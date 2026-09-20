@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+
+# Prop generation intermediates: every preview and every rejected mesh, 700 MB and growing.
+# All of it is regenerable with `python props.py ...`, and the only files anything downstream
+# needs are the adopted props/<kind>.glb plus props/yaw.json, which are committed.
+props/*/

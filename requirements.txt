@@ -1,0 +1,7 @@
+# pip install -r requirements.txt
+matplotlib          # every drawing, and the hand-rolled 3D renderers
+numpy               # the pinhole projector in model3d
+pillow              # reads whatever fal hands back, which is rarely the format we asked for
+fal                 # image and image-to-3D generation; needs FAL_KEY in the environment
+trimesh             # measuring and re-exporting generated meshes
+fast-simplification # trimesh uses it for simplify_quadric_decimation

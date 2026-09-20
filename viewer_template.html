@@ -1,0 +1,467 @@
+<title>Van Interior</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --stage: #ece7dc;
+    --ink: #22221f;
+    --muted: #7d7a70;
+    --rule: #ddd6c8;
+    --panel: #fffdf8;
+    --brass: #a8762b;
+    --shadow: 0 1px 2px rgba(40,34,20,.07), 0 8px 24px rgba(40,34,20,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14151a; --stage: #1b1d23; --ink: #e9e6dd; --muted: #8d8a80;
+      --rule: #2c2f36; --panel: #1e2027; --brass: #d3a05a;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14151a; --stage: #1b1d23; --ink: #e9e6dd; --muted: #8d8a80;
+    --rule: #2c2f36; --panel: #1e2027; --brass: #d3a05a;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+
+  header {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+    padding-block: 14px 12px; padding-inline: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1 {
+    margin: 0; font-family: Archivo, system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(17px, 2.4vw, 22px); letter-spacing: -.015em; text-wrap: balance;
+  }
+  .sub { color: var(--muted); font-size: 12.5px; }
+  .sub b { color: var(--brass); font-weight: 500; font-family: "IBM Plex Mono", monospace; }
+
+  main { position: relative; min-height: 0; background: var(--stage); }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+  .panel {
+    position: absolute; top: 14px; left: 16px; right: 16px;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start;
+    pointer-events: none;
+  }
+  .group {
+    pointer-events: auto; background: var(--panel); border: 1px solid var(--rule);
+    border-radius: 3px; box-shadow: var(--shadow); padding: 7px;
+    display: flex; flex-wrap: wrap; gap: 5px; max-width: 100%;
+  }
+  .group > .lbl {
+    width: 100%; font-family: Archivo, sans-serif; font-weight: 500; font-size: 9.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 1px 2px 3px;
+  }
+  button {
+    font: inherit; font-size: 12px; color: var(--ink); cursor: pointer;
+    background: transparent; border: 1px solid var(--rule); border-radius: 2px;
+    padding: 5px 9px; transition: background .12s, border-color .12s;
+  }
+  button:hover { background: var(--stage); }
+  button:focus-visible { outline: 2px solid var(--brass); outline-offset: 1px; }
+  button[aria-pressed="true"] { border-color: var(--brass); color: var(--brass); }
+  button.off { opacity: .45; text-decoration: line-through; }
+
+  .readout {
+    position: absolute; left: 16px; bottom: 14px; right: 16px;
+    display: flex; flex-wrap: wrap; gap: 4px 18px; pointer-events: none;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; color: var(--muted);
+  }
+  .readout span { white-space: nowrap; }
+  .readout b { color: var(--ink); font-weight: 500; }
+
+  .key {
+    position: absolute; right: 16px; bottom: 44px; pointer-events: none;
+    display: flex; flex-direction: column; gap: 3px; align-items: flex-end;
+    font-size: 11px; color: var(--muted);
+  }
+  .key i { display: inline-block; width: 9px; height: 9px; border: 1px solid rgba(128,128,128,.4);
+           margin-left: 7px; vertical-align: -1px; }
+
+  .labels { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .tag {
+    position: absolute; transform: translate(-50%, -50%); padding: 2px 6px;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 2px;
+    box-shadow: var(--shadow); font-size: 10.5px; line-height: 1.35; white-space: nowrap;
+  }
+  .tag b { display: block; font-weight: 500; }
+  .tag i {
+    font-style: normal; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; color: var(--muted);
+  }
+
+  @media (max-width: 720px) {
+    .panel { top: 8px; left: 8px; right: 8px; gap: 4px; }
+    .group { padding: 4px; gap: 3px; border-radius: 2px; }
+    .group > .lbl { font-size: 8px; letter-spacing: .06em; padding: 0 1px 2px; }
+    button { font-size: 10.5px; padding: 3px 6px; }
+    .key { display: none; }
+    .readout { bottom: 8px; left: 8px; right: 8px; font-size: 9.5px; gap: 1px 10px; }
+    .tag { font-size: 9px; padding: 1px 4px; }
+    .tag i { font-size: 8px; }
+  }
+  @media (max-width: 420px) {
+    .group > .lbl { display: none; }        /* "VIEW" and "SHOW" are clear from the buttons */
+    button { font-size: 10px; padding: 3px 5px; }
+  }
+</style>
+
+<div id="app">
+  <header>
+    <h1 id="title"></h1>
+    <span class="sub">Interior <b id="dims"></b> &middot; drag to orbit, scroll to zoom</span>
+  </header>
+  <main>
+    <canvas id="c"></canvas>
+    <div class="labels" id="labels"></div>
+    <div class="panel">
+      <div class="group" id="views"><span class="lbl">View</span></div>
+      <div class="group" id="layers"><span class="lbl">Show</span></div>
+    </div>
+    <div class="key" id="key"></div>
+    <div class="readout" id="readout"></div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+(function () {
+  var MODEL = /*MODEL_DATA*/null;
+  var mm = 0.001;
+  var L = MODEL.length * mm, W = MODEL.width * mm, H = MODEL.height * mm;
+  var NOSE = (MODEL.nose || 0) * mm;
+
+  document.getElementById("title").textContent = MODEL.title;
+  document.getElementById("dims").textContent =
+    MODEL.length + " × " + MODEL.width + " × " + MODEL.height + " mm";
+  var readout = document.getElementById("readout");
+  (MODEL.stats || []).forEach(function (t) {
+    var parts = t.split(" ");
+    var num = parts.find(function (p) { return /^\d+$/.test(p); });
+    var el = document.createElement("span");
+    el.innerHTML = num ? t.replace(num, "<b>" + num + "</b>") : t;
+    readout.appendChild(el);
+  });
+
+  var NAMES = MODEL.names || {};
+  var APPLIANCES = MODEL.appliances || [];
+  var isAppliance = {};
+  APPLIANCES.forEach(function (k) { isAppliance[k] = 1; });
+  // walls and roof render back-faces only, so the body reads as an enclosure from inside
+  // and never blocks the view from outside
+  var CUTAWAY = { shell: 1, cab: 1 };
+
+  var LAYERS = [
+    { id: "bed", label: "Bed made up", kinds: ["infill"], on: false, hide: ["table", "leg"] },
+    { id: "cubicle", label: "Wet cubicle", kinds: ["WET CUBICLE", "step"], on: true },
+    { id: "lockers", label: "Lockers", kinds: ["locker"], on: true },
+    { id: "kit", label: "Appliances", kinds: APPLIANCES, on: true, xray: true },
+    { id: "body", label: "Body + glass", kinds: ["shell", "glass", "floor", "wheel"], on: true },
+    { id: "cab", label: "Cab + seats", kinds: ["cab", "seat", "dash"], on: true },
+    { id: "props", label: "Detailed props", kinds: [], on: true, props: true },
+    { id: "sizes", label: "Sizes", kinds: [], on: false, sizes: true }
+  ];
+  var VIEWS = [
+    { id: "inside", label: "Inside", theta: 0.04, phi: 1.52, r: 3.4 },
+    { id: "door", label: "From the door", theta: -1.60, phi: 1.46, r: 4.2 },
+    { id: "over", label: "Overview", theta: -0.95, phi: 1.00, r: 8.2 },
+    { id: "top", label: "From above", theta: -0.95, phi: 0.20, r: 7.0 }
+  ];
+
+  var canvas = document.getElementById("c");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(48, 1, 0.05, 200);
+  var target = new THREE.Vector3(L / 2, H / 2.4, W / 2);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9a917f, 1.0));
+  var sun = new THREE.DirectionalLight(0xffffff, 0.5);
+  sun.position.set(-3, 6, 4);
+  scene.add(sun);
+  var fill = new THREE.DirectionalLight(0xffffff, 0.25);
+  fill.position.set(4, 2, -3);
+  scene.add(fill);
+
+  var groups = {};
+  function groupFor(kind) {
+    if (!groups[kind]) { groups[kind] = new THREE.Group(); scene.add(groups[kind]); }
+    return groups[kind];
+  }
+
+  var glassy = {}, round = {};
+  (MODEL.glassy || []).forEach(function (k) { glassy[k] = 1; });
+  (MODEL.cylinders || []).forEach(function (k) { round[k] = 1; });
+
+  // Carcasses that have kit inside them. Showing the appliances ghosts these, so you can see
+  // into a bench or the galley without inventing door and drawer splits we have not designed.
+  var container = {};
+  (MODEL.containers || []).forEach(function (k) { container[k] = 1; });
+  var ghostBody = [], ghostEdge = [];
+  function setGhost(on) {
+    ghostBody.forEach(function (m) {
+      m.transparent = on; m.opacity = on ? 0.22 : 1; m.depthWrite = !on; m.needsUpdate = true;
+    });
+    ghostEdge.forEach(function (m) { m.opacity = on ? 0.85 : 0.5; });
+    dirty = true;
+  }
+
+  MODEL.boxes.forEach(function (item) {
+    var b = item.b;
+    var w = (b[1] - b[0]) * mm, d = (b[3] - b[2]) * mm, h = (b[5] - b[4]) * mm;
+    if (w <= 0 || d <= 0 || h <= 0) return;
+    var geo;
+    if (round[item.k]) {                             // road wheels, axle across the van
+      geo = new THREE.CylinderGeometry(Math.min(w, h) / 2, Math.min(w, h) / 2, d, 28);
+      geo.rotateX(Math.PI / 2);
+    } else {
+      geo = new THREE.BoxGeometry(w, h, d);
+    }
+    var opts = { color: new THREE.Color(MODEL.colours[item.k] || "#dddddd") };
+    if (glassy[item.k]) {
+      opts.transparent = true; opts.opacity = 0.3; opts.side = THREE.DoubleSide;
+      opts.depthWrite = false;
+    } else if (CUTAWAY[item.k]) {
+      opts.side = THREE.BackSide;
+    }
+    var mat = new THREE.MeshLambertMaterial(opts);
+    var mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set((b[0] * mm) + w / 2, (b[4] * mm) + h / 2, (b[2] * mm) + d / 2);
+    groupFor(item.k).add(mesh);
+    if (container[item.k]) { ghostBody.push(mat); }
+    if (!glassy[item.k] && !CUTAWAY[item.k] && !round[item.k]) {   // furniture, not the body
+      var line = new THREE.LineBasicMaterial({ color: 0x6b6b66, transparent: true, opacity: 0.5 });
+      var edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), line);
+      edges.position.copy(mesh.position);
+      groupFor(item.k).add(edges);
+      if (container[item.k]) { ghostEdge.push(line); }
+    }
+  });
+
+  // Detailed prop meshes, made by props.py and embedded as glb. The box stays the authority:
+  // each mesh is scaled to exactly fill its box, so a generated shape can never quietly move a
+  // dimension. Turning the layer on swaps the coloured box for the mesh.
+  var PROPS = MODEL.props || {};
+  var propParts = {}, propsOn = false;
+
+  function b64buf(s) {
+    var bin = atob(s), buf = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) { buf[i] = bin.charCodeAt(i); }
+    return buf.buffer;
+  }
+
+  function loadProps() {
+    if (!THREE.GLTFLoader) { return; }
+    var loader = new THREE.GLTFLoader();
+    MODEL.boxes.forEach(function (item) {
+      var p = PROPS[item.k];
+      if (!p) { return; }
+      loader.parse(b64buf(p.glb), "", function (g) {
+        var o = g.scene, b = item.b;
+        o.rotation.y = (p.yaw || 0) * Math.PI / 180;
+        o.updateMatrixWorld(true);
+        var bb = new THREE.Box3().setFromObject(o);
+        var size = bb.getSize(new THREE.Vector3());
+        o.position.sub(bb.getCenter(new THREE.Vector3()));
+        o.traverse(function (n) {
+          if (n.isMesh) {
+            // decimating strips the normals, and a mesh without them lights as pure black
+            if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
+            n.material = new THREE.MeshLambertMaterial(
+              { color: new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
+          }
+        });
+        var w = (b[1] - b[0]) * mm, d = (b[3] - b[2]) * mm, h = (b[5] - b[4]) * mm;
+        var wrap = new THREE.Group();
+        wrap.add(o);
+        // Fill the box by default: the box is the real reserved space, and a mesh fitted
+        // uniformly shrinks to whatever its worst axis allows - a 70 mm bed cushion pulled a
+        // whole mattress down to a quarter of its slot. Props whose box is only a space
+        // reservation keep their proportions instead; model3d.KEEP_SHAPE lists them.
+        var sx = w / (size.x || 1), sy = h / (size.y || 1), sz = d / (size.z || 1);
+        if (p.fit === "keep") { sx = sy = sz = Math.min(sx, sy, sz); }
+        wrap.scale.set(sx, sy, sz);
+        wrap.position.set(b[0] * mm + w / 2, b[4] * mm + h / 2, b[2] * mm + d / 2);
+        wrap.visible = propsOn;
+        scene.add(wrap);
+        (propParts[item.k] = propParts[item.k] || []).push(wrap);
+        refresh();                                   // the mesh arrives long after the boxes
+      }, function (e) { console.warn("prop " + item.k + " failed to parse", e); });
+    });
+  }
+  loadProps();
+
+  // What each layer wants shown, by kind. Kinds on no layer are always shown. The box and its
+  // mesh must never both be drawn, and turning a layer back on must not resurrect a box whose
+  // mesh is showing - so visibility is worked out in one place rather than by each toggle.
+  var kindWanted = {};
+  function refresh() {
+    Object.keys(groups).forEach(function (k) {
+      groups[k].visible = kindWanted[k] !== false && !(propsOn && propParts[k]);
+    });
+    Object.keys(propParts).forEach(function (k) {
+      propParts[k].forEach(function (g) { g.visible = propsOn && kindWanted[k] !== false; });
+    });
+    dirty = true;
+  }
+
+  function setProps(on) {
+    propsOn = on;
+    refresh();
+  }
+
+  var theta = VIEWS[0].theta, phi = VIEWS[0].phi, radius = VIEWS[0].r, dirty = true;
+  function place() {
+    phi = Math.max(0.08, Math.min(Math.PI - 0.08, phi));
+    radius = Math.max(0.8, Math.min(30, radius));
+    camera.position.set(
+      target.x + radius * Math.sin(phi) * Math.cos(theta),
+      target.y + radius * Math.cos(phi),
+      target.z + radius * Math.sin(phi) * Math.sin(theta)
+    );
+    camera.lookAt(target);
+    dirty = true;
+  }
+  var dragging = false, lastX = 0, lastY = 0;
+  canvas.addEventListener("pointerdown", function (e) {
+    dragging = true; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    theta -= (e.clientX - lastX) * 0.007;
+    phi -= (e.clientY - lastY) * 0.007;
+    lastX = e.clientX; lastY = e.clientY;
+    place();
+  });
+  ["pointerup", "pointercancel"].forEach(function (t) {
+    canvas.addEventListener(t, function () { dragging = false; });
+  });
+  canvas.addEventListener("wheel", function (e) {
+    e.preventDefault(); radius *= (1 + Math.sign(e.deltaY) * 0.1); place();
+  }, { passive: false });
+
+  var viewsEl = document.getElementById("views");
+  VIEWS.forEach(function (v, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = v.label; b.id = "view-" + v.id;
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      theta = v.theta; phi = v.phi; radius = v.r; place();
+      VIEWS.forEach(function (o) {
+        document.getElementById("view-" + o.id).setAttribute("aria-pressed", String(o === v));
+      });
+    });
+    viewsEl.appendChild(b);
+  });
+
+  var showSizes = false;
+  var layersEl = document.getElementById("layers");
+  LAYERS.forEach(function (layer) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = layer.label; b.id = "layer-" + layer.id;
+    function apply() {
+      b.classList.toggle("off", !layer.on);
+      layer.kinds.forEach(function (k) { kindWanted[k] = layer.on; });
+      (layer.hide || []).forEach(function (k) { kindWanted[k] = !layer.on; });
+      refresh();
+      if (layer.props) setProps(layer.on);
+      if (layer.sizes) showSizes = layer.on;
+      if (layer.xray) setGhost(layer.on);
+      dirty = true;
+    }
+    b.addEventListener("click", function () { layer.on = !layer.on; apply(); });
+    layersEl.appendChild(b);
+    apply();                                           // layers that start off start off
+  });
+
+  // Dimension tags: one per named box, HTML projected onto the canvas each frame. Cheaper
+  // and far more legible than text sprites, and it picks up the page's own typography.
+  var labelsEl = document.getElementById("labels"), tags = [];
+  MODEL.boxes.forEach(function (item) {
+    var name = NAMES[item.k], b = item.b;
+    if (!name) return;
+    var el = document.createElement("div");
+    el.className = "tag";
+    el.innerHTML = "<b>" + name + "</b><i>" +
+      (b[1] - b[0]) + " × " + (b[3] - b[2]) + " × " + (b[5] - b[4]) + " mm</i>";
+    el.style.display = "none";
+    labelsEl.appendChild(el);
+    tags.push({ el: el, k: item.k, p: new THREE.Vector3(
+      (b[0] + b[1]) / 2 * mm, (b[4] + b[5]) / 2 * mm, (b[2] + b[3]) / 2 * mm) });
+  });
+
+  // Thirty tags at box centres pile into mush, so nearest wins: sort front to back and drop
+  // any tag whose rectangle lands on one already placed. Orbit slightly and the hidden ones
+  // come back. Labels follow their own layer, so switching a layer off takes its tags with it.
+  function drawLabels() {
+    var r = canvas.getBoundingClientRect(), p = new THREE.Vector3(), live = [];
+    tags.forEach(function (t) {
+      var g = groups[t.k];
+      p.copy(t.p).project(camera);
+      if (!showSizes || (g && !g.visible) ||
+          p.z > 1 || Math.abs(p.x) > 1.1 || Math.abs(p.y) > 1.1) {
+        t.el.style.display = "none";
+        return;
+      }
+      t.el.style.display = "block";
+      t.el.style.visibility = "hidden";               // measurable, not yet painted
+      t.el.style.left = ((p.x + 1) / 2 * r.width) + "px";
+      t.el.style.top = ((1 - p.y) / 2 * r.height) + "px";
+      if (!t.w) { t.w = t.el.offsetWidth; t.h = t.el.offsetHeight; }
+      live.push({ t: t, d: p.z,
+                  x: (p.x + 1) / 2 * r.width, y: (1 - p.y) / 2 * r.height });
+    });
+    live.sort(function (a, b) { return a.d - b.d; });
+    var placed = [];
+    live.forEach(function (v) {
+      var b = [v.x - v.t.w / 2, v.y - v.t.h / 2, v.x + v.t.w / 2, v.y + v.t.h / 2];
+      var clash = placed.some(function (q) {
+        return b[0] < q[2] + 4 && b[2] > q[0] - 4 && b[1] < q[3] + 3 && b[3] > q[1] - 3;
+      });
+      if (clash) { v.t.el.style.display = "none"; return; }
+      placed.push(b);
+      v.t.el.style.visibility = "visible";
+    });
+  }
+
+  var keyEl = document.getElementById("key"), seen = {};
+  MODEL.boxes.forEach(function (item) {
+    var name = NAMES[item.k];
+    if (!name || seen[name] || isAppliance[item.k]) return;   // body and kit stay out
+    seen[name] = true;
+    var row = document.createElement("div");
+    row.innerHTML = name + '<i style="background:' + (MODEL.colours[item.k] || "#ddd") + '"></i>';
+    keyEl.appendChild(row);
+  });
+
+  function resize() {
+    var r = canvas.getBoundingClientRect();
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / Math.max(1, r.height);
+    camera.updateProjectionMatrix();
+    dirty = true;
+  }
+  window.addEventListener("resize", resize);
+  resize(); place();
+
+  (function loop() {
+    requestAnimationFrame(loop);
+    if (!dirty) return;
+    dirty = false;
+    renderer.render(scene, camera);
+    drawLabels();
+  })();
+})();
+</script>

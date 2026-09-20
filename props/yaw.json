@@ -1,0 +1,16 @@
+{
+  "battery": 90,
+  "calorifier": 90,
+  "cassette": 270,
+  "electrics": 180,
+  "fresh": 90,
+  "fridge": 180,
+  "hob": 270,
+  "infill": 0,
+  "leg": 0,
+  "locker": 180,
+  "oven": 180,
+  "shower": 90,
+  "sink": 180,
+  "table": 0
+}
