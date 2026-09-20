@@ -140,6 +140,10 @@ Everything except image generation runs with no setup: `python plan.py v1` and
   `props.py auto <kind>` regenerates the intermediates for whatever you are working on.
 * The skills this project is worked with are committed under `.claude/skills/`, so the web
   session picks them up the same as the desktop one.
+* Nothing in the Python is platform-specific: no absolute paths, no shell-outs, no
+  Windows-only calls. It was written on Windows and runs unchanged on Linux.
+* `viewer.html` pulls three.js and GLTFLoader from CDNs and Google Fonts for type, so a
+  sandbox with no outbound network will render a blank page rather than the model.
 
 ## Services and access
 
