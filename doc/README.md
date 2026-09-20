@@ -195,8 +195,10 @@ once is unreadable, and tags declutter front-to-back, so switch off the layers y
 measuring first.
 
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
-Published viewers: [Transit](https://claude.ai/artifact/K7ciEPZG5qajdMzBLBPnTo) ·
-[Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)
+Published viewer: **[v1 Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** -
+republish it after any change with the Artifact tool, passing that URL so it updates in place
+rather than making a second one. It is private to Ondrej's account; sharing is done from the
+page's own Share menu, not from here.
 
 `impressions.py` turns a shaded render into photoreal interior views via FAL
 (depth-conditioned FLUX, strength 0.75). Needs `fal auth login` once.
