@@ -360,6 +360,17 @@ which way a generated mesh faces is a coin toss the box list should not be losin
 get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void in
 `HEIGHTS_V2`.
 
+**Three more for the sink, 2026-09-21:** `bowl` (hunyuan 0.07), `filtertap` (rodin) and
+`filter` (trellis 0.03). The tap scored 0.37 against its box and the mesh was not the
+problem - **the box was**: a gooseneck reaches sideways about two thirds of its height, and
+the box had been drawn as a 50 x 50 stick. Widening it to the tap's real footprint,
+50 x 170 x 250, took the error to 0.11 without touching the mesh. When one prop scores badly
+and all three models agree on the shape, suspect the box before the generator.
+
+A prop with no opening has no "face" to measure, so the direction is read from where its
+mass sits: the top fifth of the tap mesh leans toward mesh +Z, which the viewer sends to
+van +y - the back of the cabinet - so it carries a deliberate 180 in yaw.json.
+
 `props.py face <kind> <+x|-x|+y|-y>` sets which way a prop looks. It measures surface area
 near each of the four vertical faces of the bounding box: a wall panel puts a lot of area
 against its own face, an opening has almost none. The first version compared the centroid
