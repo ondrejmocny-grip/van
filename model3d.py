@@ -156,7 +156,8 @@ APPLIANCES_V2 = [
     # housing because there is only 380 mm under the bowls and a sump needs ~400 to drop the
     # cartridge out; an inline cartridge is swapped by pulling its two hose fittings and can
     # lie on its side.
-    (1620, 1670, 1770, 1820,  900, 1150, "filtertap"),  # gooseneck, 250 above the worktop
+    (1620, 1670, 1650, 1820,  900, 1150, "filtertap"),  # gooseneck, 250 above the worktop,
+                                                        #   its spout reaching over the bowl
     (1600, 1860, 1700, 1760,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - hob over the fridge
     (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
