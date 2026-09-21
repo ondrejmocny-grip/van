@@ -105,10 +105,35 @@ bowls and a slimline sump needs about 400 to drop the cartridge out of it. An in
 cartridge is swapped by pulling its two hose fittings and can lie on its side — it sits
 behind the oven at x 1600–1860, y 1700–1760.
 
-Still to buy and decide: cartridge grade (a 0.5 micron carbon block with bacteriostatic
-silver handles taste, particulates and most bacteria; sediment pre-filter only if we fill
-from doubtful taps), and a shut-off valve before the filter so a cartridge change does not
-mean draining the system.
+### The drinking water parts, end to end
+
+Five parts, roughly **€90–150** all in:
+
+| | Part | Where |
+|---|---|---|
+| 1 | Gooseneck drinking faucet | one 12 mm hole beside the mixer, x 1620–1670, 250 above the worktop |
+| 2 | Inline carbon block, 2 × 10 inch, quick-connect | behind the oven, x 1600–1860, y 1700–1760, lying on its side |
+| 3 | T-piece on the cold line, **after the pump** | the filter needs pressure behind it |
+| 4 | Shut-off valve before the filter | so a cartridge change is not a system drain |
+| 5 | 8 or 10 mm hose | pump → valve → filter → tap |
+
+**No extra power, and no extra pump.** The 12 V diaphragm pump at 1.5–2 bar pushes a carbon
+block fine. You get about **1.5 l/min** at that tap instead of 4 — which is what a drinking
+tap should give anyway.
+
+**Cartridge grade — still to decide.** A 0.5 micron carbon block with bacteriostatic silver
+covers taste, particulates and most bacteria, which suits filling from campsite taps. Add a
+sediment pre-filter only if we expect doubtful sources. Swap every 6–12 months or ~3000 L.
+
+**What this does not solve.** The filter protects what comes out of the tap, not what grows
+in the tank. A tank left full and warm for weeks still needs cleaning out — the filter only
+means we are not drinking the result.
+
+### If 70 mm of counter each side turns out too mean
+
+The fallback is a **1.5-bowl**: keep the 340 wash bowl, cut the rinse bowl to 180 wide. That
+puts 190 mm of usable counter at the aft end of the run. Worth deciding with a real
+washing-up bowl in hand before the top is cut.
 
 ## The bathroom
 
@@ -227,6 +252,9 @@ sitting over the same arch.
    into a 632 aisle blocks it completely while open. Hinge side is a real decision, and it
    matters more at 90 L than it did at 65.
 5. **Entry gap 690** and **aisle 632**. Two people cannot pass in the galley.
+8. **Sink bowls leave 70 mm of counter at each end.** The 1.5-bowl fallback (rinse bowl cut
+   to 180) is written up under Water at the sink. Decide with a washing-up bowl in hand.
+9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries
