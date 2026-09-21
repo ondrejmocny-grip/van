@@ -209,12 +209,21 @@ panel would hide the kit from most angles anyway. Sizes is off by default — th
 once is unreadable, and tags declutter front-to-back, so switch off the layers you are not
 measuring first.
 
-**Schema overlay** paints the 2D plan onto the floor of the 3D model, and the **Plan** view
-looks straight down at it from the plan's own viewpoint — nose left, driver side at the
-bottom. It is drawn in the browser from the same box list plan.py draws, not from a picture
-of `layout.png`, so it can never show something the drawing does not. It deliberately ignores
+**Schema overlay** lays the plan drawing itself on the floor of the 3D model, and the
+**Plan** view looks straight down at it from the plan's own viewpoint — nose left, driver
+side at the bottom, and it switches the overlay on when you pick it. `plan.overlay_png()`
+renders the same drawing cropped to exactly the load box, so it is the real layout image and
+it lands 1:1 on the floor; model3d embeds it as a data URI. The overlay deliberately ignores
 the depth buffer: on the floor, under the furniture, the one angle where a plan is worth
 reading would show nothing but the bed.
+
+**Panning**: right-drag, middle-drag, shift-drag or two fingers move what the camera looks
+at. Orbiting alone always points at the middle of the van, so a corner can never be centred.
+Picking a view puts the camera back where that view says, panning included.
+
+**A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
+modelled facing away from; a box against the other wall gets a half turn on top of the kind's
+own `yaw.json` entry, so the galley on v2's passenger side does not open into the wall.
 
 A variant can also send its own **Show** buttons — v2 groups shower, wardrobe and office
 table differently from v1 — in `LAYERS_V2`. Without one, the viewer uses the list in the

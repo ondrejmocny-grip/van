@@ -95,6 +95,41 @@ PROMPTS = {
     "shower": ("A shower head on a riser rail: a round chrome handheld shower head clipped to "
                "a slim vertical wall rail, a flexible hose hanging from it, the whole fitting "
                "tall and narrow, mounted flat against a white wall panel."),
+    # v2's fridge is not v1's drawer: Brisa's 65 L unit has a hinged door, and the door is
+    # the whole point of the prop - a closed cube reads as a cupboard. Ajar, not wide open:
+    # the viewer stretches the mesh to fill the box, so a door swung through ninety degrees
+    # would squash the cabinet itself to half its width.
+    "fridgedoor": ("A 65 litre campervan compressor refrigerator standing on its own with its "
+                   "door AJAR: a boxy stainless steel cabinet as wide as it is deep and only "
+                   "a little taller than it is wide, one full-height door hinged on the left "
+                   "and open a hand's width, just far enough to show the white moulded "
+                   "interior and one wire shelf behind it, a slim vertical bar handle down the "
+                   "opening edge of the door, a narrow vent grille along the bottom."),
+    # 450 x 600 x 450: a cube a third deeper than it is wide, and no taller than it is wide -
+    # every model draws a chair unless the words rule one out
+    "SEAT": ("A campervan seat box with storage inside, seen on its own: a low plywood cube, "
+             "no taller than it is wide and a third deeper than it is wide, with a thin flat "
+             "upholstered sage green cushion lying on its top face, a hinged front door with "
+             "a small round recessed finger pull, a birch plywood carcass with visible ply "
+             "edges, standing on the floor. No backrest, no legs, no armrests."),
+    # 700 x 800 x 1881: two and a half times taller than it is wide, and the open side is the
+    # point - a sealed white box tells you nothing about the room it stands in
+    "SHOWER": ("A campervan corner shower cubicle seen on its own, with NO door and NO "
+               "curtain: three flat white wall panels forming a tall three-sided enclosure "
+               "two and a half times taller than it is wide, the fourth side standing "
+               "completely open so the inside is visible right through, a shallow white "
+               "rectangular shower tray at the bottom with a chrome drain grate, a slim "
+               "chrome riser rail with a handheld shower head on the back panel, an open top. "
+               "An empty three-walled shower enclosure."),
+    # 450 x 600 x 1881: four times taller than it is wide. The lower bay is left EMPTY on
+    # purpose - the cassette is its own prop and sits inside this one in the viewer
+    "WARDROBE": ("A tall narrow campervan wardrobe cabinet seen on its own: four times taller "
+                 "than it is wide and a third deeper than it is wide, birch plywood. The upper "
+                 "two thirds is a hanging wardrobe closed by a clear glass door in a slim "
+                 "frame, with three shirts on a rail visible through the glass. The lower "
+                 "third is a separate empty compartment standing wide open at the front, its "
+                 "flat plywood floor and side panels visible, nothing inside it. A horizontal "
+                 "plywood shelf divides the two."),
     "grey": ("A flat underslung waste water tank: a wide shallow black plastic box with rounded "
              "corners, moulded mounting lugs and a drain valve on one end."),
 }
@@ -131,18 +166,28 @@ SLOW = [
 ]
 
 
+def every_box():
+    """Every box of every variant. Kinds live in three places - the plan (a shower cubicle is
+    a plan box), EXTRA (lockers, tables) and APPLIANCES - and each layout version carries its
+    own tables, so a v2-only kind is invisible if you only look at v1."""
+    out = []
+    for name in model3d.REGISTRY:
+        out += model3d.boxes_for(model3d.VARIANTS[name])
+    return out
+
+
 def box_of(kind):
-    """The authoritative box for a kind, as (dx, dy, dz) in mm, from model3d. EXTRA counts too:
-    tables, lockers, bed cushions and the table posts are furniture, not appliances, but the
-    viewer draws them as boxes all the same and they get meshes the same way.
+    """The authoritative box for a kind, as (dx, dy, dz) in mm, from model3d. Furniture counts
+    too: tables, lockers, bed cushions, the shower cubicle. The viewer draws them all as boxes
+    and they get meshes the same way.
 
     A kind can own several boxes of different sizes - three lockers, two tables. The largest
     is the one to aim at, because the viewer fits each mesh into its own box and a mesh made
     for the big one still reads correctly when shrunk into a small one."""
-    boxes = [b for b in model3d.APPLIANCES + model3d.EXTRA if b[6] == kind]
+    boxes = [b for b in every_box() if b[6] == kind]
     if not boxes:
         raise SystemExit("no box for %r - kinds: %s" % (kind, ", ".join(sorted(
-            {b[6] for b in model3d.APPLIANCES + model3d.EXTRA}))))
+            {b[6] for b in every_box()}))))
     b = max(boxes, key=lambda b: (b[1] - b[0]) * (b[3] - b[2]) * (b[5] - b[4]))
     return (b[1] - b[0], b[3] - b[2], b[5] - b[4])
 

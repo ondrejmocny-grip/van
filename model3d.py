@@ -16,7 +16,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from plan import VARIANTS
+from plan import VARIANTS, overlay_png
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -129,7 +129,7 @@ APPLIANCES_V2 = [
     (1450, 1850, 1400, 1740,  750, 1200, "sink"),       # 400 x 340 bowl, plus the tap above
     # galley, passenger side - hob over the fridge
     (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
-    (1250, 1736,   50,  575,   60,  580, "fridge"),     # 65 L hinged door, forward of the arch
+    (1250, 1736,   50,  575,   60,  580, "fridgedoor"), # 65 L hinged door, forward of the arch
     # bathroom - the WC lives in the wardrobe base and slides into the shower
     ( 715, 1135, 1252, 1822,   40,  560, "cassette"),   # ~420 x 570, hatch at x 700-1150
     # water - the tank runs the bench-to-garage corner, inboard of the wheel arch
@@ -145,6 +145,13 @@ APPLIANCES_V2 = [
 ]
 
 CONTAINERS_V2 = ("SHOWER", "WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
+
+# Which wall a prop mesh was modelled facing away from: "p" = passenger (y=0), "d" = driver.
+# v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
+# a drawer, a lid - has to turn with them or it opens into the wall. The viewer adds this to
+# the kind's own yaw, so yaw.json keeps meaning what it meant.
+FACING_V2 = {"locker": "d", "hob": "d", "fridgedoor": "d", "oven": "d", "sink": "d",
+             "cassette": "p"}
 
 # The viewer's Show buttons. v2 groups different things from v1, so it carries its own list;
 # a variant without one gets the template's default.
@@ -172,7 +179,7 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
-INTERNAL = ("oven", "plumbing", "fridge", "fresh", "grey", "calorifier",
+INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calorifier",
             "battery", "inverter", "electrics")
 
 # What each kind is called, for the viewer key and the dimension labels.
@@ -187,7 +194,7 @@ NAMES = {
     "ftable": "Front table", "fleg": "Front table post",
     "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone", "sink": "Sink",
     "plumbing": "Pump, filter, trap", "cassette": "Cassette WC",
-    "fridge": "Fridge 70 L",
+    "fridge": "Fridge 70 L", "fridgedoor": "Fridge 65 L, hinged door",
     "fresh": "Fresh water 110 L", "grey": "Grey water 70 L", "calorifier": "Calorifier 10 L",
     "battery": "Battery 150 Ah", "inverter": "Inverter 3000 W",
     "electrics": "MPPT, DC-DC, fuses",
@@ -235,7 +242,7 @@ KIND = {          # plan label or extra kind -> colour
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
-    "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
+    "fridgedoor": "#cfe4c9", "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
     "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
 }
 GLASSY = ("glass",)     # drawn transparent in the viewer
@@ -261,11 +268,11 @@ CAMERAS = [                         # name, elevation, azimuth
 REGISTRY = {
     "v1": dict(own_coords=False, heights=HEIGHTS, extra=EXTRA, appliances=APPLIANCES,
                containers=CONTAINERS, windows=WINDOWS, fans=FAN_HOLES, hatches=(),
-               partition=None, cab_seats=None, layers=None),
+               partition=None, cab_seats=None, layers=None, facing={}),
     "v2": dict(own_coords=True, heights=HEIGHTS_V2, extra=EXTRA_V2, appliances=APPLIANCES_V2,
                containers=CONTAINERS_V2, windows=WINDOWS_V2, fans=FAN_HOLES_V2,
                hatches=HATCHES_V2, partition=PARTITION_V2, cab_seats=CAB_SEATS_V2,
-               layers=LAYERS_V2),
+               layers=LAYERS_V2, facing=FACING_V2),
 }
 
 
@@ -276,6 +283,16 @@ def spec(v):
 
 def heights_for(v):
     return spec(v)["heights"]
+
+
+def half_turn(v, box):
+    """180 if this box sits against the opposite wall from the one its mesh was built for."""
+    x0, x1, y0, y1, z0, z1, kind = box
+    want = spec(v).get("facing", {}).get(kind)
+    if not want:
+        return 0
+    side = "p" if (y0 + y1) / 2 < v["width"] / 2 else "d"
+    return 180 if side != want else 0
 
 
 def fitout(v):
@@ -772,6 +789,14 @@ def props_data():
     return out
 
 
+def plan_image(v, path):
+    """Render the plan cropped to the load box and hand it back as a data URI, so viewer.html
+    stays one file you can mail."""
+    import base64
+    overlay_png(v, path)
+    return {"img": "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()}
+
+
 def write_viewer(v, path):
     """Fill viewer_template.html with this variant's geometry."""
     tpl_path = os.path.join(HERE, "viewer_template.html")
@@ -786,13 +811,12 @@ def write_viewer(v, path):
         "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
         "containers": list(sp["containers"]), "props": props_data(),
         "cylinders": ["wheel"], "layers": sp["layers"],
-        # the plan itself, for the schema overlay - same boxes plan.py draws, so the
-        # overlay can never say something the drawing does not
-        "plan": {"boxes": [[x0, x1, y0, y1, lab, sub or "", fill]
-                           for x0, x1, y0, y1, lab, sub, fill in v["boxes"]],
-                 "well": list(v["well"]) if v.get("well") else None,
-                 "slider": list(v["slider"]) if v.get("slider") else None},
-        "boxes": [{"b": [x0, x1, y0, y1, z0, z1], "k": kind}
+        # the plan drawing itself, for the schema overlay: plan.py renders it cropped to the
+        # load box, so the viewer lays the real layout image on the floor 1:1 rather than
+        # redrawing an approximation of it
+        "plan": plan_image(v, os.path.join(os.path.dirname(path) or ".", "overlay.png")),
+        "boxes": [dict({"b": [x0, x1, y0, y1, z0, z1], "k": kind},
+                       **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}))
                   for x0, x1, y0, y1, z0, z1, kind in boxes_for(v, with_shell=True)],
     }
     tpl = open(tpl_path, encoding="utf-8").read()

@@ -342,6 +342,31 @@ def draw_view(ax, view, height):
     ax.set_title(view["title"], fontsize=8.5, weight="bold", color="#111", pad=8)
 
 
+def overlay_png(v, path, inch_per_m=3.2, dpi=200):
+    """The plan cropped to exactly the load box, for the 3D viewer's schema overlay.
+
+    Same drawing code as the layout, so the viewer shows the real plan rather than a redrawn
+    copy of it - only the cab, the title and the margins are outside the crop. The axes fill
+    the figure and the figure has the van's own aspect ratio, so one pixel is one fixed number
+    of millimetres and the image lies on the floor of the 3D model 1:1. That is also why the
+    aspect goes back to "auto": "equal" lets matplotlib shrink the axes inside the figure,
+    which would slide the drawing off the floor it is supposed to match.
+    """
+    L, W = v["length"], v["width"]
+    fig = plt.figure(figsize=(L / 1000.0 * inch_per_m, W / 1000.0 * inch_per_m), dpi=dpi)
+    ax = fig.add_axes([0, 0, 1, 1])
+    draw(ax, v)
+    ax.set_title("")
+    ax.set_aspect("auto")
+    ax.set_xlim(0, L)
+    ax.set_ylim(W, 0)
+    ax.axis("off")
+    fig.savefig(path, facecolor="white", dpi=dpi)
+    plt.close(fig)
+    print("wrote", path)
+    return path
+
+
 def render_views(v):
     views, height = v["views"], v["height"]
     elevs = [x for x in views if x["kind"] == "elev"]

@@ -73,18 +73,29 @@
   button[aria-pressed="true"] { border-color: var(--brass); color: var(--brass); }
   button.off { opacity: .45; text-decoration: line-through; }
 
+  /* Both of these float over the 3D canvas, whose colour is whatever the model happens to
+     show there - white bodywork one moment, empty dark stage the next. Text alone was
+     unreadable against half of it, so each chip carries its own ground. */
   .readout {
     position: absolute; left: 16px; bottom: 14px; right: 16px;
-    display: flex; flex-wrap: wrap; gap: 4px 18px; pointer-events: none;
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 5px; pointer-events: none;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px;
   }
-  .readout span { white-space: nowrap; }
-  .readout b { color: var(--ink); font-weight: 500; }
+  .readout span {
+    white-space: nowrap; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--rule); border-radius: 2px; padding: 2px 7px;
+    box-shadow: var(--shadow);
+  }
+  .readout b { color: var(--brass); font-weight: 500; }
 
   .key {
-    position: absolute; right: 16px; bottom: 44px; pointer-events: none;
-    display: flex; flex-direction: column; gap: 3px; align-items: flex-end;
-    font-size: 11px; color: var(--muted);
+    position: absolute; right: 16px; bottom: 48px; pointer-events: none;
+    display: flex; flex-direction: column; gap: 2px; align-items: flex-end;
+    font-size: 11px;
+  }
+  .key div {
+    color: var(--ink); background: var(--panel); border: 1px solid var(--rule);
+    border-radius: 2px; padding: 1px 6px; box-shadow: var(--shadow);
   }
   .key i { display: inline-block; width: 9px; height: 9px; border: 1px solid rgba(128,128,128,.4);
            margin-left: 7px; vertical-align: -1px; }
@@ -107,7 +118,7 @@
     .group > .lbl { font-size: 8px; letter-spacing: .06em; padding: 0 1px 2px; }
     button { font-size: 10.5px; padding: 3px 6px; }
     .key { display: none; }
-    .readout { bottom: 8px; left: 8px; right: 8px; font-size: 9.5px; gap: 1px 10px; }
+    .readout { bottom: 8px; left: 8px; right: 8px; font-size: 9.5px; gap: 3px; }
     .tag { font-size: 9px; padding: 1px 4px; }
     .tag i { font-size: 8px; }
   }
@@ -120,7 +131,8 @@
 <div id="app">
   <header>
     <h1 id="title"></h1>
-    <span class="sub">Interior <b id="dims"></b> &middot; drag to orbit, scroll to zoom</span>
+    <span class="sub">Interior <b id="dims"></b> &middot; drag to orbit, right-drag or
+      shift-drag to pan, scroll to zoom</span>
   </header>
   <main>
     <canvas id="c"></canvas>
@@ -184,7 +196,8 @@
     { id: "top", label: "From above", theta: -0.95, phi: 0.20, r: 7.0 },
     // straight down, nose to the left: the plan's own viewpoint, so the schema overlay
     // lands exactly on the drawing it came from
-    { id: "plan", label: "Plan", theta: 1.5708, phi: 0.08, r: Math.max(2.6, L * 1.05) }
+    { id: "plan", label: "Plan", theta: 1.5708, phi: 0.08, r: Math.max(2.6, L * 1.05),
+      schema: true }
   ];
 
   var canvas = document.getElementById("c");
@@ -278,7 +291,7 @@
       if (!p) { return; }
       loader.parse(b64buf(p.glb), "", function (g) {
         var o = g.scene, b = item.b;
-        o.rotation.y = (p.yaw || 0) * Math.PI / 180;
+        o.rotation.y = ((p.yaw || 0) + (item.y || 0)) * Math.PI / 180;
         o.updateMatrixWorld(true);
         var bb = new THREE.Box3().setFromObject(o);
         var size = bb.getSize(new THREE.Vector3());
@@ -330,77 +343,22 @@
     refresh();
   }
 
-  // Schema overlay: the 2D plan laid on the floor of the 3D model. It is drawn from the
-  // same box list plan.py draws, not from a picture of the drawing, so the overlay can
-  // never disagree with layout.png. Built once, on the first time it is switched on, by
-  // which point the page fonts have loaded.
+  // Schema overlay: the plan drawing itself, laid on the floor of the model. plan.py
+  // renders it cropped to exactly the load box and model3d embeds it, so this is the same
+  // picture as layout.png - not a redrawing of it - and it lands 1:1 on the floor.
   var PLAN = MODEL.plan, schema = null;
 
-  function drawPlan(g, s) {
-    var open, b, i, x0, y0, w, h, rot;
-    g.fillStyle = "rgba(251,250,247,0.94)";
-    g.fillRect(0, 0, MODEL.length * s, MODEL.width * s);
-    g.textAlign = "center"; g.textBaseline = "middle";
-    for (i = 0; i < PLAN.boxes.length; i++) {
-      b = PLAN.boxes[i];
-      open = !b[6];
-      x0 = b[0] * s; y0 = b[2] * s; w = (b[1] - b[0]) * s; h = (b[3] - b[2]) * s;
-      if (!open) { g.fillStyle = b[6]; g.fillRect(x0, y0, w, h); }
-      g.strokeStyle = open ? "#b5b5b5" : "#8a8a8a";
-      g.lineWidth = 2.5;
-      g.setLineDash(open ? [10, 8] : []);
-      g.strokeRect(x0 + 1.5, y0 + 1.5, w - 3, h - 3);
-      g.setLineDash([]);
-      rot = !open && (b[1] - b[0]) < 620;          // narrow boxes read down the van
-      g.save();
-      g.translate(x0 + w / 2, open ? y0 + 46 : y0 + h / 2);
-      if (rot) { g.rotate(-Math.PI / 2); }
-      g.fillStyle = open ? "#9b9b96" : "#222220";
-      g.font = "700 30px Archivo, system-ui, sans-serif";
-      g.fillText(b[4], 0, b[5] ? -17 : 0);
-      if (b[5]) {
-        g.font = "400 21px 'IBM Plex Mono', ui-monospace, monospace";
-        g.fillStyle = open ? "#a8a8a2" : "#6b6b64";
-        g.fillText(b[5], 0, 17);
-      }
-      g.restore();
-    }
-    if (PLAN.well) {                               // wheel arches, both sides
-      g.strokeStyle = "#b03a3a"; g.lineWidth = 2.5; g.setLineDash([10, 8]);
-      [0, MODEL.width - PLAN.well[2]].forEach(function (y) {
-        g.strokeRect(PLAN.well[0] * s, y * s,
-                     (PLAN.well[1] - PLAN.well[0]) * s, PLAN.well[2] * s);
-      });
-      g.setLineDash([]);
-      g.fillStyle = "#b03a3a"; g.font = "400 19px 'IBM Plex Mono', ui-monospace, monospace";
-      g.fillText("wheel well", (PLAN.well[0] + PLAN.well[1]) / 2 * s, PLAN.well[2] / 2 * s);
-    }
-    if (PLAN.slider) {                             // the door, on the passenger edge
-      g.strokeStyle = "#0f9d78"; g.lineWidth = 9;
-      g.beginPath();
-      g.moveTo(PLAN.slider[0] * s, 5); g.lineTo(PLAN.slider[1] * s, 5);
-      g.stroke();
-      g.fillStyle = "#0f9d78"; g.font = "500 21px Archivo, system-ui, sans-serif";
-      g.fillText("SLIDING DOOR", (PLAN.slider[0] + PLAN.slider[1]) / 2 * s, 28);
-    }
-    g.fillStyle = "#adaca5"; g.font = "500 20px Archivo, system-ui, sans-serif";
-    g.fillText("PASSENGER SIDE", MODEL.length * 0.5 * s, 62);
-    g.fillText("DRIVER SIDE", MODEL.length * 0.5 * s, MODEL.width * s - 26);
-  }
-
-  function buildSchema() {
-    if (schema || !PLAN || !PLAN.boxes) { return; }
-    var s = Math.min(2600 / MODEL.length, 2600 / MODEL.width);      // canvas px per mm
-    var cv = document.createElement("canvas");
-    cv.width = Math.round(MODEL.length * s);
-    cv.height = Math.round(MODEL.width * s);
-    drawPlan(cv.getContext("2d"), s);
-    var tex = new THREE.CanvasTexture(cv);
-    if (renderer.capabilities.getMaxAnisotropy) {
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    }
+  function buildSchema(then) {
+    if (schema || !PLAN || !PLAN.img) { if (then) then(); return; }
     var geo = new THREE.PlaneGeometry(L, W);
-    geo.rotateX(-Math.PI / 2);                     // lie flat, canvas top = passenger wall
+    geo.rotateX(-Math.PI / 2);                     // lie flat, image top = passenger wall
+    var tex = new THREE.TextureLoader().load(PLAN.img, function () {
+      if (renderer.capabilities.getMaxAnisotropy) {
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      }
+      dirty = true;
+      if (then) { then(); }
+    });
     // Painted over the model rather than buried under it: on the floor with a depth test
     // the furniture hides the very thing you switched on, and from above - the one angle
     // where a plan is worth reading - you would see nothing but the bed.
@@ -418,6 +376,9 @@
   }
 
   var theta = VIEWS[0].theta, phi = VIEWS[0].phi, radius = VIEWS[0].r, dirty = true;
+  var home = target.clone();
+  var applyLayer = {};                             // id -> the layer's own apply(), filled below
+
   function place() {
     phi = Math.max(0.08, Math.min(Math.PI - 0.08, phi));
     radius = Math.max(0.8, Math.min(30, radius));
@@ -427,21 +388,68 @@
       target.z + radius * Math.sin(phi) * Math.sin(theta)
     );
     camera.lookAt(target);
+    camera.updateMatrixWorld();                    // pan reads its axes straight off this
     dirty = true;
   }
-  var dragging = false, lastX = 0, lastY = 0;
+
+  // Orbiting alone cannot look at a corner: the camera always points at the middle of the
+  // van, so the galley ends up at the edge of the frame and zooming in only pushes it out.
+  // Panning moves what the camera looks at, across the screen, so anything can be centred.
+  // Right or middle drag, shift-drag, and two fingers all do it - whichever the hand reaches
+  // for first.
+  var RIGHT = new THREE.Vector3(), UP = new THREE.Vector3(), FWD = new THREE.Vector3();
+  function panBy(dx, dy) {
+    camera.matrixWorld.extractBasis(RIGHT, UP, FWD);
+    var f = radius * 0.0016;                       // a drag tracks the cursor at any zoom
+    target.addScaledVector(RIGHT, -dx * f);
+    target.addScaledVector(UP, dy * f);
+    place();
+  }
+
+  var pts = {}, lastMid = null, lastSpan = 0;
+  var panning = function (e) {
+    return e.button === 1 || e.button === 2 || e.shiftKey || e.ctrlKey || e.metaKey;
+  };
+  function mid() {
+    var k = Object.keys(pts), a = pts[k[0]], b = pts[k[1]];
+    return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2,
+             d: Math.hypot(a.x - b.x, a.y - b.y) };
+  }
+
+  canvas.addEventListener("contextmenu", function (e) { e.preventDefault(); });
   canvas.addEventListener("pointerdown", function (e) {
-    dragging = true; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture(e.pointerId);
+    canvas.setPointerCapture(e.pointerId);
+    pts[e.pointerId] = { x: e.clientX, y: e.clientY, pan: panning(e) };
+    if (Object.keys(pts).length === 2) { var m = mid(); lastMid = m; lastSpan = m.d; }
   });
   canvas.addEventListener("pointermove", function (e) {
-    if (!dragging) return;
-    theta -= (e.clientX - lastX) * 0.007;
-    phi -= (e.clientY - lastY) * 0.007;
-    lastX = e.clientX; lastY = e.clientY;
+    var p = pts[e.pointerId];
+    if (!p) { return; }
+    var dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    var n = Object.keys(pts).length;
+    if (n >= 2) {                                  // two fingers: pan, and pinch to zoom
+      var m = mid();
+      if (lastMid) {
+        panBy(m.x - lastMid.x, m.y - lastMid.y);
+        if (lastSpan > 0 && m.d > 0) { radius *= lastSpan / m.d; place(); }
+      }
+      lastMid = m; lastSpan = m.d;
+      return;
+    }
+    if (p.pan || e.shiftKey || e.ctrlKey || e.metaKey) {
+      panBy(dx, dy);
+      return;
+    }
+    theta -= dx * 0.007;
+    phi -= dy * 0.007;
     place();
   });
-  ["pointerup", "pointercancel"].forEach(function (t) {
-    canvas.addEventListener(t, function () { dragging = false; });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(function (t) {
+    canvas.addEventListener(t, function (e) {
+      delete pts[e.pointerId];
+      if (Object.keys(pts).length < 2) { lastMid = null; lastSpan = 0; }
+    });
   });
   canvas.addEventListener("wheel", function (e) {
     e.preventDefault(); radius *= (1 + Math.sign(e.deltaY) * 0.1); place();
@@ -453,10 +461,15 @@
     b.type = "button"; b.textContent = v.label; b.id = "view-" + v.id;
     b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
     b.addEventListener("click", function () {
-      theta = v.theta; phi = v.phi; radius = v.r; place();
+      theta = v.theta; phi = v.phi; radius = v.r;
+      target.copy(home);                           // a view is a view, panning and all
+      place();
       VIEWS.forEach(function (o) {
         document.getElementById("view-" + o.id).setAttribute("aria-pressed", String(o === v));
       });
+      // the plan view is the plan: it brings the drawing with it rather than leaving you to
+      // find the switch for it
+      if (v.schema && applyLayer.schema) { applyLayer.schema(true); }
     });
     viewsEl.appendChild(b);
   });
@@ -478,6 +491,7 @@
       dirty = true;
     }
     b.addEventListener("click", function () { layer.on = !layer.on; apply(); });
+    applyLayer[layer.id] = function (on) { layer.on = on; apply(); };
     layersEl.appendChild(b);
     apply();                                           // layers that start off start off
   });
