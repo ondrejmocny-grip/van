@@ -344,18 +344,27 @@ Two things this round taught:
   open door widens the bounding box, and a cubicle you can see into is squatter than the slot
   it fills. Both were the point of the prop.
 
-**SHOWER, round two.** The first cubicle came back a pentagonal corner pod: the flux preview
-had angled panels, and stretched into a 700 x 800 rectangular hole it read as a tent. The
-qwen preview of the same prompt was rectangular all along - **the preview decides the plan
-shape, and the plan shape is not something the shape error can see**: a hexagon and a
-rectangle of the same proportions score the same. Re-meshed from the qwen shot, all three
-models came back rectangular (rodin 0.17, adopted). The prompt now spells out square corners
-and right angles as hard as it spells out the proportions.
+**SHOWER: a room is not a product, and generating one was the wrong idea.** Round one came
+back a pentagonal corner pod, because the flux preview had angled panels — **the preview
+decides the plan shape, and the plan shape is exactly what the shape error cannot see**: a
+hexagon and a rectangle of the same proportions score the same. Round two, re-meshed from
+the rectangular qwen shot, came back rectangular (rodin 0.17) and was still wrong in the
+viewer: its one open side faced the wall, and three separate ways of measuring which way it
+pointed — centroid offset, area near each face, coverage of each face — all agreed with each
+other and disagreed with what the browser drew.
 
-`props.py face <kind> <+x|-x|+y|-y>` sets which way a prop looks. An open-sided mesh carries
-its mass on the closed sides, so the vector from its area-weighted centroid to the centre of
-its bounding box points out through the opening — measurable, where the eye needs four
-screenshots. `align` still owns the quarter turn that matches the footprint; when the two
+So the cubicle is **built, not generated**: three wall panels, a tray, and a glass screen
+across the side that opens onto the lobby, all in `EXTRA_V2`. A single mesh scaled to fill a
+700 x 800 x 1881 hole can only read as a solid block or turn its one opening to a wall, and
+which way a generated mesh faces is a coin toss the box list should not be losing. Products
+get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void in
+`HEIGHTS_V2`.
+
+`props.py face <kind> <+x|-x|+y|-y>` sets which way a prop looks. It measures surface area
+near each of the four vertical faces of the bounding box: a wall panel puts a lot of area
+against its own face, an opening has almost none. The first version compared the centroid
+with the centre of the bounding box, and was wrong on the very prop it was written for —
+the shower tray sticks out through the opening and drags the centroid toward it. `align` still owns the quarter turn that matches the footprint; when the two
 disagree, facing wins. A wardrobe 150 mm too shallow still reads as a wardrobe; one that
 opens into the wall does not.
 
