@@ -137,6 +137,25 @@ PROMPTS = {
                  "third is a separate empty compartment standing wide open at the front, its "
                  "flat plywood floor and side panels visible, nothing inside it. A horizontal "
                  "plywood shelf divides the two."),
+    # 260 x 340 x 150: a third longer across than it is fore-aft, and only half as deep as
+    # it is wide - every model draws a deep square butler sink unless that is spelt out
+    "bowl": ("A small rectangular stainless steel sink bowl on its own, with no tap: a "
+             "shallow pressed basin a third longer one way than the other and only half as "
+             "deep as it is wide, straight sides with softly rounded internal corners, a flat "
+             "bottom with one round drain hole in the middle, a narrow flat rim running all "
+             "round the top edge, brushed stainless steel."),
+    # 50 x 50 x 250: five times taller than it is wide, and nothing else
+    "filtertap": ("A small polished chrome gooseneck drinking water faucet standing on its "
+                  "own: a slim vertical cylindrical column five times taller than it is wide, "
+                  "curving over at the top into a short down-turned spout, one small lever "
+                  "handle on the side near the top, a round base flange at the bottom. Slim "
+                  "and tall, nothing else around it."),
+    # 260 x 60 x 60: a cylinder four times longer than it is thick, lying down
+    "filter": ("An inline water filter cartridge lying horizontally on its own: a smooth "
+               "white plastic cylinder four times longer than it is thick, with a moulded "
+               "quick-connect hose fitting sticking straight out of each flat end, and a "
+               "printed label band around the middle. A plain sealed cylinder, no housing, "
+               "no bowl, no bracket."),
     "grey": ("A flat underslung waste water tank: a wide shallow black plastic box with rounded "
              "corners, moulded mounting lugs and a drain valve on one end."),
 }
