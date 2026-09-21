@@ -82,6 +82,34 @@ entry gap assumes — the **Worktop leaf out** button deploys it.
 fails the build if any furniture runs through them. Two rounds of the old office table were
 drawn with a swing arm through the sitter's chest before it was caught by eye.
 
+## Water at the sink
+
+Resolved 2026-09-21. **Two bowls and two taps.**
+
+| | |
+|---|---|
+| Wash bowl | **340 × 340**, 150 deep — detergent side |
+| Rinse bowl | **260 × 340**, 150 deep — clean side |
+| Divider | 40 mm; the pair takes 640 of the 780 run, leaving 70 mm of counter at each end |
+| Mixer tap | over the wash bowl, the usual pumped cold and calorifier hot |
+| **Drinking tap** | dedicated gooseneck beside the mixer, 250 above the worktop |
+| Filter | **inline carbon block**, 2 × 10 inch, teed off the cold line after the pump |
+
+**Why a separate tap and not a 3-way mixer:** filtered water never touches the mixer
+cartridge or the hose that has been sitting in the tank, it is a third of the price, and a
+failed mixer does not take the drinking water with it. Cost: one more 12 mm hole in the
+worktop.
+
+**Why an inline cartridge and not a sump housing:** there is 380 mm of height under the
+bowls and a slimline sump needs about 400 to drop the cartridge out of it. An inline
+cartridge is swapped by pulling its two hose fittings and can lie on its side — it sits
+behind the oven at x 1600–1860, y 1700–1760.
+
+Still to buy and decide: cartridge grade (a 0.5 micron carbon block with bacteriostatic
+silver handles taste, particulates and most bacteria; sediment pre-filter only if we fill
+from doubtful taps), and a shut-off valve before the filter so a cartridge change does not
+mean draining the system.
+
 ## The bathroom
 
 **Shower: curtain or sliding door, never a swinging one.** That is what lets the shower keep
@@ -127,7 +155,7 @@ side walls. Recovers 40–60 mm, takes it to ~1810, no holes in the body.
 | Shoe locker | **400 × 450 × 450** | shoes; doubles as the step to the cab |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
 | Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
-| Galley — sink side (driver) | **780 × 600**, worktop 900 | sink 400 × 340, 20 L oven at the aisle edge, pump + filter behind it |
+| Galley — sink side (driver) | **780 × 600**, worktop 900 | **two bowls** — wash 340 × 340, rinse 260 × 340 — 20 L oven at the aisle edge, pump behind it |
 | Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 + 480 board, **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
 | Bench, driver | **920 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |

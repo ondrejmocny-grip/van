@@ -147,7 +147,17 @@ APPLIANCES_V2 = [
                                                         #   of the cabinet, not buried at the back
     (1180, 1520, 1480, 1820,   40,  370, "plumbing"),   # pump, filter and trap under the sink,
                                                         #   behind the oven - shortest run to the tap
-    (1450, 1850, 1400, 1740,  750, 1200, "sink"),       # 400 x 340 bowl, plus the tap above
+    # Two bowls: wash in detergent on the left, rinse on the right. 640 of the 780 run, which
+    # leaves 70 mm of counter at each end - the prep space is the hob side and the leaf.
+    (1220, 1560, 1400, 1740,  750, 1200, "sink"),       # wash bowl 340 x 340, mixer tap above
+    (1600, 1860, 1400, 1740,  750,  900, "bowl"),       # rinse bowl 260 x 340, 150 deep
+    # Drinking water on its own path: a dedicated gooseneck beside the mixer, fed through an
+    # inline carbon block teed off the cold line after the pump. Inline rather than a sump
+    # housing because there is only 380 mm under the bowls and a sump needs ~400 to drop the
+    # cartridge out; an inline cartridge is swapped by pulling its two hose fittings and can
+    # lie on its side.
+    (1620, 1670, 1770, 1820,  900, 1150, "filtertap"),  # gooseneck, 250 above the worktop
+    (1600, 1860, 1700, 1760,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - hob over the fridge
     (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
     (1250, 1780,   30,  575,   60,  680, "fridgedoor"), # 90 L hinged door, 530 x 545 x 620,
@@ -214,6 +224,7 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
 INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calorifier",
+            "bowl", "filter",
             "battery", "inverter", "electrics")
 
 # What each kind is called, for the viewer key and the dimension labels.
@@ -228,7 +239,9 @@ NAMES = {
     "leg": "Table post", "shower": "Shower head",
     "ftable": "Worktop leaf", "fleg": "Front table post",
     "ftablep": "Worktop leaf, folded", "farm": "Leaf bracket",
-    "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone", "sink": "Sink",
+    "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone",
+    "sink": "Wash bowl + mixer tap", "bowl": "Rinse bowl",
+    "filtertap": "Drinking tap, filtered", "filter": "Carbon block, inline",
     "plumbing": "Pump, filter, trap", "cassette": "Cassette WC",
     "fridge": "Fridge 70 L", "fridgedoor": "Fridge 90 L, hinged door",
     "fresh": "Fresh water 110 L", "grey": "Grey water 70 L", "calorifier": "Calorifier 10 L",
@@ -280,7 +293,8 @@ KIND = {          # plan label or extra kind -> colour
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
-    "fridgedoor": "#cfe4c9", "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
+    "fridgedoor": "#cfe4c9", "bowl": "#b6bcbe", "filter": "#7fb2cf", "filtertap": "#b6bcbe",
+    "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
     "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
 }
 GLASSY = ("glass", "screen")     # drawn transparent in the viewer

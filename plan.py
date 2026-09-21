@@ -219,7 +219,7 @@ VARIANTS["v2"] = dict(
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
         (   0,  400,    0,  450, "LOCKER", "400 x 450 - shoes", SOFT),
         ( 750, 1150,    0,  600, "WORKTOP", "400 x 600 - fold-down leaf", GALLEY),
-        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - oven + pump under", GALLEY),
+        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - two bowls, oven + pump under", GALLEY),
         (1150, 1930,    0,  600, "HOB", "780 x 600 - 90 L fridge under", GALLEY),
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
         (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
