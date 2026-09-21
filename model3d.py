@@ -150,8 +150,9 @@ CONTAINERS_V2 = ("SHOWER", "WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BEN
 # v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
 # a drawer, a lid - has to turn with them or it opens into the wall. The viewer adds this to
 # the kind's own yaw, so yaw.json keeps meaning what it meant.
-FACING_V2 = {"locker": "d", "hob": "d", "fridgedoor": "d", "oven": "d", "sink": "d",
-             "cassette": "p"}
+# fridgedoor, SEAT, SHOWER and WARDROBE are modelled for v2's own placements, so they are
+# not in here - their facing lives in yaw.json like any deliberate turn.
+FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 
 # The viewer's Show buttons. v2 groups different things from v1, so it carries its own list;
 # a variant without one gets the template's default.
