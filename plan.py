@@ -204,23 +204,23 @@ VARIANTS["v2"] = dict(
     out="v2/layout",
     length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
-    title="v2 - VW Crafter L3H3 - front shower + wardrobe, bulkhead office, split galley, rear U",
+    title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
-    stats=["bed 1520 x 1832 across", "seat 450 x 600", "galley aisle 632",
-           "entry gap 700", "garage 600 x 1832", "standing 1881"],
+    stats=["bed 1520 x 1832 across", "locker 400 x 450", "galley aisle 632",
+           "entry gap 690", "garage 600 x 1832", "standing 1881"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
-          "pass-through beside the seat locker. Bed sleeps ACROSS: 1832 gross, ~1760 after the "
+          "pass-through beside the shoe locker. Bed sleeps ACROSS: 1832 gross, ~1760 after the "
           "wall build. WC stows under the wardrobe and slides forward into the shower, cassette "
           "out through the driver-side panel. The U is one carcass, so the fresh tank runs "
           "the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm."),
     boxes=[
-        ( 450, 1150,  660, 1032, "ENTRY", "700 wide - cab door beside the seat", None),
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - curtain", WET),
+        ( 400, 1090,  660, 1032, "ENTRY", "690 wide - cab door beside the locker", None),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - glass screen", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
-        (   0,  450,    0,  600, "SEAT", "450 x 600 - shoes", SOFT),
-        ( 450,  900,   30,  630, "TABLE", "450 x 600 - swing arm", WARM),
-        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - oven under", GALLEY),
-        (1150, 1930,    0,  600, "HOB", "780 x 600 - fridge under", GALLEY),
+        (   0,  400,    0,  450, "LOCKER", "400 x 450 - shoes", SOFT),
+        ( 750, 1150,    0,  600, "WORKTOP", "400 x 600 - fold-down leaf", GALLEY),
+        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - oven + pump under", GALLEY),
+        (1150, 1930,    0,  600, "HOB", "780 x 600 - 90 L fridge under", GALLEY),
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
         (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
         (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),

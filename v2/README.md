@@ -18,12 +18,12 @@ with the drawing above. What the 3D adds on top of the plan:
 |---|---|
 | Bed made up | the U closed to 1520 × 1832; hides the dinette table and its post |
 | Shower + wardrobe | the cubicle's panels, tray and glass screen, and the wardrobe with the WC bay open |
-| Office table out | deploys the top over your knees; off, it stands parked against the partition |
+| Worktop leaf out | deploys the galley's fold-down leaf; off, it hangs folded down the galley end |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
-| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the shower cubicle (open front), the wardrobe (open WC bay), the seat locker and the 65 L hinged-door fridge |
+| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the wardrobe (open WC bay), the shoe locker and the hinged-door fridge. The shower is built from panels, a tray and a glass screen instead |
 | **Schema overlay** | the plan itself painted onto the model — pair it with the **Plan** view |
 | Sizes | every block labelled with its name and size in mm |
 
@@ -33,7 +33,7 @@ clear of its neighbours, and clear of the tyres. Two results worth keeping:
 - **The fresh tank crosses the bench-to-garage joint and is still housed**, because the U is
   one carcass. The check now accepts a run of carcasses that meet, not only a single box.
 - **Nothing touches a tyre or a wheel arch.** The batteries sit 16 mm inboard of the driver
-  tyre and the fridge stops 127 mm short of the arch — both are tight, and both are real.
+  tyre and the 90 L fridge stops 83 mm short of the arch — both are tight, and both are real.
 
 Brisa's layout ported to our van: shower in the front driver corner, galley split across the
 aisle, rear U-dinette. See [ref/doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md).
@@ -43,61 +43,44 @@ aisle, rear U-dinette. See [ref/doracamper-brisa-ducato-l2h2](../ref/doracamper-
 - **Three front seats** (driver + double bench), so **swivel seats are dropped**. They were
   never going to work against a 3-seat bench, and dropping them also removes the handbrake
   lowering kit and the "does the Crafter have an electronic parking brake" question.
-- **Partition wall behind the cab at x = 0**, with a pass-through beside the seat locker.
+- **Partition wall behind the cab at x = 0**, with a pass-through beside the shoe locker.
 - **Three belted travelling seats** instead of two, which also makes the motor-caravan
   registration case simpler, not harder.
 - **The bed turned sideways.** 1520 mm fore-aft is enough, even with a child, so you sleep
   **across** the van.
-- **The office sits at the bulkhead**, behind the passenger seats.
+- **No office.** Dropped 2026-09-21. The front corner is a shoe locker and the galley's
+  worktop carries on forward over it as a fold-down leaf.
 - **The WC left the shower floor.** It stows under the wardrobe and slides forward into the
   shower only when needed — Scarlet & Seth's trick, adapted to a cassette.
 
-## The office
+## The front corner, and the worktop leaf
 
-A seat at the bulkhead, behind the passenger seats, facing **aft** down the van with the
-sliding door at your left shoulder.
+No office here any more. What is left is a shoe locker, the step through to the cab, and
+the galley reaching forward over it when you need prep space.
 
 | | |
 |---|---|
-| Seat / locker | **450 × 600**, top at 450 (520 with cushion) — **shoes inside** |
-| Table | **450 × 600** on a swing arm, top at 760 — same part as v1 |
-| Thigh clearance | 240 mm, the number v1 already accepted |
+| Shoe locker | **400 × 450**, top at 450 — shoes inside, and the step to the cab |
+| Worktop leaf | **400 × 600** at **900**, the galley's own height — fold-down |
+| Mount | hinged on the hob unit's forward end panel, swing-out bracket under it |
+| Folded | hangs flat down that same panel, x 1090–1150 |
 | Cab pass-through | beside the locker, **432 wide**, in the bulkhead |
+| Clear floor in front of the shower | **582** between the locker and the screen, up from 432 |
 
-The locker earns three jobs from one box: seat, shoe store, and the thing you put a knee on
-going through to the cab.
+The locker earns two jobs from one box: shoe store, and the thing you put a knee on going
+through to the cab. It lost 50 mm fore-aft and 150 mm across to give the lobby in front of
+the shower more room.
 
-### How the table is mounted
+**With the leaf down, the side door is blocked** — the clear entry drops from 690 mm to
+about 290. It folds in a second, and unlike a table nobody is sitting at it, so the cost is
+only while you are actually cooking.
 
-Resolved 2026-09-21. **The galley's forward end panel carries it, and the arm reaches
-forward to the seat.**
+Both positions are in the 3D model. **Folded is the default**, because that is the state the
+entry gap assumes — the **Worktop leaf out** button deploys it.
 
-The partition behind the seat looks like the obvious mount and is wrong: you sit on the
-seat, so an arm from the partition out to a table at 760 crosses your chest on the way.
-Drawn in a box list that is invisible; in a render it is obvious. From the galley the arm
-comes at the table from the far side, over the floor in front of your feet, and nothing
-passes through you. The wall opposite carries nothing either — between x 300 and x 1600 it
-*is* the sliding door.
-
-| | |
-|---|---|
-| Mount | Lagun-type **two-pivot arm** on the galley's front face, post at x 1090–1150, y 280–360 |
-| Post height | 300–770, clear of the worktop above and the entry beside it |
-| Deployed | arm reaches **forward** to x 900, top at x 450–900, surface at **760** → 240 thigh clearance |
-| Parked | top swings back and stands **flat on the galley end panel**, x 1090–1150, z 760–1210 |
-| Worth adding | hinge the top across the middle, 450 → 225, so half drops to let someone past |
-
-`model3d.check()` now carries a **seated person** — trunk, thighs, shins — and fails the
-build if any furniture runs through them. Two rounds of this design were drawn with an arm
-through the sitter's chest before it was caught by eye.
-
-Both positions are in the 3D model. **Parked is the default**, because that is the state the
-700 mm entry gap assumes — the **Office table out** button deploys it.
-
-**With the table deployed, the side door is blocked** — the clear entry drops from 700 mm to
-about 250. It swings away, so it is a 2-second cost, but it is a daily one. Worth knowing
-rather than fixing: a person sitting there blocks that doorway anyway, table or no table, and
-with the slider open you are working with a view out.
+`model3d.check()` carries a **person perched on the locker** — trunk, thighs, shins — and
+fails the build if any furniture runs through them. Two rounds of the old office table were
+drawn with a swing arm through the sitter's chest before it was caught by eye.
 
 ## The bathroom
 
@@ -139,18 +122,18 @@ side walls. Recovers 40–60 mm, takes it to ~1810, no holes in the body.
 
 | Area | Size (mm) | Contains |
 |---|---|---|
-| Shower | **700 × 800**, floor level, 1881 clear | curtain; WC slides in when needed |
+| Shower | **700 × 800**, floor level, 1881 clear | glass screen on the lobby side; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
-| Seat / shoe locker | **450 × 600 × 450** | shoes; doubles as the step to the cab |
-| Office table | **450 × 600** at 760 | swing arm, parks against the bulkhead |
-| Entry, clear at the door | **700** of the 1300 aperture | cab pass-through 432 beside the seat |
-| Galley — sink side (driver) | **780 × 600**, worktop 900 | sink 400 × 340, 20 L oven under |
-| Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 + 480 board, fridge under |
+| Shoe locker | **400 × 450 × 450** | shoes; doubles as the step to the cab |
+| Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
+| Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
+| Galley — sink side (driver) | **780 × 600**, worktop 900 | sink 400 × 340, 20 L oven at the aisle edge, pump + filter behind it |
+| Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 + 480 board, **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
 | Bench, driver | **920 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |
 | Bench, passenger | **920 × 600 × 450** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
 | Table → bed | **920 × 632** infill | |
-| **Rear bench / garage** | **600 × 1832 × 450**, ~400 clear | calorifier, electrics board, pump + filter |
+| **Rear bench / garage** | **600 × 1832 × 450**, ~400 clear | calorifier, electrics board |
 | **Bed made up** | **1520 × 1832** | 2 at 760 each, or 3 at 507 |
 
 Driver side adds up: shower 700 + wardrobe 450 + sink 780 = **1930**, then the bed.
@@ -193,27 +176,29 @@ sitting over the same arch.
 | Shower footprint | 750 × 700 = 0.53 m² | 700 × 800 = **0.56 m²** | +7% |
 | Shower headroom | 1681 (floor is +200 over the wheel well) | **1881** | +200, no step |
 | Shower floor when showering | cassette in it | **clear** | WC stows away |
-| Galley worktop | 1100 × 600 = 0.66 m² | 2 × 780 × 600 = **0.94 m²** | +42% |
+| Galley worktop | 1100 × 600 = 0.66 m² | 2 × 780 × 600 + a 400 × 600 leaf = **1.18 m²** | +79% |
 | Hanging space | none | **450 × 600**, ~1281 clear | new |
-| Work position | swivel seat + Lagun table | bulkhead seat + swing table | 1 either way |
+| Work position | swivel seat + Lagun table | **none** — dropped 2026-09-21 | −1 |
+| Fridge | 70 L drawer | **90 L, hinged door** | +20 L |
 | Galley aisle | 1232 | **632** | −600 |
 | Corridor past the cubicle | 532 | none | gone |
-| Entry gap at the slider | 1300 | **700** | −600 |
+| Entry gap at the slider | 1300 | **690** | −610 |
 | Bench storage | 0.89 m² | 2 × 920 × 600 = **1.10 m²** | +24% |
 | **Garage** | 450 × 1832 = 0.82 m² | **600 × 1832 = 1.10 m²** | **+33%** |
 | Travelling seats | 2 | **3** | +1 |
 
 ## Open on v2
 
-1. **The deployed table blocks the side door.** 700 mm of entry drops to ~250. Swing-arm, so
-   it is recoverable in seconds — but worth feeling before it is built.
+1. **The deployed worktop leaf blocks the side door.** 690 mm of entry drops to ~290. It
+   folds in a second — but worth feeling before it is built.
 2. **Tank shape.** 1020 × 374 × 310 is a semi-custom size. Either have one made, or plumb
    two off-the-shelf slim tanks in series. Confirm before the benches are cut.
 3. **Cassette hatch** in the driver-side body panel at x 700–1150. Check it against the actual
    Crafter body — flat panel expected, but confirm.
-4. **Fridge door swing.** Brisa's 65 L unit is a **hinged door, not a drawer** — a ~500 mm door
-   into a 632 aisle blocks it completely while open. Hinge side is a real decision.
-5. **Entry gap 700** and **aisle 632**. Two people cannot pass in the galley.
+4. **Fridge door swing.** The 90 L unit is a **hinged door, not a drawer** — a ~530 mm door
+   into a 632 aisle blocks it completely while open. Hinge side is a real decision, and it
+   matters more at 90 L than it did at 65.
+5. **Entry gap 690** and **aisle 632**. Two people cannot pass in the galley.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

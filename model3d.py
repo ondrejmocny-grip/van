@@ -96,12 +96,12 @@ APPLIANCES = [
 HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
     "WARDROBE": (0, 1881),      # hanging above, WC drawer below
-    "SEAT": (0, 450),           # seat / shoe locker, step through to the cab
+    "LOCKER": (0, 450),         # shoe locker, and the step through to the cab
     "SINK": (0, 900),
     "HOB": (0, 900),
     "BENCH": (0, 450),
     "REAR BENCH": (0, 450),
-    "TABLE": None,              # the office table is in EXTRA_V2, so it keeps its prop
+    "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
     "ENTRY": None,
     "AISLE": None,
     "TABLE -> BED": None,
@@ -115,19 +115,15 @@ EXTRA_V2 = [
     (1930, 2850,  600, 1232,  450,  520, "infill"),
     (2150, 2750,  616, 1216,  700,  760, "table"),      # dinette table, drops to the infill
     (2320, 2580,  786, 1046,    0,  700, "leg"),
-    # The office table hangs off the GALLEY's forward end panel, and reaches FORWARD to the
-    # seat. The partition behind the seat looks like the obvious mount and is not: an arm
-    # from there to a table at 760 crosses the chest of whoever is sitting on the seat. From
-    # the galley the arm comes at the table from the far side, over the floor in front of the
-    # feet, and nothing passes through the sitter. Nothing can hang off the wall opposite -
-    # between x 300 and 1600 that wall is the sliding door.
-    # Both positions are drawn. The post stands in both; the arm and the flat top are the
-    # deployed pair, the standing panel is the parked one. Parked is the default, which is
-    # the state the 700 mm entry gap assumes.
-    (1090, 1150,  280,  360,  300,  770, "fleg"),       # post, on the galley's front face
-    ( 900, 1090,  300,  340,  690,  750, "farm"),       # deployed: the arm reaches forward
-    ( 450,  900,   30,  630,  700,  760, "ftable"),     #   and the top sits over your knees
-    (1090, 1150,    0,  600,  760, 1210, "ftablep"),    # parked: flat on the galley end
+    # The galley worktop carries on forward as a fold-down leaf, hinged on the hob unit's
+    # front face at worktop height. This used to be an office table at 760 on a swing arm;
+    # the office is gone, so it is 900 like the rest of the kitchen and it is prep space.
+    # Both positions are drawn: deployed it reaches forward over the entry, folded it hangs
+    # flat down the galley's end panel. Folded is the default, which is the state the entry
+    # gap assumes.
+    ( 900, 1150,  260,  320,  780,  840, "farm"),       # swing-out bracket under the leaf
+    ( 750, 1150,    0,  600,  840,  900, "ftable"),     # deployed: 400 x 600 at worktop height
+    (1090, 1150,    0,  600,  440,  840, "ftablep"),    # folded: hangs down the galley end
     (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
     (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
     (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
@@ -147,18 +143,21 @@ EXTRA_V2 = [
 
 APPLIANCES_V2 = [
     # galley, driver side - sink unit, worktop 900
-    (1300, 1750, 1400, 1750,  380,  720, "oven"),       # 20 L mini oven, 450 x 350 x 340
+    (1300, 1750, 1252, 1602,  380,  720, "oven"),       # 20 L mini oven, at the aisle edge
+                                                        #   of the cabinet, not buried at the back
+    (1180, 1520, 1480, 1820,   40,  370, "plumbing"),   # pump, filter and trap under the sink,
+                                                        #   behind the oven - shortest run to the tap
     (1450, 1850, 1400, 1740,  750, 1200, "sink"),       # 400 x 340 bowl, plus the tap above
     # galley, passenger side - hob over the fridge
     (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
-    (1250, 1736,   50,  575,   60,  580, "fridgedoor"), # 65 L hinged door, forward of the arch
+    (1250, 1780,   30,  575,   60,  680, "fridgedoor"), # 90 L hinged door, 530 x 545 x 620,
+                                                        #   still 83 mm clear of the wheel arch
     # bathroom - the WC lives in the wardrobe base and slides into the shower
     ( 715, 1135, 1252, 1822,   40,  560, "cassette"),   # ~420 x 570, hatch at x 700-1150
     # water - the tank runs the bench-to-garage corner, inboard of the wheel arch
     (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
     (2100, 2800,  400,  900, -270,  -70, "grey"),       # 70 L, underslung
     (3100, 3400,  150,  550,   60,  360, "calorifier"), # 10 L off the engine heat exchanger
-    (2900, 3240,  700, 1040,   60,  400, "plumbing"),   # pump, filter, waste trap
     # electrics, driver bench - 16 mm inboard of the tyre, which is what sets y here
     (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
     (2340, 2540, 1240, 1590,   30,  270, "battery"),
@@ -166,24 +165,24 @@ APPLIANCES_V2 = [
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
+CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH")
 
-# Where a person actually is when they use the office seat: sitting on the locker, facing
-# aft, knees down and feet on the floor in front of it. Furniture is checked against this the
+# Where a person actually is when they perch on the shoe locker to put boots on: facing
+# aft, knees down, feet on the floor in front of it. Furniture is checked against this the
 # same way appliances are checked against each other, because two rounds of this design were
 # drawn with a swing arm running straight through the sitter's chest - obvious in a render,
 # invisible in a box list. Trunk, thighs, shins.
 SITTER_V2 = [
-    ( 80,  450,  80, 520,  520, 1400),
-    (450,  900, 120, 480,  430,  560),
-    (700,  900, 120, 480,    0,  450),
+    ( 60,  400,  60,  400,  450, 1300),
+    (400,  800, 100,  380,  380,  500),
+    (620,  820, 100,  380,    0,  400),
 ]
 
 # Which wall a prop mesh was modelled facing away from: "p" = passenger (y=0), "d" = driver.
 # v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
 # a drawer, a lid - has to turn with them or it opens into the wall. The viewer adds this to
 # the kind's own yaw, so yaw.json keeps meaning what it meant.
-# fridgedoor, SEAT, SHOWER and WARDROBE are modelled for v2's own placements, so they are
+# fridgedoor, LOCKER and WARDROBE are modelled for v2's own placements, so they are
 # not in here - their facing lives in yaw.json like any deliberate turn.
 FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 
@@ -194,7 +193,7 @@ LAYERS_V2 = [
      "hide": ["table", "leg"]},
     {"id": "wet", "label": "Shower + wardrobe",
      "kinds": ["wetwall", "tray", "screen", "shower", "WARDROBE"], "on": True},
-    {"id": "office", "label": "Office table out", "kinds": ["ftable", "farm"], "on": False,
+    {"id": "worktop", "label": "Worktop leaf out", "kinds": ["ftable", "farm"], "on": False,
      "hide": ["ftablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
@@ -219,7 +218,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calori
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
-    "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "SEAT": "Seat / shoe locker",
+    "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
     "partition": "Partition wall", "hatch": "Cassette hatch",
@@ -227,11 +226,11 @@ NAMES = {
     "BENCH": "Bench", "REAR BENCH": "Rear bench / garage", "bed": "Seat cushion", "infill": "Bed infill",
     "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
     "leg": "Table post", "shower": "Shower head",
-    "ftable": "Front table", "fleg": "Front table post",
-    "ftablep": "Office table, parked", "farm": "Table swing arm",
+    "ftable": "Worktop leaf", "fleg": "Front table post",
+    "ftablep": "Worktop leaf, folded", "farm": "Leaf bracket",
     "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone", "sink": "Sink",
     "plumbing": "Pump, filter, trap", "cassette": "Cassette WC",
-    "fridge": "Fridge 70 L", "fridgedoor": "Fridge 65 L, hinged door",
+    "fridge": "Fridge 70 L", "fridgedoor": "Fridge 90 L, hinged door",
     "fresh": "Fresh water 110 L", "grey": "Grey water 70 L", "calorifier": "Calorifier 10 L",
     "battery": "Battery 150 Ah", "inverter": "Inverter 3000 W",
     "electrics": "MPPT, DC-DC, fuses",
@@ -269,7 +268,7 @@ PARTITION_V2 = (600, 1032, 0, 1600)
 CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
-    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "SEAT": "#d8cfe2",
+    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "ftablep": "#d9b98a", "farm": "#9a9287",
@@ -918,7 +917,7 @@ def check(v):
     sat = []
     for body in spec(v).get("sitter", ()):
         for b in boxes_for(v):
-            if b[6] in ("SEAT", "bed", "ENTRY", "AISLE"):
+            if b[6] in ("LOCKER", "bed", "ENTRY", "AISLE"):
                 continue
             if overlap(b[:6], body):
                 sat.append("%s runs through the person on the seat" % b[6])

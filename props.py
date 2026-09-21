@@ -108,11 +108,11 @@ PROMPTS = {
                    "opening edge of the door, a narrow vent grille along the bottom."),
     # 450 x 600 x 450: a cube a third deeper than it is wide, and no taller than it is wide -
     # every model draws a chair unless the words rule one out
-    "SEAT": ("A campervan seat box with storage inside, seen on its own: a low plywood cube, "
-             "no taller than it is wide and a third deeper than it is wide, with a thin flat "
-             "upholstered sage green cushion lying on its top face, a hinged front door with "
-             "a small round recessed finger pull, a birch plywood carcass with visible ply "
-             "edges, standing on the floor. No backrest, no legs, no armrests."),
+    "LOCKER": ("A campervan shoe locker box, seen on its own: a low plywood cube, no taller "
+               "than it is wide and a little deeper than it is wide, with a thin flat "
+               "upholstered sage green pad lying on its top face, a hinged front door with a "
+               "small round recessed finger pull, a birch plywood carcass with visible ply "
+               "edges, standing on the floor. No backrest, no legs, no armrests."),
     # 700 x 800 x 1881: two and a half times taller than it is wide, and the open side is the
     # point - a sealed white box tells you nothing about the room it stands in
     # first round came back a pentagonal corner pod - angled panels, chamfered front. In a
