@@ -12,6 +12,7 @@ layout schemas, possibly 3D visualizations of them.
 
 - New reference material goes in `ref/`.
 - When something is decided or changes, update the relevant file in `doc/`.
+- **No pull requests here.** Work on a branch, then merge it straight into `main` and push.
 
 ## Drawing layouts
 
