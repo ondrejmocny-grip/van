@@ -17,7 +17,7 @@ with the drawing above. What the 3D adds on top of the plan:
 | Layer | What it holds |
 |---|---|
 | Bed made up | the U closed to 1520 × 1832; hides the dinette table and its post |
-| Shower + wardrobe | both full height, with the shower head on the partition |
+| Shower + wardrobe | the cubicle's panels, tray and glass screen, and the wardrobe with the WC bay open |
 | Office table out | deploys the top over your knees; off, it stands parked against the partition |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
@@ -102,7 +102,10 @@ with the slider open you are working with a view out.
 ## The bathroom
 
 **Shower: curtain or sliding door, never a swinging one.** That is what lets the shower keep
-its 800 mm width without stealing clearance from the lobby.
+its 800 mm width without stealing clearance from the lobby. The 3D model draws it as a
+**glass screen** on the lobby side — three wall panels, a tray and the screen, built from
+the box list rather than from a generated mesh, so you can see into the cubicle from the
+aisle and the drawing cannot lie about which side opens.
 
 **The WC stows under the wardrobe.** A cassette unit, roughly 420 × 570, sits in the wardrobe
 base and **slides forward into the shower** when you need it. The **cassette itself comes out

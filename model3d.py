@@ -94,7 +94,7 @@ APPLIANCES = [
 # shifted onto it, so it gets its own tables.
 # --------------------------------------------------------------------------
 HEIGHTS_V2 = {
-    "SHOWER": (0, 1881),        # full height, curtain across the open side
+    "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
     "WARDROBE": (0, 1881),      # hanging above, WC drawer below
     "SEAT": (0, 450),           # seat / shoe locker, step through to the cab
     "SINK": (0, 900),
@@ -132,6 +132,17 @@ EXTRA_V2 = [
     (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
     (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
     (   0,  160, 1600, 1760, 1140, 1860, "shower"),     # head and riser, on the partition
+    # The shower cubicle, built rather than generated. A room is not a product: a single
+    # mesh scaled to fill a 700 x 800 x 1881 hole either reads as a solid block or turns
+    # its one opening to the wall, and which way a generated mesh faces is a coin toss the
+    # box list should not be losing. Three panels, a tray, and a glass screen across the
+    # side that opens onto the lobby - so you can see in from the aisle, which is the whole
+    # point of drawing it at all.
+    (   0,   40, 1032, 1832,    0, 1881, "wetwall"),    # forward wall, on the partition
+    ( 660,  700, 1032, 1832,    0, 1881, "wetwall"),    # aft wall, shared with the wardrobe
+    (   0,  700, 1792, 1832,    0, 1881, "wetwall"),    # the driver-side wall
+    (  40,  660, 1072, 1792,    0,   60, "tray"),
+    (  40,  660, 1032, 1072,   60, 1881, "screen"),     # glass, on the lobby side
 ]
 
 APPLIANCES_V2 = [
@@ -155,7 +166,7 @@ APPLIANCES_V2 = [
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("SHOWER", "WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
+CONTAINERS_V2 = ("WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
 
 # Where a person actually is when they use the office seat: sitting on the locker, facing
 # aft, knees down and feet on the floor in front of it. Furniture is checked against this the
@@ -181,8 +192,8 @@ FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p
 LAYERS_V2 = [
     {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
      "hide": ["table", "leg"]},
-    {"id": "wet", "label": "Shower + wardrobe", "kinds": ["SHOWER", "WARDROBE", "shower"],
-     "on": True},
+    {"id": "wet", "label": "Shower + wardrobe",
+     "kinds": ["wetwall", "tray", "screen", "shower", "WARDROBE"], "on": True},
     {"id": "office", "label": "Office table out", "kinds": ["ftable", "farm"], "on": False,
      "hide": ["ftablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
@@ -209,6 +220,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calori
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "SEAT": "Seat / shoe locker",
+    "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
     "partition": "Partition wall", "hatch": "Cassette hatch",
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
@@ -258,6 +270,7 @@ CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "SEAT": "#d8cfe2",
+    "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "ftablep": "#d9b98a", "farm": "#9a9287",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
@@ -271,7 +284,7 @@ KIND = {          # plan label or extra kind -> colour
     "fridgedoor": "#cfe4c9", "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
     "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
 }
-GLASSY = ("glass",)     # drawn transparent in the viewer
+GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 
 # Props whose mesh keeps its own proportions instead of being stretched to fill its box.
 # Only for boxes that are a space reservation rather than the shape of a real object: the

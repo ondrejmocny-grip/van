@@ -485,15 +485,38 @@ def align(write=True):
         print("wrote", path)
 
 
+def openness(path, band=0.18):
+    """Which way a prop's open side points, in mesh coordinates.
+
+    Surface area near each of the four vertical faces of the bounding box. A wall panel puts
+    a lot of area against its own face; the open side has almost none. The answer is the
+    outward direction of the emptiest face.
+
+    The obvious measure - centroid against bounding-box centre - is wrong on exactly the
+    props this matters for: the shower's tray sticks out through its opening, which drags
+    the centroid the wrong way and turned the cubicle to face the wall.
+    """
+    import numpy as np
+    import trimesh
+    m = trimesh.load(path, force="mesh")
+    lo, hi = m.bounds
+    area, mid = m.area_faces, m.triangles_center
+    out, best = None, None
+    for axis, sign in ((0, 1), (0, -1), (2, 1), (2, -1)):
+        span = hi[axis] - lo[axis]
+        edge = hi[axis] if sign > 0 else lo[axis]
+        near = np.abs(mid[:, axis] - edge) < band * span
+        share = area[near].sum() / area.sum()
+        if best is None or share < best:
+            best = share
+            out = (sign if axis == 0 else 0, sign if axis == 2 else 0, share)
+    return out
+
+
 def face(kind, want, write=True):
     """Turn a prop so its OPEN side points where the layout wants it.
 
         python props.py face WARDROBE -y     # the open front looks across the aisle
-
-    An open-sided mesh carries its mass on the closed sides, so the vector from its
-    area-weighted centroid to the centre of its bounding box points straight out through the
-    opening. That is measurable, and measuring beats spinning the thing by eye through four
-    screenshots - which is how the first three props were turned, and two of them were wrong.
 
     `align` owns the quarter turn that matches the footprint; this owns the facing. They
     disagree whenever a prop's opening is on its long side, and then facing wins: a wardrobe
@@ -501,14 +524,7 @@ def face(kind, want, write=True):
     """
     import json
     import numpy as np
-    import trimesh
-    m = trimesh.load(os.path.join(OUT, kind + ".glb"), force="mesh")
-    area = m.area_faces
-    centroid = (m.triangles_center * area[:, None]).sum(axis=0) / area.sum()
-    out = m.bounding_box.centroid - centroid          # points out through the opening
-    ox, oz = out[0], out[2]                           # glTF is Y-up: X and Z are horizontal
-    if np.hypot(ox, oz) < 1e-6:
-        raise SystemExit("%s is symmetrical - nothing to face" % kind)
+    ox, oz, share = openness(os.path.join(OUT, kind + ".glb"))
     targets = {"+x": (1, 0), "-x": (-1, 0), "+y": (0, 1), "-y": (0, -1)}
     if want not in targets:
         raise SystemExit("face wants one of " + ", ".join(sorted(targets)))
@@ -520,17 +536,13 @@ def face(kind, want, write=True):
         # mesh Z to its width
         vx = ox * np.cos(a) + oz * np.sin(a)
         vy = -ox * np.sin(a) + oz * np.cos(a)
-        dot = (vx * tx + vy * ty) / np.hypot(vx, vy)
+        dot = vx * tx + vy * ty
         if dot > score:
             best, score = deg, dot
     path = os.path.join(OUT, "yaw.json")
     yaw = json.load(open(path)) if os.path.exists(path) else {}
-    ext = m.bounding_box.extents
-    bx, by, _ = box_of(kind)
-    turned = best % 180 == 90
-    mesh_ratio = (ext[2] / ext[0]) if turned else (ext[0] / ext[2])
-    print("  %-11s open side %+.2f %+.2f -> yaw %3d (match %.2f), footprint %.2f vs box %.2f"
-          % (kind, ox, oz, best, score, mesh_ratio, bx / by))
+    print("  %-11s open face %+d %+d holds %.0f%% of the area -> yaw %3d"
+          % (kind, ox, oz, share * 100, best))
     yaw[kind] = best
     if write:
         json.dump(dict(sorted(yaw.items())), open(path, "w"), indent=2)
