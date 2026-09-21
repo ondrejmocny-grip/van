@@ -165,6 +165,7 @@ writes `.png` + `.svg`.
 
     python plan.py v1             # plan + elevations + sections -> v1/
     python plan.py v1-roof         # roof layout -> v1/roof.png
+    python plan.py v2             # plan -> v2/layout.png
     python plan.py ref             # Em & Nick's Transit 148" EL -> ref/emandnick-transit-148el/
     python plan.py ref-brisa       # Dora Camper "Brisa" Ducato L2H2 -> ref/doracamper-brisa-ducato-l2h2/
     python plan.py ref-scarletseth # Scarlet & Seth ProMaster 159 EXT -> ref/scarletseth-promaster-159ext/
@@ -178,6 +179,7 @@ sits at the bottom. View coordinates add z = height above the finished floor.
 OBJ for Blender or SketchUp.
 
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
+    python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
@@ -188,8 +190,16 @@ It also carries the **big kit at real catalogue sizes** — oven, hob, sink, cas
 water tanks, calorifier, batteries, inverter, electrics board — in `APPLIANCES`. Before it
 renders anything, `check()` asserts every appliance sits inside the van, inside a cabinet,
 and clear of its neighbours, so changing a size to a real product fails loudly instead of
-quietly overlapping. `EXTRA` and `APPLIANCES` are written in v1 coordinates; `remap()` moves
-anything on the driver side or aft of the rear-bench line onto another base vehicle's walls.
+quietly overlapping.
+
+**Each layout version carries its own 3D tables.** `REGISTRY` in model3d.py maps a variant to
+its `HEIGHTS`, `EXTRA`, `APPLIANCES`, `CONTAINERS`, window and fan positions, hatches, the
+partition and the cab seats — v1 and v2 furnish completely different rooms, and nothing about
+one survives being shifted onto the other. A variant with no entry (the reference vans)
+borrows v1's and gets them through `remap()`, which moves anything on the driver side or aft
+of the rear-bench line onto that vehicle's walls. `check()` accepts kit housed in a **run of
+carcasses that meet**, not only a single box, because v2's U is one continuous carcass and
+its fresh tank crosses the joint on purpose.
 
 In the viewer, **Sizes** labels every block with its name and width × depth × height in mm,
 and **Appliances** toggles the kit *and* ghosts the carcasses listed in `CONTAINERS`, so the
@@ -199,8 +209,20 @@ panel would hide the kit from most angles anyway. Sizes is off by default — th
 once is unreadable, and tags declutter front-to-back, so switch off the layers you are not
 measuring first.
 
+**Schema overlay** paints the 2D plan onto the floor of the 3D model, and the **Plan** view
+looks straight down at it from the plan's own viewpoint — nose left, driver side at the
+bottom. It is drawn in the browser from the same box list plan.py draws, not from a picture
+of `layout.png`, so it can never show something the drawing does not. It deliberately ignores
+the depth buffer: on the floor, under the furniture, the one angle where a plan is worth
+reading would show nothing but the bed.
+
+A variant can also send its own **Show** buttons — v2 groups shower, wardrobe and office
+table differently from v1 — in `LAYERS_V2`. Without one, the viewer uses the list in the
+template.
+
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
-Published viewer: **[v1 Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** -
+Published viewers: **[v1 Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** ·
+**[v2 Crafter](https://claude.ai/artifact/4zfKdrCzAheAzWhmKarVFe)** -
 republish it after any change with the Artifact tool, passing that URL so it updates in place
 rather than making a second one. It is private to Ondrej's account; sharing is done from the
 page's own Share menu, not from here.

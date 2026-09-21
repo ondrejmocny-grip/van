@@ -20,7 +20,9 @@ from plan import VARIANTS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# plan label -> (z0, z1). None means the plan box is a void (footwell, open floor).
+# --- v1: plan label -> (z0, z1). None means the plan box is a void (footwell, open floor).
+# Every table below is v1's. The v2 tables follow, and REGISTRY at the end of this section
+# says which variant gets which. A variant with no entry falls back to v1's, remapped.
 HEIGHTS = {
     "GALLEY": (0, 900),
     "WET CUBICLE": (0, 1945),
@@ -85,6 +87,85 @@ APPLIANCES = [
     (3060, 3460, 1624, 1744,   60,  360, "electrics"),
 ]
 
+# --------------------------------------------------------------------------
+# v2 - written in v2's own coordinates, not remapped from v1. The layout is a
+# different room: shower in the front driver corner, galley split across the
+# aisle, U-dinette in the back. Nothing about v1's fit-out would survive being
+# shifted onto it, so it gets its own tables.
+# --------------------------------------------------------------------------
+HEIGHTS_V2 = {
+    "SHOWER": (0, 1881),        # full height, curtain across the open side
+    "WARDROBE": (0, 1881),      # hanging above, WC drawer below
+    "SEAT": (0, 450),           # seat / shoe locker, step through to the cab
+    "SINK": (0, 900),
+    "HOB": (0, 900),
+    "BENCH": (0, 450),
+    "REAR BENCH": (0, 450),
+    "TABLE": None,              # the office table is in EXTRA_V2, so it keeps its prop
+    "ENTRY": None,
+    "AISLE": None,
+    "TABLE -> BED": None,
+}
+
+EXTRA_V2 = [
+    # the U made up as a bed: 1520 fore-aft across the full 1832
+    (1930, 2850,    0,  600,  450,  520, "bed"),
+    (1930, 2850, 1232, 1832,  450,  520, "bed"),
+    (2850, 3450,    0, 1832,  450,  520, "bed"),
+    (1930, 2850,  600, 1232,  450,  520, "infill"),
+    (2150, 2750,  616, 1216,  700,  760, "table"),      # dinette table, drops to the infill
+    (2320, 2580,  786, 1046,    0,  700, "leg"),
+    ( 450,  900,   30,  630,  700,  760, "ftable"),     # office table on its swing arm
+    (   0,  450,  290,  370,  710,  750, "fleg"),       # the arm itself, off the partition
+    (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
+    (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
+    (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
+    (   0,  160, 1600, 1760, 1140, 1860, "shower"),     # head and riser, on the partition
+]
+
+APPLIANCES_V2 = [
+    # galley, driver side - sink unit, worktop 900
+    (1300, 1750, 1400, 1750,  380,  720, "oven"),       # 20 L mini oven, 450 x 350 x 340
+    (1450, 1850, 1400, 1740,  750, 1200, "sink"),       # 400 x 340 bowl, plus the tap above
+    # galley, passenger side - hob over the fridge
+    (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
+    (1250, 1736,   50,  575,   60,  580, "fridge"),     # 65 L hinged door, forward of the arch
+    # bathroom - the WC lives in the wardrobe base and slides into the shower
+    ( 715, 1135, 1252, 1822,   40,  560, "cassette"),   # ~420 x 570, hatch at x 700-1150
+    # water - the tank runs the bench-to-garage corner, inboard of the wheel arch
+    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
+    (2100, 2800,  400,  900, -270,  -70, "grey"),       # 70 L, underslung
+    (3100, 3400,  150,  550,   60,  360, "calorifier"), # 10 L off the engine heat exchanger
+    (2900, 3240,  700, 1040,   60,  400, "plumbing"),   # pump, filter, waste trap
+    # electrics, driver bench - 16 mm inboard of the tyre, which is what sets y here
+    (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
+    (2340, 2540, 1240, 1590,   30,  270, "battery"),
+    (2100, 2570, 1300, 1580,  270,  450, "inverter"),   # 3000 W, on a shelf over the cells
+    (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
+]
+
+CONTAINERS_V2 = ("SHOWER", "WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
+
+# The viewer's Show buttons. v2 groups different things from v1, so it carries its own list;
+# a variant without one gets the template's default.
+LAYERS_V2 = [
+    {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
+     "hide": ["table", "leg"]},
+    {"id": "wet", "label": "Shower + wardrobe", "kinds": ["SHOWER", "WARDROBE", "shower"],
+     "on": True},
+    {"id": "office", "label": "Office table", "kinds": ["ftable", "fleg"], "on": True},
+    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
+     "on": True, "xray": True},
+    {"id": "body", "label": "Body + glass",
+     "kinds": ["shell", "glass", "floor", "wheel", "partition", "hatch"], "on": True},
+    {"id": "cab", "label": "Cab + seats", "kinds": ["cab", "seat", "dash"], "on": True},
+    {"id": "props", "label": "Detailed props", "kinds": [], "on": True, "props": True},
+    {"id": "schema", "label": "Schema overlay", "kinds": [], "on": False, "schema": True},
+    {"id": "sizes", "label": "Sizes", "kinds": [], "on": False, "sizes": True},
+]
+
+
 # Carcasses with kit inside them. The viewer ghosts these while the appliances are shown,
 # so you can see into a bench without inventing door and drawer divisions we have not designed.
 CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
@@ -96,6 +177,9 @@ INTERNAL = ("oven", "plumbing", "fridge", "fresh", "grey", "calorifier",
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
+    "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "SEAT": "Seat / shoe locker",
+    "SINK": "Galley - sink side", "HOB": "Galley - hob side",
+    "partition": "Partition wall", "hatch": "Cassette hatch",
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
     "BENCH": "Bench", "REAR BENCH": "Rear bench / garage", "bed": "Seat cushion", "infill": "Bed infill",
     "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
@@ -125,7 +209,24 @@ WINDOWS = [                                     # side, x0, x1, z0, z1
 REAR_DOORS = (60, 60, 0, 1700)                  # inset from each side, z0, z1
 FAN_HOLES = [(860, 1340, 140, 620), (2460, 2940, 140, 620)]
 
+# v2 puts different things against the walls, so the holes move with them.
+WINDOWS_V2 = [
+    ("d",  120,  620, 1180, 1520),              # shower window, Brisa's trick
+    ("d", 1250, 1850, 1000, 1350),              # over the sink
+    ("d", 1950, 2750,  620,  960),              # over the driver bench
+    ("p", 1950, 2750,  620,  960),              # over the passenger bench
+]
+FAN_HOLES_V2 = [(1400, 1880, 676, 1156), (2350, 2830, 676, 1156)]
+# Service hatches: a real hole in a body panel with a lid in it. side, x0, x1, z0, z1.
+HATCHES_V2 = [("d", 700, 1150, 40, 580)]        # the cassette comes out sideways here
+# Partition behind a 3-seat cab, with the pass-through cut in it: y0, y1, z0, z1.
+PARTITION_V2 = (600, 1032, 0, 1600)
+# Cab seats as x0, x1, y0, y1 - a single driver seat and a double bench, no swivels.
+CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
+
 KIND = {          # plan label or extra kind -> colour
+    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "SEAT": "#d8cfe2",
+    "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2",
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "locker": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
@@ -152,6 +253,37 @@ CAMERAS = [                         # name, elevation, azimuth
     ("03-three-quarter-through-the-slider", 16, -104),
     ("04-cutaway-from-above", 46, -56),
 ]
+
+
+# Which tables belong to which variant. A variant not listed borrows v1's and gets them
+# remapped onto its own walls - right for a reference van drawn on the same furniture,
+# never right for a layout designed on its own, which brings its own tables instead.
+REGISTRY = {
+    "v1": dict(own_coords=False, heights=HEIGHTS, extra=EXTRA, appliances=APPLIANCES,
+               containers=CONTAINERS, windows=WINDOWS, fans=FAN_HOLES, hatches=(),
+               partition=None, cab_seats=None, layers=None),
+    "v2": dict(own_coords=True, heights=HEIGHTS_V2, extra=EXTRA_V2, appliances=APPLIANCES_V2,
+               containers=CONTAINERS_V2, windows=WINDOWS_V2, fans=FAN_HOLES_V2,
+               hatches=HATCHES_V2, partition=PARTITION_V2, cab_seats=CAB_SEATS_V2,
+               layers=LAYERS_V2),
+}
+
+
+def spec(v):
+    """The 3D tables for this variant, v1's as the fallback."""
+    return REGISTRY.get(v.get("name"), REGISTRY["v1"])
+
+
+def heights_for(v):
+    return spec(v)["heights"]
+
+
+def fitout(v):
+    """(EXTRA, APPLIANCES) in this variant's own coordinates."""
+    sp = spec(v)
+    if sp["own_coords"]:
+        return list(sp["extra"]), list(sp["appliances"])
+    return [remap(b, v) for b in sp["extra"]], [remap(b, v) for b in sp["appliances"]]
 
 
 # --- axis-aligned rectangle subtraction, so panels have real holes ----------
@@ -186,30 +318,41 @@ def subtract(rect, holes):
 def shell_for(v):
     """Body panels with apertures, glazing, and the cab. Same box format as everything else."""
     L, W, H = v["length"], v["width"], v["height"]
+    sp = spec(v)
     out = []
     clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
 
-    # side walls, holes cut for the sliding door and the windows
+    # side walls, holes cut for the sliding door, the windows and any service hatch
     for side, y0, y1 in (("p", -WALL, 0), ("d", W, W + WALL)):
         holes = []
         if side == "p":
             sx0, sx1, sz0, sz1 = SLIDER
             holes.append((sx0, sx1, sz0, sz1))
-        for s, wx0, wx1, wz0, wz1 in WINDOWS:
+        for s, wx0, wx1, wz0, wz1 in list(sp["windows"]) + list(sp["hatches"]):
             if s == side:
                 wx0, wx1 = clamp(wx0, wx1)
                 holes.append((wx0, wx1, wz0, wz1))
         for x0, x1, z0, z1 in subtract((0, L, 0, H), holes):
             out.append((x0, x1, y0, y1, z0, z1, "shell"))
-        for s, wx0, wx1, wz0, wz1 in WINDOWS:          # glaze the window openings
+        for s, wx0, wx1, wz0, wz1 in sp["windows"]:          # glaze the window openings
             if s == side:
                 wx0, wx1 = clamp(wx0, wx1)
                 out.append((wx0, wx1, y0, y1, wz0, wz1, "glass"))
+        for s, hx0, hx1, hz0, hz1 in sp["hatches"]:          # lid sits in its own hole
+            if s == side:
+                hx0, hx1 = clamp(hx0, hx1)
+                out.append((hx0, hx1, y0, y1, hz0, hz1, "hatch"))
 
     # roof, holes cut for the two fans
-    for x0, x1, y0, y1 in subtract((0, L, 0, W), FAN_HOLES):
+    for x0, x1, y0, y1 in subtract((0, L, 0, W), sp["fans"]):
         out.append((x0, x1, y0, y1, H, H + WALL, "shell"))
     out.append((0, L, 0, W, -WALL, 0, "floor"))
+
+    # partition behind the cab, with the pass-through cut in it
+    if sp["partition"]:
+        py0, py1, pz0, pz1 = sp["partition"]
+        for y0, y1, z0, z1 in subtract((0, W, 0, H), [(py0, py1, pz0, pz1)]):
+            out.append((-WALL, 0, y0, y1, z0, z1, "partition"))
 
     # rear doors
     ri, _, rz0, rz1 = REAR_DOORS
@@ -217,7 +360,7 @@ def shell_for(v):
         out.append((L, L + WALL, y0, y1, z0, z1, "shell"))
 
     # cab: floor, lower roof, raked-off windscreen simplified to a vertical pane,
-    # side walls with door openings, dashboard, wheel, and the two swivel seats
+    # side walls with door openings, dashboard, wheel, and the seats
     out.append((-NOSE, 0, 0, W, -WALL, 0, "cab"))
     out.append((-NOSE + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
     out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
@@ -226,11 +369,22 @@ def shell_for(v):
             out.append((x0, x1, y0, y1, z0, z1, "cab"))
     out.append((-1250, -1000, 60, W - 60, 700, 950, "dash"))
     out.append((-1050, -980, W - 620, W - 280, 950, 1300, "dash"))      # steering wheel
-    for cx, cy, _r in v.get("seats", []):
-        out.append((cx - 240, cx + 240, cy - 240, cy + 240,   0,  420, "seat"))
-        out.append((cx - 240, cx + 240, cy - 240, cy + 240, 420,  500, "seat"))
-        out.append((cx + 140, cx + 240, cy - 240, cy + 240, 500, 1100, "seat"))
+    out.extend(cab_seats(v))
     out.extend(wheels_for(v))
+    return out
+
+
+def cab_seats(v):
+    """Seat blocks in the cab. v1 swivels, so plan.py already carries their centres; v2 has a
+    fixed driver seat and a double bench, which the plan does not draw at all."""
+    seats = spec(v)["cab_seats"]
+    if seats is None:
+        seats = [(cx - 240, cx + 240, cy - 240, cy + 240) for cx, cy, _r in v.get("seats", [])]
+    out = []
+    for x0, x1, y0, y1 in seats:
+        out.append((x0, x1, y0, y1,   0,  420, "seat"))
+        out.append((x0, x1, y0, y1, 420,  500, "seat"))
+        out.append((x1 - 100, x1, y0, y1, 500, 1100, "seat"))
     return out
 
 
@@ -271,12 +425,14 @@ def remap(box, v):
 
 def boxes_for(v, with_shell=False):
     """(x0, x1, y0, y1, z0, z1, kind) for everything solid."""
+    heights = heights_for(v)
     out = []
     for x0, x1, y0, y1, label, _sub_label, _fill in v["boxes"]:
-        z = HEIGHTS.get(label)
+        z = heights.get(label)
         if z:
             out.append((x0, x1, y0, y1, z[0], z[1], label))
-    out.extend(remap(b, v) for b in EXTRA + APPLIANCES)
+    extra, appliances = fitout(v)
+    out.extend(extra + appliances)
     if with_shell:
         out.extend(shell_for(v))
     return [b for b in out if b[1] > b[0] and b[3] > b[2] and b[5] > b[4]]
@@ -345,20 +501,22 @@ def shell_outline(v):
     clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
     sx0, sx1, sz0, sz1 = SLIDER
     out.append((sx0, sx1, -T, T, sz0, sz1, "hole"))
-    for side, wx0, wx1, wz0, wz1 in WINDOWS:
+    for side, wx0, wx1, wz0, wz1 in list(spec(v)["windows"]) + list(spec(v)["hatches"]):
         wx0, wx1 = clamp(wx0, wx1)
         y0, y1 = (-T, T) if side == "p" else (W - T, W + T)
         out.append((wx0, wx1, y0, y1, wz0, wz1, "hole"))
     ri, _, rz0, rz1 = REAR_DOORS
     out.append((L - T, L + T, ri, W - ri, rz0, rz1, "hole"))
-    for fx0, fx1, fy0, fy1 in FAN_HOLES:
+    for fx0, fx1, fy0, fy1 in spec(v)["fans"]:
         out.append((fx0, fx1, fy0, fy1, H - T, H + T, "hole"))
     # no cab volume: as a wireframe it throws long lines across every interior view.
     # The seats and dash alone are enough to say "the cab is that way".
     out.append((-1250, -1000, 60, W - 60, 700, 950, "dash"))
-    for cx, cy, _r in v.get("seats", []):
-        out.append((cx - 240, cx + 240, cy - 240, cy + 240, 0, 500, "seat"))
-        out.append((cx + 140, cx + 240, cy - 240, cy + 240, 500, 1100, "seat"))
+    for x0, x1, y0, y1, z0, z1, kind in cab_seats(v):
+        if z0 == 0:
+            out.append((x0, x1, y0, y1, 0, 500, kind))      # base and cushion as one block
+        elif z0 >= 500:
+            out.append((x0, x1, y0, y1, z0, z1, kind))
     return out
 
 
@@ -591,7 +749,7 @@ def write_obj(v, path):
                            (2, 3, 7, 6), (3, 4, 8, 7), (4, 1, 5, 8)]:
             lines.append("f %d %d %d %d" % (n + a, n + b, n + c, n + d))
         n += 8
-    open(path, "w").write("# " + v["title"] + "\n" + "\n".join(lines) + "\n")
+    open(path, "w", encoding="utf-8").write("# " + v["title"] + "\n" + "\n".join(lines) + "\n")
     print("wrote", path)
 
 
@@ -620,13 +778,20 @@ def write_viewer(v, path):
     if not os.path.exists(tpl_path):
         print("skipped viewer.html - viewer_template.html not found")
         return
+    sp = spec(v)
     data = {
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
-        "names": NAMES, "appliances": sorted({b[6] for b in APPLIANCES}),
-        "containers": list(CONTAINERS), "props": props_data(),
-        "cylinders": ["wheel"],
+        "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
+        "containers": list(sp["containers"]), "props": props_data(),
+        "cylinders": ["wheel"], "layers": sp["layers"],
+        # the plan itself, for the schema overlay - same boxes plan.py draws, so the
+        # overlay can never say something the drawing does not
+        "plan": {"boxes": [[x0, x1, y0, y1, lab, sub or "", fill]
+                           for x0, x1, y0, y1, lab, sub, fill in v["boxes"]],
+                 "well": list(v["well"]) if v.get("well") else None,
+                 "slider": list(v["slider"]) if v.get("slider") else None},
         "boxes": [{"b": [x0, x1, y0, y1, z0, z1], "k": kind}
                   for x0, x1, y0, y1, z0, z1, kind in boxes_for(v, with_shell=True)],
     }
@@ -644,10 +809,27 @@ def check(v):
     """Every appliance must sit inside the van, inside a cabinet, and clear of its neighbours.
     The sizes are real catalogue sizes, so this is what tells us the layout actually works."""
     L, W, H = v["length"], v["width"], v["height"]
-    app = [remap(b, v) for b in APPLIANCES]
-    rooms = {b[:6]: b[6] for b in boxes_for(v) if HEIGHTS.get(b[6])}
+    app = fitout(v)[1]
+    heights = heights_for(v)
+    rooms = [b[:6] for b in boxes_for(v) if heights.get(b[6])]
     overlap = lambda a, b: all(min(a[i * 2 + 1], b[i * 2 + 1]) - max(a[i * 2], b[i * 2]) > 1
                                for i in range(3))
+
+    def housed(a):
+        """Inside one carcass, or inside a run of carcasses that meet. v2's U is one
+        continuous carcass, and its fresh tank crosses the joint between the side bench and
+        the garage on purpose - so a single-box test would reject a tank that is really
+        housed. Depth still has to be respected by every box it passes through."""
+        segs = sorted((max(r[0], a[0]), min(r[1], a[1])) for r in rooms
+                      if a[2] >= r[2] - 1 and a[3] <= r[3] + 1
+                      and min(r[1], a[1]) - max(r[0], a[0]) > 1)
+        reach = a[0]
+        for s0, s1 in segs:
+            if s0 > reach + 1:
+                break
+            reach = max(reach, s1)
+        return reach >= a[1] - 1
+
     bad = []
     for i, a in enumerate(app):
         for b in app[i + 1:]:
@@ -657,8 +839,7 @@ def check(v):
             bad.append("%s sticks out of the van" % a[6])
         if a[6] == "grey":
             continue                                    # underslung, deliberately outside
-        if not [k for r, k in rooms.items()
-                if a[0] >= r[0] - 1 and a[1] <= r[1] + 1 and a[2] >= r[2] - 1 and a[3] <= r[3] + 1]:
+        if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])
     assert not bad, "appliance check failed: " + "; ".join(bad)
 

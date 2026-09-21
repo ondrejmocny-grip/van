@@ -40,8 +40,11 @@ water but heavy on daily working comfort.
 Each design version lives in its own folder (`v1/`, `v2/`, ...) with its own README and
 drawings. `plan.py` generates them all: `python plan.py <variant>`.
 
-**v1 is a VW Crafter L3H3.** It was drawn on a Ford Transit first; the Transit was dropped on
-2026-09-20 and its folder no longer exists.
+**v1 and v2 are both a VW Crafter L3H3.** v1 was drawn on a Ford Transit first; the Transit
+was dropped on 2026-09-20 and its folder no longer exists.
+
+Each version also brings its own 3D tables — `REGISTRY` in `model3d.py` says which variant
+gets which fit-out. A variant not listed there borrows v1's, remapped.
 
 ## Prop meshes
 

@@ -230,6 +230,12 @@ VARIANTS["v2"] = dict(
 )
 
 
+# Every variant carries its own key, so model3d.py can look up the 3D fit-out that belongs
+# to it instead of guessing from the geometry.
+for _name, _variant in VARIANTS.items():
+    _variant["name"] = _name
+
+
 def draw(ax, v):
     """Plan view."""
     LEN, WID = v["length"], v["width"]

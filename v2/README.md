@@ -1,10 +1,39 @@
 # v2 — VW Crafter L3H3, 3-seat cab
 
-Started 2026-09-20. **Schema only — iterating.** No 3D, no impressions yet.
+Started 2026-09-20. **Plan and 3D model — iterating.** No photoreal impressions yet.
 
 ![plan](layout.png)
 
-Regenerate: `python plan.py v2` from the project root.
+Regenerate: `python plan.py v2` then `python model3d.py v2`, from the project root.
+
+## The 3D model
+
+**Viewer: [v2 Crafter](https://claude.ai/artifact/4zfKdrCzAheAzWhmKarVFe)** — drag to orbit,
+scroll to zoom. Also written locally to `v2/viewer.html`, `v2/model.obj` and `v2/3d/*.png`.
+
+Everything in it is extruded from the box list in `plan.py`, so the model cannot disagree
+with the drawing above. What the 3D adds on top of the plan:
+
+| Layer | What it holds |
+|---|---|
+| Bed made up | the U closed to 1520 × 1832; hides the dinette table and its post |
+| Shower + wardrobe | both full height, with the shower head on the partition |
+| Office table | the 450 × 600 top at 760 and the swing arm back to the bulkhead |
+| Lockers | three overhead runs, kept clear of the door head and the windows |
+| Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
+| Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
+| Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
+| Detailed props | generated meshes instead of coloured boxes |
+| **Schema overlay** | the plan itself painted onto the model — pair it with the **Plan** view |
+| Sizes | every block labelled with its name and size in mm |
+
+`model3d.check()` passes on all 13 appliances: each one inside the van, inside a carcass,
+clear of its neighbours, and clear of the tyres. Two results worth keeping:
+
+- **The fresh tank crosses the bench-to-garage joint and is still housed**, because the U is
+  one carcass. The check now accepts a run of carcasses that meet, not only a single box.
+- **Nothing touches a tyre or a wheel arch.** The batteries sit 16 mm inboard of the driver
+  tyre and the fridge stops 127 mm short of the arch — both are tight, and both are real.
 
 Brisa's layout ported to our van: shower in the front driver corner, galley split across the
 aisle, rear U-dinette. See [ref/doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md).

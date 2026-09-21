@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Van Interior</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
@@ -162,21 +163,28 @@
   // and never blocks the view from outside
   var CUTAWAY = { shell: 1, cab: 1 };
 
-  var LAYERS = [
+  // A variant can send its own Show buttons - v2 groups different things from v1. Without
+  // one, this is the list.
+  var LAYERS = MODEL.layers || [
     { id: "bed", label: "Bed made up", kinds: ["infill"], on: false, hide: ["table", "leg"] },
     { id: "cubicle", label: "Wet cubicle", kinds: ["WET CUBICLE", "step"], on: true },
     { id: "lockers", label: "Lockers", kinds: ["locker"], on: true },
     { id: "kit", label: "Appliances", kinds: APPLIANCES, on: true, xray: true },
-    { id: "body", label: "Body + glass", kinds: ["shell", "glass", "floor", "wheel"], on: true },
+    { id: "body", label: "Body + glass",
+      kinds: ["shell", "glass", "floor", "wheel", "partition", "hatch"], on: true },
     { id: "cab", label: "Cab + seats", kinds: ["cab", "seat", "dash"], on: true },
     { id: "props", label: "Detailed props", kinds: [], on: true, props: true },
+    { id: "schema", label: "Schema overlay", kinds: [], on: false, schema: true },
     { id: "sizes", label: "Sizes", kinds: [], on: false, sizes: true }
   ];
   var VIEWS = [
     { id: "inside", label: "Inside", theta: 0.04, phi: 1.52, r: 3.4 },
     { id: "door", label: "From the door", theta: -1.60, phi: 1.46, r: 4.2 },
     { id: "over", label: "Overview", theta: -0.95, phi: 1.00, r: 8.2 },
-    { id: "top", label: "From above", theta: -0.95, phi: 0.20, r: 7.0 }
+    { id: "top", label: "From above", theta: -0.95, phi: 0.20, r: 7.0 },
+    // straight down, nose to the left: the plan's own viewpoint, so the schema overlay
+    // lands exactly on the drawing it came from
+    { id: "plan", label: "Plan", theta: 1.5708, phi: 0.08, r: Math.max(2.6, L * 1.05) }
   ];
 
   var canvas = document.getElementById("c");
@@ -322,6 +330,93 @@
     refresh();
   }
 
+  // Schema overlay: the 2D plan laid on the floor of the 3D model. It is drawn from the
+  // same box list plan.py draws, not from a picture of the drawing, so the overlay can
+  // never disagree with layout.png. Built once, on the first time it is switched on, by
+  // which point the page fonts have loaded.
+  var PLAN = MODEL.plan, schema = null;
+
+  function drawPlan(g, s) {
+    var open, b, i, x0, y0, w, h, rot;
+    g.fillStyle = "rgba(251,250,247,0.94)";
+    g.fillRect(0, 0, MODEL.length * s, MODEL.width * s);
+    g.textAlign = "center"; g.textBaseline = "middle";
+    for (i = 0; i < PLAN.boxes.length; i++) {
+      b = PLAN.boxes[i];
+      open = !b[6];
+      x0 = b[0] * s; y0 = b[2] * s; w = (b[1] - b[0]) * s; h = (b[3] - b[2]) * s;
+      if (!open) { g.fillStyle = b[6]; g.fillRect(x0, y0, w, h); }
+      g.strokeStyle = open ? "#b5b5b5" : "#8a8a8a";
+      g.lineWidth = 2.5;
+      g.setLineDash(open ? [10, 8] : []);
+      g.strokeRect(x0 + 1.5, y0 + 1.5, w - 3, h - 3);
+      g.setLineDash([]);
+      rot = !open && (b[1] - b[0]) < 620;          // narrow boxes read down the van
+      g.save();
+      g.translate(x0 + w / 2, open ? y0 + 46 : y0 + h / 2);
+      if (rot) { g.rotate(-Math.PI / 2); }
+      g.fillStyle = open ? "#9b9b96" : "#222220";
+      g.font = "700 30px Archivo, system-ui, sans-serif";
+      g.fillText(b[4], 0, b[5] ? -17 : 0);
+      if (b[5]) {
+        g.font = "400 21px 'IBM Plex Mono', ui-monospace, monospace";
+        g.fillStyle = open ? "#a8a8a2" : "#6b6b64";
+        g.fillText(b[5], 0, 17);
+      }
+      g.restore();
+    }
+    if (PLAN.well) {                               // wheel arches, both sides
+      g.strokeStyle = "#b03a3a"; g.lineWidth = 2.5; g.setLineDash([10, 8]);
+      [0, MODEL.width - PLAN.well[2]].forEach(function (y) {
+        g.strokeRect(PLAN.well[0] * s, y * s,
+                     (PLAN.well[1] - PLAN.well[0]) * s, PLAN.well[2] * s);
+      });
+      g.setLineDash([]);
+      g.fillStyle = "#b03a3a"; g.font = "400 19px 'IBM Plex Mono', ui-monospace, monospace";
+      g.fillText("wheel well", (PLAN.well[0] + PLAN.well[1]) / 2 * s, PLAN.well[2] / 2 * s);
+    }
+    if (PLAN.slider) {                             // the door, on the passenger edge
+      g.strokeStyle = "#0f9d78"; g.lineWidth = 9;
+      g.beginPath();
+      g.moveTo(PLAN.slider[0] * s, 5); g.lineTo(PLAN.slider[1] * s, 5);
+      g.stroke();
+      g.fillStyle = "#0f9d78"; g.font = "500 21px Archivo, system-ui, sans-serif";
+      g.fillText("SLIDING DOOR", (PLAN.slider[0] + PLAN.slider[1]) / 2 * s, 28);
+    }
+    g.fillStyle = "#adaca5"; g.font = "500 20px Archivo, system-ui, sans-serif";
+    g.fillText("PASSENGER SIDE", MODEL.length * 0.5 * s, 62);
+    g.fillText("DRIVER SIDE", MODEL.length * 0.5 * s, MODEL.width * s - 26);
+  }
+
+  function buildSchema() {
+    if (schema || !PLAN || !PLAN.boxes) { return; }
+    var s = Math.min(2600 / MODEL.length, 2600 / MODEL.width);      // canvas px per mm
+    var cv = document.createElement("canvas");
+    cv.width = Math.round(MODEL.length * s);
+    cv.height = Math.round(MODEL.width * s);
+    drawPlan(cv.getContext("2d"), s);
+    var tex = new THREE.CanvasTexture(cv);
+    if (renderer.capabilities.getMaxAnisotropy) {
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    }
+    var geo = new THREE.PlaneGeometry(L, W);
+    geo.rotateX(-Math.PI / 2);                     // lie flat, canvas top = passenger wall
+    // Painted over the model rather than buried under it: on the floor with a depth test
+    // the furniture hides the very thing you switched on, and from above - the one angle
+    // where a plan is worth reading - you would see nothing but the bed.
+    schema = new THREE.Mesh(geo, new THREE.MeshBasicMaterial(
+      { map: tex, transparent: true, opacity: 0.94, depthWrite: false, depthTest: false }));
+    schema.position.set(L / 2, 0.005, W / 2);      // floor level, so it lines up in 3D too
+    schema.renderOrder = 999;
+    scene.add(schema);
+  }
+
+  function setSchema(on) {
+    if (on) { buildSchema(); }
+    if (schema) { schema.visible = on; }
+    dirty = true;
+  }
+
   var theta = VIEWS[0].theta, phi = VIEWS[0].phi, radius = VIEWS[0].r, dirty = true;
   function place() {
     phi = Math.max(0.08, Math.min(Math.PI - 0.08, phi));
@@ -378,6 +473,7 @@
       refresh();
       if (layer.props) setProps(layer.on);
       if (layer.sizes) showSizes = layer.on;
+      if (layer.schema) setSchema(layer.on);
       if (layer.xray) setGhost(layer.on);
       dirty = true;
     }
