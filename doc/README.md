@@ -323,6 +323,32 @@ The viewer **fits a mesh inside its box without distorting it**. Stretching each
 the box lies about the product's shape whenever the two disagree, and plumbing disagrees by a
 lot. The box still owns the reserved volume, and the Sizes layer still reports it.
 
+### Four props for v2, 2026-09-21 — and where the score lies to you
+
+`fridgedoor` (65 L, hinged door — a different product from v1's drawer fridge, so a different
+kind), `SEAT`, `SHOWER` and `WARDROBE`. Adopted: fridgedoor rodin 0.39, SEAT rodin 0.14,
+SHOWER **trellis 0.50**, WARDROBE rodin 0.06.
+
+Two things this round taught:
+
+- **The shape error only ranks candidates that modelled the same object.** rodin scored best
+  on SHOWER at 0.17 and had modelled the shower head on its rail — not the cubicle at all. A
+  tall thin thing matched a tall thin box perfectly. Read the shots sheet first and throw out
+  anything that is the wrong object; only then trust the number.
+- **An opening costs score and is worth it.** Every fridgedoor mesh scored OFF because the
+  open door widens the bounding box, and a cubicle you can see into is squatter than the slot
+  it fills. Both were the point of the prop.
+
+`props.py face <kind> <+x|-x|+y|-y>` sets which way a prop looks. An open-sided mesh carries
+its mass on the closed sides, so the vector from its area-weighted centroid to the centre of
+its bounding box points out through the opening — measurable, where the eye needs four
+screenshots. `align` still owns the quarter turn that matches the footprint; when the two
+disagree, facing wins. A wardrobe 150 mm too shallow still reads as a wardrobe; one that
+opens into the wall does not.
+
+Each viewer now embeds **only the props its own variant uses**, so v1 does not carry v2's
+shower cubicle and wardrobe.
+
 ### Finding a pipeline that keeps the layout — the ladder, 2026-09-18
 
 Canny-on-a-line-drawing kept inventing furniture, so we climbed from the geometry toward

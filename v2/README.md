@@ -18,12 +18,12 @@ with the drawing above. What the 3D adds on top of the plan:
 |---|---|
 | Bed made up | the U closed to 1520 × 1832; hides the dinette table and its post |
 | Shower + wardrobe | both full height, with the shower head on the partition |
-| Office table | the 450 × 600 top at 760 and the swing arm back to the bulkhead |
+| Office table out | deploys the top over your knees; off, it stands parked against the partition |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
-| Detailed props | generated meshes instead of coloured boxes |
+| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the shower cubicle (open front), the wardrobe (open WC bay), the seat locker and the 65 L hinged-door fridge |
 | **Schema overlay** | the plan itself painted onto the model — pair it with the **Plan** view |
 | Sizes | every block labelled with its name and size in mm |
 
@@ -67,8 +67,28 @@ sliding door at your left shoulder.
 The locker earns three jobs from one box: seat, shoe store, and the thing you put a knee on
 going through to the cab.
 
+### How the table is mounted
+
+Resolved 2026-09-21. **The partition carries it, because nothing else can.** Between x 300
+and x 1600 the wall opposite *is* the sliding door, so nothing can be fixed to it; the only
+other anchor near the office is the seat box, and a 600 mm cantilever off a 450 mm plywood
+box needs a base the partition gives for free.
+
+| | |
+|---|---|
+| Mount | Lagun-type **two-pivot arm** on the partition, bracket at y 250–330 |
+| Bracket height | 600–770, above the cushion and clear of the 432 pass-through at y 600–1032 |
+| Deployed | arm reaches aft, top at x 450–900, surface at **760** → 240 thigh clearance |
+| Parked | top swings up and stands **flat against the partition**, x 0–60, z 760–1210 |
+| Worth adding | hinge the top across the middle, 450 → 225, so half drops to let someone past |
+
+Both positions are in the 3D model. **Parked is the default**, because that is the state the
+700 mm entry gap assumes — the **Office table out** button deploys it.
+
 **With the table deployed, the side door is blocked** — the clear entry drops from 700 mm to
-about 250. It swings away, so it is a 2-second cost, but it is a daily one.
+about 250. It swings away, so it is a 2-second cost, but it is a daily one. Worth knowing
+rather than fixing: a person sitting there blocks that doorway anyway, table or no table, and
+with the slider open you are working with a view out.
 
 ## The bathroom
 

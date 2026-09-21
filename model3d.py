@@ -115,8 +115,15 @@ EXTRA_V2 = [
     (1930, 2850,  600, 1232,  450,  520, "infill"),
     (2150, 2750,  616, 1216,  700,  760, "table"),      # dinette table, drops to the infill
     (2320, 2580,  786, 1046,    0,  700, "leg"),
-    ( 450,  900,   30,  630,  700,  760, "ftable"),     # office table on its swing arm
-    (   0,  450,  290,  370,  710,  750, "fleg"),       # the arm itself, off the partition
+    # The office table hangs off the PARTITION, because nothing else there can carry it:
+    # between x 300 and 1600 the wall opposite is the sliding door. Both positions are
+    # drawn. The bracket stands in both; the arm and the top are the deployed pair, the
+    # standing panel is the parked one. Parked is the default, which is the state the
+    # 700 mm entry gap assumes.
+    (   0,   70,  250,  330,  600,  770, "fleg"),       # pivot bracket, above the cushion
+    (  70,  450,  290,  370,  690,  750, "farm"),       # deployed: the arm reaches aft
+    ( 450,  900,   30,  630,  700,  760, "ftable"),     #   and the top sits over your knees
+    (   0,   60,    0,  600,  760, 1210, "ftablep"),    # parked: the top stands on the wall
     (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
     (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
     (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
@@ -161,7 +168,8 @@ LAYERS_V2 = [
      "hide": ["table", "leg"]},
     {"id": "wet", "label": "Shower + wardrobe", "kinds": ["SHOWER", "WARDROBE", "shower"],
      "on": True},
-    {"id": "office", "label": "Office table", "kinds": ["ftable", "fleg"], "on": True},
+    {"id": "office", "label": "Office table out", "kinds": ["ftable", "farm"], "on": False,
+     "hide": ["ftablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
@@ -193,6 +201,7 @@ NAMES = {
     "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
     "leg": "Table post", "shower": "Shower head",
     "ftable": "Front table", "fleg": "Front table post",
+    "ftablep": "Office table, parked", "farm": "Table swing arm",
     "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone", "sink": "Sink",
     "plumbing": "Pump, filter, trap", "cassette": "Cassette WC",
     "fridge": "Fridge 70 L", "fridgedoor": "Fridge 65 L, hinged door",
@@ -235,6 +244,7 @@ CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "SEAT": "#d8cfe2",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
+    "ftablep": "#d9b98a", "farm": "#9a9287",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2",
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "locker": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
@@ -771,9 +781,12 @@ def write_obj(v, path):
     print("wrote", path)
 
 
-def props_data():
+def props_data(kinds=None):
     """Prop meshes made by props.py, embedded so viewer.html stays a single file. Absent is
-    fine - the viewer just keeps drawing the coloured box for that kind."""
+    fine - the viewer just keeps drawing the coloured box for that kind.
+
+    Only the kinds this variant actually uses go in. v1 has no wardrobe and v2 has no wet
+    cubicle, and neither viewer should carry a quarter megabyte of the other's furniture."""
     import base64
     d = os.path.join(HERE, "props")
     if not os.path.isdir(d):
@@ -784,6 +797,8 @@ def props_data():
     for name in sorted(os.listdir(d)):
         if name.endswith(".glb"):
             kind = name[:-4]
+            if kinds is not None and kind not in kinds:
+                continue
             out[kind] = {"yaw": yaw.get(kind, 0),
                          "fit": "keep" if kind in KEEP_SHAPE else "fill",
                          "glb": base64.b64encode(open(os.path.join(d, name), "rb").read()).decode()}
@@ -805,12 +820,13 @@ def write_viewer(v, path):
         print("skipped viewer.html - viewer_template.html not found")
         return
     sp = spec(v)
+    used = {b[6] for b in boxes_for(v, with_shell=True)}
     data = {
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
         "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
-        "containers": list(sp["containers"]), "props": props_data(),
+        "containers": list(sp["containers"]), "props": props_data(used),
         "cylinders": ["wheel"], "layers": sp["layers"],
         # the plan drawing itself, for the schema overlay: plan.py renders it cropped to the
         # load box, so the viewer lays the real layout image on the floor 1:1 rather than

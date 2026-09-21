@@ -11,6 +11,7 @@ it is. This builds an optional layer of real-looking meshes on top, in four stag
     python props.py pick cassette trellis     # adopt one -> props/cassette.glb
     python props.py auto oven hob fridge      # all of the above, best-scoring adopted
     python props.py align                     # turn each prop to match its box
+    python props.py face SHOWER -y            # turn its opening toward the aisle
 
 Nothing here is the source of truth. The box in model3d.APPLIANCES stays authoritative: the
 viewer scales the mesh to exactly fill its box, so a generated shape can never quietly change
@@ -478,6 +479,58 @@ def align(write=True):
         print("wrote", path)
 
 
+def face(kind, want, write=True):
+    """Turn a prop so its OPEN side points where the layout wants it.
+
+        python props.py face WARDROBE -y     # the open front looks across the aisle
+
+    An open-sided mesh carries its mass on the closed sides, so the vector from its
+    area-weighted centroid to the centre of its bounding box points straight out through the
+    opening. That is measurable, and measuring beats spinning the thing by eye through four
+    screenshots - which is how the first three props were turned, and two of them were wrong.
+
+    `align` owns the quarter turn that matches the footprint; this owns the facing. They
+    disagree whenever a prop's opening is on its long side, and then facing wins: a wardrobe
+    30 mm too deep still reads as a wardrobe, one that opens into the wall does not.
+    """
+    import json
+    import numpy as np
+    import trimesh
+    m = trimesh.load(os.path.join(OUT, kind + ".glb"), force="mesh")
+    area = m.area_faces
+    centroid = (m.triangles_center * area[:, None]).sum(axis=0) / area.sum()
+    out = m.bounding_box.centroid - centroid          # points out through the opening
+    ox, oz = out[0], out[2]                           # glTF is Y-up: X and Z are horizontal
+    if np.hypot(ox, oz) < 1e-6:
+        raise SystemExit("%s is symmetrical - nothing to face" % kind)
+    targets = {"+x": (1, 0), "-x": (-1, 0), "+y": (0, 1), "-y": (0, -1)}
+    if want not in targets:
+        raise SystemExit("face wants one of " + ", ".join(sorted(targets)))
+    tx, ty = targets[want]
+    best, score = 0, -2.0
+    for deg in (0, 90, 180, 270):
+        a = np.radians(deg)
+        # three.js rotates about Y, and the viewer maps mesh X to the van's length and
+        # mesh Z to its width
+        vx = ox * np.cos(a) + oz * np.sin(a)
+        vy = -ox * np.sin(a) + oz * np.cos(a)
+        dot = (vx * tx + vy * ty) / np.hypot(vx, vy)
+        if dot > score:
+            best, score = deg, dot
+    path = os.path.join(OUT, "yaw.json")
+    yaw = json.load(open(path)) if os.path.exists(path) else {}
+    ext = m.bounding_box.extents
+    bx, by, _ = box_of(kind)
+    turned = best % 180 == 90
+    mesh_ratio = (ext[2] / ext[0]) if turned else (ext[0] / ext[2])
+    print("  %-11s open side %+.2f %+.2f -> yaw %3d (match %.2f), footprint %.2f vs box %.2f"
+          % (kind, ox, oz, best, score, mesh_ratio, bx / by))
+    yaw[kind] = best
+    if write:
+        json.dump(dict(sorted(yaw.items())), open(path, "w"), indent=2)
+    return best
+
+
 def auto(kinds, workers=12):
     """The whole pipeline for one or more kinds with nobody in the loop, adopting the best.
 
@@ -581,6 +634,8 @@ def auto(kinds, workers=12):
 def main():
     if len(sys.argv) == 2 and sys.argv[1] == "align":
         return align()
+    if len(sys.argv) == 4 and sys.argv[1] == "face":
+        return face(sys.argv[2], sys.argv[3])
     if len(sys.argv) < 3:
         raise SystemExit(__doc__)
     cmd, kind, rest = sys.argv[1], sys.argv[2], tuple(sys.argv[3:])
