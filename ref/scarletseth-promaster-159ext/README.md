@@ -18,7 +18,7 @@ not as a whole layout.
 |---|---|
 | Model | **Ram ProMaster 159" EXT**, high roof, bought new in black and debadged |
 | Load box | **4089 × 1869 × 1930 mm**, 1384 between the wheel arches |
-| vs our L3H3 Transit | **595 mm longer**, 85 mm wider, 95 mm lower |
+| vs our Crafter L3H3 | **639 mm longer**, 37 mm wider, 31 mm lower |
 | Cost | van $61,750 · build $87,956 out of pocket · ~$104k with shop overheads |
 
 The cost is the reason this is a "steal two ideas" reference and not a model. Their own
@@ -84,8 +84,8 @@ Front to rear:
 
 Worth stealing:
 - **Shower turned sideways against the cab bulkhead.** On our L3H3 the wet cubicle currently
-  eats 750 mm of the driver-side run at x 1600–2350. Parking it across the front instead is
-  worth drawing as a v2 — it would free the middle of the van, which is where we live.
+  eats 750 mm of the driver-side run at x 1600–2350. **Taken up in [v2](../../v2/README.md)**,
+  in the half-width form — front driver corner, which frees the middle of the van.
 - **Toilet in a drawer under the fridge, pulling into the shower.** Our cubicle already
   doubles as the WC, but a drawer would give the cubicle its floor back while showering.
   The Cuddy's 16.3 in height is what makes it possible; check it against our fridge plinth.
@@ -95,7 +95,7 @@ Worth stealing:
   and their "never buy semi-flexible" data point is worth more than the rest of this file.
 - **Under 1 gallon per shower.** Same discipline we already assumed. Nice to see it measured.
 - **Rounding off every corner at hip height**, and making the worst one a bin you can sit on.
-  Our corridor past the cubicle is 484 mm (532 on the Crafter) — the tightest spot in v1, and
+  Our corridor past the cubicle is 532 mm — the tightest spot in v1, and
   exactly where a quarter-round would earn its keep.
 - **A hob that slides out of the side of the counter.** It buys back the whole worktop when
   you are not cooking, and it costs no floor area — worth weighing against v1's fixed
@@ -105,9 +105,10 @@ Worth questioning for us:
 - **Everything underslung.** 6 tanks under a van heading for Moroccan pistes, with rerouted
   exhaust and skid plates, is a lot of exposure. Our 110 L inside the bench is duller and safer.
 - **No swivel seats.** Their reasoning is ProMaster-specific (seat height) and they had no
-  office to build. **v1's front lounge is our main living space**, so this argument does not
-  transfer — but it is a reminder to check the seat height and the handbrake on whatever we buy.
-- **A 4089 mm van.** 595 mm longer than ours. Read the layout for ideas, not for proportions.
+  office to build. It did not transfer while v1's front lounge was our main living space — but
+  **v2 drops the swivels anyway**, for a different reason: a 3-seat cab bench leaves nothing
+  to swivel.
+- **A 4089 mm van.** 639 mm longer than ours. Read the layout for ideas, not for proportions.
 - **Air conditioning.** 14–16 h on 810 Ah. At our battery size it is not a conversation.
   Chasing warm-but-not-hot weather stays the plan.
 - **No desk.** Same gap as every reference so far.

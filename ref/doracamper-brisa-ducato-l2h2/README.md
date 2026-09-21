@@ -20,7 +20,7 @@ only one built on a van *shorter* than ours, and it still fits a full standing s
 | Model | **Fiat Ducato L2H2** |
 | Overall length | **5413 mm** — they advertise it as "solo 5,40 m" |
 | Load box | **3120 × 1870 × 1932 mm**, 1422 between the wheel arches |
-| vs our L3H3 Transit | **374 mm shorter**, 86 mm wider, 93 mm taller |
+| vs our Crafter L3H3 | **330 mm shorter**, 38 mm wider, 29 mm lower |
 
 That last line is the point of this reference. They lost more than a third of a metre against
 what we have and still got a standing shower, a split galley and a four-seat salon into it.
@@ -40,7 +40,7 @@ Front to rear:
    **curtain**, a **window** (they say it is what stops it feeling like a box), and a
    **heater outlet inside the cubicle** to dry towels and wetsuits.
 3. **Passenger side: the sliding door is the entry.**
-4. **Split galley across the aisle:**
+4. **Split galley across the aisle**, both runs **900 × 600**:
    - passenger side — **2-burner gas hob** with automatic ignition (chosen specifically so
      cooking does not drain the battery), porcelain worktop, **65 L fridge with freezer**
      below, cutlery drawer, hidden socket with USB, and a **window beside the hob** so you
@@ -48,6 +48,22 @@ Front to rear:
    - driver side — porcelain worktop, stainless sink, **gold pull-out tap** hot and cold,
      tiled splashback, hidden socket with USB, and a **Nespresso machine on a pop-up lift**
      that disappears into the counter at the press of a button.
+
+   **Measured off the hob close-up** (2026-09-20, Ondrej's still). Confidence ±80 mm on the
+   hob, ±100 mm on the board:
+
+   | | mm | How it was read |
+   |---|---|---|
+   | Gas hob, glass panel | **480 × 340** | standard 2-burner camper unit — two unequal burners, two knobs at the front-left, flush glass |
+   | Clear board beside it | **~420 long** | ≈ 0.9 × the hob width after perspective correction; also ≈ the run from the fridge's aft edge to the counter end |
+   | Whole run | **~900 × 600** | hob 480 + board 420 |
+   | Fridge | **~500 W × ~520 D**, 65 L | **a normal hinged door, not a drawer** — door gasket and handle edge are visible, there are no drawer runners |
+
+   The 900 mm run is **360 mm longer than this file first claimed**. It does not fit
+   3120 mm alongside a 700 mm shower and an 1880 mm bed, so the bed has to reach
+   **360 mm forward between the two counters** — which is exactly the step you can see at
+   the head of the made-up bed at 06:24. The plan is redrawn that way.
+
 5. **Rear: the salon.** Benches down both sides, a table on a **height-adjustable pillar that
    also slides sideways**, seating **4 to eat**. Heater control, USB and USB-C on both sides.
    Drop the table, add one infill piece → a bed **1880 mm fore-aft × 1350 mm across** — you
@@ -78,7 +94,7 @@ Front to rear:
 
 Worth stealing:
 - **Rear salon instead of a fixed bed, on a short van.** We already chose this in v1; Brisa is
-  the proof it survives on 3120 mm when ours has 3494 mm.
+  the proof it survives on 3120 mm when ours has 3450 mm.
 - **Keeping the rear doors usable.** Same reasoning as ours, said out loud by someone living it.
 - **Heater outlet inside the shower cubicle.** Cheap, and it turns the wet cubicle into the
   drying room — which is exactly what a minimal-water build needs.
@@ -96,8 +112,8 @@ Worth questioning for us:
   an oven. Their argument is real, but gas means a bottle locker and a solenoid, and refilling
   across Turkey and Morocco is its own problem. Our alternator-heavy energy plan is the
   counter-argument.
-- **Bed 1350 × 1880.** 1880 is fine at 171 cm. **1350 wide is narrow for two** — v1's is 1084
-  at the cubicle and 1784 at the rear, so we are not obviously worse off, but check it.
+- **Bed 1350 × 1880.** 1880 is fine at 171 cm. **1350 wide is narrow for two** — v1's is 1132
+  at the cubicle and 1832 at the rear, so we are not obviously worse off, but check it.
 - **No fixed desk anywhere.** Brisa is a holiday van, not an office. The salon table is
   height-adjustable and slides, which is the nearest thing — but Ondrej works 5 days a week,
   so a table that has to be cleared for dinner is a question, not an answer.

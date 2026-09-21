@@ -4,7 +4,7 @@ Started: 2026-09-17
 
 ## Status
 
-Base vehicle chosen: **Ford Transit L3H3, AWD**. Configuration settled.
+Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 **[v1](../v1/README.md)** is drawn - plan, elevations and sections.
 **[v2](../v2/README.md)** is being drawn on a **Crafter L3H3 with a 3-seat cab** -
 schema only so far.
@@ -19,14 +19,14 @@ Read it before proposing anything.
 | Version | What | Status |
 |---|---|---|
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
-| [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, split galley, rear U to a full-width 1850 mm bed | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
+| [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
 
 ## References
 
 | Ref | What | Verdict |
 |---|---|---|
 | [emandnick-transit-148el](../ref/emandnick-transit-148el/README.md) | 2018 Ford Transit 148" EL, high roof. Wet bath opposite the slider, split galley, rear dinette to bed, front desk. | **We like it.** Layout reconstructed. Basis for v1. |
-| [doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md) | Fiat Ducato L2H2, 5.40 m overall. Front-corner standing shower, split galley, rear salon to a 1350 x 1880 bed. | **Most relevant reference we have.** 374 mm *shorter* than ours and still has a full shower. Layout reconstructed. |
+| [doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md) | Fiat Ducato L2H2, 5.40 m overall. Front-corner standing shower, split galley, rear salon to a 1350 x 1880 bed. | **Most relevant reference we have.** 330 mm *shorter* than ours and still has a full shower. Layout reconstructed. |
 | [scarletseth-promaster-159ext](../ref/scarletseth-promaster-159ext/README.md) | Ram ProMaster 159" EXT. Shower turned sideways against the cab bulkhead, WC in a drawer under the fridge, rear dinette to a near-square bed. | **Two ideas, not a layout.** $104k build on a 4089 mm van. Layout reconstructed. |
 
 ## Base vehicle sizing
@@ -44,14 +44,15 @@ Load compartment, panel van, floor level:
 |---|---|---|---|
 | Reference van — US Transit 148" EL, high roof | 4374 mm | 2070 mm | 1784 / 1392 |
 | EU Transit **L4H3** (jumbo) | 4217 mm | 2025 mm | 1784 / 1392 |
-| **EU Transit L3H3 — ours** | **3494 mm** | **2025 mm** | **1784 / 1392** |
+| EU Transit L3H3 — dropped 2026-09-20 | 3494 mm | 2025 mm | 1784 / 1392 |
+| **VW Crafter L3H3 — ours** | **3450 mm** | **1961 mm** | **1832 / 1380** |
 | Reference van — Ram ProMaster 159" EXT, high roof | 4089 mm | 1930 mm | 1869 / 1384 |
 | Reference van — Fiat Ducato **L2H2** | **3120 mm** | 1932 mm | 1870 / 1422 |
 
 - L4H3 would be the direct equivalent of the reference van — 157 mm shorter, 45 mm lower.
 - **L3H3 is 880 mm shorter** than the reference van, 20% of the length. Everything in v1
   follows from having to give that up.
-- The **Ducato L2H2** reference goes the other way: **374 mm shorter than ours**, and it
+- The **Ducato L2H2** reference goes the other way: **330 mm shorter than ours**, and it
   still carries a full standing shower. It is the best evidence we have that v1 is not
   overreaching.
 

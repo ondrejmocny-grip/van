@@ -54,16 +54,19 @@ VARIANTS["ref-brisa"] = dict(
     out="ref/doracamper-brisa-ducato-l2h2/layout",
     length=3120, width=1870, well=(1600, 2500, 224), slider=(280, 1530),
     title='Dora Camper Studio "Brisa" - Fiat Ducato L2H2 (5.40 m overall)',
-    note="Reconstructed from video stills plus the narration. Dimensions estimated, +/-100 mm; the bed size is theirs.",
+    note=("Reconstructed from video stills plus the narration. Dimensions estimated, +/-100 mm; "
+      "the bed size is theirs. Counters re-cut to 900 from a close-up of the hob - which forces "
+      "the bed to reach 360 mm forward between them, and explains the step at its head."),
     boxes=[
-        (   0,  700, 1070, 1870, "SHOWER", "real tile - teak grate - gold mixer - window", WET),
+        (   0,  700, 1070, 1870, "SHOWER", "700 x 800 - tile - teak grate - window", WET),
         (   0,  200,    0, 1070, "SHELVES", "", WARM),
-        ( 200,  700,    0, 1070, "ENTRY", "step-in - cab door forward", None),
-        ( 700, 1240, 1270, 1870, "SINK", "gold tap - Nespresso lift", GALLEY),
-        ( 700, 1240,    0,  600, "HOB", "gas 2-ring - 65 L fridge under", GALLEY),
-        (1240, 3120, 1350, 1870, "BENCH", "Victron + 3000 W inverter", SOFT),
-        (1240, 3120,    0,  520, "BENCH", "90 L fresh water under", SOFT),
-        (1240, 3120,  520, 1350, "TABLE -> BED", "bed 1880 fore-aft x 1350 across", SOFT),
+        ( 200,  700,    0, 1070, "ENTRY", "500 x 1070 - cab door forward", None),
+        ( 700, 1600, 1270, 1870, "SINK", "900 x 600 - gold tap - Nespresso lift", GALLEY),
+        ( 700, 1600,    0,  600, "HOB", "900 x 600 - gas 2-ring - fridge under", GALLEY),
+        (1240, 1600,  600, 1270, "BED", "360 x 670", SOFT),
+        (1600, 3120, 1350, 1870, "BENCH", "1520 x 520 - Victron + inverter", SOFT),
+        (1600, 3120,    0,  520, "BENCH", "1520 x 520 - 90 L fresh", SOFT),
+        (1600, 3120,  520, 1350, "TABLE -> BED", "bed 1880 fore-aft x 1350 across", SOFT),
     ],
 )
 
@@ -201,22 +204,28 @@ VARIANTS["v2"] = dict(
     out="v2/layout",
     length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
-    title="v2 - VW Crafter L3H3 - front shower, split galley, rear U to a full-width bed",
+    title="v2 - VW Crafter L3H3 - front shower + wardrobe, bulkhead office, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
-    stats=["bed 1850 x 1832", "galley aisle 632", "entry gap 680",
-           "worktop 900", "seat 520", "standing 1881"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0. "
-          "Furniture depths include the wall build. Estimated +/-50 mm."),
+    stats=["bed 1520 x 1832 across", "seat 450 x 600", "galley aisle 632",
+           "entry gap 700", "garage 600 x 1832", "standing 1881"],
+    note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
+          "pass-through beside the seat locker. Bed sleeps ACROSS: 1832 gross, ~1760 after the "
+          "wall build. WC stows under the wardrobe and slides forward into the shower, cassette "
+          "out through the driver-side panel. The U is one carcass, so the fresh tank runs "
+          "the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm."),
     boxes=[
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - cassette - floor level", WET),
-        (   0,  980,    0, 1032, "ENTRY", "980 x 1032 - door to cab at the bulkhead", None),
-        ( 700, 1600, 1232, 1832, "SINK", "900 x 600 - oven + pump under", GALLEY),
-        ( 980, 1600,    0,  600, "HOB", "620 x 600 - fridge under", GALLEY),
-        ( 980, 1600,  600, 1232, "AISLE", "620 x 632", None),
-        (1600, 3000, 1232, 1832, "BENCH", "1400 x 600 - battery + inverter", SOFT),
-        (1600, 3000,    0,  600, "BENCH", "1400 x 600 - 110 L fresh", SOFT),
-        (1600, 3000,  600, 1232, "TABLE -> BED", "bed 1850 x 1832, full width", SOFT),
-        (3000, 3450,    0, 1832, "REAR BENCH", "450 x 1832 - garage under", SOFT),
+        ( 450, 1150,  660, 1032, "ENTRY", "700 wide - cab door beside the seat", None),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - curtain", WET),
+        ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
+        (   0,  450,    0,  600, "SEAT", "450 x 600 - shoes", SOFT),
+        ( 450,  900,   30,  630, "TABLE", "450 x 600 - swing arm", WARM),
+        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - oven under", GALLEY),
+        (1150, 1930,    0,  600, "HOB", "780 x 600 - fridge under", GALLEY),
+        (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
+        (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
+        (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),
+        (1930, 2850,  600, 1232, "TABLE -> BED", "bed 1520 x 1832, sleeps across", SOFT),
+        (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage, tank runs in", SOFT),
     ],
 )
 
