@@ -115,13 +115,19 @@ PROMPTS = {
              "edges, standing on the floor. No backrest, no legs, no armrests."),
     # 700 x 800 x 1881: two and a half times taller than it is wide, and the open side is the
     # point - a sealed white box tells you nothing about the room it stands in
-    "SHOWER": ("A campervan corner shower cubicle seen on its own, with NO door and NO "
-               "curtain: three flat white wall panels forming a tall three-sided enclosure "
-               "two and a half times taller than it is wide, the fourth side standing "
-               "completely open so the inside is visible right through, a shallow white "
-               "rectangular shower tray at the bottom with a chrome drain grate, a slim "
-               "chrome riser rail with a handheld shower head on the back panel, an open top. "
-               "An empty three-walled shower enclosure."),
+    # first round came back a pentagonal corner pod - angled panels, chamfered front. In a
+    # 700 x 800 rectangular hole that reads as a tent, so the plan shape is now spelt out as
+    # hard as the proportions: square corners, right angles, three flat rectangles
+    "SHOWER": ("A campervan shower cubicle seen on its own, with NO door and NO curtain: "
+               "exactly three flat white rectangular wall panels meeting at SQUARE ninety "
+               "degree corners, forming a tall box-shaped enclosure with a strictly "
+               "rectangular floor plan, two and a half times taller than it is wide. No "
+               "angled panels, no chamfered or cut-off corners, no curved front, no "
+               "pentagon. The fourth side stands completely open, floor to ceiling, so the "
+               "inside is visible right through. A shallow white rectangular shower tray at "
+               "the bottom with a chrome drain grate, a slim chrome riser rail with a "
+               "handheld shower head on the back panel, open at the top. An empty "
+               "three-walled rectangular shower enclosure, straight edges throughout."),
     # 450 x 600 x 1881: four times taller than it is wide. The lower bay is left EMPTY on
     # purpose - the cassette is its own prop and sits inside this one in the viewer
     "WARDROBE": ("A tall narrow campervan wardrobe cabinet seen on its own: four times taller "

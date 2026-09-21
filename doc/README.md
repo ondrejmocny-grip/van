@@ -221,6 +221,11 @@ reading would show nothing but the bed.
 at. Orbiting alone always points at the middle of the van, so a corner can never be centred.
 Picking a view puts the camera back where that view says, panning included.
 
+**Furniture is checked against a seated person.** `SITTER_V2` is trunk, thighs and shins on
+the office seat, and `check()` fails the build if anything but the seat itself runs through
+them. The office table was mounted on the partition twice, and both times the swing arm went
+straight through the sitter's chest - a clash no box list shows and every render does.
+
 **A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
 modelled facing away from; a box against the other wall gets a half turn on top of the kind's
 own `yaw.json` entry, so the galley on v2's passenger side does not open into the wall.
@@ -338,6 +343,14 @@ Two things this round taught:
 - **An opening costs score and is worth it.** Every fridgedoor mesh scored OFF because the
   open door widens the bounding box, and a cubicle you can see into is squatter than the slot
   it fills. Both were the point of the prop.
+
+**SHOWER, round two.** The first cubicle came back a pentagonal corner pod: the flux preview
+had angled panels, and stretched into a 700 x 800 rectangular hole it read as a tent. The
+qwen preview of the same prompt was rectangular all along - **the preview decides the plan
+shape, and the plan shape is not something the shape error can see**: a hexagon and a
+rectangle of the same proportions score the same. Re-meshed from the qwen shot, all three
+models came back rectangular (rodin 0.17, adopted). The prompt now spells out square corners
+and right angles as hard as it spells out the proportions.
 
 `props.py face <kind> <+x|-x|+y|-y>` sets which way a prop looks. An open-sided mesh carries
 its mass on the closed sides, so the vector from its area-weighted centroid to the centre of

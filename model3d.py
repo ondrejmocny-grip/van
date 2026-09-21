@@ -115,15 +115,19 @@ EXTRA_V2 = [
     (1930, 2850,  600, 1232,  450,  520, "infill"),
     (2150, 2750,  616, 1216,  700,  760, "table"),      # dinette table, drops to the infill
     (2320, 2580,  786, 1046,    0,  700, "leg"),
-    # The office table hangs off the PARTITION, because nothing else there can carry it:
-    # between x 300 and 1600 the wall opposite is the sliding door. Both positions are
-    # drawn. The bracket stands in both; the arm and the top are the deployed pair, the
-    # standing panel is the parked one. Parked is the default, which is the state the
-    # 700 mm entry gap assumes.
-    (   0,   70,  250,  330,  600,  770, "fleg"),       # pivot bracket, above the cushion
-    (  70,  450,  290,  370,  690,  750, "farm"),       # deployed: the arm reaches aft
+    # The office table hangs off the GALLEY's forward end panel, and reaches FORWARD to the
+    # seat. The partition behind the seat looks like the obvious mount and is not: an arm
+    # from there to a table at 760 crosses the chest of whoever is sitting on the seat. From
+    # the galley the arm comes at the table from the far side, over the floor in front of the
+    # feet, and nothing passes through the sitter. Nothing can hang off the wall opposite -
+    # between x 300 and 1600 that wall is the sliding door.
+    # Both positions are drawn. The post stands in both; the arm and the flat top are the
+    # deployed pair, the standing panel is the parked one. Parked is the default, which is
+    # the state the 700 mm entry gap assumes.
+    (1090, 1150,  280,  360,  300,  770, "fleg"),       # post, on the galley's front face
+    ( 900, 1090,  300,  340,  690,  750, "farm"),       # deployed: the arm reaches forward
     ( 450,  900,   30,  630,  700,  760, "ftable"),     #   and the top sits over your knees
-    (   0,   60,    0,  600,  760, 1210, "ftablep"),    # parked: the top stands on the wall
+    (1090, 1150,    0,  600,  760, 1210, "ftablep"),    # parked: flat on the galley end
     (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
     (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
     (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
@@ -152,6 +156,17 @@ APPLIANCES_V2 = [
 ]
 
 CONTAINERS_V2 = ("SHOWER", "WARDROBE", "SEAT", "SINK", "HOB", "BENCH", "REAR BENCH")
+
+# Where a person actually is when they use the office seat: sitting on the locker, facing
+# aft, knees down and feet on the floor in front of it. Furniture is checked against this the
+# same way appliances are checked against each other, because two rounds of this design were
+# drawn with a swing arm running straight through the sitter's chest - obvious in a render,
+# invisible in a box list. Trunk, thighs, shins.
+SITTER_V2 = [
+    ( 80,  450,  80, 520,  520, 1400),
+    (450,  900, 120, 480,  430,  560),
+    (700,  900, 120, 480,    0,  450),
+]
 
 # Which wall a prop mesh was modelled facing away from: "p" = passenger (y=0), "d" = driver.
 # v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
@@ -279,11 +294,11 @@ CAMERAS = [                         # name, elevation, azimuth
 REGISTRY = {
     "v1": dict(own_coords=False, heights=HEIGHTS, extra=EXTRA, appliances=APPLIANCES,
                containers=CONTAINERS, windows=WINDOWS, fans=FAN_HOLES, hatches=(),
-               partition=None, cab_seats=None, layers=None, facing={}),
+               partition=None, cab_seats=None, layers=None, facing={}, sitter=()),
     "v2": dict(own_coords=True, heights=HEIGHTS_V2, extra=EXTRA_V2, appliances=APPLIANCES_V2,
                containers=CONTAINERS_V2, windows=WINDOWS_V2, fans=FAN_HOLES_V2,
                hatches=HATCHES_V2, partition=PARTITION_V2, cab_seats=CAB_SEATS_V2,
-               layers=LAYERS_V2, facing=FACING_V2),
+               layers=LAYERS_V2, facing=FACING_V2, sitter=SITTER_V2),
 }
 
 
@@ -883,6 +898,18 @@ def check(v):
         if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])
     assert not bad, "appliance check failed: " + "; ".join(bad)
+
+    # Nothing may occupy the space a seated person does - except the seat they sit on, and
+    # the cushion on top of it. A table at 760 over the thighs is fine; the arm that carries
+    # it is what goes wrong, and it goes wrong silently.
+    sat = []
+    for body in spec(v).get("sitter", ()):
+        for b in boxes_for(v):
+            if b[6] in ("SEAT", "bed", "ENTRY", "AISLE"):
+                continue
+            if overlap(b[:6], body):
+                sat.append("%s runs through the person on the seat" % b[6])
+    assert not sat, "sitter check failed: " + "; ".join(sorted(set(sat)))
 
     # Wheel arches are drawn on the plan but are not boxes, so they have to be checked apart
     # from everything else. A warning, not a failure: the fresh tank does clash today and how

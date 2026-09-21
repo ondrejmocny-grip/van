@@ -69,18 +69,27 @@ going through to the cab.
 
 ### How the table is mounted
 
-Resolved 2026-09-21. **The partition carries it, because nothing else can.** Between x 300
-and x 1600 the wall opposite *is* the sliding door, so nothing can be fixed to it; the only
-other anchor near the office is the seat box, and a 600 mm cantilever off a 450 mm plywood
-box needs a base the partition gives for free.
+Resolved 2026-09-21. **The galley's forward end panel carries it, and the arm reaches
+forward to the seat.**
+
+The partition behind the seat looks like the obvious mount and is wrong: you sit on the
+seat, so an arm from the partition out to a table at 760 crosses your chest on the way.
+Drawn in a box list that is invisible; in a render it is obvious. From the galley the arm
+comes at the table from the far side, over the floor in front of your feet, and nothing
+passes through you. The wall opposite carries nothing either — between x 300 and x 1600 it
+*is* the sliding door.
 
 | | |
 |---|---|
-| Mount | Lagun-type **two-pivot arm** on the partition, bracket at y 250–330 |
-| Bracket height | 600–770, above the cushion and clear of the 432 pass-through at y 600–1032 |
-| Deployed | arm reaches aft, top at x 450–900, surface at **760** → 240 thigh clearance |
-| Parked | top swings up and stands **flat against the partition**, x 0–60, z 760–1210 |
+| Mount | Lagun-type **two-pivot arm** on the galley's front face, post at x 1090–1150, y 280–360 |
+| Post height | 300–770, clear of the worktop above and the entry beside it |
+| Deployed | arm reaches **forward** to x 900, top at x 450–900, surface at **760** → 240 thigh clearance |
+| Parked | top swings back and stands **flat on the galley end panel**, x 1090–1150, z 760–1210 |
 | Worth adding | hinge the top across the middle, 450 → 225, so half drops to let someone past |
+
+`model3d.check()` now carries a **seated person** — trunk, thighs, shins — and fails the
+build if any furniture runs through them. Two rounds of this design were drawn with an arm
+through the sitter's chest before it was caught by eye.
 
 Both positions are in the 3D model. **Parked is the default**, because that is the state the
 700 mm entry gap assumes — the **Office table out** button deploys it.
