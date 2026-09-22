@@ -330,6 +330,11 @@ YAW_V3 = {
     "hob": 90,              # 90 ccw, on top of yaw.json 270 + the 180 FACING adds
     "fridgedrawer": 90,     # 90 ccw, from nothing
     "oven": 270,            # 180 on top of the 90 quarter turn the bulkhead run needs
+    # The larder mesh is a slab 0.31 x 1.00 x 0.07, thin on mesh Z. The slot is thin on van x,
+    # so without a quarter turn the viewer would stretch the thin axis to 600 and squash the
+    # wide one to 200. 270 rather than 90 so the modelled door looks aft rather than into the
+    # galley return it butts against - see v3/README.md, the real unit opens the other way.
+    "LARDER": 270,
 }
 
 LAYERS_V3 = [

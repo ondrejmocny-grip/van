@@ -121,7 +121,7 @@ moves aft into a nook between the larder and the bed.
 | Galley leaf | **600 × 450** at 900 | pulls up over the shoe locker |
 | **Galley, return** — down the driver wall | **180 × 600**, worktop 900 | free counter, the drainer end |
 | Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
-| **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — tins, jars, dry goods, one bottle deep |
+| **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — a **tandem pull-out**, 200-wide front onto the aisle, 600-deep baskets |
 | **Office seat** | **450 × 400**, top 450 | in the nook between the larder and the bed |
 | Aisle | **632** | runs straight into the corridor |
 | Entry clear at the door | **830** | of the 1300 aperture |
@@ -276,15 +276,22 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 9. **The sink is a placeholder.** Cut down to **340 × 560** — smaller and narrower than the
    first draft's 440 × 640 — but no real product chosen yet. The 200 mm of counter it frees
    between the bowls and the bulkhead is where both taps now stand.
-10. **The fridge prop is a box without a front.** `fridgedrawer` was adopted from trellis on
+10. **The larder has to be a pull-out, not a cupboard.** Its two wide faces are boxed in — the
+   galley return forward, the office seat aft — so the only face that can open is the narrow
+   one onto the aisle: a 200-wide front with 600-deep baskets, which is a real tandem larder
+   product. The aisle is 632, so a 600-deep basket clears when it is out. The generated prop
+   still carries a door on its wide face (turned aft, so it at least does not open into the
+   galley return); regenerating it with the narrow face named as the front is a future round.
+   Written up in [doc/README.md](../doc/README.md#the-larder-2026-09-22--say-which-face-is-the-front).
+11. **The fridge prop is a box without a front.** `fridgedrawer` was adopted from trellis on
    its shape error (0.16 against rodin's 0.17), and only afterwards did a geometric probe show
    trellis has no flat drawer front while rodin does. The two tie inside the noise on
    proportions, so rodin is the better mesh and the swap is one command:
    `python props.py pick fridgedrawer rodin`. Written up in
    [doc/README.md](../doc/README.md#the-shape-error-cannot-see-a-missing-feature-2026-09-22).
-11. **The galley leaf against the cab pass-through.** Up, the leaf crosses it. Decide whether
+12. **The galley leaf against the cab pass-through.** Up, the leaf crosses it. Decide whether
    that matters or whether the leaf should stop at the locker's own width.
-12. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
+13. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
 
 **The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1881 and the
 viewer stretches a mesh to fill its box, so any door leaf becomes a flat slab — which is what
