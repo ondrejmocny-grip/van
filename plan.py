@@ -276,23 +276,56 @@ VARIANTS["v4"] = dict(
     cab=800,
     title="v4 - VW Crafter L3H3 - thin rear bathroom, fixed crosswise bed, front office seat",
     viewer_title="Crafter L3H3 v4 Interior",
-    stats=["bed 1400 x 1832 fixed", "bathroom 500 deep", "garage 1.0 m3 under the bed",
-           "galley 0.93 m2", "entry 750", "larder 200 x 600 full height"],
+    stats=["bed 1520 x 1832 fixed", "bathroom 500 deep", "garage 1.1 m3 under the bed",
+           "galley 0.94 m2 = v2", "entry 650", "larder 200 x 600 full height"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Bathroom is a 500 mm slot across the whole "
           "back; the bed is FIXED and never converted, sitting over a full-width garage that "
           "swallows both wheel arches. The cassette WC lives in the aft end of that garage and "
-          "slides back into the bathroom. Front 1550 carries the galley both sides, a crosswise "
-          "office seat behind the driver with a desk folding off the partition, and a thin "
-          "larder between the seat and the sink. Estimated +/-50 mm."),
+          "slides back into the bathroom. The office seat is 450 wide because you sit crosswise "
+          "and only your hips need the width - which is exactly what pays for a v2-sized bed and "
+          "a v2-sized galley in the same van. Estimated +/-50 mm."),
     boxes=[
-        (   0,  600, 1432, 1832, "OFFICE SEAT", "600 x 400 - batteries under", SOFT),
-        (   0,  600,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 720", None),
-        ( 600,  800, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
-        ( 800, 1550, 1232, 1832, "SINK", "750 x 600 - two bowls - oven + pump under", GALLEY),
-        (   0,  800,    0,  600, "HOB + FRIDGE", "800 x 600 - induction - 90 L drawer fridge", GALLEY),
-        ( 800, 1550,    0,  600, "ENTRY", "750 clear at the door", None),
-        ( 600, 1550,  600, 1232, "AISLE", "632 wide", None),
-        (1550, 2950,    0, 1832, "BED - FIXED", "1400 x 1832 across - garage under, 400 clear", SOFT),
+        (   0,  450, 1432, 1832, "OFFICE SEAT", "450 x 400 - batteries under", SOFT),
+        (   0,  450,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 720", None),
+        ( 450,  650, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
+        ( 650, 1430, 1232, 1832, "SINK", "780 x 600 - two bowls - oven + pump under", GALLEY),
+        (   0,  780,    0,  600, "HOB + FRIDGE", "780 x 600 - induction - 90 L drawer fridge", GALLEY),
+        ( 780, 1430,    0,  600, "ENTRY", "650 clear at the door", None),
+        ( 450, 1430,  600, 1232, "AISLE", "632 wide", None),
+        (1430, 2950,    0, 1832, "BED - FIXED", "1520 x 1832 across - garage under, 400 clear", SOFT),
+        (2950, 3450,    0, 1832, "BATHROOM", "500 x 1832 - sit-down shower - WC slides in from the garage", WET),
+    ],
+)
+
+
+# --------------------------------------------------------------------------
+# v5 - v4 with the driver seat on a swivel base. The double passenger bench
+# cannot turn and never could; the driver seat is on the other side of the
+# cab and nothing about a 3-seat front stops it. So the office bench is
+# deleted and its 450 becomes open floor - same geometry, a far better chair.
+# --------------------------------------------------------------------------
+VARIANTS["v5"] = dict(
+    out="v5/layout",
+    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    cab=800,
+    seats=[(-430, 1380, 285)],
+    title="v5 - VW Crafter L3H3 - v4 with the driver seat swivelled as the office chair",
+    viewer_title="Crafter L3H3 v5 Interior",
+    stats=["bed 1520 x 1832 fixed", "bathroom 500 deep", "driver seat swivels",
+           "galley 0.94 m2 = v2", "entry 650", "larder 200 x 600 full height"],
+    note=("v4 with one change: the driver seat turns to face aft and becomes the office chair, "
+          "so the 450 x 400 bench is deleted and that floor stays open. The partition is open on "
+          "the DRIVER side and closed on the passenger side behind the bench. Needs a swivel base "
+          "and almost certainly a handbrake lowering kit - confirm both against the actual van. "
+          "Estimated +/-50 mm."),
+    boxes=[
+        (   0,  450,  600, 1832, "SWIVEL SEAT ZONE", "driver seat turns aft - desk off the driver wall", None),
+        ( 450,  650, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
+        ( 650, 1430, 1232, 1832, "SINK", "780 x 600 - two bowls - oven + pump under", GALLEY),
+        (   0,  780,    0,  600, "HOB + FRIDGE", "780 x 600 - induction - 90 L drawer fridge", GALLEY),
+        ( 780, 1430,    0,  600, "ENTRY", "650 clear at the door", None),
+        ( 450, 1430,  600, 1232, "AISLE", "632 wide", None),
+        (1430, 2950,    0, 1832, "BED - FIXED", "1520 x 1832 across - garage under, 400 clear", SOFT),
         (2950, 3450,    0, 1832, "BATHROOM", "500 x 1832 - sit-down shower - WC slides in from the garage", WET),
     ],
 )
