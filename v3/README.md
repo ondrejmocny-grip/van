@@ -264,5 +264,9 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 9. **The oven's quarter turn is a guess.** `YAW_V3` turns it 90° so its door faces the aisle
    rather than the bulkhead; 90 against 270 was not something the box list could settle. Check
    it in the viewer, and `props.py face` is there to correct it.
-10. **No photoreal impressions yet.** `impressions.py` has not been run on v3. Prop meshes for
-   the two new kinds — the 90 L drawer fridge and the pocket door — are being generated.
+10. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
+
+**The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1881 and the
+viewer stretches a mesh to fill its box, so any door leaf becomes a flat slab — which is what
+the box already looks like. The only thing a mesh would add is a recessed finger pull. The
+prompt is written in `props.py` if we ever change our mind; nothing else is.
