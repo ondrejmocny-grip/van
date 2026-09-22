@@ -252,7 +252,7 @@ VARIANTS["v3"] = dict(
           "garage loading through the rear door. Estimated +/-50 mm."),
     boxes=[
         (   0,  450, 1432, 1832, "OFFICE SEAT", "450 x 400 - sit crosswise", SOFT),
-        (   0,  450,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 720", None),
+        (   0,  450,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 740", None),
         ( 450,  650, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
         ( 650, 1430, 1232, 1832, "SINK", "780 x 600 - two bowls - oven + pump under", GALLEY),
         (   0,  780,    0,  600, "HOB + FRIDGE", "780 x 600 - induction - 90 L drawer fridge", GALLEY),
