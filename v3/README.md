@@ -264,7 +264,13 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 9. **The oven's quarter turn is a guess.** `YAW_V3` turns it 90° so its door faces the aisle
    rather than the bulkhead; 90 against 270 was not something the box list could settle. Check
    it in the viewer, and `props.py face` is there to correct it.
-10. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
+10. **The fridge prop is a box without a front.** `fridgedrawer` was adopted from trellis on
+   its shape error (0.16 against rodin's 0.17), and only afterwards did a geometric probe show
+   trellis has no flat drawer front while rodin does. The two tie inside the noise on
+   proportions, so rodin is the better mesh and the swap is one command:
+   `python props.py pick fridgedrawer rodin`. Written up in
+   [doc/README.md](../doc/README.md#the-shape-error-cannot-see-a-missing-feature-2026-09-22).
+11. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
 
 **The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1881 and the
 viewer stretches a mesh to fill its box, so any door leaf becomes a flat slab — which is what

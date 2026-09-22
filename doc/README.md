@@ -435,6 +435,34 @@ the same amount*, stop looking at the models. Either the prompt or the preview i
 the axis that is off tells you which one — here, the long axis was the one the drawer had
 extended.
 
+### The shape error cannot see a missing feature, 2026-09-22
+
+Same round, second lesson. `fridgedrawer` came back **trellis 0.16, rodin 0.17, hunyuan 0.19** —
+trellis and rodin tied inside the noise, so the score picked trellis and so did we.
+
+Then a look at the geometry rather than the number. Surface area in the outermost 2 % of the
+bounding box, per vertical face:
+
+| | +X | −X | +Z | −Z |
+|---|---|---|---|---|
+| trellis | 0.001 | 0.001 | 0.005 | **0.009** |
+| rodin | 0.002 | 0.002 | 0.004 | **0.174** |
+| hunyuan | 0.001 | 0.001 | 0.004 | **0.188** |
+
+A flat face sitting hard against its own bounding-box plane puts a lot of area in that band; a
+rounded or tapered one puts almost none. **rodin and hunyuan have one flat face — the drawer
+front. trellis has none: it is a rounded box with no front at all.**
+
+So the rule from the battery round — *let the shape error pick the mesh, not the eye* — needs a
+second half:
+
+> **The shape error only ranks proportions.** It cannot see whether the mesh has the feature
+> that makes it that object. When two candidates tie inside the noise, the score has stopped
+> deciding anything, and a geometric probe for the feature is what breaks the tie.
+
+The probe is three lines of trimesh and it is worth running on any prop whose point is a face:
+a door, a drawer, a hob, an opening.
+
 ### Finding a pipeline that keeps the layout — the ladder, 2026-09-18
 
 Canny-on-a-line-drawing kept inventing furniture, so we climbed from the geometry toward
