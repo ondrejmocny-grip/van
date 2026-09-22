@@ -264,6 +264,40 @@ VARIANTS["v3"] = dict(
 )
 
 
+# --------------------------------------------------------------------------
+# v4 - VW Crafter L3H3. Bathroom squeezed thin and run the full width at the
+# very back; fixed crosswise bed in front of it over a full-width garage, and
+# the WC slides aft out of that garage. Everything else - galley, a front
+# office seat behind the driver, a thin larder - shares the front 1550.
+# --------------------------------------------------------------------------
+VARIANTS["v4"] = dict(
+    out="v4/layout",
+    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    cab=800,
+    title="v4 - VW Crafter L3H3 - thin rear bathroom, fixed crosswise bed, front office seat",
+    viewer_title="Crafter L3H3 v4 Interior",
+    stats=["bed 1400 x 1832 fixed", "bathroom 500 deep", "garage 1.0 m3 under the bed",
+           "galley 0.93 m2", "entry 750", "larder 200 x 600 full height"],
+    note=("Load box 3450 x 1832 x 1881 mm finished. Bathroom is a 500 mm slot across the whole "
+          "back; the bed is FIXED and never converted, sitting over a full-width garage that "
+          "swallows both wheel arches. The cassette WC lives in the aft end of that garage and "
+          "slides back into the bathroom. Front 1550 carries the galley both sides, a crosswise "
+          "office seat behind the driver with a desk folding off the partition, and a thin "
+          "larder between the seat and the sink. Estimated +/-50 mm."),
+    boxes=[
+        (   0,  600, 1432, 1832, "OFFICE SEAT", "600 x 400 - batteries under", SOFT),
+        (   0,  600,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 720", None),
+        ( 600,  800, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
+        ( 800, 1550, 1232, 1832, "SINK", "750 x 600 - two bowls - oven + pump under", GALLEY),
+        (   0,  800,    0,  600, "HOB + FRIDGE", "800 x 600 - induction - 90 L drawer fridge", GALLEY),
+        ( 800, 1550,    0,  600, "ENTRY", "750 clear at the door", None),
+        ( 600, 1550,  600, 1232, "AISLE", "632 wide", None),
+        (1550, 2950,    0, 1832, "BED - FIXED", "1400 x 1832 across - garage under, 400 clear", SOFT),
+        (2950, 3450,    0, 1832, "BATHROOM", "500 x 1832 - sit-down shower - WC slides in from the garage", WET),
+    ],
+)
+
+
 # Every variant carries its own key, so model3d.py can look up the 3D fit-out that belongs
 # to it instead of guessing from the geometry.
 for _name, _variant in VARIANTS.items():
