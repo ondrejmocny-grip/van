@@ -1,193 +1,179 @@
-# v3 — VW Crafter L3H3, slide-out bed at the front, bathroom at the back
+# v3 — VW Crafter L3H3, front office seat, split convertible bed, rear bathroom
 
-Started 2026-09-21. Reworked 2026-09-22 — the bed now sleeps **across** on a slide-out.
+Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 **Plan only — geometry not yet checked in 3D.**
 
 ![plan](layout.png)
 
 Regenerate: `python plan.py v3`, from the project root.
 
-Same van and same cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0), turned around:
-bed to the front, bathroom and a full-height closet to the back.
+Same van and cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0). Order from the back:
+**bathroom + garage, bed, galley, office seat.**
 
-## The slide-out is what makes this work
+## The shape in one line
 
-The sliding door is at x 300–1600 — the **front half** of the van. A bed at the front and a
-door at the front want the same floor. The answer is that the bed **is not there during the
-day**:
+**Two parallel benches, not a U** — and the 632 mm gap between them is a corridor that runs
+from the galley straight to the bathroom door. At night the table drops and that corridor
+becomes the middle of the bed.
 
-| | The front, x 760–1520, full width |
-|---|---|
-| **Day** | Platform stowed inside the bench. **Open floor, 760 × 1832.** Step in, walk through, sit at the table. |
-| **Night** | Platform pulled 760 mm aft. **Bed 1520 × 1832**, sleeping across. |
-
-The bench against the bulkhead is **760 deep and the full 1832 wide**. The platform lives
-inside it, at seat level, on full-extension runners, and pulls out exactly its own depth —
-so it needs no second stage and no folding.
-
-**The table is not part of the bed.** It is a lift-off top on a single pedestal. At night it
-comes off and slides into the closet. That is what frees the bed from the table's shape, and
-it is why the bed can be a clean rectangle.
-
-## What the crosswise bed gives back
-
-Turning the bed across the van recovers everything the fore-aft version had to pay for:
-
-| | fore-aft version (first draft) | **crosswise slide-out** |
+| | Day | Night |
 |---|---|---|
-| Bed | 1800 × 1400 | **1520 × 1832** |
-| Two sleeping | 700 each | **760 each** |
-| Three sleeping | 466 each | **507 each** |
-| Night walkway to the bathroom | 432 mm squeeze | **none needed** — you step off the foot of the bed straight into the aisle |
-| Entry clear at the door | 700 by day | **840** |
-| Worktop | 1.14 m² | **1.31 m²** |
-| Sink | 1.5 bowl (run only 850) | **two full bowls** (run 1130) |
+| The gap between the benches | **corridor, 632 wide**, to the bathroom | **the middle third of the bed** |
+| The table in it | folds and slides out of the way | dropped to 450, cushions over |
+| Bathroom | walk to it | cross the bed to it |
 
-The night walkway is the big one. With the bed across, its aft edge is at x 1520 and the
-aisle starts there — **getting up for the toilet at 3 a.m. costs nothing.** In the fore-aft
-version it cost a 432 mm squeeze along the passenger wall, and that was the weakest part of
-the design.
+This is the fix for the problem the fixed-bed version had: with a permanent full-width bed,
+the bathroom behind it could **only** ever be reached by climbing over. Now it is a normal
+walk all day, and only a night trip costs anything.
 
-## The front, measured
+## The budget closes to the millimetre
+
+| Driver side | mm |
+|---|---|
+| Office seat | 450 |
+| Larder | 200 |
+| Sink run | 780 |
+| Bed / dinette | 1520 |
+| Bathroom + garage | 500 |
+| **Total** | **3450** = the van |
+
+**450 is enough for the seat because you sit crosswise.** Sitting across the van, the only
+thing the seat's fore-aft dimension holds is your hips — about 400 mm seated. The depth that
+has to be generous is the 400 mm of cushion plus the whole lounge floor for your legs. A
+lengthwise bench would need 600 deep *and* 450 wide, and cost three times the floor.
+
+Those 450 mm are exactly what buys **v2's bed (1520) and v2's galley (0.94 m²)** in the same
+van as a bathroom and a garage.
+
+## Front, x 0–1430 — office, galley, larder
 
 | Piece | Size (mm) | Holds |
 |---|---|---|
-| Bench against the bulkhead | **760 × 1832**, top 450 | the slide-out platform; **~120 L fresh tank**; drawers under |
-| Sofa, driver leg | **760 × 600**, top 450 | batteries, inverter |
-| Slide-out platform | **760 × 1232**, top 450 | — |
-| Table | **600 × 660** at 700, lift-off pedestal | — |
-| **Bed made up** | **1520 × 1832** | 760 each for two, 507 for three |
+| **Office seat** | **450 × 400**, top 450 | shoes, books |
+| Desk | folds off the partition at **720** | stows flat against the bulkhead |
+| **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — tins, jars, dry goods, one bottle deep |
+| Sink, driver | **780 × 600**, worktop 900 | two bowls (340 wash + 260 rinse, as v2), oven and pump under |
+| Hob + fridge, passenger | **780 × 600**, worktop 900 | induction 300 × 520 at the door end, **90 L drawer fridge** |
+| Aisle | 980 × **632** | runs straight into the corridor |
+| Entry clear at the door | **650** | of the 1300 aperture |
+
+**The office.** A 450 × 400 bench in the front driver corner, against the driver wall. You
+**sit crosswise** — facing the sliding door, legs into the open floor at y 1032–1432. The desk
+is a board hinged on the partition, dropping to horizontal at 720 over your knees.
+
+| | |
+|---|---|
+| Why crosswise | the legroom is the lounge floor, so the seat costs only 450 mm of length |
+| Why a fold-down and not a swing arm | v2 drew two swing-arm office tables straight through the sitter's chest before it was caught by eye. A board on the bulkhead cannot do that |
+| View | out of the sliding door, across the van — daylight, not a wall |
+| Cab | the pass-through is directly over this seat. The seat is the step |
+
+**The fridge is a 90 L drawer and it dodges nothing.** The wheel arches start at x 1863; the
+galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's open item #4
+(a 530 mm hinged door swinging into a 632 aisle) and gets 20 L back at the same time.
+
+**Galley 0.94 m² — v2 exactly**, with no fold-down leaf blocking the door while you cook.
+
+## Middle, x 1430–2950 — the split bed
+
+| | Size (mm) | Holds |
+|---|---|---|
+| Bench, driver | **1520 × 600**, top 450 | batteries, inverter, calorifier |
+| Bench, passenger | **1520 × 600**, top 450 | **118 L fresh tank**, inboard of the arch |
+| Corridor between | **1520 × 632** | the table |
+| Table | **900 × 512** at 700 | folds in half and slides fore-aft on its pedestal |
+| **Bed made up** | **1520 × 1832** | **760 each for two**, 507 for three |
 | Headroom over the bed | 1431 | |
 
-**Day layout.** L-sofa around the front driver corner — bench along the bulkhead, leg down
-the driver side — with the table in the corner between them. Clear walkway y 0–560 runs from
-the sliding door aft into the aisle.
+**Why two benches and not a U.** A U needs a third bench across the back — and the back is now
+the bathroom and the garage. Two parallel benches leave the middle open, and that open middle
+is what the bathroom needs to be reachable.
 
-**The conversion, at night.** Pull two platform panels aft (they carry their own drop-down
-legs at the outer edge), lift the table top off and slide it into the closet, and flip the
-bulkhead backrest cushions down flat — they *are* the platform's mattress. Under a minute.
+**Why the table has to move, not just drop.** Parked in the middle of the corridor it blocks
+the walk to the bathroom. So the top folds in half over its pedestal, and the pedestal slides
+fore-aft in a floor track: fold and push it forward and the run aft is clear. At night it
+drops to 450 and the two folded halves open flat as the bed's centre panel.
 
-**Storage under the bench.** The platform takes only the top ~100 mm. Below it, z 0–330
-across 760 × 1832 is drawers and the water tank, all opening aft into the footwell.
+**The conversion.** Drop the table, open its halves, lay the centre cushions. Under a minute,
+and only the middle 632 mm ever changes — the two benches are already at bed height.
 
-**The bench is the step to the cab.** It is full width at 450 high, so the partition's
-pass-through sits directly above it. No separate shoe locker needed — v2 had to build one.
+## Rear, x 2950–3450 — bathroom beside a garage
 
-## The galley, in the middle
-
-| Run | Size (mm) | Holds |
-|---|---|---|
-| Driver | **1130 × 600**, worktop 900 | **two bowls** (340 wash + 260 rinse, as v2), 20 L oven and the pump under |
-| Passenger — by the door | **1050 × 600**, worktop 900 | induction 300 × 520 at the door end, **70 L drawer fridge** over the arch, prep board |
-| Aisle | 1130 × **632** | |
-
-**Worktop 1.31 m²** — the most of any version (v1: 0.66; v2: 1.18 including a fold-down leaf
-that blocked the door). No leaf, nothing to fold.
-
-**The fridge is a 70 L drawer, and that is deliberate.** Both runs sit over the wheel arch
-(x 1863–2763). A 90 L upright cannot live over a 300 mm arch under a 900 worktop — the
-arithmetic does not close. A drawer unit at ~525 high sits on a plinth on top of the arch and
-clears. It also kills v2's open item #4: no ~530 mm hinged door swinging into a 632 aisle.
-
-## The rear: bathroom and closet, behind a pair of sliding panels
+The back is 500 mm deep and **split**, not full width:
 
 | | Size (mm) | |
 |---|---|---|
-| **Bathroom**, driver side | **800 × 1000**, 1881 clear | sit-down shower + cassette WC, both permanent |
-| **Garage closet**, passenger side | **800 × 832**, full height 1881 | hanging rail + shelves; the table top stows here |
+| **Bathroom**, driver side | **500 × 1232** = 0.62 m², 1881 clear | sit-down shower **and** a permanent cassette WC |
+| **Garage**, passenger side | **500 × 600**, full height 1881 ≈ 0.56 m³ | loads through the **rear door** |
 
-**The sliding door, as asked — you walk in from the galley.** A pocket door does not fit: a
-600 mm door needs 600 mm of pocket, and neither the 1000 mm forward face nor the 832 mm
-divider wall is long enough to hide one.
+**A real pocket door fits here, and that is why the bathroom is this width.** The bathroom's
+forward face is 1232 long: a 600 mm door plus a 632 mm pocket is exactly 1232. Nothing
+surface-mounted, nothing swinging into the corridor.
 
-So the whole rear face becomes the door: **a 1832 mm track carrying two surface-mounted
-panels**, full height.
+**The WC stays put — no sliding drawer.** At 1232 wide the room holds both. The cassette sits
+at the driver end facing across, which gives **782 mm of knee room**; the shower is the other
+end, with a fold seat on the passenger wall and the whole 1232 for your legs when seated. v2
+had to slide its WC in and out of a 700 × 800 cubicle; this one does not.
 
-- Slide one panel across and the **bathroom opening is 700 mm wide**, straight off the aisle.
-- Slide them the other way and the **closet** is open instead.
-- Only one of the two is open at a time. That is the cost, and for a bathroom and a wardrobe
-  it does not matter.
-
-**Water tightness.** A surface slider is a room door, not a shower screen. Inside, the tray
-gets a **40 mm upstand at the door line and its own curtain**. The sliding panel keeps the
-steam and the privacy in; the curtain keeps the water in.
-
-**The WC sits in the aft-driver corner on the diagonal.** That is what makes the knee room
-work: across the corner you have ~1280 mm, where square to a wall you would only have 500.
-The shower seat folds off the forward wall.
-
-**The wheel arch just reaches in.** It runs to x 2763, so it pokes 113 mm into both forward
-corners of the rear block, 226 mm wide. On the bathroom side the nib sits under the fold-down
-seat. On the closet side it is inside a cupboard. **No raised floor anywhere** — v1's "+360
-step into the wet cubicle" is not coming back.
-
-**The closet is v2's garage rebuilt vertically.** v2: 1.10 m² of floor at ~400 clear ≈ 0.44 m³.
-v3: 0.67 m² of floor by 1881 high ≈ **1.25 m³**, and you can hang a jacket in it. It replaces
-v2's separate wardrobe as well.
+**The garage is full height, so it can hang clothes.** 600 wide × 500 deep is enough for a
+rail across the width (hangers are ~430). Half rail, half shelves, loaded from the back —
+that closes the "nowhere to hang anything" gap the earlier drafts had.
 
 ## Water, weight and services
 
 | Service | Where |
 |---|---|
-| Fresh tank ~120 L, 800 × 500 × 300 | under the bulkhead bench, lying across the van |
-| Batteries + inverter | under the driver-side sofa leg |
-| Calorifier | under the driver galley, aft end — short runs to the sink and the shower |
-| Pump + filter | under the sink |
+| Fresh tank 118 L, 1020 × 374 × 310 | passenger bench, **inboard of the wheel arch**, x 1900–2920 |
+| Batteries + inverter | driver bench, forward end, inboard of the arch |
+| Calorifier | driver bench, aft end — next to the bathroom wall |
+| Oven, pump, filter | under the sink |
 | Grey | underslung |
-| Cassette hatch | driver-side rear quarter panel, x ~2850–3300 |
+| Cassette hatch | driver-side rear quarter panel, x ~3050–3400 |
 
-**No wheel arch at the front**, so the tank is a **plain rectangular off-the-shelf box** —
-v2's open item #2 (a semi-custom 1020 × 374 × 310) goes away.
-
-**Axle loading improves.** Rear axle ≈ x 2313, front axle ≈ x −2177. The tank's centre at
-x ≈ 380 puts about **57 %** of its weight on the rear axle. v2's tank at x ≈ 2440 put **103 %**
-on it. The rear axle is what runs out first in a camper, so moving water forward buys margin —
-and the rear bathroom (x ≈ 3050, **116 %**) is what spends it.
+**The tank is v2's tank again, with v2's problem.** 1020 × 374 × 310 is a semi-custom size, and
+sitting at x ≈ 2410 it puts about **102 %** of its weight on the rear axle (rear axle ≈ x 2313).
+Options, all open: have one made, plumb two slim off-the-shelf tanks in series, or cut it to
+~90 L and move it forward into the bench's front third. See open item 3.
 
 ## v3 against v2
 
-| | v2 | v3 | |
+| | v2 | **v3** | |
 |---|---|---|---|
-| Bed | 1520 × 1832 across, rear | **1520 × 1832 across, front** | same size |
-| Bed left made up? | yes, most days | **no — converted daily** | worse |
-| Conversion | drop the table, infill | **pull a slide, flip cushions** | faster |
-| Bathroom | 700 × 800 = 0.56 m² | **800 × 1000 = 0.80 m²** | +43 % |
-| WC | slides in from a drawer under the wardrobe | **permanent, in the bathroom** | simpler |
-| Bathroom door | glass screen off the lobby | **sliding panel off the galley aisle** | as asked |
-| Hanging | 450 × 600, ~1281 clear | **832 × 800, full height** | much more |
-| Closet / garage volume | ~0.44 m³ | **~1.25 m³** | +180 % |
-| Worktop | 1.18 m² with a fold-down leaf | **1.31 m², no leaf** | +11 % |
-| Fridge | 90 L hinged, blocks the aisle | **70 L drawer** | −20 L, no door swing |
-| Entry clear at the door | 690 | **840** | +150 |
-| Galley aisle | 632 | 632 | = |
-| Fresh tank | semi-custom, 103 % on the rear axle | **off-the-shelf, 57 %** | better |
-| Rear doors | open into the garage | **open into the bathroom and the closet** | worse |
+| Bed | 1520 × 1832 across, rear | **1520 × 1832 across, middle** | same |
+| Bed made from | rear U | **two parallel benches** | corridor survives |
+| Bathroom reachable by day without crossing the bed | yes | **yes — the corridor** | = |
+| Bathroom | 700 × 800 = 0.56 m² | **500 × 1232 = 0.62 m²** | +11 % |
+| Bathroom door | glass screen off the lobby | **pocket door** off the corridor | better |
+| WC | slides in from a drawer | **permanent** | simpler |
+| Galley | 0.94 m² with a fold-down leaf | **0.94 m², no leaf** | = |
+| Fridge | 90 L hinged, over the arch, blocks the aisle | **90 L drawer, no arch** | better |
+| Dedicated work seat | none | **450 × 400 + fold-down desk** | new |
+| Hanging space | wardrobe 450 × 600 | **garage rail, 600 × 500 full height** | ≈ |
+| Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.56 m³ full height** + 2 benches under the bed | ≈ |
+| Entry clear at the door | 690 | 650 | −40 |
 | Travelling seats | 3 | 3 | = |
 
 ## Open on v3
 
-1. **The bed must be converted every day.** [about-us](../doc/about-us.md) says we are happy
-   to *leave the rear bed made up and live in the front lounge*. A front bed removes that
-   option — the platform out blocks the entry and the lounge both. The slide makes the
-   conversion fast, but it does not make it optional. **This is the real cost of v3 and it is
-   worth being sure about before going further.**
-2. **No clear rear exit at night.** The rear doors are the bathroom and the closet; the
-   slider is behind the bed. Exits at night are: over the bed through the slider, or over the
-   bench and through the cab. Both work — but check it against the motor-caravan registration
-   rules, which may have something to say.
-3. **Slide-out runners.** 760 × 1232 of platform plus two people is 200 kg-plus. Full-extension
-   runners rated for it are heavy and expensive; drop-down legs at the outer edge are the cheap
-   way to carry it. Decide which before the bench is built.
-4. **Where the backrest cushions go.** They are the platform's mattress, so they must stand up
-   against the bulkhead by day: ~0.94 m² of cushion against ~0.92 m² of backrest. It fits, just.
-   Mock it with foam offcuts.
-5. **Rear doors.** Confirm the bike rack swings away, and decide whether the bathroom gets a
-   window in the rear door or in the driver-side panel.
-6. **The two sliding panels.** Only one of the bathroom and the closet is open at a time.
-   Confirm that is acceptable before committing to one track.
-7. **WC on the diagonal.** Works on paper at ~1280 mm across the corner. Sit on a real cassette
-   inside a 800 × 1000 box before the walls are cut.
-8. **Drawer fridge on a plinth over the arch.** 300 arch + ~525 unit = 825 under a 900 worktop.
-   75 mm of margin. Confirm with the actual model before ordering.
+1. **Night trip to the bathroom.** By day the corridor works. At night the bed is full width,
+   so the aft sleeper rolls off straight into the bathroom and the forward sleeper crosses
+   ~760 mm of their partner. Better than a fixed bed, not free.
+2. **The table has to fold *and* slide.** Two mechanisms in one small table, and it doubles as
+   the bed's centre panel. Mock it in cardboard before it is built — this is the part most
+   likely to be annoying every day.
+3. **Fresh tank.** Semi-custom shape and 102 % on the rear axle. Decide between a made-to-fit
+   tank, two slim tanks in series, or 90 L moved forward.
+4. **Bathroom 500 deep.** Fine seated, tight standing. Stand in a 500 mm gap before agreeing.
+5. **Garage 600 wide.** Confirm what actually has to go in it — if it is only clothes, a rail
+   and two shelves; if bulky gear, it may want to be wider at the bathroom's expense.
+6. **Fold-down desk at 720 over a 450 seat.** 270 mm of thigh clearance is the minimum and this
+   is exactly at it.
+7. **Entry 650**, aisle 632 — two people cannot pass in the galley.
+8. **Driver seat swivel.** A 3-seat front never blocked the *driver* side — the double bench
+   cannot swivel in any van, but it is on the other side of the cab and is not in the driver
+   seat's way. If it works, the swivelled seat replaces the 450 × 400 bench at no cost in floor
+   (knees land inside the same 450) and gives a far better chair for an eight-hour day. The
+   blockers are the handbrake lever (lowering kit) and an open driver-side partition. **Worth
+   answering when the van is chosen: lever or electronic parking brake?**
 9. **No 3D yet.** `model3d.py` has no `REGISTRY` entry for v3, so nothing has been checked for
-   fit. That is the next step, and it is where v1 and v2 both found real clashes.
+   fit. That is where v1 and v2 both found real clashes.
