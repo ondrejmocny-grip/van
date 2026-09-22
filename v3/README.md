@@ -20,10 +20,11 @@ extruded from the box list in `plan.py`, so the model cannot disagree with the d
 |---|---|
 | Bed made up | the corridor infilled to 1520 × 1832; hides the table and its post |
 | Bathroom door shut | the pocket-door leaf out of its pocket, closing the 600 across the corridor |
-| Table at the desk | the top in its forward socket at 745; off, it is in the corridor at 700 |
+| Office table out | the 400 × 360 board off the larder, over the lap; off, it hangs folded down the larder |
+| Galley leaf up | the pull-up leaf over the shoe locker at worktop height; off, it hangs folded down the galley's end panel |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
-| Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through over the shoe locker |
+| Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through over the shoe locker, and **the wall between the bed and the rear rooms** |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
 | Schema overlay | the plan itself painted onto the model |
 | Sizes | every block labelled with its name and size in mm |
@@ -49,8 +50,12 @@ from every run v1 and v2 were built on:
 
 - `sink_wells()` gained an **axis**: the two bowls now sit side by side across the van, not
   along it. Without it a 600 mm-deep counter got two bowls stacked front to back.
-- the registry gained a **yaw** table, a per-variant quarter turn for a prop whose mesh was
-  modelled on a run running the other way. Only the oven needs it today.
+- the registry gained a **yaw** table, a per-variant turn for a prop whose mesh was modelled
+  on a run running the other way. Four kinds now carry one, read off the viewer:
+  **LOCKER 90 cw, hob 90 ccw, fridge 90 ccw, oven 180.** The sign is worth writing down: the
+  viewer does `rotation.y` with world X = van length and world Z = van width, so **+90 turns
+  van +x toward the passenger wall — counter-clockwise seen from above**, the way the plan is
+  drawn. Clockwise is 270.
 
 **The bathroom is drawn as a carcass the viewer ghosts**, not built from panels the way v2's
 shower was. v2 had a glass screen worth building; here the interesting things are inside —
@@ -113,6 +118,7 @@ moves aft into a nook between the larder and the bed.
 | Piece | Size (mm) | Holds |
 |---|---|---|
 | **Galley, long leg** — across the bulkhead | **600 × 1382**, worktop 900 | hob at the door end, **90 L drawer fridge** under it, **sink in the corner**, oven and pump under |
+| Galley leaf | **600 × 450** at 900 | pulls up over the shoe locker |
 | **Galley, return** — down the driver wall | **180 × 600**, worktop 900 | free counter, the drainer end |
 | Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
 | **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — tins, jars, dry goods, one bottle deep |
@@ -127,15 +133,21 @@ moves aft into a nook between the larder and the bed.
 - **The seat gets a nook.** Larder on one side, bed bench on the other, window at your
   shoulder. Better to work in than a corner beside a cooker.
 
-**One top, two floor sockets — there is no separate desk any more.** The dinette table lifts
-off and drops into a second socket in front of the office seat. That deletes the fold-down
-board off the partition, which was one more mechanism to build and would now be nowhere near
-the seat anyway.
+**The office table is its own board, not the dinette top moved forward.** 400 × 360, hinged on
+the larder's aft face at **745**, folding flat down the larder when you want out of the seat.
+Sharing one top with the dinette meant carrying it the length of the van twice a day and a
+pedestal with three clamp positions; a small dedicated board is less of everything.
 
 | | |
 |---|---|
-| Aft socket, in the corridor | table at **700** — dinette, benches both sides |
-| Forward socket, in the aisle | table at **745** — desk, 270 of thigh clearance over the 450 seat |
+| Office table | **400 × 360** at 745, off the larder — 270 of thigh clearance over the 450 seat |
+| Dinette table | **900 × 512** at 700 in the corridor, dropping to 450 as the bed's centre panel |
+| **Galley leaf** | **600 × 450** at 900, pulling up over the shoe locker — prep space right at the door |
+
+**The galley leaf crosses the cab pass-through when it is up.** The pass-through sits over the
+shoe locker and the leaf lands at 900, straight through it. Same trade v2's worktop leaf made
+against the sliding door: it is only while you are actually cooking, and it folds in a second.
+Worth feeling before it is built.
 | Bed | the aft pedestal drops to **450** and the top becomes the bed's centre panel |
 | At the desk | the top overhangs the bed bench by 70 mm — 275 mm above it, so it clears |
 
@@ -261,16 +273,18 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
    (knees land inside the same 450) and gives a far better chair for an eight-hour day. The
    blockers are the handbrake lever (lowering kit) and an open driver-side partition. **Worth
    answering when the van is chosen: lever or electronic parking brake?**
-9. **The oven's quarter turn is a guess.** `YAW_V3` turns it 90° so its door faces the aisle
-   rather than the bulkhead; 90 against 270 was not something the box list could settle. Check
-   it in the viewer, and `props.py face` is there to correct it.
+9. **The sink is a placeholder.** Cut down to **340 × 560** — smaller and narrower than the
+   first draft's 440 × 640 — but no real product chosen yet. The 200 mm of counter it frees
+   between the bowls and the bulkhead is where both taps now stand.
 10. **The fridge prop is a box without a front.** `fridgedrawer` was adopted from trellis on
    its shape error (0.16 against rodin's 0.17), and only afterwards did a geometric probe show
    trellis has no flat drawer front while rodin does. The two tie inside the noise on
    proportions, so rodin is the better mesh and the swap is one command:
    `python props.py pick fridgedrawer rodin`. Written up in
    [doc/README.md](../doc/README.md#the-shape-error-cannot-see-a-missing-feature-2026-09-22).
-11. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
+11. **The galley leaf against the cab pass-through.** Up, the leaf crosses it. Decide whether
+   that matters or whether the leaf should stop at the locker's own width.
+12. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
 
 **The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1881 and the
 viewer stretches a mesh to fill its box, so any door leaf becomes a flat slab — which is what

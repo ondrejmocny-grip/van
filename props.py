@@ -172,6 +172,16 @@ PROMPTS = {
                      "handle across the full width of the drawer front near its top, and a "
                      "narrow vent grille along the very bottom. Nothing is open, nothing "
                      "sticks out, nothing is pulled forward: a closed rectangular cabinet."),
+    # 200 x 600 x 1881: a slab - nine times taller than it is deep, three times taller than
+    # it is wide. Closed, per the fridge lesson above: nothing sticking out of the box.
+    "LARDER": ("A tall narrow campervan larder cupboard standing on its own with everything "
+               "CLOSED: a slim upright birch plywood cabinet, more than nine times taller "
+               "than it is deep and three times taller than it is wide, a tall flat slab of a "
+               "cupboard only as deep as a tin is wide. One full-height matte off-white door "
+               "fills the entire front, set apart by a narrow shadow gap running round it, "
+               "with a slim vertical brushed brass bar handle down one long edge. Flat top, "
+               "flat sides, flat front, standing on the floor. Nothing open, nothing pulled "
+               "out, nothing sticking out of the slab."),
     # 40 x 600 x 1881: a plank - three times taller than it is wide and forty times taller
     # than it is thick. A pocket door has a FLUSH pull, never a knob: a handle that stands
     # proud would foul the pocket it slides into
