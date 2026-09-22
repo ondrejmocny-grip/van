@@ -12,7 +12,8 @@ schema only so far.
 bathroom and a full-height closet at the back. Plan only, no 3D yet.
 **[v4](../v4/README.md)** puts the bed back in the middle, fixed and never converted, over a
 full-width garage, with a 500 mm bathroom slot behind it and a real office seat at the front.
-Plan only, no 3D yet.
+**[v5](../v5/README.md)** is v4 with the driver seat swivelled as the office chair — the
+3-seat cab never blocked that, only the passenger side. Both plan only, no 3D yet.
 
 ## Who this is for
 
@@ -25,7 +26,8 @@ Read it before proposing anything.
 |---|---|---|
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
-| [v4](../v4/README.md) | Same van and cab: 500 mm bathroom slot across the whole back, **fixed** 1400 x 1832 crosswise bed over a 1.03 m3 garage that swallows both wheel arches, v2-sized galley, thin larder and a crosswise office seat with a desk folding off the partition | **Plan only, first draft.** The only version with a work seat and a bed never converted. Pays for it: the bathroom is behind the bed, so you cross it to get there. |
+| [v4](../v4/README.md) | Same van and cab: 500 mm bathroom slot across the whole back, **fixed** 1520 x 1832 crosswise bed over a 1.11 m3 garage that swallows both wheel arches, v2-sized galley, thin larder and a 450 x 400 crosswise office seat with a desk folding off the partition | **Plan only, iterating.** The only version with a work seat and a bed never converted, and it gives up nothing to v2 to get them. Pays for it: the bathroom is behind the bed, so you cross it to get there. |
+| [v5](../v5/README.md) | v4 with the **driver seat on a swivel** as the office chair; the bench is deleted and its 450 stays open floor. Driver-side partition opens, passenger side stays closed | **Plan only.** Same geometry as v4, far better chair. Blocked on one fact: lever or electronic parking brake. |
 | [v3](../v3/README.md) | Same van and cab as v2, reversed: full-width front bench with a slide-out platform making a 1520 x 1832 bed across, split galley in the middle, rear bathroom 800 x 1000 beside a full-height 800 x 832 closet, both behind sliding panels | **Plan only, iterating.** Most worktop and the biggest bathroom of the three; costs the rear doors and a daily bed conversion. |
 
 ## References
