@@ -240,28 +240,28 @@ VARIANTS["v3"] = dict(
     out="v3/layout",
     length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
-    title="v3 - VW Crafter L3H3 - front office seat, split convertible bed, rear bathroom + garage",
+    title="v3 - VW Crafter L3H3 - L-galley in the front corner, split convertible bed, rear bathroom",
     viewer_title="Crafter L3H3 v3 Interior",
     stats=["bed 1520 x 1832 across", "corridor 632 to the bathroom", "galley 0.94 m2 = v2",
-           "entry 650", "bathroom 500 x 1232", "garage 500 x 600 full height"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. Partition behind a 3-seat cab at x=0. The bed "
-          "is TWO parallel benches, not a U - the 632 corridor between them runs from the galley "
-          "aisle straight to the bathroom door, and the table in it folds and slides out of the "
-          "way. At night the table drops and the corridor infills to a 1520 x 1832 bed sleeping "
-          "ACROSS. Bathroom is 1232 wide, not full width; the rest of the back is a full-height "
-          "garage loading through the rear door. Estimated +/-50 mm."),
+           "entry 830", "bathroom 500 x 1232", "garage 500 x 600 full height"],
+    note=("Load box 3450 x 1832 x 1881 mm finished. The galley is an L using the corner behind "
+          "the driver: a long leg across the front bulkhead and a short return down the driver "
+          "wall. Then a thin larder, then the office seat, then the bed - so the seat sits in a "
+          "nook between the larder and the bed, and the dinette table lifts across to a second "
+          "floor socket in front of it. The bed is TWO parallel benches; the 632 corridor "
+          "between them runs to the bathroom door. Estimated +/-50 mm."),
     boxes=[
-        (   0,  450, 1432, 1832, "OFFICE SEAT", "450 x 400 - sit crosswise", SOFT),
-        (   0,  450,  600, 1432, "DESK / LEGROOM", "desk folds off the partition at 740", None),
-        ( 450,  650, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
-        ( 650, 1430, 1232, 1832, "SINK", "780 x 600 - two bowls - oven + pump under", GALLEY),
-        (   0,  780,    0,  600, "HOB + FRIDGE", "780 x 600 - induction - 90 L drawer fridge", GALLEY),
-        ( 780, 1430,    0,  600, "ENTRY", "650 clear at the door", None),
-        ( 450, 1430,  600, 1232, "AISLE", "632 wide", None),
+        (   0,  600,  450, 1832, "GALLEY", "600 x 1382 - hob at the door, sink in the corner", GALLEY),
+        ( 600,  780, 1232, 1832, "GALLEY", "180 x 600 - return", GALLEY),
+        (   0,  600,    0,  450, "LOCKER", "shoes - step to the cab", SOFT),
+        ( 780,  980, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
+        ( 980, 1430, 1432, 1832, "OFFICE SEAT", "450 x 400 - legs into the aisle", SOFT),
+        ( 600, 1430,    0,  600, "ENTRY", "830 clear at the door - aisle 632", None),
+        ( 600, 1500,  720, 1232, "TABLE - DESK", "forward socket", None),
         (1430, 2950, 1232, 1832, "BENCH -> BED", "1520 x 600 - batteries + calorifier under", SOFT),
         (1430, 2950,    0,  600, "BENCH -> BED", "1520 x 600 - 118 L fresh tank inboard of the arch", SOFT),
         (1430, 2950,  600, 1232, "CORRIDOR -> BED", "632 wide - to the bathroom", None),
-        (1950, 2850,  660, 1172, "TABLE", "900 x 512 - folds and slides", None),
+        (1950, 2850,  660, 1172, "TABLE", "aft socket - drops to bed level", None),
         (2950, 3450,  600, 1832, "BATHROOM", "1232 wide - pocket door", WET),
         (2950, 3450,    0,  600, "GARAGE", "600 wide - loads from the back", WARM),
     ],

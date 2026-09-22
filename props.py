@@ -154,6 +154,26 @@ PROMPTS = {
                "quick-connect hose fitting sticking straight out of each flat end, and a "
                "printed label band around the middle. A plain sealed cylinder, no housing, "
                "no bowl, no bracket."),
+    # 545 x 545 x 525: a near cube, and the ONE big drawer is the point - v1's 70 L unit is
+    # its own kind, so adopting one never changes the other
+    "fridgedrawer": ("A 90 litre campervan compressor drawer fridge standing on its own: a "
+                     "stainless steel cabinet that is a near cube, exactly as wide as it is "
+                     "deep and only a touch lower than it is wide, its whole front face taken "
+                     "up by ONE single very deep pull-out drawer pulled open a hand's width, "
+                     "one long horizontal brushed steel bar handle running the full width of "
+                     "the drawer front, the white moulded interior just visible in the gap, a "
+                     "narrow vent grille along the bottom. No hinged door, no shelves on the "
+                     "front, one drawer only."),
+    # 40 x 600 x 1881: a plank - three times taller than it is wide and forty times taller
+    # than it is thick. A pocket door has a FLUSH pull, never a knob: a handle that stands
+    # proud would foul the pocket it slides into
+    "doorshut": ("A single tall flat sliding pocket door leaf standing upright on its own: a "
+                 "plain matte off-white rectangular panel, three times taller than it is wide "
+                 "and extremely thin, no thicker than a plank, with dead straight edges and "
+                 "square corners. A small oval recessed FLUSH finger pull is let into the face "
+                 "near one vertical edge at hand height, sunk below the surface. Completely "
+                 "flat otherwise: no frame, no glass, no panels, no hinges, and no handle or "
+                 "knob standing proud of the face."),
     "grey": ("A flat underslung waste water tank: a wide shallow black plastic box with rounded "
              "corners, moulded mounting lugs and a drain valve on one end."),
 }
