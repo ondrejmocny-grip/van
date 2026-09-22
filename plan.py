@@ -247,17 +247,18 @@ VARIANTS["v3"] = dict(
     note=("Load box 3450 x 1832 x 1881 mm finished. The galley is an L using the corner behind "
           "the driver: a long leg across the front bulkhead and a short return down the driver "
           "wall. Then a thin larder, then the office seat, then the bed - so the seat sits in a "
-          "nook between the larder and the bed, and the dinette table lifts across to a second "
-          "floor socket in front of it. The bed is TWO parallel benches; the 632 corridor "
-          "between them runs to the bathroom door. Estimated +/-50 mm."),
+          "nook between the larder and the bed with its own small table folding off the larder. "
+          "A pull-up leaf beside the hob makes prep space over the shoe locker. The bed is TWO "
+          "parallel benches; the 632 corridor between them runs to the bathroom door, and a "
+          "wall closes the bed off from the bathroom and the garage. Estimated +/-50 mm."),
     boxes=[
         (   0,  600,  450, 1832, "GALLEY", "600 x 1382 - hob at the door, sink in the corner", GALLEY),
         ( 600,  780, 1232, 1832, "GALLEY", "180 x 600 - return", GALLEY),
-        (   0,  600,    0,  450, "LOCKER", "shoes - step to the cab", SOFT),
+        (   0,  600,    0,  450, "LOCKER", "shoes - step - leaf over it", SOFT),
         ( 780,  980, 1232, 1832, "LARDER", "200 x 600 - full height", WARM),
         ( 980, 1430, 1432, 1832, "OFFICE SEAT", "450 x 400 - legs into the aisle", SOFT),
+        ( 980, 1380, 1100, 1480, "OFFICE TABLE", "400 x 380 - folds off the larder", None),
         ( 600, 1430,    0,  600, "ENTRY", "830 clear at the door - aisle 632", None),
-        ( 600, 1500,  720, 1232, "TABLE - DESK", "forward socket", None),
         (1430, 2950, 1232, 1832, "BENCH -> BED", "1520 x 600 - batteries + calorifier under", SOFT),
         (1430, 2950,    0,  600, "BENCH -> BED", "1520 x 600 - 118 L fresh tank inboard of the arch", SOFT),
         (1430, 2950,  600, 1232, "CORRIDOR -> BED", "632 wide - to the bathroom", None),

@@ -236,7 +236,7 @@ HEIGHTS_V3 = {
     "BATHROOM": (0, 1881),          # a carcass the viewer ghosts, like v1's wet cubicle
     "GARAGE": (0, 1881),
     "ENTRY": None,
-    "TABLE - DESK": None,
+    "OFFICE TABLE": None,
     "CORRIDOR -> BED": None,
     "TABLE": None,
 }
@@ -251,10 +251,16 @@ EXTRA_V3 = [
     # office seat, 45 mm higher. A lift-off top and two sockets beat a 1850 mm floor track.
     (1950, 2850,  660, 1172,  700,  760, "table"),       # aft socket, dinette height
     (2270, 2530,  786, 1046,    0,  700, "leg"),
-    ( 600, 1500,  720, 1232,  725,  745, "ftable"),      # forward socket, desk height. Its
-                                                         #   aft 70 overhangs the bed bench,
-                                                         #   which is 275 below it
-    ( 920, 1180,  846, 1106,    0,  725, "fleg"),
+    # The office table is its own board now, not the dinette top moved forward: 400 x 380,
+    # hinged on the larder's aft face, folding flat down it when you want out of the seat.
+    ( 980, 1380, 1060, 1420,  725,  745, "otable"),      # out, over the lap - stops 12 short
+                                                         #   of the seat so the folded board
+                                                         #   does not run into its carcass
+    ( 980, 1000, 1060, 1420,  325,  725, "otablep"),     # folded down the larder
+    # A pull-up leaf on the galley's passenger end panel, making prep space over the shoe
+    # locker at worktop height. Up it crosses the cab pass-through; down it hangs flat.
+    (   0,  600,    0,  450,  880,  900, "ltable"),      # up, over the locker
+    (   0,  600,  430,  450,  450,  875, "ltablep"),     # folded down the end panel
     # Overhead lockers. The passenger run starts aft of the sliding door head.
     (   0,  780, 1532, 1832, 1400, 1800, "locker"),      # driver, over the galley
     (1430, 2950, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
@@ -262,8 +268,12 @@ EXTRA_V3 = [
     # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
     # inside the wall - so only the shut position is a box, and it is off by default.
     (2990, 3410,  640, 1792,    0,   60, "tray"),
-    (2950, 3110, 1672, 1832, 1140, 1860, "shower"),      # head and riser, forward wall
+    (2990, 3150, 1672, 1832, 1140, 1860, "shower"),      # head and riser, clear of the wall
     (2950, 2990,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
+    # The wall that closes the bed off from the bathroom and the garage. Full height, with
+    # the 600 doorway left open in it - the doorshut leaf above fills that when it is on.
+    (2950, 2990,    0,  600,    0, 1881, "wall"),
+    (2950, 2990, 1200, 1832,    0, 1881, "wall"),
 ]
 
 APPLIANCES_V3 = [
@@ -276,9 +286,9 @@ APPLIANCES_V3 = [
     ( 120,  470, 1200, 1650,  380,  720, "oven"),        # 20 L mini oven, 450 x 350 x 340
     ( 150,  490, 1490, 1830,   40,  370, "plumbing"),    # pump and trap, under the bowls
     ( 200,  460, 1680, 1740,  420,  480, "filter"),      # 2 x 10 inch inline carbon block
-    (  40,  140, 1350, 1540,  905, 1185, "tap"),         # mixer on the deck, against the
-                                                         #   partition behind the bowls
-    (  40,   90, 1600, 1720,  905, 1155, "filtertap"),   # drinking gooseneck beside it
+    (  60,  160, 1400, 1590,  905, 1185, "tap"),         # mixer on the 200 of counter between
+                                                         #   the bowls and the bulkhead
+    (  60,  110, 1650, 1770,  905, 1155, "filtertap"),   # drinking gooseneck beside it
     # bathroom - the WC stays put, no sliding drawer. 420 x 570 against the driver wall
     # leaves 662 of knee room across the room, which is what the 1232 width buys.
     (2990, 3410, 1262, 1832,   40,  560, "cassette"),
@@ -308,22 +318,33 @@ SITTER_V3 = [
 ]
 
 FACING_V3 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
-# v3's galley crosses the bulkhead instead of running along a wall, so its under-counter kit
-# is rotated a quarter turn from the box every existing mesh was made for. The oven is the
-# one where it shows - a door facing the wall instead of the aisle.
-YAW_V3 = {"oven": 90}
+# v3's galley crosses the bulkhead instead of running along a wall, so its kit is a quarter
+# turn from the box every existing mesh was made for. These are the turns Ondrej read off the
+# viewer, added to whatever yaw.json and FACING already apply.
+#
+# Sign: the viewer does rotation.y with world X = van length and world Z = van width, so +90
+# takes van +x to van -y - COUNTER-CLOCKWISE seen from above, which is how the plan is drawn.
+# Clockwise is therefore 270.
+YAW_V3 = {
+    "LOCKER": 270,          # 90 cw
+    "hob": 90,              # 90 ccw, on top of yaw.json 270 + the 180 FACING adds
+    "fridgedrawer": 90,     # 90 ccw, from nothing
+    "oven": 270,            # 180 on top of the 90 quarter turn the bulkhead run needs
+}
 
 LAYERS_V3 = [
     {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
      "hide": ["table", "leg"]},
     {"id": "door", "label": "Bathroom door shut", "kinds": ["doorshut"], "on": False},
-    {"id": "desk", "label": "Table at the desk", "kinds": ["ftable", "fleg"], "on": False,
-     "hide": ["table", "leg"]},
+    {"id": "otable", "label": "Office table out", "kinds": ["otable"], "on": False,
+     "hide": ["otablep"]},
+    {"id": "leaf", "label": "Galley leaf up", "kinds": ["ltable"], "on": False,
+     "hide": ["ltablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V3}),
      "on": True, "xray": True},
     {"id": "body", "label": "Body + glass",
-     "kinds": ["shell", "glass", "floor", "wheel", "partition", "hatch"], "on": True},
+     "kinds": ["shell", "glass", "floor", "wheel", "partition", "hatch", "wall"], "on": True},
     {"id": "cab", "label": "Cab + seats", "kinds": ["cab", "seat", "dash"], "on": True},
     {"id": "props", "label": "Detailed props", "kinds": [], "on": True, "props": True},
     {"id": "schema", "label": "Schema overlay", "kinds": [], "on": False, "schema": True},
@@ -361,7 +382,9 @@ NAMES = {
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
     "OFFICE SEAT": "Office seat", "LARDER": "Larder",
     "BENCH -> BED": "Bench / bed", "BATHROOM": "Bathroom", "GARAGE": "Garage, full height",
-    "doorshut": "Bathroom door, shut",
+    "doorshut": "Bathroom door, shut", "wall": "Bathroom / garage wall",
+    "otable": "Office table", "otablep": "Office table, folded",
+    "ltable": "Galley leaf, up", "ltablep": "Galley leaf, folded",
     "fridgedrawer": "Fridge 90 L drawer",
     "partition": "Partition wall", "hatch": "Cassette hatch",
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
@@ -417,7 +440,8 @@ KIND = {          # plan label or extra kind -> colour
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "OFFICE SEAT": "#d8cfe2", "LARDER": "#e6dcc6",
     "BENCH -> BED": "#d8cfe2", "BATHROOM": "#bcd6e6", "GARAGE": "#e6dcc6",
-    "doorshut": "#d9d4c8", "fridgedrawer": "#cfe4c9",
+    "doorshut": "#d9d4c8", "wall": "#d9d4c8", "fridgedrawer": "#cfe4c9",
+    "otable": "#d9b98a", "otablep": "#d9b98a", "ltable": "#d9b98a", "ltablep": "#d9b98a",
     "ftablep": "#d9b98a", "farm": "#9a9287",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2",
@@ -562,8 +586,10 @@ def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30, axis="x"):
 # hard against the wardrobe at x 1150, which leaves the 200 mm aft of it as free counter
 EXTRA_V2 += sink_wells(1150, 1730, 1440, 1800, 750, 905)
 # v3: in the corner behind the driver, bowls side by side ACROSS the van - the run crosses
-# the bulkhead, so the axis that holds two bowls is y, not x
-EXTRA_V3 += sink_wells(140, 580, 1190, 1830, 750, 905, axis="y")
+# the bulkhead, so the axis that holds two bowls is y, not x. Cut down to 340 x 560 from
+# 440 x 640 - a smaller, narrower unit, product still to be found. The 200 mm of counter it
+# frees between the bowls and the bulkhead is where the taps stand.
+EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 
 
 def shell_for(v):
