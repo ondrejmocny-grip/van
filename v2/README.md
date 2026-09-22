@@ -53,6 +53,20 @@ aisle, rear U-dinette. See [ref/doracamper-brisa-ducato-l2h2](../ref/doracamper-
 - **The WC left the shower floor.** It stows under the wardrobe and slides forward into the
   shower only when needed — Scarlet & Seth's trick, adapted to a cassette.
 
+## The dinette table, sized for two laptops
+
+Two people opposite each other, offset, each with a laptop and a mouse:
+
+| | |
+|---|---|
+| One station | 16" laptop 355 × 248 + mouse pad 200 × 180 + 60 forearm = **575 wide × 308 deep** |
+| Head-on, two of them | needs 616 of depth; the van gives **632** — they fit, with the screens touching |
+| Offset | two stations need 1150 of length; the table gives 900, so they **overlap by 230** and work diagonally |
+| Table | **900 × 600** at 760, 240 over the 520 cushion |
+
+It is a slide, so the 900 is the fully-out position — pull it less when only one of you is
+working and the aisle stays clearer.
+
 ## The front corner, and the worktop leaf
 
 No office here any more. What is left is a shoe locker, the step through to the cab, and
@@ -174,11 +188,32 @@ What this buys:
 Hanging length above the WC is about **1281 mm** — fine for shirts and jackets, not for a
 full-length coat.
 
+## The rear: a deck at table height, with everything sliding out of it
+
+Changed 2026-09-22. The bed is no longer the seating dropped flat. **The garage deck is the
+bed base**, fixed at 760 — table height — and two things slide forward out of it: the table,
+and the panel that finishes the bed.
+
+| | |
+|---|---|
+| Fixed deck | x 2550–3450, **900 deep**, full width, top at **760** |
+| Garage under it | **900 × 1832 × 720 clear = 1.19 m³** (was 600 × 1832 × 400 = 0.44 m³) |
+| Bed slide | **620 × 1832** panel, pulls forward over the benches |
+| Bed made up | 900 fixed + 620 slide = **1520 × 1832 at 760** |
+| Table | **900 × 600** at 760, its own slide out of the same deck |
+| Benches | **620 long** now, tops at 450 / 520 |
+| Sitting headroom over the bed | 1881 − 760 − 100 mattress = **1021** |
+
+**Why 900 and 620 and not something rounder:** a slide can only be as deep as the box it
+stores in. The bed is 1520, so the fixed deck and the slide have to add up to that, and the
+slide must not be longer than the deck. 900 + 620 is the split that also lets a 900 mm table
+store away completely.
+
 ## The bed sleeps across the van
 
 | | |
 |---|---|
-| Platform | **1520 fore-aft × 1832 across** |
+| Platform | **1520 fore-aft × 1832 across**, at **760** on the deck |
 | Body length | across the van: **1832 gross, ~1760 after the wall build** |
 | Sleeping width | **760 each** for two · **507 each** for three |
 
@@ -201,10 +236,10 @@ side walls. Recovers 40–60 mm, takes it to ~1810, no holes in the body.
 | Galley — sink side (driver) | **780 × 600**, worktop 900 | double sink 580 × 360 at the wardrobe, **200 prep** aft; 20 L oven at the aisle edge, pump behind it |
 | Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 forward beside the leaf, **480 prep** aft; **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
-| Bench, driver | **920 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |
-| Bench, passenger | **920 × 600 × 450** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
-| Table → bed | **920 × 632** infill | |
-| **Rear bench / garage** | **600 × 1832 × 450**, ~400 clear | calorifier, electrics board |
+| Bench, driver | **620 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |
+| Bench, passenger | **620 × 600 × 450** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running under the deck |
+| Table | **900 × 600** at 760 | slides out of the deck, between the benches |
+| **Garage + bed base** | **900 × 1832**, deck at 760, **720 clear** | calorifier, electrics board, and the bed slide stored in it |
 | **Bed made up** | **1520 × 1832** | 2 at 760 each, or 3 at 507 |
 
 Driver side adds up: shower 700 + wardrobe 450 + sink 780 = **1930**, then the bed.
@@ -255,7 +290,9 @@ sitting over the same arch.
 | Corridor past the cubicle | 532 | none | gone |
 | Entry gap at the slider | 1300 | **690** | −610 |
 | Bench storage | 0.89 m² | 2 × 920 × 600 = **1.10 m²** | +24% |
-| **Garage** | 450 × 1832 = 0.82 m² | **600 × 1832 = 1.10 m²** | **+33%** |
+| **Garage** | 450 × 1832 × 400 = 0.33 m³ | **900 × 1832 × 720 = 1.19 m³** | **+261%** |
+| Dinette table | 1130 × 700 | **900 × 600**, slides out | two laptops, offset |
+| Dinette seats | 4 | **2** — the rear bench became the deck | −2 |
 | Travelling seats | 2 | **3** | +1 |
 
 ## Open on v2
@@ -273,6 +310,13 @@ sitting over the same arch.
 8. **Bowls at 239 × 304 vs prep at 200 mm.** A 660-wide top would give 279 × 304 bowls and
    drop the prep strip to 120. Decide with a dinner plate and a washing-up bowl in hand.
 9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
+10. **The table fully out reaches 280 mm forward of the benches**, at 760, into the galley
+    aisle. Nobody walks past a deployed dinette table anyway, but it is 280 mm of head-height
+    obstruction in the walkway — feel it before building.
+11. **The dinette now seats two, not four.** The rear bench became the 760 deck, so there is
+    no third side to sit on. Fine for us; worth knowing before guests.
+12. **A 900 mm cantilever needs real slides.** Full-extension runners, 45 kg class, for both
+    the table and the bed panel.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

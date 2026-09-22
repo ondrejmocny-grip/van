@@ -100,7 +100,7 @@ HEIGHTS_V2 = {
     "SINK": (0, 900),
     "HOB": (0, 900),
     "BENCH": (0, 450),
-    "REAR BENCH": (0, 450),
+    "GARAGE": (0, 760),         # the bed base: a deck at table height, garage under it
     "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
     "ENTRY": None,
     "AISLE": None,
@@ -108,13 +108,15 @@ HEIGHTS_V2 = {
 }
 
 EXTRA_V2 = [
-    # the U made up as a bed: 1520 fore-aft across the full 1832
-    (1930, 2850,    0,  600,  450,  520, "bed"),
-    (1930, 2850, 1232, 1832,  450,  520, "bed"),
-    (2850, 3450,    0, 1832,  450,  520, "bed"),
-    (1930, 2850,  600, 1232,  450,  520, "infill"),
-    (2150, 2750,  616, 1216,  700,  760, "table"),      # dinette table, drops to the infill
-    (2320, 2580,  786, 1046,    0,  700, "leg"),
+    # The bed is no longer the seating dropped flat. The garage's deck IS the bed base, at
+    # table height, and a panel slides forward out of it over the benches to finish the bed:
+    # 900 of fixed deck plus 620 of slide makes the same 1520. A slide can only be as deep
+    # as the box it stores in, which is what sets the 900/620 split and the bench length.
+    (1930, 2550,    0,  600,  450,  520, "bed"),        # seat cushion, passenger side
+    (1930, 2550, 1232, 1832,  450,  520, "bed"),        # seat cushion, driver side
+    (1650, 2550,  616, 1216,  700,  760, "table"),      # 900 x 600, slides out of the deck
+    (1930, 2550,    0, 1832,  700,  760, "bedslide"),   # the bed panel, pulled forward
+    (1930, 3450,    0, 1832,  760,  860, "mattress"),   # made up: 1520 x 1832 at 760
     # The galley worktop carries on forward as a fold-down leaf, hinged on the hob unit's
     # front face at worktop height. This used to be an office table at 760 on a swing arm;
     # the office is gone, so it is 900 like the rest of the kitchen and it is prep space.
@@ -174,11 +176,11 @@ APPLIANCES_V2 = [
     # electrics, driver bench - 16 mm inboard of the tyre, which is what sets y here
     (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
     (2340, 2540, 1240, 1590,   30,  270, "battery"),
-    (2100, 2570, 1300, 1580,  270,  450, "inverter"),   # 3000 W, on a shelf over the cells
+    (2080, 2550, 1300, 1580,  270,  450, "inverter"),   # 3000 W, on a shelf over the cells
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH")
+CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "GARAGE")
 
 # Where a person actually is when they perch on the shoe locker to put boots on: facing
 # aft, knees down, feet on the floor in front of it. Furniture is checked against this the
@@ -202,8 +204,8 @@ FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p
 # The viewer's Show buttons. v2 groups different things from v1, so it carries its own list;
 # a variant without one gets the template's default.
 LAYERS_V2 = [
-    {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
-     "hide": ["table", "leg"]},
+    {"id": "bed", "label": "Bed made up", "kinds": ["bedslide", "mattress"], "on": False,
+     "hide": ["table"]},
     {"id": "wet", "label": "Shower + wardrobe",
      "kinds": ["wetwall", "tray", "screen", "shower", "WARDROBE"], "on": True},
     {"id": "worktop", "label": "Worktop leaf out", "kinds": ["ftable", "farm"], "on": False,
@@ -387,7 +389,8 @@ NAMES = {
     "fridgedrawer": "Fridge 90 L drawer",
     "partition": "Partition wall", "hatch": "Cassette hatch",
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
-    "BENCH": "Bench", "REAR BENCH": "Rear bench / garage", "bed": "Seat cushion", "infill": "Bed infill",
+    "BENCH": "Bench", "REAR BENCH": "Rear bench / garage",
+    "GARAGE": "Garage + bed base", "bedslide": "Bed slide-out", "mattress": "Mattress", "bed": "Seat cushion", "infill": "Bed infill",
     "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
     "leg": "Table post", "shower": "Shower head",
     "ftable": "Worktop leaf", "fleg": "Front table post",
@@ -443,7 +446,8 @@ KIND = {          # plan label or extra kind -> colour
     "otable": "#d9b98a", "otablep": "#d9b98a", "ltable": "#d9b98a", "ltablep": "#d9b98a",
     "ftablep": "#d9b98a", "farm": "#9a9287",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
-    "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2",
+    "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2", "GARAGE": "#d8cfe2",
+    "bedslide": "#e3dfe9", "mattress": "#eceaf1",
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "locker": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",

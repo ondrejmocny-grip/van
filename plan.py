@@ -206,11 +206,12 @@ VARIANTS["v2"] = dict(
     cab=800,
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
-    stats=["bed 1520 x 1832 across", "locker 400 x 450", "galley aisle 632",
-           "entry gap 690", "garage 600 x 1832", "standing 1881"],
+    stats=["bed 1520 x 1832 at 760", "table 900 x 600", "locker 400 x 450",
+           "galley aisle 632", "entry gap 690", "garage 700 clear", "standing 1881"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
           "pass-through beside the shoe locker. Bed sleeps ACROSS: 1832 gross, ~1760 after the "
-          "wall build. WC stows under the wardrobe and slides forward into the shower, cassette "
+          "wall build, at 760 over a full-height garage: the bed panel and the table both slide "
+          "out of it. WC stows under the wardrobe and slides forward into the shower, cassette "
           "out through the driver-side panel. The U is one carcass, so the fresh tank runs "
           "the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm."),
     boxes=[
@@ -222,10 +223,10 @@ VARIANTS["v2"] = dict(
         (1150, 1930, 1232, 1832, "SINK", "780 x 600 - sink at the wardrobe, 200 prep aft", GALLEY),
         (1150, 1930,    0,  600, "HOB", "780 x 600 - hob forward, 480 prep aft", GALLEY),
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
-        (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
-        (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),
-        (1930, 2850,  600, 1232, "TABLE -> BED", "bed 1520 x 1832, sleeps across", SOFT),
-        (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage, tank runs in", SOFT),
+        (1930, 2550, 1232, 1832, "BENCH", "620 x 600 - battery + inverter", SOFT),
+        (1930, 2550,    0,  600, "BENCH", "620 x 600 - 118 L tank inboard of arch", SOFT),
+        (1930, 2550,  600, 1232, "TABLE -> BED", "900 x 600 table slides out at 760", SOFT),
+        (2550, 3450,    0, 1832, "GARAGE", "900 x 1832 - 700 clear - bed base at 760", SOFT),
     ],
 )
 
