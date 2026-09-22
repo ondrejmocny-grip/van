@@ -2,7 +2,6 @@
   "LOCKER": 0,
   "WARDROBE": 180,
   "battery": 90,
-  "bowl": 90,
   "calorifier": 90,
   "cassette": 270,
   "electrics": 180,
@@ -18,5 +17,6 @@
   "oven": 180,
   "shower": 90,
   "sink": 180,
-  "table": 0
+  "table": 0,
+  "tap": 180
 }

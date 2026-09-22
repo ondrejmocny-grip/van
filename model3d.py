@@ -147,20 +147,22 @@ APPLIANCES_V2 = [
                                                         #   of the cabinet, not buried at the back
     (1180, 1520, 1480, 1820,   40,  370, "plumbing"),   # pump, filter and trap under the sink,
                                                         #   behind the oven - shortest run to the tap
-    # Two bowls: wash in detergent on the left, rinse on the right. 640 of the 780 run, which
-    # leaves 70 mm of counter at each end - the prep space is the hob side and the leaf.
-    (1220, 1560, 1400, 1740,  750, 1200, "sink"),       # wash bowl 340 x 340, mixer tap above
-    (1600, 1860, 1400, 1740,  750,  900, "bowl"),       # rinse bowl 260 x 340, 150 deep
+    # The double sink is BUILT, in sink_wells() below - a generated mesh of it came back a
+    # solid block. 780 mm of run cannot hold two bowls AND a prep area in the middle, so the
+    # bowls sit hard against the wardrobe and the free counter is all in one piece aft.
+    (1300, 1400, 1640, 1830,  905, 1185, "tap"),        # mixer on the deck behind the bowls:
+                                                        #   100 across the lever, 190 of reach
     # Drinking water on its own path: a dedicated gooseneck beside the mixer, fed through an
     # inline carbon block teed off the cold line after the pump. Inline rather than a sump
     # housing because there is only 380 mm under the bowls and a sump needs ~400 to drop the
     # cartridge out; an inline cartridge is swapped by pulling its two hose fittings and can
     # lie on its side.
-    (1620, 1670, 1650, 1820,  900, 1150, "filtertap"),  # gooseneck, 250 above the worktop,
-                                                        #   its spout reaching over the bowl
+    (1440, 1490, 1700, 1820,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
     (1600, 1860, 1700, 1760,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - hob over the fridge
-    (1300, 1600,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
+    (1150, 1450,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520,
+                                                        #   hard against the forward end, so the
+                                                        #   480 aft of it is one clear run
     (1250, 1780,   30,  575,   60,  680, "fridgedoor"), # 90 L hinged door, 530 x 545 x 620,
                                                         #   still 83 mm clear of the wheel arch
     # bathroom - the WC lives in the wardrobe base and slides into the shower
@@ -225,7 +227,7 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
 INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calorifier",
-            "bowl", "filter",
+            "filter",
             "battery", "inverter", "electrics")
 
 # What each kind is called, for the viewer key and the dimension labels.
@@ -241,7 +243,7 @@ NAMES = {
     "ftable": "Worktop leaf", "fleg": "Front table post",
     "ftablep": "Worktop leaf, folded", "farm": "Leaf bracket",
     "oven": "Mini oven 20 L", "hob": "Induction hob, 2 zone",
-    "sink": "Wash bowl + mixer tap", "bowl": "Rinse bowl",
+    "sink": "Sink", "sinkrim": "Sink deck", "bowl": "Sink bowl", "tap": "Mixer tap",
     "filtertap": "Drinking tap, filtered", "filter": "Carbon block, inline",
     "plumbing": "Pump, filter, trap", "cassette": "Cassette WC",
     "fridge": "Fridge 70 L", "fridgedoor": "Fridge 90 L, hinged door",
@@ -293,8 +295,8 @@ KIND = {          # plan label or extra kind -> colour
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
-    "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
-    "fridgedoor": "#cfe4c9", "bowl": "#b6bcbe", "filter": "#7fb2cf", "filtertap": "#b6bcbe",
+    "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
+    "fridgedoor": "#cfe4c9", "filter": "#7fb2cf", "filtertap": "#b6bcbe", "tap": "#b6bcbe",
     "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
     "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
 }
@@ -383,6 +385,34 @@ def subtract(rect, holes):
             nxt.extend(_sub(r, h))
         rects = nxt
     return rects
+
+
+def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30):
+    """A double-bowl inset sink, built out of boxes rather than generated.
+
+    Image-to-3D gave a clean double sink at 0.06 shape error and it rendered as a solid
+    block: 4000 faces is not enough to keep a recess, and a sink IS its recess. Same verdict
+    as the shower cubicle - products get meshes, hollow things get built. Here that is a deck
+    with two rectangular holes in it (the same subtract() the body panels use), and a
+    five-sided well hanging under each hole.
+    """
+    deck = z1 - 10
+    ix0, ix1, iy0, iy1 = x0 + rim, x1 - rim, y0 + rim, y1 - rim
+    mid = (ix0 + ix1) / 2.0
+    bowls = [(ix0, mid - gap / 2.0, iy0, iy1), (mid + gap / 2.0, ix1, iy0, iy1)]
+    out = [(a0, a1, b0, b1, deck, z1, "sinkrim")
+           for a0, a1, b0, b1 in subtract((x0, x1, y0, y1), bowls)]
+    for bx0, bx1, by0, by1 in bowls:
+        out.append((bx0, bx1, by0, by1, z0, z0 + wall, "bowl"))            # bottom
+        out.append((bx0, bx1, by0, by0 + wall, z0, deck, "bowl"))          # aisle side
+        out.append((bx0, bx1, by1 - wall, by1, z0, deck, "bowl"))          # wall side
+        out.append((bx0, bx0 + wall, by0, by1, z0, deck, "bowl"))          # forward end
+        out.append((bx1 - wall, bx1, by0, by1, z0, deck, "bowl"))          # aft end
+    return out
+
+
+# hard against the wardrobe at x 1150, which leaves the 200 mm aft of it as free counter
+EXTRA_V2 += sink_wells(1150, 1730, 1440, 1800, 750, 905)
 
 
 def shell_for(v):

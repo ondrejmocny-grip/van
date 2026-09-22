@@ -34,14 +34,19 @@ PROMPTS = {
                  "upper right, a swivel bowl, standing on the floor as a single free-standing "
                  "unit."),
     # the box is bowl plus tap, 400 x 340 x 450 - the bowl hangs under the counter and the
-    # tap stands 300 above it, so the whole thing is a little taller than it is wide
+    # tap stands 300 above it, so the whole thing is a little taller than it is wide. This is
+    # v1's single sink; v2's double is its own kind, so adopting one never changes the other
     "sink": ("A rectangular stainless steel inset kitchen sink with its mixer tap: a single "
              "shallow pressed bowl with rounded corners and a narrow flat rim, and a tall "
              "slender chrome mixer tap rising from the rim behind the bowl, its spout curving "
              "forward over the bowl, one lever handle on the tap body, all one assembly in "
              "brushed steel and chrome."),
-    # a 15 mm sheet of glass has no geometry to speak of, so the prompt asks for the parts
-    # that do stand proud: recessed wells, a raised control strip, knobs
+    # 60 x 120 x 280: the spout reaches forward about half the height, the body is slim
+    "tap": ("A polished chrome kitchen mixer tap standing on its own: a slim cylindrical body "
+            "rising from a round base, five times taller than the body is wide, one lever "
+            "handle on the side of the body, and a spout that curves forward and down from "
+            "the top, reaching forward about half as far as the tap is tall. Nothing else "
+            "around it."),
     "hob": ("A two-zone domino induction hob, photographed on its own: a black glass rectangle "
             "twice as long as it is deep, its two cooking zones formed as shallow circular "
             "wells recessed into the glass with raised chrome trim rings around them, a raised "
@@ -137,13 +142,6 @@ PROMPTS = {
                  "third is a separate empty compartment standing wide open at the front, its "
                  "flat plywood floor and side panels visible, nothing inside it. A horizontal "
                  "plywood shelf divides the two."),
-    # 260 x 340 x 150: a third longer across than it is fore-aft, and only half as deep as
-    # it is wide - every model draws a deep square butler sink unless that is spelt out
-    "bowl": ("A small rectangular stainless steel sink bowl on its own, with no tap: a "
-             "shallow pressed basin a third longer one way than the other and only half as "
-             "deep as it is wide, straight sides with softly rounded internal corners, a flat "
-             "bottom with one round drain hole in the middle, a narrow flat rim running all "
-             "round the top edge, brushed stainless steel."),
     # 50 x 50 x 250: five times taller than it is wide, and nothing else
     "filtertap": ("A small polished chrome gooseneck drinking water faucet standing on its "
                   "own: a slim vertical cylindrical column five times taller than it is wide, "
