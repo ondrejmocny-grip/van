@@ -17,5 +17,7 @@
   "oven": 180,
   "shower": 90,
   "sink": 180,
-  "table": 0
+  "sinkdouble": 0,
+  "table": 0,
+  "tap": 180
 }

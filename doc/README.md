@@ -367,12 +367,24 @@ which way a generated mesh faces is a coin toss the box list should not be losin
 get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void in
 `HEIGHTS_V2`.
 
+**The double sink, 2026-09-22.** `sinkdouble` (hunyuan 0.06) is one pressed top with two
+bowls and a tap deck, drawn from a reference photo Ondrej sent; `tap` (rodin 0.00) is the
+mixer that stands on it. v2's double sink is **its own kind**, because `box_of()` takes the
+largest box of any variant: written as `sink` it would have been scored against v1's single
+bowl, and adopting it would have put a double sink with no tap into v1. The separate rinse
+bowl prop is gone - one inset top is what a real sink is.
+
 **Three more for the sink, 2026-09-21:** `bowl` (hunyuan 0.07), `filtertap` (rodin) and
 `filter` (trellis 0.03). The tap scored 0.37 against its box and the mesh was not the
 problem - **the box was**: a gooseneck reaches sideways about two thirds of its height, and
 the box had been drawn as a 50 x 50 stick. Widening it to the tap's real footprint,
 50 x 170 x 250, took the error to 0.11 without touching the mesh. When one prop scores badly
 and all three models agree on the shape, suspect the box before the generator.
+
+It happened twice more the same day. The double sink's mixer scored 0.21-0.26 on all three
+models against a 60 x 120 box; a mixer with a lever handle is about 100 across and reaches
+190 forward at 280 tall, and with the box drawn that way rodin came out at **0.00**. Three
+models agreeing on a shape is evidence about the box, not about the generator.
 
 A prop with no opening has no "face" to measure, so the direction is read from where its
 mass sits: the top fifth of the tap mesh leans toward mesh +Z, which the viewer sends to

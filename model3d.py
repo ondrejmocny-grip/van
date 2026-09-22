@@ -152,7 +152,8 @@ APPLIANCES_V2 = [
     # two bowls AND a prep area in the middle; putting the bowls at one end is what buys the
     # strip back.
     (1350, 1930, 1440, 1800,  750,  905, "sinkdouble"), # 580 x 360 inset top, rim 5 proud
-    (1440, 1500, 1700, 1820,  905, 1185, "tap"),        # mixer, on the deck behind the bowls
+    (1420, 1520, 1640, 1830,  905, 1185, "tap"),        # mixer on the deck behind the bowls:
+                                                        #   100 across the lever, 190 of reach
     # Drinking water on its own path: a dedicated gooseneck beside the mixer, fed through an
     # inline carbon block teed off the cold line after the pump. Inline rather than a sump
     # housing because there is only 380 mm under the bowls and a sump needs ~400 to drop the
