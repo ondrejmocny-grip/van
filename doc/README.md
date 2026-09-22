@@ -8,7 +8,7 @@ Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 **[v1](../v1/README.md)** is drawn - plan, elevations and sections.
 **[v2](../v2/README.md)** is being drawn on a **Crafter L3H3 with a 3-seat cab** -
 schema only so far.
-**[v3](../v3/README.md)** turns v2 around: bed at the front as a convertible L-sofa,
+**[v3](../v3/README.md)** turns v2 around: bed at the front on a slide-out platform,
 bathroom and a full-height closet at the back. Plan only, no 3D yet.
 
 ## Who this is for
@@ -22,7 +22,7 @@ Read it before proposing anything.
 |---|---|---|
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
-| [v3](../v3/README.md) | Same van and cab as v2, reversed: front L-sofa converting to an 1800 x 1400 bed along the van, split galley in the middle, rear bathroom 800 x 1000 beside a full-height 800 x 832 closet | **Plan only, first draft.** Sleeps longest of the three; costs the rear doors and a narrow night walkway. |
+| [v3](../v3/README.md) | Same van and cab as v2, reversed: full-width front bench with a slide-out platform making a 1520 x 1832 bed across, split galley in the middle, rear bathroom 800 x 1000 beside a full-height 800 x 832 closet, both behind sliding panels | **Plan only, iterating.** Most worktop and the biggest bathroom of the three; costs the rear doors and a daily bed conversion. |
 
 ## References
 
