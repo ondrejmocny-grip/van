@@ -240,26 +240,25 @@ VARIANTS["v3"] = dict(
     out="v3/layout",
     length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
-    title="v3 - VW Crafter L3H3 - front L-sofa bed, split galley, rear bathroom + closet",
+    title="v3 - VW Crafter L3H3 - front slide-out bed across, split galley, rear bathroom + closet",
     viewer_title="Crafter L3H3 v3 Interior",
-    stats=["bed 1800 x 1400 fore-aft", "L-sofa 1800 + 600", "galley aisle 632",
-           "entry 700 by day", "bathroom 800 x 1000", "closet 800 x 832 full height"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. Partition behind a 3-seat cab at x=0, "
-          "pass-through over the shoe locker. L-sofa on the driver side and the bulkhead "
-          "converts to an 1800 x 1400 bed sleeping FORE-AFT; the passenger strip y 0-432 "
-          "stays walkable at night, which is what keeps the rear bathroom reachable. "
-          "Fresh tank under the front sofa - no wheel arch there, so a plain rectangular "
-          "tank. Estimated +/-50 mm."),
+    stats=["bed 1520 x 1832 across", "slide-out 760 deep", "entry 840", "galley aisle 632",
+           "worktop 1.31 m2", "bathroom 800 x 1000", "closet 800 x 832 full height"],
+    note=("Load box 3450 x 1832 x 1881 mm finished. Partition behind a 3-seat cab at x=0; the "
+          "full-width front bench is the step through it. The bench holds a slide-out platform "
+          "that pulls 760 aft and makes an 1520 x 1832 bed sleeping ACROSS. Day: the platform is "
+          "in and the floor x 760-1520 is walkable full width. The table is a lift-off pedestal, "
+          "not part of the bed. Rear bathroom opens through a sliding panel on a track running "
+          "the whole rear face. Estimated +/-50 mm."),
     boxes=[
-        (   0,  400,    0,  700, "LOCKER", "shoes - step to the cab", SOFT),
-        (   0, 1800, 1232, 1832, "SOFA -> BED", "1800 x 600 - 118 L fresh tank under", SOFT),
-        (   0,  600,  700, 1232, "SOFA", "600 x 532 - batteries", SOFT),
-        ( 600, 1600,  700, 1232, "TABLE -> BED", "1000 x 532 - drops to 450", SOFT),
-        ( 400, 1600,    0,  700, "ENTRY", "700 clear by day - 432 at night, bed boards in", None),
+        (   0,  760,    0, 1832, "SOFA -> BED", "760 x 1832 - slide-out + 120 L tank under", SOFT),
+        ( 760, 1520, 1232, 1832, "SOFA", "760 x 600 - batteries", SOFT),
+        ( 760, 1520,    0, 1232, "SLIDE-OUT", "760 x 1232 - floor by day, bed at night", None),
+        ( 860, 1460,  560, 1220, "TABLE", "600 x 660 - lifts off at night", None),
         (1600, 2650,    0,  600, "HOB + FRIDGE", "1050 x 600 - induction - 70 L drawer over the arch", GALLEY),
-        (1800, 2650, 1232, 1832, "SINK", "850 x 600 - 1.5 bowl - oven + pump under", GALLEY),
-        (1600, 2650,  600, 1232, "AISLE", "632 wide", None),
-        (2650, 3450,  832, 1832, "BATHROOM", "800 x 1000 - sit-down shower + cassette WC", WET),
+        (1520, 2650, 1232, 1832, "SINK", "1130 x 600 - two bowls - oven + pump under", GALLEY),
+        (1520, 2650,  600, 1232, "AISLE", "632 wide", None),
+        (2650, 3450,  832, 1832, "BATHROOM", "800 x 1000 - shower + WC - sliding door", WET),
         (2650, 3450,    0,  832, "GARAGE CLOSET", "800 x 832 - full height - hanging + gear", WARM),
     ],
 )
