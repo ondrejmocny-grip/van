@@ -1,4 +1,4 @@
-# v3 — VW Crafter L3H3, front office seat, split convertible bed, rear bathroom
+# v3 — VW Crafter L3H3, L-galley, split convertible bed, rear bathroom
 
 Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 **Plan and 3D model — iterating.** No photoreal impressions yet.
@@ -7,8 +7,8 @@ Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 
 Regenerate: `python plan.py v3` then `python model3d.py v3`, from the project root.
 
-Same van and cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0). Order from the back:
-**bathroom + garage, bed, galley, office seat.**
+Same van and cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0). Order down the driver
+side, back to front: **bathroom + garage · bed · office seat · larder · galley.**
 
 ## The 3D model
 
@@ -20,10 +20,10 @@ extruded from the box list in `plan.py`, so the model cannot disagree with the d
 |---|---|
 | Bed made up | the corridor infilled to 1520 × 1832; hides the table and its post |
 | Bathroom door shut | the pocket-door leaf out of its pocket, closing the 600 across the corridor |
-| Desk out | the front desk deployed; off, it hangs folded flat down the partition |
+| Table at the desk | the top in its forward socket at 745; off, it is in the corridor at 700 |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
-| Body + glass | panels with real holes: slider, three windows, the cassette hatch, two fans, the partition with its pass-through over the office seat |
+| Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through over the shoe locker |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
 | Schema overlay | the plan itself painted onto the model |
 | Sizes | every block labelled with its name and size in mm |
@@ -42,7 +42,15 @@ clear of its neighbours, and clear of the tyres. Three results worth keeping:
 `check()` also carries **a person sitting crosswise on the office seat** — trunk, thighs,
 shins — and fails the build if any furniture runs through them. That test exists because two
 rounds of v2's office table were drawn with a swing arm through the sitter's chest before it
-was caught by eye. It is why the desk here hinges on the partition instead.
+was caught by eye. It is why the desk here is a top on a floor pedestal instead.
+
+**Two tool changes the L needed.** The galley crosses the bulkhead, so its runs are turned 90°
+from every run v1 and v2 were built on:
+
+- `sink_wells()` gained an **axis**: the two bowls now sit side by side across the van, not
+  along it. Without it a 600 mm-deep counter got two bowls stacked front to back.
+- the registry gained a **yaw** table, a per-variant quarter turn for a prop whose mesh was
+  modelled on a run running the other way. Only the oven needs it today.
 
 **The bathroom is drawn as a carcass the viewer ghosts**, not built from panels the way v2's
 shower was. v2 had a glass screen worth building; here the interesting things are inside —
@@ -50,12 +58,16 @@ the WC, the tray, the shower head — and a pocket door has nothing to draw when
 because the leaf is inside the wall. So the door is one box, in its shut position, off by
 default.
 
-### Two numbers the 3D corrected
+### Three numbers the 3D corrected
 
 - **WC knee room is 662 mm, not 782.** A 420 × 570 cassette against the driver wall leaves
   662 across the room, not the 782 estimated from a shallower pan. Still enough to sit.
-- **The desk top is 740, not 720.** At 720 with a 20 mm top the underside lands at 700, which
-  is only 250 above a 450 seat. 740 gives the 270 of thigh clearance that is the minimum.
+- **The desk height is 745, not 720.** At 720 with a 20 mm top the underside lands at 700,
+  only 250 above a 450 seat. 745 gives the 270 of thigh clearance that is the minimum.
+- **The desk top overhangs the bed bench by 70 mm.** A 900 top in front of the office seat
+  does not fit between the galley and the bench — but at 725 it passes 275 mm over the bench
+  top, so the overhang is free. The first draft had it 70 mm into the galley worktop instead,
+  which the overlap check caught.
 
 ## The shape in one line
 
@@ -92,34 +104,58 @@ lengthwise bench would need 600 deep *and* 450 wide, and cost three times the fl
 Those 450 mm are exactly what buys **v2's bed (1520) and v2's galley (0.94 m²)** in the same
 van as a bathroom and a garage.
 
-## Front, x 0–1430 — office, galley, larder
+## Front, x 0–1430 — the L-galley, larder and office seat
+
+The galley turns the corner behind the driver instead of splitting across the aisle. That
+corner used to be the office seat and a patch of open floor; now it is worktop, and the seat
+moves aft into a nook between the larder and the bed.
 
 | Piece | Size (mm) | Holds |
 |---|---|---|
-| **Office seat** | **450 × 400**, top 450 | shoes, books |
-| Desk | folds off the partition at **720** | stows flat against the bulkhead |
+| **Galley, long leg** — across the bulkhead | **600 × 1382**, worktop 900 | hob at the door end, **90 L drawer fridge** under it, **sink in the corner**, oven and pump under |
+| **Galley, return** — down the driver wall | **180 × 600**, worktop 900 | free counter, the drainer end |
+| Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
 | **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — tins, jars, dry goods, one bottle deep |
-| Sink, driver | **780 × 600**, worktop 900 | two bowls (340 wash + 260 rinse, as v2), oven and pump under |
-| Hob + fridge, passenger | **780 × 600**, worktop 900 | induction 300 × 520 at the door end, **90 L drawer fridge** |
-| Aisle | 980 × **632** | runs straight into the corridor |
-| Entry clear at the door | **650** | of the 1300 aperture |
+| **Office seat** | **450 × 400**, top 450 | in the nook between the larder and the bed |
+| Aisle | **632** | runs straight into the corridor |
+| Entry clear at the door | **830** | of the 1300 aperture |
 
-**The office.** A 450 × 400 bench in the front driver corner, against the driver wall. You
-**sit crosswise** — facing the sliding door, legs into the open floor at y 1032–1432. The desk
-is a board hinged on the partition, dropping to horizontal at 720 over your knees.
+**Why the L is worth it.** Two things fall out of moving the galley into the corner:
+
+- **The entry goes from 650 to 830.** The passenger side of the front zone is now nothing but
+  the shoe locker and open floor, so the only thing narrowing the sliding door is the locker.
+- **The seat gets a nook.** Larder on one side, bed bench on the other, window at your
+  shoulder. Better to work in than a corner beside a cooker.
+
+**One top, two floor sockets — there is no separate desk any more.** The dinette table lifts
+off and drops into a second socket in front of the office seat. That deletes the fold-down
+board off the partition, which was one more mechanism to build and would now be nowhere near
+the seat anyway.
 
 | | |
 |---|---|
-| Why crosswise | the legroom is the lounge floor, so the seat costs only 450 mm of length |
-| Why a fold-down and not a swing arm | v2 drew two swing-arm office tables straight through the sitter's chest before it was caught by eye. A board on the bulkhead cannot do that |
-| View | out of the sliding door, across the van — daylight, not a wall |
-| Cab | the pass-through is directly over this seat. The seat is the step |
+| Aft socket, in the corridor | table at **700** — dinette, benches both sides |
+| Forward socket, in the aisle | table at **745** — desk, 270 of thigh clearance over the 450 seat |
+| Bed | the aft pedestal drops to **450** and the top becomes the bed's centre panel |
+| At the desk | the top overhangs the bed bench by 70 mm — 275 mm above it, so it clears |
+
+**The office.** A 450 × 400 bench against the driver wall at x 980–1430. You **sit crosswise**
+— facing the sliding door, legs into the aisle. The seat costs only 450 mm of the driver
+side's length because the legroom is floor the van already had.
+
+**Why not a swing arm.** v2 drew two swing-arm office tables straight through the sitter's
+chest before it was caught by eye. A top on a floor pedestal cannot do that, and
+`model3d.check()` now carries the sitter to prove it.
+
+**The cab pass-through moves to the passenger corner**, over the shoe locker — the galley owns
+the driver corner now, which is the whole point of the L.
 
 **The fridge is a 90 L drawer and it dodges nothing.** The wheel arches start at x 1863; the
 galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's open item #4
 (a 530 mm hinged door swinging into a 632 aisle) and gets 20 L back at the same time.
 
-**Galley 0.94 m² — v2 exactly**, with no fold-down leaf blocking the door while you cook.
+**Galley 0.94 m² — v2 exactly** (0.83 in the long leg, 0.11 in the return), with no fold-down
+leaf blocking the door while you cook.
 
 ## Middle, x 1430–2950 — the split bed
 
@@ -127,9 +163,8 @@ galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's
 |---|---|---|
 | Bench, driver | **1520 × 600**, top 450 | batteries, inverter, calorifier |
 | Bench, passenger | **1520 × 600**, top 450 | **118 L fresh tank**, inboard of the arch |
-| Corridor between | **1520 × 632** | the table |
-| Table | **900 × 512** at 700 | folds in half and slides fore-aft on its pedestal |
-| Desk, front | **440 × 530** at **740** | folds flat down the partition; 270 of thigh clearance |
+| Corridor between | **1520 × 632** | the table, in its aft socket |
+| Table | **900 × 512** | one top, two sockets — 700 aft, 745 forward, 450 as bed |
 | **Bed made up** | **1520 × 1832** | **760 each for two**, 507 for three |
 | Headroom over the bed | 1431 | |
 
@@ -137,12 +172,13 @@ galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's
 the bathroom and the garage. Two parallel benches leave the middle open, and that open middle
 is what the bathroom needs to be reachable.
 
-**Why the table has to move, not just drop.** Parked in the middle of the corridor it blocks
-the walk to the bathroom. So the top folds in half over its pedestal, and the pedestal slides
-fore-aft in a floor track: fold and push it forward and the run aft is clear. At night it
-drops to 450 and the two folded halves open flat as the bed's centre panel.
+**Why the table lifts off instead of sliding.** Parked in the corridor it blocks the walk to
+the bathroom. A floor track long enough to reach the desk position would have to run 1850 mm,
+across the bed line. Two sockets and a lift-off top do the same job with no track at all — and
+lifting it out is also how you clear the corridor.
 
-**The conversion.** Drop the table, open its halves, lay the centre cushions. Under a minute,
+**The conversion.** Lift the top off, drop the pedestal to 450, put the top back, lay the
+centre cushions. Under a minute,
 and only the middle 632 mm ever changes — the two benches are already at bed height.
 
 ## Rear, x 2950–3450 — bathroom beside a garage
@@ -195,10 +231,11 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 | WC | slides in from a drawer | **permanent** | simpler |
 | Galley | 0.94 m² with a fold-down leaf | **0.94 m², no leaf** | = |
 | Fridge | 90 L hinged, over the arch, blocks the aisle | **90 L drawer, no arch** | better |
-| Dedicated work seat | none | **450 × 400 + fold-down desk** | new |
+| Dedicated work seat | none | **450 × 400 in a nook + the table at 745** | new |
 | Hanging space | wardrobe 450 × 600 | **garage rail, 600 × 500 full height** | ≈ |
 | Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.56 m³ full height** + 2 benches under the bed | ≈ |
-| Entry clear at the door | 690 | 650 | −40 |
+| Galley shape | two runs across the aisle | **L into the corner behind the driver** | |
+| Entry clear at the door | 690 | **830** | +140 |
 | Travelling seats | 3 | 3 | = |
 
 ## Open on v3
@@ -206,23 +243,26 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 1. **Night trip to the bathroom.** By day the corridor works. At night the bed is full width,
    so the aft sleeper rolls off straight into the bathroom and the forward sleeper crosses
    ~760 mm of their partner. Better than a fixed bed, not free.
-2. **The table has to fold *and* slide.** Two mechanisms in one small table, and it doubles as
-   the bed's centre panel. Mock it in cardboard before it is built — this is the part most
-   likely to be annoying every day.
+2. **One top doing three jobs.** Dinette at 700, desk at 745, bed panel at 450, in two floor
+   sockets. That needs a pedestal with three clamp positions and somewhere to park the top
+   while you move it. Mock it before it is built — it is the part most likely to annoy daily.
 3. **Fresh tank.** Semi-custom shape and 102 % on the rear axle. Decide between a made-to-fit
    tank, two slim tanks in series, or 90 L moved forward.
 4. **Bathroom 500 deep.** Fine seated, tight standing. Stand in a 500 mm gap before agreeing.
 5. **Garage 600 wide.** Confirm what actually has to go in it — if it is only clothes, a rail
    and two shelves; if bulky gear, it may want to be wider at the bathroom's expense.
-6. **Fold-down desk at 740 over a 450 seat.** That is 270 mm of thigh clearance — the minimum,
-   and the 3D moved it up 20 mm to get there. Sit at a 740 desk on a 450 chair before agreeing.
-7. **Entry 650**, aisle 632 — two people cannot pass in the galley.
+6. **The table at 745 over a 450 seat.** That is 270 mm of thigh clearance — the minimum. Sit
+   at a 745 desk on a 450 chair before agreeing.
+7. **Aisle 632** — two people still cannot pass in the galley, even with the entry at 830.
+   And working at the forward socket blocks the aisle until you lift the top off.
 8. **Driver seat swivel.** A 3-seat front never blocked the *driver* side — the double bench
    cannot swivel in any van, but it is on the other side of the cab and is not in the driver
    seat's way. If it works, the swivelled seat replaces the 450 × 400 bench at no cost in floor
    (knees land inside the same 450) and gives a far better chair for an eight-hour day. The
    blockers are the handbrake lever (lowering kit) and an open driver-side partition. **Worth
    answering when the van is chosen: lever or electronic parking brake?**
-9. **No photoreal impressions yet.** `impressions.py` has not been run on v3, and no prop
-   meshes have been generated for its new kinds — the 90 L drawer fridge and the pocket door
-   are still coloured boxes in the viewer.
+9. **The oven's quarter turn is a guess.** `YAW_V3` turns it 90° so its door faces the aisle
+   rather than the bulkhead; 90 against 270 was not something the box list could settle. Check
+   it in the viewer, and `props.py face` is there to correct it.
+10. **No photoreal impressions yet.** `impressions.py` has not been run on v3. Prop meshes for
+   the two new kinds — the 90 L drawer fridge and the pocket door — are being generated.

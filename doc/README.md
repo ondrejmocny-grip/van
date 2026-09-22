@@ -8,9 +8,10 @@ Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 **[v1](../v1/README.md)** is drawn - plan, elevations and sections.
 **[v2](../v2/README.md)** is being drawn on a **Crafter L3H3 with a 3-seat cab** -
 schema only so far.
-**[v3](../v3/README.md)** keeps the bed in the middle but splits it into two benches with a
-corridor between them, running to a rear bathroom that sits beside a full-height garage; a
-450 mm crosswise office seat at the front. Plan and 3D done — [viewer](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ).
+**[v3](../v3/README.md)** puts the galley in an L around the corner behind the driver, splits
+the bed into two benches with a corridor between them running to a rear bathroom beside a
+full-height garage, and sits a 450 mm crosswise office seat in the nook between the larder and
+the bed. Plan and 3D done — [viewer](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ).
 
 ## Who this is for
 
@@ -23,7 +24,7 @@ Read it before proposing anything.
 |---|---|---|
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
-| [v3](../v3/README.md) | Same van and cab as v2: 450 x 400 crosswise office seat and a thin larder at the front, v2-sized galley, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom - and a 500 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Adds a work seat and a walkable bathroom without giving up v2's bed or galley. First version where no appliance overlaps a wheel arch. |
+| [v3](../v3/README.md) | Same van and cab as v2: **L-galley** into the corner behind the driver, thin larder, 450 x 400 crosswise office seat in a nook beside the bed, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom - and a 500 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Adds a work seat and a walkable bathroom without giving up v2's bed or galley. First version where no appliance overlaps a wheel arch. |
 
 ## References
 
