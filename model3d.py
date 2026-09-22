@@ -231,12 +231,10 @@ HEIGHTS_V3 = {
     "GALLEY": (0, 900),             # both legs of the L carry the same label
     "LOCKER": (0, 450),             # shoes, and the step through to the cab
     "LARDER": (0, 1881),
-    "OFFICE SEAT": (0, 450),
     "BENCH -> BED": (0, 450),       # both benches carry the same label
     "BATHROOM": (0, 1881),          # a carcass the viewer ghosts, like v1's wet cubicle
     "GARAGE": (0, 1881),
     "ENTRY": None,
-    "OFFICE TABLE": None,
     "CORRIDOR -> BED": None,
     "TABLE": None,
 }
@@ -244,36 +242,30 @@ HEIGHTS_V3 = {
 EXTRA_V3 = [
     # The bed made up. Only the middle 632 changes state - the two benches are already at
     # bed height, which is the whole point of splitting the U into two.
-    (1430, 2950,    0,  600,  450,  520, "bed"),
-    (1430, 2950, 1232, 1832,  450,  520, "bed"),
-    (1430, 2950,  600, 1232,  450,  520, "infill"),
-    # One table top, two floor sockets. Aft it is the dinette; forward it is the desk at the
-    # office seat, 45 mm higher. A lift-off top and two sockets beat a 1850 mm floor track.
-    (1950, 2850,  660, 1172,  700,  760, "table"),       # aft socket, dinette height
-    (2270, 2530,  786, 1046,    0,  700, "leg"),
-    # The office table is its own board now, not the dinette top moved forward: 400 x 380,
-    # hinged on the larder's aft face, folding flat down it when you want out of the seat.
-    ( 980, 1380, 1060, 1420,  725,  745, "otable"),      # out, over the lap - stops 12 short
-                                                         #   of the seat so the folded board
-                                                         #   does not run into its carcass
-    ( 980, 1000, 1060, 1420,  325,  725, "otablep"),     # folded down the larder
+    (1330, 2850,    0,  600,  450,  520, "bed"),
+    (1330, 2850, 1232, 1832,  450,  520, "bed"),
+    (1330, 2850,  600, 1232,  450,  520, "infill"),
+    # One table, three heights on a telescopic pedestal: 745 to work at, 700 to eat at, 450
+    # as the bed's centre panel. 900 x 560 is what two laptops facing each other need.
+    (1640, 2540,  636, 1196,  725,  745, "table"),
+    (1960, 2220,  786, 1046,    0,  725, "leg"),
     # A pull-up leaf on the galley's passenger end panel, making prep space over the shoe
     # locker at worktop height. Up it crosses the cab pass-through; down it hangs flat.
     (   0,  600,    0,  450,  880,  900, "ltable"),      # up, over the locker
     (   0,  600,  430,  450,  450,  875, "ltablep"),     # folded down the end panel
     # Overhead lockers. The passenger run starts aft of the sliding door head.
-    (   0,  780, 1532, 1832, 1400, 1800, "locker"),      # driver, over the galley
-    (1430, 2950, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
-    (1700, 2950,    0,  300, 1400, 1800, "locker"),      # passenger, clear of the door head
+    (   0, 1130, 1532, 1832, 1400, 1800, "locker"),      # driver, over the galley
+    (1330, 2850, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
+    (1700, 2850,    0,  300, 1400, 1800, "locker"),      # passenger, clear of the door head
     # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
     # inside the wall - so only the shut position is a box, and it is off by default.
-    (2990, 3410,  640, 1792,    0,   60, "tray"),
-    (2990, 3150, 1672, 1832, 1140, 1860, "shower"),      # head and riser, clear of the wall
-    (2950, 2990,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
-    # The wall that closes the bed off from the bathroom and the garage. Full height, with
-    # the 600 doorway left open in it - the doorshut leaf above fills that when it is on.
-    (2950, 2990,    0,  600,    0, 1881, "wall"),
-    (2950, 2990, 1200, 1832,    0, 1881, "wall"),
+    (2890, 3410,  640, 1792,    0,   60, "tray"),
+    (2890, 3050, 1672, 1832, 1140, 1860, "shower"),      # head and riser, clear of the wall
+    (2850, 2890,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
+    # The wall that closes the bed off from the bathroom and the garage, with the doorway
+    # left open in it.
+    (2850, 2890,    0,  600,    0, 1881, "wall"),
+    (2850, 2890, 1200, 1832,    0, 1881, "wall"),
 ]
 
 APPLIANCES_V3 = [
@@ -291,31 +283,36 @@ APPLIANCES_V3 = [
     (  60,  110, 1650, 1770,  905, 1155, "filtertap"),   # drinking gooseneck beside it
     # bathroom - the WC stays put, no sliding drawer. 420 x 570 against the driver wall
     # leaves 662 of knee room across the room, which is what the 1232 width buys.
-    (2990, 3410, 1262, 1832,   40,  560, "cassette"),
+    (2890, 3310, 1262, 1832,   40,  560, "cassette"),
     # water
-    (1900, 2920,  226,  600,   30,  340, "fresh"),       # 1020 x 374 x 310 = 118 L, inboard
+    (1800, 2820,  226,  600,   30,  340, "fresh"),       # 1020 x 374 x 310 = 118 L, inboard
                                                          #   of the arch in the passenger bench
     (2100, 2800,  400,  900, -270,  -70, "grey"),        # 70 L, underslung
-    (3050, 3350,  150,  550,   60,  360, "calorifier"),  # 10 L, in the garage
+    (2950, 3250,  150,  550,   60,  360, "calorifier"),  # 10 L, in the garage
     # electrics, driver bench - forward of the tyre, which starts at x 1957
-    (1500, 1700, 1240, 1590,   30,  270, "battery"),     # 150 Ah LiFePO4, group 31 case
-    (1740, 1940, 1240, 1590,   30,  270, "battery"),
-    (1500, 1970, 1300, 1580,  270,  450, "inverter"),    # 3000 W, on a shelf over the cells
-    (3050, 3440,   20,  140,   60,  360, "electrics"),   # MPPT, DC-DC, busbars, fuses
+    (1400, 1600, 1240, 1590,   30,  270, "battery"),     # 150 Ah LiFePO4, group 31 case
+    (1640, 1840, 1240, 1590,   30,  270, "battery"),
+    (1400, 1870, 1300, 1580,  270,  450, "inverter"),    # 3000 W, on a shelf over the cells
+    (2950, 3340,   20,  140,   60,  360, "electrics"),   # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V3 = ("LOCKER", "GALLEY", "LARDER", "OFFICE SEAT", "BENCH -> BED",
-                 "BATHROOM", "GARAGE")
+CONTAINERS_V3 = ("LOCKER", "GALLEY", "LARDER", "BENCH -> BED", "BATHROOM", "GARAGE")
 
-# The person at the office seat, in its new nook between the larder and the bed: sitting
-# CROSSWISE, facing the sliding door, legs out into the aisle. Trunk, thighs, shins. The
-# thighs stop 7 mm short of the seat carcass on purpose - the seat you sit on is not
-# "running through" you, but every other box is, and the table top at 745 must clear them.
+# TWO people at the dinette with laptops, facing each other across the 632 corridor - which
+# is what the dinette has to do now that the separate office seat is gone. Trunk, thighs,
+# shins each. Sitting back on a 600-deep bench, the knees reach about 130 past its front
+# edge, so the two sets stop 368 mm apart: they do not meet, and the table at 745 clears
+# both. SIT_OK_V3 lists what is allowed to touch them - the benches they sit on and the
+# cushions on top.
 SITTER_V3 = [
-    (1040, 1380, 1500, 1800,  450, 1300),
-    (1080, 1360, 1140, 1425,  380,  500),
-    (1080, 1360, 1140, 1340,    0,  400),
+    (1900, 2240, 1480, 1800,  450, 1300),    # driver side: trunk
+    (1940, 2220, 1180, 1480,  380,  500),    #   thighs, overhanging the bench edge by 52
+    (1940, 2220, 1072, 1232,    0,  400),    #   shins, dropping into the corridor
+    (1900, 2240,   32,  352,  450, 1300),    # passenger side: trunk
+    (1940, 2220,  352,  652,  380,  500),    #   thighs
+    (1940, 2220,  600,  760,    0,  400),    #   shins
 ]
+SIT_OK_V3 = ("BENCH -> BED", "bed", "infill", "ENTRY", "CORRIDOR -> BED")
 
 FACING_V3 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 # v3's galley crosses the bulkhead instead of running along a wall, so its kit is a quarter
@@ -341,8 +338,6 @@ LAYERS_V3 = [
     {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
      "hide": ["table", "leg"]},
     {"id": "door", "label": "Bathroom door shut", "kinds": ["doorshut"], "on": False},
-    {"id": "otable", "label": "Office table out", "kinds": ["otable"], "on": False,
-     "hide": ["otablep"]},
     {"id": "leaf", "label": "Galley leaf up", "kinds": ["ltable"], "on": False,
      "hide": ["ltablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
@@ -357,13 +352,12 @@ LAYERS_V3 = [
 ]
 
 WINDOWS_V3 = [
-    ("d",  100,  700, 1000, 1350),              # over the galley's driver return
-    ("d",  980, 1400,  950, 1300),              # at the office seat
-    ("d", 1550, 2350,  620,  960),              # over the driver bench
-    ("p", 1700, 2500,  620,  960),              # over the passenger bench
+    ("d",  120, 1000, 1000, 1350),              # over the galley
+    ("d", 1450, 2250,  620,  960),              # over the driver bench
+    ("p", 1600, 2400,  620,  960),              # over the passenger bench
 ]
-FAN_HOLES_V3 = [(150, 630, 500, 980), (2000, 2480, 676, 1156)]
-HATCHES_V3 = [("d", 3000, 3420, 40, 580)]       # cassette out of the rear quarter panel
+FAN_HOLES_V3 = [(150, 630, 500, 980), (1900, 2380, 676, 1156)]
+HATCHES_V3 = [("d", 2900, 3320, 40, 580)]       # cassette out of the rear quarter panel
 # The pass-through is over the shoe locker in the passenger corner - the galley now owns the
 # driver corner, which is the whole point of the L.
 PARTITION_V3 = (60, 440, 420, 1620)
@@ -491,7 +485,8 @@ REGISTRY = {
     "v3": dict(own_coords=True, heights=HEIGHTS_V3, extra=EXTRA_V3, appliances=APPLIANCES_V3,
                containers=CONTAINERS_V3, windows=WINDOWS_V3, fans=FAN_HOLES_V3,
                hatches=HATCHES_V3, partition=PARTITION_V3, cab_seats=CAB_SEATS_V3,
-               layers=LAYERS_V3, facing=FACING_V3, sitter=SITTER_V3, yaw=YAW_V3),
+               layers=LAYERS_V3, facing=FACING_V3, sitter=SITTER_V3, yaw=YAW_V3,
+               sit_ok=SIT_OK_V3),
 }
 
 
@@ -1142,9 +1137,10 @@ def check(v):
     # the cushion on top of it. A table at 760 over the thighs is fine; the arm that carries
     # it is what goes wrong, and it goes wrong silently.
     sat = []
+    sit_ok = spec(v).get("sit_ok", ("LOCKER", "bed", "ENTRY", "AISLE"))
     for body in spec(v).get("sitter", ()):
         for b in boxes_for(v):
-            if b[6] in ("LOCKER", "bed", "ENTRY", "AISLE"):
+            if b[6] in sit_ok:
                 continue
             if overlap(b[:6], body):
                 sat.append("%s runs through the person on the seat" % b[6])

@@ -1,4 +1,4 @@
-# v3 — VW Crafter L3H3, L-galley, split convertible bed, rear bathroom
+# v3 — VW Crafter L3H3, L-galley, dinette that works as the office, rear bathroom
 
 Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 **Plan and 3D model — iterating.** No photoreal impressions yet.
@@ -8,7 +8,7 @@ Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 Regenerate: `python plan.py v3` then `python model3d.py v3`, from the project root.
 
 Same van and cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0). Order down the driver
-side, back to front: **bathroom + garage · bed · office seat · larder · galley.**
+side, back to front: **bathroom + garage · bed · larder · galley.**
 
 ## The 3D model
 
@@ -20,7 +20,6 @@ extruded from the box list in `plan.py`, so the model cannot disagree with the d
 |---|---|
 | Bed made up | the corridor infilled to 1520 × 1832; hides the table and its post |
 | Bathroom door shut | the pocket-door leaf out of its pocket, closing the 600 across the corridor |
-| Office table out | the 400 × 360 board off the larder, over the lap; off, it hangs folded down the larder |
 | Galley leaf up | the pull-up leaf over the shoe locker at worktop height; off, it hangs folded down the galley's end panel |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
@@ -40,10 +39,24 @@ clear of its neighbours, and clear of the tyres. Three results worth keeping:
 - **The fresh tank sits exactly on the arch line.** Its outboard face is at y = 226, which is
   where the arch ends. Nothing to spare, nothing over.
 
-`check()` also carries **a person sitting crosswise on the office seat** — trunk, thighs,
-shins — and fails the build if any furniture runs through them. That test exists because two
-rounds of v2's office table were drawn with a swing arm through the sitter's chest before it
-was caught by eye. It is why the desk here is a top on a floor pedestal instead.
+`check()` also carries **two people at the dinette with laptops**, facing each other across the
+corridor — trunk, thighs and shins each — and fails the build if any furniture runs through
+them. That test exists because two rounds of v2's office table were drawn with a swing arm
+through the sitter's chest before it was caught by eye, and it earned its keep again here: the
+first draft of the seated pose put the passenger's shins 68 mm inside the bench carcass, where
+the fresh tank lives, and the build refused.
+
+What it now proves, which is the whole question behind dropping the separate office seat:
+
+| | |
+|---|---|
+| **Knee gap between the two of you** | **312 mm** — the shins stop well short of each other |
+| **Thigh clearance under the table** | **275 mm** at the 745 setting — the minimum is 270 |
+| Table | **900 × 560**, which is two laptops facing each other with room for a mug |
+
+`check()` also gained a per-variant **`sit_ok`** list, because which boxes are allowed to touch
+a seated person depends on the layout — here it is the benches they sit on and the cushions on
+top of them, where v1 and v2 meant the shoe locker.
 
 **Two tool changes the L needed.** The galley crosses the bulkhead, so its runs are turned 90°
 from every run v1 and v2 were built on:
@@ -67,12 +80,11 @@ default.
 
 - **WC knee room is 662 mm, not 782.** A 420 × 570 cassette against the driver wall leaves
   662 across the room, not the 782 estimated from a shallower pan. Still enough to sit.
-- **The desk height is 745, not 720.** At 720 with a 20 mm top the underside lands at 700,
-  only 250 above a 450 seat. 745 gives the 270 of thigh clearance that is the minimum.
-- **The desk top overhangs the bed bench by 70 mm.** A 900 top in front of the office seat
-  does not fit between the galley and the bench — but at 725 it passes 275 mm over the bench
-  top, so the overhang is free. The first draft had it 70 mm into the galley worktop instead,
-  which the overlap check caught.
+- **The working height is 745, not 720.** At 720 with a 20 mm top the underside lands at 700,
+  only 250 above a 450 seat. 745 gives the 275 of thigh clearance that is the minimum.
+- **The seated pose had to be redrawn before it told the truth.** The first version put the
+  passenger's shins 68 mm inside the bench carcass — where the fresh tank is — and the build
+  refused. Shins drop *from* the bench edge into the corridor; they do not start behind it.
 
 ## The shape in one line
 
@@ -94,73 +106,71 @@ walk all day, and only a night trip costs anything.
 
 | Driver side | mm |
 |---|---|
-| Office seat | 450 |
+| Galley, across the bulkhead | 600 |
+| Galley, the return | 530 |
 | Larder | 200 |
-| Sink run | 780 |
 | Bed / dinette | 1520 |
-| Bathroom + garage | 500 |
+| Bathroom + garage | 600 |
 | **Total** | **3450** = the van |
 
-**450 is enough for the seat because you sit crosswise.** Sitting across the van, the only
-thing the seat's fore-aft dimension holds is your hips — about 400 mm seated. The depth that
-has to be generous is the 400 mm of cushion plus the whole lounge floor for your legs. A
-lengthwise bench would need 600 deep *and* 450 wide, and cost three times the floor.
+**The separate office seat is gone, and its 450 mm paid for two things.** A 450 × 400 perch
+with its own little table next to a dinette that already seats two was one seat too many — so
+the galley return grew from 180 to **530**, which turns a token corner into a real second leg,
+and the rear block grew from 500 to **600**, which is the shower.
 
-Those 450 mm are exactly what buys **v2's bed (1520) and v2's galley (0.94 m²)** in the same
-van as a bathroom and a garage.
+| | before | now | |
+|---|---|---|---|
+| Galley | 0.94 m² | **1.15 m²** | +22 % over v2 |
+| Bathroom | 0.62 m² | **0.74 m²** | +19 % |
+| Entry clear at the door | 830 | **730** | −100, the cost |
 
-## Front, x 0–1430 — the L-galley, larder and office seat
+The entry is what paid for the shower: the bed had to move 100 mm forward to give the rear
+block its extra depth. 730 is still the widest entry of any version except v1's empty one.
 
-The galley turns the corner behind the driver instead of splitting across the aisle. That
-corner used to be the office seat and a patch of open floor; now it is worktop, and the seat
-moves aft into a nook between the larder and the bed.
+## Front, x 0–1330 — the L-galley and the larder
 
 | Piece | Size (mm) | Holds |
 |---|---|---|
 | **Galley, long leg** — across the bulkhead | **600 × 1382**, worktop 900 | hob at the door end, **90 L drawer fridge** under it, **sink in the corner**, oven and pump under |
+| **Galley, return** — down the driver wall | **530 × 600**, worktop 900 | free counter, the drainer end |
 | Galley leaf | **600 × 450** at 900 | pulls up over the shoe locker |
-| **Galley, return** — down the driver wall | **180 × 600**, worktop 900 | free counter, the drainer end |
 | Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
 | **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — a **tandem pull-out**, 200-wide front onto the aisle, 600-deep baskets |
-| **Office seat** | **450 × 400**, top 450 | in the nook between the larder and the bed |
 | Aisle | **632** | runs straight into the corridor |
-| Entry clear at the door | **830** | of the 1300 aperture |
+| Entry clear at the door | **730** | of the 1300 aperture |
 
-**Why the L is worth it.** Two things fall out of moving the galley into the corner:
-
-- **The entry goes from 650 to 830.** The passenger side of the front zone is now nothing but
-  the shoe locker and open floor, so the only thing narrowing the sliding door is the locker.
-- **The seat gets a nook.** Larder on one side, bed bench on the other, window at your
-  shoulder. Better to work in than a corner beside a cooker.
-
-**The office table is its own board, not the dinette top moved forward.** 400 × 360, hinged on
-the larder's aft face at **745**, folding flat down the larder when you want out of the seat.
-Sharing one top with the dinette meant carrying it the length of the van twice a day and a
-pedestal with three clamp positions; a small dedicated board is less of everything.
-
-| | |
-|---|---|
-| Office table | **400 × 360** at 745, off the larder — 270 of thigh clearance over the 450 seat |
-| Dinette table | **900 × 512** at 700 in the corridor, dropping to 450 as the bed's centre panel |
-| **Galley leaf** | **600 × 450** at 900, pulling up over the shoe locker — prep space right at the door |
+**Galley 1.15 m²** — 0.83 across the bulkhead and 0.32 in the return. That is **+22 % on v2**
+and the most of any version with a bathroom in it.
 
 **The galley leaf crosses the cab pass-through when it is up.** The pass-through sits over the
 shoe locker and the leaf lands at 900, straight through it. Same trade v2's worktop leaf made
 against the sliding door: it is only while you are actually cooking, and it folds in a second.
 Worth feeling before it is built.
-| Bed | the aft pedestal drops to **450** and the top becomes the bed's centre panel |
-| At the desk | the top overhangs the bed bench by 70 mm — 275 mm above it, so it clears |
-
-**The office.** A 450 × 400 bench against the driver wall at x 980–1430. You **sit crosswise**
-— facing the sliding door, legs into the aisle. The seat costs only 450 mm of the driver
-side's length because the legroom is floor the van already had.
-
-**Why not a swing arm.** v2 drew two swing-arm office tables straight through the sitter's
-chest before it was caught by eye. A top on a floor pedestal cannot do that, and
-`model3d.check()` now carries the sitter to prove it.
 
 **The cab pass-through moves to the passenger corner**, over the shoe locker — the galley owns
 the driver corner now, which is the whole point of the L.
+
+## The office is the dinette
+
+There is no separate work seat. Both of you sit at the bed benches, facing each other across
+the corridor, with the table up at **745**.
+
+| | |
+|---|---|
+| Table | **900 × 560** on a telescopic pedestal — **745** to work, **700** to eat, **450** as the bed's centre panel |
+| Seats | the two bed benches, 600 deep, top 450 |
+| Knee gap between you | **312 mm** — measured, not assumed |
+| Thigh clearance | **275 mm**, against a 270 minimum |
+| Daylight | a window over each bench |
+
+**Why this is better than the perch it replaces.** A 450 × 400 seat with its own 400 × 360
+board, wedged between the larder and the bed bench, was a second-class place to spend eight
+hours — and it sat next to a dinette that already seats two properly. Deleting it bought a
+real galley return and a bigger shower.
+
+**Why a floor pedestal and not a swing arm.** v2 drew two swing-arm office tables straight
+through the sitter's chest before it was caught by eye. A top on a floor pedestal cannot do
+that, and `check()` now carries both sitters to prove it.
 
 **The fridge is a 90 L drawer and it dodges nothing.** The wheel arches start at x 1863; the
 galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's open item #4
@@ -169,14 +179,14 @@ galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's
 **Galley 0.94 m² — v2 exactly** (0.83 in the long leg, 0.11 in the return), with no fold-down
 leaf blocking the door while you cook.
 
-## Middle, x 1430–2950 — the split bed
+## Middle, x 1330–2850 — the split bed
 
 | | Size (mm) | Holds |
 |---|---|---|
 | Bench, driver | **1520 × 600**, top 450 | batteries, inverter, calorifier |
 | Bench, passenger | **1520 × 600**, top 450 | **118 L fresh tank**, inboard of the arch |
-| Corridor between | **1520 × 632** | the table, in its aft socket |
-| Table | **900 × 512** | one top, two sockets — 700 aft, 745 forward, 450 as bed |
+| Corridor between | **1520 × 632** | the table, and the walk to the bathroom |
+| Table | **900 × 560** | 745 to work at, 700 to eat at, 450 as the bed's centre panel |
 | **Bed made up** | **1520 × 1832** | **760 each for two**, 507 for three |
 | Headroom over the bed | 1431 | |
 
@@ -184,23 +194,26 @@ leaf blocking the door while you cook.
 the bathroom and the garage. Two parallel benches leave the middle open, and that open middle
 is what the bathroom needs to be reachable.
 
-**Why the table lifts off instead of sliding.** Parked in the corridor it blocks the walk to
-the bathroom. A floor track long enough to reach the desk position would have to run 1850 mm,
-across the bed line. Two sockets and a lift-off top do the same job with no track at all — and
-lifting it out is also how you clear the corridor.
+**The table has to lift off.** Parked in the corridor it blocks the walk to the bathroom, so
+the top comes off its pedestal and stands in the garage when the run aft matters.
 
 **The conversion.** Lift the top off, drop the pedestal to 450, put the top back, lay the
-centre cushions. Under a minute,
-and only the middle 632 mm ever changes — the two benches are already at bed height.
+centre cushions. Under a minute, and only the middle 632 mm ever changes — the two benches are
+already at bed height.
 
-## Rear, x 2950–3450 — bathroom beside a garage
+## Rear, x 2850–3450 — bathroom beside a garage
 
-The back is 500 mm deep and **split**, not full width:
+The back is **600 mm deep** — 100 more than the first draft, which is where the office seat's
+length went — and **split**, not full width:
 
 | | Size (mm) | |
 |---|---|---|
-| **Bathroom**, driver side | **500 × 1232** = 0.62 m², 1881 clear | sit-down shower **and** a permanent cassette WC |
-| **Garage**, passenger side | **500 × 600**, full height 1881 ≈ 0.56 m³ | loads through the **rear door** |
+| **Bathroom**, driver side | **600 × 1232** = 0.74 m², 1881 clear | sit-down shower **and** a permanent cassette WC |
+| **Garage**, passenger side | **600 × 600**, full height 1881 ≈ 0.68 m³ | loads through the **rear door** |
+
+**The extra 100 mm is all shower.** The WC's knee room is set across the room, not along it, so
+it stays at 662; what grows is the standing and sitting space in front of the tray, and the
+tray itself. 0.74 m² against v2's 0.56 is **+32 %**.
 
 **A real pocket door fits here, and that is why the bathroom is this width.** The bathroom's
 forward face is 1232 long: a 600 mm door plus a 632 mm pocket is exactly 1232. Nothing
@@ -211,7 +224,7 @@ at the driver end facing across, which gives **662 mm of knee room**; the shower
 end, with a fold seat on the passenger wall and the whole 1232 for your legs when seated. v2
 had to slide its WC in and out of a 700 × 800 cubicle; this one does not.
 
-**The garage is full height, so it can hang clothes.** 600 wide × 500 deep is enough for a
+**The garage is full height, so it can hang clothes.** 600 wide × 600 deep is enough for a
 rail across the width (hangers are ~430). Half rail, half shelves, loaded from the back —
 that closes the "nowhere to hang anything" gap the earlier drafts had.
 
@@ -219,15 +232,15 @@ that closes the "nowhere to hang anything" gap the earlier drafts had.
 
 | Service | Where |
 |---|---|
-| Fresh tank 118 L, 1020 × 374 × 310 | passenger bench, **inboard of the wheel arch**, x 1900–2920 |
+| Fresh tank 118 L, 1020 × 374 × 310 | passenger bench, **inboard of the wheel arch**, x 1800–2820 |
 | Batteries + inverter | driver bench, forward end, inboard of the arch |
 | Calorifier | driver bench, aft end — next to the bathroom wall |
 | Oven, pump, filter | under the sink |
 | Grey | underslung |
-| Cassette hatch | driver-side rear quarter panel, x ~3050–3400 |
+| Cassette hatch | driver-side rear quarter panel, x ~2900–3320 |
 
 **The tank is v2's tank again, with v2's problem.** 1020 × 374 × 310 is a semi-custom size, and
-sitting at x ≈ 2410 it puts about **102 %** of its weight on the rear axle (rear axle ≈ x 2313).
+sitting at x ≈ 2310 it puts about **100 %** of its weight on the rear axle (rear axle ≈ x 2313).
 Options, all open: have one made, plumb two slim off-the-shelf tanks in series, or cut it to
 ~90 L and move it forward into the bench's front third. See open item 3.
 
@@ -238,16 +251,16 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 | Bed | 1520 × 1832 across, rear | **1520 × 1832 across, middle** | same |
 | Bed made from | rear U | **two parallel benches** | corridor survives |
 | Bathroom reachable by day without crossing the bed | yes | **yes — the corridor** | = |
-| Bathroom | 700 × 800 = 0.56 m² | **500 × 1232 = 0.62 m²** | +11 % |
+| Bathroom | 700 × 800 = 0.56 m² | **600 × 1232 = 0.74 m²** | +32 % |
 | Bathroom door | glass screen off the lobby | **pocket door** off the corridor | better |
 | WC | slides in from a drawer | **permanent** | simpler |
-| Galley | 0.94 m² with a fold-down leaf | **0.94 m², no leaf** | = |
+| Galley | 0.94 m² with a fold-down leaf | **1.15 m², a real L** | +22 % |
 | Fridge | 90 L hinged, over the arch, blocks the aisle | **90 L drawer, no arch** | better |
-| Dedicated work seat | none | **450 × 400 in a nook + the table at 745** | new |
+| Work position | none | **the dinette, table at 745, two people** | new |
 | Hanging space | wardrobe 450 × 600 | **garage rail, 600 × 500 full height** | ≈ |
-| Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.56 m³ full height** + 2 benches under the bed | ≈ |
+| Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.68 m³ full height** + 2 benches under the bed | +55 % |
 | Galley shape | two runs across the aisle | **L into the corner behind the driver** | |
-| Entry clear at the door | 690 | **830** | +140 |
+| Entry clear at the door | 690 | **730** | +40 |
 | Travelling seats | 3 | 3 | = |
 
 ## Open on v3
@@ -255,9 +268,9 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 1. **Night trip to the bathroom.** By day the corridor works. At night the bed is full width,
    so the aft sleeper rolls off straight into the bathroom and the forward sleeper crosses
    ~760 mm of their partner. Better than a fixed bed, not free.
-2. **One top doing three jobs.** Dinette at 700, desk at 745, bed panel at 450, in two floor
-   sockets. That needs a pedestal with three clamp positions and somewhere to park the top
-   while you move it. Mock it before it is built — it is the part most likely to annoy daily.
+2. **One top doing three jobs.** 700 to eat at, 745 to work at, 450 as the bed panel — a
+   telescopic pedestal with three clamp positions, and somewhere to park the top while the
+   corridor is in use. Mock it before it is built; it is the part most likely to annoy daily.
 3. **Fresh tank.** Semi-custom shape and 102 % on the rear axle. Decide between a made-to-fit
    tank, two slim tanks in series, or 90 L moved forward.
 4. **Bathroom 500 deep.** Fine seated, tight standing. Stand in a 500 mm gap before agreeing.
@@ -265,8 +278,8 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
    and two shelves; if bulky gear, it may want to be wider at the bathroom's expense.
 6. **The table at 745 over a 450 seat.** That is 270 mm of thigh clearance — the minimum. Sit
    at a 745 desk on a 450 chair before agreeing.
-7. **Aisle 632** — two people still cannot pass in the galley, even with the entry at 830.
-   And working at the forward socket blocks the aisle until you lift the top off.
+7. **Aisle 632** — two people still cannot pass in the galley, and the table blocks the walk
+   to the bathroom until you lift the top off.
 8. **Driver seat swivel.** A 3-seat front never blocked the *driver* side — the double bench
    cannot swivel in any van, but it is on the other side of the cab and is not in the driver
    seat's way. If it works, the swivelled seat replaces the 450 × 400 bench at no cost in floor
@@ -277,7 +290,7 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
    first draft's 440 × 640 — but no real product chosen yet. The 200 mm of counter it frees
    between the bowls and the bulkhead is where both taps now stand.
 10. **The larder has to be a pull-out, not a cupboard.** Its two wide faces are boxed in — the
-   galley return forward, the office seat aft — so the only face that can open is the narrow
+   galley return forward, the bed bench aft — so the only face that can open is the narrow
    one onto the aisle: a 200-wide front with 600-deep baskets, which is a real tandem larder
    product. The aisle is 632, so a 600-deep basket clears when it is out. The generated prop
    still carries a door on its wide face (turned aft, so it at least does not open into the
