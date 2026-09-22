@@ -220,14 +220,133 @@ LAYERS_V2 = [
 ]
 
 
+# --------------------------------------------------------------------------
+# v3 - its own tables again. Nothing about v2's room survives here: the bed is
+# two parallel benches with a corridor between them, the bathroom is a 500 mm
+# slot in the back driver corner beside a full-height garage, and the front
+# driver corner is a 450 x 400 office seat with a desk folding off the
+# partition. Written in v3's own coordinates.
+# --------------------------------------------------------------------------
+HEIGHTS_V3 = {
+    "OFFICE SEAT": (0, 450),        # also the step through to the cab
+    "LARDER": (0, 1881),
+    "SINK": (0, 900),
+    "HOB + FRIDGE": (0, 900),
+    "BENCH -> BED": (0, 450),       # both benches carry the same label
+    "BATHROOM": (0, 1881),          # a carcass the viewer ghosts, like v1's wet cubicle
+    "GARAGE": (0, 1881),
+    "DESK / LEGROOM": None,
+    "ENTRY": None,
+    "AISLE": None,
+    "CORRIDOR -> BED": None,
+    "TABLE": None,
+}
+
+EXTRA_V3 = [
+    # The bed made up. Only the middle 632 changes state - the two benches are already at
+    # bed height, which is the whole point of splitting the U into two.
+    (1430, 2950,    0,  600,  450,  520, "bed"),
+    (1430, 2950, 1232, 1832,  450,  520, "bed"),
+    (1430, 2950,  600, 1232,  450,  520, "infill"),
+    (1950, 2850,  660, 1172,  700,  760, "table"),
+    (2270, 2530,  786, 1046,    0,  700, "leg"),
+    # The desk. Hinged on the partition and folding flat against it, not on a swing arm:
+    # v2 drew two swing-arm office tables straight through the sitter's chest before it was
+    # caught by eye, and SITTER_V3 below is what stops that happening again.
+    # Top at 740 over a 450 seat leaves 270 of thigh clearance, which is the minimum.
+    (   0,  440,  900, 1430,  720,  740, "ftable"),      # deployed
+    (   0,   40,  900, 1430,  280,  720, "ftablep"),     # folded down the partition
+    # Overhead lockers. The passenger run starts aft of the sliding door head.
+    ( 650, 1430, 1532, 1832, 1400, 1800, "locker"),      # driver, over the sink
+    (1430, 2950, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
+    (1700, 2950,    0,  300, 1400, 1800, "locker"),      # passenger, clear of the door head
+    # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
+    # inside the wall - so only the shut position is a box, and it is off by default.
+    (2990, 3410,  640, 1792,    0,   60, "tray"),
+    (2950, 3110, 1672, 1832, 1140, 1860, "shower"),      # head and riser, forward wall
+    (2950, 2990,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
+]
+
+APPLIANCES_V3 = [
+    # galley, driver side - 780 of run, worktop 900. The bowls sit hard against the larder so
+    # the free counter is one piece at the aisle end, the same argument as v2.
+    ( 950, 1400, 1252, 1602,  380,  720, "oven"),        # 20 L mini oven, 450 x 350 x 340
+    ( 700, 1040, 1480, 1820,   40,  370, "plumbing"),    # pump and trap, behind the oven
+    ( 700,  800, 1640, 1830,  905, 1185, "tap"),         # mixer on the deck behind the bowls
+    ( 840,  890, 1700, 1820,  905, 1155, "filtertap"),   # drinking gooseneck beside it
+    (1080, 1340, 1700, 1760,  420,  480, "filter"),      # 2 x 10 inch inline carbon block
+    # galley, passenger side - hob at the door end, fridge as a DRAWER. Nothing in this van
+    # sits over a wheel arch: the galley ends at 1430 and the arches start at 1863, which is
+    # what lets the fridge be 90 L and still not swing a door into a 632 aisle.
+    ( 420,  720,   40,  560,  845,  905, "hob"),         # 2-zone domino induction, 300 x 520
+    (  40,  585,   30,  575,   60,  585, "fridgedrawer"),# 90 L drawer, 545 x 545 x 525
+    # bathroom - the WC stays put, no sliding drawer. 420 x 570 against the driver wall
+    # leaves 662 of knee room across the room, which is what the 1232 width buys.
+    (2990, 3410, 1262, 1832,   40,  560, "cassette"),
+    # water
+    (1900, 2920,  226,  600,   30,  340, "fresh"),       # 1020 x 374 x 310 = 118 L, inboard
+                                                         #   of the arch in the passenger bench
+    (2100, 2800,  400,  900, -270,  -70, "grey"),        # 70 L, underslung
+    (3050, 3350,  150,  550,   60,  360, "calorifier"),  # 10 L, in the garage
+    # electrics, driver bench - forward of the tyre, which starts at x 1957
+    (1500, 1700, 1240, 1590,   30,  270, "battery"),     # 150 Ah LiFePO4, group 31 case
+    (1740, 1940, 1240, 1590,   30,  270, "battery"),
+    (1500, 1970, 1300, 1580,  270,  450, "inverter"),    # 3000 W, on a shelf over the cells
+    (3050, 3440,   20,  140,   60,  360, "electrics"),   # MPPT, DC-DC, busbars, fuses
+]
+
+CONTAINERS_V3 = ("OFFICE SEAT", "LARDER", "SINK", "HOB + FRIDGE", "BENCH -> BED",
+                 "BATHROOM", "GARAGE")
+
+# The person at the office seat: sitting CROSSWISE, facing the sliding door, legs out into
+# the lounge floor. Trunk, thighs, shins. The thighs stop 7 mm short of the seat carcass on
+# purpose - the seat you sit on is not "running through" you, but every other box is.
+SITTER_V3 = [
+    ( 60,  400, 1500, 1800,  450, 1300),
+    (100,  380, 1140, 1425,  380,  500),
+    (100,  380, 1140, 1340,    0,  400),
+]
+
+FACING_V3 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+
+LAYERS_V3 = [
+    {"id": "bed", "label": "Bed made up", "kinds": ["infill"], "on": False,
+     "hide": ["table", "leg"]},
+    {"id": "door", "label": "Bathroom door shut", "kinds": ["doorshut"], "on": False},
+    {"id": "desk", "label": "Desk out", "kinds": ["ftable"], "on": False,
+     "hide": ["ftablep"]},
+    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V3}),
+     "on": True, "xray": True},
+    {"id": "body", "label": "Body + glass",
+     "kinds": ["shell", "glass", "floor", "wheel", "partition", "hatch"], "on": True},
+    {"id": "cab", "label": "Cab + seats", "kinds": ["cab", "seat", "dash"], "on": True},
+    {"id": "props", "label": "Detailed props", "kinds": [], "on": True, "props": True},
+    {"id": "schema", "label": "Schema overlay", "kinds": [], "on": False, "schema": True},
+    {"id": "sizes", "label": "Sizes", "kinds": [], "on": False, "sizes": True},
+]
+
+WINDOWS_V3 = [
+    ("d",  750, 1350, 1000, 1350),              # over the sink
+    ("d", 1550, 2350,  620,  960),              # over the driver bench
+    ("p", 1700, 2500,  620,  960),              # over the passenger bench
+]
+FAN_HOLES_V3 = [(700, 1180, 676, 1156), (2000, 2480, 676, 1156)]
+HATCHES_V3 = [("d", 3000, 3420, 40, 580)]       # cassette out of the rear quarter panel
+# The pass-through is over the office seat, so the seat is the step - same trick as v2's
+# shoe locker, one box cheaper.
+PARTITION_V3 = (1420, 1812, 420, 1620)
+CAB_SEATS_V3 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
+
+
 # Carcasses with kit inside them. The viewer ghosts these while the appliances are shown,
 # so you can see into a bench without inventing door and drawer divisions we have not designed.
 CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
-INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fresh", "grey", "calorifier",
-            "filter",
+INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey",
+            "calorifier", "filter",
             "battery", "inverter", "electrics")
 
 # What each kind is called, for the viewer key and the dimension labels.
@@ -235,6 +354,10 @@ NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
+    "OFFICE SEAT": "Office seat", "LARDER": "Larder", "HOB + FRIDGE": "Galley - hob side",
+    "BENCH -> BED": "Bench / bed", "BATHROOM": "Bathroom", "GARAGE": "Garage, full height",
+    "doorshut": "Bathroom door, shut",
+    "fridgedrawer": "Fridge 90 L drawer",
     "partition": "Partition wall", "hatch": "Cassette hatch",
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
     "BENCH": "Bench", "REAR BENCH": "Rear bench / garage", "bed": "Seat cushion", "infill": "Bed infill",
@@ -287,6 +410,9 @@ KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
+    "OFFICE SEAT": "#d8cfe2", "LARDER": "#e6dcc6", "HOB + FRIDGE": "#cfded9",
+    "BENCH -> BED": "#d8cfe2", "BATHROOM": "#bcd6e6", "GARAGE": "#e6dcc6",
+    "doorshut": "#d9d4c8", "fridgedrawer": "#cfe4c9",
     "ftablep": "#d9b98a", "farm": "#9a9287",
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2",
@@ -328,6 +454,10 @@ REGISTRY = {
                containers=CONTAINERS_V2, windows=WINDOWS_V2, fans=FAN_HOLES_V2,
                hatches=HATCHES_V2, partition=PARTITION_V2, cab_seats=CAB_SEATS_V2,
                layers=LAYERS_V2, facing=FACING_V2, sitter=SITTER_V2),
+    "v3": dict(own_coords=True, heights=HEIGHTS_V3, extra=EXTRA_V3, appliances=APPLIANCES_V3,
+               containers=CONTAINERS_V3, windows=WINDOWS_V3, fans=FAN_HOLES_V3,
+               hatches=HATCHES_V3, partition=PARTITION_V3, cab_seats=CAB_SEATS_V3,
+               layers=LAYERS_V3, facing=FACING_V3, sitter=SITTER_V3),
 }
 
 
@@ -413,6 +543,8 @@ def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30):
 
 # hard against the wardrobe at x 1150, which leaves the 200 mm aft of it as free counter
 EXTRA_V2 += sink_wells(1150, 1730, 1440, 1800, 750, 905)
+# v3: hard against the larder at x 650, so the free counter is one piece at the aisle end
+EXTRA_V3 += sink_wells(660, 1300, 1440, 1800, 750, 905)
 
 
 def shell_for(v):

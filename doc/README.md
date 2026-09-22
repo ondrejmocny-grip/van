@@ -10,7 +10,7 @@ Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 schema only so far.
 **[v3](../v3/README.md)** keeps the bed in the middle but splits it into two benches with a
 corridor between them, running to a rear bathroom that sits beside a full-height garage; a
-450 mm crosswise office seat at the front. Plan only, no 3D yet.
+450 mm crosswise office seat at the front. Plan and 3D done — [viewer](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ).
 
 ## Who this is for
 
@@ -23,7 +23,7 @@ Read it before proposing anything.
 |---|---|---|
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
-| [v3](../v3/README.md) | Same van and cab as v2: 450 x 400 crosswise office seat and a thin larder at the front, v2-sized galley, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom - and a 500 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan only, iterating.** Adds a work seat and a walkable bathroom without giving up v2's bed or galley. |
+| [v3](../v3/README.md) | Same van and cab as v2: 450 x 400 crosswise office seat and a thin larder at the front, v2-sized galley, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom - and a 500 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Adds a work seat and a walkable bathroom without giving up v2's bed or galley. First version where no appliance overlaps a wheel arch. |
 
 ## References
 

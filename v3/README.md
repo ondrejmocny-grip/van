@@ -1,14 +1,61 @@
 # v3 — VW Crafter L3H3, front office seat, split convertible bed, rear bathroom
 
 Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
-**Plan only — geometry not yet checked in 3D.**
+**Plan and 3D model — iterating.** No photoreal impressions yet.
 
 ![plan](layout.png)
 
-Regenerate: `python plan.py v3`, from the project root.
+Regenerate: `python plan.py v3` then `python model3d.py v3`, from the project root.
 
 Same van and cab as v2 (Crafter L3H3, 3-seat cab, partition at x = 0). Order from the back:
 **bathroom + garage, bed, galley, office seat.**
+
+## The 3D model
+
+**Viewer: [v3 Crafter](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ)** — drag to orbit,
+scroll to zoom. Also written locally to `v3/viewer.html`, `v3/model.obj` and `v3/3d/*.png`. Everything in it is
+extruded from the box list in `plan.py`, so the model cannot disagree with the drawing above.
+
+| Layer | What it holds |
+|---|---|
+| Bed made up | the corridor infilled to 1520 × 1832; hides the table and its post |
+| Bathroom door shut | the pocket-door leaf out of its pocket, closing the 600 across the corridor |
+| Desk out | the front desk deployed; off, it hangs folded flat down the partition |
+| Lockers | three overhead runs, kept clear of the door head and the windows |
+| Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
+| Body + glass | panels with real holes: slider, three windows, the cassette hatch, two fans, the partition with its pass-through over the office seat |
+| Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
+| Schema overlay | the plan itself painted onto the model |
+| Sizes | every block labelled with its name and size in mm |
+
+`model3d.check()` passes on all **15 appliances**: each one inside the van, inside a carcass,
+clear of its neighbours, and clear of the tyres. Three results worth keeping:
+
+- **Nothing overlaps a wheel arch at all.** Not one warning — a first for this project. The
+  galley ends at x 1430 and the arches start at 1863, so no appliance is even near one. It is
+  what lets the fridge be a 90 L drawer instead of v2's hinged 90 L or v1's 70 L.
+- **The batteries stop 17 mm short of the driver tyre.** The tyre runs x 1957–2669; the aft
+  battery ends at 1940. Tight, and real.
+- **The fresh tank sits exactly on the arch line.** Its outboard face is at y = 226, which is
+  where the arch ends. Nothing to spare, nothing over.
+
+`check()` also carries **a person sitting crosswise on the office seat** — trunk, thighs,
+shins — and fails the build if any furniture runs through them. That test exists because two
+rounds of v2's office table were drawn with a swing arm through the sitter's chest before it
+was caught by eye. It is why the desk here hinges on the partition instead.
+
+**The bathroom is drawn as a carcass the viewer ghosts**, not built from panels the way v2's
+shower was. v2 had a glass screen worth building; here the interesting things are inside —
+the WC, the tray, the shower head — and a pocket door has nothing to draw when it is open,
+because the leaf is inside the wall. So the door is one box, in its shut position, off by
+default.
+
+### Two numbers the 3D corrected
+
+- **WC knee room is 662 mm, not 782.** A 420 × 570 cassette against the driver wall leaves
+  662 across the room, not the 782 estimated from a shallower pan. Still enough to sit.
+- **The desk top is 740, not 720.** At 720 with a 20 mm top the underside lands at 700, which
+  is only 250 above a 450 seat. 740 gives the 270 of thigh clearance that is the minimum.
 
 ## The shape in one line
 
@@ -82,6 +129,7 @@ galley ends at 1430. No appliance in this van sits over an arch. That fixes v2's
 | Bench, passenger | **1520 × 600**, top 450 | **118 L fresh tank**, inboard of the arch |
 | Corridor between | **1520 × 632** | the table |
 | Table | **900 × 512** at 700 | folds in half and slides fore-aft on its pedestal |
+| Desk, front | **440 × 530** at **740** | folds flat down the partition; 270 of thigh clearance |
 | **Bed made up** | **1520 × 1832** | **760 each for two**, 507 for three |
 | Headroom over the bed | 1431 | |
 
@@ -111,7 +159,7 @@ forward face is 1232 long: a 600 mm door plus a 632 mm pocket is exactly 1232. N
 surface-mounted, nothing swinging into the corridor.
 
 **The WC stays put — no sliding drawer.** At 1232 wide the room holds both. The cassette sits
-at the driver end facing across, which gives **782 mm of knee room**; the shower is the other
+at the driver end facing across, which gives **662 mm of knee room**; the shower is the other
 end, with a fold seat on the passenger wall and the whole 1232 for your legs when seated. v2
 had to slide its WC in and out of a 700 × 800 cubicle; this one does not.
 
@@ -166,8 +214,8 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 4. **Bathroom 500 deep.** Fine seated, tight standing. Stand in a 500 mm gap before agreeing.
 5. **Garage 600 wide.** Confirm what actually has to go in it — if it is only clothes, a rail
    and two shelves; if bulky gear, it may want to be wider at the bathroom's expense.
-6. **Fold-down desk at 720 over a 450 seat.** 270 mm of thigh clearance is the minimum and this
-   is exactly at it.
+6. **Fold-down desk at 740 over a 450 seat.** That is 270 mm of thigh clearance — the minimum,
+   and the 3D moved it up 20 mm to get there. Sit at a 740 desk on a 450 chair before agreeing.
 7. **Entry 650**, aisle 632 — two people cannot pass in the galley.
 8. **Driver seat swivel.** A 3-seat front never blocked the *driver* side — the double bench
    cannot swivel in any van, but it is on the other side of the cab and is not in the driver
@@ -175,5 +223,6 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
    (knees land inside the same 450) and gives a far better chair for an eight-hour day. The
    blockers are the handbrake lever (lowering kit) and an open driver-side partition. **Worth
    answering when the van is chosen: lever or electronic parking brake?**
-9. **No 3D yet.** `model3d.py` has no `REGISTRY` entry for v3, so nothing has been checked for
-   fit. That is where v1 and v2 both found real clashes.
+9. **No photoreal impressions yet.** `impressions.py` has not been run on v3, and no prop
+   meshes have been generated for its new kinds — the 90 L drawer fridge and the pocket door
+   are still coloured boxes in the viewer.
