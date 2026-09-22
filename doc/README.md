@@ -406,6 +406,35 @@ opens into the wall does not.
 Each viewer now embeds **only the props its own variant uses**, so v1 does not carry v2's
 shower cubicle and wardrobe.
 
+### The fridge drawer, 2026-09-22 — anything sticking out is measured too
+
+v3's `fridgedrawer` (90 L, 545 x 545 x 525) took two rounds, and the first one failed in a way
+worth writing down.
+
+Round one asked for the drawer **open a hand's width**, because a closed cabinet reads as a
+cupboard and the drawer is the point. qwen drew it pulled out most of its own depth again. All
+three mesh models then scored **0.24 to 0.28 — and every one of them missed the same axis.**
+
+That is not three models being bad. The shape error is measured against the mesh's **bounding
+box**, and the bounding box was the cabinet *plus* the protruding drawer: depth grew by half,
+so the height came back as 0.68-0.72 of the longest side instead of 0.96. The viewer fills the
+box, so adopting any of them would have squashed the cabinet to two thirds of its height.
+
+v2's `fridgedoor` already carries half of this — *"ajar, not wide open: a door swung through
+ninety degrees would squash the cabinet itself to half its width."* The other half is the
+general rule:
+
+> **For a prop that gets scaled into a box, the silhouette is the whole product. Anything that
+> sticks out has to be described SHUT.** A drawer reads as a drawer from its front — a deep
+> shadow gap round a single tall panel and a full-width bar handle — not from being open.
+
+Rewritten that way, all four image models returned a closed near-cube on the first try.
+
+**And the diagnostic that gets you there fast:** when every mesh model misses the *same axis by
+the same amount*, stop looking at the models. Either the prompt or the preview is wrong, and
+the axis that is off tells you which one — here, the long axis was the one the drawer had
+extended.
+
 ### Finding a pipeline that keeps the layout — the ladder, 2026-09-18
 
 Canny-on-a-line-drawing kept inventing furniture, so we climbed from the geometry toward

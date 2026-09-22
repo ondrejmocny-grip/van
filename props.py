@@ -154,16 +154,24 @@ PROMPTS = {
                "quick-connect hose fitting sticking straight out of each flat end, and a "
                "printed label band around the middle. A plain sealed cylinder, no housing, "
                "no bowl, no bracket."),
-    # 545 x 545 x 525: a near cube, and the ONE big drawer is the point - v1's 70 L unit is
-    # its own kind, so adopting one never changes the other
-    "fridgedrawer": ("A 90 litre campervan compressor drawer fridge standing on its own: a "
-                     "stainless steel cabinet that is a near cube, exactly as wide as it is "
-                     "deep and only a touch lower than it is wide, its whole front face taken "
-                     "up by ONE single very deep pull-out drawer pulled open a hand's width, "
-                     "one long horizontal brushed steel bar handle running the full width of "
-                     "the drawer front, the white moulded interior just visible in the gap, a "
-                     "narrow vent grille along the bottom. No hinged door, no shelves on the "
-                     "front, one drawer only."),
+    # 545 x 545 x 525: a near cube. First round asked for the drawer OPEN "a hand's width"
+    # and all three mesh models came back 0.24-0.28 off, every one of them missing the SAME
+    # axis - because qwen drew the drawer out most of its own depth, and the bounding box the
+    # error is measured against is the cabinet PLUS the drawer. The viewer fills that box, so
+    # adopting one would have squashed the cabinet to two thirds of its height.
+    # v2's fridgedoor already carries half this lesson ("ajar, not wide open"). The rest of it:
+    # for a prop that gets scaled into a box, the silhouette is the whole product, so anything
+    # sticking out of it has to be described SHUT. A drawer reads as a drawer from its front,
+    # not from being open.
+    "fridgedrawer": ("A 90 litre campervan compressor drawer fridge standing on its own with "
+                     "everything CLOSED: a stainless steel cabinet that is a near cube, "
+                     "exactly as wide as it is deep and only a touch lower than it is wide, a "
+                     "plain flat rectangular box. Its front face is one single tall drawer "
+                     "front filling almost the whole face, set apart by a deep shadow gap "
+                     "running right round it, with one long horizontal brushed steel bar "
+                     "handle across the full width of the drawer front near its top, and a "
+                     "narrow vent grille along the very bottom. Nothing is open, nothing "
+                     "sticks out, nothing is pulled forward: a closed rectangular cabinet."),
     # 40 x 600 x 1881: a plank - three times taller than it is wide and forty times taller
     # than it is thick. A pocket door has a FLUSH pull, never a knob: a handle that stands
     # proud would foul the pocket it slides into
