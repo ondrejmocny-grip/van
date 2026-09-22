@@ -367,6 +367,13 @@ which way a generated mesh faces is a coin toss the box list should not be losin
 get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void in
 `HEIGHTS_V2`.
 
+**And then the sink was built too, 2026-09-22.** The adopted double sink scored 0.06 and
+rendered as a **solid block**: at 4000 faces a recess does not survive, and a sink is its
+recess. `sink_wells()` builds it instead - a deck with two rectangular holes (the same
+`subtract()` the body panels use) and a five-sided well hanging under each. The rule from
+the shower holds and is now twice earned: **products get meshes, hollow things get built.**
+The taps stayed meshes, because a tap is a shape rather than a hole.
+
 **The double sink, 2026-09-22.** `sinkdouble` (hunyuan 0.06) is one pressed top with two
 bowls and a tap deck, drawn from a reference photo Ondrej sent; `tap` (rodin 0.00) is the
 mixer that stands on it. v2's double sink is **its own kind**, because `box_of()` takes the

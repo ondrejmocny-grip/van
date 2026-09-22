@@ -41,17 +41,6 @@ PROMPTS = {
              "slender chrome mixer tap rising from the rim behind the bowl, its spout curving "
              "forward over the bowl, one lever handle on the tap body, all one assembly in "
              "brushed steel and chrome."),
-    # 580 x 360 x 155: nearly twice as wide as it is deep and only a quarter as deep as it
-    # is wide - say it or every model draws a deep butler sink. The taps are separate props,
-    # so this is the pressed top on its own
-    "sinkdouble": ("A double bowl inset kitchen sink seen on its own with NO taps fitted: one "
-             "pressed stainless steel top with a narrow flat rim all round, holding two "
-             "rectangular bowls side by side separated by a narrow raised divider, the left "
-             "bowl a little wider than the right one, each bowl with softly rounded internal "
-             "corners, a flat bottom and one round drain hole, and a flat tap deck along the "
-             "back edge with two small tap holes punched in it. Nearly twice as wide as it is "
-             "deep and only a quarter as deep as it is wide, brushed stainless steel, seen "
-             "from above at a three-quarter angle."),
     # 60 x 120 x 280: the spout reaches forward about half the height, the body is slim
     "tap": ("A polished chrome kitchen mixer tap standing on its own: a slim cylindrical body "
             "rising from a round base, five times taller than the body is wide, one lever "

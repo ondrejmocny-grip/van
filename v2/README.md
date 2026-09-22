@@ -23,7 +23,7 @@ with the drawing above. What the 3D adds on top of the plan:
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
-| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the wardrobe (open WC bay), the shoe locker, the hinged-door fridge, the double sink, both taps and the inline filter. The shower is built from panels, a tray and a glass screen instead |
+| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the wardrobe (open WC bay), the shoe locker, the hinged-door fridge, both taps and the inline filter. The sink is built from a deck and two wells, like the shower. The shower is built from panels, a tray and a glass screen instead |
 | **Schema overlay** | the plan itself painted onto the model — pair it with the **Plan** view |
 | Sizes | every block labelled with its name and size in mm |
 
@@ -88,10 +88,10 @@ Resolved 2026-09-21. **Two bowls and two taps.**
 
 | | |
 |---|---|
-| Sink top | one pressed **580 × 360** inset, two bowls side by side |
-| Bowls | **250 × 310** each, 150 deep, 30 mm divider — detergent one side, rinse the other |
-| Where | pushed to the **aft end** of the run, x 1350–1930 |
-| Prep beside it | **200 mm × 600** of free counter forward of the sink |
+| Sink top | one pressed **580 × 360** inset, two bowls side by side, 20 mm rim |
+| Bowls | **239 × 304** each, 137 deep, 30 mm divider — detergent one side, rinse the other |
+| Where | hard against the **wardrobe**, x 1150–1730 |
+| Prep beside it | **200 mm × 600** of free counter aft of the sink |
 | Mixer tap | over the wash bowl, the usual pumped cold and calorifier hot |
 | **Drinking tap** | dedicated gooseneck beside the mixer, 250 above the worktop |
 | Filter | **inline carbon block**, 2 × 10 inch, teed off the cold line after the pump |
@@ -137,16 +137,21 @@ both runs now put their kit at one end and keep the counter in one piece:
 
 | Run | Kit | Free counter |
 |---|---|---|
-| Driver, sink | double sink **aft**, x 1350–1930 | **200 mm** forward of it |
-| Passenger, hob | hob **aft**, x 1560–1860 | **410 mm** forward, running straight into the 400 leaf = **810 mm** in one line |
+| Driver, sink | double sink **forward**, against the wardrobe, x 1150–1730 | **200 mm** aft of it |
+| Passenger, hob | hob **forward**, x 1150–1450, with the leaf right beside it | **480 mm** aft of it, in one piece |
 
 Worktop with the leaf out: **1.18 m² gross, 0.81 m² free** once the sink top and the hob are
 off it.
 
-**The cost, and it is a real one: the bowls are 250 × 310.** A 320 mm dinner plate only lies
-flat across the diagonal. Making the top 660 wide would give 290 × 310 bowls and leave
+**The cost, and it is a real one: the bowls are 239 × 304.** A 320 mm dinner plate only lies
+flat across the diagonal. Making the top 660 wide would give 279 × 304 bowls and leave
 120 mm of prep instead of 200. Worth settling with a plate and a washing-up bowl in hand
 before the top is cut.
+
+**The sink is built, not generated.** A generated double sink scored 0.06 and rendered as a
+solid block: 4000 faces cannot hold a recess, and a sink is its recess. It is now a deck
+with two holes in it and a five-sided well under each — same call as the shower cubicle.
+The taps are still meshes; a tap is a shape, not a hole.
 
 ## The bathroom
 
@@ -193,8 +198,8 @@ side walls. Recovers 40–60 mm, takes it to ~1810, no holes in the body.
 | Shoe locker | **400 × 450 × 450** | shoes; doubles as the step to the cab |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
 | Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
-| Galley — sink side (driver) | **780 × 600**, worktop 900 | double sink 580 × 360 aft, **200 prep** forward; 20 L oven at the aisle edge, pump behind it |
-| Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 aft, **410 prep** forward into the leaf; **90 L fridge** under |
+| Galley — sink side (driver) | **780 × 600**, worktop 900 | double sink 580 × 360 at the wardrobe, **200 prep** aft; 20 L oven at the aisle edge, pump behind it |
+| Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 forward beside the leaf, **480 prep** aft; **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
 | Bench, driver | **920 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |
 | Bench, passenger | **920 × 600 × 450** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
@@ -265,7 +270,7 @@ sitting over the same arch.
    into a 632 aisle blocks it completely while open. Hinge side is a real decision, and it
    matters more at 90 L than it did at 65.
 5. **Entry gap 690** and **aisle 632**. Two people cannot pass in the galley.
-8. **Bowls at 250 × 310 vs prep at 200 mm.** A 660-wide top would give 290 × 310 bowls and
+8. **Bowls at 239 × 304 vs prep at 200 mm.** A 660-wide top would give 279 × 304 bowls and
    drop the prep strip to 120. Decide with a dinner plate and a washing-up bowl in hand.
 9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
