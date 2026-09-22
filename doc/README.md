@@ -463,6 +463,26 @@ second half:
 The probe is three lines of trimesh and it is worth running on any prop whose point is a face:
 a door, a drawer, a hob, an opening.
 
+### The larder, 2026-09-22 — say which face is the front
+
+`LARDER` (200 deep x 600 wide x 1881 tall) scored **hunyuan 0.03, rodin 0.22, trellis 0.22**.
+Not a tie — a seven-fold gap — so the shape error decided it on its own and the flat-face probe
+was not needed. 0.03 is the best number this project has recorded apart from v2's wardrobe.
+
+But the round still taught something. The prompt spelt out the proportions ("nine times taller
+than it is deep, three times taller than it is wide") and then put **one full-height door on
+the wide face**. For a 200 x 600 slot wedged between the galley return and the office seat,
+that face is the one that cannot open — both of its neighbours are solid carcasses. The face
+that is actually free is the narrow one onto the aisle.
+
+> **Proportions are not enough: say which face is the front.** Every mesh model puts the door
+> where the prompt puts it, and a prop's front is decided by the layout around its box, not by
+> the shape of the box.
+
+The number was right and the door was on the wrong side of it. The real unit here is a tandem
+pull-out with a 200-wide front onto the aisle and 600-deep baskets; the prop keeps a door on
+its wide face, turned aft so it at least does not open into the carcass it butts against.
+
 ### Finding a pipeline that keeps the layout — the ladder, 2026-09-18
 
 Canny-on-a-line-drawing kept inventing furniture, so we climbed from the geometry toward
