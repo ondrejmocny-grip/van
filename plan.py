@@ -101,14 +101,14 @@ VARIANTS["ref-scarletseth"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v1"] = dict(
     out="v1/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 195), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 195), slider=(300, 1600),
     cab=800,                                   # cab depth drawn forward of x=0
     seats=[(-430, 460, 285), (-430, 1380, 285)],
     title="v1 - VW Crafter L3H3 · swivel seats, wet cubicle, rear dinette",
     viewer_title="Crafter L3H3 Interior",
     stats=["bed 1730 long", "galley aisle 1232", "corridor past cubicle 532",
-           "worktop 900", "seat 520", "standing 1881"],
-    note="Load box 3450 x 1832 x 1881 mm finished. Furniture depths include the wall build. Estimated +/-50 mm.",
+           "worktop 900", "seat 520", "standing 1781"],
+    note="Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Furniture depths include the wall build. Estimated +/-50 mm.",
     boxes=[
         (-150,  550,  620, 1220, "TABLE", "Lagun swing arm", None),
         (   0,  620,    0, 1832, "FRONT LOUNGE", "swivel seats · office + seat", None),
@@ -125,41 +125,41 @@ VARIANTS["v1"] = dict(
         dict(kind="elev", title="Driver side elevation", span=3450, left="FRONT", right="REAR",
              datum=(520, "bed / seat top 520"),
              boxes=[
-                 (   0,  620,    0, 1881, "FRONT LOUNGE", "swivel seat + Lagun table", None),
+                 (   0,  620,    0, 1781, "FRONT LOUNGE", "swivel seat + Lagun table", None),
                  ( 620, 1720,    0,  900, "GALLEY", "sink · induction · oven · one drawer stack", GALLEY),
-                 ( 620, 1720, 1400, 1800, "overhead locker", "", WARM),
+                 ( 620, 1720, 1400, 1700, "overhead locker", "", WARM),
                  ( 900, 1550, 1000, 1350, "awning window", "", None),
                  (1720, 2270,    0,  900, "FRIDGE", "70 L, over the arch", COLD),
                  (2270, 3000,    0,  450, "BENCH", "battery + inverter under", SOFT),
                  (3000, 3450,    0,  450, "REAR BENCH", "", SOFT),
-                 (2270, 3000, 1400, 1800, "overhead locker", "", WARM),
+                 (2270, 3000, 1400, 1700, "overhead locker", "", WARM),
                  (2350, 3000,  620,  960, "awning window", "", None),
              ]),
         dict(kind="elev", title="Passenger side elevation (kerb side)", span=3450, left="FRONT", right="REAR",
              datum=(520, "bed / seat top 520"),
              boxes=[
-                 (   0,  300,    0, 1881, "LOUNGE", "", None),
+                 (   0,  300,    0, 1781, "LOUNGE", "", None),
                  ( 300, 1600,    0, 1550, "SLIDING DOOR", "entry", None),
-                 (1600, 2350,    0, 1881, "WET CUBICLE", "sit-down shower · floor +360", WET),
+                 (1600, 2350,    0, 1781, "WET CUBICLE", "sit-down shower · floor +360", WET),
                  (1750, 2100,  410,  810, "cassette hatch", "", None),
                  (2350, 3000,    0,  450, "BENCH", "108 L fresh tank under", SOFT),
                  (3000, 3450,    0,  450, "REAR BENCH", "", SOFT),
-                 (2350, 3000, 1400, 1800, "overhead locker", "", WARM),
+                 (2350, 3000, 1400, 1700, "overhead locker", "", WARM),
                  (2400, 3000,  620,  960, "awning window", "", None),
              ]),
         dict(kind="sect", title="Section A-A · through the galley, looking forward", span=1832,
              left="DRIVER", right="PASSENGER",
              boxes=[
                  (   0,  600,    0,  900, "GALLEY", "600 deep", GALLEY),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
              ],
              notes=[(1216, 1150, "entry / aisle 1232 wide"), (1650, 500, "sliding door")]),
         dict(kind="sect", title="Section B-B · through the wet cubicle, looking forward", span=1832,
              left="DRIVER", right="PASSENGER", datum=(520, "bed 1132 wide here"),
              boxes=[
                  (   0,  600,    0,  900, "FRIDGE", "70 L over the arch", COLD),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
-                 (1132, 1832,    0, 1881, "WET CUBICLE", "700 wide · floor +360", WET),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
+                 (1132, 1832,    0, 1781, "WET CUBICLE", "700 wide · floor +360", WET),
                  (1132, 1832,    0,  360, "step", "", WARM),
              ],
              notes=[(866, 1150, "corridor 532")]),
@@ -169,10 +169,10 @@ VARIANTS["v1"] = dict(
                  (   0,  600,    0,  450, "BENCH", "battery + inverter under", SOFT),
                  (1132, 1832,    0,  450, "BENCH", "fresh tank", SOFT),
                  ( 600, 1132,  700,  760, "TABLE", "", WARM),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
-                 (1512, 1832, 1400, 1800, "locker", "", WARM),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
+                 (1512, 1832, 1400, 1700, "locker", "", WARM),
              ],
-             notes=[(916, 1150, "headroom 1881")]),
+             notes=[(916, 1150, "headroom 1781")]),
     ],
 )
 
@@ -248,13 +248,13 @@ VARIANTS["v2"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v3"] = dict(
     out="v3/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
     title="v3 - VW Crafter L3H3 - L-galley, dinette that works as the office, rear bathroom",
     viewer_title="Crafter L3H3 v3 Interior",
     stats=["bed 1520 x 1832 across", "galley 1.15 m2", "bathroom 600 x 1232",
            "entry 730", "corridor 632", "garage 600 wide full height"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. The galley is a proper L round the corner "
+    note=("Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van. The galley is a proper L round the corner "
           "behind the driver: 600 x 1382 across the bulkhead and a 530 return down the driver "
           "wall, then the larder. No separate office seat - two people work at the dinette, "
           "facing each other across the 632 corridor with the table at 745. The bed is TWO "
