@@ -8,7 +8,7 @@ the vehicle itself - body panels with real apertures, glazing, and the cab.
     python model3d.py v1
 
 line_render() is used by impressions.py as the control image for image generation.
-write_viewer() fills viewer_template.html with this variant's geometry.
+write_viewer() fills viewer_template.html with one variant, or with several and a switch.
 """
 import json, os, sys
 import matplotlib
@@ -1202,8 +1202,9 @@ def props_data(kinds=None):
     """Prop meshes made by props.py, embedded so viewer.html stays a single file. Absent is
     fine - the viewer just keeps drawing the coloured box for that kind.
 
-    Only the kinds this variant actually uses go in. v1 has no wardrobe and v2 has no wet
-    cubicle, and neither viewer should carry a quarter megabyte of the other's furniture."""
+    Only the kinds the page's variants actually use go in. v1 has no wardrobe and v2 has no
+    wet cubicle, and neither viewer should carry a quarter megabyte of the other's furniture.
+    The combined viewer embeds each mesh once, however many variants use it."""
     import base64
     d = os.path.join(HERE, "props")
     if not os.path.isdir(d):
@@ -1230,34 +1231,50 @@ def plan_image(v, path):
     return {"img": "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()}
 
 
-def write_viewer(v, path):
-    """Fill viewer_template.html with this variant's geometry."""
-    tpl_path = os.path.join(HERE, "viewer_template.html")
-    if not os.path.exists(tpl_path):
-        print("skipped viewer.html - viewer_template.html not found")
-        return
+def viewer_data(v, out):
+    """One variant's geometry for the viewer. `out` is the variant's folder, where the
+    schema overlay image is written on the way."""
     sp = spec(v)
     used = {b[6] for b in boxes_for(v, with_shell=True)}
-    data = {
+    return {
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
         "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
-        "containers": list(sp["containers"]), "props": props_data(used),
+        "containers": list(sp["containers"]), "props": sorted(used),
         "cylinders": ["wheel"], "layers": sp["layers"],
         # the plan drawing itself, for the schema overlay: plan.py renders it cropped to the
         # load box, so the viewer lays the real layout image on the floor 1:1 rather than
         # redrawing an approximation of it
-        "plan": plan_image(v, os.path.join(os.path.dirname(path) or ".", "overlay.png")),
+        "plan": plan_image(v, os.path.join(out, "overlay.png")),
         "boxes": [dict({"b": [x0, x1, y0, y1, z0, z1], "k": kind},
                        **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}))
                   for x0, x1, y0, y1, z0, z1, kind in boxes_for(v, with_shell=True)],
     }
+
+
+def write_viewer(names, path, title="Van Interior"):
+    """Fill viewer_template.html with these variants. One name gives a variant's own viewer;
+    several give one page with a switch between them, which is the one that gets published."""
+    tpl_path = os.path.join(HERE, "viewer_template.html")
+    if not os.path.exists(tpl_path):
+        print("skipped viewer.html - viewer_template.html not found")
+        return
+    variants = {}
+    for name in names:
+        v = VARIANTS[name]
+        variants[name] = viewer_data(v, variant_dir(v))
+    used = set().union(*(set(d["props"]) for d in variants.values()))
+    data = {"order": list(names), "start": names[-1], "variants": variants,
+            "props": props_data(used)}
     tpl = open(tpl_path, encoding="utf-8").read()
-    tpl = tpl.replace("<title>Van Interior</title>",
-                      "<title>" + v.get("viewer_title", "Van Interior") + "</title>")
+    tpl = tpl.replace("<title>Van Interior</title>", "<title>" + title + "</title>")
     open(path, "w", encoding="utf-8").write(tpl.replace("/*MODEL_DATA*/null", json.dumps(data)))
     print("wrote", path)
+
+
+def variant_dir(v):
+    return os.path.join(HERE, v["out"].rsplit("/", 1)[0]) if "/" in v["out"] else HERE
 
 
 WELL_H = 350            # wheel arch height above the finished floor - not in the plan data
@@ -1343,13 +1360,26 @@ def main(name):
     v = VARIANTS[name]
     if "height" not in v:
         sys.exit("variant %r has no 'height' - add one before extruding it" % name)
-    out = v["out"].rsplit("/", 1)[0] if "/" in v["out"] else "."
+    out = variant_dir(v)
     os.makedirs(out, exist_ok=True)
     check(v)
     render(v, os.path.join(out, "3d"))
     write_obj(v, os.path.join(out, "model.obj"))
-    write_viewer(v, os.path.join(out, "viewer.html"))
+    write_viewer([name], os.path.join(out, "viewer.html"), v.get("viewer_title", "Van Interior"))
+
+
+# The versions the combined viewer switches between, in the order its buttons show them.
+# The last one is where it opens.
+VIEWER_ALL = ("v1", "v2", "v3")
+
+
+def main_all():
+    """One viewer.html at the top with every version in it - the page that gets published."""
+    for name in VIEWER_ALL:
+        check(VARIANTS[name])
+    write_viewer(list(VIEWER_ALL), os.path.join(HERE, "viewer.html"), "Crafter L3H3 Interior")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "v1")
+    arg = sys.argv[1] if len(sys.argv) > 1 else "v1"
+    main_all() if arg == "viewer" else main(arg)

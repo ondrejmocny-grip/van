@@ -46,6 +46,21 @@
   .sub { color: var(--muted); font-size: 12.5px; }
   .sub b { color: var(--brass); font-weight: 500; font-family: "IBM Plex Mono", monospace; }
 
+  /* One page for every version: the switch sits in the header, before the title, so which
+     van you are looking at is the first thing you read. Hidden when there is only one. */
+  .versions { display: flex; gap: 0; align-self: center; }
+  .versions[hidden] { display: none; }
+  .versions button {
+    font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 13px;
+    padding: 4px 12px; border-radius: 0; margin-left: -1px;
+  }
+  .versions button:first-child { border-radius: 2px 0 0 2px; margin-left: 0; }
+  .versions button:last-child { border-radius: 0 2px 2px 0; }
+  .versions button[aria-pressed="true"] {
+    background: var(--brass); border-color: var(--brass); color: var(--paper);
+    position: relative;
+  }
+
   main { position: relative; min-height: 0; background: var(--stage); }
   canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 
@@ -130,6 +145,7 @@
 
 <div id="app">
   <header>
+    <div class="versions" id="versions" role="group" aria-label="Layout version" hidden></div>
     <h1 id="title"></h1>
     <span class="sub">Interior <b id="dims"></b> &middot; drag to orbit, right-drag or
       shift-drag to pan, scroll to zoom</span>
@@ -150,7 +166,49 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script>
 (function () {
-  var MODEL = /*MODEL_DATA*/null;
+  // Every variant in one page. Each one's geometry is its own; the prop meshes are shared,
+  // because v1, v2 and v3 use many of the same appliances and a glb is the heavy part.
+  var BUNDLE = /*MODEL_DATA*/null;
+  var ORDER = BUNDLE.order, current = null;
+
+  function pick() {
+    var h = (location.hash || "").replace("#", "");
+    if (BUNDLE.variants[h]) { return h; }
+    try {
+      var s = localStorage.getItem("van-viewer-variant");
+      if (BUNDLE.variants[s]) { return s; }
+    } catch (e) {}
+    return BUNDLE.start || ORDER[ORDER.length - 1];
+  }
+
+  var versionsEl = document.getElementById("versions");
+  versionsEl.hidden = ORDER.length < 2;
+  ORDER.forEach(function (id) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = id; b.id = "variant-" + id;
+    b.title = BUNDLE.variants[id].title;
+    b.addEventListener("click", function () { show(id); });
+    versionsEl.appendChild(b);
+  });
+
+  function show(id) {
+    // what you were looking at comes with you: the same view, the same layers switched on,
+    // so v2 and v3 can be compared from one spot rather than set up again each time
+    var keep = current ? current.state() : null;
+    if (current) { current.dispose(); }
+    current = build(BUNDLE.variants[id], keep);
+    ORDER.forEach(function (o) {
+      document.getElementById("variant-" + o).setAttribute("aria-pressed", String(o === id));
+    });
+    try { localStorage.setItem("van-viewer-variant", id); } catch (e) {}
+    if (history.replaceState) { try { history.replaceState(null, "", "#" + id); } catch (e) {} }
+  }
+
+  window.addEventListener("resize", function () { if (current) { current.resize(); } });
+  var glbCache = {};
+
+  function build(MODEL, keep) {
+  var alive = true;
   var mm = 0.001;
   var L = MODEL.length * mm, W = MODEL.width * mm, H = MODEL.height * mm;
   var NOSE = (MODEL.nose || 0) * mm;
@@ -159,6 +217,7 @@
   document.getElementById("dims").textContent =
     MODEL.length + " × " + MODEL.width + " × " + MODEL.height + " mm";
   var readout = document.getElementById("readout");
+  readout.textContent = "";
   (MODEL.stats || []).forEach(function (t) {
     var parts = t.split(" ");
     var num = parts.find(function (p) { return /^\d+$/.test(p); });
@@ -200,7 +259,10 @@
       schema: true }
   ];
 
-  var canvas = document.getElementById("c");
+  // a fresh canvas per variant: its listeners and its GL context go with the old one
+  var old = document.getElementById("c"), canvas = document.createElement("canvas");
+  canvas.id = "c";
+  old.parentNode.replaceChild(canvas, old);
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
@@ -274,13 +336,18 @@
   // Detailed prop meshes, made by props.py and embedded as glb. The box stays the authority:
   // each mesh is scaled to exactly fill its box, so a generated shape can never quietly move a
   // dimension. Turning the layer on swaps the coloured box for the mesh.
-  var PROPS = MODEL.props || {};
+  var PROPS = {};
+  (MODEL.props || []).forEach(function (k) {
+    if (BUNDLE.props[k]) { PROPS[k] = BUNDLE.props[k]; }
+  });
   var propParts = {}, propsOn = false;
 
-  function b64buf(s) {
+  function b64buf(k, s) {
+    if (glbCache[k]) { return glbCache[k].slice(0); }   // parse may keep the one it is given
     var bin = atob(s), buf = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) { buf[i] = bin.charCodeAt(i); }
-    return buf.buffer;
+    glbCache[k] = buf.buffer;
+    return buf.buffer.slice(0);
   }
 
   function loadProps() {
@@ -289,7 +356,8 @@
     MODEL.boxes.forEach(function (item) {
       var p = PROPS[item.k];
       if (!p) { return; }
-      loader.parse(b64buf(p.glb), "", function (g) {
+      loader.parse(b64buf(item.k, p.glb), "", function (g) {
+        if (!alive) { return; }                      // switched away before it arrived
         var o = g.scene, b = item.b;
         o.rotation.y = ((p.yaw || 0) + (item.y || 0)) * Math.PI / 180;
         o.updateMatrixWorld(true);
@@ -375,7 +443,10 @@
     dirty = true;
   }
 
-  var theta = VIEWS[0].theta, phi = VIEWS[0].phi, radius = VIEWS[0].r, dirty = true;
+  var startView = VIEWS[0];
+  VIEWS.forEach(function (v) { if (keep && v.id === keep.view) { startView = v; } });
+  var viewNow = startView.id;
+  var theta = startView.theta, phi = startView.phi, radius = startView.r, dirty = true;
   var home = target.clone();
   var applyLayer = {};                             // id -> the layer's own apply(), filled below
 
@@ -456,11 +527,13 @@
   }, { passive: false });
 
   var viewsEl = document.getElementById("views");
+  viewsEl.querySelectorAll("button").forEach(function (b) { b.remove(); });
   VIEWS.forEach(function (v, i) {
     var b = document.createElement("button");
     b.type = "button"; b.textContent = v.label; b.id = "view-" + v.id;
-    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.setAttribute("aria-pressed", String(v === startView));
     b.addEventListener("click", function () {
+      viewNow = v.id;
       theta = v.theta; phi = v.phi; radius = v.r;
       target.copy(home);                           // a view is a view, panning and all
       place();
@@ -476,7 +549,9 @@
 
   var showSizes = false;
   var layersEl = document.getElementById("layers");
+  layersEl.querySelectorAll("button").forEach(function (b) { b.remove(); });
   LAYERS.forEach(function (layer) {
+    if (keep && layer.id in keep.layers) { layer.on = keep.layers[layer.id]; }
     var b = document.createElement("button");
     b.type = "button"; b.textContent = layer.label; b.id = "layer-" + layer.id;
     function apply() {
@@ -499,6 +574,7 @@
   // Dimension tags: one per named box, HTML projected onto the canvas each frame. Cheaper
   // and far more legible than text sprites, and it picks up the page's own typography.
   var labelsEl = document.getElementById("labels"), tags = [];
+  labelsEl.textContent = "";
   MODEL.boxes.forEach(function (item) {
     var name = NAMES[item.k], b = item.b;
     if (!name) return;
@@ -547,6 +623,7 @@
   }
 
   var keyEl = document.getElementById("key"), seen = {};
+  keyEl.textContent = "";
   MODEL.boxes.forEach(function (item) {
     var name = NAMES[item.k];
     if (!name || seen[name] || isAppliance[item.k]) return;   // body and kit stay out
@@ -563,15 +640,41 @@
     camera.updateProjectionMatrix();
     dirty = true;
   }
-  window.addEventListener("resize", resize);
   resize(); place();
 
   (function loop() {
+    if (!alive) return;
     requestAnimationFrame(loop);
     if (!dirty) return;
     dirty = false;
     renderer.render(scene, camera);
     drawLabels();
   })();
+
+  return {
+    resize: resize,
+    state: function () {
+      var on = {};
+      LAYERS.forEach(function (l) { on[l.id] = l.on; });
+      return { view: viewNow, layers: on };
+    },
+    dispose: function () {
+      alive = false;
+      scene.traverse(function (n) {
+        if (n.geometry) { n.geometry.dispose(); }
+        if (n.material) {
+          (Array.isArray(n.material) ? n.material : [n.material]).forEach(function (m) {
+            if (m.map) { m.map.dispose(); }
+            m.dispose();
+          });
+        }
+      });
+      renderer.dispose();
+      if (renderer.forceContextLoss) { renderer.forceContextLoss(); }
+    }
+  };
+  }
+
+  show(pick());
 })();
 </script>

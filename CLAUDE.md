@@ -47,6 +47,10 @@ was dropped on 2026-09-20 and its folder no longer exists.
 Each version also brings its own 3D tables — `REGISTRY` in `model3d.py` says which variant
 gets which fit-out. A variant not listed there borrows v1's, remapped.
 
+One published 3D viewer holds every version with a switch between them: `python model3d.py
+viewer` writes it to the top-level `viewer.html`. Republish that one; the per-version
+`vN/viewer.html` files are local copies.
+
 ## Prop meshes
 
 `props.py` replaces the viewer's coloured boxes with generated low-poly meshes through FAL.

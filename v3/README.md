@@ -12,7 +12,7 @@ side, back to front: **bathroom + garage · bed · larder · galley.**
 
 ## The 3D model
 
-**Viewer: [v3 Crafter](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ)** — drag to orbit,
+**Viewer: [v3 Crafter](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y#v3)** — drag to orbit,
 scroll to zoom. Also written locally to `v3/viewer.html`, `v3/model.obj` and `v3/3d/*.png`. Everything in it is
 extruded from the box list in `plan.py`, so the model cannot disagree with the drawing above.
 

@@ -8,7 +8,7 @@ Regenerate: `python plan.py v2` then `python model3d.py v2`, from the project ro
 
 ## The 3D model
 
-**Viewer: [v2 Crafter](https://claude.ai/artifact/4zfKdrCzAheAzWhmKarVFe)** — drag to orbit,
+**Viewer: [v2 Crafter](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y#v2)** — drag to orbit,
 scroll to zoom. Also written locally to `v2/viewer.html`, `v2/model.obj` and `v2/3d/*.png`.
 
 Everything in it is extruded from the box list in `plan.py`, so the model cannot disagree

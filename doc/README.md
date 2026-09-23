@@ -10,7 +10,9 @@ Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 schema only so far.
 **[v3](../v3/README.md)** puts the galley in an L around the corner behind the driver, splits
 the bed into two benches with a corridor between them running to a rear bathroom beside a
-full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done — [viewer](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ).
+full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done.
+
+**3D viewer, all versions in one page: [v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
 
 ## Who this is for
 
@@ -184,6 +186,7 @@ OBJ for Blender or SketchUp.
 
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
+    python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
@@ -248,9 +251,15 @@ table differently from v1 — in `LAYERS_V2`. Without one, the viewer uses the l
 template.
 
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
-Published viewers: **[v1 Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** ·
-**[v2 Crafter](https://claude.ai/artifact/4zfKdrCzAheAzWhmKarVFe)** -
-republish it after any change with the Artifact tool, passing that URL so it updates in place
+**One published viewer for all versions: [Crafter L3H3 - v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)**, built
+from the top-level `viewer.html` (`python model3d.py viewer`; `VIEWER_ALL` in model3d.py
+lists the versions). Buttons in the header switch versions; the view and the Show layers stay
+as they were, so two layouts can be compared from the same spot. `#v2` at the end of the link
+opens that version where the host passes it through; otherwise the page opens on the version
+you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the
+three separate pages were 7 MB together. The older per-version pages (v1
+`LwGHoarYhEiNDaQSUbvz5s`, v2 `4zfKdrCzAheAzWhmKarVFe`, v3 `53pg4zZh6jgR2B4MFKnLHJ`) are no
+longer updated. Republish it after any change with the Artifact tool, passing that URL so it updates in place
 rather than making a second one. It is private to Ondrej's account; sharing is done from the
 page's own Share menu, not from here.
 
