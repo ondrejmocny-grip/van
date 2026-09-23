@@ -199,6 +199,7 @@ OBJ for Blender or SketchUp.
     python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
     python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube.
                                   #    Their "VW Cr L2H2" is a real L3H3 inside - their L3H3 is an L4.
+                                  #    Their vans are FWD height; the export scales it to 4MOTION (x0.953).
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
@@ -269,7 +270,7 @@ template.
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
 **One published viewer for all versions: [Crafter L3H3 - v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)**, built
 from the top-level `viewer.html` (`python model3d.py viewer`; `VIEWER_ALL` in model3d.py
-lists the versions). Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
+lists the versions). It has no roofs, over the load area or the cab, so you can look straight in from above. Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
 as they were, so two layouts can be compared from the same spot. `#v2` at the end of the link
 opens that version where the host passes it through; otherwise the page opens on the version
 you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the
