@@ -55,6 +55,11 @@ Load compartment, panel van, floor level:
 | Reference van — Ram ProMaster 159" EXT, high roof | 4089 mm | 1930 mm | 1869 / 1384 |
 | Reference van — Fiat Ducato **L2H2** | **3120 mm** | 1932 mm | 1870 / 1422 |
 
+- **Checked 2026-09-23 against VW's own panel-van brochure** (MY18 UK, technical pages):
+  Crafter medium wheelbase, high roof = wheelbase 3640, load 3450 x 1832 (1380 between
+  arches), overall 5986. Load height **1961 is front-wheel drive only - 4MOTION and RWD give
+  1861**, and the load sill rises 570 -> 670. Parkers lists 1861 for the FWD van; the
+  brochure says that is wrong.
 - L4H3 would be the direct equivalent of the reference van — 157 mm shorter, 45 mm lower.
 - **L3H3 is 880 mm shorter** than the reference van, 20% of the length. Everything in v1
   follows from having to give that up.
@@ -105,6 +110,11 @@ decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-on
 See [budget.md](budget.md).
 
 ## Open questions
+- **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
+  2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
+  standing, not 1881. That still fits 171 cm, but v2's 1800-1810 lockers and the 1860
+  shower rail no longer fit, and standing on the 60 mm shower tray leaves ~1720 clear - about 1 cm over Ondrej.
+  The listing's own "1961" is the FWD brochure figure, not this van's.
 - Engine heat exchanger: in the plan, Ondrej to check against the warranty.
 - Morocco and Turkey paperwork, and Schengen limits on a Turkish passport.
 - Measure the real van's roof once bought; our 3300 x 1570 mm usable figure is derived, not measured.
@@ -187,6 +197,8 @@ OBJ for Blender or SketchUp.
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
     python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
+    python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube.
+                                  #    Their "VW Cr L2H2" is a real L3H3 inside - their L3H3 is an L4.
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
