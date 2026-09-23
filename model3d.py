@@ -23,9 +23,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # --- v1: plan label -> (z0, z1). None means the plan box is a void (footwell, open floor).
 # Every table below is v1's. The v2 tables follow, and REGISTRY at the end of this section
 # says which variant gets which. A variant with no entry falls back to v1's, remapped.
+# Every version is drawn on the 4MOTION van since 2026-09-23 - finished ceiling 1781, 100 under
+# the FWD van. Anything that reaches the ceiling is keyed to its variant's height.
+H_V1 = VARIANTS["v1"]["height"]
+H_V3 = VARIANTS["v3"]["height"]
+
 HEIGHTS = {
     "GALLEY": (0, 900),
-    "WET CUBICLE": (0, 1945),
+    "WET CUBICLE": (0, H_V1),
     "FRIDGE": (0, 900),
     "BENCH": (0, 450),
     "REAR BENCH": (0, 450),
@@ -41,16 +46,16 @@ EXTRA = [
     (2350, 3494,    0,  700,  450,  520, "bed"),
     (2350, 3494, 1184, 1784,  450,  520, "bed"),
     (3044, 3494,  700, 1184,  450,  520, "bed"),
-    ( 620, 1720, 1484, 1784, 1400, 1800, "locker"),     # driver, over the galley
-    (2270, 3044, 1484, 1784, 1400, 1800, "locker"),     # driver, over the dinette
-    (2350, 3044,    0,  300, 1400, 1800, "locker"),     # passenger, over the dinette
+    ( 620, 1720, 1484, 1784, 1400, 1700, "locker"),     # driver, over the galley
+    (2270, 3044, 1484, 1784, 1400, 1700, "locker"),     # driver, over the dinette
+    (2350, 3044,    0,  300, 1400, 1700, "locker"),     # passenger, over the dinette
     (2350, 3044,  700, 1184,  700,  760, "table"),      # dinette table, same patch
     ( -50,  550,  600, 1180,  700,  760, "ftable"),     # front Lagun table
     (1600, 2350,    0,  700,    0,  360, "step"),       # raised cubicle floor, high
                                                          # enough to clear the arch
     (2567, 2827,  812, 1072,    0,  700, "leg"),        # dinette post, under its centre
     ( 120,  380,  760, 1020,    0,  700, "fleg"),       # front table post
-    (1600, 1760,   60,  420, 1140, 1940, "shower"),     # head and riser, raised with
+    (1600, 1760,   60,  420, 1140, 1760, "shower"),     # head and riser, raised with
                                                          # the floor under it
 ]
 
@@ -93,8 +98,6 @@ APPLIANCES = [
 # aisle, U-dinette in the back. Nothing about v1's fit-out would survive being
 # shifted onto it, so it gets its own tables.
 # --------------------------------------------------------------------------
-# v2 is drawn on the 4MOTION van (2026-09-23): its floor sits 100 mm higher than the FWD
-# van's, so the finished ceiling is 1781, not 1881. Everything that reaches up is keyed to it.
 H_V2 = VARIANTS["v2"]["height"]
 
 HEIGHTS_V2 = {
@@ -290,10 +293,10 @@ LAYERS_V2 = [
 HEIGHTS_V3 = {
     "GALLEY": (0, 900),             # both legs of the L carry the same label
     "LOCKER": (0, 450),             # shoes, and the step through to the cab
-    "LARDER": (0, 1881),
+    "LARDER": (0, H_V3),
     "BENCH -> BED": (0, 450),       # both benches carry the same label
-    "BATHROOM": (0, 1881),          # a carcass the viewer ghosts, like v1's wet cubicle
-    "GARAGE": (0, 1881),
+    "BATHROOM": (0, H_V3),          # a carcass the viewer ghosts, like v1's wet cubicle
+    "GARAGE": (0, H_V3),
     "ENTRY": None,
     "CORRIDOR -> BED": None,
     "TABLE": None,
@@ -314,18 +317,18 @@ EXTRA_V3 = [
     (   0,  600,    0,  450,  880,  900, "ltable"),      # up, over the locker
     (   0,  600,  430,  450,  450,  875, "ltablep"),     # folded down the end panel
     # Overhead lockers. The passenger run starts aft of the sliding door head.
-    (   0, 1130, 1532, 1832, 1400, 1800, "locker"),      # driver, over the galley
-    (1330, 2850, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
-    (1700, 2850,    0,  300, 1400, 1800, "locker"),      # passenger, clear of the door head
+    (   0, 1130, 1532, 1832, 1400, 1700, "locker"),      # driver, over the galley
+    (1330, 2850, 1532, 1832, 1400, 1700, "locker"),      # driver, over the bed bench
+    (1700, 2850,    0,  300, 1400, 1700, "locker"),      # passenger, clear of the door head
     # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
     # inside the wall - so only the shut position is a box, and it is off by default.
     (2890, 3410,  640, 1792,    0,   60, "tray"),
-    (2890, 3050, 1672, 1832, 1140, 1860, "shower"),      # head and riser, clear of the wall
-    (2850, 2890,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
+    (2890, 3050, 1672, 1832, 1140, 1760, "shower"),      # head and riser, clear of the wall
+    (2850, 2890,  600, 1200,    0, H_V3, "doorshut"),    # shut: the leaf out of its pocket
     # The wall that closes the bed off from the bathroom and the garage, with the doorway
     # left open in it.
-    (2850, 2890,    0,  600,    0, 1881, "wall"),
-    (2850, 2890, 1200, 1832,    0, 1881, "wall"),
+    (2850, 2890,    0,  600,    0, H_V3, "wall"),
+    (2850, 2890, 1200, 1832,    0, H_V3, "wall"),
 ]
 
 APPLIANCES_V3 = [

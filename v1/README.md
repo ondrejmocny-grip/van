@@ -1,5 +1,9 @@
 # v1 — VW Crafter L3H3
 
+**Drawn on the 4MOTION van since 2026-09-23:** finished ceiling **1781**, 100 mm under the
+front-wheel-drive van (VW brochure: 1861 vs 1961 raw). Overhead lockers top out at 1700,
+the shower head at 1760, and full-height parts follow the ceiling.
+
 Configuration settled in the grilling session on 2026-09-17. Read
 [doc/about-us.md](../doc/about-us.md) first — it explains why this build is minimal on
 storage and water but heavy on daily working comfort.
@@ -118,8 +122,8 @@ these. Build from `layout.png` and `views.png`.
 
 ## Vehicle
 
-- **VW Crafter L3H3.** Load box **3450 × 1832 mm**, 1961 mm load height.
-- Finished interior after floor and ceiling build: **3450 × 1832 × 1881 mm**.
+- **VW Crafter L3H3, 4MOTION.** Load box **3450 × 1832 mm**, 1861 mm load height (1961 on FWD).
+- Finished interior after floor and ceiling build: **3450 × 1832 × 1781 mm**.
 - Buying in Czechia or Germany, converting in Czechia.
 - Registered as a **motor caravan from the start** — furniture fixed, built to the EU
   definition (seating, table, sleeping accommodation, cooking facility, storage).
@@ -196,11 +200,11 @@ run both at once.
 
 | | mm above finished floor |
 |---|---|
-| Clear interior height | 1881 |
+| Clear interior height | 1781 |
 | Galley worktop | 900 |
 | Bench top / bed platform | 450 (seat 520 with cushion) |
 | Table | 760 |
-| Overhead lockers | 1400–1800, 300 deep |
+| Overhead lockers | 1400–1700, 300 deep |
 | Wet cubicle floor | +360 (clears the wheel arch outright, gives the drain its fall) |
 | Garage clear height | ~400 |
 
@@ -310,7 +314,7 @@ buys, at the same layout:
 |---|---|---|
 | Load length | 3494 | **3450** |
 | Max width | 1784 | **1832** |
-| Standing height | 1945 | **1881** |
+| Standing height | 1945 | **1881** (1781 on the 4MOTION van) |
 | Bed length | 1774 | **1730** |
 | Corridor past the cubicle | 484 | **532** |
 
@@ -332,9 +336,9 @@ hatch — and that wall is where the rear wheel arch is. Moving the WC inboard b
 moving it forward puts it outside the cubicle. So the floor goes up instead, to 360, which
 clears the arch outright.
 
-The cost is headroom: 1881 − 360 leaves **1521 mm** standing height in the cubicle. That is
+The cost is headroom: 1781 − 360 leaves **1421 mm** standing height in the cubicle. That is
 fine for the sit-down shower we planned and no good for standing under it. The shower head
-went up with the floor, to a rail at 1140–1940, which is head height for someone sitting.
+went up with the floor, to a rail at 1140–1760, which is head height for someone sitting.
 
 The alternative was to measure the real arch first. The tyre itself only reaches 112 mm above
 the floor; the 350 mm we design around is an allowance for suspension travel that nobody has
