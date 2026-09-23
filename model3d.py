@@ -93,9 +93,13 @@ APPLIANCES = [
 # aisle, U-dinette in the back. Nothing about v1's fit-out would survive being
 # shifted onto it, so it gets its own tables.
 # --------------------------------------------------------------------------
+# v2 is drawn on the 4MOTION van (2026-09-23): its floor sits 100 mm higher than the FWD
+# van's, so the finished ceiling is 1781, not 1881. Everything that reaches up is keyed to it.
+H_V2 = VARIANTS["v2"]["height"]
+
 HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
-    "WARDROBE": (0, 1881),      # hanging above, WC drawer below
+    "WARDROBE": (0, H_V2),      # hanging above, WC drawer below
     "LOCKER": (0, 450),         # shoe locker, and the step through the hatch to the cab
     "CAT": None,                # the litter cabinet is panels in EXTRA_V2, with a hole in it
     "SINK": (0, 900),
@@ -152,24 +156,24 @@ EXTRA_V2 = [
     ( 200,  540,  400,  440,  300,  680, "ptablep"),    # folded: drops off the arm and hangs
                                                         #   flat down the locker's side panel,
                                                         #   clear of the legs of whoever sits
-    (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
-    (1600, 1930,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
+    (1150, 1930, 1532, 1832, 1400, 1700, "locker"),     # driver, over the sink
+    (1600, 1930,    0,  300, 1400, 1700, "locker"),     # passenger, clear of the door head
     # Over the dinette the lockers had to move. A 600-deep bench at 570 puts a seated head
     # at 1480, and a locker whose door starts at 1400 is exactly where that head is. So they
     # go up and get shallower: 260 deep instead of 300, 1560 instead of 1400, which clears
     # the head by 80 mm. Shoulder room is the reason they are also held 20 mm off the wall
     # line the bench uses.
-    (1950, 2830, 1572, 1832, 1560, 1810, "locker"),     # driver, over the dinette
-    (1950, 2830,    0,  260, 1560, 1810, "locker"),     # passenger, over the dinette
-    (   0,  160, 1600, 1760, 1140, 1860, "shower"),     # head and riser, on the partition
+    (1950, 2830, 1572, 1832, 1560, 1710, "locker"),     # driver, over the dinette
+    (1950, 2830,    0,  260, 1560, 1710, "locker"),     # passenger, over the dinette
+    (   0,  160, 1600, 1760, 1140, 1760, "shower"),     # head and riser, on the partition
     # The shower cubicle, built rather than generated. A room is not a product: a single
-    # mesh scaled to fill a 700 x 800 x 1881 hole either reads as a solid block or turns
+    # mesh scaled to fill a 700 x 800 x 1781 hole either reads as a solid block or turns
     # its one opening to the wall, and which way a generated mesh faces is a coin toss the
     # box list should not be losing. Three panels, a tray, and a fourth panel on the lobby
     # side with the entrance carved out of it - see arch_face() below.
-    (   0,   40, 1032, 1832,    0, 1881, "wetwall"),    # forward wall, on the partition
-    ( 660,  700, 1032, 1832,    0, 1881, "wetwall"),    # aft wall, shared with the wardrobe
-    (   0,  700, 1792, 1832,    0, 1881, "wetwall"),    # the driver-side wall
+    (   0,   40, 1032, 1832,    0, H_V2, "wetwall"),    # forward wall, on the partition
+    ( 660,  700, 1032, 1832,    0, H_V2, "wetwall"),    # aft wall, shared with the wardrobe
+    (   0,  700, 1792, 1832,    0, H_V2, "wetwall"),    # the driver-side wall
     (  40,  660, 1072, 1792,    0,   60, "tray"),
 ]
 
@@ -733,12 +737,12 @@ def arch_face(x0, x1, y0, y1, z0, z1, ox0, ox1, oz0, oz1, rtop, rbot, kind, step
 EXTRA_V2 += sink_wells(1150, 1590, 1440, 1800, 700, 905, n=1)
 EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
 # The shower entrance: carved, not a door and not a full glass wall. 450 clear is the
-# narrowest an adult actually walks through; a semicircular head springs at 1575 and tops
-# out at 1800. It is pushed to the AFT end of the face, against the wardrobe, which leaves
+# narrowest an adult actually walks through; a semicircular head springs at 1515 and tops
+# out at 1740, 41 under the 4MOTION ceiling. It is pushed to the AFT end of the face, against the wardrobe, which leaves
 # 170 mm of full-height panel at the forward end, on the partition side - the only place on
 # this face anything can be mounted, and the end you meet first coming from the cab.
-EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, 1881,
-                      210, 660, 60, 1800, 225, 60, "wetface", steps=45)
+EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, H_V2,
+                      210, 660, 60, 1740, 225, 60, "wetface", steps=45)
 
 # The cat box, in the hole the walk-through left at floor level. 400 x 400 outside, and it
 # reaches 190 mm forward THROUGH the partition into the dead space behind the bench's seat

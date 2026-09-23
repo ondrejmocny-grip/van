@@ -2,6 +2,11 @@
 
 Started 2026-09-20. **Plan and 3D model — iterating.** No photoreal impressions yet.
 
+**Drawn on the 4MOTION van since 2026-09-23:** finished ceiling **1781**, 100 mm lower than the
+front-wheel-drive van (VW brochure: 1861 vs 1961 raw). The overhead lockers dropped to 1700 and
+1710 tops, the shower head to 1760 and the shower arch to 1740. Standing on the 60 mm tray
+leaves ~1720 - about 1 cm over Ondrej.
+
 ![plan](layout.png)
 
 Regenerate: `python plan.py v2` then `python model3d.py v2`, from the project root.
@@ -280,8 +285,8 @@ actually needs, pushed to the aft end of the face, against the wardrobe.
 
 | | |
 |---|---|
-| Opening | **450 wide**, from the 60 mm curb up to **1800** |
-| Head | full semicircle, radius 225, springing at 1575 |
+| Opening | **450 wide**, from the 60 mm curb up to **1740** |
+| Head | full semicircle, radius 225, springing at 1515 |
 | Position | hard against the **aft** wall, x 210–660 of the 620 mm face — the wardrobe end |
 | **Panel left forward of it** | **170 wide × full height**, on the partition side — see below |
 | Curb | the 60 mm tray lip runs across the opening, bottom corners radius 60 |
@@ -334,7 +339,7 @@ footwell, and everything that step buys is storage.
 | Garage | **600 × 1832 × 570 clear = 0.63 m³** (the old flat U gave 0.44) |
 | Table | **900 × 600** at **900**, on one post |
 | Bed made up | **1520 × 1832 at 630** |
-| Sitting headroom over the bed | 1881 − 630 = **1251** |
+| Sitting headroom over the bed | 1781 − 630 = **1151** |
 | Seat to head, sitting | 630 + 850 = **1480** at the top of the head |
 
 **The numbers all come from one rule.** A seat wants to be ~450 above whatever your feet are
@@ -354,7 +359,7 @@ moved rather than quietly overlapping:
 
 | | Before | Now |
 |---|---|---|
-| Height | 1400–1800 | **1560–1810** |
+| Height | 1400–1800 | **1560–1710** |
 | Depth | 300 | **260** |
 | Over the dinette | driver 1930–2850, passenger 1600–2850 | **1950–2830 both sides** |
 | Clear over a seated head | −80 (through it) | **+80** |
@@ -388,8 +393,8 @@ them.
 
 | Area | Size (mm) | Contains |
 |---|---|---|
-| Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
-| Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
+| Shower | **700 × 800**, floor level, 1781 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
+| Wardrobe | **450 × 600** | hanging above (~1181 clear), **WC drawer below** |
 | Shoe locker | **450 × 400 × 450** | shoes; doubles as the step up to the cab hatch |
 | Cat box | **400 × 400 × 420** | 190 of it forward of the partition; 240 × 260 flap in the aft face |
 | Side table | **340 × 380** at 720 | L bracket off the locker's side panel; folds down flat |
@@ -443,7 +448,7 @@ sitting over the same arch.
 | Body length in bed | 1730 (along the van) | **~1760** (across, after wall build) | +30 |
 | Bed shape | 1730 × 1832 head, **1132 at the foot** | **1520 × 1832**, no notch | notch gone |
 | Shower footprint | 750 × 700 = 0.53 m² | 700 × 800 = **0.56 m²** | +7% |
-| Shower headroom | 1681 (floor is +200 over the wheel well) | **1881** | +200, no step |
+| Shower headroom | 1681 (floor is +200 over the wheel well) | **1781** | +100, no step |
 | Shower floor when showering | cassette in it | **clear** | WC stows away |
 | Galley worktop | 1100 × 600 = 0.66 m² | 2 × 780 × 600 + a 400 × 600 leaf = **1.18 m²** gross, 0.81 free | +79% |
 | Hanging space | none | **450 × 600**, ~1281 clear | new |
@@ -480,7 +485,7 @@ sitting over the same arch.
     which is exactly why the two dinette seats are drawn offset along the van. If sitting
     opposite each other turns out to matter more than the 900 table, a wall-mounted swing arm
     off the rear bench face is the alternative, at the cost of the free corner.
-12. **Two slim high lockers instead of two deep low ones.** 1560–1810, 260 deep. Confirm by
+12. **Two slim high lockers instead of two deep low ones.** 1560–1710, 260 deep - only 150 tall on the 4MOTION van. Confirm by
     sitting: the check clears a seated head by 80 mm, and that number came from 171 cm.
 13. **Perch versus door.** The fold-out perch stands in the step-in pocket. If it turns out to
     be folded 95% of the time, it is a hook, not a seat — worth living with a cardboard
