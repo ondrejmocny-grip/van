@@ -275,7 +275,10 @@ APPLIANCES_V3 = [
                                                          #   at the door end for the ventilation
     (  30,  575,  480, 1025,   60,  585, "fridgedrawer"),# 90 L drawer, 545 x 545 x 525, under
                                                          #   the hob - no arch anywhere near it
-    ( 120,  470, 1200, 1650,  380,  720, "oven"),        # 20 L mini oven, 450 x 350 x 340
+    # The oven moves out of the bulkhead run and into the L's return, where its door opens
+    # straight onto the corridor instead of across the cook's own worktop.
+    ( 640, 1090, 1252, 1602,  380,  720, "oven"),        # 20 L mini oven, 450 x 350 x 340,
+                                                         #   door facing the aisle
     ( 150,  490, 1490, 1830,   40,  370, "plumbing"),    # pump and trap, under the bowls
     ( 200,  460, 1680, 1740,  420,  480, "filter"),      # 2 x 10 inch inline carbon block
     (  60,  160, 1400, 1590,  905, 1185, "tap"),         # mixer on the 200 of counter between
@@ -326,7 +329,9 @@ YAW_V3 = {
     "LOCKER": 270,          # 90 cw
     "hob": 90,              # 90 ccw, on top of yaw.json 270 + the 180 FACING adds
     "fridgedrawer": 90,     # 90 ccw, from nothing
-    "oven": 270,            # 180 on top of the 90 quarter turn the bulkhead run needs
+    # The oven is in the RETURN now, so its door has to face the aisle (-y) rather than aft
+    # (+x) - a further 90 ccw on top of what the bulkhead run needed, which lands on 0.
+    "oven": 0,
     # The larder mesh is a slab 0.31 x 1.00 x 0.07, thin on mesh Z. The slot is thin on van x,
     # so without a quarter turn the viewer would stretch the thin axis to 600 and squash the
     # wide one to 200. 270 rather than 90 so the modelled door looks aft rather than into the

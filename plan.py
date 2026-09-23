@@ -252,7 +252,7 @@ VARIANTS["v3"] = dict(
           "closes the bed off from the bathroom and the garage. Estimated +/-50 mm."),
     boxes=[
         (   0,  600,  450, 1832, "GALLEY", "600 x 1382 - hob at the door, sink in the corner", GALLEY),
-        ( 600, 1130, 1232, 1832, "GALLEY", "530 x 600 - the return", GALLEY),
+        ( 600, 1130, 1232, 1832, "GALLEY", "530 x 600 - return - oven under", GALLEY),
         (   0,  600,    0,  450, "LOCKER", "shoes - step - leaf over it", SOFT),
         (1130, 1330, 1232, 1832, "LARDER", "200 x 600 - pull-out", WARM),
         ( 600, 1330,    0,  600, "ENTRY", "730 clear at the door - aisle 632", None),

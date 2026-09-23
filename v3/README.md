@@ -65,7 +65,8 @@ from every run v1 and v2 were built on:
   along it. Without it a 600 mm-deep counter got two bowls stacked front to back.
 - the registry gained a **yaw** table, a per-variant turn for a prop whose mesh was modelled
   on a run running the other way. Four kinds now carry one, read off the viewer:
-  **LOCKER 90 cw, hob 90 ccw, fridge 90 ccw, oven 180.** The sign is worth writing down: the
+  **LOCKER 90 cw, hob 90 ccw, fridge 90 ccw, oven 180, then a further 90 ccw when it moved
+  into the return.** The sign is worth writing down: the
   viewer does `rotation.y` with world X = van length and world Z = van width, so **+90 turns
   van +x toward the passenger wall — counter-clockwise seen from above**, the way the plan is
   drawn. Clockwise is 270.
@@ -131,8 +132,8 @@ block its extra depth. 730 is still the widest entry of any version except v1's 
 
 | Piece | Size (mm) | Holds |
 |---|---|---|
-| **Galley, long leg** — across the bulkhead | **600 × 1382**, worktop 900 | hob at the door end, **90 L drawer fridge** under it, **sink in the corner**, oven and pump under |
-| **Galley, return** — down the driver wall | **530 × 600**, worktop 900 | free counter, the drainer end |
+| **Galley, long leg** — across the bulkhead | **600 × 1382**, worktop 900 | hob at the door end, **90 L drawer fridge** under it, **sink in the corner**, pump and filter under |
+| **Galley, return** — down the driver wall | **530 × 600**, worktop 900 | counter and the drainer end, **oven under**, its door onto the corridor |
 | Galley leaf | **600 × 450** at 900 | pulls up over the shoe locker |
 | Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
 | **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — a **tandem pull-out**, 200-wide front onto the aisle, 600-deep baskets |
@@ -141,6 +142,12 @@ block its extra depth. 730 is still the widest entry of any version except v1's 
 
 **Galley 1.15 m²** — 0.83 across the bulkhead and 0.32 in the return. That is **+22 % on v2**
 and the most of any version with a bathroom in it.
+
+**The oven lives in the return, not in the bulkhead run.** Its door then opens straight onto
+the corridor rather than across the cook's own worktop, and you are not bending over the hot
+shelf in the middle of the prep area. It is a further quarter turn from where the bulkhead run
+put it — the rule from the L still applies, and a delta is all you need: from facing aft to
+facing the aisle is +90 counter-clockwise.
 
 **The galley leaf crosses the cab pass-through when it is up.** The pass-through sits over the
 shoe locker and the leaf lands at 900, straight through it. Same trade v2's worktop leaf made
