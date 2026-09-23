@@ -207,7 +207,7 @@ VARIANTS["v2"] = dict(
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
     stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
-           "garage 600 x 1832 x 570", "entry column 210 x 562", "galley aisle 632",
+           "garage 600 x 1832 x 570", "crawl-through 500 x 930", "galley aisle 632",
            "rear floor +180", "standing 1881"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
           "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
@@ -226,7 +226,6 @@ VARIANTS["v2"] = dict(
         (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
         (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step to the hatch", SOFT),
-        (   0,  210,  700, 1032, "SHELVES", "210 x 332 - 420 up to the roof - towels, stores", WARM),
         (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
         ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
         ( 750, 1150,    0,  600, "WORKTOP", "400 x 600 - fold-down leaf", GALLEY),

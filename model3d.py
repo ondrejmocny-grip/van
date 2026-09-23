@@ -97,8 +97,6 @@ HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
     "WARDROBE": (0, 1881),      # hanging above, WC drawer below
     "LOCKER": (0, 450),         # shoe locker, and the step through the hatch to the cab
-    "SHELVES": (420, 1881),     # what is left of the old walk-through: a stack standing on
-                                #   the cat box, aft of the hatch so you can still reach it
     "CAT": None,                # the litter cabinet is panels in EXTRA_V2, with a hole in it
     "SINK": (0, 900),
     "HOB": (0, 900),
@@ -148,7 +146,6 @@ EXTRA_V2 = [
     # from a thing you perch on into a seat you can work at. 60 of foam: the sitter's trunk
     # starts at x 60, so the cushion fills the gap between the wall and the back exactly.
     (   0,   60,   20,  400,  480,  950, "backrest"),
-    (  -40,    0,  450,  680, 1000, 1500, "hatchdoor"),  # the little door over the hatch
     ( 100,  180,  400,  460,  120,  640, "parm"),       # upright, bolted flat to the side panel
     ( 180,  660,  400,  460,  640,  680, "parm"),       # the arm, running aft at hand height
     ( 460,  800,   60,  440,  680,  720, "ptable"),     # 340 x 380 top, surface at 720
@@ -214,7 +211,7 @@ APPLIANCES_V2 = [
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SHELVES", "SINK", "HOB", "BENCH", "REAR BENCH",
+CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
                  "FOOTWELL -> BED")
 
 # Three people, checked the same way appliances are checked against each other - because
@@ -267,7 +264,6 @@ LAYERS_V2 = [
      "hide": ["ftablep"]},
     {"id": "perch", "label": "Side table out", "kinds": ["ptable"], "on": True,
      "hide": ["ptablep"]},
-    {"id": "hatch", "label": "Cab hatch open", "kinds": [], "on": False, "hide": ["hatchdoor"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
@@ -437,8 +433,8 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
-    "SHELVES": "Entry shelves", "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
-    "backrest": "Backrest pillow", "hatchdoor": "Cab hatch door",
+    "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
+    "backrest": "Backrest pillow",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "wetface": "Shower face, carved opening", "pillow": "Pillow", "insert": "Sink insert tray",
     "ptable": "Side table", "ptablep": "Side table, folded", "parm": "Table bracket",
@@ -499,22 +495,24 @@ HATCHES_V2 = [("d", 700, 1150, 40, 580)]        # the cassette comes out sideway
 # bench backs onto the partition from y 60 to 1060, so that "door" opened onto the back of a
 # seat. Two smaller holes do more:
 #
-# 1) A HATCH between the two passenger headrests. The bench's seats are y 60-560 and 560-1060,
-#    so their head restraints sit about y 175-445 and 675-945 and the gap between them is
-#    y 445-675 - which is where this goes, at 1000-1500, face height for anyone in the cab and
-#    chest height for anyone standing in the lobby. It has a door, because a hole into the cab
-#    is a hole in the insulation and a hole in the noise.
+# 1) A crawl-through. It started as a 230 x 500 hatch in the gap between the two passenger
+#    head restraints (they sit about y 175-445 and 675-945, so the gap is y 445-675) - and a
+#    hole that size is for handing a drink through, not for a person. At 500 x 930 it is a
+#    person-sized hole, which no longer fits between the restraints: it is centred on the
+#    MIDDLE seat instead, whose restraint lifts out and whose back folds. The sill at 520 is
+#    100 above the cat box lid, which is the step you kneel on going through. It stops at 1450
+#    because the cab roof is at 1500. A door is drawn nowhere and assumed everywhere: see
+#    v2/README.md - the hole is left open here so the geometry can be read.
 # 2) A LOW hole for the cat box to slide forward through, into the 190 mm of dead space
 #    between the bench's seat back (x -190) and the partition.
-PARTITION_V2 = [(450, 680, 1000, 1500),
+PARTITION_V2 = [(460, 960,  520, 1450),
                 (580, 980,    0,  420)]
 # Cab seats as x0, x1, y0, y1 - a single driver seat and a double bench, no swivels.
 CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
-    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2", "SHELVES": "#e6dcc6",
+    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
     "CAT": "#e0d7c4", "litter": "#e0d7c4", "litterlid": "#cfc7b6", "backrest": "#eceaf1",
-    "hatchdoor": "#d9d4c8",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8", "wetface": "#c6d9e4",
     "pillow": "#f4f2f6", "insert": "#b6bcbe", "ptable": "#d9b98a", "ptablep": "#d9b98a",
     "parm": "#9a9287", "FOOTWELL -> BED": "#d8cfe2", "SIDE TABLE": "#d9b98a",
