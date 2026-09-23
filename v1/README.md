@@ -31,7 +31,7 @@ Panels go on rails or crossbars, never straight onto the roof ribs.
 
 ## 3D and impressions
 
-- **[Interactive 3D viewer](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** — orbit the
+- **[Interactive 3D viewer](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y#v1)** — orbit the
   layout in a browser. Four preset views, and you can switch off the bed, the cubicle, the
   lockers, the appliances or the shell to see past them. Built from the same box data as
   the plan. Local copy: `viewer.html` (regenerate with `python model3d.py v1`). The model

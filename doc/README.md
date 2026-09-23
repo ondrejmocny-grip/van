@@ -10,7 +10,9 @@ Base vehicle chosen: **VW Crafter L3H3** (see below). Configuration settled.
 schema only so far.
 **[v3](../v3/README.md)** puts the galley in an L around the corner behind the driver, splits
 the bed into two benches with a corridor between them running to a rear bathroom beside a
-full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done — [viewer](https://claude.ai/artifact/53pg4zZh6jgR2B4MFKnLHJ).
+full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done.
+
+**3D viewer, all versions in one page: [v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
 
 ## Who this is for
 
@@ -184,6 +186,7 @@ OBJ for Blender or SketchUp.
 
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
+    python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
@@ -225,10 +228,19 @@ reading would show nothing but the bed.
 at. Orbiting alone always points at the middle of the van, so a corner can never be centred.
 Picking a view puts the camera back where that view says, panning included.
 
-**Furniture is checked against a seated person.** `SITTER_V2` is trunk, thighs and shins on
-the office seat, and `check()` fails the build if anything but the seat itself runs through
-them. The office table was mounted on the partition twice, and both times the swing arm went
-straight through the sitter's chest - a clash no box list shows and every render does.
+**Furniture is checked against seated people.** `SITTER_V2` is now three of them - trunk,
+thighs and shins each - one on the shoe locker and two on the dinette benches, with `SIT_OK_V2`
+listing what is allowed to touch them (the seat, its cushion, the floor they stand on).
+`check()` fails the build if anything else runs through a body. It has caught two different
+classes of mistake: the office table was mounted on the partition twice and both times the
+swing arm went straight through a sitter's chest, and when the rear of v2 was lifted by
+180 mm the overhead lockers over the dinette failed instantly, because a seated head had
+moved up into them. Neither is visible in a box list; both are obvious in a render, if you
+happen to render that corner.
+
+A sitter is written from the seat surface: trunk from the seat to seat + 850, thighs
+straddling the cushion, shins from the floor to just under it. 850 is Ondrej at 171 cm -
+raise it before trusting the numbers for anyone taller.
 
 **A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
 modelled facing away from; a box against the other wall gets a half turn on top of the kind's
@@ -239,9 +251,15 @@ table differently from v1 — in `LAYERS_V2`. Without one, the viewer uses the l
 template.
 
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
-Published viewers: **[v1 Crafter](https://claude.ai/artifact/LwGHoarYhEiNDaQSUbvz5s)** ·
-**[v2 Crafter](https://claude.ai/artifact/4zfKdrCzAheAzWhmKarVFe)** -
-republish it after any change with the Artifact tool, passing that URL so it updates in place
+**One published viewer for all versions: [Crafter L3H3 - v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)**, built
+from the top-level `viewer.html` (`python model3d.py viewer`; `VIEWER_ALL` in model3d.py
+lists the versions). Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
+as they were, so two layouts can be compared from the same spot. `#v2` at the end of the link
+opens that version where the host passes it through; otherwise the page opens on the version
+you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the
+three separate pages were 7 MB together. The older per-version pages (v1
+`LwGHoarYhEiNDaQSUbvz5s`, v2 `4zfKdrCzAheAzWhmKarVFe`, v3 `53pg4zZh6jgR2B4MFKnLHJ`) are no
+longer updated. Republish it after any change with the Artifact tool, passing that URL so it updates in place
 rather than making a second one. It is private to Ondrej's account; sharing is done from the
 page's own Share menu, not from here.
 
@@ -366,10 +384,20 @@ get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void 
 
 **And then the sink was built too, 2026-09-22.** The adopted double sink scored 0.06 and
 rendered as a **solid block**: at 4000 faces a recess does not survive, and a sink is its
-recess. `sink_wells()` builds it instead - a deck with two rectangular holes (the same
+recess. `sink_wells()` builds it instead - a deck with a rectangular hole per bowl (the same
 `subtract()` the body panels use) and a five-sided well hanging under each. The rule from
 the shower holds and is now twice earned: **products get meshes, hollow things get built.**
 The taps stayed meshes, because a tap is a shape rather than a hole.
+
+It takes `n=1` for a single bowl and `axis` for which way two bowls sit; `tray_box()` beside
+it is the same five-sided trick for anything open-topped - v2's drop-in sink tray is one.
+
+**Curves are staircases of boxes, 2026-09-23.** `arch_face()` draws a panel with a
+rounded-corner opening carved out of it - v2's shower entrance. Everything in this model is
+an axis-aligned box, so the arch is sampled in columns, each column rounded **outward** so
+the hole is never smaller than the true curve, and columns that come out the same height are
+merged so a shallow arch does not cost thirty boxes. 45 columns across a 450 mm opening is
+10 mm steps, which reads as a curve at real scale; fewer is visibly stepped.
 
 **The double sink, 2026-09-22.** `sinkdouble` (hunyuan 0.06) is one pressed top with two
 bowls and a tap deck, drawn from a reference photo Ondrej sent; `tap` (rodin 0.00) is the

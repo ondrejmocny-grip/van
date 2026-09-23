@@ -206,26 +206,36 @@ VARIANTS["v2"] = dict(
     cab=800,
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
-    stats=["bed 1520 x 1832 across", "locker 400 x 450", "galley aisle 632",
-           "entry gap 690", "garage 600 x 1832", "standing 1881"],
+    stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
+           "garage 600 x 1832 x 570", "crawl-through 500 x 930", "galley aisle 632",
+           "rear floor +180", "standing 1881"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
-          "pass-through beside the shoe locker. Bed sleeps ACROSS: 1832 gross, ~1760 after the "
-          "wall build. WC stows under the wardrobe and slides forward into the shower, cassette "
-          "out through the driver-side panel. The U is one carcass, so the fresh tank runs "
-          "the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm."),
+          "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
+          "the partition, so there was never a way past it. The rear is a U again, but the "
+          "whole of it is "
+          "lifted: you step up 180 into the footwell, the benches are 570 high, and the bed "
+          "makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift "
+          "is the storage: 570 of garage under the rear bench, and a shallow drawer under the "
+          "footwell floor. The table is 900 x 600 on a post at 900, the galley worktop height, "
+          "and drops onto cleats to become the middle of the bed. WC stows under the wardrobe "
+          "and slides forward into the shower, cassette out through the driver-side panel. The "
+          "U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the "
+          "wheel arch. Estimated +/-50 mm."),
     boxes=[
-        ( 400, 1090,  660, 1032, "ENTRY", "690 wide - cab door beside the locker", None),
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - glass screen", WET),
+        ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
-        (   0,  400,    0,  450, "LOCKER", "400 x 450 - shoes", SOFT),
+        (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step to the hatch", SOFT),
+        (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
+        ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
         ( 750, 1150,    0,  600, "WORKTOP", "400 x 600 - fold-down leaf", GALLEY),
-        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - sink at the wardrobe, 200 prep aft", GALLEY),
+        (1150, 1930, 1232, 1832, "SINK", "780 x 600 - 440 single bowl, 340 prep aft", GALLEY),
         (1150, 1930,    0,  600, "HOB", "780 x 600 - hob forward, 480 prep aft", GALLEY),
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
         (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
         (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),
-        (1930, 2850,  600, 1232, "TABLE -> BED", "bed 1520 x 1832, sleeps across", SOFT),
-        (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage, tank runs in", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +180, drawer under", SOFT),
+        (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage 570 clear under", SOFT),
     ],
 )
 
