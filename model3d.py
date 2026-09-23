@@ -99,24 +99,33 @@ HEIGHTS_V2 = {
     "LOCKER": (0, 450),         # shoe locker, and the step through to the cab
     "SINK": (0, 900),
     "HOB": (0, 900),
-    "BENCH": (0, 450),
-    "GARAGE": (0, 760),         # the bed base: a deck at table height, garage under it
+    # The rear U is lifted as one piece. Floor +180 in the footwell, benches 570, bed at 630.
+    # Everything that lift buys is storage: 570 of garage under the rear bench instead of 450,
+    # and a drawer under the footwell floor that pulls forward into the galley aisle.
+    "BENCH": (0, 570),
+    "REAR BENCH": (0, 570),     # the garage, reached through the rear doors
+    "FOOTWELL -> BED": (0, 180),# the step up, and the drawer inside it
     "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
+    "SEAT": None,               # the fold-away perch is in EXTRA_V2, in both its positions
     "ENTRY": None,
     "AISLE": None,
-    "TABLE -> BED": None,
 }
 
 EXTRA_V2 = [
-    # The bed is no longer the seating dropped flat. The garage's deck IS the bed base, at
-    # table height, and a panel slides forward out of it over the benches to finish the bed:
-    # 900 of fixed deck plus 620 of slide makes the same 1520. A slide can only be as deep
-    # as the box it stores in, which is what sets the 900/620 split and the bench length.
-    (1930, 2550,    0,  600,  450,  520, "bed"),        # seat cushion, passenger side
-    (1930, 2550, 1232, 1832,  450,  520, "bed"),        # seat cushion, driver side
-    (1650, 2550,  616, 1216,  700,  760, "table"),      # 900 x 600, slides out of the deck
-    (1930, 2550,    0, 1832,  700,  760, "bedslide"),   # the bed panel, pulled forward
-    (1930, 3450,    0, 1832,  760,  860, "mattress"),   # made up: 1520 x 1832 at 760
+    # A U again, and the table is back on a post instead of sliding out of the rear box -
+    # which is why the rear box is only 600 deep now: the 900 table has to live between the
+    # benches, not inside the garage. The whole U is lifted, and the numbers chain from the
+    # one comfort rule that matters: seat 450 above the floor your feet are on, table 270
+    # above the seat. Footwell floor 180 -> seat 630 -> table 900, the galley worktop height.
+    (1930, 2850,    0,  600,  570,  630, "bed"),        # seat cushion, passenger bench
+    (1930, 2850, 1232, 1832,  570,  630, "bed"),        # seat cushion, driver bench
+    (2850, 3450,    0, 1832,  570,  630, "bed"),        # seat cushion, rear bench
+    (1940, 2840,  616, 1216,  840,  900, "table"),      # 900 x 600, on one post
+    (2340, 2440,  866,  966,  180,  840, "leg"),        # the post, standing on the raised floor
+    (1930, 2850,  600, 1232,  570,  630, "infill"),     # bed made up: table down on cleats at
+                                                        #   570, infill cushion over it
+    (2010, 2610, 1420, 1820,  630,  790, "pillow"),     # heads at the driver wall, one each
+    (2770, 3370, 1420, 1820,  630,  790, "pillow"),
     # The galley worktop carries on forward as a fold-down leaf, hinged on the hob unit's
     # front face at worktop height. This used to be an office table at 760 on a swing arm;
     # the office is gone, so it is 900 like the rest of the kitchen and it is prep space.
@@ -126,21 +135,31 @@ EXTRA_V2 = [
     ( 900, 1150,  260,  320,  780,  840, "farm"),       # swing-out bracket under the leaf
     ( 750, 1150,    0,  600,  840,  900, "ftable"),     # deployed: 400 x 600 at worktop height
     (1090, 1150,    0,  600,  440,  840, "ftablep"),    # folded: hangs down the galley end
+    # A perch that folds out of the shoe locker's aft face. Sit on it facing aft down the
+    # van, or swing round and face the driver side; it folds flat against the locker so the
+    # sliding door is clear. One leg, hinged with it.
+    ( 450,  790,   20,  360,  390,  450, "chair"),      # seat pad, level with the locker top
+    ( 700,  770,  150,  230,    0,  390, "fleg"),       # the leg, down to the floor
+    ( 450,  500,   20,  360,   60,  430, "chairp"),     # folded flat on the locker's aft face
     (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
-    (1930, 2850, 1532, 1832, 1400, 1800, "locker"),     # driver, over the dinette
-    (1600, 2850,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
+    (1600, 1930,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
+    # Over the dinette the lockers had to move. A 600-deep bench at 570 puts a seated head
+    # at 1480, and a locker whose door starts at 1400 is exactly where that head is. So they
+    # go up and get shallower: 260 deep instead of 300, 1560 instead of 1400, which clears
+    # the head by 80 mm. Shoulder room is the reason they are also held 20 mm off the wall
+    # line the bench uses.
+    (1950, 2830, 1572, 1832, 1560, 1810, "locker"),     # driver, over the dinette
+    (1950, 2830,    0,  260, 1560, 1810, "locker"),     # passenger, over the dinette
     (   0,  160, 1600, 1760, 1140, 1860, "shower"),     # head and riser, on the partition
     # The shower cubicle, built rather than generated. A room is not a product: a single
     # mesh scaled to fill a 700 x 800 x 1881 hole either reads as a solid block or turns
     # its one opening to the wall, and which way a generated mesh faces is a coin toss the
-    # box list should not be losing. Three panels, a tray, and a glass screen across the
-    # side that opens onto the lobby - so you can see in from the aisle, which is the whole
-    # point of drawing it at all.
+    # box list should not be losing. Three panels, a tray, and a fourth panel on the lobby
+    # side with the entrance carved out of it - see arch_face() below.
     (   0,   40, 1032, 1832,    0, 1881, "wetwall"),    # forward wall, on the partition
     ( 660,  700, 1032, 1832,    0, 1881, "wetwall"),    # aft wall, shared with the wardrobe
     (   0,  700, 1792, 1832,    0, 1881, "wetwall"),    # the driver-side wall
     (  40,  660, 1072, 1792,    0,   60, "tray"),
-    (  40,  660, 1032, 1072,   60, 1881, "screen"),     # glass, on the lobby side
 ]
 
 APPLIANCES_V2 = [
@@ -149,17 +168,18 @@ APPLIANCES_V2 = [
                                                         #   of the cabinet, not buried at the back
     (1180, 1520, 1480, 1820,   40,  370, "plumbing"),   # pump, filter and trap under the sink,
                                                         #   behind the oven - shortest run to the tap
-    # The double sink is BUILT, in sink_wells() below - a generated mesh of it came back a
-    # solid block. 780 mm of run cannot hold two bowls AND a prep area in the middle, so the
-    # bowls sit hard against the wardrobe and the free counter is all in one piece aft.
-    (1300, 1400, 1640, 1830,  905, 1185, "tap"),        # mixer on the deck behind the bowls:
+    # The sink is BUILT, in sink_wells() below - a generated mesh of it came back a solid
+    # block. One deep bowl now, 440 of run instead of 780, with a shallow tray that drops
+    # into it: the second bowl when you want one, 340 mm of clear cutting board when you
+    # do not. It sits hard against the wardrobe, so the free counter is one run aft.
+    (1200, 1300, 1640, 1830,  905, 1185, "tap"),        # mixer on the deck behind the bowl:
                                                         #   100 across the lever, 190 of reach
     # Drinking water on its own path: a dedicated gooseneck beside the mixer, fed through an
     # inline carbon block teed off the cold line after the pump. Inline rather than a sump
     # housing because there is only 380 mm under the bowls and a sump needs ~400 to drop the
     # cartridge out; an inline cartridge is swapped by pulling its two hose fittings and can
     # lie on its side.
-    (1440, 1490, 1700, 1820,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
+    (1340, 1390, 1700, 1820,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
     (1600, 1860, 1700, 1760,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - hob over the fridge
     (1150, 1450,   40,  560,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520,
@@ -180,18 +200,34 @@ APPLIANCES_V2 = [
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "GARAGE")
+CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
+                 "FOOTWELL -> BED")
 
-# Where a person actually is when they perch on the shoe locker to put boots on: facing
-# aft, knees down, feet on the floor in front of it. Furniture is checked against this the
-# same way appliances are checked against each other, because two rounds of this design were
-# drawn with a swing arm running straight through the sitter's chest - obvious in a render,
-# invisible in a box list. Trunk, thighs, shins.
+# Three people, checked the same way appliances are checked against each other - because
+# two rounds of this design were drawn with a swing arm running straight through a sitter's
+# chest: obvious in a render, invisible in a box list. Trunk, thighs, shins each.
+#
+# 1) On the fold-out perch by the door, turned to face the driver side. The locker itself is
+#    no longer a seat in this state: the perch is deployed exactly where your legs would go.
+# 2+3) The two dinette seats, facing each other across the 632 footwell and OFFSET along the
+#    van - the offset is the whole reason the table is 900 long. Seat surface 630, feet on
+#    the raised floor at 180, so the body sits 450 above what it stands on. Head tops out at
+#    1480 (Ondrej is 171), which is what evicted the old 1400 lockers over the dinette.
 SITTER_V2 = [
-    ( 60,  400,  60,  400,  450, 1300),
-    (400,  800, 100,  380,  380,  500),
-    (620,  820, 100,  380,    0,  400),
+    ( 480,  740,   20,  320,  450, 1300),    # door perch: trunk, facing the driver side
+    ( 500,  760,  320,  700,  380,  500),    #   thighs, reaching into the room
+    ( 520,  740,  620,  820,    0,  400),    #   shins, feet on the floor
+    (2000, 2340,   32,  352,  630, 1480),    # passenger bench, sitting forward: trunk
+    (2040, 2320,  352,  652,  560,  680),    #   thighs, overhanging the bench edge by 52
+    (2040, 2320,  600,  760,  180,  580),    #   shins, dropping into the footwell
+    (2440, 2780, 1480, 1800,  630, 1480),    # driver bench, sitting aft: trunk
+    (2480, 2760, 1180, 1480,  560,  680),    #   thighs
+    (2480, 2760, 1072, 1232,  180,  580),    #   shins
 ]
+# What is allowed to touch a sitter: the seat under them, the cushion on it, and the floor
+# they step on.
+SIT_OK_V2 = ("LOCKER", "chair", "bed", "infill", "pillow", "BENCH", "REAR BENCH",
+             "FOOTWELL -> BED", "ENTRY", "AISLE", "SEAT")
 
 # Which wall a prop mesh was modelled facing away from: "p" = passenger (y=0), "d" = driver.
 # v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
@@ -200,16 +236,22 @@ SITTER_V2 = [
 # fridgedoor, LOCKER and WARDROBE are modelled for v2's own placements, so they are
 # not in here - their facing lives in yaw.json like any deliberate turn.
 FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+# The shoe locker turned a quarter turn in plan - 450 along the van, 400 across - so its
+# mesh has to turn with it. Sign as in YAW_V3: +90 is counter-clockwise seen from above,
+# so a clockwise quarter turn is 270.
+YAW_V2 = {"LOCKER": 270}
 
 # The viewer's Show buttons. v2 groups different things from v1, so it carries its own list;
 # a variant without one gets the template's default.
 LAYERS_V2 = [
-    {"id": "bed", "label": "Bed made up", "kinds": ["bedslide", "mattress"], "on": False,
-     "hide": ["table"]},
+    {"id": "bed", "label": "Bed made up", "kinds": ["infill", "pillow"], "on": False,
+     "hide": ["table", "leg"]},
     {"id": "wet", "label": "Shower + wardrobe",
-     "kinds": ["wetwall", "tray", "screen", "shower", "WARDROBE"], "on": True},
+     "kinds": ["wetwall", "tray", "wetface", "shower", "WARDROBE"], "on": True},
     {"id": "worktop", "label": "Worktop leaf out", "kinds": ["ftable", "farm"], "on": False,
      "hide": ["ftablep"]},
+    {"id": "perch", "label": "Door perch out", "kinds": ["chair", "fleg"], "on": True,
+     "hide": ["chairp"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
@@ -380,6 +422,9 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
+    "wetface": "Shower face, carved opening", "pillow": "Pillow", "insert": "Sink insert tray",
+    "chair": "Door perch", "chairp": "Door perch, folded",
+    "FOOTWELL -> BED": "Footwell / bed middle", "SEAT": "Door perch",
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
     "OFFICE SEAT": "Office seat", "LARDER": "Larder",
     "BENCH -> BED": "Bench / bed", "BATHROOM": "Bathroom", "GARAGE": "Garage, full height",
@@ -438,7 +483,9 @@ CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
-    "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8",
+    "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8", "wetface": "#c6d9e4",
+    "pillow": "#f4f2f6", "insert": "#b6bcbe", "chair": "#d8cfe2", "chairp": "#d8cfe2",
+    "FOOTWELL -> BED": "#d8cfe2", "SEAT": "#d8cfe2",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "OFFICE SEAT": "#d8cfe2", "LARDER": "#e6dcc6",
     "BENCH -> BED": "#d8cfe2", "BATHROOM": "#bcd6e6", "GARAGE": "#e6dcc6",
@@ -485,7 +532,8 @@ REGISTRY = {
     "v2": dict(own_coords=True, heights=HEIGHTS_V2, extra=EXTRA_V2, appliances=APPLIANCES_V2,
                containers=CONTAINERS_V2, windows=WINDOWS_V2, fans=FAN_HOLES_V2,
                hatches=HATCHES_V2, partition=PARTITION_V2, cab_seats=CAB_SEATS_V2,
-               layers=LAYERS_V2, facing=FACING_V2, sitter=SITTER_V2),
+               layers=LAYERS_V2, facing=FACING_V2, sitter=SITTER_V2, yaw=YAW_V2,
+               sit_ok=SIT_OK_V2),
     "v3": dict(own_coords=True, heights=HEIGHTS_V3, extra=EXTRA_V3, appliances=APPLIANCES_V3,
                containers=CONTAINERS_V3, windows=WINDOWS_V3, fans=FAN_HOLES_V3,
                hatches=HATCHES_V3, partition=PARTITION_V3, cab_seats=CAB_SEATS_V3,
@@ -559,18 +607,20 @@ def subtract(rect, holes):
     return rects
 
 
-def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30, axis="x"):
-    """A double-bowl inset sink, built out of boxes rather than generated.
+def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30, axis="x", n=2):
+    """An inset sink - one deep bowl or two - built out of boxes rather than generated.
 
     Image-to-3D gave a clean double sink at 0.06 shape error and it rendered as a solid
     block: 4000 faces is not enough to keep a recess, and a sink IS its recess. Same verdict
     as the shower cubicle - products get meshes, hollow things get built. Here that is a deck
-    with two rectangular holes in it (the same subtract() the body panels use), and a
+    with a rectangular hole per bowl in it (the same subtract() the body panels use), and a
     five-sided well hanging under each hole.
     """
     deck = z1 - 10
     ix0, ix1, iy0, iy1 = x0 + rim, x1 - rim, y0 + rim, y1 - rim
-    if axis == "y":                     # bowls side by side ALONG the van's width
+    if n == 1:                          # one deep bowl, the insert tray makes the second
+        bowls = [(ix0, ix1, iy0, iy1)]
+    elif axis == "y":                   # bowls side by side ALONG the van's width
         mid = (iy0 + iy1) / 2.0
         bowls = [(ix0, ix1, iy0, mid - gap / 2.0), (ix0, ix1, mid + gap / 2.0, iy1)]
     else:                               # bowls side by side along the van's length
@@ -587,8 +637,72 @@ def sink_wells(x0, x1, y0, y1, z0, z1, rim=20, wall=8, gap=30, axis="x"):
     return out
 
 
-# hard against the wardrobe at x 1150, which leaves the 200 mm aft of it as free counter
-EXTRA_V2 += sink_wells(1150, 1730, 1440, 1800, 750, 905)
+def tray_box(x0, x1, y0, y1, z0, z1, wall=6, kind="insert"):
+    """A shallow open tray: bottom and four sides, so it reads as something with a hollow."""
+    return [
+        (x0, x1, y0, y1, z0, z0 + wall, kind),
+        (x0, x1, y0, y0 + wall, z0, z1, kind),
+        (x0, x1, y1 - wall, y1, z0, z1, kind),
+        (x0, x0 + wall, y0, y1, z0, z1, kind),
+        (x1 - wall, x1, y0, y1, z0, z1, kind),
+    ]
+
+
+def arch_face(x0, x1, y0, y1, z0, z1, ox0, ox1, oz0, oz1, rtop, rbot, kind, steps=30):
+    """A panel across the van's x with a rounded-corner opening carved out of it.
+
+    Everything in this model is an axis-aligned box, so the curve is a staircase: the
+    opening is sampled in columns and each column keeps whatever panel is left above and
+    below it. Each column is rounded OUTWARD - the hole is never smaller than the true
+    curve, because a doorway 2 mm generous beats one with a sliver of panel in your
+    shoulder. Columns that come out the same height are merged, so the straight part of a
+    shallow arch costs one box, not thirty.
+    """
+    out = []
+    if ox0 > x0:
+        out.append((x0, ox0, y0, y1, z0, z1, kind))
+    if ox1 < x1:
+        out.append((ox1, x1, y0, y1, z0, z1, kind))
+
+    def edge(x, r, base, up):
+        """Where the opening's top (up=1) or bottom (up=-1) sits at x, corners radius r."""
+        if r <= 0:
+            return base
+        d = min(x - ox0, ox1 - x)
+        if d >= r:
+            return base
+        return base - up * (r - (r * r - (r - d) ** 2) ** 0.5)
+
+    cols = []
+    for i in range(steps):
+        a = ox0 + (ox1 - ox0) * i / float(steps)
+        b = ox0 + (ox1 - ox0) * (i + 1) / float(steps)
+        hi = max(edge(a, rtop, oz1, 1), edge(b, rtop, oz1, 1))
+        lo = min(edge(a, rbot, oz0, -1), edge(b, rbot, oz0, -1))
+        if cols and abs(cols[-1][2] - lo) < 0.5 and abs(cols[-1][3] - hi) < 0.5:
+            cols[-1][1] = b
+        else:
+            cols.append([a, b, lo, hi])
+    for a, b, lo, hi in cols:
+        if lo > z0:
+            out.append((a, b, y0, y1, z0, lo, kind))
+        if hi < z1:
+            out.append((a, b, y0, y1, hi, z1, kind))
+    return out
+
+
+# The sink: one deep bowl, 440 x 360 outside, hard against the wardrobe at x 1150. The bowl
+# is 195 deep - deep enough that the shallow tray drops inside it instead of beside it, and
+# that is the whole point: two compartments when washing up, and 340 mm of unbroken counter
+# aft of the unit the rest of the time, which is where the chopping board lives.
+EXTRA_V2 += sink_wells(1150, 1590, 1440, 1800, 700, 905, n=1)
+EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
+# The shower entrance: carved, not a door and not a full glass wall. 450 clear is the
+# narrowest an adult actually walks through; a semicircular head springs at 1575 and tops
+# out at 1800. It is pushed to the forward end of the face, which leaves 170 mm of full-
+# height panel at the aft end - the only place on this face anything can be mounted.
+EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, 1881,
+                      40, 490, 60, 1800, 225, 60, "wetface", steps=45)
 # v3: in the corner behind the driver, bowls side by side ACROSS the van - the run crosses
 # the bulkhead, so the axis that holds two bowls is y, not x. Cut down to 340 x 560 from
 # 440 x 640 - a smaller, narrower unit, product still to be found. The 200 mm of counter it

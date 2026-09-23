@@ -94,6 +94,9 @@ PROMPTS = {
             "green fabric with piped seams around the edge and softly rounded corners, wide "
             "and shallow, half again as long as it is deep and fifteen times longer than it "
             "is thick, lying flat."),
+    "pillow": ("One bed pillow on its own: a plump rectangular pillow in a plain white cotton "
+               "case, soft rounded corners, the middle dipping slightly, half again as long "
+               "as it is wide and about five times longer than it is thick, lying flat."),
     "locker": ("A campervan overhead wall locker: a long shallow rectangular cabinet with two "
                "matte off-white hinged doors side by side, slim brushed brass bar handles, a "
                "birch plywood carcass, much longer than it is tall and shallower than it is "

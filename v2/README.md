@@ -16,24 +16,28 @@ with the drawing above. What the 3D adds on top of the plan:
 
 | Layer | What it holds |
 |---|---|
-| Bed made up | the U closed to 1520 × 1832; hides the dinette table and its post |
-| Shower + wardrobe | the cubicle's panels, tray and glass screen, and the wardrobe with the WC bay open |
+| Bed made up | the infill over the footwell and the two pillows; hides the table and its post |
+| Shower + wardrobe | the cubicle's panels, tray and carved face, and the wardrobe with the WC bay open |
 | Worktop leaf out | deploys the galley's fold-down leaf; off, it hangs folded down the galley end |
+| Door perch out | the fold-out seat by the sliding door; off, it hangs flat on the locker |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
 | Cab + seats | the 3-seat cab, dash, wheel, and the four road wheels |
-| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the wardrobe (open WC bay), the shoe locker, the hinged-door fridge, both taps and the inline filter. The sink is built from a deck and two wells, like the shower. The shower is built from panels, a tray and a glass screen instead |
+| Detailed props | generated meshes instead of coloured boxes — v2 adds its own for the wardrobe (open WC bay), the shoe locker, the hinged-door fridge, both taps and the inline filter. The sink, its insert tray and the shower cubicle are built from boxes instead: hollow things never survive a generated mesh |
 | **Schema overlay** | the plan itself painted onto the model — pair it with the **Plan** view |
 | Sizes | every block labelled with its name and size in mm |
 
-`model3d.check()` passes on all 13 appliances: each one inside the van, inside a carcass,
-clear of its neighbours, and clear of the tyres. Two results worth keeping:
+`model3d.check()` passes on all 15 appliances: each one inside the van, inside a carcass,
+clear of its neighbours, and clear of the tyres. Three results worth keeping:
 
 - **The fresh tank crosses the bench-to-garage joint and is still housed**, because the U is
   one carcass. The check now accepts a run of carcasses that meet, not only a single box.
 - **Nothing touches a tyre or a wheel arch.** The batteries sit 16 mm inboard of the driver
   tyre and the 90 L fridge stops 83 mm short of the arch — both are tight, and both are real.
+- **Three seated people are part of the check.** The overhead lockers over the dinette failed
+  it the moment the rear was lifted, which is how they came to move up rather than being
+  found with a head in them later.
 
 Brisa's layout ported to our van: shower in the front driver corner, galley split across the
 aisle, rear U-dinette. See [ref/doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md).
@@ -62,10 +66,17 @@ Two people opposite each other, offset, each with a laptop and a mouse:
 | One station | 16" laptop 355 × 248 + mouse pad 200 × 180 + 60 forearm = **575 wide × 308 deep** |
 | Head-on, two of them | needs 616 of depth; the van gives **632** — they fit, with the screens touching |
 | Offset | two stations need 1150 of length; the table gives 900, so they **overlap by 230** and work diagonally |
-| Table | **900 × 600** at 760, 240 over the 520 cushion |
+| Table | **900 × 600** at **900**, 270 over the 630 seat |
 
-It is a slide, so the 900 is the fully-out position — pull it less when only one of you is
-working and the aisle stays clearer.
+Updated 2026-09-23. **It is back on a post, not a slide.** One tube standing on the raised
+footwell floor, a flat plate under the top, and two collar positions: 900 to work and eat,
+570 to drop the top onto the cleats and become the middle of the bed. The post stands at the
+table's centre, x 2340–2440 — your feet go either side of it, which is why the two sitters in
+`check()` are drawn offset along the van rather than opposite each other.
+
+**900 is not an eating-table height by accident.** The whole rear is lifted, so the seat is
+630 and the table has to be 270 above it. That lands on 900 — the galley worktop height, so
+the two surfaces read as one level all through the van.
 
 ## The front corner, and the worktop leaf
 
@@ -74,7 +85,8 @@ the galley reaching forward over it when you need prep space.
 
 | | |
 |---|---|
-| Shoe locker | **400 × 450**, top at 450 — shoes inside, and the step to the cab |
+| Shoe locker | **450 × 400**, top at 450 — shoes inside, and the step to the cab |
+| Door perch | **340 × 340** seat pad at 450, folding out of the locker's aft face |
 | Worktop leaf | **400 × 600** at **900**, the galley's own height — fold-down |
 | Mount | hinged on the hob unit's forward end panel, swing-out bracket under it |
 | Folded | hangs flat down that same panel, x 1090–1150 |
@@ -85,6 +97,15 @@ The locker earns two jobs from one box: shoe store, and the thing you put a knee
 through to the cab. It lost 50 mm fore-aft and 150 mm across to give the lobby in front of
 the shower more room.
 
+**Turned a quarter clockwise, 2026-09-23** — 450 along the van, 400 across — and it grew a
+**fold-out perch on its aft face**: a 340 × 340 pad at 450, level with the locker top, on one
+folding leg. Sit on it facing **aft** down the van, or swing round and face the **driver
+side**; with the pad down you and the locker make one 790 mm bench along the wall.
+
+**Deployed, the perch stands in the step-in pocket** (x 450–790), so it has to be folded to
+walk in or out. That is what the leg is for. The **Door perch out** button in the viewer
+shows both states; deployed is the default.
+
 **With the leaf down, the side door is blocked** — the clear entry drops from 690 mm to
 about 290. It folds in a second, and unlike a table nobody is sitting at it, so the cost is
 only while you are actually cooking.
@@ -92,9 +113,11 @@ only while you are actually cooking.
 Both positions are in the 3D model. **Folded is the default**, because that is the state the
 entry gap assumes — the **Worktop leaf out** button deploys it.
 
-`model3d.check()` carries a **person perched on the locker** — trunk, thighs, shins — and
-fails the build if any furniture runs through them. Two rounds of the old office table were
-drawn with a swing arm through the sitter's chest before it was caught by eye.
+`model3d.check()` carries **three seated people** — trunk, thighs and shins each: one on the
+door perch turned to face the driver side, and the two at the dinette. The build fails if any
+furniture runs through them. Two rounds of the old office table were drawn with a swing arm
+through a sitter's chest before it was caught by eye, and the same test is what evicted the
+old overhead lockers from above the dinette.
 
 ## Water at the sink
 
@@ -146,34 +169,65 @@ means we are not drinking the result.
 
 ### Where the prep space comes from
 
-Updated 2026-09-22. 780 mm of run cannot hold two bowls **and** a prep area in the middle, so
-both runs now put their kit at one end and keep the counter in one piece:
+Updated 2026-09-23. 780 mm of run cannot hold two bowls **and** a prep area, so the sink went
+down to **one deep bowl with a drop-in tray** — the second compartment only exists when you
+want it, and the counter is free the rest of the time:
 
 | Run | Kit | Free counter |
 |---|---|---|
-| Driver, sink | double sink **forward**, against the wardrobe, x 1150–1730 | **200 mm** aft of it |
+| Driver, sink | single bowl **forward**, against the wardrobe, x 1150–**1590** | **340 mm** aft of it |
 | Passenger, hob | hob **forward**, x 1150–1450, with the leaf right beside it | **480 mm** aft of it, in one piece |
 
-Worktop with the leaf out: **1.18 m² gross, 0.81 m² free** once the sink top and the hob are
-off it.
+| The sink unit | |
+|---|---|
+| Outside | **440 × 360**, deck at 900 |
+| Bowl | **400 × 320 clear, 195 deep** — deep is the point, the tray has to fit inside it |
+| Insert tray | **200 × 290, 80 deep**, drops onto the bowl rim: detergent in the tray, rinse below, or lift it out and use the whole bowl |
+| Prep aft of it | **340 mm** in one piece — a 300 mm board lies flat |
 
-**The cost, and it is a real one: the bowls are 239 × 304.** A 320 mm dinner plate only lies
-flat across the diagonal. Making the top 660 wide would give 279 × 304 bowls and leave
-120 mm of prep instead of 200. Worth settling with a plate and a washing-up bowl in hand
-before the top is cut.
+Worktop with the leaf out: **1.18 m² gross, 0.90 m² free** once the sink top and the hob are
+off it — 90 000 mm² more than the double bowl left.
+
+**Still to find: the product.** A 440 × 360 single bowl 195 deep with a matching insert tray
+(Blanco and Franke both sell "multi-level" bowls with a sliding colander/tray on the rim; the
+tray has to sit on a ledge, not float). If the tray we find is a different size, only the
+tray box moves — the bowl is the fixed thing.
 
 **The sink is built, not generated.** A generated double sink scored 0.06 and rendered as a
 solid block: 4000 faces cannot hold a recess, and a sink is its recess. It is now a deck
-with two holes in it and a five-sided well under each — same call as the shower cubicle.
-The taps are still meshes; a tap is a shape, not a hole.
+with a hole in it, a five-sided well under the hole, and a five-sided tray inside the well —
+same call as the shower cubicle. The taps are still meshes; a tap is a shape, not a hole.
 
 ## The bathroom
 
-**Shower: curtain or sliding door, never a swinging one.** That is what lets the shower keep
-its 800 mm width without stealing clearance from the lobby. The 3D model draws it as a
-**glass screen** on the lobby side — three wall panels, a tray and the screen, built from
-the box list rather than from a generated mesh, so you can see into the cubicle from the
-aisle and the drawing cannot lie about which side opens.
+**No door at all now.** Changed 2026-09-23: the lobby side is a solid panel with the entrance
+**carved out of it** — a walk-in opening with a semicircular head, as narrow as an adult
+actually needs, pushed to the forward end of the face.
+
+| | |
+|---|---|
+| Opening | **450 wide**, from the 60 mm curb up to **1800** |
+| Head | full semicircle, radius 225, springing at 1575 |
+| Position | hard against the forward wall, x 40–490 of the 620 mm face |
+| **Panel left aft of it** | **170 wide × full height** — see below |
+| Curb | the 60 mm tray lip runs across the opening, bottom corners radius 60 |
+
+**450 is the floor, not a choice.** Interior doors are 600–700 and RV shower doors 500–560;
+450 is where a boat head lands, and it is what leaves anything at all on the other side of
+the face. Every millimetre added to the opening comes straight off that 170.
+
+**What the 170 strip can hold:** towel hooks or a vertical rail, a slim shelf column on the
+wet side for bottles, or a mirror. Not a cupboard — 170 × 40 of panel is a surface to mount
+on, not a volume. If it turns out to be worth more than that, the honest move is to steal it
+from the wardrobe next door rather than from the opening.
+
+**A curtain is still the wet-side answer.** The carve keeps the water in only as far as the
+curb does; a curtain or a half-height glass fin on the aft jamb stops the spray reaching the
+lobby floor. Never a swinging door — that is what would cost the 800 mm width.
+
+The cubicle is built from the box list rather than from a generated mesh: three wall panels,
+a tray, and the carved face. The arch itself is a staircase of thin boxes, rounded outward
+so the hole is never smaller than the curve it approximates.
 
 **The WC stows under the wardrobe.** A cassette unit, roughly 420 × 570, sits in the wardrobe
 base and **slides forward into the shower** when you need it. The **cassette itself comes out
@@ -188,32 +242,54 @@ What this buys:
 Hanging length above the WC is about **1281 mm** — fine for shirts and jackets, not for a
 full-length coat.
 
-## The rear: a deck at table height, with everything sliding out of it
+## The rear: a U again, lifted
 
-Changed 2026-09-22. The bed is no longer the seating dropped flat. **The garage deck is the
-bed base**, fixed at 760 — table height — and two things slide forward out of it: the table,
-and the panel that finishes the bed.
+Changed 2026-09-23. Back to a **U** — two side benches and a rear bench, table in the middle
+— but the whole of it sits **180 mm higher than the rest of the van**. You step up into the
+footwell, and everything that step buys is storage.
 
 | | |
 |---|---|
-| Fixed deck | x 2550–3450, **900 deep**, full width, top at **760** |
-| Garage under it | **900 × 1832 × 720 clear = 1.19 m³** (was 600 × 1832 × 400 = 0.44 m³) |
-| Bed slide | **620 × 1832** panel, pulls forward over the benches |
-| Bed made up | 900 fixed + 620 slide = **1520 × 1832 at 760** |
-| Table | **900 × 600** at 760, its own slide out of the same deck |
-| Benches | **620 long** now, tops at 450 / 520 |
-| Sitting headroom over the bed | 1881 − 760 − 100 mattress = **1021** |
+| Footwell floor | **+180**, x 1930–2850 × y 600–1232, drawer inside it |
+| Side benches | **920 × 600**, tops at **570**, cushion to **630** |
+| Rear bench | **600 × 1832**, top at 570 — the garage is what is under it |
+| Garage | **600 × 1832 × 570 clear = 0.63 m³** (the old flat U gave 0.44) |
+| Table | **900 × 600** at **900**, on one post |
+| Bed made up | **1520 × 1832 at 630** |
+| Sitting headroom over the bed | 1881 − 630 = **1251** |
+| Seat to head, sitting | 630 + 850 = **1480** at the top of the head |
 
-**Why 900 and 620 and not something rounder:** a slide can only be as deep as the box it
-stores in. The bed is 1520, so the fixed deck and the slide have to add up to that, and the
-slide must not be longer than the deck. 900 + 620 is the split that also lets a 900 mm table
-store away completely.
+**The numbers all come from one rule.** A seat wants to be ~450 above whatever your feet are
+on, and a table ~270 above the seat. Set the footwell floor at 180 and the rest follows:
+seat 630, table 900. Lift it further and the table goes above worktop height and the room
+starts to feel like a bar; lift it less and the garage gains nothing.
+
+**Why the rear box shrank to 600.** The table is on a post again instead of sliding out of the
+rear box, so the rear box no longer has to be 900 deep to swallow it — and the 900 table has
+to fit between the benches instead. 2850 is where those two facts meet.
+
+### What the lift costs: the overhead lockers over the dinette
+
+A seated head tops out at **1480**. The old lockers over the dinette started at **1400** —
+which is exactly where that head is now. `model3d.check()` fails the build on it, so they
+moved rather than quietly overlapping:
+
+| | Before | Now |
+|---|---|---|
+| Height | 1400–1800 | **1560–1810** |
+| Depth | 300 | **260** |
+| Over the dinette | driver 1930–2850, passenger 1600–2850 | **1950–2830 both sides** |
+| Clear over a seated head | −80 (through it) | **+80** |
+
+The passenger locker that used to run from 1600 all the way aft is now cut at 1930, where the
+dinette begins. **Volume lost: about 0.06 m³**; the garage gained 0.19 and the footwell
+drawer adds ~0.10, so the rear is up on the deal even before the deeper bench boxes.
 
 ## The bed sleeps across the van
 
 | | |
 |---|---|
-| Platform | **1520 fore-aft × 1832 across**, at **760** on the deck |
+| Platform | **1520 fore-aft × 1832 across**, at **630** |
 | Body length | across the van: **1832 gross, ~1760 after the wall build** |
 | Sleeping width | **760 each** for two · **507 each** for three |
 
@@ -224,25 +300,33 @@ gives ~1710" was the **Transit's** 1784 width — the Crafter's 1832 changes the
 **Worth doing:** thin the wall build to a shallow **shoulder niche** at bed height on both
 side walls. Recovers 40–60 mm, takes it to ~1810, no holes in the body.
 
+**Making it up:** drop the table onto its cleats at 570, lay the infill cushion over it, and
+the middle of the U is at 630 like everything else. **Pillows go at the driver wall** — the
+model carries two, 600 × 400, one each, which is also what fixes which side of the bed is the
+head end: the sliding door and the step are at the passenger side, so heads go away from
+them.
+
 ## Every area, measured
 
 | Area | Size (mm) | Contains |
 |---|---|---|
-| Shower | **700 × 800**, floor level, 1881 clear | glass screen on the lobby side; WC slides in when needed |
+| Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
-| Shoe locker | **400 × 450 × 450** | shoes; doubles as the step to the cab |
+| Shoe locker | **450 × 400 × 450** | shoes; doubles as the step to the cab |
+| Door perch | **340 × 340** at 450 | folds out of the locker's aft face, one leg |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
 | Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
-| Galley — sink side (driver) | **780 × 600**, worktop 900 | double sink 580 × 360 at the wardrobe, **200 prep** aft; 20 L oven at the aisle edge, pump behind it |
+| Galley — sink side (driver) | **780 × 600**, worktop 900 | single bowl 440 × 360 at the wardrobe, insert tray inside it, **340 prep** aft; 20 L oven at the aisle edge, pump behind it |
 | Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 forward beside the leaf, **480 prep** aft; **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
-| Bench, driver | **620 × 600 × 450** | 2 × 150 Ah battery, 3000 W inverter |
-| Bench, passenger | **620 × 600 × 450** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running under the deck |
-| Table | **900 × 600** at 760 | slides out of the deck, between the benches |
-| **Garage + bed base** | **900 × 1832**, deck at 760, **720 clear** | calorifier, electrics board, and the bed slide stored in it |
-| **Bed made up** | **1520 × 1832** | 2 at 760 each, or 3 at 507 |
+| Bench, driver | **920 × 600 × 570** | 2 × 150 Ah battery, 3000 W inverter |
+| Bench, passenger | **920 × 600 × 570** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
+| Footwell | **920 × 632**, floor at **+180** | shallow drawer under the floor, pulling forward into the galley aisle |
+| Table | **900 × 600** at 900 | on one post at x 2340–2440, drops to 570 for the bed |
+| **Rear bench + garage** | **600 × 1832**, top at 570, **570 clear** | calorifier, electrics board, and the third seat on top |
+| **Bed made up** | **1520 × 1832** at 630 | 2 at 760 each, or 3 at 507 |
 
-Driver side adds up: shower 700 + wardrobe 450 + sink 780 = **1930**, then the bed.
+Driver side adds up: shower 700 + wardrobe 450 + sink 780 = **1930**, then the U.
 
 **The wardrobe is now 600 deep, aligned with the sink**, so the aisle runs clear past it. Only
 the shower still stands 200 mm proud of that line, and it does so at the very front where the
@@ -310,13 +394,20 @@ sitting over the same arch.
 8. **Bowls at 239 × 304 vs prep at 200 mm.** A 660-wide top would give 279 × 304 bowls and
    drop the prep strip to 120. Decide with a dinner plate and a washing-up bowl in hand.
 9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
-10. **The table fully out reaches 280 mm forward of the benches**, at 760, into the galley
-    aisle. Nobody walks past a deployed dinette table anyway, but it is 280 mm of head-height
-    obstruction in the walkway — feel it before building.
-11. **The dinette now seats two, not four.** The rear bench became the 760 deck, so there is
-    no third side to sit on. Fine for us; worth knowing before guests.
-12. **A 900 mm cantilever needs real slides.** Full-extension runners, 45 kg class, for both
-    the table and the bed panel.
+10. **The step up into the dinette is 180 mm.** That is a normal stair riser, but it is in the
+    dark at the end of a 632 aisle, and it is the last thing you cross at night. A nosing
+    strip and an LED under the bench lip are not optional extras here.
+11. **The table post stands in the middle of the footwell.** Feet go either side of it —
+    which is exactly why the two dinette seats are drawn offset along the van. If sitting
+    opposite each other turns out to matter more than the 900 table, a wall-mounted swing arm
+    off the rear bench face is the alternative, at the cost of the free corner.
+12. **Two slim high lockers instead of two deep low ones.** 1560–1810, 260 deep. Confirm by
+    sitting: the check clears a seated head by 80 mm, and that number came from 171 cm.
+13. **Perch versus door.** The fold-out perch stands in the step-in pocket. If it turns out to
+    be folded 95% of the time, it is a hook, not a seat — worth living with a cardboard
+    mock-up before the hinge is bought.
+14. **The 170 mm strip beside the shower opening.** Decide what it is for before the panel is
+    cut: hooks, a rail, a mirror, or a slim wet-side shelf are all it will take.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

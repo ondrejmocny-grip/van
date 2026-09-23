@@ -225,10 +225,19 @@ reading would show nothing but the bed.
 at. Orbiting alone always points at the middle of the van, so a corner can never be centred.
 Picking a view puts the camera back where that view says, panning included.
 
-**Furniture is checked against a seated person.** `SITTER_V2` is trunk, thighs and shins on
-the office seat, and `check()` fails the build if anything but the seat itself runs through
-them. The office table was mounted on the partition twice, and both times the swing arm went
-straight through the sitter's chest - a clash no box list shows and every render does.
+**Furniture is checked against seated people.** `SITTER_V2` is now three of them - trunk,
+thighs and shins each - on the door perch and on both dinette benches, with `SIT_OK_V2`
+listing what is allowed to touch them (the seat, its cushion, the floor they stand on).
+`check()` fails the build if anything else runs through a body. It has caught two different
+classes of mistake: the office table was mounted on the partition twice and both times the
+swing arm went straight through a sitter's chest, and when the rear of v2 was lifted by
+180 mm the overhead lockers over the dinette failed instantly, because a seated head had
+moved up into them. Neither is visible in a box list; both are obvious in a render, if you
+happen to render that corner.
+
+A sitter is written from the seat surface: trunk from the seat to seat + 850, thighs
+straddling the cushion, shins from the floor to just under it. 850 is Ondrej at 171 cm -
+raise it before trusting the numbers for anyone taller.
 
 **A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
 modelled facing away from; a box against the other wall gets a half turn on top of the kind's
@@ -366,10 +375,20 @@ get meshes; rooms get panels. `props/SHOWER.glb` is gone and `SHOWER` is a void 
 
 **And then the sink was built too, 2026-09-22.** The adopted double sink scored 0.06 and
 rendered as a **solid block**: at 4000 faces a recess does not survive, and a sink is its
-recess. `sink_wells()` builds it instead - a deck with two rectangular holes (the same
+recess. `sink_wells()` builds it instead - a deck with a rectangular hole per bowl (the same
 `subtract()` the body panels use) and a five-sided well hanging under each. The rule from
 the shower holds and is now twice earned: **products get meshes, hollow things get built.**
 The taps stayed meshes, because a tap is a shape rather than a hole.
+
+It takes `n=1` for a single bowl and `axis` for which way two bowls sit; `tray_box()` beside
+it is the same five-sided trick for anything open-topped - v2's drop-in sink tray is one.
+
+**Curves are staircases of boxes, 2026-09-23.** `arch_face()` draws a panel with a
+rounded-corner opening carved out of it - v2's shower entrance. Everything in this model is
+an axis-aligned box, so the arch is sampled in columns, each column rounded **outward** so
+the hole is never smaller than the true curve, and columns that come out the same height are
+merged so a shallow arch does not cost thirty boxes. 45 columns across a 450 mm opening is
+10 mm steps, which reads as a curve at real scale; fewer is visibly stepped.
 
 **The double sink, 2026-09-22.** `sinkdouble` (hunyuan 0.06) is one pressed top with two
 bowls and a tap deck, drawn from a reference photo Ondrej sent; `tap` (rodin 0.00) is the
