@@ -253,7 +253,7 @@ template.
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
 **One published viewer for all versions: [Crafter L3H3 - v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)**, built
 from the top-level `viewer.html` (`python model3d.py viewer`; `VIEWER_ALL` in model3d.py
-lists the versions). Buttons in the header switch versions; the view and the Show layers stay
+lists the versions). Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
 as they were, so two layouts can be compared from the same spot. `#v2` at the end of the link
 opens that version where the host passes it through; otherwise the page opens on the version
 you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the

@@ -35,24 +35,20 @@
   #app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
 
   header {
-    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
-    padding-block: 14px 12px; padding-inline: 16px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+    padding-block: 6px; padding-inline: 16px;
     border-bottom: 1px solid var(--rule);
   }
-  h1 {
-    margin: 0; font-family: Archivo, system-ui, sans-serif; font-weight: 700;
-    font-size: clamp(17px, 2.4vw, 22px); letter-spacing: -.015em; text-wrap: balance;
-  }
-  .sub { color: var(--muted); font-size: 12.5px; }
-  .sub b { color: var(--brass); font-weight: 500; font-family: "IBM Plex Mono", monospace; }
+  .vehicle { font-size: 12px; color: var(--muted); }
+  .vehicle b { color: var(--ink); font-weight: 500; }
 
-  /* One page for every version: the switch sits in the header, before the title, so which
+  /* One page for every version: the switch sits in the header, before the vehicle line, so which
      van you are looking at is the first thing you read. Hidden when there is only one. */
   .versions { display: flex; gap: 0; align-self: center; }
   .versions[hidden] { display: none; }
   .versions button {
-    font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 13px;
-    padding: 4px 12px; border-radius: 0; margin-left: -1px;
+    font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 12px;
+    padding: 2px 10px; border-radius: 0; margin-left: -1px;
   }
   .versions button:first-child { border-radius: 2px 0 0 2px; margin-left: 0; }
   .versions button:last-child { border-radius: 0 2px 2px 0; }
@@ -65,23 +61,24 @@
   canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 
   .panel {
-    position: absolute; top: 14px; left: 16px; right: 16px;
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start;
+    position: absolute; top: 8px; left: 8px; right: 8px;
+    display: flex; flex-wrap: wrap; gap: 5px; align-items: flex-start;
     pointer-events: none;
   }
   .group {
     pointer-events: auto; background: var(--panel); border: 1px solid var(--rule);
-    border-radius: 3px; box-shadow: var(--shadow); padding: 7px;
-    display: flex; flex-wrap: wrap; gap: 5px; max-width: 100%;
+    border-radius: 3px; box-shadow: var(--shadow); padding: 3px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 3px; max-width: 100%;
   }
+  /* the group name sits in the row, before its buttons, rather than on a line of its own */
   .group > .lbl {
-    width: 100%; font-family: Archivo, sans-serif; font-weight: 500; font-size: 9.5px;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 1px 2px 3px;
+    font-family: Archivo, sans-serif; font-weight: 500; font-size: 8.5px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0 3px;
   }
   button {
-    font: inherit; font-size: 12px; color: var(--ink); cursor: pointer;
+    font: inherit; font-size: 11px; color: var(--ink); cursor: pointer;
     background: transparent; border: 1px solid var(--rule); border-radius: 2px;
-    padding: 5px 9px; transition: background .12s, border-color .12s;
+    padding: 2px 7px; transition: background .12s, border-color .12s;
   }
   button:hover { background: var(--stage); }
   button:focus-visible { outline: 2px solid var(--brass); outline-offset: 1px; }
@@ -103,18 +100,6 @@
   }
   .readout b { color: var(--brass); font-weight: 500; }
 
-  .key {
-    position: absolute; right: 16px; bottom: 48px; pointer-events: none;
-    display: flex; flex-direction: column; gap: 2px; align-items: flex-end;
-    font-size: 11px;
-  }
-  .key div {
-    color: var(--ink); background: var(--panel); border: 1px solid var(--rule);
-    border-radius: 2px; padding: 1px 6px; box-shadow: var(--shadow);
-  }
-  .key i { display: inline-block; width: 9px; height: 9px; border: 1px solid rgba(128,128,128,.4);
-           margin-left: 7px; vertical-align: -1px; }
-
   .labels { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .tag {
     position: absolute; transform: translate(-50%, -50%); padding: 2px 6px;
@@ -128,27 +113,23 @@
   }
 
   @media (max-width: 720px) {
-    .panel { top: 8px; left: 8px; right: 8px; gap: 4px; }
-    .group { padding: 4px; gap: 3px; border-radius: 2px; }
-    .group > .lbl { font-size: 8px; letter-spacing: .06em; padding: 0 1px 2px; }
-    button { font-size: 10.5px; padding: 3px 6px; }
-    .key { display: none; }
+    .panel { top: 6px; left: 6px; right: 6px; gap: 4px; }
+    .group { padding: 3px; gap: 2px; border-radius: 2px; }
+    .group > .lbl { display: none; }
+    button { font-size: 10.5px; padding: 2px 5px; }
     .readout { bottom: 8px; left: 8px; right: 8px; font-size: 9.5px; gap: 3px; }
     .tag { font-size: 9px; padding: 1px 4px; }
     .tag i { font-size: 8px; }
   }
   @media (max-width: 420px) {
-    .group > .lbl { display: none; }        /* "VIEW" and "SHOW" are clear from the buttons */
-    button { font-size: 10px; padding: 3px 5px; }
+    button { font-size: 10px; padding: 2px 4px; }
   }
 </style>
 
 <div id="app">
   <header>
     <div class="versions" id="versions" role="group" aria-label="Layout version" hidden></div>
-    <h1 id="title"></h1>
-    <span class="sub">Interior <b id="dims"></b> &middot; drag to orbit, right-drag or
-      shift-drag to pan, scroll to zoom</span>
+    <span class="vehicle" id="vehicle"></span>
   </header>
   <main>
     <canvas id="c"></canvas>
@@ -157,7 +138,6 @@
       <div class="group" id="views"><span class="lbl">View</span></div>
       <div class="group" id="layers"><span class="lbl">Show</span></div>
     </div>
-    <div class="key" id="key"></div>
     <div class="readout" id="readout"></div>
   </main>
 </div>
@@ -213,9 +193,8 @@
   var L = MODEL.length * mm, W = MODEL.width * mm, H = MODEL.height * mm;
   var NOSE = (MODEL.nose || 0) * mm;
 
-  document.getElementById("title").textContent = MODEL.title;
-  document.getElementById("dims").textContent =
-    MODEL.length + " × " + MODEL.width + " × " + MODEL.height + " mm";
+  document.getElementById("vehicle").innerHTML = "<b>" + (BUNDLE.vehicle || "") + "</b> (Interior " +
+    MODEL.length + " × " + MODEL.width + " × " + MODEL.height + " mm)";
   var readout = document.getElementById("readout");
   readout.textContent = "";
   (MODEL.stats || []).forEach(function (t) {
@@ -443,7 +422,7 @@
     dirty = true;
   }
 
-  var startView = VIEWS[0];
+  var startView = VIEWS[1];                         // from the door: the view you walk in to
   VIEWS.forEach(function (v) { if (keep && v.id === keep.view) { startView = v; } });
   var viewNow = startView.id;
   var theta = startView.theta, phi = startView.phi, radius = startView.r, dirty = true;
@@ -621,17 +600,6 @@
       v.t.el.style.visibility = "visible";
     });
   }
-
-  var keyEl = document.getElementById("key"), seen = {};
-  keyEl.textContent = "";
-  MODEL.boxes.forEach(function (item) {
-    var name = NAMES[item.k];
-    if (!name || seen[name] || isAppliance[item.k]) return;   // body and kit stay out
-    seen[name] = true;
-    var row = document.createElement("div");
-    row.innerHTML = name + '<i style="background:' + (MODEL.colours[item.k] || "#ddd") + '"></i>';
-    keyEl.appendChild(row);
-  });
 
   function resize() {
     var r = canvas.getBoundingClientRect();

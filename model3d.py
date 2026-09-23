@@ -1266,6 +1266,7 @@ def write_viewer(names, path, title="Van Interior"):
         variants[name] = viewer_data(v, variant_dir(v))
     used = set().union(*(set(d["props"]) for d in variants.values()))
     data = {"order": list(names), "start": names[-1], "variants": variants,
+            "vehicle": "VW Crafter L3H3",
             "props": props_data(used)}
     tpl = open(tpl_path, encoding="utf-8").read()
     tpl = tpl.replace("<title>Van Interior</title>", "<title>" + title + "</title>")
