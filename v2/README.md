@@ -20,6 +20,7 @@ with the drawing above. What the 3D adds on top of the plan:
 | Shower + wardrobe | the cubicle's panels, tray and carved face, and the wardrobe with the WC bay open |
 | Worktop leaf out | deploys the galley's fold-down leaf; off, it hangs folded down the galley end |
 | Side table out | the top beside the shoe locker; off, it hangs flat down the locker's side |
+| Cab hatch open | takes the little door out of the partition hatch |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
@@ -87,8 +88,10 @@ the galley reaching forward over it when you need prep space.
 |---|---|
 | Shoe locker | **450 × 400**, top at 450 — shoes inside, and the step to the cab |
 | Side table | **340 × 380** top at **720**, on an L bracket off the locker's side |
-| Entry column | **210 × 562**, floor to roof — where the walk-through used to be |
-| Cab hatch | **420 × 850** in the partition, sill 500, straight over the locker |
+| Backrest | pillow on the partition behind the locker, **480–950** |
+| Cab hatch | **230 × 500** at **1000–1500**, between the two passenger headrests, with a door |
+| Cat box | **400 × 400 × 420**, reaching through the partition behind the bench |
+| Entry shelves | **210 × 332**, 420 up to the roof, standing on the cat box |
 | Worktop leaf | **400 × 600** at **900**, the galley's own height — fold-down |
 | Mount | hinged on the hob unit's forward end panel, swing-out bracket under it |
 | Folded | hangs flat down that same panel, x 1090–1150 |
@@ -121,33 +124,47 @@ positions, one through the shins and one through the folded panel.
 **Deployed, the top stands in the step-in pocket** (x 460–800), so it folds to walk in or out.
 The **Side table out** button in the viewer shows both states; deployed is the default.
 
-### The walk-through was a fiction, 2026-09-23
+### The partition: one bad door became three good holes, 2026-09-23
 
-The partition had a 432 mm opening at y 600–1032. With a **3-seat cab** the double bench backs
-onto the partition from y 60 to 1060 — that opening looked at the back of a seat. It is gone,
-replaced by a **hatch over the shoe locker**: 420 wide, sill at 500 (50 above the locker top),
-up to 1350.
+The partition had a 432 mm walk-through at y 600–1032. With a **3-seat cab** the double bench
+backs onto the partition from y 60 to 1060 — that opening looked at the back of a seat. One
+useless hole is now doing three jobs instead, and the wall around them carries a fourth.
 
-**What it costs:** no getting to the cab without going outside. That is the real price of the
-third seat, and it is worth saying out loud rather than drawing a door that does not work. If
-it matters more than it looks, the fix is at the seat, not the wall — a bench whose middle
-back folds forward gives a crawl-through again.
+| | Where | For |
+|---|---|---|
+| **Hatch** | y **450–680**, z **1000–1500**, with a door | talking, and handing things through |
+| **Cat hole** | y 580–980, z 0–420 | the litter box slides forward through it |
+| **Backrest** | x 0–60, y 20–400, z **480–950** | the pillow behind whoever sits on the locker |
+| Shelves | x 0–210, y 700–1032, z 420–1881 | what is left of the corner: **0.10 m³** |
 
-**What it buys:** the corner the walk-through was using, which is now the **entry column**.
+**Why the hatch is where it is.** The bench is two seats, y 60–560 and 560–1060, so their head
+restraints sit at roughly y 175–445 and 675–945 and the **gap between them is y 445–675**. The
+hatch is 450–680: dead centre of that gap, clear of both heads. At 1000–1500 it is face height
+for anyone in the cab and chest height for anyone standing in the lobby — you hand a drink
+through it rather than climb through it. **It has a door** because a hole into the cab is a
+hole in the insulation and a hole in the road noise.
 
-| | |
-|---|---|
-| Size | **210 deep × 562 wide × 1881** = **0.22 m³** |
-| Where | x 0–210, y 470–1032 — against the partition, beside the shower's forward wall |
-| Why 210 and not 450 | its aft face lines up with the **shower opening's forward jamb**, so it never stands in the way of stepping in |
-| Why y starts at 470 | that is where the side table's bracket ends |
-| Holds | boots and shoes low down, towels and hooks in the middle, light stores above head height |
+**What is still lost:** getting to the cab without going outside. That is the real price of the
+third seat. If it matters more than it looks, the fix is at the seat, not the wall — a bench
+whose middle back folds forward gives a crawl-through again.
+
+**The backrest is the quiet win.** The locker was a thing you perched on; with 470 mm of pillow
+behind it, at 480–950, it is a seat you can work at for an hour with the side table at 720. The
+cushion is 60 thick, which is exactly the gap between the partition and where `check()` puts a
+sitter's back.
+
+**The cat box, at last.** 400 × 400 × 420, but only **210 of it stands in the lobby**: the
+other 190 reaches through the partition into the dead space between the bench's seat back and
+the wall, which was doing nothing at all. The flap is a **240 × 260 hole low in its aft face**,
+on the side the cat is on, and the lid comes off for the tray. Its aft face lines up with the
+shelves above it and with the shower opening's forward jamb — the whole column is 210 deep for
+that one reason.
 
 **The rest of the lobby stays floor, on purpose.** x 210–1150 × y 400–1032 is the only place in
 this van where somebody can stand out of the corridor: drying off out of the shower, getting a
-child dressed, dropping bags coming in, and the WC sliding forward out of the wardrobe. Filling
-it would buy storage we do not need — 140 L of belongings for two — and spend the one thing
-that is genuinely scarce.
+child dressed, dropping bags coming in, the WC sliding forward out of the wardrobe — and now
+reaching the hatch. Filling it would buy storage we do not need (140 L of belongings for two)
+and spend the one thing that is genuinely scarce.
 
 **With the leaf down, the side door is blocked** — the clear entry drops from 690 mm to
 about 290. It folds in a second, and unlike a table nobody is sitting at it, so the cost is
@@ -361,10 +378,11 @@ them.
 | Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
 | Shoe locker | **450 × 400 × 450** | shoes; doubles as the step up to the cab hatch |
-| Entry column | **210 × 562**, full height | **0.22 m³** — boots, towels, stores; the old walk-through |
+| Entry shelves | **210 × 332**, 420 → 1881 | **0.10 m³** — towels and stores, standing on the cat box |
+| Cat box | **400 × 400 × 420** | 190 of it forward of the partition; 240 × 260 flap in the aft face |
 | Side table | **340 × 380** at 720 | L bracket off the locker's side panel; folds down flat |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
-| Entry, clear at the door | **690** of the 1300 aperture | cab **hatch** 420 x 850 over the locker |
+| Entry, clear at the door | **690** of the 1300 aperture | cab **hatch** 230 x 500 at 1000, between the headrests |
 | Galley — sink side (driver) | **780 × 600**, worktop 900 | single bowl 440 × 360 at the wardrobe, insert tray inside it, **340 prep** aft; 20 L oven at the aisle edge, pump behind it |
 | Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 forward beside the leaf, **480 prep** aft; **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
@@ -459,12 +477,15 @@ sitting over the same arch.
     and, with a curtain rather than a door, it is where the curtain stacks when it is open.
     A curtain needs 100–150 of stack; the strip is 170. Hooks and a rail go on it; the wet
     side of the same panel takes a recessed bottle shelf above 900.
-15. **Nobody has drawn the cat a litter tray yet.** It is the one thing in `doc/about-us.md`
-    with no home in any variant. The two places that can take a hooded tray (~500 × 380) are
-    **inside the shoe locker** (450 × 400 × 450, a flap in its aft face, shoes move to the new
-    column) or the **aft 300 mm of the driver bench**. The locker is at the door, which is
-    where the smell wants to be; it also means sitting on it. Worth deciding before the front
-    is cut.
+15. **The cat box is 400 × 400 — small.** Internally the tray is about 320 × 290, which suits
+    a small cat and no more. Measure the tray you actually own before the front is cut; the
+    box can grow aft to 300 deep if it has to, at the cost of standing room in front of the
+    shower.
+16. **The cat box breaks the partition's fire and noise line** at floor level, and it puts a
+    litter tray 190 mm from the passenger's calves. Both are arguments for a sealed cabinet
+    with its own vent to the outside through the floor, rather than an open cubby.
+17. **A hatch is not a walk-through.** Check how much it bothers you to leave the van to get
+    into the cab, in the rain, at a service station, before committing to a fixed bench.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

@@ -97,7 +97,9 @@ HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
     "WARDROBE": (0, 1881),      # hanging above, WC drawer below
     "LOCKER": (0, 450),         # shoe locker, and the step through the hatch to the cab
-    "SHELVES": (0, 1881),       # the column the old walk-through left behind
+    "SHELVES": (420, 1881),     # what is left of the old walk-through: a stack standing on
+                                #   the cat box, aft of the hatch so you can still reach it
+    "CAT": None,                # the litter cabinet is panels in EXTRA_V2, with a hole in it
     "SINK": (0, 900),
     "HOB": (0, 900),
     # The rear U is lifted as one piece. Floor +180 in the footwell, benches 570, bed at 630.
@@ -142,6 +144,11 @@ EXTRA_V2 = [
     # front of the locker is exactly where your shins go. The bracket is an L in two planes
     # instead - up the locker's DRIVER-side face, aft along it at hand height, then the top
     # cantilevers inboard off the arm. Nothing of it crosses the body; check() enforces that.
+    # A pillow backrest on the partition behind the locker, which is what turns the locker
+    # from a thing you perch on into a seat you can work at. 60 of foam: the sitter's trunk
+    # starts at x 60, so the cushion fills the gap between the wall and the back exactly.
+    (   0,   60,   20,  400,  480,  950, "backrest"),
+    (  -40,    0,  450,  680, 1000, 1500, "hatchdoor"),  # the little door over the hatch
     ( 100,  180,  400,  460,  120,  640, "parm"),       # upright, bolted flat to the side panel
     ( 180,  660,  400,  460,  640,  680, "parm"),       # the arm, running aft at hand height
     ( 460,  800,   60,  440,  680,  720, "ptable"),     # 340 x 380 top, surface at 720
@@ -260,6 +267,7 @@ LAYERS_V2 = [
      "hide": ["ftablep"]},
     {"id": "perch", "label": "Side table out", "kinds": ["ptable"], "on": True,
      "hide": ["ptablep"]},
+    {"id": "hatch", "label": "Cab hatch open", "kinds": [], "on": False, "hide": ["hatchdoor"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
@@ -429,7 +437,8 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
-    "SHELVES": "Entry column, full height",
+    "SHELVES": "Entry shelves", "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
+    "backrest": "Backrest pillow", "hatchdoor": "Cab hatch door",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "wetface": "Shower face, carved opening", "pillow": "Pillow", "insert": "Sink insert tray",
     "ptable": "Side table", "ptablep": "Side table, folded", "parm": "Table bracket",
@@ -485,18 +494,27 @@ WINDOWS_V2 = [
 FAN_HOLES_V2 = [(1400, 1880, 676, 1156), (2350, 2830, 676, 1156)]
 # Service hatches: a real hole in a body panel with a lid in it. side, x0, x1, z0, z1.
 HATCHES_V2 = [("d", 700, 1150, 40, 580)]        # the cassette comes out sideways here
-# Partition behind a 3-seat cab, with the opening cut in it: y0, y1, z0, z1.
+# Partition behind a 3-seat cab, holes cut in it: y0, y1, z0, z1 each.
 # It used to be a walk-through at y 600-1032, which a 3-seat cab makes a fiction: the double
 # bench backs onto the partition from y 60 to 1060, so that "door" opened onto the back of a
-# seat. It is now a HATCH over the shoe locker instead - sill 50 mm above the locker top, so
-# things (and a child, and a cat) go across the locker and through. Inside access to the cab
-# on foot is gone; that is the price of the third seat, and it bought the lobby a cupboard.
-PARTITION_V2 = (0, 420, 500, 1350)
+# seat. Two smaller holes do more:
+#
+# 1) A HATCH between the two passenger headrests. The bench's seats are y 60-560 and 560-1060,
+#    so their head restraints sit about y 175-445 and 675-945 and the gap between them is
+#    y 445-675 - which is where this goes, at 1000-1500, face height for anyone in the cab and
+#    chest height for anyone standing in the lobby. It has a door, because a hole into the cab
+#    is a hole in the insulation and a hole in the noise.
+# 2) A LOW hole for the cat box to slide forward through, into the 190 mm of dead space
+#    between the bench's seat back (x -190) and the partition.
+PARTITION_V2 = [(450, 680, 1000, 1500),
+                (580, 980,    0,  420)]
 # Cab seats as x0, x1, y0, y1 - a single driver seat and a double bench, no swivels.
 CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2", "SHELVES": "#e6dcc6",
+    "CAT": "#e0d7c4", "litter": "#e0d7c4", "litterlid": "#cfc7b6", "backrest": "#eceaf1",
+    "hatchdoor": "#d9d4c8",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8", "wetface": "#c6d9e4",
     "pillow": "#f4f2f6", "insert": "#b6bcbe", "ptable": "#d9b98a", "ptablep": "#d9b98a",
     "parm": "#9a9287", "FOOTWELL -> BED": "#d8cfe2", "SIDE TABLE": "#d9b98a",
@@ -718,6 +736,23 @@ EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
 # this face anything can be mounted, and the end you meet first coming from the cab.
 EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, 1881,
                       210, 660, 60, 1800, 225, 60, "wetface", steps=45)
+
+# The cat box, in the hole the walk-through left at floor level. 400 x 400 outside, and it
+# reaches 190 mm forward THROUGH the partition into the dead space behind the bench's seat
+# back - so only 210 of it stands in the lobby, exactly the depth of the shelves above it.
+# Panels rather than a solid, because the point of it is the flap: a 240 x 260 hole low in
+# the aft face, which is the side the cat is on.
+_CAT = (-190, 210, 580, 980, 0, 420)
+EXTRA_V2 += [
+    (-190, 210, 580, 980,   0,  40, "litter"),          # pan
+    (-190, 210, 580, 980, 380, 420, "litter"),          # lid
+    (-190, 210, 580, 620,  40, 380, "litter"),          # passenger side
+    (-190, 210, 940, 980,  40, 380, "litter"),          # driver side
+    (-190, -150, 620, 940,  40, 380, "litter"),         # forward end, inside the cab
+]
+EXTRA_V2 += [(170, 210, y0, y1, z0, z1, "litter")       # aft face, with the flap cut out
+             for y0, y1, z0, z1 in subtract((620, 940, 40, 380), [(660, 900, 40, 300)])]
+EXTRA_V2 += tray_box(-150, 170, 630, 930, 40, 190, kind="litterlid")
 # v3: in the corner behind the driver, bowls side by side ACROSS the van - the run crosses
 # the bulkhead, so the axis that holds two bowls is y, not x. Cut down to 340 x 560 from
 # 440 x 640 - a smaller, narrower unit, product still to be found. The 200 mm of counter it
@@ -760,8 +795,10 @@ def shell_for(v):
 
     # partition behind the cab, with the pass-through cut in it
     if sp["partition"]:
-        py0, py1, pz0, pz1 = sp["partition"]
-        for y0, y1, z0, z1 in subtract((0, W, 0, H), [(py0, py1, pz0, pz1)]):
+        holes = sp["partition"]
+        if not isinstance(holes[0], (list, tuple)):     # a single hole, written flat
+            holes = [holes]
+        for y0, y1, z0, z1 in subtract((0, W, 0, H), [tuple(h) for h in holes]):
             out.append((-WALL, 0, y0, y1, z0, z1, "partition"))
 
     # rear doors
