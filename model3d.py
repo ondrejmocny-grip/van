@@ -1247,7 +1247,10 @@ def viewer_data(v, out):
     """One variant's geometry for the viewer. `out` is the variant's folder, where the
     schema overlay image is written on the way."""
     sp = spec(v)
-    used = {b[6] for b in boxes_for(v, with_shell=True)}
+    # no roofs, over the load area or the cab: the viewer is for looking in from above
+    boxes = [b for b in boxes_for(v, with_shell=True)
+             if not (b[6] in ("shell", "cab") and b[4] in (v["height"], CAB_ROOF))]
+    used = {b[6] for b in boxes}
     return {
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
@@ -1261,7 +1264,7 @@ def viewer_data(v, out):
         "plan": plan_image(v, os.path.join(out, "overlay.png")),
         "boxes": [dict({"b": [x0, x1, y0, y1, z0, z1], "k": kind},
                        **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}))
-                  for x0, x1, y0, y1, z0, z1, kind in boxes_for(v, with_shell=True)],
+                  for x0, x1, y0, y1, z0, z1, kind in boxes],
     }
 
 
@@ -1400,18 +1403,21 @@ def main_all():
 # VW's: its "L2H2" is a real L3H3 inside (3440 x 1836 x 1953), its "L3H3" is an L4 with the
 # super-high roof (4294 x 1838 x 2200).
 VS3D_SAVES = os.path.expanduser("~/AppData/LocalLow/vanspace 3D/vanspace 3D/saves")
-VS3D_FLOOR = 4.47                      # y of the floor top, our z = 0
-VS3D_VANS = {                          # van -> (z of the bulkhead's aft face, default wheelbase)
-    "VW Cr L2H2": (5.37, 364.0),       # the wheelbase is in cm: 3640, the real L3's
-    "VW Cr L3H3": (4.65, 450.0),
+VS3D_FLOOR = 4.47                      # y of the floor top, unscaled
+VS3D_RAW_H = 1861                      # our van's raw load height: 4MOTION, VW brochure
+VS3D_VANS = {                          # van -> (z of the bulkhead's aft face, y of the ceiling,
+    "VW Cr L2H2": (5.37, 24.00, 364.0),  #   default wheelbase - in cm: 3640, the real L3's)
+    "VW Cr L3H3": (4.65, 26.40, 450.0),
 }
+# Their vans are the FWD height. The save scales the van about its origin, so a yScale that
+# brings the ceiling down to VS3D_RAW_H brings the floor down with it - the cubes follow.
 
 
-def vs3d_box(v, box, layer, front):
+def vs3d_box(v, box, layer, front, floor):
     """One of our boxes as a VanSpace3D Parent holding a scaled Cube."""
     x0, x1, y0, y1, z0, z1, kind = box
     pos = {"x": (v["width"] / 2 - (y0 + y1) / 2) / 100,
-           "y": VS3D_FLOOR + (z0 + z1) / 200,
+           "y": floor + (z0 + z1) / 200,
            "z": front - (x0 + x1) / 200}
     rot = {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0}
     hexcol = KIND.get(kind, "#bbbbbb")
@@ -1431,17 +1437,18 @@ def write_vs3d(name, van="VW Cr L2H2"):
     catalogue items by hand. Any van but the default gets its own file, vN-<van>.vs3d."""
     v = VARIANTS[name]
     check(v)
-    front, wheelbase = VS3D_VANS[van]
+    front, ceiling, wheelbase = VS3D_VANS[van]
+    ys = VS3D_RAW_H / 100 / (ceiling - VS3D_FLOOR)
     boxes = boxes_for(v)
     kinds = list(dict.fromkeys(b[6] for b in boxes))
     white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
     save = dict(VanModelName=van, ApplicationVersion="3.08", TimeOfDay=0.0,
-                CustomVan=False, CustomVanPresetName="", xScale=1.0, yScale=1.0, zScale=1.0,
+                CustomVan=False, CustomVanPresetName="", xScale=1.0, yScale=ys, zScale=1.0,
                 WallDimensions={"x": 0.0, "y": 0.0, "z": 0.0}, WheelbaseLength=wheelbase,
                 ExteriorColor=white, WallMaterialName="Aged Plywood", WallColor=white,
                 FloorMaterialName="Aged Plywood", FloorColor=white,
                 CeilingMaterialName="Aged Plywood", CeilingColor=white,
-                items=[vs3d_box(v, b, kinds.index(b[6]) + 1, front) for b in boxes], groups=[],
+                items=[vs3d_box(v, b, kinds.index(b[6]) + 1, front, VS3D_FLOOR * ys) for b in boxes], groups=[],
                 wires={"isWire": False, "Lines": []}, pipes={"isWire": False, "Lines": []},
                 wheelOnLeft=False,
                 labels=[{"name": "Base Layer", "index": 0}]
@@ -1451,7 +1458,7 @@ def write_vs3d(name, van="VW Cr L2H2"):
     path = os.path.join(VS3D_SAVES, name + tag + ".vs3d")
     with open(path, "w") as f:
         json.dump(save, f, indent=4)
-    print("wrote %s - %d cubes on %d layers" % (path, len(boxes), len(kinds)))
+    print("wrote %s - %d cubes on %d layers, van height x%.3f" % (path, len(boxes), len(kinds), ys))
 
 
 if __name__ == "__main__":
