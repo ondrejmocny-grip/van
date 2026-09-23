@@ -226,7 +226,7 @@ at. Orbiting alone always points at the middle of the van, so a corner can never
 Picking a view puts the camera back where that view says, panning included.
 
 **Furniture is checked against seated people.** `SITTER_V2` is now three of them - trunk,
-thighs and shins each - on the door perch and on both dinette benches, with `SIT_OK_V2`
+thighs and shins each - one on the shoe locker and two on the dinette benches, with `SIT_OK_V2`
 listing what is allowed to touch them (the seat, its cushion, the floor they stand on).
 `check()` fails the build if anything else runs through a body. It has caught two different
 classes of mistake: the office table was mounted on the partition twice and both times the

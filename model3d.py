@@ -106,7 +106,7 @@ HEIGHTS_V2 = {
     "REAR BENCH": (0, 570),     # the garage, reached through the rear doors
     "FOOTWELL -> BED": (0, 180),# the step up, and the drawer inside it
     "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
-    "SEAT": None,               # the fold-away perch is in EXTRA_V2, in both its positions
+    "SIDE TABLE": None,         # the fold-away top is in EXTRA_V2, in both its positions
     "ENTRY": None,
     "AISLE": None,
 }
@@ -135,12 +135,18 @@ EXTRA_V2 = [
     ( 900, 1150,  260,  320,  780,  840, "farm"),       # swing-out bracket under the leaf
     ( 750, 1150,    0,  600,  840,  900, "ftable"),     # deployed: 400 x 600 at worktop height
     (1090, 1150,    0,  600,  440,  840, "ftablep"),    # folded: hangs down the galley end
-    # A perch that folds out of the shoe locker's aft face. Sit on it facing aft down the
-    # van, or swing round and face the driver side; it folds flat against the locker so the
-    # sliding door is clear. One leg, hinged with it.
-    ( 450,  790,   20,  360,  390,  450, "chair"),      # seat pad, level with the locker top
-    ( 700,  770,  150,  230,    0,  390, "fleg"),       # the leg, down to the floor
-    ( 450,  500,   20,  360,   60,  430, "chairp"),     # folded flat on the locker's aft face
+    # The shoe locker's side table. You sit ON the locker at 450 and the top is at 720, a
+    # desk rise above it, reaching aft over your lap - so it is where your hands are, not
+    # where your legs are. That is also why it cannot stand on a straight leg: the floor in
+    # front of the locker is exactly where your shins go. The bracket is an L in two planes
+    # instead - up the locker's DRIVER-side face, aft along it at hand height, then the top
+    # cantilevers inboard off the arm. Nothing of it crosses the body; check() enforces that.
+    ( 100,  180,  400,  460,  120,  640, "parm"),       # upright, bolted flat to the side panel
+    ( 180,  660,  400,  460,  640,  680, "parm"),       # the arm, running aft at hand height
+    ( 460,  800,   60,  440,  680,  720, "ptable"),     # 340 x 380 top, surface at 720
+    ( 200,  540,  400,  440,  300,  680, "ptablep"),    # folded: drops off the arm and hangs
+                                                        #   flat down the locker's side panel,
+                                                        #   clear of the legs of whoever sits
     (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
     (1600, 1930,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
     # Over the dinette the lockers had to move. A 600-deep bench at 570 puts a seated head
@@ -207,16 +213,17 @@ CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
 # two rounds of this design were drawn with a swing arm running straight through a sitter's
 # chest: obvious in a render, invisible in a box list. Trunk, thighs, shins each.
 #
-# 1) On the fold-out perch by the door, turned to face the driver side. The locker itself is
-#    no longer a seat in this state: the perch is deployed exactly where your legs would go.
+# 1) On the shoe locker by the door, facing aft, with the side table over the lap. Nothing
+#    of the table or its bracket is allowed into this body - which is what forced the
+#    bracket onto the locker's side panel rather than onto the face you sit looking over.
 # 2+3) The two dinette seats, facing each other across the 632 footwell and OFFSET along the
 #    van - the offset is the whole reason the table is 900 long. Seat surface 630, feet on
 #    the raised floor at 180, so the body sits 450 above what it stands on. Head tops out at
 #    1480 (Ondrej is 171), which is what evicted the old 1400 lockers over the dinette.
 SITTER_V2 = [
-    ( 480,  740,   20,  320,  450, 1300),    # door perch: trunk, facing the driver side
-    ( 500,  760,  320,  700,  380,  500),    #   thighs, reaching into the room
-    ( 520,  740,  620,  820,    0,  400),    #   shins, feet on the floor
+    (  60,  400,   60,  380,  450, 1300),    # shoe locker: trunk, facing aft
+    ( 450,  800,  100,  380,  380,  500),    #   thighs, under the side table
+    ( 620,  820,  100,  380,    0,  400),    #   shins, feet on the floor
     (2000, 2340,   32,  352,  630, 1480),    # passenger bench, sitting forward: trunk
     (2040, 2320,  352,  652,  560,  680),    #   thighs, overhanging the bench edge by 52
     (2040, 2320,  600,  760,  180,  580),    #   shins, dropping into the footwell
@@ -226,8 +233,8 @@ SITTER_V2 = [
 ]
 # What is allowed to touch a sitter: the seat under them, the cushion on it, and the floor
 # they step on.
-SIT_OK_V2 = ("LOCKER", "chair", "bed", "infill", "pillow", "BENCH", "REAR BENCH",
-             "FOOTWELL -> BED", "ENTRY", "AISLE", "SEAT")
+SIT_OK_V2 = ("LOCKER", "bed", "infill", "pillow", "BENCH", "REAR BENCH",
+             "FOOTWELL -> BED", "ENTRY", "AISLE", "SIDE TABLE")
 
 # Which wall a prop mesh was modelled facing away from: "p" = passenger (y=0), "d" = driver.
 # v2 mirrors several of v1's placements across the aisle, and a mesh with a front - a door,
@@ -250,8 +257,8 @@ LAYERS_V2 = [
      "kinds": ["wetwall", "tray", "wetface", "shower", "WARDROBE"], "on": True},
     {"id": "worktop", "label": "Worktop leaf out", "kinds": ["ftable", "farm"], "on": False,
      "hide": ["ftablep"]},
-    {"id": "perch", "label": "Door perch out", "kinds": ["chair", "fleg"], "on": True,
-     "hide": ["chairp"]},
+    {"id": "perch", "label": "Side table out", "kinds": ["ptable"], "on": True,
+     "hide": ["ptablep"]},
     {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
@@ -423,8 +430,8 @@ NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "wetface": "Shower face, carved opening", "pillow": "Pillow", "insert": "Sink insert tray",
-    "chair": "Door perch", "chairp": "Door perch, folded",
-    "FOOTWELL -> BED": "Footwell / bed middle", "SEAT": "Door perch",
+    "ptable": "Side table", "ptablep": "Side table, folded", "parm": "Table bracket",
+    "FOOTWELL -> BED": "Footwell / bed middle", "SIDE TABLE": "Side table",
     "SINK": "Galley - sink side", "HOB": "Galley - hob side",
     "OFFICE SEAT": "Office seat", "LARDER": "Larder",
     "BENCH -> BED": "Bench / bed", "BATHROOM": "Bathroom", "GARAGE": "Garage, full height",
@@ -484,8 +491,8 @@ CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 KIND = {          # plan label or extra kind -> colour
     "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8", "wetface": "#c6d9e4",
-    "pillow": "#f4f2f6", "insert": "#b6bcbe", "chair": "#d8cfe2", "chairp": "#d8cfe2",
-    "FOOTWELL -> BED": "#d8cfe2", "SEAT": "#d8cfe2",
+    "pillow": "#f4f2f6", "insert": "#b6bcbe", "ptable": "#d9b98a", "ptablep": "#d9b98a",
+    "parm": "#9a9287", "FOOTWELL -> BED": "#d8cfe2", "SIDE TABLE": "#d9b98a",
     "SINK": "#cfded9", "HOB": "#cfded9", "partition": "#d9d4c8", "hatch": "#c9c2b4",
     "OFFICE SEAT": "#d8cfe2", "LARDER": "#e6dcc6",
     "BENCH -> BED": "#d8cfe2", "BATHROOM": "#bcd6e6", "GARAGE": "#e6dcc6",

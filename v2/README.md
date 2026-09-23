@@ -19,7 +19,7 @@ with the drawing above. What the 3D adds on top of the plan:
 | Bed made up | the infill over the footwell and the two pillows; hides the table and its post |
 | Shower + wardrobe | the cubicle's panels, tray and carved face, and the wardrobe with the WC bay open |
 | Worktop leaf out | deploys the galley's fold-down leaf; off, it hangs folded down the galley end |
-| Door perch out | the fold-out seat by the sliding door; off, it hangs flat on the locker |
+| Side table out | the top beside the shoe locker; off, it hangs flat down the locker's side |
 | Lockers | three overhead runs, kept clear of the door head and the windows |
 | Appliances | the kit at real catalogue sizes, and it ghosts the carcasses so you see in |
 | Body + glass | panels with real holes: slider, four windows, the cassette hatch, two fans, the partition with its pass-through |
@@ -86,7 +86,7 @@ the galley reaching forward over it when you need prep space.
 | | |
 |---|---|
 | Shoe locker | **450 × 400**, top at 450 — shoes inside, and the step to the cab |
-| Door perch | **340 × 340** seat pad at 450, folding out of the locker's aft face |
+| Side table | **340 × 380** top at **720**, on an L bracket off the locker's side |
 | Worktop leaf | **400 × 600** at **900**, the galley's own height — fold-down |
 | Mount | hinged on the hob unit's forward end panel, swing-out bracket under it |
 | Folded | hangs flat down that same panel, x 1090–1150 |
@@ -98,13 +98,26 @@ through to the cab. It lost 50 mm fore-aft and 150 mm across to give the lobby i
 the shower more room.
 
 **Turned a quarter clockwise, 2026-09-23** — 450 along the van, 400 across — and it grew a
-**fold-out perch on its aft face**: a 340 × 340 pad at 450, level with the locker top, on one
-folding leg. Sit on it facing **aft** down the van, or swing round and face the **driver
-side**; with the pad down you and the locker make one 790 mm bench along the wall.
+**side table** beside it. **You sit on the locker**, at 450, facing aft; the top is at **720**
+and reaches over your lap. That is a desk rise, 270 above the seat, with 180 mm of thigh
+clearance under it — a laptop, a coffee, a book by the open door.
 
-**Deployed, the perch stands in the step-in pocket** (x 450–790), so it has to be folded to
-walk in or out. That is what the leg is for. The **Door perch out** button in the viewer
-shows both states; deployed is the default.
+**The bracket is an L in two planes, and it had to be.** A straight leg to the floor lands
+exactly where your shins go. So instead:
+
+| | |
+|---|---|
+| Upright | x 100–180, bolted flat to the locker's **driver-side panel**, 120 → 640 |
+| Arm | runs **aft** along that panel, x 180–660 at 640–680 |
+| Top | **340 × 380**, cantilevers **inboard** off the arm, surface at **720** |
+| Folded | the top drops off the arm and hangs flat down the side panel, clear of your legs |
+
+Everything structural is outboard of the body at y 400–460; nothing crosses it. That is not a
+judgement call — `check()` carries the seated person and rejected the first two bracket
+positions, one through the shins and one through the folded panel.
+
+**Deployed, the top stands in the step-in pocket** (x 460–800), so it folds to walk in or out.
+The **Side table out** button in the viewer shows both states; deployed is the default.
 
 **With the leaf down, the side door is blocked** — the clear entry drops from 690 mm to
 about 290. It folds in a second, and unlike a table nobody is sitting at it, so the cost is
@@ -114,7 +127,8 @@ Both positions are in the 3D model. **Folded is the default**, because that is t
 entry gap assumes — the **Worktop leaf out** button deploys it.
 
 `model3d.check()` carries **three seated people** — trunk, thighs and shins each: one on the
-door perch turned to face the driver side, and the two at the dinette. The build fails if any
+shoe locker facing aft with the side table over their lap, and the two at the dinette. The
+build fails if any
 furniture runs through them. Two rounds of the old office table were drawn with a swing arm
 through a sitter's chest before it was caught by eye, and the same test is what evicted the
 old overhead lockers from above the dinette.
@@ -317,7 +331,7 @@ them.
 | Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
 | Shoe locker | **450 × 400 × 450** | shoes; doubles as the step to the cab |
-| Door perch | **340 × 340** at 450 | folds out of the locker's aft face, one leg |
+| Side table | **340 × 380** at 720 | L bracket off the locker's side panel; folds down flat |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
 | Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
 | Galley — sink side (driver) | **780 × 600**, worktop 900 | single bowl 440 × 360 at the wardrobe, insert tray inside it, **340 prep** aft; 20 L oven at the aisle edge, pump behind it |
