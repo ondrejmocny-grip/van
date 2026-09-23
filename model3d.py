@@ -1386,6 +1386,70 @@ def main_all():
     write_viewer(list(VIEWER_ALL), os.path.join(HERE, "viewer.html"), "Crafter L3H3 Interior")
 
 
+# VanSpace3D (vanspace3d.com) saves a build as Unity JsonUtility JSON: one "Parent" per placed
+# item, holding the catalogue item by name. Its "Cube" is a 1-unit mesh centred on its pivot,
+# 1 unit = 100 mm, +z toward the cab, +x toward the passenger wall, +y up, x = 0 on the
+# centre line. Measured off its own van meshes, 2026-09-23. Its names run one size up from
+# VW's: its "L2H2" is a real L3H3 inside (3440 x 1836 x 1953), its "L3H3" is an L4 with the
+# super-high roof (4294 x 1838 x 2200).
+VS3D_SAVES = os.path.expanduser("~/AppData/LocalLow/vanspace 3D/vanspace 3D/saves")
+VS3D_FLOOR = 4.47                      # y of the floor top, our z = 0
+VS3D_VANS = {                          # van -> (z of the bulkhead's aft face, default wheelbase)
+    "VW Cr L2H2": (5.37, 364.0),       # the wheelbase is in cm: 3640, the real L3's
+    "VW Cr L3H3": (4.65, 450.0),
+}
+
+
+def vs3d_box(v, box, layer, front):
+    """One of our boxes as a VanSpace3D Parent holding a scaled Cube."""
+    x0, x1, y0, y1, z0, z1, kind = box
+    pos = {"x": (v["width"] / 2 - (y0 + y1) / 2) / 100,
+           "y": VS3D_FLOOR + (z0 + z1) / 200,
+           "z": front - (x0 + x1) / 200}
+    rot = {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0}
+    hexcol = KIND.get(kind, "#bbbbbb")
+    colour = dict(zip("rgb", (int(hexcol[i:i + 2], 16) / 255 for i in (1, 3, 5))), a=1.0)
+    cube = dict(Name="Cube", Position=pos, Rotation=rot,
+                Scale={"x": (y1 - y0) / 100, "y": (z1 - z0) / 100, "z": (x1 - x0) / 100},
+                IsSafeDestroyed=False, Visible=True, SubItems=[],
+                MaterialNames=["Sla Plastic Grey"], MaterialColors=[colour],
+                Layer=layer, IsDuplicate=False)
+    return dict(cube, Name="Parent", Scale={"x": 1.0, "y": 1.0, "z": 1.0}, SubItems=[cube],
+                MaterialNames=[], MaterialColors=[])
+
+
+def write_vs3d(name, van="VW Cr L2H2"):
+    """vN.vs3d straight into VanSpace3D's saves folder: every box as a coloured Cube, one
+    layer per kind so each can be hidden. Everything arrives as Cubes - swap in real
+    catalogue items by hand. Any van but the default gets its own file, vN-<van>.vs3d."""
+    v = VARIANTS[name]
+    check(v)
+    front, wheelbase = VS3D_VANS[van]
+    boxes = boxes_for(v)
+    kinds = list(dict.fromkeys(b[6] for b in boxes))
+    white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
+    save = dict(VanModelName=van, ApplicationVersion="3.08", TimeOfDay=0.0,
+                CustomVan=False, CustomVanPresetName="", xScale=1.0, yScale=1.0, zScale=1.0,
+                WallDimensions={"x": 0.0, "y": 0.0, "z": 0.0}, WheelbaseLength=wheelbase,
+                ExteriorColor=white, WallMaterialName="Aged Plywood", WallColor=white,
+                FloorMaterialName="Aged Plywood", FloorColor=white,
+                CeilingMaterialName="Aged Plywood", CeilingColor=white,
+                items=[vs3d_box(v, b, kinds.index(b[6]) + 1, front) for b in boxes], groups=[],
+                wires={"isWire": False, "Lines": []}, pipes={"isWire": False, "Lines": []},
+                wheelOnLeft=False,
+                labels=[{"name": "Base Layer", "index": 0}]
+                + [{"name": k, "index": i + 1} for i, k in enumerate(kinds)],
+                isBulkheadVisible=True, isSeatsVisible=True)
+    tag = "" if van == "VW Cr L2H2" else "-" + van.split()[-1]
+    path = os.path.join(VS3D_SAVES, name + tag + ".vs3d")
+    with open(path, "w") as f:
+        json.dump(save, f, indent=4)
+    print("wrote %s - %d cubes on %d layers" % (path, len(boxes), len(kinds)))
+
+
 if __name__ == "__main__":
     arg = sys.argv[1] if len(sys.argv) > 1 else "v1"
-    main_all() if arg == "viewer" else main(arg)
+    if arg == "vanspace":
+        write_vs3d(*(sys.argv[2:4] or ["v2"]))
+    else:
+        main_all() if arg == "viewer" else main(arg)
