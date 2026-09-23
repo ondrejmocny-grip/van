@@ -202,14 +202,14 @@ same call as the shower cubicle. The taps are still meshes; a tap is a shape, no
 
 **No door at all now.** Changed 2026-09-23: the lobby side is a solid panel with the entrance
 **carved out of it** — a walk-in opening with a semicircular head, as narrow as an adult
-actually needs, pushed to the forward end of the face.
+actually needs, pushed to the aft end of the face, against the wardrobe.
 
 | | |
 |---|---|
 | Opening | **450 wide**, from the 60 mm curb up to **1800** |
 | Head | full semicircle, radius 225, springing at 1575 |
-| Position | hard against the forward wall, x 40–490 of the 620 mm face |
-| **Panel left aft of it** | **170 wide × full height** — see below |
+| Position | hard against the **aft** wall, x 210–660 of the 620 mm face — the wardrobe end |
+| **Panel left forward of it** | **170 wide × full height**, on the partition side — see below |
 | Curb | the 60 mm tray lip runs across the opening, bottom corners radius 60 |
 
 **450 is the floor, not a choice.** Interior doors are 600–700 and RV shower doors 500–560;
@@ -220,6 +220,10 @@ the face. Every millimetre added to the opening comes straight off that 170.
 wet side for bottles, or a mirror. Not a cupboard — 170 × 40 of panel is a surface to mount
 on, not a volume. If it turns out to be worth more than that, the honest move is to steal it
 from the wardrobe next door rather than from the opening.
+
+It sits at the **forward** end now, against the partition. That is the end you reach first
+coming through from the cab, and it keeps the opening itself beside the wardrobe, where the
+WC slides in and where you are already standing when you use the bathroom.
 
 **A curtain is still the wet-side answer.** The carve keeps the water in only as far as the
 curb does; a curtain or a half-height glass fin on the aft jamb stops the spray reaching the

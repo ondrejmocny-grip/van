@@ -699,10 +699,11 @@ EXTRA_V2 += sink_wells(1150, 1590, 1440, 1800, 700, 905, n=1)
 EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
 # The shower entrance: carved, not a door and not a full glass wall. 450 clear is the
 # narrowest an adult actually walks through; a semicircular head springs at 1575 and tops
-# out at 1800. It is pushed to the forward end of the face, which leaves 170 mm of full-
-# height panel at the aft end - the only place on this face anything can be mounted.
+# out at 1800. It is pushed to the AFT end of the face, against the wardrobe, which leaves
+# 170 mm of full-height panel at the forward end, on the partition side - the only place on
+# this face anything can be mounted, and the end you meet first coming from the cab.
 EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, 1881,
-                      40, 490, 60, 1800, 225, 60, "wetface", steps=45)
+                      210, 660, 60, 1800, 225, 60, "wetface", steps=45)
 # v3: in the corner behind the driver, bowls side by side ACROSS the van - the run crosses
 # the bulkhead, so the axis that holds two bowls is y, not x. Cut down to 340 x 560 from
 # 440 x 640 - a smaller, narrower unit, product still to be found. The 200 mm of counter it

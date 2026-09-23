@@ -220,7 +220,7 @@ VARIANTS["v2"] = dict(
           "wheel arch. Estimated +/-50 mm."),
     boxes=[
         ( 400, 1090,  660, 1032, "ENTRY", "690 wide - cab door beside the locker", None),
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, forward end", WET),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
         (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step", SOFT),
         ( 450,  790,   20,  360, "SEAT", "fold-away perch - sit aft or inboard", SOFT),
