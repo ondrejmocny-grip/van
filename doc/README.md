@@ -112,8 +112,8 @@ See [budget.md](budget.md).
 ## Open questions
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
-  standing, not 1881. That still fits 171 cm, but v2's 1800-1810 lockers and the 1860
-  shower rail no longer fit, and standing on the 60 mm shower tray leaves ~1720 clear - about 1 cm over Ondrej.
+  standing, not 1881. That still fits 171 cm. **v2 is now drawn at 1781** (lockers, shower
+  head and arch lowered); v1 and v3 are still at 1881, and standing on the 60 mm shower tray leaves ~1720 clear - about 1 cm over Ondrej.
   The listing's own "1961" is the FWD brochure figure, not this van's.
 - Engine heat exchanger: in the plan, Ondrej to check against the warranty.
 - Morocco and Turkey paperwork, and Schengen limits on a Turkish passport.

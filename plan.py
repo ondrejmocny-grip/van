@@ -202,14 +202,14 @@ VARIANTS["v1-roof"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v2"] = dict(
     out="v2/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
     stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
            "garage 600 x 1832 x 570", "crawl-through 500 x 930", "galley aisle 632",
-           "rear floor +180", "standing 1881"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
+           "rear floor +180", "standing 1781"],
+    note=("Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Partition wall behind a 3-seat cab at x=0, "
           "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
           "the partition, so there was never a way past it. The rear is a U again, but the "
           "whole of it is "
