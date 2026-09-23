@@ -46,9 +46,9 @@ EXTRA = [
     (2350, 3494,    0,  700,  450,  520, "bed"),
     (2350, 3494, 1184, 1784,  450,  520, "bed"),
     (3044, 3494,  700, 1184,  450,  520, "bed"),
-    ( 620, 1720, 1484, 1784, 1400, 1700, "locker"),     # driver, over the galley
-    (2270, 3044, 1484, 1784, 1400, 1700, "locker"),     # driver, over the dinette
-    (2350, 3044,    0,  300, 1400, 1700, "locker"),     # passenger, over the dinette
+    ( 620, 1720, 1484, 1784, 1400, 1700, "overhead"),     # driver, over the galley
+    (2270, 3044, 1484, 1784, 1400, 1700, "overhead"),     # driver, over the dinette
+    (2350, 3044,    0,  300, 1400, 1700, "overhead"),     # passenger, over the dinette
     (2350, 3044,  700, 1184,  700,  760, "table"),      # dinette table, same patch
     ( -50,  550,  600, 1180,  700,  760, "ftable"),     # front Lagun table
     (1600, 2350,    0,  700,    0,  360, "step"),       # raised cubicle floor, high
@@ -159,15 +159,15 @@ EXTRA_V2 = [
     ( 200,  540,  400,  440,  300,  680, "ptablep"),    # folded: drops off the arm and hangs
                                                         #   flat down the locker's side panel,
                                                         #   clear of the legs of whoever sits
-    (1150, 1930, 1532, 1832, 1400, 1700, "locker"),     # driver, over the sink
-    (1600, 1930,    0,  300, 1400, 1700, "locker"),     # passenger, clear of the door head
+    (1150, 1930, 1532, 1832, 1400, 1700, "overhead"),     # driver, over the sink
+    (1600, 1930,    0,  300, 1400, 1700, "overhead"),     # passenger, clear of the door head
     # Over the dinette the lockers had to move. A 600-deep bench at 570 puts a seated head
     # at 1480, and a locker whose door starts at 1400 is exactly where that head is. So they
     # go up and get shallower: 260 deep instead of 300, 1560 instead of 1400, which clears
     # the head by 80 mm. Shoulder room is the reason they are also held 20 mm off the wall
     # line the bench uses.
-    (1950, 2830, 1572, 1832, 1560, 1710, "locker"),     # driver, over the dinette
-    (1950, 2830,    0,  260, 1560, 1710, "locker"),     # passenger, over the dinette
+    (1950, 2830, 1572, 1832, 1560, 1710, "overhead"),     # driver, over the dinette
+    (1950, 2830,    0,  260, 1560, 1710, "overhead"),     # passenger, over the dinette
     (   0,  160, 1600, 1760, 1140, 1760, "shower"),     # head and riser, on the partition
     # The shower cubicle, built rather than generated. A room is not a product: a single
     # mesh scaled to fill a 700 x 800 x 1781 hole either reads as a solid block or turns
@@ -254,7 +254,7 @@ SIT_OK_V2 = ("LOCKER", "bed", "infill", "pillow", "BENCH", "REAR BENCH",
 # the kind's own yaw, so yaw.json keeps meaning what it meant.
 # fridgedoor, LOCKER and WARDROBE are modelled for v2's own placements, so they are
 # not in here - their facing lives in yaw.json like any deliberate turn.
-FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+FACING_V2 = {"overhead": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 # The shoe locker turned a quarter turn in plan - 450 along the van, 400 across - so its
 # mesh has to turn with it. Sign as in YAW_V3: +90 is counter-clockwise seen from above,
 # so a clockwise quarter turn is 270.
@@ -271,7 +271,7 @@ LAYERS_V2 = [
      "hide": ["ftablep"]},
     {"id": "perch", "label": "Side table out", "kinds": ["ptable"], "on": True,
      "hide": ["ptablep"]},
-    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "lockers", "label": "Lockers", "kinds": ["overhead"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
     {"id": "body", "label": "Body + glass",
@@ -317,9 +317,9 @@ EXTRA_V3 = [
     (   0,  600,    0,  450,  880,  900, "ltable"),      # up, over the locker
     (   0,  600,  430,  450,  450,  875, "ltablep"),     # folded down the end panel
     # Overhead lockers. The passenger run starts aft of the sliding door head.
-    (   0, 1130, 1532, 1832, 1400, 1700, "locker"),      # driver, over the galley
-    (1330, 2850, 1532, 1832, 1400, 1700, "locker"),      # driver, over the bed bench
-    (1700, 2850,    0,  300, 1400, 1700, "locker"),      # passenger, clear of the door head
+    (   0, 1130, 1532, 1832, 1400, 1700, "overhead"),      # driver, over the galley
+    (1330, 2850, 1532, 1832, 1400, 1700, "overhead"),      # driver, over the bed bench
+    (1700, 2850,    0,  300, 1400, 1700, "overhead"),      # passenger, clear of the door head
     # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
     # inside the wall - so only the shut position is a box, and it is off by default.
     (2890, 3410,  640, 1792,    0,   60, "tray"),
@@ -380,7 +380,7 @@ SITTER_V3 = [
 ]
 SIT_OK_V3 = ("BENCH -> BED", "bed", "infill", "ENTRY", "CORRIDOR -> BED")
 
-FACING_V3 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+FACING_V3 = {"overhead": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 # v3's galley crosses the bulkhead instead of running along a wall, so its kit is a quarter
 # turn from the box every existing mesh was made for. These are the turns Ondrej read off the
 # viewer, added to whatever yaw.json and FACING already apply.
@@ -408,7 +408,7 @@ LAYERS_V3 = [
     {"id": "door", "label": "Bathroom door shut", "kinds": ["doorshut"], "on": False},
     {"id": "leaf", "label": "Galley leaf up", "kinds": ["ltable"], "on": False,
      "hide": ["ltablep"]},
-    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "lockers", "label": "Lockers", "kinds": ["overhead"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V3}),
      "on": True, "xray": True},
     {"id": "body", "label": "Body + glass",
@@ -462,7 +462,7 @@ NAMES = {
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
     "BENCH": "Bench", "REAR BENCH": "Rear bench / garage",
     "GARAGE": "Garage + bed base", "bedslide": "Bed slide-out", "mattress": "Mattress", "bed": "Seat cushion", "infill": "Bed infill",
-    "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
+    "overhead": "Overhead locker", "table": "Table", "step": "Cubicle step",
     "leg": "Table post", "shower": "Shower head",
     "ftable": "Worktop leaf", "fleg": "Front table post",
     "ftablep": "Worktop leaf, folded", "farm": "Leaf bracket",
@@ -537,7 +537,7 @@ KIND = {          # plan label or extra kind -> colour
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2", "GARAGE": "#d8cfe2",
     "bedslide": "#e3dfe9", "mattress": "#eceaf1",
-    "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "locker": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
+    "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",

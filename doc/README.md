@@ -254,6 +254,10 @@ A sitter is written from the seat surface: trunk from the seat to seat + 850, th
 straddling the cushion, shins from the floor to just under it. 850 is Ondrej at 171 cm -
 raise it before trusting the numbers for anyone taller.
 
+**Two kinds must never differ only by case.** A prop is `props/<kind>.glb`, and Windows keeps
+one file for `LOCKER.glb` and `locker.glb` - a pull silently overwrote one mesh with the other,
+and the viewer lost the overhead lockers. That kind is `overhead` since 2026-09-23.
+
 **A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
 modelled facing away from; a box against the other wall gets a half turn on top of the kind's
 own `yaw.json` entry, so the galley on v2's passenger side does not open into the wall.
