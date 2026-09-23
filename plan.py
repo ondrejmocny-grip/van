@@ -207,9 +207,12 @@ VARIANTS["v2"] = dict(
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
     stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
-           "garage 600 x 1832 x 570", "galley aisle 632", "rear floor +180", "standing 1881"],
+           "garage 600 x 1832 x 570", "entry column 210 x 562", "galley aisle 632",
+           "rear floor +180", "standing 1881"],
     note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
-          "pass-through beside the shoe locker. The rear is a U again, but the whole of it is "
+          "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
+          "the partition, so there was never a way past it. The rear is a U again, but the "
+          "whole of it is "
           "lifted: you step up 180 into the footwell, the benches are 570 high, and the bed "
           "makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift "
           "is the storage: 570 of garage under the rear bench, and a shallow drawer under the "
@@ -219,10 +222,11 @@ VARIANTS["v2"] = dict(
           "U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the "
           "wheel arch. Estimated +/-50 mm."),
     boxes=[
-        ( 400, 1090,  660, 1032, "ENTRY", "690 wide - cab door beside the locker", None),
+        ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
         (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
-        (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step", SOFT),
+        (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step to the hatch", SOFT),
+        (   0,  210,  470, 1032, "SHELVES", "210 x 562 full height - boots, towels, stores", WARM),
         ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
         ( 750, 1150,    0,  600, "WORKTOP", "400 x 600 - fold-down leaf", GALLEY),
         (1150, 1930, 1232, 1832, "SINK", "780 x 600 - 440 single bowl, 340 prep aft", GALLEY),

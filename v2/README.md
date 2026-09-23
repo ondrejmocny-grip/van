@@ -87,6 +87,8 @@ the galley reaching forward over it when you need prep space.
 |---|---|
 | Shoe locker | **450 × 400**, top at 450 — shoes inside, and the step to the cab |
 | Side table | **340 × 380** top at **720**, on an L bracket off the locker's side |
+| Entry column | **210 × 562**, floor to roof — where the walk-through used to be |
+| Cab hatch | **420 × 850** in the partition, sill 500, straight over the locker |
 | Worktop leaf | **400 × 600** at **900**, the galley's own height — fold-down |
 | Mount | hinged on the hob unit's forward end panel, swing-out bracket under it |
 | Folded | hangs flat down that same panel, x 1090–1150 |
@@ -118,6 +120,34 @@ positions, one through the shins and one through the folded panel.
 
 **Deployed, the top stands in the step-in pocket** (x 460–800), so it folds to walk in or out.
 The **Side table out** button in the viewer shows both states; deployed is the default.
+
+### The walk-through was a fiction, 2026-09-23
+
+The partition had a 432 mm opening at y 600–1032. With a **3-seat cab** the double bench backs
+onto the partition from y 60 to 1060 — that opening looked at the back of a seat. It is gone,
+replaced by a **hatch over the shoe locker**: 420 wide, sill at 500 (50 above the locker top),
+up to 1350.
+
+**What it costs:** no getting to the cab without going outside. That is the real price of the
+third seat, and it is worth saying out loud rather than drawing a door that does not work. If
+it matters more than it looks, the fix is at the seat, not the wall — a bench whose middle
+back folds forward gives a crawl-through again.
+
+**What it buys:** the corner the walk-through was using, which is now the **entry column**.
+
+| | |
+|---|---|
+| Size | **210 deep × 562 wide × 1881** = **0.22 m³** |
+| Where | x 0–210, y 470–1032 — against the partition, beside the shower's forward wall |
+| Why 210 and not 450 | its aft face lines up with the **shower opening's forward jamb**, so it never stands in the way of stepping in |
+| Why y starts at 470 | that is where the side table's bracket ends |
+| Holds | boots and shoes low down, towels and hooks in the middle, light stores above head height |
+
+**The rest of the lobby stays floor, on purpose.** x 210–1150 × y 400–1032 is the only place in
+this van where somebody can stand out of the corridor: drying off out of the shower, getting a
+child dressed, dropping bags coming in, and the WC sliding forward out of the wardrobe. Filling
+it would buy storage we do not need — 140 L of belongings for two — and spend the one thing
+that is genuinely scarce.
 
 **With the leaf down, the side door is blocked** — the clear entry drops from 690 mm to
 about 290. It folds in a second, and unlike a table nobody is sitting at it, so the cost is
@@ -330,10 +360,11 @@ them.
 |---|---|---|
 | Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
-| Shoe locker | **450 × 400 × 450** | shoes; doubles as the step to the cab |
+| Shoe locker | **450 × 400 × 450** | shoes; doubles as the step up to the cab hatch |
+| Entry column | **210 × 562**, full height | **0.22 m³** — boots, towels, stores; the old walk-through |
 | Side table | **340 × 380** at 720 | L bracket off the locker's side panel; folds down flat |
 | Worktop leaf | **400 × 600** at 900 | fold-down off the galley's end panel |
-| Entry, clear at the door | **690** of the 1300 aperture | cab pass-through 432 beside the locker |
+| Entry, clear at the door | **690** of the 1300 aperture | cab **hatch** 420 x 850 over the locker |
 | Galley — sink side (driver) | **780 × 600**, worktop 900 | single bowl 440 × 360 at the wardrobe, insert tray inside it, **340 prep** aft; 20 L oven at the aisle edge, pump behind it |
 | Galley — hob side (passenger) | **780 × 600** | induction 300 × 520 forward beside the leaf, **480 prep** aft; **90 L fridge** under |
 | Galley aisle | **780 × 632** | |
@@ -424,8 +455,16 @@ sitting over the same arch.
 13. **Perch versus door.** The fold-out perch stands in the step-in pocket. If it turns out to
     be folded 95% of the time, it is a hook, not a seat — worth living with a cardboard
     mock-up before the hinge is bought.
-14. **The 170 mm strip beside the shower opening.** Decide what it is for before the panel is
-    cut: hooks, a rail, a mirror, or a slim wet-side shelf are all it will take.
+14. **The 170 mm strip beside the shower opening** is now the **entry column's aft face** —
+    and, with a curtain rather than a door, it is where the curtain stacks when it is open.
+    A curtain needs 100–150 of stack; the strip is 170. Hooks and a rail go on it; the wet
+    side of the same panel takes a recessed bottle shelf above 900.
+15. **Nobody has drawn the cat a litter tray yet.** It is the one thing in `doc/about-us.md`
+    with no home in any variant. The two places that can take a hooded tray (~500 × 380) are
+    **inside the shoe locker** (450 × 400 × 450, a flap in its aft face, shoes move to the new
+    column) or the **aft 300 mm of the driver bench**. The locker is at the door, which is
+    where the smell wants to be; it also means sitting on it. Worth deciding before the front
+    is cut.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

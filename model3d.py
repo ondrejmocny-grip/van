@@ -96,7 +96,8 @@ APPLIANCES = [
 HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
     "WARDROBE": (0, 1881),      # hanging above, WC drawer below
-    "LOCKER": (0, 450),         # shoe locker, and the step through to the cab
+    "LOCKER": (0, 450),         # shoe locker, and the step through the hatch to the cab
+    "SHELVES": (0, 1881),       # the column the old walk-through left behind
     "SINK": (0, 900),
     "HOB": (0, 900),
     # The rear U is lifted as one piece. Floor +180 in the footwell, benches 570, bed at 630.
@@ -206,7 +207,7 @@ APPLIANCES_V2 = [
     (2900, 3300, 1700, 1820,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
 ]
 
-CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
+CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SHELVES", "SINK", "HOB", "BENCH", "REAR BENCH",
                  "FOOTWELL -> BED")
 
 # Three people, checked the same way appliances are checked against each other - because
@@ -428,6 +429,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
+    "SHELVES": "Entry column, full height",
     "wetwall": "Shower wall", "tray": "Shower tray", "screen": "Shower screen, glass",
     "wetface": "Shower face, carved opening", "pillow": "Pillow", "insert": "Sink insert tray",
     "ptable": "Side table", "ptablep": "Side table, folded", "parm": "Table bracket",
@@ -483,13 +485,18 @@ WINDOWS_V2 = [
 FAN_HOLES_V2 = [(1400, 1880, 676, 1156), (2350, 2830, 676, 1156)]
 # Service hatches: a real hole in a body panel with a lid in it. side, x0, x1, z0, z1.
 HATCHES_V2 = [("d", 700, 1150, 40, 580)]        # the cassette comes out sideways here
-# Partition behind a 3-seat cab, with the pass-through cut in it: y0, y1, z0, z1.
-PARTITION_V2 = (600, 1032, 0, 1600)
+# Partition behind a 3-seat cab, with the opening cut in it: y0, y1, z0, z1.
+# It used to be a walk-through at y 600-1032, which a 3-seat cab makes a fiction: the double
+# bench backs onto the partition from y 60 to 1060, so that "door" opened onto the back of a
+# seat. It is now a HATCH over the shoe locker instead - sill 50 mm above the locker top, so
+# things (and a child, and a cat) go across the locker and through. Inside access to the cab
+# on foot is gone; that is the price of the third seat, and it bought the lobby a cupboard.
+PARTITION_V2 = (0, 420, 500, 1350)
 # Cab seats as x0, x1, y0, y1 - a single driver seat and a double bench, no swivels.
 CAB_SEATS_V2 = [(-670, -190, 1140, 1620), (-670, -190, 60, 1060)]
 
 KIND = {          # plan label or extra kind -> colour
-    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2",
+    "SHOWER": "#bcd6e6", "WARDROBE": "#e6dcc6", "LOCKER": "#d8cfe2", "SHELVES": "#e6dcc6",
     "wetwall": "#cfe0ea", "tray": "#dde4e8", "screen": "#a9c6d8", "wetface": "#c6d9e4",
     "pillow": "#f4f2f6", "insert": "#b6bcbe", "ptable": "#d9b98a", "ptablep": "#d9b98a",
     "parm": "#9a9287", "FOOTWELL -> BED": "#d8cfe2", "SIDE TABLE": "#d9b98a",
