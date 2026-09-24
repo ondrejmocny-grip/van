@@ -113,6 +113,11 @@ carrier on them, and the wheel (~711 across) does not fit anywhere inside.
 | Table post | can no longer bolt through the footwell floor: a small frame over the tank carries it |
 | Lost | the footwell drawer, ~0.1 m³ |
 
+**The spare wheel bay sets a limit on tyres.** It measures ~730 on VW's drawing for the 712
+factory wheel. Bigger all-terrain tyres ([ref/offroad-upgrades](../ref/offroad-upgrades/README.md))
+- 744 for 225/75 R16, 774 for 245/75 R16 - may not fit it, which would reopen this question.
+Check with the real bay before choosing a tyre size.
+
 The ready-made underslung Crafter tanks never fitted anyway: the Wydale 90 L and 63 L say
 "does not fit LHD", the 90 L also "not MWB", and the 82 L runs down the centre where a
 4MOTION has its propshaft.

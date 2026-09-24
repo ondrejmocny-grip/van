@@ -38,6 +38,7 @@ Read it before proposing anything.
 | [doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md) | Fiat Ducato L2H2, 5.40 m overall. Front-corner standing shower, split galley, rear salon to a 1350 x 1880 bed. | **Most relevant reference we have.** 330 mm *shorter* than ours and still has a full shower. Layout reconstructed. |
 | [scarletseth-promaster-159ext](../ref/scarletseth-promaster-159ext/README.md) | Ram ProMaster 159" EXT. Shower turned sideways against the cab bulkhead, WC in a drawer under the fridge, rear dinette to a near-square bed. | **Two ideas, not a layout.** $104k build on a 4089 mm van. Layout reconstructed. |
 | [vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md) | VW's official body builder drawings and converter guidelines for our van, Crafter L3H3 4MOTION. | **Source of truth for the body** until we measure the real van. Walls lean in, floor 3390, grey tank position wrong in v2. |
+| [offroad-upgrades](../ref/offroad-upgrades/README.md) | Rough-road upgrades for the 4MOTION: skid plates, lift, air springs, A/T tyres, snorkel - checked against our van. | **Not decided.** Nothing changes inside; outside +30-60 height and step-in. Bigger tyres collide with the spare wheel bay; everything costs payload under the 3.5 t licence limit. |
 
 ## Base vehicle sizing
 
@@ -116,6 +117,9 @@ See [budget.md](budget.md).
 ## Open questions
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
+- **Rough-road upgrades** (list 2026-09-24, [ref/offroad-upgrades](../ref/offroad-upgrades/README.md)) - which tier.
+  Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
+- **Weight: 3500 kg is the licence B limit.** 4MOTION + heavy electrics + upgrades - the payload check is due in the product register.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
