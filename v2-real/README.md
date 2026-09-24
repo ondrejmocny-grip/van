@@ -20,21 +20,64 @@ It is also in the combined viewer: `python model3d.py viewer`.
 
 The difference between v2 and v2-real is always what is written in those two blocks.
 
-## State on 2026-09-24
+## State on 2026-09-24 — the real body is in, the furniture is still v2's
 
-Identical to v2. The 3D model is the same geometry; `check()` passes on all 15 appliances.
+**Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
+the real wall in black, v2's old 1832 box dashed, parts the wall cuts in red. Then
+[layout.png](layout.png) — the plan with the real wall in red (solid at the floor, dashed at
+1600 high).
+
+### What is modelled now
+
+| | Real (v2-real) | v2 had |
+|---|---|---|
+| Floor length | **3390** | 3450 |
+| Width at the floor → at 900 → from 1540 up | **1776 → 1708 → 1472** | 1832 everywhere |
+| Wheel arch | x **1817–2728**, **251** above the finished floor, solid in 3D | 1863–2763, 350, not drawn |
+| Slider | x **305–1615**, **1672** high | 300–1600, 1550 |
+| Rear door opening | **1690** high | 1700 |
+| Ceiling | 1781 finished (unchanged) | 1781 |
+
+All from [ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md). The walls in
+3D are a staircase of 40 mm bands (boxes cannot slope), never more than 3 mm off the line.
+
+**Placeholder:** the finished floor is taken as 50 above bare metal, the ceiling 30 below the
+roof. Wall cladding is **not** in yet - the walls here are bare metal (rib faces). Step 2
+replaces both with the real build-up, which takes another ~20-40 mm per side.
+
+### What the real body breaks — 37 parts
+
+`python model3d.py v2-real` prints the full list. It is a report, not a failure, while
+`body.strict` is False in `plan.py`; set it True once the list is empty, and from then on a
+part hitting the wall fails the build. In groups:
+
+| Group | Parts | How far in | What it needs |
+|---|---|---|---|
+| **Everything against a wall, low down** | benches, rear bench, bed cushions, shoe locker, cassette, plumbing, electrics | **28–36** | the van is 56 narrower at the floor: carcasses 30 shallower, or the aisle / footwell gives it up |
+| **Galley carcasses** (top at 900) | sink and hob runs, worktop leaf, backrest, hob | **50–61** | worktop 60 shallower each side, or the aisle 632 → ~510 |
+| **Up high, against the lean** | 4 overhead lockers | **180** | redesign: from 1540 up the wall is 180 in. A 300-deep locker is ~120 deep there |
+| **Full-height parts** | wardrobe, 3 shower walls, shower riser | **180 at the top**, 28 at the floor | their outer faces must follow the lean; the shower loses width up high |
+| **Taps** | mixer, drinking tap | **96–112** | they stand at the back edge of the deck; move them forward |
+| **Length** | rear bench, rear bed cushion, calorifier | **60** (calorifier 10) | the garage is 540 deep now, not 600, or the U moves forward |
+
+Nothing new clashes with the wheel arch or the tyres. The arch is lower and a little further
+forward than drawn: the fridge now stops ~37 short of it (was 83).
+
+**Not in this report:** the grey tank (underslung, and its 4MOTION problem is in the ref
+README), and the bed length across the van: 1766 between the bare walls at 570-630, before
+cladding. That is the decision still open.
 
 ## The plan: from schema to buildable
 
 Order matters: each step sets the limits for the next.
 
-### 1. The real van body — data found, not modelled yet
+### 1. The real van body — modelled 2026-09-24
 
 2026-09-24: VW's official body builder drawings are in
 **[ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md)**. The big findings:
 the walls lean in (~1775 wide low down, ~1475 near the roof, not 1832), the floor is 3390 long
 not 3450, the arch is 301 high, and **the grey tank as drawn sits on the rear differential**.
-Next: put that shape into the model.
+Now in the model - see the state above. Next: adapt the layout to it.
 
 | What | Why it matters |
 |---|---|

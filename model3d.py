@@ -16,7 +16,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from plan import VARIANTS, overlay_png
+from plan import VARIANTS, overlay_png, wall_inset, wall_inset_max
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -798,10 +798,77 @@ EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 REGISTRY["v2-real"] = copy.deepcopy(REGISTRY["v2"])
 
 
+def body_bands(v, step=40):
+    """The real wall as horizontal bands, (z0, z1, inset) each: vertical where the wall is
+    vertical, 40 mm steps where it leans. Boxes cannot slope, so a sloped wall is a
+    staircase - each step at the inset of its middle, never more than 3 mm off the line."""
+    pts = v["body"]["profile"]
+    bands = []
+    for (za, ia), (zb, ib) in zip(pts, pts[1:]):
+        n = 1 if abs(ib - ia) < 1 else max(1, int(round((zb - za) / step)))
+        for k in range(n):
+            z0, z1 = za + (zb - za) * k / n, za + (zb - za) * (k + 1) / n
+            bands.append((z0, z1, wall_inset(v, (z0 + z1) / 2)))
+    return bands
+
+
+def real_shell(v):
+    """The load area of a variant with a measured body: side walls that lean in, a roof as
+    wide as the top of them, wheel arches as solids, and the slider and rear doors at their
+    real openings. The cab and the wheels are the same as the box van's."""
+    L, W, H = v["length"], v["width"], v["height"]
+    sp, body = spec(v), v["body"]
+    bands = body_bands(v)
+    out = []
+    clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
+    sx0, sx1 = v["slider"]
+    for side in ("p", "d"):
+        holes = [(sx0, sx1, 0, body["slider_h"])] if side == "p" else []
+        holes += [clamp(hx0, hx1) + (hz0, hz1)
+                  for s, hx0, hx1, hz0, hz1 in list(sp["windows"]) + list(sp["hatches"]) if s == side]
+        for z0, z1, i in bands:
+            y0, y1 = (i - WALL, i) if side == "p" else (W - i, W - i + WALL)
+            for x0, x1, bz0, bz1 in subtract((0, L, z0, z1), holes):
+                out.append((x0, x1, y0, y1, bz0, bz1, "shell"))
+            for s, wx0, wx1, wz0, wz1 in sp["windows"]:
+                if s == side and wz0 < z1 and wz1 > z0:
+                    wx0, wx1 = clamp(wx0, wx1)
+                    out.append((wx0, wx1, y0, y1, max(z0, wz0), min(z1, wz1), "glass"))
+            for s, hx0, hx1, hz0, hz1 in sp["hatches"]:
+                if s == side and hz0 < z1 and hz1 > z0:
+                    hx0, hx1 = clamp(hx0, hx1)
+                    out.append((hx0, hx1, y0, y1, max(z0, hz0), min(z1, hz1), "hatch"))
+
+    top = wall_inset(v, H)
+    for x0, x1, y0, y1 in subtract((0, L, top, W - top), sp["fans"]):
+        out.append((x0, x1, y0, y1, H, H + WALL, "shell"))
+    floor = wall_inset(v, 0)
+    out.append((0, L, floor, W - floor, -WALL, 0, "floor"))
+
+    # the wheel arches, solid: the thing the benches are built over
+    w0, w1, wd = v["well"]
+    for y0, y1 in ((floor, wd), (W - wd, W - floor)):
+        out.append((w0, w1, y0, y1, 0, body["arch_h"], "shell"))
+
+    # partition and rear doors, each band as wide as the walls are apart at that height
+    holes = sp["partition"] or []
+    if holes and not isinstance(holes[0], (list, tuple)):
+        holes = [holes]
+    ri = REAR_DOORS[0]
+    for z0, z1, i in bands:
+        for y0, y1, bz0, bz1 in subtract((i, W - i, z0, z1), [tuple(h) for h in holes]):
+            out.append((-WALL, 0, y0, y1, bz0, bz1, "partition"))
+        for y0, y1, bz0, bz1 in subtract((i, W - i, z0, z1), [(ri, W - ri, 0, body["rear_h"])]):
+            out.append((L, L + WALL, y0, y1, bz0, bz1, "shell"))
+    return out
+
+
 def shell_for(v):
     """Body panels with apertures, glazing, and the cab. Same box format as everything else."""
     L, W, H = v["length"], v["width"], v["height"]
     sp = spec(v)
+    if v.get("body"):
+        return real_shell(v) + cab_for(v)
     out = []
     clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
 
@@ -844,8 +911,14 @@ def shell_for(v):
     for y0, y1, z0, z1 in subtract((0, W, 0, H), [(ri, W - ri, rz0, rz1)]):
         out.append((L, L + WALL, y0, y1, z0, z1, "shell"))
 
-    # cab: floor, lower roof, raked-off windscreen simplified to a vertical pane,
-    # side walls with door openings, dashboard, wheel, and the seats
+    return out + cab_for(v)
+
+
+def cab_for(v):
+    """The cab: floor, lower roof, raked-off windscreen simplified to a vertical pane, side
+    walls with door openings, dashboard, wheel, and the seats - then the four road wheels."""
+    W = v["width"]
+    out = []
     out.append((-NOSE, 0, 0, W, -WALL, 0, "cab"))
     out.append((-NOSE + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
     out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
@@ -1324,6 +1397,50 @@ def variant_dir(v):
 WELL_H = 350            # wheel arch height above the finished floor - not in the plan data
 
 
+def body_clashes(v):
+    """Everything solid that the REAL body cuts: through a leaning side wall, past the rear
+    doors, or into the roof. One line per part, with how far it goes in. Empty for the box
+    variants - their walls are the box."""
+    if not v.get("body"):
+        return []
+    L, W, H = v["length"], v["width"], v["height"]
+    out = []
+    for x0, x1, y0, y1, z0, z1, kind in boxes_for(v):
+        if kind == "grey":
+            continue                                    # underslung, outside on purpose
+        za, zb = max(z0, 0), min(z1, H)
+        i = wall_inset_max(v, za, zb)
+        # the lowest height at which the wall reaches the box - a tall carcass that meets the
+        # lean only near the ceiling is a different problem from a bench too wide at the floor
+        start = lambda gap: next(z for z in range(int(za), int(zb) + 2, 10)
+                                 if wall_inset(v, min(z, zb)) > gap + 1)
+        hits = []
+        if y0 < i - 1:
+            hits.append("passenger wall by %d (from z %d)" % (i - y0, start(y0)))
+        if y1 > W - i + 1:
+            hits.append("driver wall by %d (from z %d)" % (y1 - (W - i), start(W - y1)))
+        if x1 > L + 1:
+            hits.append("rear doors by %d" % (x1 - L))
+        if z1 > H + 1:
+            hits.append("roof by %d" % (z1 - H))
+        if hits:
+            out.append("%s at x %d-%d, z %d-%d: into the %s" % (kind, x0, x1, z0, z1, ", ".join(hits)))
+    return out
+
+
+def body_check(v):
+    """Report the real body's clashes; fatal only once the variant says it is adapted."""
+    clashes = body_clashes(v)
+    if not clashes:
+        return
+    if v["body"].get("strict"):
+        raise AssertionError("body check failed: " + "; ".join(clashes))
+    print("BODY - %d parts cut by the real walls (not fatal yet, body.strict is False):"
+          % len(clashes))
+    for c in clashes:
+        print("  " + c)
+
+
 def check(v):
     """Every appliance must sit inside the van, inside a cabinet, and clear of its neighbours.
     The sizes are real catalogue sizes, so this is what tells us the layout actually works."""
@@ -1354,13 +1471,15 @@ def check(v):
         for b in app[i + 1:]:
             if overlap(a[:6], b[:6]):
                 bad.append("%s clashes with %s" % (a[6], b[6]))
-        if not (0 <= a[0] and a[1] <= L and 0 <= a[2] and a[3] <= W and a[5] <= H):
+        if not v.get("body") and not (0 <= a[0] and a[1] <= L and 0 <= a[2] and a[3] <= W
+                                      and a[5] <= H):
             bad.append("%s sticks out of the van" % a[6])
         if a[6] == "grey":
             continue                                    # underslung, deliberately outside
         if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])
     assert not bad, "appliance check failed: " + "; ".join(bad)
+    body_check(v)
 
     # Nothing may occupy the space a seated person does - except the seat they sit on, and
     # the cushion on top of it. A table at 760 over the thighs is fine; the arm that carries
@@ -1380,8 +1499,9 @@ def check(v):
     # to split it is still open, and a hard failure would block every other drawing meanwhile.
     if v.get("well"):
         w0, w1, wd = v["well"]
+        well_h = v["body"]["arch_h"] if v.get("body") else WELL_H
         for a in app:
-            if a[6] == "grey" or a[1] <= w0 or a[0] >= w1 or a[4] >= WELL_H:
+            if a[6] == "grey" or a[1] <= w0 or a[0] >= w1 or a[4] >= well_h:
                 continue
             for y0, y1 in ((0, wd), (W - wd, W)):
                 across = min(a[3], y1) - max(a[2], y0)
@@ -1400,6 +1520,47 @@ def check(v):
     print("check ok - %d appliances placed" % len(app))
 
 
+def body_sections(v, path, stations=((1500, "galley, x 1500"), (2400, "dinette, x 2400"),
+                                      (3100, "garage, x 3100"))):
+    """Cross-sections through the real body, looking forward: v2's old box line, the real
+    wall, and every solid the cut passes through - red where it pokes into the wall. One
+    picture of what the lean costs, at the three places it costs the most."""
+    from matplotlib.patches import Rectangle as R, Polygon as P
+    W, H = v["width"], v["height"]
+    boxes = boxes_for(v)
+    fig, axes = plt.subplots(1, len(stations), figsize=(6 * len(stations), 6.6), dpi=130)
+    pts = v["body"]["profile"]
+    for ax, (x, title) in zip(axes, stations):
+        ax.add_patch(R((0, 0), W, H, fc="none", ec="#999", lw=1, ls=(0, (5, 4))))
+        wall = [(i, z) for z, i in pts] + [(W - i, z) for z, i in reversed(pts)]
+        ax.add_patch(P(wall, closed=True, fc="#f7f5f0", ec="#222", lw=2.2))
+        if v.get("well") and v["well"][0] <= x <= v["well"][1]:
+            w0, w1, wd = v["well"]
+            for y0, y1 in ((0, wd), (W - wd, W)):
+                ax.add_patch(R((y0, 0), y1 - y0, v["body"]["arch_h"], fc="#d9d4c8", ec="#777"))
+        for x0, x1, y0, y1, z0, z1, kind in boxes:
+            if not (x0 <= x < x1) or kind == "grey":
+                continue
+            i = wall_inset_max(v, max(z0, 0), min(z1, H))
+            bad = y0 < i - 1 or y1 > W - i + 1
+            ax.add_patch(R((y0, z0), y1 - y0, z1 - z0, fc=(1, .82, .8, .55) if bad else (.85, .87, .9, .45),
+                           ec="#c0392b" if bad else "#667", lw=1.3 if bad else .7))
+        for z, lab in ((0, "floor"), (900, "900"), (1540, "1540"), (H, "ceiling %d" % H)):
+            i = wall_inset(v, z)
+            ax.annotate("", (i, z), (W - i, z), arrowprops=dict(arrowstyle="<->", color="#2c6e9b", lw=.8))
+            ax.text(W / 2, z + 12, "%d wide at %s" % (W - 2 * i, lab), ha="center", va="bottom",
+                    fontsize=7.5, color="#2c6e9b")
+        ax.set_title(title + "  (looking aft from the cab, passenger side left)", fontsize=9)
+        ax.set_xlim(-60, W + 60); ax.set_ylim(-60, H + 80); ax.set_aspect("equal")
+        ax.tick_params(labelsize=6)
+    fig.suptitle("v2-real - the real Crafter walls (black) against v2's 1832 box (dashed). "
+                 "Red: parts the real wall cuts.", fontsize=10)
+    fig.tight_layout()
+    fig.savefig(path, facecolor="white")
+    plt.close(fig)
+    print("wrote", path)
+
+
 def main(name):
     v = VARIANTS[name]
     if "height" not in v:
@@ -1409,6 +1570,8 @@ def main(name):
     check(v)
     render(v, os.path.join(out, "3d"))
     write_obj(v, os.path.join(out, "model.obj"))
+    if v.get("body"):
+        body_sections(v, os.path.join(out, "sections.png"))
     write_viewer([name], os.path.join(out, "viewer.html"), v.get("viewer_title", "Van Interior"))
 
 

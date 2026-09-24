@@ -28,7 +28,7 @@ Read it before proposing anything.
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
 | [v3](../v3/README.md) | Same van and cab as v2: **L-galley** into the corner behind the driver (1.15 m2), thin larder, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom, and the dinette doubling as the office for two - and a 600 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Most galley and the biggest bathroom of any version, and the first where no appliance overlaps a wheel arch. |
-| [v2-real](../v2-real/README.md) | v2's layout, being turned from a schema into a buildable plan: real body, wall build-up, real products | **Started 2026-09-24.** Identical to v2 so far. v2 is frozen. |
+| [v2-real](../v2-real/README.md) | v2's layout, being turned from a schema into a buildable plan: real body, wall build-up, real products | **Started 2026-09-24.** Real VW body in the model (leaning walls, 3390 floor, real arch and slider); v2's furniture not yet adapted - 37 parts cut by the walls. v2 is frozen. |
 
 ## References
 
@@ -199,12 +199,19 @@ Plan coordinates: x = 0 at the front bulkhead growing aft, y = 0 at the passenge
 growing toward the driver side. In the drawing the nose is at the left, so the driver side
 sits at the bottom. View coordinates add z = height above the finished floor.
 
+**A variant can carry a real body** (`body=` in `plan.py`, only v2-real so far): a wall
+profile of (height, inset) pairs measured from VW's drawing, the arch height, the slider and
+rear door heights. `model3d.py` then builds leaning walls and solid arches, and
+`body_clashes()` lists every part that runs into the real walls or past the rear doors -
+printed as a report while `body.strict` is False, fatal once it is True.
+
 `model3d.py` extrudes the plan into 3D: greybox renders, edge-only control renders, and an
 OBJ for Blender or SketchUp.
 
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
     python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
+    python model3d.py v2-real     # also v2-real/sections.png, and the BODY report
     python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube,
                                   #    except VS3D_ITEMS: real catalogue items at their own size,
                                   #    printed against our box ("TOO BIG" when one outgrows it).
