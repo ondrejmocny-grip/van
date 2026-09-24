@@ -286,12 +286,12 @@ VARIANTS["v2-real"] = dict(
         strict=True,
     ),
     stats=["bed 1520 x 1744 across at 630", "worktops 565 deep", "galley aisle 562",
-           "garage 540 x 1746 x 570", "standing 1811", "grey 104 L in the spare wheel bay"],
+           "garage 540 x 1746 x 570", "standing 1811", "grey 95 L under the footwell"],
     note=("v2's layout on the REAL body (VW panel-van drawing, ref/vw-crafter-bodybuilder) with the "
           "thin build: floor 3390 long, 1756 between the finished walls at the floor, 1694 at "
           "worktop height, 1452 from 1555 up; ceiling 1811. Arch x 1817-2728, 266 high. Galley "
-          "split down the middle: worktops 565, aisle 562. Bed across 1744. Grey tank in the "
-          "spare wheel bay. Red lines: the finished walls. Body +/-10 mm."),
+          "split down the middle: worktops 565, aisle 562. Bed across 1744. Grey tank inside, "
+          "under the footwell. Red lines: the finished walls. Body +/-10 mm."),
     shapes={"SHOWER": [(0, 1032), (700, 1232), (700, 1794), (0, 1794)]},
     boxes=[
         ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
@@ -306,7 +306,7 @@ VARIANTS["v2-real"] = dict(
         (1150, 1930,  635, 1197, "AISLE", "780 x 562", None),
         (1930, 2850, 1232, 1789, "BENCH", "920 x 557 - battery + inverter", SOFT),
         (1930, 2850,   43,  600, "BENCH", "920 x 557 - 118 L tank inboard of arch", SOFT),
-        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, drawer under", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, 95 L grey tank under", SOFT),
         (2850, 3390,   43, 1789, "REAR BENCH", "540 x 1746 - garage 570 clear under", SOFT),
     ],
 )

@@ -7,6 +7,8 @@ Last updated: 2026-09-17
 - **Ondrej** — Czech citizen. 171 cm. Works full-time, remotely, from wherever the van is.
 - **Wife** — Turkish citizen. Shorter than Ondrej. Does not need a desk, needs a place to sit with a desk.
 - Two people. No dog, 1 cat, 1 small kid, bikes at the back of the car, maybe surfboard on the roofs.
+  The bikes go on a **rack on the rear doors**, so nothing else may claim them (2026-09-24:
+  that is why the spare wheel stays under the van and the grey tank moved inside).
 
 ## How we'll use it
 

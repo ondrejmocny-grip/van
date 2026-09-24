@@ -901,14 +901,16 @@ APPLIANCES_V2R = [
     ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150
     # water
     (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
-    # The grey tank. v2 hung it at x 2100-2800 under the middle of the van - on a 4MOTION
-    # that is the propshaft and the rear differential (VW underbody drawing, AWD L3). The
-    # one clear bay big enough is the SPARE WHEEL's, behind the rear axle between the chassis
-    # rails: VW X ~3830-4560, Y -470..+460, which is our x 2460-3190, y 456-1386. The tank
-    # hangs where the wheel hangs, under the two crossmembers there, so it costs no ground
-    # clearance the spare did not already cost. 650 x 800 x 200 = 104 L gross, ~90 usable -
-    # a custom tank: the ready-made Crafter sill tanks do not fit a mid-wheelbase LHD van.
-    (2500, 3150,  516, 1316, -320, -120, "grey"),
+    # The grey tank, INSIDE, under the raised footwell floor. v2 hung it at x 2100-2800
+    # under the middle of the van - on a 4MOTION that is the propshaft and the rear
+    # differential (VW underbody drawing, AWD L3). The only clear bay underneath is the
+    # spare wheel's, and the spare stays there: the rear doors are kept free for a bike
+    # rack, so no carrier on them. The footwell is lifted 220 for nothing but storage, so
+    # its drawer becomes the tank: low, on the centre line, between the axles. The sink
+    # drains into it by gravity (bowl ~700, tank top 190); the shower tray needs a small
+    # drain pump. Custom tank, 880 x 600 x 180 = 95 L gross, ~85 usable, outlet through the
+    # floor at its low point. The table post needs a small frame over it.
+    (1950, 2830,  616, 1216,   10,  190, "grey"),
     (3080, 3380,  150,  550,   60,  360, "calorifier"), # 10 L, 30 forward: the floor is shorter
     # electrics, driver bench
     (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
@@ -1550,7 +1552,7 @@ def body_clashes(v):
     out = []
     people = [b[:6] + ("person on a seat",) for b in spec(v).get("sitter", ())]
     for x0, x1, y0, y1, z0, z1, kind in boxes_for(v) + people:
-        if kind == "grey":
+        if kind == "grey" and z1 <= 0:
             continue                                    # underslung, outside on purpose
         za, zb = max(z0, 0), min(z1, H)
         i = wall_inset_max(v, za, zb)
@@ -1618,7 +1620,7 @@ def check(v):
         if not v.get("body") and not (0 <= a[0] and a[1] <= L and 0 <= a[2] and a[3] <= W
                                       and a[5] <= H):
             bad.append("%s sticks out of the van" % a[6])
-        if a[6] == "grey":
+        if a[6] == "grey" and a[5] <= 0:
             continue                                    # underslung, deliberately outside
         if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])

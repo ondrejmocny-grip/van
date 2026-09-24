@@ -43,7 +43,7 @@ person — runs into the finished walls, past the rear doors, or into the roof. 
 | Shower | 762 → 562 deep at the floor, wet lining follows the lean | 800 → 600 |
 | Taps | 130 forward, to the back edge of the bowl | at the back of the deck |
 | WC | **≤ 520 deep** (420 × 520 drawn) | 420 × 570 |
-| Grey tank | 104 L in the spare wheel bay — **spare wheel home open** | 70 L on the rear differential |
+| Grey tank | **95 L inside, under the raised footwell**; the spare wheel stays in VW's bay | 70 L underslung, on the rear differential |
 
 **Two things the lean costs that are easy to miss:**
 
@@ -94,42 +94,43 @@ which is how most Crafter builds do it anyway.
 v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
 worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
 
-## The grey tank, moved to the spare wheel bay
+## The grey tank — inside, under the footwell (agreed 2026-09-24)
 
-v2's spot (x 2100–2800 under the middle) is the **propshaft and the rear differential** on a
-4MOTION. Read from VW's AWD underbody drawing, the only clear bay big enough is the spare
-wheel's: behind the rear axle, between the two chassis rails.
+**Why it moved at all:** v2 hung it under the middle of the van (x 2100–2800), which on a
+4MOTION is the **propshaft and the rear differential**. VW's AWD underbody drawing leaves one
+clear bay big enough — the **spare wheel's**, behind the rear axle — and the spare wheel has
+to stay there: **the rear doors are kept free for a bike rack**, so there is no spare wheel
+carrier on them, and the wheel (~711 across) does not fit anywhere inside.
 
 | | |
 |---|---|
-| Bay (VW) | X ~3830–4560, Y −470…+460, under two crossmembers |
-| Bay (ours) | x 2460–3190, y 456–1386 — under the garage |
-| Tank drawn | **650 × 800 × 200 = 104 L gross, ~90 usable**, x 2500–3150, y 516–1316 |
-| Ground clearance | the tank hangs where the wheel hangs, so no worse than today; the lowest point stays the SCR tank (194–212, VW) |
-| Product | **custom tank.** The ready-made Crafter underslung tanks (Wydale 90 L, 63 L) say "does not fit LHD" and the 90 L also "not MWB"; the 82 L one runs between chassis rails over 1700 mm, which on a 4MOTION is the propshaft |
-| Drain | at the rear, reachable behind the rear bumper |
+| Where | under the raised footwell floor, x 1950–2830, y 616–1216, z 10–190 |
+| Size | **880 × 600 × 180 = 95 L gross, ~85 usable** — custom tank |
+| Sink | drains by gravity: bowl bottom ~700, tank top 190 |
+| Shower | the tray drains at floor level, below the tank top: a **small shower drain pump** |
+| Emptying | outlet through the floor at the tank's low point, valve under the van |
+| Smell | sealed lid, vent to outside, trap on every inlet |
+| Table post | can no longer bolt through the footwell floor: a small frame over the tank carries it |
+| Lost | the footwell drawer, ~0.1 m³ |
 
-The other free spots, both too small alone: driver side between the fuel tank and the rear
-axle (~350 × 400, twice), and the passenger side, which the exhaust and the muffler fill.
+The ready-made underslung Crafter tanks never fitted anyway: the Wydale 90 L and 63 L say
+"does not fit LHD", the 90 L also "not MWB", and the 82 L runs down the centre where a
+4MOTION has its propshaft.
 
-**Open: where the spare wheel goes** — see the options below. 235/65 R16 is ~711 across and ~235 wide. It does not fit
-the garage (540 deep, 570 high). Likely a **carrier on the rear door**; the alternative is
-tyre sealant plus a compressor, which is a poor bet for Morocco.
+## Where the spare wheel could go — the options we compared, 2026-09-24
 
-## Where the spare wheel could go — options, 2026-09-24
-
-The rear-door carrier is out if we can avoid it. The spare is a 235/65 R16: **~711 across,
+The rear-door carrier is out: the rear doors are for a bike rack. The spare is a 235/65 R16: **~711 across,
 ~235 wide, ~25 kg**. VW's drawing also lists a temporary spare (Notrad) at 15–18.5 kg.
 
 | | Option | Spare wheel | Grey tank | Costs | Verdict |
 |---|---|---|---|---|---|
-| **A** | **Grey tank INSIDE, under the raised footwell floor** | **stays in its bay, as VW made it** | ~880 × 600 × 180 = **95 L gross, ~85 usable**, x 1950–2830, y 616–1216 | the footwell drawer; a small shower drain pump; a frame for the table post | **recommended** |
+| **A** | **Grey tank INSIDE, under the raised footwell floor** | **stays in its bay, as VW made it** | ~880 × 600 × 180 = **95 L gross, ~85 usable**, x 1950–2830, y 616–1216 | the footwell drawer; a small shower drain pump; a frame for the table post | **chosen** |
 | B | Two small tanks under the driver side, between the fuel tank and the rear axle | stays in its bay | 2 × ~26 = ~53 L | two tanks, more plumbing, next to the fuel tank and brake lines, 30 % less capacity | fallback |
 | C | Spare on a tow-bar swing-away carrier | on the back, outside | spare wheel bay, 104 L | +~300 length, swing it away for every rear door opening, needs a tow bar | no |
 | D | No spare — sealant + compressor | none | spare wheel bay | a torn sidewall on a Moroccan piste ends the trip | no |
 | E | Inside: garage or bench | — | — | does not fit: garage 540 deep and 570 high, wheel 711 | impossible |
 
-**Why A:**
+**Why A won:**
 
 - **The spare stays where VW put it.** Nothing new hangs under the van; the carrier, the
   winch-down and the ground clearance stay as they are.
