@@ -42,7 +42,7 @@ person — runs into the finished walls, past the rear doors, or into the roof. 
 | Wardrobe | 554 deep at the base (WC under it), back follows the lean above 775 | 600, square |
 | Shower | 762 → 562 deep at the floor, wet lining follows the lean | 800 → 600 |
 | Taps | 130 forward, to the back edge of the bowl | at the back of the deck |
-| WC | **≤ 520 deep** (420 × 520 drawn) | 420 × 570 |
+| WC | **≤ 520 deep** (420 × 520 drawn), emptied **inside** — no body hatch | 420 × 570, hatch in the side panel |
 | Grey tank | **95 L inside, under the raised footwell**; the spare wheel stays in VW's bay | 70 L underslung, on the rear differential |
 
 **Two things the lean costs that are easy to miss:**
@@ -94,7 +94,7 @@ which is how most Crafter builds do it anyway.
 v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
 worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
 
-## Windows and fans — first real products, 2026-09-24 (proposed)
+## Windows and fans — chosen 2026-09-24
 
 From the product register ([doc/products.md](../doc/products.md), numbers in `products.py`).
 The body check now also fails a window outside VW's stamped window fields, or a roof cut-out
@@ -112,13 +112,33 @@ over a known roof bow.
 fields, and three stood above the fields' top (~1473). **The shower window is gone for now**:
 inside the field the shower is 470 wide, and the smallest S4 still sold is 500.
 
-**Open:**
+**What having no shower window costs** (the smallest S4 still sold is 500 wide; the shower is
+470 inside the field):
 
-- **Shower window** — drop it, or find a narrower product. The front fan is next to the shower.
-- **Sliding door window** — none drawn. A Crafter-specific sliding window fits the door (Carbest 31710).
-- **The cassette hatch** (driver side, x 700–1150, low) is a cut in the side panel outside any
-  window field. VW: side panel changes need added stiffness and a letter of non-objection.
-- **Roof bows 2-3 and 5-6:** measure on the real van before cutting either fan hole.
+| Lost | How much it matters |
+|---|---|
+| Daylight in the shower | little: a short shower in daylight is lit through the 450 opening from the lobby; LED strip for the rest |
+| A direct vent for the steam | the real one. The front fan is ~150 from the shower's opening, and the curtain leaves the top open, so run the fan while showering. Condensation lands on the wet lining, which is made for it |
+| A view | none worth having in a shower |
+
+| Gained | |
+|---|---|
+| One hole less in the wall | no leak or rot point in the one wall that is always wet |
+| €260–400 and a frame | |
+| A continuous wet lining | simpler to seal |
+
+**Recommendation: no shower window** — the front fan does the job that matters.
+
+**Also decided 2026-09-24:**
+
+- **No window in the sliding door** — it gets a **fly screen** instead (Horrex pleated or
+  VanQuito magnetic, see [products.md](../doc/products.md)).
+- **No cassette hatch in the body.** The WC's waste tank comes out **inside**, through a door
+  in the wardrobe base on the lobby side, and is carried ~1 m to the sliding door. That was
+  the only cut outside VW's window fields — no VW letter needed now. A portable WC with its
+  own flush tank (e.g. Thetford Porta Potti 565E, 386 x 450 x 447) fits this best.
+
+**Still open:** roof bows 2-3 and 5-6 — measure on the real van before cutting either fan hole.
 
 ## The grey tank — inside, under the footwell (agreed 2026-09-24)
 

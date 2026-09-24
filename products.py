@@ -18,7 +18,7 @@ PRODUCTS = {
         weight_kg=None, price_eur=(620, 680), shop="dalix.cz / karavan.cz",
         source="https://www.reimo.com/de/bilder/intern/ersatzteile-daten_2012/dometic-seitz/"
                "product-documentation/dateien/S4-Fenster.pdf",
-        status="proposed"),
+        status="chosen"),
     "s4-500x350": dict(
         name="Dometic S4 hinged window 500 x 350", kind="window",
         cutout=(500, 348), outer=(544, 380), clear=(404, 204), wall=(27, 53),
@@ -26,7 +26,7 @@ PRODUCTS = {
         weight_kg=None, price_eur=(260, 400), shop="shop.camperselbstbau.de",
         source="https://www.reimo.com/de/bilder/intern/ersatzteile-daten_2012/dometic-seitz/"
                "product-documentation/dateien/S4-Fenster.pdf",
-        status="proposed"),
+        status="chosen"),
     # Made for the Crafter 2017+: fills a whole stamped field. Single tinted safety glass,
     # no blind or flyscreen. Kept as the alternative.
     "carbest-crafter-front": dict(
@@ -51,7 +51,35 @@ PRODUCTS = {
         weight_kg=None, price_eur=(356, 356), shop="nomadem.cz (8,890 CZK)",
         source="https://airxcel.eu/wp-content/uploads/2022/02/airxcel-europe-maxxfan-deluxe.pdf",
         note="Crafter 2017+ roof adapter (PVC, 15 mm): North Devon Campervans, GBP 80-100",
-        status="proposed"),
+        status="chosen"),
+    # --- sliding door fly screen (no window in the door: agreed 2026-09-24) -------------------
+    "horrex-plissee-crafter": dict(
+        name="Horrex pleated fly screen door, VW Crafter / MAN TGE 2017+", kind="flyscreen",
+        cutout=None, outer=None, depth_mm=None,
+        weight_kg=None, price_eur=None, shop="campingplus.de",
+        source="https://www.campingplus.de/caravaning-technik/fenster-u.-tuer/insektenschutz/"
+               "horrex-plissee-fliegenschutztuer-vw-crafter-man-ab-2017",
+        note="made for the 2017+ door opening; rails and cassette sit in the opening - check "
+             "their depth against the shoe locker (y 41) and the hob run's end (x 1150)",
+        status="option"),
+    "vanquito-crafter": dict(
+        name="VanQuito magnetic mosquito net, sliding door VW Crafter / MAN TGE 2017+", kind="flyscreen",
+        cutout=None, outer=None, depth_mm=0,
+        weight_kg=None, price_eur=None, shop="lila-bus-shop.de",
+        source="https://www.lila-bus-shop.de/Insektenschutzgitter/VW-Crafter/Insektenschutzgitter-VW-Crafter-4424.html",
+        note="fine mesh, magnetic zip, elastic edge over the opening; the door cannot close over it",
+        status="option"),
+    # --- WC ------------------------------------------------------------------------------------
+    # Emptied INSIDE (2026-09-24): no hatch in the side panel. A portable unit is the natural
+    # fit for a WC that slides out of the wardrobe: it has its own flush tank and no plumbing.
+    "porta-potti-565e": dict(
+        name="Thetford Porta Potti 565E (Curve)", kind="wc",
+        outer=(386, 450, 447), waste_l=21, flush_l=15,
+        weight_kg=None, price_eur=None, shop=None,
+        source="https://www.campingworld.com/thetford-porta-potti-565e-curve-portable-rvmarine-toilet-58980.html",
+        note="386 W x 450 D x 447 H - inside the 420 x 520 slot, which the shower's diagonal "
+             "face limits to 520 deep",
+        status="option"),
 }
 
 

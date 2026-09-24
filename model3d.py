@@ -964,7 +964,12 @@ FANS_V2R = [
 
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
-                           windows=WINDOWS_V2R, fans=FANS_V2R)
+                           windows=WINDOWS_V2R, fans=FANS_V2R,
+                           # No cassette hatch in the body (2026-09-24): the WC's waste tank is
+                           # taken out INSIDE, through the wardrobe base's lobby-side door, and
+                           # carried ~1 m to the sliding door. No cut in the side panel, so no
+                           # VW letter and no extra stiffening.
+                           hatches=())
 
 
 def body_bands(v, step=40):

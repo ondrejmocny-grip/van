@@ -28,6 +28,10 @@ From [products.md](products.md). The **Shell** line above assumed 2 awning windo
 | Fans: 2 × 356 + 2 Crafter roof adapters (~95–120 each) | 900–950 |
 | **Windows + fans** | **2,400–2,710** |
 
+Windows and fans are **chosen** (2026-09-24). Also changed since v1's numbers: the
+**Bathroom** line's "service hatch" is gone — the WC is emptied inside — and a **sliding door
+fly screen** (price not found yet) joins the Shell line.
+
 That is most of the Shell line's €2,800–3,200 by itself, before insulation, the floor, the
 cladding and sound deadening — expect the Shell line to rise when the rest is priced.
 

@@ -117,9 +117,12 @@ See [budget.md](budget.md).
 ## Open questions
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
-- **Windows and fans (proposed 2026-09-24, [products.md](products.md)):** 3 × Dometic S4 in VW's stamped
-  window fields, 2 × MaxxFan Deluxe. Open: shower window, sliding door window, and measuring the
-  roof bows on the real van before any roof cut. The cassette hatch needs a VW letter.
+- **Windows and fans chosen 2026-09-24 ([products.md](products.md)):** 3 × Dometic S4 in VW's stamped
+  window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead (Horrex or
+  VanQuito, to pick). Shower window: recommended none. Measure the roof bows on the real van
+  before any roof cut.
+- **WC emptied inside** (2026-09-24): no hatch in the side panel; a portable WC with its own flush
+  tank fits the slide-out best.
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
