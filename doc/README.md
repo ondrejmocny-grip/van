@@ -118,7 +118,7 @@ See [budget.md](budget.md).
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
-  Check our van's gearbox (Seikel breathers are manual-only).
+  Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
 - **Weight: 3500 kg is the licence B limit.** 4MOTION + heavy electrics + upgrades - the payload check is due in the product register.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).

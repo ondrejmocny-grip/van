@@ -70,7 +70,8 @@ bay). Priced in [doc/budget.md](../../doc/budget.md): tier 1 ~€3.2–5.0k, tie
 
 Found while pricing:
 
-- **Seikel's breather kit is for manual gearboxes only.** Check which gearbox our van has.
+- **Seikel's breather kit is for manual gearboxes only** — our van is **manual** (confirmed by
+  Ondrej 2026-09-24), so it fits.
 - **Seikel's rear diff guard is "only for vehicles up to 3.88 t"** — fine for our 3.5 t.
 - **The Seikel lift comes with a VW no-objection letter (UBB)**, which is what the technical
   inspection wants to see. It allows up to 50 mm total together with bigger tyres.

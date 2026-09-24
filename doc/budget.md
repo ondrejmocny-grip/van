@@ -32,7 +32,7 @@ own workshop price where it gives one.
 | 1 | Rear auxiliary air springs, 12 V compressor, dash control | VB-SemiAir, €1,299 (fitting not priced) | 1,300–1,800 |
 | 2 | Lift +30 mm, springs + tuned dampers, VW no-objection letter (UBB) | Seikel, €2,410 + €720 fitting | 3,130 |
 | 2 | Rear AWD coupling / differential guard | GTV-VAN €339 … Seikel €758 + €120 fitting | 340–880 |
-| 2 | Breather extensions (gearbox, Haldex, rear diff) | Seikel €250 + €470 fitting — **manual gearbox only; check our van's gearbox** | 720 |
+| 2 | Breather extensions (gearbox, Haldex, rear diff) | Seikel €250 + €470 fitting — manual gearbox only; **ours is manual** | 720 |
 | | **Tier 1** | | **3,170–4,990** |
 | | **Tier 2** | | **4,190–4,730** |
 | | **Total** | | **€7,360–9,720** |
