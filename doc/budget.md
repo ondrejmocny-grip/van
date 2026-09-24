@@ -16,6 +16,21 @@ battery and fridge prices move a lot. Decisions already taken are baked into the
 | **Other** | Starlink + flat mount, swivel base + handbrake kit, roof rails, bug screen, reflective covers, homologation fees | 1,800–2,100 |
 | **Total** | | **€13,740–17,040** |
 
+## Products priced so far (v2-real) — 2026-09-24
+
+From [products.md](products.md). The **Shell** line above assumed 2 awning windows and
+2 Maxxair fans; the proposal is now **3 windows** (2 × S4 900 x 450, 1 × S4 500 x 350) and
+**2 MaxxFan Deluxe**:
+
+| | € |
+|---|---|
+| Windows: 2 × 620–680 + 1 × 260–400 | 1,500–1,760 |
+| Fans: 2 × 356 + 2 Crafter roof adapters (~95–120 each) | 900–950 |
+| **Windows + fans** | **2,400–2,710** |
+
+That is most of the Shell line's €2,800–3,200 by itself, before insulation, the floor, the
+cladding and sound deadening — expect the Shell line to rise when the rest is priced.
+
 ## Vehicle upgrades for rough roads — added 2026-09-24
 
 **A separate pot**, not part of the €10–15k build: these are changes to the vehicle, like the

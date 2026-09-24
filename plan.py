@@ -290,10 +290,14 @@ VARIANTS["v2-real"] = dict(
                        ("d", 1690, 3200, 816, 1473),     # driver, rear
                        ("p",  170, 1650, 753, 1473),     # passenger: the sliding door's glass
                        ("p", 1650, 3160, 816, 1473)),    # passenger, rear
-        # Roof bows, taken as VW's roof-rack mounting points (L3), measured from the roof's rear
-        # edge at x ~3265. A roof cut-out must stay this far clear of each one.
-        roof_bows=(387, 666, 1086, 1506, 1783, 2132, 2413, 2604, 2870, 3132),
-        bow_clear=30,
+        # Roof bows KNOWN to be there. VW (converter guidelines 2023 p. 207-208): an L3 has at
+        # least 6 - one behind the B-pillar (x ~0), two "in the middle of the sliding door",
+        # one at the C-pillar (x 1688, the seam between the window fields), the rest between
+        # the C-pillar and the rear header (x ~3265). Only these three have a position; the
+        # others are to MEASURE on the real van before any roof cut. A cut-out stays this far
+        # clear of each known one.
+        roof_bows=(0, 1688, 3265),
+        bow_clear=40,
         # True: a part that runs into the real walls, the rear doors or the roof fails the
         # build, the same as an appliance outside its cabinet.
         strict=True,

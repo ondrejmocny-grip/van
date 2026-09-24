@@ -117,6 +117,9 @@ See [budget.md](budget.md).
 ## Open questions
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
+- **Windows and fans (proposed 2026-09-24, [products.md](products.md)):** 3 × Dometic S4 in VW's stamped
+  window fields, 2 × MaxxFan Deluxe. Open: shower window, sliding door window, and measuring the
+  roof bows on the real van before any roof cut. The cassette hatch needs a VW letter.
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
@@ -202,6 +205,10 @@ To iterate, edit the variant's `boxes` (plan) and `views` (elevations, sections)
 Plan coordinates: x = 0 at the front bulkhead growing aft, y = 0 at the passenger wall
 growing toward the driver side. In the drawing the nose is at the left, so the driver side
 sits at the bottom. View coordinates add z = height above the finished floor.
+
+**Products** live in `products.py` (sizes, cut-outs, prices, sources); `doc/products.md` is the
+readable version. v2-real takes its window and fan cut-outs from there, so a product change is
+one edit and the check says whether it still fits.
 
 **A variant can carry a real body** (`body=` in `plan.py`, only v2-real so far): a wall
 profile of (height, inset) pairs measured from VW's drawing, the arch height, the slider and

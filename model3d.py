@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 from plan import VARIANTS, overlay_png, wall_inset, wall_inset_max
+from products import PRODUCTS, cut
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -939,8 +940,31 @@ SITTER_V2R = [
     (2480, 2760, 1034, 1194,  220,  580),    #   shins
 ]
 
+# Windows and fans from the product register, placed inside VW's stamped window fields and
+# clear of the known roof bows - body_clashes() checks both.
+#   Sink:     S4 500 x 350 between the wardrobe (1150) and the end of the front field (1685),
+#             its top under the locker over the sink (1400).
+#   Dinette:  S4 900 x 450 each side, over the benches, top 25 under the fields (1473):
+#             seated eye ~1400, and the pair gives cross-flow over the bed.
+#   Shower:   none for now - the shower is 470 wide inside the front field, and the smallest
+#             S4 still sold is 500 wide.
+WINDOWS_V2R = [
+    cut("s4-500x350",  "d", 1165, 1040),
+    cut("s4-900x450",  "d", 1940, 1000),
+    cut("s4-900x450",  "p", 1940, 1000),
+]
+# Fans: MaxxFan Deluxe, 400 x 400 cut-outs on the centre line.
+#   Front:  in VW's own roof-hatch pressing on the front roof panel (x ~385-1136), over the
+#           lobby between the shower and the galley - steam and cooking both reach it.
+#   Rear:   over the dinette. Where the bows 5-6 are is not known: MEASURE before cutting.
+FANS_V2R = [
+    cut("maxxfan-deluxe", None, 560, 716),
+    cut("maxxfan-deluxe", None, 2200, 716),
+]
+
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
-                           appliances=APPLIANCES_V2R, sitter=SITTER_V2R)
+                           appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
+                           windows=WINDOWS_V2R, fans=FANS_V2R)
 
 
 def body_bands(v, step=40):

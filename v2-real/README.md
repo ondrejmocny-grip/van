@@ -94,6 +94,32 @@ which is how most Crafter builds do it anyway.
 v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
 worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
 
+## Windows and fans — first real products, 2026-09-24 (proposed)
+
+From the product register ([doc/products.md](../doc/products.md), numbers in `products.py`).
+The body check now also fails a window outside VW's stamped window fields, or a roof cut-out
+over a known roof bow.
+
+| | Product | Where (x, height above floor) |
+|---|---|---|
+| Over the sink | Dometic S4 500 x 350 | driver, x 1165–1665, z 1040–1388 — under the sink locker (1400) |
+| Dinette, driver | Dometic S4 900 x 450 | x 1940–2842, z 1000–1448 |
+| Dinette, passenger | Dometic S4 900 x 450 | x 1940–2842, z 1000–1448 — cross-flow over the bed |
+| Front fan | MaxxFan Deluxe, cut 400 x 400 | x 560–960, centre line — VW's roof-hatch pressing, over the lobby |
+| Rear fan | MaxxFan Deluxe, cut 400 x 400 | x 2200–2600, over the dinette — **bow positions to measure first** |
+
+**Changed from v2:** v2 had four windows — one crossed the pillar between the two driver
+fields, and three stood above the fields' top (~1473). **The shower window is gone for now**:
+inside the field the shower is 470 wide, and the smallest S4 still sold is 500.
+
+**Open:**
+
+- **Shower window** — drop it, or find a narrower product. The front fan is next to the shower.
+- **Sliding door window** — none drawn. A Crafter-specific sliding window fits the door (Carbest 31710).
+- **The cassette hatch** (driver side, x 700–1150, low) is a cut in the side panel outside any
+  window field. VW: side panel changes need added stiffness and a letter of non-objection.
+- **Roof bows 2-3 and 5-6:** measure on the real van before cutting either fan hole.
+
 ## The grey tank — inside, under the footwell (agreed 2026-09-24)
 
 **Why it moved at all:** v2 hung it under the middle of the van (x 2100–2800), which on a
@@ -186,7 +212,9 @@ replaces brochure data.
 In the model as `floor_build`, `ceiling_build` and `clad` in `body=` (see above). Still to do:
 the actual products per layer, and the 70–110 mm cavity depth checked on the real van.
 
-### 3. Product register — not started
+### 3. Product register — started 2026-09-24
+
+[doc/products.md](../doc/products.md) and `products.py`: windows and fans so far.
 
 One entry per real product: brand + model, shop (CZ or EU), outer size, **required
 clearances** (ventilation, service access, hose and cable exits), weight, price, power.
