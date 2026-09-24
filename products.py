@@ -54,21 +54,28 @@ PRODUCTS = {
         status="chosen"),
     # --- sliding door fly screen (no window in the door: agreed 2026-09-24) -------------------
     "horrex-plissee-crafter": dict(
-        name="Horrex pleated fly screen door, VW Crafter / MAN TGE 2017+", kind="flyscreen",
-        cutout=None, outer=None, depth_mm=None,
-        weight_kg=None, price_eur=None, shop="campingplus.de",
+        name="Horrex pleated fly screen door, VW Crafter / MAN TGE 2017+ (art. 052176, maker 134998)",
+        kind="flyscreen", outer=(1267, 1884), depth_mm=None,
+        weight_kg=3.5, price_eur=(414, 668), shop="campingplus.de 414 / campingwuerdig.de 667.50",
         source="https://www.campingplus.de/caravaning-technik/fenster-u.-tuer/insektenschutz/"
                "horrex-plissee-fliegenschutztuer-vw-crafter-man-ab-2017",
-        note="made for the 2017+ door opening; rails and cassette sit in the opening - check "
-             "their depth against the shoe locker (y 41) and the hob run's end (x 1150)",
+        note="Mounts IN the door opening: floor profile screwed down at the threshold, top profile "
+             "clipped on the opening's metal flange under the door seal, pleat cassette standing "
+             "at one end. 1884 tall is made for the FWD high-roof opening (1822, VW H508); our "
+             "4MOTION high floor gives 1722 - ask Horrex for a 4MOTION version before buying. "
+             "Cassette depth not published: check against the shoe locker (x 0-450, y from 41).",
         status="option"),
     "vanquito-crafter": dict(
-        name="VanQuito magnetic mosquito net, sliding door VW Crafter / MAN TGE 2017+", kind="flyscreen",
-        cutout=None, outer=None, depth_mm=0,
-        weight_kg=None, price_eur=None, shop="lila-bus-shop.de",
+        name="VanQuito magnetic mosquito net, right sliding door, VW Crafter / MAN TGE 2017+, "
+             "fine mesh, H2 + H3 (art. 1734-mag-fine-mesh)", kind="flyscreen",
+        outer=None, depth_mm=0,
+        weight_kg=0.75, price_eur=(195, 195), shop="lila-bus-shop.de (RRP 229.90)",
         source="https://www.lila-bus-shop.de/Insektenschutzgitter/VW-Crafter/Insektenschutzgitter-VW-Crafter-4424.html",
-        note="fine mesh, magnetic zip, elastic edge over the opening; the door cannot close over it",
-        status="option"),
+        note="Soft net held by sewn-in magnets around the opening, magnetic zip to walk through; "
+             "mesh 0.94 x 0.94 mm. The maker says it can stay on with the door closed - but off "
+             "in rain and while driving. Made for the passenger-side door and H2/H3 vans "
+             "(2590-2640 high), so it does not depend on the 4MOTION floor.",
+        status="proposed"),
     # --- WC ------------------------------------------------------------------------------------
     # Emptied INSIDE (2026-09-24): no hatch in the side panel. A portable unit is the natural
     # fit for a WC that slides out of the wardrobe: it has its own flush tank and no plumbing.

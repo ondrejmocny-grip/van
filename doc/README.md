@@ -118,8 +118,8 @@ See [budget.md](budget.md).
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
 - **Windows and fans chosen 2026-09-24 ([products.md](products.md)):** 3 × Dometic S4 in VW's stamped
-  window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead (Horrex or
-  VanQuito, to pick). Shower window: recommended none. Measure the roof bows on the real van
+  window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead: VanQuito magnetic net proposed (the
+  Horrex pleated door is sized for the FWD opening, 100 too tall for ours). No shower window (agreed). Measure the roof bows on the real van
   before any roof cut.
 - **WC emptied inside** (2026-09-24): no hatch in the side panel; a portable WC with its own flush
   tank fits the slide-out best.

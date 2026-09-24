@@ -62,20 +62,33 @@ checked against the real roof before cutting.** The front fan sits in VW's own r
 pressing on the front roof panel, which is made for a cut-out.
 
 **Decided 2026-09-24:** S4 windows and MaxxFans — **chosen**. **No window in the sliding
-door**; it needs a fly screen instead (below).
+door**; it needs a fly screen instead (below). **No shower window** (agreed 2026-09-24).
 
 ## Sliding door fly screen
 
 No window in the door (agreed 2026-09-24), but the door is the one opening we will want open
-all evening in Morocco, so it needs a screen.
+all evening in Morocco, so it needs a screen. Sizes researched 2026-09-24:
 
-| Product | How | Note | Status |
-|---|---|---|---|
-| **Horrex pleated fly screen door**, Crafter / MAN TGE 2017+ | pleated screen on rails in the door opening, pulls across | made for this van; **check its rail and cassette depth** against the shoe locker (y 41) and the end of the hob run (x 1150), which sit just inside the opening | option — nicer to use |
-| **VanQuito magnetic net**, Crafter / MAN TGE 2017+ | mesh with an elastic edge over the opening, magnetic zip to walk through | no depth at all; the door cannot close over it | option — cheapest, simplest |
+| | **VanQuito magnetic net** | Horrex pleated door |
+|---|---|---|
+| Made for | Crafter / TGE 2017+, **right (passenger) sliding door**, H2 + H3 | Crafter / TGE 2017+, "high roof, door opening over 180 cm" |
+| Size | follows the opening (soft net) | **1267 x 1884** |
+| How it mounts | sewn-in magnets on the body around the opening | floor profile screwed down at the threshold, top profile clipped on the opening's metal edge under the door seal, pleat cassette at one end |
+| Depth into the van | **none** | **not published** |
+| Door closes over it | yes, says the maker — but take it off in rain and for driving | not stated |
+| Mesh | 0.94 x 0.94 mm, fine (small midges too) | not stated |
+| Weight | 0.75 kg | 3.5 kg |
+| Price | **€195** | €414–668 (two shops) |
 
-Prices not found yet. **Recommendation: Horrex**, if its depth clears the locker — you use it
-every evening, and a pleated screen that slides is less fuss than a zip.
+**The size problem with the Horrex:** its 1884 height is made for the front-wheel-drive high-roof
+door opening, **1822** tall (VW H508). Our 4MOTION has the high floor, so our opening is
+**1722** — 100 lower. It will not fit as sold; Horrex would have to confirm a 4MOTION version.
+Its cassette depth is also unknown, and the shoe locker sits just inside the front edge of the
+opening.
+
+**Recommendation now: VanQuito** — it fits our door as made, costs a third, has no depth to
+clash with the locker or the galley end, and weighs almost nothing. **Status: proposed.**
+The Horrex stays the nicer option if Horrex confirms a 4MOTION size.
 
 ## WC
 
