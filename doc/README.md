@@ -197,7 +197,9 @@ OBJ for Blender or SketchUp.
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
     python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
-    python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube.
+    python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube,
+                                  #    except VS3D_ITEMS: real catalogue items at their own size,
+                                  #    printed against our box ("TOO BIG" when one outgrows it).
                                   #    Their "VW Cr L2H2" is a real L3H3 inside - their L3H3 is an L4.
                                   #    Their vans are FWD height; the export scales it to 4MOTION (x0.953).
 
