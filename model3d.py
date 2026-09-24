@@ -1571,6 +1571,20 @@ def body_clashes(v):
             hits.append("roof by %d" % (z1 - H))
         if hits:
             out.append("%s at x %d-%d, z %d-%d: into the %s" % (kind, x0, x1, z0, z1, ", ".join(hits)))
+    body, sp = v["body"], spec(v)
+    # Windows only inside a stamped window field on their own side.
+    for side, wx0, wx1, wz0, wz1 in sp["windows"]:
+        if not any(s == side and fx0 <= wx0 and wx1 <= fx1 and fz0 <= wz0 and wz1 <= fz1
+                   for s, fx0, fx1, fz0, fz1 in body.get("window_fields", ())):
+            out.append("window %s x %d-%d, z %d-%d: outside the stamped window fields"
+                       % (side, wx0, wx1, wz0, wz1))
+    # Roof cut-outs clear of every roof bow.
+    c = body.get("bow_clear", 0)
+    for fx0, fx1, fy0, fy1 in sp["fans"]:
+        hit = [b for b in body.get("roof_bows", ()) if fx0 - c < b < fx1 + c]
+        if hit:
+            out.append("roof cut-out x %d-%d: over the roof bow at x %s"
+                       % (fx0, fx1, ", ".join(str(b) for b in hit)))
     return out
 
 

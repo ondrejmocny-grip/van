@@ -281,6 +281,19 @@ VARIANTS["v2-real"] = dict(
         arch_h=266,                 # VW 401 on the low floor -> 301 on ours -> 266 finished
         slider_h=1687,              # VW H508 1722 on the high floor
         rear_h=1705,                # VW H202 1740 on the high floor
+        # Where a window may be cut: the stamped window fields in the side panels (VW converter
+        # guidelines p. 209-210 - cutting outside them needs a VW letter and added stiffness).
+        # Read off VW's side view and the L3H3 foil template: VW X - 1370, road height - 573
+        # (loaded floor, H196) - 35. About +/-30 - to check on the real van.
+        # side, x0, x1, z0, z1
+        window_fields=(("d",  190, 1685, 753, 1473),     # driver, behind the B-pillar
+                       ("d", 1690, 3200, 816, 1473),     # driver, rear
+                       ("p",  170, 1650, 753, 1473),     # passenger: the sliding door's glass
+                       ("p", 1650, 3160, 816, 1473)),    # passenger, rear
+        # Roof bows, taken as VW's roof-rack mounting points (L3), measured from the roof's rear
+        # edge at x ~3265. A roof cut-out must stay this far clear of each one.
+        roof_bows=(387, 666, 1086, 1506, 1783, 2132, 2413, 2604, 2870, 3132),
+        bow_clear=30,
         # True: a part that runs into the real walls, the rear doors or the roof fails the
         # build, the same as an appliance outside its cabinet.
         strict=True,
