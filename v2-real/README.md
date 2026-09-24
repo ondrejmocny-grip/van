@@ -6,6 +6,9 @@ build-up we agreed, so it can become a plan to build from. **v2 is frozen.**
 
 ![plan](layout.png)
 
+**Viewer:** the **Roof + fans** button (off by default) shows the roof with its real fan
+cut-outs and the two MaxxFans on top, at their catalogue size.
+
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
 finished walls black, bare rib faces grey, v2's old 1832 box dashed.
 

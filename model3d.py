@@ -448,6 +448,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
+    "roof": "Roof", "fan": "Roof fan, MaxxFan Deluxe",
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
     "backrest": "Backrest pillow",
@@ -547,6 +548,7 @@ KIND = {          # plan label or extra kind -> colour
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
+    "roof": "#d6d2c9", "fan": "#3b3e44",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
@@ -962,7 +964,13 @@ FANS_V2R = [
     cut("maxxfan-deluxe", None, 2200, 716),
 ]
 
-REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
+# v2's Show buttons plus one for the roof, off by default: the roof with its real fan
+# cut-outs and the two fans on top of it.
+LAYERS_V2R = copy.deepcopy(LAYERS_V2)
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
+                  {"id": "roof", "label": "Roof + fans", "kinds": ["roof", "fan"], "on": False})
+
+REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
                            windows=WINDOWS_V2R, fans=FANS_V2R,
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
@@ -1015,7 +1023,13 @@ def real_shell(v):
 
     top = wall_inset(v, H)
     for x0, x1, y0, y1 in subtract((0, L, top, W - top), sp["fans"]):
-        out.append((x0, x1, y0, y1, H, H + WALL, "shell"))
+        out.append((x0, x1, y0, y1, H, H + WALL, "roof"))
+    # the fans themselves, on top of their cut-outs, at the MaxxFan's own size (lid closed)
+    fw, fd = PRODUCTS["maxxfan-deluxe"]["outer"]
+    fh = PRODUCTS["maxxfan-deluxe"]["above_roof"][0]
+    for x0, x1, y0, y1 in sp["fans"]:
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        out.append((cx - fw / 2, cx + fw / 2, cy - fd / 2, cy + fd / 2, H + WALL, H + WALL + fh, "fan"))
     floor = wall_inset(v, 0)
     out.append((0, L, floor, W - floor, -WALL, 0, "floor"))
 
@@ -1522,7 +1536,8 @@ def viewer_data(v, out):
     """One variant's geometry for the viewer. `out` is the variant's folder, where the
     schema overlay image is written on the way."""
     sp = spec(v)
-    # no roofs, over the load area or the cab: the viewer is for looking in from above
+    # no roofs, over the load area or the cab: the viewer is for looking in from above. A
+    # variant with a real body keeps its roof as its own kind, behind a switch that starts off.
     boxes = [b for b in boxes_for(v, with_shell=True)
              if not (b[6] in ("shell", "cab") and b[4] in (v["height"], CAB_ROOF))]
     used = {b[6] for b in boxes}
