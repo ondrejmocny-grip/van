@@ -128,10 +128,11 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: at the 3500 kg limit** (first payload check 2026-09-24, [v2-real/payload.md](../v2-real/payload.md)):
-  3536 kg with the proposed kitchen and poplar furniture (36 over), rear axle 2081 of 2100. **Weigh the van per
-  axle before the build**; poplar furniture is a must; drive with little fresh water. No route
-  above 3.5 t for a 2023 4MOTION (and it would need C1).
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3491 kg with full water and
+  poplar furniture, rear axle 2007, roof 67 of 150 - after leaving the bikes out, cutting solar to
+  one panel and adding the awning (2026-09-24). **Weigh the van per axle before the build**; poplar
+  furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
+- **Energy:** one ~200 W panel + a 50 A DC-DC proposed, 300 Ah kept - needs a daily energy check.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished

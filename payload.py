@@ -20,6 +20,7 @@ V = m.VARIANTS["v2-real"]
 
 GROSS = 3500                  # licence B, and the van's registration
 AXLE_MAX = (1800, 2100)       # front, rear - VW, Crafter 35 4MOTION
+ROOF_MAX = 150               # VW converter guidelines p. 74, high roof H3
 FRONT_MIN_SHARE = 0.33        # VW converter guidelines p. 54: loaded, the front axle >= 33 %
 REAR_AXLE = 2270
 FRONT_AXLE = REAR_AXLE - 3640
@@ -55,7 +56,7 @@ ITEMS = [
     ("Electrics", "SmartSolar MPPT 100/50 + Orion-Tr 12/12-30", 3.1, at("electrics"), "Victron datasheets"),
     ("Electrics", "Busbars, fuses, consumer unit, shore inlet", 5.0, at("electrics"), "est."),
     ("Electrics", "70 mm2 cable ~8 m (0.78 kg/m) + other wiring", 16.0, 1500, "cable 0.78 kg/m; wiring est."),
-    ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + rails", 30.0, 2400, "Victron 185 W 11 kg; rails est."),
+    ("Electrics", "1 solar panel ~200 W (11 kg) + rails - reduced 2026-09-24", 16.0, 2400, "Victron 185 W 11 kg; rails est."),
     ("Electrics", "Starlink dish, router, flat mount", 5.0, 2900, "Starlink spec sheets"),
     ("Electrics", "12 V lighting, switches, USB", 4.0, 1500, "est."),
     # --- water and bathroom
@@ -79,6 +80,7 @@ ITEMS = [
     ("Shell", "Wall + ceiling cladding, 6 mm ply ~11 m2 (not behind furniture)", 28.0, 1700, "poplar 6 mm ~2.5 kg/m2"),
     ("Shell", "Our partition, 15 mm ply + frame + crawl-through door", 22.0, 0, "est."),
     ("Shell", "VanQuito door fly screen", prod("vanquito-crafter"), 960, "products.py"),
+    ("Shell", "Thule Omnistor 6300 awning 3.25 m + Crafter adapter", prod("thule-omnistor-6300-325") + 4.0, 1650, "Thule 25.1 kg; adapter est. 4"),
     ("Shell", "Screws, rivnuts, glue, sealant", 10.0, 1700, "est."),
     # --- vehicle upgrades, tier 1 + 2
     ("Upgrades", "Front engine guard, 6 mm aluminium (GTV)", 17.7, -1400, "gtv-van.com"),
@@ -142,7 +144,7 @@ LOAD = [
     ("Gear", "Bedding, towels", 12.0, 2600, "est."),
     ("Gear", "Laptops, monitor, work kit", 8.0, 2400, "est."),
     ("Gear", "Recovery boards, shovel, compressor, tools", 25.0, 3120, "est."),
-    ("Gear", "Bike rack on the rear doors + 3 bikes", 60.0, 3700, "est. 12 + 3 x 16 - behind the rear axle"),
+    # Bikes: left out for now (2026-09-24) - 60 kg with a rack, all behind the rear axle.
 ]
 
 
@@ -199,6 +201,10 @@ def report():
            "| Front share (min %d %%) | %d %% | %d %% |" % (FRONT_MIN_SHARE * 100,
                                                         100 * p["front"] / p["total"],
                                                         100 * b["front"] / b["total"]), ""]
+    roof = [(n, kg) for g, n, kg, x, s in p["lines"]
+            if any(w in n for w in ("solar", "Starlink", "MaxxFan", "awning"))]
+    out += ["**Roof load (VW max %d kg):** %d kg — %s." % (ROOF_MAX, sum(k for _, k in roof),
+            ", ".join("%s %.0f" % (n.split(",")[0].split("(")[0].strip(), k) for n, k in roof)), ""]
     if p["gaps"]:
         out += ["**Not counted yet (weight unknown):** " + "; ".join(p["gaps"]) + ".", ""]
     out += ["## By group (poplar)", "", "| Group | kg | front | rear |", "|---|---|---|---|"]

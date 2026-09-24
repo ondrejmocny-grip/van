@@ -97,40 +97,37 @@ which is how most Crafter builds do it anyway.
 v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
 worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
 
-## Payload — the van is at its limit (first check, 2026-09-24)
+## Payload — just under the limit (2026-09-24)
 
 `python payload.py` writes **[payload.md](payload.md)**: every item with its weight, its
-source and its place along the van, against 3500 kg and the two axles.
+source and its place along the van, against 3500 kg, the two axles and the roof.
+
+**Changed 2026-09-24 (Ondrej):** **bikes left out** for now; **solar cut to one ~200 W
+panel**, relying more on charging while driving; **awning added** (Thule Omnistor 6300,
+3.25 m); **batteries stay 300 Ah** (2 x 150).
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| Van as sold (listing, incl. 75 kg driver, 90 % fuel) | 2440 | 2440 |
-| Build: conversion + rough-road upgrades | 614 | 737 |
-| Load: passenger, child, cat, full fresh water, gear, 3 bikes | 438 | 438 |
-| **Total, with the proposed kitchen** | **3536** | **3659** |
-| Rear axle (max 2100) | 2081 | 2181 |
+| **Total, full fresh water (118 L)** | **3491 — 8 under** | 3614 — 114 over |
+| Rear axle (max 2100) | 2007 | 2107 |
+| Front axle (max 1800) | 1484 | 1507 |
+| Roof load (max 150) | 67 | 67 |
 
 **Read on that:**
 
-- **We are 36 kg over 3500 with poplar, 159 over with birch.** Poplar furniture is not optional.
-- **The rear axle is the tight one**, 2081 of 2100 — almost everything heavy sits over or
-  behind it (water, batteries, garage, bikes on the rear doors). The split of the empty van is
-  an assumption (53/47) until we weigh it.
-- **The biggest unknown is the van itself.** 2440 is the listing; VW's minimum for this spec
-  is 2182 and allows ±3-5 %. **Weigh the van, per axle, before the build** — it moves the
-  answer by ±100 kg, more than anything we choose.
+- **Poplar furniture is a must.** With it the van is inside every limit — only just.
+- **8 kg is no margin.** Driving with ~40 L of fresh water instead of 118 gives ~85 kg of room.
+- **The biggest unknown is still the van itself** (2440 is the listing; VW allows ±3-5 %).
+  **Weigh it, per axle, before the build.**
+- **The rear axle got its room back** with the bikes gone (93 kg under). Bikes on the rear
+  doors would cost ~1.4 kg on that axle per kg of bike.
 
-**What moves the number most:**
+**Less solar, more alternator:** one ~200 W panel gives roughly 0.6–0.8 kWh on a sunny day.
+To lean on driving instead, the DC-DC charger can go from 30 A to **50 A** (~0.65 kWh per hour
+of driving) — a daily energy check is the next thing to do before settling the size.
 
-| Lever | Saves |
-|---|---|
-| Birch → poplar furniture | ~120 kg |
-| Drive with ~40 L fresh water, fill at the stop | ~78 kg, nearly all off the rear axle |
-| Bikes: every kg on the rear doors puts ~1.4 kg on the rear axle; e-bikes are ~25 kg each | 15–30 kg per bike |
-| 200 Ah instead of 300 Ah battery | ~10 kg |
-
-The furniture is estimated from the model's own boxes (±20 %); the passenger and child
-weights are placeholders to confirm.
+The furniture is estimated from the model's boxes (±20 %); the passenger and child weights are
+placeholders to confirm.
 
 ## Kitchen — proposed 2026-09-24
 

@@ -138,6 +138,22 @@ deep). All four are in the model and in the payload check.
 
 **No sink weight is published** — the payload counts 10 kg for sink, taps and filter.
 
+## Awning — proposed 2026-09-24
+
+| Product | Length x projection | kg | Crafter 2017+ fitting | Status |
+|---|---|---|---|---|
+| **Thule Omnistor 6300 3.25** | 3.25 x 2.50 m | **25.1** | adapter Thule 301768 (H3, 2017+) | **proposed** — lighter |
+| Fiamma F80S 320 | 3.20 x 2.50 m, 7.7 m² | 29.0 | bracket kit 98655Z058 | option |
+
+On the passenger side, over the sliding door. It counts toward the **150 kg roof load**
+(with the solar panel, fans and Starlink: 67 kg). Prices not found yet.
+
+## Solar and charging — changed 2026-09-24
+
+**One ~200 W panel** instead of two (−14 kg), and more charging while driving: a **50 A**
+DC-DC charger instead of the 30 A Orion (Victron's Orion XS 12/12-50 is the obvious one —
+weight and price to find). Batteries stay **300 Ah**. A daily energy check comes next.
+
 ## Still to add
 
 Tanks, batteries, inverter, MPPT, DC-DC,

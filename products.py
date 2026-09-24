@@ -137,6 +137,20 @@ PRODUCTS = {
         price_eur=(138, 138), shop="borovec-elektro.cz (3,460 CZK)",
         source="https://www.borovec-elektro.cz/p/electrolux-emz421mmw",
         note="fits the old 450 x 350 slot; a microwave with grill, no hot air", status="option"),
+    # --- awning (added 2026-09-24) ---------------------------------------------------------
+    "thule-omnistor-6300-325": dict(
+        name="Thule Omnistor 6300 roof awning 3.25 x 2.50", kind="awning",
+        outer=(3250, 250, None), weight_kg=25.1, price_eur=None,
+        shop="thule.com; Crafter H3 2017+ adapter Thule 301768 (camping-factory.com)",
+        source="https://www.thule.com/de-de/awnings/manual-awnings/thule-omnistor-6300-325x250-_-302230",
+        note="on the passenger side, over the sliding door; counts toward the 150 kg roof load",
+        status="proposed"),
+    "fiamma-f80s-320": dict(
+        name="Fiamma F80S 320 roof awning, 3.2 m, projection 2.5 m", kind="awning",
+        outer=(3200, 250, None), weight_kg=29.0, price_eur=None,
+        shop="Crafter 2017+ bracket kit 98655Z058 (justkampers.com)",
+        source="https://www.offroadaccessoires.ch/de/markise/1004-1012-fiamma-f80s-320-cm-dachmarkise-fuer-vans-und-wohnmobile.html",
+        note="4 kg heavier than the Thule", status="option"),
 }
 
 
