@@ -132,7 +132,10 @@ See [budget.md](budget.md).
   poplar furniture, rear axle 2007, roof 67 of 150 - after leaving the bikes out, cutting solar to
   one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
-- **Energy:** one ~200 W panel + a 50 A DC-DC proposed, 300 Ah kept - needs a daily energy check.
+- **Energy: one panel is far too little** ([v2-real/energy.md](../v2-real/energy.md), 2026-09-24): a parked
+  working day uses ~4.6 kWh, more than the usable 300 Ah. Only ~800 W of solar + lean use (Starlink
+  Mini, inverter search mode, hot water from engine/campsite) gets through a week alone - and that
+  costs ~43 kg the payload does not have unless the awning goes. To decide.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
@@ -214,6 +217,8 @@ To iterate, edit the variant's `boxes` (plan) and `views` (elevations, sections)
 Plan coordinates: x = 0 at the front bulkhead growing aft, y = 0 at the passenger wall
 growing toward the driver side. In the drawing the nose is at the left, so the driver side
 sits at the bottom. View coordinates add z = height above the finished floor.
+
+**Energy:** `python energy.py` -> `v2-real/energy.md` - daily use per load and a simulated week per set-up.
 
 **Payload:** `python payload.py` -> `v2-real/payload.md` - total and axle loads from every item's
 weight and position (products, estimates, furniture from the model boxes).

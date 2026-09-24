@@ -142,6 +142,35 @@ of driving) — a daily energy check is the next thing to do before settling the
 The furniture is estimated from the model's boxes (±20 %); the passenger and child weights are
 placeholders to confirm.
 
+## Energy — one panel is far too little (first check, 2026-09-24)
+
+`python energy.py` writes **[energy.md](energy.md)**: every load per day type, and a
+simulated week (work Monday to Friday parked, drive 2 h on Wednesday and 4 h on Saturday, no
+shore power) for several set-ups, in three seasons.
+
+- **A parked working day uses ~4.6 kWh** — more than the whole usable battery (3.46 kWh of
+  300 Ah). The big ones: cooking 1.1, Starlink Standard 0.9 (75–100 W on average, Starlink's
+  own spec), laptop + monitor 0.6, hot water 0.5, fridge 0.4, the inverter just being on 0.35.
+- **Charging while driving cannot carry it:** a 50 A DC-DC gives 0.67 kWh per hour of driving,
+  so a parked working day costs ~6-7 h of driving.
+- **"Lean" use** — Starlink Mini (25–40 W), the inverter in search mode, hot water only from
+  the engine or a campsite — brings a parked working day to ~2.9 kWh without touching
+  cooking or work.
+
+| Set-up, one week without shore power | Morocco, winter | EU, summer |
+|---|---|---|
+| As planned: 1 panel, 30 A | empty — 19 kWh short | empty — 19 kWh short |
+| 2 panels, 50 A | empty — 13 kWh short | empty — 11 kWh short |
+| 1 panel, 50 A, lean, campsite twice a week | empty — 5 kWh short | empty — 5 kWh short |
+| 3 panels, 50 A, lean | empty — 3 kWh short | just ok |
+| **4 panels (~800 W), 50 A, lean** | **ok — lowest 9 %** | **ok — lowest 94 %** |
+
+**Energy and weight pull opposite ways.** 4 panels are ~+43 kg over the one panel — which the
+payload does not have (8 kg margin) unless the awning goes (−29) and we drive with little
+fresh water. **To decide with Ondrej**; the roof layout (4 panels around 2 fans and Starlink)
+is also still to draw. Loads are estimates (source column in energy.md) — the conclusion is
+robust to them: the gap is a factor of 3, not 10 %.
+
 ## Kitchen — proposed 2026-09-24
 
 Isotherm Cruise 85 fridge, Bosch PIB375FB1E hob (limited to 2000 W), Quadron Anthony 50 sink
