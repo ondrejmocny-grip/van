@@ -107,7 +107,38 @@ A fixed cassette toilet (Thetford C-series) is made to be emptied through an out
 needs flush plumbing - both fight the slide-out idea. Price and the final choice come with the
 bathroom products.
 
+## Kitchen — proposed 2026-09-24
+
+Researched on the EU / Czech market and checked against the v2-real galley (worktops 565
+deep). All four are in the model and in the payload check.
+
+| | Product | Size W x D x H | Key numbers | kg | € | Status |
+|---|---|---|---|---|---|---|
+| Fridge | **Isotherm Cruise 85 Elegance**, hinged door | 475 x 505 x 627 | 85 L | 22.0 | 1,040 | **proposed** |
+| | Indel B Cruise 85 OFF | 475 x 545 x 635 | 85 L, 0.386 kWh/day | 21.5 | 774 | option — cheaper, little air behind |
+| | Vitrifrigo C75L | 470 x 462 x 622 | 75 L | 18.6 | 815 | option — lightest |
+| Hob | **Bosch PIB375FB1E**, domino induction 30 cm | 306 x 527 x 51 | 3.7 kW, **total can be limited to 1000–3000 W** | 6.8 | 400–472 | **proposed** |
+| Sink | **Quadron Anthony 50** workstation sink | 440 x 440 x 190 | bowl 400 x 400 x 190; colander, board, mat included | — | ~260 | **proposed** |
+| Oven | **Tefal Optimo OF4448**, hot air | 462 x 318 x 288 | 19 L, 1380 W | 4.8 | ~100 | **proposed** |
+| | Electrolux EMZ421MMW, microwave + grill | 442 x 345 x 262 | 20 L, 1270 W | 11.5 | ~138 | option — no hot air |
+
+**What changed in the galley to take them:**
+
+- **Fridge:** the 620 height was never the real limit — above it there is room up to ~835
+  (the hob wants 65 free under the worktop). So an **85 L** fits: no 80–95 L fridge is under
+  622 tall. The Isotherm is the shallow one (505): ~75 mm of air behind it, 92 clear of the arch.
+- **Sink:** nobody sells a 440 x 360 sink with a ledge for the tray. The Quadron is 80 deeper
+  (440 x 440), which the 565 worktop takes — **so the taps move beside the bowl**, to the back
+  of the 340 prep counter, instead of behind it.
+- **Oven:** a true hot-air oven, 288 tall. **It fixes a clash v2 had:** v2's 340-tall oven box
+  ran 20 mm into the sink bowl. The model now checks built sink parts against the appliances.
+  The slot grows 12 wider (462).
+- **Power:** set the hob's limit to **2000 W**. Hob 2000 + oven 1380 = 3380 W is more than the
+  3000 W inverter: **not both at full power at once.**
+
+**No sink weight is published** — the payload counts 10 kg for sink, taps and filter.
+
 ## Still to add
 
-Fridge, sink, hob, oven (research running), tanks, batteries, inverter, MPPT, DC-DC,
+Tanks, batteries, inverter, MPPT, DC-DC,
 calorifier. Their weights are already in the payload check ([v2-real/payload.md](../v2-real/payload.md)).

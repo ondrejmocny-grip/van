@@ -66,10 +66,10 @@ ITEMS = [
     ("Water system", "Thetford Porta Potti 565E, dry", 6.1, at("cassette"), "sylvansport.com"),
     ("Water system", "Shower tray, wet lining, curtain, mixer + head", 15.0, 350, "est."),
     # --- kitchen: estimates until the kitchen products are picked
-    ("Kitchen", "Fridge ~90 L, compressor", None, at("fridgedoor"), "kitchen research pending"),
-    ("Kitchen", "Induction hob, 2 zones", None, at("hob"), "kitchen research pending"),
-    ("Kitchen", "Mini oven 20 L", None, at("oven"), "kitchen research pending"),
-    ("Kitchen", "Sink with insert, 2 taps, carbon filter", None, at("sinkrim"), "kitchen research pending"),
+    ("Kitchen", "Isotherm Cruise 85 Elegance fridge", prod("isotherm-cruise-85"), at("fridgedoor"), "products.py"),
+    ("Kitchen", "Bosch PIB375FB1E induction hob", prod("bosch-pib375fb1e"), at("hob"), "products.py"),
+    ("Kitchen", "Tefal Optimo OF4448 oven", prod("tefal-of4448"), at("oven"), "products.py"),
+    ("Kitchen", "Quadron Anthony 50 sink + colander, 2 taps, carbon filter", 10.0, at("sinkrim"), "est. - sink weight not published"),
     # --- shell: insulation, floor, cladding, openings
     ("Shell", "3 x Dometic S4 (2 x 900x450 8.0 kg, 1 x 500x350 4.7 kg)", 20.7, 2000, "Dometic S4 chart"),
     ("Shell", "2 x MaxxFan Deluxe + 2 Crafter adapters", 17.4, 1400, "fan ~7.7 kg (shops vary); adapter est."),

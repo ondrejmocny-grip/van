@@ -87,6 +87,56 @@ PRODUCTS = {
         note="386 W x 450 D x 447 H - inside the 420 x 520 slot, which the shower's diagonal "
              "face limits to 520 deep",
         status="option"),
+    # --- kitchen (researched 2026-09-24) ----------------------------------------------------
+    # outer is W x D x H. The fridge stands under the hob run; above it there is room up to
+    # ~835 (the Bosch hob wants 65 free under the worktop), so 620 was never the real limit.
+    "isotherm-cruise-85": dict(
+        name="Isotherm (Webasto) Cruise 85 Elegance, compressor, hinged door", kind="fridge",
+        outer=(475, 505, 627), volume_l=85, kwh_day=None, weight_kg=22.0,
+        price_eur=(1040, 1040), shop="koesling.de",
+        source="https://www.webasto.com/en-int/cooling/fridges-freezers/cruise-elegance.html",
+        note="shallow (505) - leaves ~75 behind it for air in our 565 carcass; freezer size and "
+             "daily use not on the maker page",
+        status="proposed"),
+    "indel-cruise-85": dict(
+        name="Indel B Cruise 85 OFF, compressor, hinged door", kind="fridge",
+        outer=(475, 545, 635), volume_l=85, kwh_day=0.386, weight_kg=21.5,
+        price_eur=(774, 774), shop="prokes-auto.com",
+        source="https://www.prokes-auto.com/indel-b-cruise-85-off-built-in-compressor-refrigerator-12-24v-85l/",
+        note="cheaper, but 545 deep: little room behind it for air", status="option"),
+    "vitrifrigo-c75l": dict(
+        name="Vitrifrigo C75L, compressor, hinged door", kind="fridge",
+        outer=(470, 462, 622), volume_l=75, kwh_day=None, weight_kg=18.6,
+        price_eur=(815, 815), shop="svetkaravanu.cz (20,360 CZK)",
+        source="https://www.svetkaravanu.cz/vestavna-autochladnicka-vitrifrigo-c75l-chr-51-l-cerna_z102502/",
+        note="smallest and lightest; 10 L less", status="option"),
+    "bosch-pib375fb1e": dict(
+        name="Bosch PIB375FB1E Serie 6, domino induction 30 cm, 2 zones", kind="hob",
+        outer=(306, 527, 51), cutout=(270, 490), power_w=3700, power_limit_w=(1000, 3000),
+        weight_kg=6.8, price_eur=(400, 472), shop="ab-com.cz (10,041 CZK) / kueche24.com",
+        source="https://media3.bsh-group.com/Documents/9001763570_C.pdf",
+        note="total power can be LIMITED in the settings, 1000-3000 W: set 2000 on our inverter",
+        status="proposed"),
+    "quadron-anthony-50": dict(
+        name="Quadron Anthony 50 workstation sink, stainless", kind="sink",
+        outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(400, 400),
+        weight_kg=None, price_eur=(260, 260), shop="sink-tap.co.uk (GBP 221)",
+        source="https://www.olif.co.uk/products/quadron-anthony-50-kitchen-workstation-undermount-or-topmount",
+        note="colander, roll mat and chopping board included; ledge size not published. "
+             "80 deeper than our 360 plan, so the taps stand beside it, not behind",
+        status="proposed"),
+    "tefal-of4448": dict(
+        name="Tefal Optimo OF4448 mini oven 19 L, hot air", kind="oven",
+        outer=(462, 318, 288), power_w=1380, volume_l=19, weight_kg=4.8,
+        price_eur=(100, 100), shop="zbozi.cz (from 2,497 CZK)",
+        source="https://www.mironet.cz/tefal-of444834-elektricka-trouba-prikon-1380-w-objem-19-l+dp754085/",
+        note="a countertop oven built in: leave air space round it", status="proposed"),
+    "electrolux-emz421mmw": dict(
+        name="Electrolux EMZ421MMW, 20 L microwave + grill", kind="oven",
+        outer=(442, 345, 262), power_w=1270, volume_l=20, weight_kg=11.5,
+        price_eur=(138, 138), shop="borovec-elektro.cz (3,460 CZK)",
+        source="https://www.borovec-elektro.cz/p/electrolux-emz421mmw",
+        note="fits the old 450 x 350 slot; a microwave with grill, no hot air", status="option"),
 }
 
 

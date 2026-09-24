@@ -107,14 +107,13 @@ source and its place along the van, against 3500 kg and the two axles.
 | Van as sold (listing, incl. 75 kg driver, 90 % fuel) | 2440 | 2440 |
 | Build: conversion + rough-road upgrades | 614 | 737 |
 | Load: passenger, child, cat, full fresh water, gear, 3 bikes | 438 | 438 |
-| **Total, kitchen not yet counted (~+45)** | **3492** | **3615** |
-| Rear axle (max 2100) | 2048 | 2148 |
+| **Total, with the proposed kitchen** | **3536** | **3659** |
+| Rear axle (max 2100) | 2081 | 2181 |
 
 **Read on that:**
 
-- **With the kitchen we are ~40 kg over 3500 with poplar, ~160 over with birch.** Poplar
-  furniture is not optional.
-- **The rear axle is the tight one**, ~2085 of 2100 — almost everything heavy sits over or
+- **We are 36 kg over 3500 with poplar, 159 over with birch.** Poplar furniture is not optional.
+- **The rear axle is the tight one**, 2081 of 2100 — almost everything heavy sits over or
   behind it (water, batteries, garage, bikes on the rear doors). The split of the empty van is
   an assumption (53/47) until we weigh it.
 - **The biggest unknown is the van itself.** 2440 is the listing; VW's minimum for this spec
@@ -132,6 +131,14 @@ source and its place along the van, against 3500 kg and the two axles.
 
 The furniture is estimated from the model's own boxes (±20 %); the passenger and child
 weights are placeholders to confirm.
+
+## Kitchen — proposed 2026-09-24
+
+Isotherm Cruise 85 fridge, Bosch PIB375FB1E hob (limited to 2000 W), Quadron Anthony 50 sink
+(440 x 440), Tefal Optimo OF4448 hot-air oven — see [products.md](../doc/products.md). In the
+model: the fridge 85 L at the hob run's front, the sink 80 deeper with the **taps aft of the
+bowl**, the oven 288 tall and 462 wide — which **fixes v2's oven running 20 mm into the sink
+bowl**. The check now tests built sink parts against the appliances.
 
 ## Windows and fans — chosen 2026-09-24
 

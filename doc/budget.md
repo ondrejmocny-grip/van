@@ -35,6 +35,9 @@ fly screen** (price not found yet) joins the Shell line.
 That is most of the Shell line's €2,800–3,200 by itself, before insulation, the floor, the
 cladding and sound deadening — expect the Shell line to rise when the rest is priced.
 
+**Kitchen, proposed 2026-09-24:** fridge 1,040 + hob 400–472 + sink ~260 + oven ~100 =
+**~1,800–1,870** (v1's Kitchen line: 1,290–1,690 — the 85 L fridge is the difference).
+
 ## Vehicle upgrades for rough roads — added 2026-09-24
 
 **A separate pot**, not part of the €10–15k build: these are changes to the vehicle, like the

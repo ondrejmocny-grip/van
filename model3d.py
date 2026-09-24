@@ -879,26 +879,30 @@ EXTRA_V2R += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2R,
 EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
                _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1784, 0, 60, "tray")
               for i in range(31)]
-# The sink, 70 nearer the aisle with the driver-side carcass: its back is on the wall at
-# 900, 1762. Bowl, tray and deck as in v2.
-EXTRA_V2R += sink_wells(1150, 1590, 1370, 1730, 700, 905, n=1)
-EXTRA_V2R += tray_box(1355, 1555, 1405, 1695, 815, 895)
+# The sink: Quadron Anthony 50, 440 x 440 with a 400 x 400 x 190 bowl - no sink with a ledge
+# is sold at v2's 440 x 360. Its back 32 in front of the wall at 905 (1762). Its colander
+# drawn at v2's tray size: Quadron does not publish it.
+EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 715, 905, n=1)
+EXTRA_V2R += tray_box(1270, 1470, 1350, 1640, 825, 895)
 # The cat box and its tray behind the partition: the middle of the van, nothing moved.
 EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
 
 APPLIANCES_V2R = [
     # galley, driver side - carcass y 1197-1762, worktop 900
-    (1300, 1750, 1217, 1567,  380,  720, "oven"),       # 20 L mini oven, at the aisle edge
+    # Tefal Optimo OF4448, 462 x 318 x 288, hot air, 1380 W - at the aisle edge. 288 tall, so
+    # its top (668) is 47 under the sink bowl (715); v2's 340-tall box ran 20 into the bowl.
+    (1285, 1747, 1217, 1535,  380,  668, "oven"),
     (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
-    # The taps stood at the back of the deck, and at 1185 the wall is 122 in: 100 through it.
-    # They come forward to the back edge of the bowl instead.
-    (1200, 1300, 1510, 1700,  905, 1185, "tap"),        # mixer: 100 across, 190 of reach
-    (1340, 1390, 1586, 1706,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
+    # The taps stand AFT of the bowl, at the back of the prep counter: the 440-deep sink
+    # leaves no deck behind it, and at 1185 the wall is 122 in.
+    (1600, 1700, 1520, 1710,  905, 1185, "tap"),        # mixer, spout swings over the bowl
+    (1720, 1770, 1590, 1710,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
     (1600, 1860, 1630, 1690,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - carcass y 70-635
-    (1150, 1450,   90,  610,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
-    (1250, 1780,   80,  625,   60,  680, "fridgedoor"), # 90 L hinged door, 530 x 545 x 620,
-                                                        #   37 clear of the arch (x 1817)
+    (1150, 1456,   88,  615,  849,  905, "hob"),        # Bosch PIB375FB1E, 306 x 527 x 51
+    # Isotherm Cruise 85 Elegance, 475 x 505 x 627, at the carcass front: ~75 behind it to
+    # the wall for air, and 92 clear of the wheel arch (x 1817).
+    (1250, 1725,  120,  625,   60,  687, "fridgedoor"),
     # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
     # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
     ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150
@@ -1682,7 +1686,13 @@ def check(v):
             continue                                    # underslung, deliberately outside
         if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])
-    assert not bad, "appliance check failed: " + "; ".join(bad)
+    if v.get("body"):
+        built = [b for b in fitout(v)[0] if b[6] in ("bowl", "insert", "sinkrim")]
+        for a in app:
+            for b in built:
+                if overlap(a[:6], b[:6]):
+                    bad.append("%s runs into the sink (%s)" % (a[6], b[6]))
+    assert not bad, "appliance check failed: " + "; ".join(sorted(set(bad)))
     body_check(v)
 
     # Nothing may occupy the space a seated person does - except the seat they sit on, and

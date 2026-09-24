@@ -117,6 +117,8 @@ See [budget.md](budget.md).
 ## Open questions
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
+- **Kitchen proposed 2026-09-24 ([products.md](products.md)):** Isotherm Cruise 85, Bosch PIB375FB1E (cap 2000 W),
+  Quadron Anthony 50 sink (taps beside it), Tefal Optimo hot-air oven. Not hob + oven at full power together.
 - **Windows and fans chosen 2026-09-24 ([products.md](products.md)):** 3 × Dometic S4 in VW's stamped
   window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead: VanQuito magnetic net chosen (the
   Horrex pleated door is sized for the FWD opening, 100 too tall for ours). No shower window (agreed). Measure the roof bows on the real van
@@ -127,7 +129,7 @@ See [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
 - **Weight: at the 3500 kg limit** (first payload check 2026-09-24, [v2-real/payload.md](../v2-real/payload.md)):
-  ~3490 kg before the kitchen with poplar furniture, rear axle ~2085 of 2100. **Weigh the van per
+  3536 kg with the proposed kitchen and poplar furniture (36 over), rear axle 2081 of 2100. **Weigh the van per
   axle before the build**; poplar furniture is a must; drive with little fresh water. No route
   above 3.5 t for a 2023 4MOTION (and it would need C1).
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
