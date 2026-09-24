@@ -1,82 +1,60 @@
-# v2-real — v2 on the real van and real products
+# v2-real — v2 on the real van
 
-Started 2026-09-24 as an **exact copy of [v2](../v2/README.md)**. v2 is a schema: a box van,
-placeholder boxes, "+/-50 mm". v2-real turns that same layout into a plan you can build from.
-
-**v2 is now frozen.** All new work happens here. v2-real is built as a copy of v2's tables
-plus its own changes, so a later edit to v2 would also change v2-real. Do not edit v2.
+Started 2026-09-24 as a copy of [v2](../v2/README.md). v2 is a schema: a box van, placeholder
+boxes, "+/-50 mm". v2-real is the same layout **on the real Crafter body**, with the wall
+build-up we agreed, so it can become a plan to build from. **v2 is frozen.**
 
 ![plan](layout.png)
+
+**Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
+finished walls black, bare rib faces grey, v2's old 1832 box dashed.
 
 Regenerate: `python plan.py v2-real` then `python model3d.py v2-real`, from the project root.
 It is also in the combined viewer: `python model3d.py viewer`.
 
-## Where the changes live
+## Where it lives
 
 | File | v2-real block |
 |---|---|
-| `plan.py` | `VARIANTS["v2-real"]` — deep copy of v2, then its own changes below it |
-| `model3d.py` | `REGISTRY["v2-real"]` — deep copy of v2's 3D tables, then its own changes below it |
+| `plan.py` | `VARIANTS["v2-real"]` — its own box list, and `body=`: the VW wall profile, arch, openings, and the build-up |
+| `model3d.py` | the v2-real section — `HEIGHTS_V2R`, `EXTRA_V2R`, `APPLIANCES_V2R`, `SITTER_V2R`; the rest (windows, fans, partition, layers) is still v2's |
 
-The difference between v2 and v2-real is always what is written in those two blocks.
+The frame is v2's: y against the old 1832 box lines, so the real centre line is at y 916 and
+the walls stand inside 0 and 1832. A part that does not touch a wall kept v2's numbers.
 
-## State on 2026-09-24 — the real body is in, the furniture is still v2's
+**The body check is strict.** `python model3d.py v2-real` fails if any part — or any seated
+person — runs into the finished walls, past the rear doors, or into the roof. Today: none.
 
-**Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
-the real wall in black, v2's old 1832 box dashed, parts the wall cuts in red. Then
-[layout.png](layout.png) — the plan with the real wall in red (solid at the floor, dashed at
-1600 high).
+## State on 2026-09-24 — v2's room, fitted to the real body
 
-### What is modelled now
-
-| | Real (v2-real) | v2 had |
+| | **v2-real** | v2 |
 |---|---|---|
 | Floor length | **3390** | 3450 |
-| Width at the floor → at 900 → from 1540 up | **1776 → 1708 → 1472** | 1832 everywhere |
-| Wheel arch | x **1817–2728**, **251** above the finished floor, solid in 3D | 1863–2763, 350, not drawn |
-| Slider | x **305–1615**, **1672** high | 300–1600, 1550 |
-| Rear door opening | **1690** high | 1700 |
-| Ceiling | 1781 finished (unchanged) | 1781 |
+| Between the finished walls: floor / 900 / from 1555 up | **1756 / 1693 / 1452** | 1832 |
+| Finished height | **1811** (bare 1861 − 35 floor − 15 ceiling) | 1781 |
+| Wheel arch | x 1817–2728, **266** high | 1863–2763, 350 |
+| Slider | x 305–1615, 1687 high | 300–1600 |
+| **Galley** | worktops **565** deep each side, aisle **562** | 600 / 632 |
+| **Bed across** | **1744** (cushions 44–1788) | 1832 |
+| Benches | 557 deep (wall side moved in 43) | 600 |
+| Garage | **540** × 1746 × 570 | 600 × 1832 × 570 |
+| Overhead lockers | **250** deep over the galley, **220** over the dinette, standing further into the room; the dinette pair 30 higher (110 over a seated head) | 300 / 260 from the box line |
+| Wardrobe | 554 deep at the base (WC under it), back follows the lean above 775 | 600, square |
+| Shower | 762 → 562 deep at the floor, wet lining follows the lean | 800 → 600 |
+| Taps | 130 forward, to the back edge of the bowl | at the back of the deck |
+| WC | **≤ 520 deep** (420 × 520 drawn) | 420 × 570 |
+| Grey tank | 104 L in the spare wheel bay — **spare wheel home open** | 70 L on the rear differential |
 
-All from [ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md). The walls in
-3D are a staircase of 40 mm bands (boxes cannot slope), never more than 3 mm off the line.
+**Two things the lean costs that are easy to miss:**
 
-**Placeholder:** the finished floor is taken as 50 above bare metal, the ceiling 30 below the
-roof. Wall cladding is **not** in yet - the walls here are bare metal (rib faces). Step 2
-replaces both with the real build-up, which takes another ~20-40 mm per side.
+- **Seated people sit ~100 further into the room.** Your hips are on the cushion at the wall,
+  but your shoulders meet the wall ~100 further in (at 1480 the wall is 176 in). So at the
+  dinette the trunk, thighs and shins all move toward the table. The check now carries that.
+  The table still clears the knees.
+- **Up high, depth moves into the room.** Every locker is ~140 nearer the centre than in v2 to
+  stay usable. Over the galley the locker front is at 1392 against a worktop front at 1197.
 
-### What the real body breaks — 37 parts
-
-`python model3d.py v2-real` prints the full list. It is a report, not a failure, while
-`body.strict` is False in `plan.py`; set it True once the list is empty, and from then on a
-part hitting the wall fails the build. In groups:
-
-| Group | Parts | How far in | What it needs |
-|---|---|---|---|
-| **Everything against a wall, low down** | benches, rear bench, bed cushions, shoe locker, cassette, plumbing, electrics | **28–36** | the van is 56 narrower at the floor: carcasses 30 shallower, or the aisle / footwell gives it up |
-| **Galley carcasses** (top at 900) | sink and hob runs, worktop leaf, backrest, hob | **50–61** | worktop 60 shallower each side, or the aisle 632 → ~510 |
-| **Up high, against the lean** | 4 overhead lockers | **180** | redesign: from 1540 up the wall is 180 in. A 300-deep locker is ~120 deep there |
-| **Full-height parts** | wardrobe, 3 shower walls, shower riser | **180 at the top**, 28 at the floor | their outer faces must follow the lean; the shower loses width up high |
-| **Taps** | mixer, drinking tap | **96–112** | they stand at the back edge of the deck; move them forward |
-| **Length** | rear bench, rear bed cushion, calorifier | **60** (calorifier 10) | the garage is 540 deep now, not 600, or the U moves forward |
-
-Nothing new clashes with the wheel arch or the tyres. The arch is lower and a little further
-forward than drawn: the fridge now stops ~37 short of it (was 83).
-
-**Not in this report:** the grey tank (underslung - see below) and the bed length across the
-van: 1766 between the bare walls at 570-630, before cladding. **Decided 2026-09-24: the bed
-stays across.**
-
-## Decisions 2026-09-24
-
-| | Decision | Status |
-|---|---|---|
-| Bed | **Stays across the van**, ~1735 after a thin wall build | agreed |
-| Galley | **Middle ground** between shallower worktops and a narrower aisle | waits for the cladding number |
-| Grey tank | **In the spare wheel bay**, behind the rear axle | modelled; spare wheel home open |
-| Cladding | thin build proposed - see below | **to agree with Ondrej** |
-
-## Wall, floor and ceiling build-up — proposal, to agree
+## Wall, floor and ceiling build-up — thin, agreed 2026-09-24
 
 **The key fact:** VW's widths are measured to the **rib faces** (the lashing rails). Behind
 the rib face there is a cavity of roughly **70–110 mm** to the outer skin (read from section
@@ -87,7 +65,7 @@ Our use sets the priorities ([about-us](../doc/about-us.md)): warm weather, no h
 in winter, EU in summer. So the job is **keeping the sun out and stopping condensation**, not
 holding heat in. The roof matters most; the walls need less than a winter build.
 
-| Layer | Thin (**recommended**) | Standard | Battened |
+| Layer | **Thin (agreed)** | Standard | Battened |
 |---|---|---|---|
 | Wall cavity | closed-cell foam on the skin + fill — **0 inside** | same | same |
 | Over the ribs | 3 mm thermal-break strip | 10 mm foam | 20 mm battens |
@@ -134,21 +112,54 @@ wheel's: behind the rear axle, between the two chassis rails.
 The other free spots, both too small alone: driver side between the fuel tank and the rear
 axle (~350 × 400, twice), and the passenger side, which the exhaust and the muffler fill.
 
-**Open: where the spare wheel goes.** 235/65 R16 is ~711 across and ~235 wide. It does not fit
+**Open: where the spare wheel goes** — see the options below. 235/65 R16 is ~711 across and ~235 wide. It does not fit
 the garage (540 deep, 570 high). Likely a **carrier on the rear door**; the alternative is
 tyre sealant plus a compressor, which is a poor bet for Morocco.
+
+## Where the spare wheel could go — options, 2026-09-24
+
+The rear-door carrier is out if we can avoid it. The spare is a 235/65 R16: **~711 across,
+~235 wide, ~25 kg**. VW's drawing also lists a temporary spare (Notrad) at 15–18.5 kg.
+
+| | Option | Spare wheel | Grey tank | Costs | Verdict |
+|---|---|---|---|---|---|
+| **A** | **Grey tank INSIDE, under the raised footwell floor** | **stays in its bay, as VW made it** | ~880 × 600 × 180 = **95 L gross, ~85 usable**, x 1950–2830, y 616–1216 | the footwell drawer; a small shower drain pump; a frame for the table post | **recommended** |
+| B | Two small tanks under the driver side, between the fuel tank and the rear axle | stays in its bay | 2 × ~26 = ~53 L | two tanks, more plumbing, next to the fuel tank and brake lines, 30 % less capacity | fallback |
+| C | Spare on a tow-bar swing-away carrier | on the back, outside | spare wheel bay, 104 L | +~300 length, swing it away for every rear door opening, needs a tow bar | no |
+| D | No spare — sealant + compressor | none | spare wheel bay | a torn sidewall on a Moroccan piste ends the trip | no |
+| E | Inside: garage or bench | — | — | does not fit: garage 540 deep and 570 high, wheel 711 | impossible |
+
+**Why A:**
+
+- **The spare stays where VW put it.** Nothing new hangs under the van; the carrier, the
+  winch-down and the ground clearance stay as they are.
+- **The tank sits in the best place in the van for weight:** low, on the centre line,
+  between the axles. Full it is ~85 kg; the spare wheel bay is behind the rear axle.
+- **The footwell is already lifted 220 for nothing but storage.** That drawer becomes the tank
+  — and we have been cutting storage on purpose anyway ([about-us](../doc/about-us.md)).
+- **Gravity still works for the sink:** the bowl bottom is at ~700, the tank top at ~190.
+- **The shower tray drains at floor level**, below the tank top, so it needs a small shower
+  drain pump either way. An underslung tank at the far end of the van would have needed a long
+  falling pipe past the fuel tank instead.
+- **Emptying:** an outlet through the floor at the tank's low point, valve under the van.
+- **Warm-weather use means no freezing risk** — the usual argument for inside tanks, not against.
+
+**What A costs, honestly:** the footwell drawer (~0.1 m³); a tank inside the living space
+needs a sealed lid, a vent to outside and a trap, or it smells; and the table post can no
+longer bolt through the footwell floor into the floor pan — it needs a small frame beside or
+over the tank, or the tank splits into two either side of the post.
 
 ## The plan: from schema to buildable
 
 Order matters: each step sets the limits for the next.
 
-### 1. The real van body — modelled 2026-09-24
+### 1. The real van body — done 2026-09-24
 
 2026-09-24: VW's official body builder drawings are in
 **[ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md)**. The big findings:
 the walls lean in (~1775 wide low down, ~1475 near the roof, not 1832), the floor is 3390 long
 not 3450, the arch is 301 high, and **the grey tank as drawn sits on the rear differential**.
-Now in the model - see the state above. Next: adapt the layout to it.
+In the model, and v2's layout is fitted to it - see the state above.
 
 | What | Why it matters |
 |---|---|
@@ -164,10 +175,10 @@ Sources, best first: VW body builder guidelines for the Crafter (drawings; CAD d
 converters to be checked), then **measuring the real van** once bought — measured data
 replaces brochure data.
 
-### 2. Wall, floor and ceiling build-up — not started
+### 2. Wall, floor and ceiling build-up — thin build agreed 2026-09-24
 
-Model the layers (metal → insulation → battens → cladding, each with a thickness) and
-calculate the finished interior from them, instead of assuming "finished" sizes.
+In the model as `floor_build`, `ceiling_build` and `clad` in `body=` (see above). Still to do:
+the actual products per layer, and the 70–110 mm cavity depth checked on the real van.
 
 ### 3. Product register — not started
 

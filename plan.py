@@ -244,48 +244,71 @@ VARIANTS["v2"] = dict(
 
 
 # --------------------------------------------------------------------------
-# v2-real - v2 turned from a schema into a buildable plan. Started 2026-09-24 as an exact
-# copy of v2; from here it takes the real Crafter body (wall slope, ribs, the true arch, the
-# 4MOTION underbody), the wall build-up, and real products in place of placeholder boxes.
-# v2 is frozen as the schema it was. Everything v2-real changes is written below this copy,
-# so the difference between the two is always this block.
+# v2-real - v2 turned from a schema into a buildable plan. Started 2026-09-24 as a copy of
+# v2; since the real body went in it has its own box list, written against the REAL walls.
+# v2 is frozen as the schema it was.
+#
+# Frame: x from the partition, z above the finished floor, y against v2's old 1832 box lines
+# - the real centre line stays at y 916, so the walls simply stand inside 0 and 1832 by the
+# body profile below plus the cladding. Where a part stands against a wall, its wall-side
+# edge is that finished face at the part's top (the lean only comes further in higher up).
 # --------------------------------------------------------------------------
-VARIANTS["v2-real"] = copy.deepcopy(VARIANTS["v2"])
-VARIANTS["v2-real"].update(
+VARIANTS["v2-real"] = dict(
     out="v2-real/layout",
-    title="v2-real - VW Crafter L3H3 4MOTION - v2 on the real body and real products",
+    title="v2-real - VW Crafter L3H3 4MOTION - v2 on the real body",
     viewer_title="Crafter L3H3 v2-real Interior",
-    # The real body, from VW's own panel-van drawing - see ref/vw-crafter-bodybuilder. Every
-    # number is converted to OUR frame: z above the finished floor, y against v2's old
-    # 1832 box lines (the real centre line stays at y 916), x from the partition.
     length=3390,                    # VW L502-2, partition to rear door, not the brochure 3450
+    width=1832,                     # the frame, NOT the van: the real walls are body= below
+    height=1811,                    # 1861 bare - 35 floor - 15 ceiling
     slider=(305, 1615),             # VW L508 1311 wide, centred at x ~960
     well=(1817, 2728, 226),         # VW 911 long; 1380 between the arches (W202)
+    cab=800,
     body=dict(
         source="ref/vw-crafter-bodybuilder",
-        # The finished floor sits this far above bare metal. A placeholder until the wall,
-        # floor and ceiling build-up is designed (step 2): 1861 bare - 1781 finished = 80,
-        # split 50 floor / 30 ceiling.
-        floor_build=50,
-        # (z, inset): how far the bare wall stands INSIDE the old 1832 box line, at each
-        # height. Linear between points, the same on both sides and all along the van (the
-        # slider and rear-axle sections differ by 11 mm at most; the tighter one is used).
-        #   z 0-250:  888 from the centre (VW, section C-C)        -> 28
-        #   z 760:    880 / 891 (C-C), 880 (D-D, 1760 wide)        -> 36
-        #   z 1540+:  736 / 741 (C-C), 1473 wide (D-D, "H3")       -> 180
-        profile=((0, 28), (250, 28), (760, 36), (1540, 180), (1781, 180)),
-        arch_h=251,                 # VW 401 on the low floor -> 301 on ours -> 251 finished
-        slider_h=1672,              # VW H508 1722 on the high floor
-        rear_h=1690,                # VW H202 1740 on the high floor
-        # False: body clashes are REPORTED, not fatal, while v2's layout is adapted to the
-        # real shell. Set True once the report is empty - from then on it fails the build.
-        strict=False,
+        # The thin build, agreed 2026-09-24 (v2-real/README.md): insulation lives in the
+        # 70-110 mm cavity behind the rib faces, so only what goes OVER the ribs costs room.
+        floor_build=35,             # 20 XPS between battens + 12 ply + 2 vinyl
+        ceiling_build=15,           # foam between the roof bows + 6 ply
+        clad=10,                    # per wall: 3 mm thermal-break strip + 6 ply, or a carcass back
+        # (z, inset): how far the BARE wall (the rib faces) stands inside the old 1832 box
+        # line, at each height above the finished floor. Linear between points, the same on
+        # both sides and all along the van (the slider and rear-axle sections differ by
+        # 11 mm at most; the tighter one is used). Heights are VW's on the high floor - 35.
+        #   z 0-265:  888 from the centre (VW, section C-C)        -> 28
+        #   z 775:    880 / 891 (C-C), 880 (D-D, 1760 wide)        -> 36
+        #   z 1555+:  736 / 741 (C-C), 1473 wide (D-D, "H3")       -> 180
+        profile=((0, 28), (265, 28), (775, 36), (1555, 180), (1811, 180)),
+        arch_h=266,                 # VW 401 on the low floor -> 301 on ours -> 266 finished
+        slider_h=1687,              # VW H508 1722 on the high floor
+        rear_h=1705,                # VW H202 1740 on the high floor
+        # True: a part that runs into the real walls, the rear doors or the roof fails the
+        # build, the same as an appliance outside its cabinet.
+        strict=True,
     ),
-    note=("v2's layout on the REAL body, from VW's panel-van drawing (ref/vw-crafter-bodybuilder): "
-          "floor 3390 long, walls ~1776 apart low down leaning in to ~1472 above 1540, arch "
-          "x 1817-2728 and 251 high, slider 1311 at x 305-1615. The furniture is still v2's - "
-          "the red lines show where the real walls cut it. Heights above the finished floor, "
-          "which sits 50 over bare metal (placeholder). Body +/-10 mm."),
+    stats=["bed 1520 x 1744 across at 630", "worktops 565 deep", "galley aisle 562",
+           "garage 540 x 1746 x 570", "standing 1811", "grey 104 L in the spare wheel bay"],
+    note=("v2's layout on the REAL body (VW panel-van drawing, ref/vw-crafter-bodybuilder) with the "
+          "thin build: floor 3390 long, 1756 between the finished walls at the floor, 1694 at "
+          "worktop height, 1452 from 1555 up; ceiling 1811. Arch x 1817-2728, 266 high. Galley "
+          "split down the middle: worktops 565, aisle 562. Bed across 1744. Grey tank in the "
+          "spare wheel bay. Red lines: the finished walls. Body +/-10 mm."),
+    shapes={"SHOWER": [(0, 1032), (700, 1232), (700, 1794), (0, 1794)]},
+    boxes=[
+        ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
+        (   0,  700, 1032, 1794, "SHOWER", "700 x 762>562 - diagonal face - 450 opening aft", WET),
+        ( 700, 1150, 1232, 1786, "WARDROBE", "450 x 554 - back follows the lean - WC under", WARM),
+        (   0,  450,   41,  400, "LOCKER", "450 x 359 - shoes - step to the hatch", SOFT),
+        (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
+        ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
+        ( 750, 1150,   70,  635, "WORKTOP", "400 x 565 - fold-down leaf", GALLEY),
+        (1150, 1930, 1197, 1762, "SINK", "780 x 565 - 440 single bowl, 340 prep aft", GALLEY),
+        (1150, 1930,   70,  635, "HOB", "780 x 565 - hob forward, 480 prep aft", GALLEY),
+        (1150, 1930,  635, 1197, "AISLE", "780 x 562", None),
+        (1930, 2850, 1232, 1789, "BENCH", "920 x 557 - battery + inverter", SOFT),
+        (1930, 2850,   43,  600, "BENCH", "920 x 557 - 118 L tank inboard of arch", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, drawer under", SOFT),
+        (2850, 3390,   43, 1789, "REAR BENCH", "540 x 1746 - garage 570 clear under", SOFT),
+    ],
 )
 
 # --------------------------------------------------------------------------
@@ -344,26 +367,28 @@ for _name, _variant in VARIANTS.items():
     _variant["name"] = _name
 
 
-def wall_inset(v, z):
+def wall_inset(v, z, bare=False):
     """How far the real wall stands inside the variant's box line at height z, for a variant
-    that carries a measured body. 0 for the box-shaped variants."""
+    that carries a measured body: the finished face (rib face + cladding), or with bare=True
+    the rib faces themselves. 0 for the box-shaped variants."""
     body = v.get("body")
     if not body:
         return 0
     pts = body["profile"]
+    clad = 0 if bare else body.get("clad", 0)
     if z <= pts[0][0]:
-        return pts[0][1]
+        return pts[0][1] + clad
     for (za, ia), (zb, ib) in zip(pts, pts[1:]):
         if z <= zb:
-            return ia + (ib - ia) * (z - za) / (zb - za)
-    return pts[-1][1]
+            return ia + (ib - ia) * (z - za) / (zb - za) + clad
+    return pts[-1][1] + clad
 
 
-def wall_inset_max(v, z0, z1):
+def wall_inset_max(v, z0, z1, bare=False):
     """The deepest the wall comes in anywhere between z0 and z1 - what a box spanning those
     heights has to clear."""
     zs = [z0, z1] + [z for z, _ in v.get("body", {}).get("profile", ()) if z0 < z < z1]
-    return max(wall_inset(v, z) for z in zs)
+    return max(wall_inset(v, z, bare) for z in zs)
 
 
 def draw(ax, v):
@@ -408,7 +433,7 @@ def draw(ax, v):
 
     if v.get("body"):
         # the real wall, at the floor and where it has leaned in the most, over the box line
-        for z, ls, tag in ((0, "-", "real wall at the floor"), (1600, (0, (6, 3)), "real wall at 1600 high")):
+        for z, ls, tag in ((0, "-", "finished wall at the floor"), (1600, (0, (6, 3)), "finished wall at 1600 high")):
             i = wall_inset(v, z)
             for y in (i, WID - i):
                 ax.plot([0, LEN], [y, y], color="#c0392b", lw=1.4, ls=ls, zorder=9)

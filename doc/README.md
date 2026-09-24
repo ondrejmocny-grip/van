@@ -28,7 +28,7 @@ Read it before proposing anything.
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
 | [v3](../v3/README.md) | Same van and cab as v2: **L-galley** into the corner behind the driver (1.15 m2), thin larder, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom, and the dinette doubling as the office for two - and a 600 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Most galley and the biggest bathroom of any version, and the first where no appliance overlaps a wheel arch. |
-| [v2-real](../v2-real/README.md) | v2's layout, being turned from a schema into a buildable plan: real body, wall build-up, real products | **Started 2026-09-24.** Real VW body in the model (leaning walls, 3390 floor, real arch and slider); v2's furniture not yet adapted - 37 parts cut by the walls. v2 is frozen. |
+| [v2-real](../v2-real/README.md) | v2's layout on the real VW body with the thin wall build: galley 565 / aisle 562, bed across 1744, garage 540, ceiling 1811 | **Fitted 2026-09-24.** Strict body check passes. Open: grey tank / spare wheel. v2 is frozen. |
 
 ## References
 
@@ -114,9 +114,9 @@ decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-on
 See [budget.md](budget.md).
 
 ## Open questions
-- **Wall, floor and ceiling build-up** - thin build proposed 2026-09-24 (see v2-real README),
-  to agree. It sets the bed length across (kept across, decided 2026-09-24) and the galley depth.
-- **Spare wheel** - the grey tank takes its bay (decided 2026-09-24, v2-real). The spare needs a new home: rear door carrier is the likely one.
+- **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
+  ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
+- **Grey tank vs spare wheel** - no rear door carrier if avoidable. Recommended: grey tank inside, under the raised footwell, spare stays in its bay. See v2-real README.
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
   standing, not 1881. That still fits 171 cm. **v1, v2 and v3 are all drawn at 1781** (lockers,

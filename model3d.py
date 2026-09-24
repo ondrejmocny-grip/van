@@ -790,25 +790,155 @@ EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 
 
 # --------------------------------------------------------------------------
-# v2-real - starts as an exact copy of v2's tables, taken here, after the last of v2's own
-# additions above. It is a deep copy, so editing v2-real can never move v2. The changes
-# that turn it into a buildable plan - real body, wall build-up, real products - are made
-# to REGISTRY["v2-real"] below this line, one visible delta at a time.
+# v2-real - v2's room on the REAL Crafter body, with the thin build (floor 35, ceiling 15,
+# 10 on every wall). Its own tables since 2026-09-24: v2's were written against a 1832 box,
+# and nearly every part that touched a wall moved. The frame is still v2's (centre line at
+# y 916), so a part that did not touch a wall kept its numbers. Where a part stands against
+# a wall, its wall-side edge is the finished face at the part's top: plan.wall_inset().
 # --------------------------------------------------------------------------
-REGISTRY["v2-real"] = copy.deepcopy(REGISTRY["v2"])
+V2R = VARIANTS["v2-real"]
+H_V2R = V2R["height"]
+W_V2R = V2R["width"]
 
-# The grey tank. v2 hung it at x 2100-2800 under the middle of the van - on a 4MOTION that is
-# the propshaft and the rear differential (VW underbody drawing, AWD L3). The one clear bay
-# big enough is the SPARE WHEEL's, behind the rear axle between the chassis rails: VW X
-# ~3830-4560, Y -470..+460, which is our x 2460-3190, y 456-1386. The tank hangs where the
-# wheel hangs, under the two crossmembers there, so it costs no ground clearance the spare
-# did not already cost. 650 x 800 x 200 = 104 L gross, ~90 usable - a custom tank: the
-# ready-made Crafter sill tanks do not fit a mid-wheelbase LHD van. The spare wheel needs
-# a new home (rear door carrier is the likely one) - open question in v2-real/README.md.
-_v2r = REGISTRY["v2-real"]["appliances"]
-_v2r[:] = [a for a in _v2r if a[6] != "grey"] + [
-    (2500, 3150,  516, 1316, -320, -120, "grey"),       # spare wheel bay, 104 L gross
+
+def against_wall(x0, x1, y_front, z0, z1, side, kind, step=260):
+    """A full-height part standing against a wall that leans: stacked boxes, each one's back
+    on the finished wall at the TOP of its own band, so the stack follows the lean down to
+    the floor instead of losing its whole depth to the narrowest point. Bands break at the
+    profile's own corners, and every `step` in between where the wall is sloping."""
+    zs = [z0]
+    for z, _ in V2R["body"]["profile"]:
+        if z0 < z < z1:
+            zs.append(z)
+    zs.append(z1)
+    cuts = []
+    for a, b in zip(zs, zs[1:]):
+        n = 1 if wall_inset(V2R, a) == wall_inset(V2R, b) else max(1, int(round((b - a) / step)))
+        cuts += [a + (b - a) * k / n for k in range(n)]
+    cuts.append(z1)
+    out = []
+    for a, b in zip(cuts, cuts[1:]):
+        i = int(wall_inset_max(V2R, a, b) + 0.999)
+        y0, y1 = (i, y_front) if side == "p" else (y_front, W_V2R - i)
+        out.append((x0, x1, y0, y1, round(a), round(b), kind))
+    return out
+
+
+HEIGHTS_V2R = dict(HEIGHTS_V2)
+HEIGHTS_V2R["WARDROBE"] = (0, 775)  # the full-depth base, where the WC lives; the hanging
+                                    #   space above follows the lean - EXTRA_V2R
+
+EXTRA_V2R = [
+    # The rear U, lifted as in v2: footwell +220, benches 570, cushions to 630, table at 900.
+    # The benches lost 43 to the walls, the rear bench 60 to the shorter floor.
+    (1930, 2850,   44,  600,  570,  630, "bed"),        # seat cushion, passenger bench
+    (1930, 2850, 1232, 1788,  570,  630, "bed"),        # seat cushion, driver bench
+    (2850, 3390,   44, 1788,  570,  630, "bed"),        # seat cushion, rear bench
+    (1940, 2840,  616, 1216,  840,  900, "table"),      # 900 x 600, on one post
+    (2340, 2440,  866,  966,  220,  840, "leg"),        # the post, standing on the raised floor
+    (1930, 2850,  600, 1232,  570,  630, "infill"),     # bed made up: 1744 across, wall to wall
+    (2010, 2610, 1383, 1783,  630,  790, "pillow"),     # heads at the driver wall, one each
+    (2770, 3370, 1383, 1783,  630,  790, "pillow"),
+    # The galley leaf, the depth of the hob run now: 565.
+    ( 900, 1150,  260,  320,  780,  840, "farm"),       # swing-out bracket under the leaf
+    ( 750, 1150,   70,  635,  840,  900, "ftable"),     # deployed: 400 x 565 at worktop height
+    (1090, 1150,   70,  635,  440,  840, "ftablep"),    # folded: hangs down the galley end
+    # The shoe locker's backrest: at 950 the wall is 78 in, so the pillow starts there.
+    (   0,   60,   79,  400,  480,  950, "backrest"),
+    ( 100,  180,  400,  460,  120,  640, "parm"),       # side table bracket, unchanged
+    ( 180,  660,  400,  460,  640,  680, "parm"),
+    ( 460,  800,   60,  440,  680,  720, "ptable"),     # at 720 the wall is 45 in - clear
+    ( 200,  540,  400,  440,  300,  680, "ptablep"),
+    # Overhead lockers. From 1555 up the finished wall is 190 in, so a locker at v2's front
+    # line would be 110 deep. They keep a usable 250 / 220 instead and stand that much
+    # further into the room. The ceiling came up 30, so the dinette ones went up with it:
+    # 110 over a seated head now instead of 80.
+    (1150, 1930, 1392, 1642, 1400, 1700, "overhead"),   # driver, over the sink: 250 deep
+    (1600, 1930,  190,  440, 1400, 1700, "overhead"),   # passenger, clear of the door head
+    (1950, 2830, 1422, 1642, 1590, 1740, "overhead"),   # driver, over the dinette: 220 deep
+    (1950, 2830,  190,  410, 1590, 1740, "overhead"),   # passenger, over the dinette
+    # The shower riser, on the partition: the wall at 1760 is 190 in, and the wet panel is
+    # another 10 inside that.
+    (   0,  160, 1472, 1632, 1140, 1760, "shower"),
 ]
+# The hanging space over the wardrobe base, back on the lean.
+EXTRA_V2R += against_wall(700, 1150, 1232, 775, H_V2R, "d", "WARDROBE")
+# The shower's three panels. Forward and aft walls end on the finished wall; the driver-side
+# one IS a wet lining over the cladding, 10 thick, following the lean all the way up.
+EXTRA_V2R += against_wall(  0,   40, 1032, 0, H_V2R, "d", "wetwall")
+EXTRA_V2R += against_wall(660,  700, 1232, 0, H_V2R, "d", "wetwall")
+EXTRA_V2R += [(x0, x1, y1 - 10, y1, z0, z1, k)
+              for x0, x1, _y0, y1, z0, z1, k in against_wall(40, 660, 0, 0, H_V2R, "d", "wetwall")]
+# The carved lobby face and the tray, as in v2 - the face is inside the room, only its
+# height changed; the tray stops at the wet lining.
+EXTRA_V2R += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2R,
+                        660 * _WET_K - 450, 660 * _WET_K, 60, 1740, 225, 60, "wetface")
+EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
+               _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1784, 0, 60, "tray")
+              for i in range(31)]
+# The sink, 70 nearer the aisle with the driver-side carcass: its back is on the wall at
+# 900, 1762. Bowl, tray and deck as in v2.
+EXTRA_V2R += sink_wells(1150, 1590, 1370, 1730, 700, 905, n=1)
+EXTRA_V2R += tray_box(1355, 1555, 1405, 1695, 815, 895)
+# The cat box and its tray behind the partition: the middle of the van, nothing moved.
+EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
+
+APPLIANCES_V2R = [
+    # galley, driver side - carcass y 1197-1762, worktop 900
+    (1300, 1750, 1217, 1567,  380,  720, "oven"),       # 20 L mini oven, at the aisle edge
+    (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
+    # The taps stood at the back of the deck, and at 1185 the wall is 122 in: 100 through it.
+    # They come forward to the back edge of the bowl instead.
+    (1200, 1300, 1510, 1700,  905, 1185, "tap"),        # mixer: 100 across, 190 of reach
+    (1340, 1390, 1586, 1706,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
+    (1600, 1860, 1630, 1690,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
+    # galley, passenger side - carcass y 70-635
+    (1150, 1450,   90,  610,  845,  905, "hob"),        # 2-zone domino induction, 300 x 520
+    (1250, 1780,   80,  625,   60,  680, "fridgedoor"), # 90 L hinged door, 530 x 545 x 620,
+                                                        #   37 clear of the arch (x 1817)
+    # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
+    # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
+    ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150
+    # water
+    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
+    # The grey tank. v2 hung it at x 2100-2800 under the middle of the van - on a 4MOTION
+    # that is the propshaft and the rear differential (VW underbody drawing, AWD L3). The
+    # one clear bay big enough is the SPARE WHEEL's, behind the rear axle between the chassis
+    # rails: VW X ~3830-4560, Y -470..+460, which is our x 2460-3190, y 456-1386. The tank
+    # hangs where the wheel hangs, under the two crossmembers there, so it costs no ground
+    # clearance the spare did not already cost. 650 x 800 x 200 = 104 L gross, ~90 usable -
+    # a custom tank: the ready-made Crafter sill tanks do not fit a mid-wheelbase LHD van.
+    (2500, 3150,  516, 1316, -320, -120, "grey"),
+    (3080, 3380,  150,  550,   60,  360, "calorifier"), # 10 L, 30 forward: the floor is shorter
+    # electrics, driver bench
+    (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
+    (2340, 2540, 1240, 1590,   30,  270, "battery"),
+    (2080, 2550, 1300, 1580,  270,  450, "inverter"),   # 3000 W, on a shelf over the cells
+    (2900, 3300, 1672, 1782,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
+]
+
+# The seated people, against the leaning wall. Your hips sit on the cushion at the wall, but
+# your shoulders meet the wall higher up, where it has come in ~100 more - so every trunk is
+# two boxes: the lower one on the wall at 900, the upper one on the wall at its top. That is
+# the real cost of the lean at the dinette: the head and shoulders sit ~100 further into the
+# room than v2 assumed, and the thighs and shins with them.
+SITTER_V2R = [
+    (  60,  400,   70,  390,  450,  900),    # shoe locker: lower trunk, facing aft
+    (  60,  400,  143,  423,  900, 1300),    #   shoulders, on the wall at 1300
+    ( 450,  800,  100,  380,  380,  500),    #   thighs, under the side table
+    ( 620,  820,  100,  380,    0,  400),    #   shins, feet on the floor
+    (2000, 2340,   70,  390,  630,  900),    # passenger bench, sitting forward: lower trunk
+    (2000, 2340,  177,  457,  900, 1480),    #   shoulders and head, on the wall at 1480
+    (2040, 2320,  390,  690,  560,  680),    #   thighs
+    (2040, 2320,  638,  798,  220,  580),    #   shins, dropping into the footwell
+    (2440, 2780, 1442, 1762,  630,  900),    # driver bench, sitting aft: lower trunk
+    (2440, 2780, 1375, 1655,  900, 1480),    #   shoulders and head
+    (2480, 2760, 1142, 1442,  560,  680),    #   thighs
+    (2480, 2760, 1034, 1194,  220,  580),    #   shins
+]
+
+REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
+                           appliances=APPLIANCES_V2R, sitter=SITTER_V2R)
 
 
 def body_bands(v, step=40):
@@ -1418,7 +1548,8 @@ def body_clashes(v):
         return []
     L, W, H = v["length"], v["width"], v["height"]
     out = []
-    for x0, x1, y0, y1, z0, z1, kind in boxes_for(v):
+    people = [b[:6] + ("person on a seat",) for b in spec(v).get("sitter", ())]
+    for x0, x1, y0, y1, z0, z1, kind in boxes_for(v) + people:
         if kind == "grey":
             continue                                    # underslung, outside on purpose
         za, zb = max(z0, 0), min(z1, H)
@@ -1545,8 +1676,11 @@ def body_sections(v, path, stations=((1500, "galley, x 1500"), (2400, "dinette, 
     pts = v["body"]["profile"]
     for ax, (x, title) in zip(axes, stations):
         ax.add_patch(R((0, 0), W, H, fc="none", ec="#999", lw=1, ls=(0, (5, 4))))
-        wall = [(i, z) for z, i in pts] + [(W - i, z) for z, i in reversed(pts)]
-        ax.add_patch(P(wall, closed=True, fc="#f7f5f0", ec="#222", lw=2.2))
+        bare = [(i, z) for z, i in pts] + [(W - i, z) for z, i in reversed(pts)]
+        ax.add_patch(P(bare, closed=True, fc="none", ec="#999", lw=1.0))
+        c = v["body"].get("clad", 0)
+        fin = [(i + c, z) for z, i in pts] + [(W - i - c, z) for z, i in reversed(pts)]
+        ax.add_patch(P(fin, closed=True, fc="#f7f5f0", ec="#222", lw=2.2))
         if v.get("well") and v["well"][0] <= x <= v["well"][1]:
             w0, w1, wd = v["well"]
             for y0, y1 in ((0, wd), (W - wd, W)):
@@ -1566,8 +1700,8 @@ def body_sections(v, path, stations=((1500, "galley, x 1500"), (2400, "dinette, 
         ax.set_title(title + "  (looking aft from the cab, passenger side left)", fontsize=9)
         ax.set_xlim(-60, W + 60); ax.set_ylim(-60, H + 80); ax.set_aspect("equal")
         ax.tick_params(labelsize=6)
-    fig.suptitle("v2-real - the real Crafter walls (black) against v2's 1832 box (dashed). "
-                 "Red: parts the real wall cuts.", fontsize=10)
+    fig.suptitle("v2-real - finished walls (black) over the bare rib faces (grey), inside v2's "
+                 "1832 box (dashed). Red: parts the finished wall cuts.", fontsize=10)
     fig.tight_layout()
     fig.savefig(path, facecolor="white")
     plt.close(fig)
