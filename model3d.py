@@ -1448,6 +1448,9 @@ VS3D_ITEMS = {   # kind -> (catalogue name, (min x, y, z), (max x, y, z), materi
     "inverter": ("Inverter", (-1.947, -0.285, -3.555), (0.652, 0.530, 0.061), ["inverter_mat"]),
     "tap": ("Foldable RV Faucet Rotating Single Handle", (-0.474, -1.178, -0.986),
             (0.474, 1.178, 0.986), ["Steel Rough"]),
+    "pillow": ("Pillow", (-2.317, -0.995, -1.134), (2.317, 0.995, 1.134), ["Satin Fabric"]),
+    # Tried and left as Cubes, 2026-09-24: the handheld showers hang 810 of hose off a 620
+    # rail and would poke through the ceiling; the pillow set is four meshes in one item.
 }
 
 
