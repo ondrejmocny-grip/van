@@ -114,10 +114,9 @@ decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-on
 See [budget.md](budget.md).
 
 ## Open questions
-- **Bed across the van may be too short** (found 2026-09-24 in the VW drawings): bare width at
-  bed height is ~1776, so ~1715 after insulation and cladding - Ondrej is 171 cm. See
-  [ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md).
-- **Grey tank position on the 4MOTION** - v2's spot is on the rear differential. Needs a new place.
+- **Wall, floor and ceiling build-up** - thin build proposed 2026-09-24 (see v2-real README),
+  to agree. It sets the bed length across (kept across, decided 2026-09-24) and the galley depth.
+- **Spare wheel** - the grey tank takes its bay (decided 2026-09-24, v2-real). The spare needs a new home: rear door carrier is the likely one.
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
   standing, not 1881. That still fits 171 cm. **v1, v2 and v3 are all drawn at 1781** (lockers,

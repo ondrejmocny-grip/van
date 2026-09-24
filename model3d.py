@@ -797,6 +797,19 @@ EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 # --------------------------------------------------------------------------
 REGISTRY["v2-real"] = copy.deepcopy(REGISTRY["v2"])
 
+# The grey tank. v2 hung it at x 2100-2800 under the middle of the van - on a 4MOTION that is
+# the propshaft and the rear differential (VW underbody drawing, AWD L3). The one clear bay
+# big enough is the SPARE WHEEL's, behind the rear axle between the chassis rails: VW X
+# ~3830-4560, Y -470..+460, which is our x 2460-3190, y 456-1386. The tank hangs where the
+# wheel hangs, under the two crossmembers there, so it costs no ground clearance the spare
+# did not already cost. 650 x 800 x 200 = 104 L gross, ~90 usable - a custom tank: the
+# ready-made Crafter sill tanks do not fit a mid-wheelbase LHD van. The spare wheel needs
+# a new home (rear door carrier is the likely one) - open question in v2-real/README.md.
+_v2r = REGISTRY["v2-real"]["appliances"]
+_v2r[:] = [a for a in _v2r if a[6] != "grey"] + [
+    (2500, 3150,  516, 1316, -320, -120, "grey"),       # spare wheel bay, 104 L gross
+]
+
 
 def body_bands(v, step=40):
     """The real wall as horizontal bands, (z0, z1, inset) each: vertical where the wall is

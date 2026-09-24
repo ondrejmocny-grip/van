@@ -63,9 +63,80 @@ part hitting the wall fails the build. In groups:
 Nothing new clashes with the wheel arch or the tyres. The arch is lower and a little further
 forward than drawn: the fridge now stops ~37 short of it (was 83).
 
-**Not in this report:** the grey tank (underslung, and its 4MOTION problem is in the ref
-README), and the bed length across the van: 1766 between the bare walls at 570-630, before
-cladding. That is the decision still open.
+**Not in this report:** the grey tank (underslung - see below) and the bed length across the
+van: 1766 between the bare walls at 570-630, before cladding. **Decided 2026-09-24: the bed
+stays across.**
+
+## Decisions 2026-09-24
+
+| | Decision | Status |
+|---|---|---|
+| Bed | **Stays across the van**, ~1735 after a thin wall build | agreed |
+| Galley | **Middle ground** between shallower worktops and a narrower aisle | waits for the cladding number |
+| Grey tank | **In the spare wheel bay**, behind the rear axle | modelled; spare wheel home open |
+| Cladding | thin build proposed - see below | **to agree with Ondrej** |
+
+## Wall, floor and ceiling build-up — proposal, to agree
+
+**The key fact:** VW's widths are measured to the **rib faces** (the lashing rails). Behind
+the rib face there is a cavity of roughly **70–110 mm** to the outer skin (read from section
+C-C). **Insulation goes in that cavity and costs no room inside.** What costs room is only
+what sits *over* the ribs: a thermal break and the panel.
+
+Our use sets the priorities ([about-us](../doc/about-us.md)): warm weather, no heater, Morocco
+in winter, EU in summer. So the job is **keeping the sun out and stopping condensation**, not
+holding heat in. The roof matters most; the walls need less than a winter build.
+
+| Layer | Thin (**recommended**) | Standard | Battened |
+|---|---|---|---|
+| Wall cavity | closed-cell foam on the skin + fill — **0 inside** | same | same |
+| Over the ribs | 3 mm thermal-break strip | 10 mm foam | 20 mm battens |
+| Panel | 6 mm ply on rivnuts in the factory holes | 6 mm ply | 6 mm ply |
+| **Wall, per side** | **~10** | ~16 | ~26 |
+| Behind furniture | carcass back on the break strip, ~10 | ~16 | ~26 |
+| Wiring | in the cavity and inside carcasses | same | behind the battens |
+| **Floor** | 20 XPS between battens + 12 ply + 2 vinyl = **~35** | ~35 | ~35 |
+| **Ceiling** | foam between the roof bows + 6 ply = **~15** | ~20 | ~30 |
+
+What each option gives (bare numbers from the VW drawing):
+
+| | Thin | Standard | Battened | v2-real today |
+|---|---|---|---|---|
+| Bed across (bare 1766) | **~1746** | ~1734 | ~1714 | — |
+| Finished height (bare 1861) | **~1811** | ~1806 | ~1796 | 1781 (placeholder 50 + 30) |
+| Standing on the 60 mm shower tray | ~1751 — **4 cm over Ondrej** | ~1746 | ~1736 | ~1720 |
+
+**Why thin:** it is the cheapest in room exactly where the van is short (the bed across and
+the galley aisle), and it gives back ~30 mm of headroom over the placeholder. It does not
+insulate less: the insulation is in the cavity either way. What it gives up is a service
+space behind the panels - the wiring runs in the cavity through the existing holes instead,
+which is how most Crafter builds do it anyway.
+
+**The galley "middle ground" with the thin build:** the wall at worktop height is 61 in from
+v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
+worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
+
+## The grey tank, moved to the spare wheel bay
+
+v2's spot (x 2100–2800 under the middle) is the **propshaft and the rear differential** on a
+4MOTION. Read from VW's AWD underbody drawing, the only clear bay big enough is the spare
+wheel's: behind the rear axle, between the two chassis rails.
+
+| | |
+|---|---|
+| Bay (VW) | X ~3830–4560, Y −470…+460, under two crossmembers |
+| Bay (ours) | x 2460–3190, y 456–1386 — under the garage |
+| Tank drawn | **650 × 800 × 200 = 104 L gross, ~90 usable**, x 2500–3150, y 516–1316 |
+| Ground clearance | the tank hangs where the wheel hangs, so no worse than today; the lowest point stays the SCR tank (194–212, VW) |
+| Product | **custom tank.** The ready-made Crafter underslung tanks (Wydale 90 L, 63 L) say "does not fit LHD" and the 90 L also "not MWB"; the 82 L one runs between chassis rails over 1700 mm, which on a 4MOTION is the propshaft |
+| Drain | at the rear, reachable behind the rear bumper |
+
+The other free spots, both too small alone: driver side between the fuel tank and the rear
+axle (~350 × 400, twice), and the passenger side, which the exhaust and the muffler fill.
+
+**Open: where the spare wheel goes.** 235/65 R16 is ~711 across and ~235 wide. It does not fit
+the garage (540 deep, 570 high). Likely a **carrier on the rear door**; the alternative is
+tyre sealant plus a compressor, which is a poor bet for Morocco.
 
 ## The plan: from schema to buildable
 
