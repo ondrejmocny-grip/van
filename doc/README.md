@@ -409,8 +409,14 @@ The taps stayed meshes, because a tap is a shape rather than a hole.
 It takes `n=1` for a single bowl and `axis` for which way two bowls sit; `tray_box()` beside
 it is the same five-sided trick for anything open-topped - v2's drop-in sink tray is one.
 
-**Curves are staircases of boxes, 2026-09-23.** `arch_face()` draws a panel with a
-rounded-corner opening carved out of it - v2's shower entrance. Everything in this model is
+**Curves are staircases of boxes, 2026-09-23.** `arch_face()` drew a panel with a
+rounded-corner opening carved out of it - v2's shower entrance. On 2026-09-24 the face went
+diagonal and `slant_face()` replaced it: the same carve on a panel whose outer face is a
+line in plan, laid as 20 mm columns in x, each reaching from the outer face at its start to
+the inner face at its end so the staircase never shows a gap. The opening is given along
+the face, in true length. `plan.py` draws such a thing through a variant's `shapes`
+(label -> polygon); the box stays in the list as the label position and bounding size.
+What `arch_face()` did: Everything in this model is
 an axis-aligned box, so the arch is sampled in columns, each column rounded **outward** so
 the hole is never smaller than the true curve, and columns that come out the same height are
 merged so a shallow arch does not cost thirty boxes. 45 columns across a 450 mm opening is

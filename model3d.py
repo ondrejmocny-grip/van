@@ -175,11 +175,12 @@ EXTRA_V2 = [
     # mesh scaled to fill a 700 x 800 x 1781 hole either reads as a solid block or turns
     # its one opening to the wall, and which way a generated mesh faces is a coin toss the
     # box list should not be losing. Three panels, a tray, and a fourth panel on the lobby
-    # side with the entrance carved out of it - see arch_face() below.
+    # side with the entrance carved out of it - see slant_face() below. That face runs on a
+    # diagonal, so the aft wall starts 200 further in than the forward one, and the tray is
+    # a trapezoid; both are laid down after the helpers.
     (   0,   40, 1032, 1832,    0, H_V2, "wetwall"),    # forward wall, on the partition
-    ( 660,  700, 1032, 1832,    0, H_V2, "wetwall"),    # aft wall, shared with the wardrobe
+    ( 660,  700, 1232, 1832,    0, H_V2, "wetwall"),    # aft wall, shared with the wardrobe
     (   0,  700, 1792, 1832,    0, H_V2, "wetwall"),    # the driver-side wall
-    (  40,  660, 1072, 1792,    0,   60, "tray"),
 ]
 
 APPLIANCES_V2 = [
@@ -695,62 +696,75 @@ def tray_box(x0, x1, y0, y1, z0, z1, wall=6, kind="insert"):
     ]
 
 
-def arch_face(x0, x1, y0, y1, z0, z1, ox0, ox1, oz0, oz1, rtop, rbot, kind, steps=30):
-    """A panel across the van's x with a rounded-corner opening carved out of it.
-
-    Everything in this model is an axis-aligned box, so the curve is a staircase: the
-    opening is sampled in columns and each column keeps whatever panel is left above and
-    below it. Each column is rounded OUTWARD - the hole is never smaller than the true
-    curve, because a doorway 2 mm generous beats one with a sliver of panel in your
-    shoulder. Columns that come out the same height are merged, so the straight part of a
-    shallow arch costs one box, not thirty.
-    """
-    out = []
-    if ox0 > x0:
-        out.append((x0, ox0, y0, y1, z0, z1, kind))
-    if ox1 < x1:
-        out.append((ox1, x1, y0, y1, z0, z1, kind))
-
-    def edge(x, r, base, up):
-        """Where the opening's top (up=1) or bottom (up=-1) sits at x, corners radius r."""
-        if r <= 0:
-            return base
-        d = min(x - ox0, ox1 - x)
-        if d >= r:
-            return base
-        return base - up * (r - (r * r - (r - d) ** 2) ** 0.5)
-
-    cols = []
-    for i in range(steps):
-        a = ox0 + (ox1 - ox0) * i / float(steps)
-        b = ox0 + (ox1 - ox0) * (i + 1) / float(steps)
-        hi = max(edge(a, rtop, oz1, 1), edge(b, rtop, oz1, 1))
-        lo = min(edge(a, rbot, oz0, -1), edge(b, rbot, oz0, -1))
-        if cols and abs(cols[-1][2] - lo) < 0.5 and abs(cols[-1][3] - hi) < 0.5:
-            cols[-1][1] = b
-        else:
-            cols.append([a, b, lo, hi])
-    for a, b, lo, hi in cols:
-        if lo > z0:
-            out.append((a, b, y0, y1, z0, lo, kind))
-        if hi < z1:
-            out.append((a, b, y0, y1, hi, z1, kind))
-    return out
-
-
 # The sink: one deep bowl, 440 x 360 outside, hard against the wardrobe at x 1150. The bowl
 # is 195 deep - deep enough that the shallow tray drops inside it instead of beside it, and
 # that is the whole point: two compartments when washing up, and 340 mm of unbroken counter
 # aft of the unit the rest of the time, which is where the chopping board lives.
 EXTRA_V2 += sink_wells(1150, 1590, 1440, 1800, 700, 905, n=1)
 EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
-# The shower entrance: carved, not a door and not a full glass wall. 450 clear is the
-# narrowest an adult actually walks through; a semicircular head springs at 1515 and tops
-# out at 1740, 41 under the 4MOTION ceiling. It is pushed to the AFT end of the face, against the wardrobe, which leaves
-# 170 mm of full-height panel at the forward end, on the partition side - the only place on
-# this face anything can be mounted, and the end you meet first coming from the cab.
-EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, H_V2,
-                      210, 660, 60, 1740, 225, 60, "wetface", steps=45)
+def slant_face(x0, x1, y0, slope, t, z0, z1, s0, s1, oz0, oz1, rtop, rbot, kind, step=20):
+    """A wall panel with a rounded-corner opening carved out of it, running on a diagonal.
+
+    Everything in this model is an axis-aligned box, so both the arch and the slant are
+    staircases. The panel's outer face is the line y = y0 + slope * x, and it is t thick measured square
+    to itself. Axis-aligned boxes cannot lie on a slant, so it is laid as columns step wide
+    in x, each one reaching from the outer face at its start to the inner face at its end:
+    the staircase never shows a gap, and its teeth are slope * step deep (6 mm at 20).
+    The opening is given ALONG the face (s0, s1 from x = 0), because that is the width a
+    person walks through; the arch is rounded in true length too, then projected. Each
+    column is rounded OUTWARD - the hole is never smaller than the true curve, because a
+    doorway 2 mm generous beats one with a sliver of panel in your shoulder.
+    """
+    k = (1 + slope * slope) ** 0.5
+    ox0, ox1 = s0 / k, s1 / k
+    xs = []
+    for a, b in ((x0, ox0), (ox0, ox1), (ox1, x1)):
+        n = max(1, int(round((b - a) / float(step))))
+        xs += [a + (b - a) * i / float(n) for i in range(n)]
+    xs.append(x1)
+
+    def edge(s, r, base, up):
+        if r <= 0:
+            return base
+        d = min(s - s0, s1 - s)
+        if d >= r:
+            return base
+        return base - up * (r - (r * r - (r - d) ** 2) ** 0.5)
+
+    out = []
+    for a, b in zip(xs, xs[1:]):
+        ya, yb = y0 + slope * a, y0 + slope * b + t * k
+        if a >= ox0 - 0.01 and b <= ox1 + 0.01:
+            hi = max(edge(a * k, rtop, oz1, 1), edge(b * k, rtop, oz1, 1))
+            lo = min(edge(a * k, rbot, oz0, -1), edge(b * k, rbot, oz0, -1))
+            if lo > z0:
+                out.append((a, b, ya, yb, z0, lo, kind))
+            if hi < z1:
+                out.append((a, b, ya, yb, hi, z1, kind))
+        else:
+            out.append((a, b, ya, yb, z0, z1, kind))
+    return out
+
+
+# The shower's lobby face runs on a DIAGONAL: 800 deep at the partition, 600 at the
+# wardrobe, so it no longer ends in a corner standing 200 proud of the wardrobe and the
+# galley line - which was exactly where you turn from the aisle into the lobby. It gives
+# the corridor 200 at the old corner and 100 halfway along, and costs the shower a
+# triangle, 14 % of its floor, almost all of it at the aft end, away from the head.
+# The entrance is still carved and still at the aft end: 450 clear measured along the
+# face, from the aft wall's inner face forward. A semicircular head springs at 1515 and
+# tops out at 1740, 41 under the 4MOTION ceiling. What is left forward of it is ~190 of
+# full-height panel on the partition side - the only place on this face anything can be
+# mounted, and the end you meet first coming from the cab.
+_WET_Y0, _WET_SLOPE, _WET_T = 1032, 200 / 700.0, 40
+_WET_K = (1 + _WET_SLOPE ** 2) ** 0.5
+EXTRA_V2 += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2,
+                       660 * _WET_K - 450, 660 * _WET_K, 60, 1740, 225, 60, "wetface")
+# The tray follows the face: a trapezoid, laid in the same 20 mm columns, each starting on
+# the inner face of the slant so none of it can show through on the lobby side.
+EXTRA_V2 += [(40 + 20 * i, 60 + 20 * i,
+              _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1792, 0, 60, "tray")
+             for i in range(31)]
 
 # The cat box, in the hole the walk-through left at floor level. 400 x 400 outside, and it
 # reaches 190 mm forward THROUGH the partition into the dead space behind the bench's seat

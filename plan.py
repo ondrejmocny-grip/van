@@ -18,7 +18,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Circle
+from matplotlib.patches import Rectangle, Circle, Polygon
 
 WARM, GALLEY, SOFT, WET, COLD = "#efe7d8", "#dce7e4", "#e7e0ec", "#d9e6f0", "#e2efdf"
 
@@ -221,9 +221,10 @@ VARIANTS["v2"] = dict(
           "and slides forward into the shower, cassette out through the driver-side panel. The "
           "U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the "
           "wheel arch. Estimated +/-50 mm."),
+    shapes={"SHOWER": [(0, 1032), (700, 1232), (700, 1832), (0, 1832)]},
     boxes=[
         ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800>600 - diagonal face - 450 opening aft", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
         (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step to the hatch", SOFT),
         (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
@@ -312,11 +313,18 @@ def draw(ax, v):
 
     ax.add_patch(Rectangle((0, 0), LEN, WID, fc="white", ec="#222", lw=3, zorder=2))
 
+    # A box can be drawn as a polygon instead, when the thing it stands for is not square in
+    # plan - v2's shower has a diagonal face. The box stays: it is the label position and
+    # the bounding size the rest of the tooling reads.
+    shapes = v.get("shapes", {})
     for x0, x1, y0, y1, lab, sub, fc in v["boxes"]:
         open_floor = fc is None
-        ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fc="none" if open_floor else fc,
-                               ec="#b5b5b5" if open_floor else "#8a8a8a", lw=1.2,
-                               ls=(0, (4, 3)) if open_floor else "-", zorder=3))
+        style = dict(fc="none" if open_floor else fc, ec="#b5b5b5" if open_floor else "#8a8a8a",
+                     lw=1.2, ls=(0, (4, 3)) if open_floor else "-", zorder=3)
+        if lab in shapes:
+            ax.add_patch(Polygon(shapes[lab], closed=True, **style))
+        else:
+            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, **style))
         cx = (x0 + x1) / 2
         # open zones label at their top edge, so furniture drawn inside them stays readable
         cy = y0 + 130 if open_floor else (y0 + y1) / 2

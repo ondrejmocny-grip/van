@@ -283,20 +283,40 @@ same call as the shower cubicle. The taps are still meshes; a tap is a shape, no
 **carved out of it** — a walk-in opening with a semicircular head, as narrow as an adult
 actually needs, pushed to the aft end of the face, against the wardrobe.
 
+**The face runs on a diagonal.** Changed 2026-09-24. The cubicle used to stand 200 mm proud of
+the wardrobe and the galley line, and its aft corner was exactly where you turn from the
+aisle into the lobby. Making the cubicle shallower would have fixed the corner and ruined the
+shower, so only the face moved: it now runs from the partition at **800 deep** to the
+wardrobe at **600 deep**, flush with the wardrobe front.
+
+| | Straight face (before) | **Diagonal face (now)** |
+|---|---|---|
+| Outside | 700 × 800 | **700 × 800 at the partition → 600 at the wardrobe** |
+| Inside depth, forward wall | 720 | **706** — where the head is, and where you stand |
+| Inside depth, middle | 720 | **618** |
+| Inside depth, aft wall | 720 | **529** — where you walk in |
+| Floor inside | 0.45 m² | **0.38 m²** (−14 %) |
+| Lobby floor | — | **+0.07 m²**; +200 at the old corner, +100 halfway along |
+
+The loss is a triangle, and nearly all of it is at the aft end — the doorway end, which you
+walk through rather than stand in. The standing spot under the head, against the partition,
+is 14 mm shallower than before.
+
 | | |
 |---|---|
-| Opening | **450 wide**, from the 60 mm curb up to **1740** |
+| Opening | **450 wide measured along the face**, from the 60 mm curb up to **1740** |
 | Head | full semicircle, radius 225, springing at 1515 |
-| Position | hard against the **aft** wall, x 210–660 of the 620 mm face — the wardrobe end |
-| **Panel left forward of it** | **170 wide × full height**, on the partition side — see below |
+| Position | hard against the **aft** wall — x 227–660 in plan, the wardrobe end |
+| **Panel left forward of it** | **~190 along the face × full height**, on the partition side — see below |
 | Curb | the 60 mm tray lip runs across the opening, bottom corners radius 60 |
+| Tray | a **trapezoid**, 620 long, 706 → 529 deep — a custom tray or a built-in GRP floor |
 
 **450 is the floor, not a choice.** Interior doors are 600–700 and RV shower doors 500–560;
 450 is where a boat head lands, and it is what leaves anything at all on the other side of
-the face. Every millimetre added to the opening comes straight off that 170.
+the face. Every millimetre added to the opening comes straight off that strip.
 
-**What the 170 strip can hold:** towel hooks or a vertical rail, a slim shelf column on the
-wet side for bottles, or a mirror. Not a cupboard — 170 × 40 of panel is a surface to mount
+**What the ~190 strip can hold:** towel hooks or a vertical rail, a slim shelf column on the
+wet side for bottles, or a mirror. Not a cupboard — a strip of 40 mm panel is a surface to mount
 on, not a volume. If it turns out to be worth more than that, the honest move is to steal it
 from the wardrobe next door rather than from the opening.
 
@@ -304,17 +324,25 @@ It sits at the **forward** end now, against the partition. That is the end you r
 coming through from the cab, and it keeps the opening itself beside the wardrobe, where the
 WC slides in and where you are already standing when you use the bathroom.
 
-**A curtain is still the wet-side answer.** The carve keeps the water in only as far as the
-curb does; a curtain or a half-height glass fin on the aft jamb stops the spray reaching the
+**A curtain is still the wet-side answer**, and the diagonal does not change that: the track
+runs straight along the face, and the curtain stacks on the forward strip. The carve keeps the water in only as far as the
+curb does; the curtain or a half-height glass fin on the aft jamb stops the spray reaching the
 lobby floor. Never a swinging door — that is what would cost the 800 mm width.
 
 The cubicle is built from the box list rather than from a generated mesh: three wall panels,
-a tray, and the carved face. The arch itself is a staircase of thin boxes, rounded outward
-so the hole is never smaller than the curve it approximates.
+a tray, and the carved face. The face is a staircase of 20 mm columns — the model has no
+slanted boxes — with the arch rounded outward in each, so the hole is never smaller than the
+curve it approximates. The teeth are 6 mm deep, invisible at real scale.
 
 **The WC stows under the wardrobe.** A cassette unit, roughly 420 × 570, sits in the wardrobe
 base and **slides forward into the shower** when you need it. The **cassette itself comes out
 sideways through a hatch in the driver-side body panel**, at x 700–1150.
+
+**The diagonal sets a limit on the WC: no deeper than ~520.** It slides forward out of the
+wardrobe past the aft wall, and that is where the shower is now narrowest — 529 inside. Once
+it is in, the forward half is deep enough (≥ 570 anywhere forward of x 520), but it has to get
+there. The 420 × 570 drawn is a placeholder; portable cassette units are typically nearer
+430–450 deep. This is the one real cost of the diagonal — check it against the actual WC.
 
 What this buys:
 
@@ -413,7 +441,7 @@ them.
 
 | Area | Size (mm) | Contains |
 |---|---|---|
-| Shower | **700 × 800**, floor level, 1781 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
+| Shower | **700 × 800 → 600**, diagonal face, floor level, 1781 clear | **450 carved opening** at the aft end, ~190 of panel forward of it; WC slides in when needed |
 | Wardrobe | **450 × 600** | hanging above (~1181 clear), **WC drawer below** |
 | Shoe locker | **450 × 400 × 450** | shoes; doubles as the step up to the cab hatch |
 | Cat box | **400 × 400 × 420** | 190 of it forward of the partition; 240 × 260 flap in the aft face |
@@ -531,6 +559,10 @@ sitting over the same arch.
     nothing in it — deliberately parked, not solved.
 20. **Overhead lockers over the dinette, or a taller garage.** Removing the two 880 runs lets
     the whole U rise ~100–150 (garage ~700 high) under the 1781 ceiling. Kept for now.
+21. **The WC must be ≤ ~520 deep** to slide past the aft end of the diagonal shower (529
+    inside). Pick the actual unit before the wardrobe base is built.
+22. **The shower tray is a trapezoid** (620 × 706 → 529). Custom GRP or stainless tray, or a
+    tanked floor with a former — no catalogue rectangle fits.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries
