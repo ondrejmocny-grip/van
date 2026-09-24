@@ -15,7 +15,7 @@ PRODUCTS = {
         name="Dometic S4 hinged window 900 x 450", kind="window",
         cutout=(902, 448), outer=(948, 481), clear=(804, 304), wall=(27, 53),
         glazing="double acrylic", blind=True, flyscreen=True,
-        weight_kg=None, price_eur=(620, 680), shop="dalix.cz / karavan.cz",
+        weight_kg=8.0, price_eur=(620, 680), shop="dalix.cz / karavan.cz",
         source="https://www.reimo.com/de/bilder/intern/ersatzteile-daten_2012/dometic-seitz/"
                "product-documentation/dateien/S4-Fenster.pdf",
         status="chosen"),
@@ -23,7 +23,7 @@ PRODUCTS = {
         name="Dometic S4 hinged window 500 x 350", kind="window",
         cutout=(500, 348), outer=(544, 380), clear=(404, 204), wall=(27, 53),
         glazing="double acrylic", blind=True, flyscreen=True,
-        weight_kg=None, price_eur=(260, 400), shop="shop.camperselbstbau.de",
+        weight_kg=4.7, price_eur=(260, 400), shop="shop.camperselbstbau.de",
         source="https://www.reimo.com/de/bilder/intern/ersatzteile-daten_2012/dometic-seitz/"
                "product-documentation/dateien/S4-Fenster.pdf",
         status="chosen"),
@@ -48,7 +48,7 @@ PRODUCTS = {
         name="Maxxair MaxxFan Deluxe 00-07500KI40 (EU)", kind="fan",
         cutout=(400, 400), outer=(585, 417), above_roof=(127, 237), roof=(25, 90),
         current_a=(0.2, 2.3), features="10 speeds, in and out, rain cover, thermostat, remote",
-        weight_kg=None, price_eur=(356, 356), shop="nomadem.cz (8,890 CZK)",
+        weight_kg=7.7, price_eur=(356, 356), shop="nomadem.cz (8,890 CZK)",
         source="https://airxcel.eu/wp-content/uploads/2022/02/airxcel-europe-maxxfan-deluxe.pdf",
         note="Crafter 2017+ roof adapter (PVC, 15 mm): North Devon Campervans, GBP 80-100",
         status="chosen"),
@@ -82,7 +82,7 @@ PRODUCTS = {
     "porta-potti-565e": dict(
         name="Thetford Porta Potti 565E (Curve)", kind="wc",
         outer=(386, 450, 447), waste_l=21, flush_l=15,
-        weight_kg=None, price_eur=None, shop=None,
+        weight_kg=6.1, price_eur=None, shop=None,
         source="https://www.campingworld.com/thetford-porta-potti-565e-curve-portable-rvmarine-toilet-58980.html",
         note="386 W x 450 D x 447 H - inside the 420 x 520 slot, which the shower's diagonal "
              "face limits to 520 deep",

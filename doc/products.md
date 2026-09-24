@@ -109,5 +109,5 @@ bathroom products.
 
 ## Still to add
 
-Fridge, sink, hob, oven, WC, tanks, batteries, inverter, MPPT, DC-DC, calorifier, and the
-payload (weight) check across all of them and the vehicle upgrades.
+Fridge, sink, hob, oven (research running), tanks, batteries, inverter, MPPT, DC-DC,
+calorifier. Their weights are already in the payload check ([v2-real/payload.md](../v2-real/payload.md)).

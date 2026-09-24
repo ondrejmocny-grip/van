@@ -126,7 +126,10 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: 3500 kg is the licence B limit.** 4MOTION + heavy electrics + upgrades - the payload check is due in the product register.
+- **Weight: at the 3500 kg limit** (first payload check 2026-09-24, [v2-real/payload.md](../v2-real/payload.md)):
+  ~3490 kg before the kitchen with poplar furniture, rear axle ~2085 of 2100. **Weigh the van per
+  axle before the build**; poplar furniture is a must; drive with little fresh water. No route
+  above 3.5 t for a 2023 4MOTION (and it would need C1).
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
@@ -208,6 +211,9 @@ To iterate, edit the variant's `boxes` (plan) and `views` (elevations, sections)
 Plan coordinates: x = 0 at the front bulkhead growing aft, y = 0 at the passenger wall
 growing toward the driver side. In the drawing the nose is at the left, so the driver side
 sits at the bottom. View coordinates add z = height above the finished floor.
+
+**Payload:** `python payload.py` -> `v2-real/payload.md` - total and axle loads from every item's
+weight and position (products, estimates, furniture from the model boxes).
 
 **Products** live in `products.py` (sizes, cut-outs, prices, sources); `doc/products.md` is the
 readable version. v2-real takes its window and fan cut-outs from there, so a product change is

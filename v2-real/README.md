@@ -97,6 +97,42 @@ which is how most Crafter builds do it anyway.
 v2's line, +10 cladding = 71. Splitting that between the carcasses and the aisle gives
 worktops **~565 deep** each side and an aisle **~560** (v2: 600 and 632).
 
+## Payload — the van is at its limit (first check, 2026-09-24)
+
+`python payload.py` writes **[payload.md](payload.md)**: every item with its weight, its
+source and its place along the van, against 3500 kg and the two axles.
+
+| | Poplar furniture | Birch furniture |
+|---|---|---|
+| Van as sold (listing, incl. 75 kg driver, 90 % fuel) | 2440 | 2440 |
+| Build: conversion + rough-road upgrades | 614 | 737 |
+| Load: passenger, child, cat, full fresh water, gear, 3 bikes | 438 | 438 |
+| **Total, kitchen not yet counted (~+45)** | **3492** | **3615** |
+| Rear axle (max 2100) | 2048 | 2148 |
+
+**Read on that:**
+
+- **With the kitchen we are ~40 kg over 3500 with poplar, ~160 over with birch.** Poplar
+  furniture is not optional.
+- **The rear axle is the tight one**, ~2085 of 2100 — almost everything heavy sits over or
+  behind it (water, batteries, garage, bikes on the rear doors). The split of the empty van is
+  an assumption (53/47) until we weigh it.
+- **The biggest unknown is the van itself.** 2440 is the listing; VW's minimum for this spec
+  is 2182 and allows ±3-5 %. **Weigh the van, per axle, before the build** — it moves the
+  answer by ±100 kg, more than anything we choose.
+
+**What moves the number most:**
+
+| Lever | Saves |
+|---|---|
+| Birch → poplar furniture | ~120 kg |
+| Drive with ~40 L fresh water, fill at the stop | ~78 kg, nearly all off the rear axle |
+| Bikes: every kg on the rear doors puts ~1.4 kg on the rear axle; e-bikes are ~25 kg each | 15–30 kg per bike |
+| 200 Ah instead of 300 Ah battery | ~10 kg |
+
+The furniture is estimated from the model's own boxes (±20 %); the passenger and child
+weights are placeholders to confirm.
+
 ## Windows and fans — chosen 2026-09-24
 
 From the product register ([doc/products.md](../doc/products.md), numbers in `products.py`).
