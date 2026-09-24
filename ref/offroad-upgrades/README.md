@@ -2,8 +2,7 @@
 
 Received 2026-09-24 from Ondrej: a list of recommended upgrades for rough tracks, deep ruts
 and unpaved roads. It is kept here in short form, **checked against our van and VW's own
-drawing** ([vw-crafter-bodybuilder](../vw-crafter-bodybuilder/README.md)). **Nothing is
-decided yet.**
+drawing** ([vw-crafter-bodybuilder](../vw-crafter-bodybuilder/README.md)). **Chosen 2026-09-24: tier 1 and 2 yes, tier 3 no — this can be changed later.**
 
 ## What the list recommends
 
@@ -63,6 +62,21 @@ add ~100–150, lift and tyres ~50–60 — about **2.65–2.75 m**. Check this 
   snorkel) — a rough estimate, to check per product.
 - **So every kilo here comes out of water, gear and people.** The payload check belongs in the
   product register (step 3), with these items in it.
+
+## Decision 2026-09-24 — can be changed later
+
+**Tier 1: yes. Tier 2: yes. Tier 3: no.** Tyre size stays 235/65 R16 for now (the spare wheel
+bay). Priced in [doc/budget.md](../../doc/budget.md): tier 1 ~€3.2–5.0k, tier 2 ~€4.2–4.7k.
+
+Found while pricing:
+
+- **Seikel's breather kit is for manual gearboxes only.** Check which gearbox our van has.
+- **Seikel's rear diff guard is "only for vehicles up to 3.88 t"** — fine for our 3.5 t.
+- **The Seikel lift comes with a VW no-objection letter (UBB)**, which is what the technical
+  inspection wants to see. It allows up to 50 mm total together with bigger tyres.
+- **Weight of tier 1 + 2 is lower than the full list:** ~35–55 kg, because the heavy items
+  (rocksliders, long tank plates) are in tier 3. delta4x4 gives its engine guard as 10 kg
+  in one place and 15.5 kg in another.
 
 ## First take on what fits how we travel
 
