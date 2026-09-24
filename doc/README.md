@@ -37,6 +37,7 @@ Read it before proposing anything.
 | [emandnick-transit-148el](../ref/emandnick-transit-148el/README.md) | 2018 Ford Transit 148" EL, high roof. Wet bath opposite the slider, split galley, rear dinette to bed, front desk. | **We like it.** Layout reconstructed. Basis for v1. |
 | [doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md) | Fiat Ducato L2H2, 5.40 m overall. Front-corner standing shower, split galley, rear salon to a 1350 x 1880 bed. | **Most relevant reference we have.** 330 mm *shorter* than ours and still has a full shower. Layout reconstructed. |
 | [scarletseth-promaster-159ext](../ref/scarletseth-promaster-159ext/README.md) | Ram ProMaster 159" EXT. Shower turned sideways against the cab bulkhead, WC in a drawer under the fridge, rear dinette to a near-square bed. | **Two ideas, not a layout.** $104k build on a 4089 mm van. Layout reconstructed. |
+| [vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md) | VW's official body builder drawings and converter guidelines for our van, Crafter L3H3 4MOTION. | **Source of truth for the body** until we measure the real van. Walls lean in, floor 3390, grey tank position wrong in v2. |
 
 ## Base vehicle sizing
 
@@ -113,6 +114,10 @@ decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-on
 See [budget.md](budget.md).
 
 ## Open questions
+- **Bed across the van may be too short** (found 2026-09-24 in the VW drawings): bare width at
+  bed height is ~1776, so ~1715 after insulation and cladding - Ondrej is 171 cm. See
+  [ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md).
+- **Grey tank position on the 4MOTION** - v2's spot is on the rear differential. Needs a new place.
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
   standing, not 1881. That still fits 171 cm. **v1, v2 and v3 are all drawn at 1781** (lockers,

@@ -28,7 +28,13 @@ Identical to v2. The 3D model is the same geometry; `check()` passes on all 15 a
 
 Order matters: each step sets the limits for the next.
 
-### 1. The real van body — not started
+### 1. The real van body — data found, not modelled yet
+
+2026-09-24: VW's official body builder drawings are in
+**[ref/vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md)**. The big findings:
+the walls lean in (~1775 wide low down, ~1475 near the roof, not 1832), the floor is 3390 long
+not 3450, the arch is 301 high, and **the grey tank as drawn sits on the rear differential**.
+Next: put that shape into the model.
 
 | What | Why it matters |
 |---|---|
