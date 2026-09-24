@@ -86,8 +86,11 @@ door opening, **1822** tall (VW H508). Our 4MOTION has the high floor, so our op
 Its cassette depth is also unknown, and the shoe locker sits just inside the front edge of the
 opening.
 
-**Recommendation now: VanQuito** — it fits our door as made, costs a third, has no depth to
-clash with the locker or the galley end, and weighs almost nothing. **Status: proposed.**
+**Chosen 2026-09-24: VanQuito** — it fits our door as made, costs a third, has no depth to
+clash with the locker or the galley end, and weighs almost nothing.
+
+**Rule from Ondrej for any future door screen:** the **shoe locker may get smaller** to make
+room; **the galley may not**.
 The Horrex stays the nicer option if Horrex confirms a 4MOTION size.
 
 ## WC

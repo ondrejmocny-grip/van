@@ -75,7 +75,7 @@ PRODUCTS = {
              "mesh 0.94 x 0.94 mm. The maker says it can stay on with the door closed - but off "
              "in rain and while driving. Made for the passenger-side door and H2/H3 vans "
              "(2590-2640 high), so it does not depend on the 4MOTION floor.",
-        status="proposed"),
+        status="chosen"),
     # --- WC ------------------------------------------------------------------------------------
     # Emptied INSIDE (2026-09-24): no hatch in the side panel. A portable unit is the natural
     # fit for a WC that slides out of the wardrobe: it has its own flush tank and no plumbing.

@@ -131,8 +131,9 @@ inside the field the shower is 470 wide, and the smallest S4 still sold is 500.
 
 **Also decided 2026-09-24:**
 
-- **No window in the sliding door** — it gets a **fly screen** instead — proposed: the **VanQuito** magnetic net; the Horrex pleated door is
-  made for the FWD door height (1822) and our 4MOTION opening is 1722. See [products.md](../doc/products.md).
+- **No window in the sliding door** — it gets a **fly screen** instead — chosen: the **VanQuito** magnetic net; the Horrex pleated door is
+  made for the FWD door height (1822) and our 4MOTION opening is 1722. If a screen ever needs
+  room: the shoe locker may shrink, the galley may not. See [products.md](../doc/products.md).
 - **No cassette hatch in the body.** The WC's waste tank comes out **inside**, through a door
   in the wardrobe base on the lobby side, and is carried ~1 m to the sliding door. That was
   the only cut outside VW's window fields — no VW letter needed now. A portable WC with its
