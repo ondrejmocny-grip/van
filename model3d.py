@@ -107,12 +107,12 @@ HEIGHTS_V2 = {
     "CAT": None,                # the litter cabinet is panels in EXTRA_V2, with a hole in it
     "SINK": (0, 900),
     "HOB": (0, 900),
-    # The rear U is lifted as one piece. Floor +180 in the footwell, benches 570, bed at 630.
+    # The rear U is lifted as one piece. Floor +220 in the footwell, benches 570, bed at 630.
     # Everything that lift buys is storage: 570 of garage under the rear bench instead of 450,
     # and a drawer under the footwell floor that pulls forward into the galley aisle.
     "BENCH": (0, 570),
     "REAR BENCH": (0, 570),     # the garage, reached through the rear doors
-    "FOOTWELL -> BED": (0, 180),# the step up, and the drawer inside it
+    "FOOTWELL -> BED": (0, 220),# the step up, and the drawer inside it
     "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
     "SIDE TABLE": None,         # the fold-away top is in EXTRA_V2, in both its positions
     "ENTRY": None,
@@ -125,11 +125,13 @@ EXTRA_V2 = [
     # benches, not inside the garage. The whole U is lifted, and the numbers chain from the
     # one comfort rule that matters: seat 450 above the floor your feet are on, table 270
     # above the seat. Footwell floor 180 -> seat 630 -> table 900, the galley worktop height.
+    # The floor then went up to 220 on its own: 410 from seat to foot fits both of us barefoot
+    # (Ondrej's knee crease is ~430, his wife's lower), and nothing above it has to move.
     (1930, 2850,    0,  600,  570,  630, "bed"),        # seat cushion, passenger bench
     (1930, 2850, 1232, 1832,  570,  630, "bed"),        # seat cushion, driver bench
     (2850, 3450,    0, 1832,  570,  630, "bed"),        # seat cushion, rear bench
     (1940, 2840,  616, 1216,  840,  900, "table"),      # 900 x 600, on one post
-    (2340, 2440,  866,  966,  180,  840, "leg"),        # the post, standing on the raised floor
+    (2340, 2440,  866,  966,  220,  840, "leg"),        # the post, standing on the raised floor
     (1930, 2850,  600, 1232,  570,  630, "infill"),     # bed made up: table down on cleats at
                                                         #   570, infill cushion over it
     (2010, 2610, 1420, 1820,  630,  790, "pillow"),     # heads at the driver wall, one each
@@ -230,7 +232,7 @@ CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
 #    bracket onto the locker's side panel rather than onto the face you sit looking over.
 # 2+3) The two dinette seats, facing each other across the 632 footwell and OFFSET along the
 #    van - the offset is the whole reason the table is 900 long. Seat surface 630, feet on
-#    the raised floor at 180, so the body sits 450 above what it stands on. Head tops out at
+#    the raised floor at 220, so the body sits 410 above what it stands on. Head tops out at
 #    1480 (Ondrej is 171), which is what evicted the old 1400 lockers over the dinette.
 SITTER_V2 = [
     (  60,  400,   60,  380,  450, 1300),    # shoe locker: trunk, facing aft
@@ -238,10 +240,10 @@ SITTER_V2 = [
     ( 620,  820,  100,  380,    0,  400),    #   shins, feet on the floor
     (2000, 2340,   32,  352,  630, 1480),    # passenger bench, sitting forward: trunk
     (2040, 2320,  352,  652,  560,  680),    #   thighs, overhanging the bench edge by 52
-    (2040, 2320,  600,  760,  180,  580),    #   shins, dropping into the footwell
+    (2040, 2320,  600,  760,  220,  580),    #   shins, dropping into the footwell
     (2440, 2780, 1480, 1800,  630, 1480),    # driver bench, sitting aft: trunk
     (2480, 2760, 1180, 1480,  560,  680),    #   thighs
-    (2480, 2760, 1072, 1232,  180,  580),    #   shins
+    (2480, 2760, 1072, 1232,  220,  580),    #   shins
 ]
 # What is allowed to touch a sitter: the seat under them, the cushion on it, and the floor
 # they step on.
@@ -496,8 +498,11 @@ FAN_HOLES = [(860, 1340, 140, 620), (2460, 2940, 140, 620)]
 WINDOWS_V2 = [
     ("d",  120,  620, 1180, 1520),              # shower window, Brisa's trick
     ("d", 1250, 1850, 1000, 1350),              # over the sink
-    ("d", 1950, 2750,  620,  960),              # over the driver bench
-    ("p", 1950, 2750,  620,  960),              # over the passenger bench
+    # Over the benches the glass goes where a seated eye is: 630 + ~770 = ~1400 for Ondrej,
+    # a little lower for his wife. 620-960 had been left over from a 450 bench and put the
+    # glass behind your shoulders. The top stops 60 under the dinette lockers at 1560.
+    ("d", 1950, 2750, 1050, 1500),              # over the driver bench
+    ("p", 1950, 2750, 1050, 1500),              # over the passenger bench
 ]
 FAN_HOLES_V2 = [(1400, 1880, 676, 1156), (2350, 2830, 676, 1156)]
 # Service hatches: a real hole in a body panel with a lid in it. side, x0, x1, z0, z1.

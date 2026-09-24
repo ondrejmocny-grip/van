@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-23T17:03:57.394812</dc:date>
+    <dc:date>2026-09-24T06:11:05.001399</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -35,7 +35,7 @@ L 1168.763329 78.80298
 L 1168.763329 304.343702 
 L 1070.27393 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #f2f0eb; stroke-dasharray: 5,4; stroke-dashoffset: 0; stroke: #bbbbbb; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #f2f0eb; stroke-dasharray: 5,4; stroke-dashoffset: 0; stroke: #bbbbbb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
     <path d="M 1168.763329 78.80298 
@@ -43,7 +43,7 @@ L 1593.498859 78.80298
 L 1593.498859 304.343702 
 L 1168.763329 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #ffffff; stroke: #222222; stroke-width: 3; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #ffffff; stroke: #222222; stroke-width: 3; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- cab -->
@@ -142,7 +142,7 @@ L 1302.955134 205.854304
 L 1218.008028 205.854304 
 L 1218.008028 160.056734 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b5b5b5; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b5b5b5; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 1168.763329 205.854304 
@@ -150,7 +150,7 @@ L 1254.941552 205.854304
 L 1254.941552 304.343702 
 L 1168.763329 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #d9e6f0; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #d9e6f0; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
     <path d="M 1254.941552 230.476654 
@@ -158,7 +158,7 @@ L 1310.341839 230.476654
 L 1310.341839 304.343702 
 L 1254.941552 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #efe7d8; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #efe7d8; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
     <path d="M 1168.763329 78.80298 
@@ -166,7 +166,7 @@ L 1224.163615 78.80298
 L 1224.163615 128.04768 
 L 1168.763329 128.04768 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_8">
     <path d="M 1145.372097 150.207794 
@@ -174,7 +174,7 @@ L 1194.616796 150.207794
 L 1194.616796 199.452493 
 L 1145.372097 199.452493 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #efe7d8; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #efe7d8; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 1225.394733 86.189685 
@@ -182,7 +182,7 @@ L 1267.252727 86.189685
 L 1267.252727 132.972149 
 L 1225.394733 132.972149 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 1261.09714 78.80298 
@@ -190,7 +190,7 @@ L 1310.341839 78.80298
 L 1310.341839 152.670029 
 L 1261.09714 152.670029 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
     <path d="M 1310.341839 230.476654 
@@ -198,7 +198,7 @@ L 1406.369002 230.476654
 L 1406.369002 304.343702 
 L 1310.341839 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_12">
     <path d="M 1310.341839 78.80298 
@@ -206,7 +206,7 @@ L 1406.369002 78.80298
 L 1406.369002 152.670029 
 L 1310.341839 152.670029 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #dce7e4; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_13">
     <path d="M 1310.341839 152.670029 
@@ -215,7 +215,7 @@ L 1406.369002 230.476654
 L 1310.341839 230.476654 
 L 1310.341839 152.670029 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b5b5b5; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b5b5b5; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_14">
     <path d="M 1406.369002 230.476654 
@@ -223,7 +223,7 @@ L 1519.63181 230.476654
 L 1519.63181 304.343702 
 L 1406.369002 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_15">
     <path d="M 1406.369002 78.80298 
@@ -231,7 +231,7 @@ L 1519.63181 78.80298
 L 1519.63181 152.670029 
 L 1406.369002 152.670029 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_16">
     <path d="M 1406.369002 152.670029 
@@ -239,7 +239,7 @@ L 1519.63181 152.670029
 L 1519.63181 230.476654 
 L 1406.369002 230.476654 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_17">
     <path d="M 1519.63181 78.80298 
@@ -247,7 +247,7 @@ L 1593.498859 78.80298
 L 1593.498859 304.343702 
 L 1519.63181 304.343702 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: #e7e0ec; stroke: #8a8a8a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="text_2">
     <!-- SLIDING DOOR  ~1300 mm -->
@@ -988,7 +988,7 @@ z
     </g>
    </g>
    <g id="text_6">
-    <!-- Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Partition wall behind a 3-seat cab at x=0, with a hatch over the shoe locker instead of a walk-through - the bench backs onto the partition, so there was never a way past it. The rear is a U again, but the whole of it is lifted: you step up 180 into the footwell, the benches are 570 high, and the bed makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift is the storage: 570 of garage under the rear bench, and a shallow drawer under the footwell floor. The table is 900 x 600 on a post at 900, the galley worktop height, and drops onto cleats to become the middle of the bed. WC stows under the wardrobe and slides forward into the shower, cassette out through the driver-side panel. The U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm. -->
+    <!-- Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Partition wall behind a 3-seat cab at x=0, with a hatch over the shoe locker instead of a walk-through - the bench backs onto the partition, so there was never a way past it. The rear is a U again, but the whole of it is lifted: you step up 220 into the footwell, the benches are 570 high, and the bed makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift is the storage: 570 of garage under the rear bench, and a shallow drawer under the footwell floor. The table is 900 x 600 on a post at 900, the galley worktop height, and drops onto cleats to become the middle of the bed. WC stows under the wardrobe and slides forward into the shower, cassette out through the driver-side panel. The U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the wheel arch. Estimated +/-50 mm. -->
     <g style="fill: #aaaaaa" transform="translate(7.2 345.836289) scale(0.06 -0.06)">
      <defs>
       <path id="DejaVuSans-Oblique-2f" d="M 1075 4666 
@@ -2481,8 +2481,8 @@ z
      <use xlink:href="#DejaVuSans-Oblique-58" transform="translate(15924.015625 0)"/>
      <use xlink:href="#DejaVuSans-Oblique-53" transform="translate(15987.390625 0)"/>
      <use xlink:href="#DejaVuSans-Oblique-3" transform="translate(16050.875 0)"/>
-     <use xlink:href="#DejaVuSans-Oblique-14" transform="translate(16082.65625 0)"/>
-     <use xlink:href="#DejaVuSans-Oblique-1b" transform="translate(16146.28125 0)"/>
+     <use xlink:href="#DejaVuSans-Oblique-15" transform="translate(16082.65625 0)"/>
+     <use xlink:href="#DejaVuSans-Oblique-15" transform="translate(16146.28125 0)"/>
      <use xlink:href="#DejaVuSans-Oblique-13" transform="translate(16209.90625 0)"/>
      <use xlink:href="#DejaVuSans-Oblique-3" transform="translate(16273.53125 0)"/>
      <use xlink:href="#DejaVuSans-Oblique-4c" transform="translate(16305.3125 0)"/>
@@ -5030,7 +5030,7 @@ z
     </g>
    </g>
    <g id="text_33">
-    <!-- 632 wide - floor +180, drawer under -->
+    <!-- 632 wide - floor +220, drawer under -->
     <g style="fill: #666666" transform="translate(1408.151031 206.058903) scale(0.06 -0.06)">
      <use xlink:href="#DejaVuSans-19"/>
      <use xlink:href="#DejaVuSans-16" transform="translate(63.625 0)"/>
@@ -5049,8 +5049,8 @@ z
      <use xlink:href="#DejaVuSans-55" transform="translate(742.234375 0)"/>
      <use xlink:href="#DejaVuSans-3" transform="translate(783.34375 0)"/>
      <use xlink:href="#DejaVuSans-e" transform="translate(815.125 0)"/>
-     <use xlink:href="#DejaVuSans-14" transform="translate(898.921875 0)"/>
-     <use xlink:href="#DejaVuSans-1b" transform="translate(962.546875 0)"/>
+     <use xlink:href="#DejaVuSans-15" transform="translate(898.921875 0)"/>
+     <use xlink:href="#DejaVuSans-15" transform="translate(962.546875 0)"/>
      <use xlink:href="#DejaVuSans-13" transform="translate(1026.171875 0)"/>
      <use xlink:href="#DejaVuSans-f" transform="translate(1089.796875 0)"/>
      <use xlink:href="#DejaVuSans-3" transform="translate(1121.578125 0)"/>
@@ -5130,7 +5130,7 @@ L 1508.921088 106.626235
 L 1398.120515 106.626235 
 L 1398.120515 78.80298 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b03a3a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b03a3a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_19">
     <path d="M 1398.120515 276.520447 
@@ -5139,7 +5139,7 @@ L 1508.921088 304.343702
 L 1398.120515 304.343702 
 L 1398.120515 276.520447 
 z
-" clip-path="url(#p1ba8a63ac8)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b03a3a; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#pb1e46c013a)" style="fill: none; stroke-dasharray: 4.8,3.6; stroke-dashoffset: 0; stroke: #b03a3a; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="text_36">
     <!-- wheel well -->
@@ -5159,12 +5159,12 @@ z
    <g id="line2d_1">
     <path d="M 1205.696853 78.80298 
 L 1365.742125 78.80298 
-" clip-path="url(#p1ba8a63ac8)" style="fill: none; stroke: #0f9d78; stroke-width: 5"/>
+" clip-path="url(#pb1e46c013a)" style="fill: none; stroke: #0f9d78; stroke-width: 5"/>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p1ba8a63ac8">
+  <clipPath id="pb1e46c013a">
    <rect x="1043.189346" y="29.558281" width="589.705272" height="343.728"/>
   </clipPath>
  </defs>

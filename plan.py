@@ -208,12 +208,12 @@ VARIANTS["v2"] = dict(
     viewer_title="Crafter L3H3 v2 Interior",
     stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
            "garage 600 x 1832 x 570", "crawl-through 500 x 930", "galley aisle 632",
-           "rear floor +180", "standing 1781"],
+           "rear floor +220", "standing 1781"],
     note=("Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Partition wall behind a 3-seat cab at x=0, "
           "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
           "the partition, so there was never a way past it. The rear is a U again, but the "
           "whole of it is "
-          "lifted: you step up 180 into the footwell, the benches are 570 high, and the bed "
+          "lifted: you step up 220 into the footwell, the benches are 570 high, and the bed "
           "makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift "
           "is the storage: 570 of garage under the rear bench, and a shallow drawer under the "
           "footwell floor. The table is 900 x 600 on a post at 900, the galley worktop height, "
@@ -234,7 +234,7 @@ VARIANTS["v2"] = dict(
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
         (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
         (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),
-        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +180, drawer under", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, drawer under", SOFT),
         (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage 570 clear under", SOFT),
     ],
 )

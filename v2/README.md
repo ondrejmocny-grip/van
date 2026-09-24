@@ -328,12 +328,12 @@ full-length coat.
 ## The rear: a U again, lifted
 
 Changed 2026-09-23. Back to a **U** — two side benches and a rear bench, table in the middle
-— but the whole of it sits **180 mm higher than the rest of the van**. You step up into the
+— but the whole of it sits **above the rest of the van**: the footwell floor at +220, the benches at 570. You step up into the
 footwell, and everything that step buys is storage.
 
 | | |
 |---|---|
-| Footwell floor | **+180**, x 1930–2850 × y 600–1232, drawer inside it |
+| Footwell floor | **+220**, x 1930–2850 × y 600–1232, drawer inside it |
 | Side benches | **920 × 600**, tops at **570**, cushion to **630** |
 | Rear bench | **600 × 1832**, top at 570 — the garage is what is under it |
 | Garage | **600 × 1832 × 570 clear = 0.63 m³** (the old flat U gave 0.44) |
@@ -341,11 +341,31 @@ footwell, and everything that step buys is storage.
 | Bed made up | **1520 × 1832 at 630** |
 | Sitting headroom over the bed | 1781 − 630 = **1151** |
 | Seat to head, sitting | 630 + 850 = **1480** at the top of the head |
+| Seat to foot | 630 − 220 = **410** |
+| Windows over the benches | **800 × 450**, z **1050–1500** — seated eye ~1400 |
 
 **The numbers all come from one rule.** A seat wants to be ~450 above whatever your feet are
 on, and a table ~270 above the seat. Set the footwell floor at 180 and the rest follows:
 seat 630, table 900. Lift it further and the table goes above worktop height and the room
 starts to feel like a bar; lift it less and the garage gains nothing.
+
+**Then the footwell alone went up to 220** (2026-09-24). 450 seat-to-foot was sized to
+Ondrej's legs with shoes on; barefoot his knee crease is ~430 and his wife's is lower, so
+**410** fits both of them better, and nothing above the floor moves: seat, table, bed,
+garage and headroom are all unchanged. Knees still clear the table's underside (840) by
+~90. The limit is Ondrej: at 380 his thighs lift off the seat front, so ~230 is the most
+this floor can take on its own.
+
+**Why the whole U did not go up with it.** Every 10 mm of lift takes 10 mm off the 80 mm
+between a seated head (1480) and the dinette lockers (1560), and the 4MOTION ceiling at
+1781 leaves them nowhere to go. +40 would have bought 40 mm of garage height for half the
+headroom, a two-tread step and a table above the worktop. The only way past that limit is
+removing the lockers over the dinette — parked as an open question.
+
+**The windows over the benches moved up** at the same time, from 620–960 to **1050–1500**.
+The old height was left over from a 450 bench and put the glass behind your shoulders; a
+seated eye here is ~1400 (630 + ~770), a little lower for Ondrej's wife. The top stops 60
+under the lockers.
 
 **Why the rear box shrank to 600.** The table is on a post again instead of sliding out of the
 rear box, so the rear box no longer has to be 900 deep to swallow it — and the 900 table has
@@ -405,7 +425,7 @@ them.
 | Galley aisle | **780 × 632** | |
 | Bench, driver | **920 × 600 × 570** | 2 × 150 Ah battery, 3000 W inverter |
 | Bench, passenger | **920 × 600 × 570** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
-| Footwell | **920 × 632**, floor at **+180** | shallow drawer under the floor, pulling forward into the galley aisle |
+| Footwell | **920 × 632**, floor at **+220** | shallow drawer under the floor, pulling forward into the galley aisle |
 | Table | **900 × 600** at 900 | on one post at x 2340–2440, drops to 570 for the bed |
 | **Rear bench + garage** | **600 × 1832**, top at 570, **570 clear** | calorifier, electrics board, and the third seat on top |
 | **Bed made up** | **1520 × 1832** at 630 | 2 at 760 each, or 3 at 507 |
@@ -478,7 +498,7 @@ sitting over the same arch.
 8. **Bowls at 239 × 304 vs prep at 200 mm.** A 660-wide top would give 279 × 304 bowls and
    drop the prep strip to 120. Decide with a dinner plate and a washing-up bowl in hand.
 9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
-10. **The step up into the dinette is 180 mm.** That is a normal stair riser, but it is in the
+10. **The step up into the dinette is 220 mm.** That is a steep but single stair riser, but it is in the
     dark at the end of a 632 aisle, and it is the last thing you cross at night. A nosing
     strip and an LED under the bench lip are not optional extras here.
 11. **The table post stands in the middle of the footwell.** Feet go either side of it —
@@ -509,6 +529,8 @@ sitting over the same arch.
     (costs the backrest).
 19. **The corner above the cat box is empty again.** 210 deep × 332 wide × the full height, and
     nothing in it — deliberately parked, not solved.
+20. **Overhead lockers over the dinette, or a taller garage.** Removing the two 880 runs lets
+    the whole U rise ~100–150 (garage ~700 high) under the 1781 ceiling. Kept for now.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries
