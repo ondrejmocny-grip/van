@@ -20,6 +20,8 @@ V = m.VARIANTS["v2-real"]
 
 GROSS = 3500                  # licence B, and the van's registration
 AXLE_MAX = (1800, 2100)       # front, rear - VW, Crafter 35 4MOTION
+SEATS = 3                     # the 3-seat cab
+LENGTH_M = 6.0                # overall length, 5986
 ROOF_MAX = 150               # VW converter guidelines p. 74, high roof H3
 FRONT_MIN_SHARE = 0.33        # VW converter guidelines p. 54: loaded, the front axle >= 33 %
 REAR_AXLE = 2270
@@ -80,7 +82,7 @@ ITEMS = [
     ("Shell", "Wall + ceiling cladding, 6 mm ply ~11 m2 (not behind furniture)", 28.0, 1700, "poplar 6 mm ~2.5 kg/m2"),
     ("Shell", "Our partition, 15 mm ply + frame + crawl-through door", 22.0, 0, "est."),
     ("Shell", "VanQuito door fly screen", prod("vanquito-crafter"), 960, "products.py"),
-    ("Shell", "Thule Omnistor 6300 awning 3.25 m + Crafter adapter", prod("thule-omnistor-6300-325") + 4.0, 1650, "Thule 25.1 kg; adapter est. 4"),
+    ("Shell", "Thule Omnistor 6300 awning 3.25 m + Crafter adapter (optional - first to cut)", prod("thule-omnistor-6300-325") + 4.0, 1650, "Thule 25.1 kg; adapter est. 4"),
     ("Shell", "Screws, rivnuts, glue, sealant", 10.0, 1700, "est."),
     # --- vehicle upgrades, tier 1 + 2
     ("Upgrades", "Front engine guard, 6 mm aluminium (GTV)", 17.7, -1400, "gtv-van.com"),
@@ -201,6 +203,20 @@ def report():
            "| Front share (min %d %%) | %d %% | %d %% |" % (FRONT_MIN_SHARE * 100,
                                                         100 * p["front"] / p["total"],
                                                         100 * b["front"] / b["total"]), ""]
+    opt = [(n, kg) for g, n, kg, x, s in p["lines"] if "optional" in n]
+    if opt:
+        out += ["**Optional, first to cut:** %s — without them the total is **%d kg**." %
+                ("; ".join("%s (%.0f kg)" % (n.split(" (optional")[0], k) for n, k in opt),
+                 p["total"] - sum(k for _, k in opt)), ""]
+    # Registration as a motor caravan: the converted van, empty, plus 75 kg for each seat
+    # beyond the driver and a luggage allowance of 10 x (seats + length in m) - EU 1230/2012,
+    # as we read it; the STK confirms. The driver is already in the kerb weight.
+    empty = KERB + build(p)
+    need = empty + 75 * (SEATS - 1) + 10 * (SEATS + LENGTH_M)
+    out += ["**Registration test (motor caravan, EU 1230/2012 as we read it):** converted van "
+            "empty %d kg + %d kg for %d more seats + %d kg luggage allowance = **%d kg** — "
+            "%s 3500 by %d." % (empty, 75 * (SEATS - 1), SEATS - 1, 10 * (SEATS + LENGTH_M),
+                                need, "under" if need <= GROSS else "OVER", abs(GROSS - need)), ""]
     roof = [(n, kg) for g, n, kg, x, s in p["lines"]
             if any(w in n for w in ("solar", "Starlink", "MaxxFan", "awning"))]
     out += ["**Roof load (VW max %d kg):** %d kg — %s." % (ROOF_MAX, sum(k for _, k in roof),

@@ -4,7 +4,8 @@ Sizes here are the manufacturer's, and the model takes them from here - so a pro
 is one edit, and model3d.check() then says whether it still fits. Prices in EUR incl. VAT
 from the source named (CZK at 25 per EUR). None means not found yet, never a guess.
 
-status: "proposed" (recommended, not agreed), "chosen" (agreed with Ondrej), "option".
+status: "proposed" (recommended, not agreed), "chosen" (agreed with Ondrej), "option",
+"optional" (nice to have - first to cut if weight or money runs short).
 """
 
 PRODUCTS = {
@@ -144,7 +145,7 @@ PRODUCTS = {
         shop="thule.com; Crafter H3 2017+ adapter Thule 301768 (camping-factory.com)",
         source="https://www.thule.com/de-de/awnings/manual-awnings/thule-omnistor-6300-325x250-_-302230",
         note="on the passenger side, over the sliding door; counts toward the 150 kg roof load",
-        status="proposed"),
+        status="optional"),
     "fiamma-f80s-320": dict(
         name="Fiamma F80S 320 roof awning, 3.2 m, projection 2.5 m", kind="awning",
         outer=(3200, 250, None), weight_kg=29.0, price_eur=None,

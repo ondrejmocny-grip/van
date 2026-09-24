@@ -113,6 +113,19 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 | Front axle (max 1800) | 1484 | 1507 |
 | Roof load (max 150) | 67 | 67 |
 
+| Without the awning (optional, first to cut) | 3462 | 3585 |
+| **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3353 — 146 under** | 3476 — 24 under |
+
+**Two different limits:**
+
+- **Registration (the STK, once):** the converted van **empty**, plus the other two seats at
+  75 kg and a luggage allowance, must stay under 3500 — otherwise it is not approved with 3
+  seats. **We pass by 146 kg** (poplar).
+- **On the road (every day):** the van **as loaded** must stay under 3500 and each axle under
+  its limit. That is the 3491 above — the tight one. It is the law, not comfort: over it is a
+  fine at a roadside weigh check, a possible insurance problem after an accident, and brakes,
+  tyres and axles working beyond what they were rated for.
+
 **Read on that:**
 
 - **Poplar furniture is a must.** With it the van is inside every limit — only just.

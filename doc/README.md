@@ -130,7 +130,7 @@ See [budget.md](budget.md).
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
 - **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3491 kg with full water and
   poplar furniture, rear axle 2007, roof 67 of 150 - after leaving the bikes out, cutting solar to
-  one panel and adding the awning (2026-09-24). **Weigh the van per axle before the build**; poplar
+  one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
 - **Energy:** one ~200 W panel + a 50 A DC-DC proposed, 300 Ah kept - needs a daily energy check.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).

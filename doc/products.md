@@ -7,7 +7,8 @@ The real products the build uses or is weighing up. The numbers the model uses l
 Prices in EUR incl. VAT from the shop named, 2026-09-24 (CZK at 25 per EUR). A blank means
 not found yet — never a guess.
 
-Status: **proposed** = recommended, waiting for Ondrej · **chosen** = agreed · option = the alternative.
+Status: **proposed** = recommended, waiting for Ondrej · **chosen** = agreed · option = the alternative ·
+**optional** = nice to have, first to cut if weight or money runs short.
 
 ## Side windows
 
@@ -138,11 +139,11 @@ deep). All four are in the model and in the payload check.
 
 **No sink weight is published** — the payload counts 10 kg for sink, taps and filter.
 
-## Awning — proposed 2026-09-24
+## Awning — optional (nice to have, first to cut), 2026-09-24
 
 | Product | Length x projection | kg | Crafter 2017+ fitting | Status |
 |---|---|---|---|---|
-| **Thule Omnistor 6300 3.25** | 3.25 x 2.50 m | **25.1** | adapter Thule 301768 (H3, 2017+) | **proposed** — lighter |
+| **Thule Omnistor 6300 3.25** | 3.25 x 2.50 m | **25.1** | adapter Thule 301768 (H3, 2017+) | **optional** — nice to have, first to cut; lighter |
 | Fiamma F80S 320 | 3.20 x 2.50 m, 7.7 m² | 29.0 | bracket kit 98655Z058 | option |
 
 On the passenger side, over the sliding door. It counts toward the **150 kg roof load**
