@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Extrude a plan into 3D: greybox renders, line renders, an OBJ, and a web viewer.
 
 The footprint comes straight from plan.py, so there is one source of truth.
@@ -1432,6 +1432,59 @@ VS3D_VANS = {                          # van -> (z of the bulkhead's aft face, y
 # brings the ceiling down to VS3D_RAW_H brings the floor down with it - the cubes follow.
 
 
+# Kinds that go in as a real catalogue item, at the item's own size: the save names it and
+# the app loads the mesh. Bounds are the item's mesh in its own frame, VanSpace3D units,
+# read out of the app's asset bundles with UnityPy on 2026-09-24 - pivots are not always
+# centred. Materials must match the prefab's renderer, or the item loads untextured.
+# Everything else - and anything the catalogue has no honest stand-in for - stays a Cube.
+VS3D_ITEMS = {   # kind -> (catalogue name, (min x, y, z), (max x, y, z), materials)
+    "fridgedoor": ("Osculati Isotherm Fridge 65L", (-2.305, -2.707, -2.638), (2.305, 2.707, 2.638),
+                   ["Steel Rough"] * 4),     # front door, but 65 L against our 90 L
+    "cassette": ("Porta Potti 565E", (-2.087, -2.272, -2.478), (2.087, 2.272, 2.478),
+                 ["Sla Plastic White"] * 2),  # Thetford, as the C223 is - portable, not cassette
+    "battery": ("Car Battery Large", (-1.686, -1.061, -0.848), (1.686, 1.061, 0.848),
+                ["Sla Plastic", "Sla Plastic", "Steel Rough", "Sla Plastic Red",
+                 "Sla Plastic vanspace Blue"]),  # group 31 case, near enough
+    "inverter": ("Inverter", (-1.947, -0.285, -3.555), (0.652, 0.530, 0.061), ["inverter_mat"]),
+    "tap": ("Foldable RV Faucet Rotating Single Handle", (-0.474, -1.178, -0.986),
+            (0.474, 1.178, 0.986), ["Steel Rough"]),
+    "pillow": ("Pillow", (-2.317, -0.995, -1.134), (2.317, 0.995, 1.134), ["Satin Fabric"]),
+    # Tried and left as Cubes, 2026-09-24: the handheld showers hang 810 of hose off a 620
+    # rail and would poke through the ceiling; the pillow set is four meshes in one item.
+}
+
+
+def vs3d_item(v, box, layer, front, floor):
+    """A catalogue item standing on the box's floor, centred on its footprint, turned 90 when
+    that fits the box better. Returns the Parent and a line comparing the two sizes."""
+    x0, x1, y0, y1, z0, z1, kind = box
+    name, lo, hi, mats = VS3D_ITEMS[kind]
+    ex, ey, ez = (h - l for h, l in zip(hi, lo))
+    cx, cz = (lo[0] + hi[0]) / 2, (lo[2] + hi[2]) / 2
+    across, along = (y1 - y0) / 100, (x1 - x0) / 100
+    turn = abs(ez - across) + abs(ex - along) < abs(ex - across) + abs(ez - along)
+    if turn:     # +90 about y: the item's +x points aft (-z), its +z toward the passenger wall
+        rot = {"x": 0.0, "y": 0.5 ** 0.5, "z": 0.0, "w": 0.5 ** 0.5}
+        cx, cz, ex, ez = cz, -cx, ez, ex
+    else:
+        rot = {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0}
+    pos = {"x": (v["width"] / 2 - (y0 + y1) / 2) / 100 - cx,
+           "y": floor + z0 / 100 - lo[1],
+           "z": front - (x0 + x1) / 200 - cz}
+    white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
+    sub = dict(Name=name + " (1)", Position=pos, Rotation=rot, Scale={"x": 1.0, "y": 1.0, "z": 1.0},
+               IsSafeDestroyed=False, Visible=True, SubItems=[], MaterialNames=mats,
+               MaterialColors=[white] * len(mats), Layer=layer, IsDuplicate=False)
+    parent = dict(sub, Name=name, Visible=False, SubItems=[sub], MaterialNames=[], MaterialColors=[])
+    size = lambda a, b, c: "%4.0f x %4.0f x %4.0f" % (a, b, c)
+    over = [ax for ax, i, b in (("along", ez, along), ("across", ex, across), ("up", ey, (z1 - z0) / 100))
+            if i > b + 0.05]    # 5 mm of slack
+    note = "%-11s %-42s box %s  item %s%s%s" % (
+        kind, name, size(x1 - x0, y1 - y0, z1 - z0), size(ez * 100, ex * 100, ey * 100),
+        "  turned" if turn else "", "  TOO BIG " + "/".join(over) if over else "")
+    return parent, note
+
+
 def vs3d_box(v, box, layer, front, floor):
     """One of our boxes as a VanSpace3D Parent holding a scaled Cube."""
     x0, x1, y0, y1, z0, z1, kind = box
@@ -1452,14 +1505,25 @@ def vs3d_box(v, box, layer, front, floor):
 
 def write_vs3d(name, van="VW Cr L2H2"):
     """vN.vs3d straight into VanSpace3D's saves folder: every box as a coloured Cube, one
-    layer per kind so each can be hidden. Everything arrives as Cubes - swap in real
-    catalogue items by hand. Any van but the default gets its own file, vN-<van>.vs3d."""
+    layer per kind so each can be hidden, except the kinds in VS3D_ITEMS, which go in as
+    the real catalogue item at its own size - printed against our box, so a catalogue item
+    that outgrows the space we gave it shows. Any van but the default gets its own file,
+    vN-<van>.vs3d."""
     v = VARIANTS[name]
     check(v)
     front, ceiling, wheelbase = VS3D_VANS[van]
     ys = VS3D_RAW_H / 100 / (ceiling - VS3D_FLOOR)
     boxes = boxes_for(v)
     kinds = list(dict.fromkeys(b[6] for b in boxes))
+    items = []
+    for b in boxes:
+        layer = kinds.index(b[6]) + 1
+        if b[6] in VS3D_ITEMS:
+            item, note = vs3d_item(v, b, layer, front, VS3D_FLOOR * ys)
+            print(note)
+            items.append(item)
+        else:
+            items.append(vs3d_box(v, b, layer, front, VS3D_FLOOR * ys))
     white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
     save = dict(VanModelName=van, ApplicationVersion="3.08", TimeOfDay=0.0,
                 CustomVan=False, CustomVanPresetName="", xScale=1.0, yScale=ys, zScale=1.0,
@@ -1467,7 +1531,7 @@ def write_vs3d(name, van="VW Cr L2H2"):
                 ExteriorColor=white, WallMaterialName="Aged Plywood", WallColor=white,
                 FloorMaterialName="Aged Plywood", FloorColor=white,
                 CeilingMaterialName="Aged Plywood", CeilingColor=white,
-                items=[vs3d_box(v, b, kinds.index(b[6]) + 1, front, VS3D_FLOOR * ys) for b in boxes], groups=[],
+                items=items, groups=[],
                 wires={"isWire": False, "Lines": []}, pipes={"isWire": False, "Lines": []},
                 wheelOnLeft=False,
                 labels=[{"name": "Base Layer", "index": 0}]
@@ -1477,7 +1541,7 @@ def write_vs3d(name, van="VW Cr L2H2"):
     path = os.path.join(VS3D_SAVES, name + tag + ".vs3d")
     with open(path, "w") as f:
         json.dump(save, f, indent=4)
-    print("wrote %s - %d cubes on %d layers, van height x%.3f" % (path, len(boxes), len(kinds), ys))
+    print("wrote %s - %d boxes on %d layers, van height x%.3f" % (path, len(boxes), len(kinds), ys))
 
 
 if __name__ == "__main__":
