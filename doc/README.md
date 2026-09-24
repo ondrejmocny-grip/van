@@ -11,8 +11,10 @@ schema only so far.
 **[v3](../v3/README.md)** puts the galley in an L around the corner behind the driver, splits
 the bed into two benches with a corridor between them running to a rear bathroom beside a
 full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done.
+**[v2-real](../v2-real/README.md)** started 2026-09-24 as a copy of v2, to turn it into a buildable
+plan: real Crafter body, wall build-up, real products. **v2 is frozen; work continues in v2-real.**
 
-**3D viewer, all versions in one page: [v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
+**3D viewer, all versions in one page: [v1 · v2 · v3 · v2-real](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
 
 ## Who this is for
 
@@ -26,6 +28,7 @@ Read it before proposing anything.
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
 | [v3](../v3/README.md) | Same van and cab as v2: **L-galley** into the corner behind the driver (1.15 m2), thin larder, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom, and the dinette doubling as the office for two - and a 600 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Most galley and the biggest bathroom of any version, and the first where no appliance overlaps a wheel arch. |
+| [v2-real](../v2-real/README.md) | v2's layout, being turned from a schema into a buildable plan: real body, wall build-up, real products | **Started 2026-09-24.** Identical to v2 so far. v2 is frozen. |
 
 ## References
 

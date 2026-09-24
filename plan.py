@@ -14,6 +14,8 @@ For elevations a = x (front at left). For sections a runs driver-wall to passeng
 
 Run: python plan.py <variant>
 """
+import copy
+import os
 import sys
 import matplotlib
 matplotlib.use("Agg")
@@ -242,6 +244,20 @@ VARIANTS["v2"] = dict(
 
 
 # --------------------------------------------------------------------------
+# v2-real - v2 turned from a schema into a buildable plan. Started 2026-09-24 as an exact
+# copy of v2; from here it takes the real Crafter body (wall slope, ribs, the true arch, the
+# 4MOTION underbody), the wall build-up, and real products in place of placeholder boxes.
+# v2 is frozen as the schema it was. Everything v2-real changes is written below this copy,
+# so the difference between the two is always this block.
+# --------------------------------------------------------------------------
+VARIANTS["v2-real"] = copy.deepcopy(VARIANTS["v2"])
+VARIANTS["v2-real"].update(
+    out="v2-real/layout",
+    title="v2-real - VW Crafter L3H3 4MOTION - v2 on the real body and real products",
+    viewer_title="Crafter L3H3 v2-real Interior",
+)
+
+# --------------------------------------------------------------------------
 # v3 - VW Crafter L3H3. Same van and same 3-seat cab as v2, turned around:
 # the bed moves to the FRONT as an L-sofa that converts, and the whole rear
 # becomes a bathroom on the driver side with a full-height garage closet
@@ -459,6 +475,7 @@ def main(name):
     fig, ax = plt.subplots(figsize=(12, 6.2), dpi=160)
     fig.patch.set_facecolor("#fbfaf7")
     draw(ax, v)
+    os.makedirs(os.path.dirname(v["out"]) or ".", exist_ok=True)   # a new variant has no folder yet
     for ext in ("png", "svg"):
         fig.savefig("%s.%s" % (v["out"], ext), facecolor=fig.get_facecolor(), bbox_inches="tight")
         print("wrote", "%s.%s" % (v["out"], ext))

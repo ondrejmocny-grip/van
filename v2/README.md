@@ -1,6 +1,7 @@
 # v2 — VW Crafter L3H3, 3-seat cab
 
-Started 2026-09-20. **Plan and 3D model — iterating.** No photoreal impressions yet.
+Started 2026-09-20. **Frozen 2026-09-24** — work continues in **[v2-real](../v2-real/README.md)**,
+which copies this layout and makes it buildable. Do not edit v2: v2-real is built from its tables.
 
 **Drawn on the 4MOTION van since 2026-09-23:** finished ceiling **1781**, 100 mm lower than the
 front-wheel-drive van (VW brochure: 1861 vs 1961 raw). The overhead lockers dropped to 1700 and

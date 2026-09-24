@@ -10,7 +10,7 @@ the vehicle itself - body panels with real apertures, glazing, and the cab.
 line_render() is used by impressions.py as the control image for image generation.
 write_viewer() fills viewer_template.html with one variant, or with several and a switch.
 """
-import json, os, sys
+import copy, json, os, sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -789,6 +789,15 @@ EXTRA_V2 += tray_box(-150, 170, 630, 930, 40, 190, kind="litterlid")
 EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 
 
+# --------------------------------------------------------------------------
+# v2-real - starts as an exact copy of v2's tables, taken here, after the last of v2's own
+# additions above. It is a deep copy, so editing v2-real can never move v2. The changes
+# that turn it into a buildable plan - real body, wall build-up, real products - are made
+# to REGISTRY["v2-real"] below this line, one visible delta at a time.
+# --------------------------------------------------------------------------
+REGISTRY["v2-real"] = copy.deepcopy(REGISTRY["v2"])
+
+
 def shell_for(v):
     """Body panels with apertures, glazing, and the cab. Same box format as everything else."""
     L, W, H = v["length"], v["width"], v["height"]
@@ -1405,7 +1414,7 @@ def main(name):
 
 # The versions the combined viewer switches between, in the order its buttons show them.
 # The last one is where it opens.
-VIEWER_ALL = ("v1", "v2", "v3")
+VIEWER_ALL = ("v1", "v2", "v3", "v2-real")
 
 
 def main_all():

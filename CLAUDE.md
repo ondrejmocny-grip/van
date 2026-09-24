@@ -41,6 +41,9 @@ water but heavy on daily working comfort.
 Each design version lives in its own folder (`v1/`, `v2/`, ...) with its own README and
 drawings. `plan.py` generates them all: `python plan.py <variant>`.
 
+**v2-real** (2026-09-24) is v2 being turned into a buildable plan - real body, real products.
+It starts as a deep copy of v2's tables, so **v2 is frozen**: edit v2-real, never v2.
+
 **v1, v2 and v3 are all a VW Crafter L3H3.** v1 was drawn on a Ford Transit first; the Transit
 was dropped on 2026-09-20 and its folder no longer exists.
 
