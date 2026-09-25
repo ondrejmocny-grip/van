@@ -53,3 +53,45 @@ The estimates add up to about −130 to −200 kg, which is consistent with the 
   empty van, weigh a sheet of poplar, and weigh again half way through the build.**
 - **If we ever wanted heating:** a diesel heater is ~10–15 kg with its tank line. That still fits, but
   it eats a fifth of the margin.
+
+## In practice: papers, licence, and the rules above 3.5 t
+
+Researched 2026-09-25. **(not verified)** marks single or secondary sources.
+
+**How a factory camper gets its papers.** EU type approval of the model (sample vans checked by
+the approval authority) → the COC for each van, calculated, not weighed → registration from the
+COC. The STK never weighs. The only weighing on the road is a police roadside check, and the
+driver is responsible for the weight. We are weighed because a conversion has no manufacturer
+approval for its converted state.
+
+**Driving licence (Czech B):** up to 3,500 kg. A GC at 3.88 t needs **C1** today (medical at
+group 2 level, theory + driving exam; ~27,000 CZK and 17 h of driving at one school). The new EU
+directive **(EU) 2025/2205** lets B holders drive motor caravans **up to 4,250 kg**, any fuel, after
+training or a test set by each country — but only from **26 Nov 2029** (national law by 26 Nov
+2028); Czechia has not decided how. Whether a country may opt out is **not verified**.
+
+**Above 3.5 t, private motor caravan:**
+
+| | CZ | DE | AT | CH | IT | FR | ES |
+|---|---|---|---|---|---|---|---|
+| Max motorway / rural km/h | **80 / 80** | 100 / 80 | **80 / 70** | 100 / 80 | 100 / 80 | 110 / 80 | 90 / 80 |
+| Toll | **per-km truck toll (MYTO), no vignette** | none for motorhomes | **GO-Box per km** | **PSVA fee** instead of the vignette, all roads | same as a car (not verified) | class 3 (not verified) | few tolls |
+| Truck overtaking ban | likely not (not verified) | **yes** | no | ? | no | some rules | ? |
+
+Same as ≤ 3.5 t: no Czech road tax for M1, STK after 4 years then every 2, no tachograph, no
+weekend truck bans for us.
+
+**Overweight fines (3.5 t vehicle):**
+
+| | Tolerance | Fine |
+|---|---|---|
+| DE | 5 % | €10 (>5 %) … €95 + a point (>20 %) … €235 (>30 %); trip stopped until unloaded |
+| AT | **none** | up to €300 on the spot, up to €5,000+ in proceedings; can refuse onward travel |
+| CH | 3 % for measuring | CHF 100 (≤ 100 kg over), CHF 200 (≤ 5 %); above 5 % a criminal report |
+| CZ | ~3 % (not verified) | ~1,500–2,500 CZK on the spot, up to ~5,000 (not verified) |
+
+Insurance (not verified): liability still pays the other side, but the insurer may claim it back
+from the driver if the overload helped cause the accident; kasko may pay less.
+
+**For us:** staying at 3.5 t keeps the B licence, 130 km/h in Czechia and the vignette instead of
+tolls. That is worth protecting the 74 kg margin for.
