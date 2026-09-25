@@ -178,9 +178,12 @@ deep). All four are in the model and in the payload check.
 
 | | Product | Size | Key numbers | € | Status |
 |---|---|---|---|---|---|
-| Sink | **Quadron Anthony 50 / "Paul" MF4444BS_I**, stainless, inset | 440 x 440, bowl 400 x 400 x **190** | 3½" drain, siphon included; cut-out 420 (use the box template) | **179** (SIKO.cz 4,472 CZK) | proposed |
-| | Blanco Andano 400-IF (backup) | 440 x 440, bowl 400 x 400 x 190 | flush or top mount | 306 (sanitino.cz 7,641 CZK) | option |
-| Mixer | **Grohe Eurosmart Cosmopolitan 31170000** (window mixer) | 202 tall, **reach 226** | lifts out of its base for driving; 3/8" hoses | 224–228 (sanitino.cz 5,709 CZK) | proposed |
+| Sink | **Blanco Andano 400-IF** (522957), stainless, top or flush mount | 440 x 440, bowl 400 x 400 x **190** | cut-out 430 x 430 R15; 3½" drain, hidden overflow | **306** ([eshop-blanco.cz](https://eshop-blanco.cz/jednodrezy-kulate-drezy/17218-kuchynsky-drez-blanco-andano-400-if-bez-tahla.html) 7,641 CZK) | **proposed** (2026-09-25, for the insert) |
+| Insert bowl | **Blanco 227692** multifunction bowl | 197 x 417 x **80**, ~6 L | rests on the rim over half the bowl — **soapy water in it, rinse beside it** | **56** ([sanitino.cz](https://www.sanitino.cz/blanco-doplnky-miska-do-drezu-andano-nerez-227692) 1,395 CZK) | proposed — **check it is solid, not perforated** |
+| | Quadron Anthony 50 / "Paul" MF4444BS_I | 440 x 440, bowl 400 x 400 x 190 | no insert made for it | 193 (4,830 CZK) | option — no soapy-water compartment |
+| Mixer | **Franke Lina Semi Pro FC 6085.031** — spring hose | **410 tall, reach 205**, turns 360° | stream / spray; 9 l/min at 3 bar | **179** ([sanitino.cz](https://www.sanitino.cz/franke-lina-drezova-baterie-fc-6085-031-s-flexibilnim-ramenem-chrom-cerna-115-0626-085) 4,469 CZK) | **proposed** (a tall movable hose, 2026-09-25) |
+| | Grohe Minta 32321002 — pull-out spray | 379 tall, reach 223 | **minimum 1.0 bar published**; head docks back | 205 ([sanitino.cz](https://www.sanitino.cz/grohe-minta-drezova-baterie-s-vysuvnou-sprskou-chrom-32321002) 5,119 CZK) | option — the safe choice on pressure |
+| | Grohe Eurosmart Cosmopolitan 31170000 (window mixer) | 202 tall, reach 226 | lifts out of its base for driving | 224–228 | option — no movable hose |
 | | Reich Linnea L | 200 tall, reach 160 | made for camper pumps, fits 12 mm pipe | 109 | option — reach too short |
 | | Comet London | 180 tall, folds to 40, reach 145 | camper tap | 18 | option — reach too short |
 | Drinking filter | **Alb Filter Nano under-sink set** | housing Ø69 x 120; needs ~75 x 75 x 260 | **0.1 µm, certified against bacteria** (ASTM F838-15A); 5,000–7,000 L or 6 months, cartridge 59.90 | 170 | proposed |
@@ -188,11 +191,19 @@ deep). All four are in the model and in the payload check.
 
 Why:
 
-- **Sink:** exactly our 440 x 440 x 190, sold in CZ, 40 % cheaper than the Blanco. **It has no
-  real ledge** — no stainless sink with a ledge fits 440 x 440 x 190 (the Blanco Etagon 500-U
-  has rails but is 540 wide). The board, mat and colander rest on the rim instead.
-- **Mixer:** the only compact one with the **reach to the middle of the bowl** from beside it;
-  the camper taps reach 145–160. It lifts off its base for driving.
+- **A compartment for soapy water (Ondrej's need):** **no double sink fits** 480 x 480 — camper
+  doubles are 575+ long (Dometic SMEV VA945 575 x 370, Barka 575 x 325), kitchen 1.5-bowls
+  start at ~560 (Franke Box 560 x 450, main bowl 200 deep). Two narrow Franke Box 210 bowls side
+  by side would fit, but each bowl is 160 wide (no pans) and the pair costs ~17,400 CZK.
+- **So: one bowl + Blanco's own insert bowl.** The Andano 400 is the same size as the Quadron,
+  but Blanco makes a stainless bowl for it that rests on the rim (197 x 417 x 80, ~6 L): soapy
+  water in it, rinse in the other half, lift it out for big pots. Sinks with a real ledge are
+  too big (Blanco Etagon 500-U 540 x 440). If the insert turns out to be perforated, a plastic
+  washing-up tub standing in the bowl does the same job.
+- **Mixer with a tall movable hose:** the Franke Lina Semi Pro has a spring hose on a column,
+  410 tall — 65 under the locker over the sink. Its minimum pressure is not published; the
+  Grohe Minta (pull-out, 379 tall) states 1.0 bar, under our pump's 1.4. **For driving:** strap
+  the arm and clip the head.
 - **Do not buy a German "Niederdruck" tap:** those are for open boilers. The Truma B10 is
   pressurised - a normal tap is right. No microswitch needed: the pump switches on pressure.
 - **Drinking water:** the Alb Nano is the only filter we found that is **certified against
@@ -206,7 +217,7 @@ Why:
 - **To check:** the Alb's flow at 1.4 bar (not published — ask or test), and the drinking tap's
   reach (it must reach ~180 to pour into the bowl) and total height (drawn 280, the limit).
 
-**Kitchen water total: ~€690** (sink 179 + mixer 226 + filter 170 + tap 109).
+**Kitchen water total: ~€820** (sink 306 + insert 56 + mixer 179 + filter 170 + tap 109).
 
 ## Awning — tarp chosen 2026-09-25
 

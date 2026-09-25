@@ -15,7 +15,7 @@ cut-outs, the two MaxxFans, the two solar panels and the Starlink Mini, at catal
 [systems.md](systems.md) as tubes (turn off Body, Lockers and Shower to see them). The roof
 has its **rails and cross bars** on VW's rack points. Every chosen product - hob, fridge, oven, Truma
 B10, Porta Potti, both tanks, gas bottle, batteries, MultiPlus, panels, fans, Starlink, the
-Grohe mixer, the drinking tap and the Alb filter - is an exact mesh built from its datasheet
+Franke mixer, the drinking tap and the Alb filter - is an exact mesh built from its datasheet
 (`solids.py`) — see [props-sheet.png](props-sheet.png).
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
@@ -320,8 +320,9 @@ Details: [doc/products.md](../doc/products.md#sink-taps-and-drinking-water--rese
 
 | | Product | In the model |
 |---|---|---|
-| Sink | Quadron Anthony 50 ("Paul" in CZ), 440 x 440, bowl 190 deep | the built sink, unchanged |
-| Mixer | Grohe Eurosmart Cosmopolitan, 202 tall, reach 226 | base aft of the bowl at x ~1660, spout over the bowl to x 1434 |
+| Sink | Blanco Andano 400-IF, 440 x 440, bowl 190 deep | the built sink, unchanged |
+| Insert bowl | Blanco 227692, 197 x 417 x 80 - **the soapy-water compartment** | on the rim over the aft half of the bowl, x 1370–1567 |
+| Mixer | Franke Lina Semi Pro, spring hose, 410 tall, reach 205 | base aft of the bowl at x ~1670, arm over the bowl to x 1465; top 1335, 65 under the locker |
 | Drinking tap | its-wasser Fil kurz | behind the mixer, toward the wall, neck reaching 185 forward |
 | Filter | Alb Filter Nano, 0.1 µm (bacteria) | 260 x 75 x 75 under the prep counter (was 260 x 60 x 60 - too small for its 69 mm housing) |
 

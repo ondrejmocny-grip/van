@@ -341,6 +341,28 @@ def tap_grohe():
     return m
 
 
+def tap_franke():
+    """Franke Lina Semi Pro: a chrome column on its base, an arm at the top reaching 205
+    forward (toward x = 0) that holds the spray head, and the black spring hose rising from
+    the base to the head."""
+    L, W, H = 235, 60, 410
+    bx, c = L - 30, W / 2
+    chrome, black = "#c9ced3", "#1d1d1d"
+    m = Mesh()
+    m.cylinder(bx, c, 0, 15, 28, colour="#aab0b6")                       # base
+    m.cylinder(bx, c, 15, 120, 22, colour=chrome)                        # body with the lever
+    m.box(bx - 55, bx + 5, 105, 115, c - 7, c + 7, chrome)               # lever
+    m.cylinder(bx + 12, c, 120, H - 20, 8, colour=chrome)                # the column
+    m.cylinder(H - 20, c, 30, bx + 12, 8, colour=chrome, axis="x")       # arm, forward
+    for k in range(14):                                                  # the spring, rising
+        z = 125 + k * 17
+        m.cylinder(bx - 10, c, z, z + 9, 17, colour=black)
+    m.cylinder(bx - 10, c, 120, H - 40, 7, colour="#3a3a3a")             # the hose inside it
+    m.cylinder(H - 40, c, 40, bx - 10, 7, colour="#3a3a3a", axis="x")    # hose to the head
+    m.cylinder(40, c, H - 120, H - 20, 20, colour=chrome)                # spray head in its holder
+    return m
+
+
 def filtertap_its():
     """A slim drinking-water tap standing aft of the bowl: base, a thin column, and a neck
     reaching forward (toward x = 0) so it pours into the bowl, a small lever."""
@@ -374,7 +396,7 @@ SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
           "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
           "portapotti": porta_potti, "oven-tefal": oven_tefal,
           "fresh-v2r": fresh_tank, "grey-v2r": grey_tank,
-          "tap-grohe": tap_grohe, "filtertap-its": filtertap_its, "filter-alb": filter_alb}
+          "tap-grohe": tap_grohe, "tap-franke": tap_franke, "filtertap-its": filtertap_its, "filter-alb": filter_alb}
 
 
 def main():

@@ -572,7 +572,7 @@ KEEP_SHAPE = ("plumbing",)
 # Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
 OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink",
                "hob-thetford", "fridge-c95l", "b10", "portapotti", "oven-tefal",
-               "fresh-v2r", "grey-v2r", "tap-grohe", "filtertap-its", "filter-alb")
+               "fresh-v2r", "grey-v2r", "tap-grohe", "tap-franke", "filtertap-its", "filter-alb")
 # Meshes drawn at their true size inside a bigger slot, standing on its floor
 REAL_SIZE = ("portapotti",)
 
@@ -894,11 +894,11 @@ EXTRA_V2R += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2R,
 EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
                _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1784, 0, 60, "tray")
               for i in range(31)]
-# The sink: Quadron Anthony 50, 440 x 440 with a 400 x 400 x 190 bowl - no sink with a ledge
-# is sold at v2's 440 x 360. Its back 32 in front of the wall at 905 (1762). Its colander
-# drawn at v2's tray size: Quadron does not publish it.
+# The sink: Blanco Andano 400-IF, 440 x 440 with a 400 x 400 x 190 bowl. Its insert bowl
+# (Blanco 227692, 197 x 417 x 80) rests on the rim across the bowl, over the aft half: soapy
+# water in it, rinse in the front half. No double sink this small exists (2026-09-25).
 EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 735, 925, n=1)
-EXTRA_V2R += tray_box(1270, 1470, 1350, 1640, 845, 915)
+EXTRA_V2R += tray_box(1370, 1567, 1301, 1718, 845, 925)
 # The cat box and its tray behind the partition: the middle of the van, nothing moved.
 EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
 
@@ -910,9 +910,9 @@ APPLIANCES_V2R = [
     (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
     # The taps stand AFT of the bowl, at the back of the prep counter: the 440-deep sink
     # leaves no deck behind it, and at 1185 the wall is 122 in.
-    # Grohe Eurosmart Cosmopolitan 31170000: base at x ~1660, spout reaching 226 forward over
-    # the bowl (to x ~1434), 202 tall. Lifts out of its base for driving.
-    (1434, 1690, 1575, 1635,  925, 1127, "tap"),
+    # Franke Lina Semi Pro: a spring-hose mixer, base at x ~1670, arm reaching 205 forward
+    # over the bowl (to x ~1465), 410 tall - 65 under the locker over the sink (1400).
+    (1465, 1700, 1575, 1635,  925, 1335, "tap"),
     # drinking tap behind the mixer (toward the wall), its neck reaching 185 forward over the
     # bowl - its-wasser Fil kurz; its reach is not published: it needs >= ~180
     (1560, 1770, 1655, 1705,  925, 1205, "filtertap"),   # outlet 228 up; 280 in all, est.
@@ -1063,14 +1063,15 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                     "hob": "hob-thetford", "fridgedoor": "fridge-c95l",
                                     "calorifier": "b10", "cassette": "portapotti",
                                     "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r",
-                                    "tap": "tap-grohe", "filtertap": "filtertap-its",
+                                    "tap": "tap-franke", "filtertap": "filtertap-its",
                                     "filter": "filter-alb"},
                            runs=True,
                            # the solids.py meshes are built for the side they stand on here
                            facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
                            names={"rack": "Roof rail / bar on VW's rack points",
                                   "hob": "Gas hob, Thetford Topline 922",
-                                  "tap": "Mixer, Grohe Eurosmart Cosmopolitan",
+                                  "tap": "Mixer, Franke Lina Semi Pro (spring hose)",
+                                  "insert": "Insert bowl, Blanco 227692",
                                   "filtertap": "Drinking tap, filtered",
                                   "filter": "Alb Filter Nano, 0.1 micron",
                                   "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",

@@ -127,7 +127,42 @@ PRODUCTS = {
              "mat and colander rest on the rim; no sink with a real ledge fits 440 x 440 x 190. "
              "Cut-out: shops say 420 or 400 - use the template in the box. Backup: Blanco Andano "
              "400-IF, same size, 7,641 CZK. 6.4 kg is with packaging",
+        status="option"),
+    # Ondrej, 2026-09-25: a compartment for soapy water while rinsing. No double sink fits
+    # 480 x 480 (camper doubles are 575+ long, kitchen 1.5-bowls 560+); so a single bowl with
+    # a matching insert bowl that rests on its rim.
+    "blanco-andano-400-if": dict(
+        name="Blanco Andano 400-IF (522957), stainless, top or flush mount", kind="sink",
+        outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(430, 430), drain='3 1/2" InFino',
+        weight_kg=None, price_eur=(306, 306), shop="eshop-blanco.cz 7,641 CZK",
+        source="https://eshop-blanco.cz/jednodrezy-kulate-drezy/17218-kuchynsky-drez-blanco-andano-400-if-bez-tahla.html",
+        note="no ledge, but Blanco makes an insert bowl for it (blanco-227692); hidden overflow; "
+             "no tap hole - the taps go in the worktop", status="proposed"),
+    "blanco-227692": dict(
+        name="Blanco 227692 multifunction insert bowl, stainless (Andano / Supra / Etagon)",
+        kind="insert", outer=(197, 417, 80), volume_l=6, weight_kg=None, price_eur=(56, 56),
+        shop="sanitino.cz 1,395 CZK",
+        source="https://www.sanitino.cz/blanco-doplnky-miska-do-drezu-andano-nerez-227692",
+        note="417 long, so it rests on the 400 bowl's rim and covers about half of it: soapy water "
+             "in it, rinse beside it, lift it out for big pots. CHECK it is SOLID, not perforated "
+             "(227689 is perforated and fits other models). Fallback: a plastic tub in the bowl",
         status="proposed"),
+    # a tall, movable spring hose (Ondrej, 2026-09-25)
+    "franke-lina-semipro": dict(
+        name="Franke Lina Semi Pro FC 6085.031 (115.0626.085), spring-hose mixer, chrome/black",
+        kind="tap", outer=(205, 60, 410), reach=205, flow_l_min=9, weight_kg=None,
+        price_eur=(179, 179), shop="sanitino.cz 4,469 CZK",
+        source="https://www.sanitino.cz/franke-lina-drezova-baterie-fc-6085-031-s-flexibilnim-ramenem-chrom-cerna-115-0626-085",
+        note="410 tall (the locker is ~480 over the worktop), reach 205, turns 360, stream / spray. "
+             "Minimum pressure not published (9 l/min at 3 bar). The arm swings - strap it and clip "
+             "the head for driving. Alternative with a known minimum (1.0 bar): Grohe Minta "
+             "32321002 pull-out, 379 tall, reach 223, 5,119 CZK", status="proposed"),
+    "grohe-minta-32321002": dict(
+        name="Grohe Minta 32321002, C-spout with pull-out spray", kind="tap", outer=(223, 60, 379),
+        reach=223, flow_l_min=9, min_bar=1.0, weight_kg=None, price_eur=(205, 205),
+        shop="sanitino.cz 5,119 CZK",
+        source="https://www.sanitino.cz/grohe-minta-drezova-baterie-s-vysuvnou-sprskou-chrom-32321002",
+        note="46 mm SilkMove cartridge, 3/8 inch hoses, EasyDock head return", status="option"),
     # --- taps and drinking water (researched 2026-09-25) ------------------------------------
     # NOT a German "Niederdruck" tap: those are for open boilers; the Truma B10 is pressurised.
     "grohe-31170000": dict(
@@ -139,7 +174,7 @@ PRODUCTS = {
              "its base for driving (a 30 mm stub stays). 3/8 inch hoses: 12 mm push-fit adapters. "
              "Minimum pressure not published. Cheaper: Reich Linnea L (200 tall, reach 160 - "
              "short), 109; Comet London folds flat, 18, reach 145",
-        status="proposed"),
+        status="option"),
     "alb-nano": dict(
         name="Alb Filter Nano under-sink set, 0.1 micron hollow fibre", kind="filter",
         outer=(120, 69, 69), micron=0.1, weight_kg=0.5, price_eur=(170, 170),
