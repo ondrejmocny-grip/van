@@ -6,6 +6,8 @@ the v2-real README).
 
 ## Ask sellers
 
+Email drafts, ready to copy: [emails.md](emails.md).
+
 - [ ] **Franke Lina Semi Pro (mixer)** — does it work at **1.4 bar** (our Shurflo pump, ~6.8 l/min)?
   Franke publishes 9 l/min at 3 bar but no minimum. Ask sanitino.cz or Franke CZ. If not →
   Grohe Minta 32321002 (minimum 1.0 bar published). *(chosen 2026-09-25)*
