@@ -156,7 +156,7 @@ PRODUCTS = {
         note="410 tall (the locker is ~480 over the worktop), reach 205, turns 360, stream / spray. "
              "Minimum pressure not published (9 l/min at 3 bar). The arm swings - strap it and clip "
              "the head for driving. Alternative with a known minimum (1.0 bar): Grohe Minta "
-             "32321002 pull-out, 379 tall, reach 223, 5,119 CZK", status="proposed"),
+             "32321002 pull-out, 379 tall, reach 223, 5,119 CZK", status="chosen"),
     "grohe-minta-32321002": dict(
         name="Grohe Minta 32321002, C-spout with pull-out spray", kind="tap", outer=(223, 60, 379),
         reach=223, flow_l_min=9, min_bar=1.0, weight_kg=None, price_eur=(205, 205),

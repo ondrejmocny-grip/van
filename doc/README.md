@@ -115,6 +115,9 @@ decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-on
 See [budget.md](budget.md).
 
 ## Open questions
+
+**Checks before buying and building: [todo.md](todo.md).**
+
 - **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
   ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
 - **Kitchen proposed 2026-09-24 ([products.md](products.md)):** Isotherm Cruise 85, Bosch PIB375FB1E (cap 2000 W),
