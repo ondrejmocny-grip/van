@@ -569,19 +569,39 @@ def slab(L, W, H, colour=TOP):
     return m
 
 
-def furniture_piece(kind, L, W, H, front_plus_z, n):
+def fronts(key, box, L, H, mirrored):
+    """The doors, drawers and openings the cut list proposes (cutlist.FRONTS) for this box,
+    in its own frame: x from the box's start (mirrored for a piece built turned), z from its
+    foot, cut to its height - so a wardrobe door runs on through the bands it spans."""
+    import cutlist
+    x0b, z0b = box[0], box[4]
+    doors, openings = [], []
+    for piece, a0, a1, b0, b1, _what in cutlist.FRONTS.get(key, []):
+        za, zb = max(b0 - z0b, 0), min(b1 - z0b, H)
+        if zb <= za or piece == "fixed panel":
+            continue
+        xa, xb = a0 - x0b, a1 - x0b
+        if mirrored:
+            xa, xb = L - xb, L - xa
+        if "opening" in piece:
+            openings.append((xa, xb, za, zb))
+        else:
+            top_here = b1 - z0b <= H                      # the latch goes near its top edge
+            doors.append((xa, xb, za, zb, ((xa + xb) / 2, zb - 40) if top_here else None))
+    return doors, openings
+
+
+def furniture_piece(kind, L, W, H, front_plus_z, n, box=None):
     """One furniture box. L along x, W across (z), H up. Front at z = 0, turned if +z."""
     if kind in ("SINK", "HOB"):
-        # the galley: 30 worktop, the built-in appliance's opening, a cupboard door beside it
-        if kind == "SINK":        # oven opening at x 135-597, z 380-668; cupboard aft of it
-            m = carcass(L, W, H, 30, doors=[(597, L, 40, H - 30, (L - 40, H - 80))],
-                        openings=[(135, 597, 380, 668)])
-        else:                      # passenger side, so built mirrored and turned: the fridge
-            # door at van x 100-585 is 195-680 here, the cupboard aft of it 0-195
-            m = carcass(L, W, H, 30, doors=[(0, 195, 40, H - 30, (40, H - 80))],
-                        openings=[(195, 680, 30, 822)])
+        # the galley: 30 worktop, and the doors, drawers and openings of the cut list
+        doors, openings = fronts(kind, box, L, H, front_plus_z)
+        m = carcass(L, W, H, 30, doors=doors, openings=openings)
     elif kind in ("BENCH", "LOCKER"):
-        m = carcass(L, W, H, lids=[(0, L / 2), (L / 2, L)] if kind == "BENCH" else [(0, L)])
+        key = kind if kind == "LOCKER" else ("BENCH-p" if front_plus_z else "BENCH-d")
+        doors, _ = fronts(key, box, L, H, front_plus_z)
+        m = carcass(L, W, H, doors=doors,
+                    lids=[(0, L / 2), (L / 2, L)] if kind == "BENCH" else [(0, L)])
     elif kind == "REAR BENCH":
         # front faces forward (-x): built with its length across, then turned a quarter
         m = carcass(W, L, H, lids=[(0, W / 3), (W / 3, 2 * W / 3), (2 * W / 3, W)])
@@ -598,10 +618,8 @@ def furniture_piece(kind, L, W, H, front_plus_z, n):
         m.cylinder(L / 2, W / 2, H, H + 3, 60, colour=ALU)             # the post socket
         return m                                                        # no front to turn
     elif kind == "WARDROBE":
-        latch = (L / 2 - 20, H - 60) if n in (0, 3) else None
-        m = carcass(L, W, H)
-        panel(m, 20, L / 2 - 1, 20, H, latch=latch and (L / 2 - 30, latch[1]))
-        panel(m, L / 2 + 1, L - 20, 20, H, latch=latch and (L / 2 + 30, latch[1]))
+        doors, _ = fronts("WARDROBE", box, L, H, front_plus_z)
+        m = carcass(L, W, H, doors=doors)
     elif kind == "overhead":
         m = carcass(L, W, H)
         k = max(1, round(L / 420))                                      # doors ~400 wide
@@ -703,7 +721,7 @@ def furniture(variant="v2-real"):
             continue
         x0, x1, y0, y1, z0, z1, kind = b
         n = int(key.rsplit("-", 1)[1])
-        out[key] = furniture_piece(kind, x1 - x0, y1 - y0, z1 - z0, (y0 + y1) / 2 < v["width"] / 2, n)
+        out[key] = furniture_piece(kind, x1 - x0, y1 - y0, z1 - z0, (y0 + y1) / 2 < v["width"] / 2, n, b)
     return out
 
 

@@ -82,7 +82,7 @@ ITEMS = [
     ("Shell", "Sound deadening ~6 m2", 9.0, 1700, "est. 1.5 kg/m2"),
     ("Shell", "Floor 6 m2: 20 XPS + 12 ply + 2 vinyl + battens", 58.0, 1700, "XPS 0.6, poplar 12 4.9, vinyl ~3 kg/m2; battens est."),
     ("Shell", "Wall + ceiling cladding, 6 mm ply ~11 m2 (not behind furniture)", 28.0, 1700, "poplar 6 mm ~2.5 kg/m2"),
-    ("Shell", "Our partition, 15 mm ply + frame + crawl-through door", 22.0, 0, "est."),
+    ("Shell", "Partition frame, crawl-through door + hinges (its panel is in the cut list)", 4.0, 0, "est."),
     ("Shell", "VanQuito door fly screen", prod("vanquito-crafter"), 960, "products.py"),
     ("Shell", "Tarp 3 x 2.4 m on a keder rail (yourGEAR) + rail", prod("yourgear-tarp-3x24") + 1.0, 1650, "tarp 2.9 kg; rail est. 1"),
     ("Shell", "Screws, rivnuts, glue, sealant", 10.0, 1700, "est."),
@@ -97,6 +97,16 @@ ITEMS = [
 
 
 def furniture():
+    """The furniture from the cut list (cutlist.py: every panel at its board's weight), plus
+    the cushions and the cat box from the model, plus the hardware."""
+    import cutlist
+    out = list(cutlist.groups())
+    out += [r for r in furniture_estimate() if r[0] in ("Cushions", "Cat box")]
+    out.append(("Hinges, runners, push latches, struts, table post", 12.0, 12.0, 1700))
+    return out
+
+
+def furniture_estimate():
     """The furniture estimated from the model: every carcass as its top, its front and two
     ends (the back is the wall, the bottom the floor) plus 30 % for shelves and dividers;
     thin panels by their big face; cushions by volume. Returns (item, kg poplar, kg birch, x)."""
@@ -165,7 +175,7 @@ def run(ply="poplar 15"):
     total, front, rear = KERB, KERB * KERB_FRONT_SHARE, KERB * (1 - KERB_FRONT_SHARE)
     groups = {}
     rows = [(g, n, kg, x, s) for g, n, kg, x, s in ITEMS]
-    rows += [("Furniture", n, (p, b)[idx - 1], x, "model boxes, %s ply" % ply)
+    rows += [("Furniture", n, (p, b)[idx - 1], x, "cutlist.md, %s ply" % ply.split()[0])
              for n, p, b, x in furniture()]
     rows += LOAD
     for g, n, kg, x, s in rows:
