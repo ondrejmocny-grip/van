@@ -115,7 +115,8 @@ Cooking **and** hot water on gas: the van needs no campsite for power (see
 
 | | Product | kg | Status |
 |---|---|---|---|
-| Hob | **2-burner gas hob, 30 mbar, flame failure devices** in the old 306 x 527 slot — model to pick (Dometic HB 2325, Lavanda 853, Can Hoodiny 3.9 kg …) | ~4 | proposed |
+| Hob | **Thetford Topline 922**, made for vehicles: 305 x 500 (cut-out 285 x 485), 2 x 1.5 kW, 216 g/h, **LPG 30 mbar from the factory**, flame failure on both burners, **12 V ignition**, no lid | 5.5 | **proposed** — €359 (Reimo) / 12,690 CZK (stavbakaravanu.cz) |
+| | *alt:* Bosch PRB3A6B70, domino 306 x 527, 47 high, 1.9 + 2.8 kW — a home hob: set for natural gas (LPG jets included, changed by Bosch service), 230 V ignition | 7.0 | option — 11,628 CZK |
 | Hot water | **Truma Boiler B10**, 10 L, 1500 W, 120 g/h, 350 x 350 x 260 | 6.7 | **chosen** |
 | Gas | **6 kg refillable bottle** (~256 x 495) in a sealed locker in the garage, floor vent | ~14 full | **chosen** |
 | | regulator, hose, pipes, gas + CO detector | ~6 | |
@@ -126,6 +127,13 @@ Cooking **and** hot water on gas: the van needs no campsite for power (see
   "revize"); a flue through the side wall for the B10; LPG refills — easy in Turkey, harder in
   Morocco (bottle systems differ: plan adapters, or refill before crossing).
 - **The oven stays electric** (Tefal, 1380 W) — used a few times a week, the battery carries it.
+- **The hob, researched 2026-09-25:** only two kinds fit the 306 x 527 slot — the Thetford
+  (the one camper hob that is 30 cm wide, burners one behind the other) and 30 cm domestic
+  "domino" gas hobs. The camper 2-burner hobs (Dometic HB 2325, Smev PI 8022, CAN Hoodiny,
+  Lavanda 853) are all 380–530 wide. **Why Thetford:** built for vehicles and for LPG as sold,
+  ignites on 12 V, and the Czech gas inspection may not accept a home hob. **Before buying:**
+  it is being discontinued (Frankana) — buy soon; and ask Thetford how deep it hangs under
+  the worktop (95 high in all; the model assumes 75, so the fridge stands 15 lower).
 
 ## Kitchen — proposed 2026-09-24
 

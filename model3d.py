@@ -905,12 +905,13 @@ APPLIANCES_V2R = [
     (1720, 1770, 1585, 1705,  925, 1175, "filtertap"),  # gooseneck, beside the mixer
     (1600, 1860, 1630, 1690,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - carcass y 70-635
-    # A 2-burner GAS hob in the induction hob's 306 x 527 slot (full gas, 2026-09-25; model to
-    # pick - camper 2-burner hobs weigh ~4 kg). Its body drawn 51 deep under the 920 worktop.
-    (1150, 1456,   88,  615,  869,  925, "hob"),
-    # Vitrifrigo C95L, 485 x 473 x 792 - 95 L with a 12.8 L freezer - standing low (45) so
-    # its top (837) is 32 under the hob. ~110 behind it for air; 82 clear of the arch.
-    (1250, 1735,  152,  625,   45,  837, "fridgedoor"),
+    # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the
+    # factory, flame failure on both burners, 12 V ignition. 95 high in all; how much of that
+    # hangs under the worktop is not published - drawn as 75, to be safe.
+    (1150, 1455,  104,  604,  845,  925, "hob"),
+    # Vitrifrigo C95L, 485 x 473 x 792 - 95 L with a 12.8 L freezer - standing low (30) so
+    # its top (822) is 23 under the hob's body. ~110 behind it for air; 82 clear of the arch.
+    (1250, 1735,  152,  625,   30,  822, "fridgedoor"),
     # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
     # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
     ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150

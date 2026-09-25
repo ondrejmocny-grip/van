@@ -108,7 +108,7 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L (2026-09-25) | **3496 — 3 under** | 3619 — 119 over |
+| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L (2026-09-25) | **3498 — 1 under** | 3621 — 121 over |
 | Rear axle (max 2100) | 2021 | 2122 |
 | Front axle (max 1800) | 1484 | 1507 |
 | Roof load (max 150) | 51 | 51 |
@@ -143,7 +143,7 @@ placeholders to confirm.
 
 ## Changed 2026-09-25 — full gas, tarp, bigger fridge, galley at 920
 
-- **Full gas:** a 2-burner gas hob in the induction hob's slot, a **Truma B10** gas water heater
+- **Full gas:** a **Thetford Topline 922** 2-burner gas hob in the induction hob's slot (12 V ignition), a **Truma B10** gas water heater
   where the calorifier was, a **6 kg bottle** in a sealed locker in the garage. Solar back to
   **2 panels**.
 - **Tarp** on a keder rail instead of the Thule awning (−25 kg).

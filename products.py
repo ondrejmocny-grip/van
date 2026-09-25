@@ -195,12 +195,23 @@ PRODUCTS = {
              "poles, guy lines and pegs included. 4 x 2.4 m: 3.4 kg",
         status="chosen"),
     # --- full gas (chosen 2026-09-25) -------------------------------------------------------
-    "gas-hob-2-burner": dict(
-        name="2-burner gas hob, 30 mbar, flame failure devices - MODEL TO PICK", kind="hob",
-        outer=(306, 527, 51), weight_kg=4.0, price_eur=None, shop=None, source=None,
-        note="must fit the 306 x 527 slot the Bosch induction hob had; candidates: Dometic "
-             "HB 2325 (2 x 1.6 kW, 233 g/h), Lavanda 853, Can Hoodiny (3.9 kg) - sizes to check",
+    "thetford-topline-922": dict(
+        name="Thetford Topline 922 (SHB92290Z), 2-burner gas hob for vehicles", kind="hob",
+        outer=(305, 500, 95), cutout=(285, 485), power_kw=(1.5, 1.5), gas_g_h=216,
+        weight_kg=5.5, price_eur=(359, 508), shop="stavbakaravanu.cz 12,690 CZK / reimo.com 359",
+        source="https://www.thetford.com/au/products-and-support/topline-hob-922-gas-only/",
+        note="LPG 30 mbar from the factory; flame failure on both burners; 12 V ignition (no "
+             "inverter needed); no lid. Frankana lists it discontinued - buy soon. Depth under "
+             "the worktop not published: check before cutting",
         status="proposed"),
+    "bosch-prb3a6b70": dict(
+        name="Bosch PRB3A6B70 Serie 8, domino gas hob 30 cm", kind="hob",
+        outer=(306, 527, 47), cutout=(270, 490), power_kw=(1.9, 2.8), weight_kg=7.0,
+        price_eur=(465, 465), shop="elektroshock.cz 11,628 CZK",
+        source="https://media3.bosch-home.com/Documents/specsheet/en-GB/PRB3A6B70.pdf",
+        note="a home appliance: set for natural gas, LPG jets included (Bosch service changes "
+             "them); 230 V ignition; only 47 high. Check the CZ gas inspection accepts it",
+        status="option"),
     "gas-bottle-6kg": dict(
         name="6 kg refillable LPG bottle", kind="gas", outer=(256, 256, 495),
         weight_kg=14.3, price_eur=None, shop=None,

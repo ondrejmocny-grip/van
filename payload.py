@@ -71,7 +71,7 @@ ITEMS = [
     ("Water system", "Shower tray, wet lining, curtain, mixer + head", 15.0, 350, "est."),
     # --- kitchen: estimates until the kitchen products are picked
     ("Kitchen", "Vitrifrigo C95L fridge, 95 L", prod("vitrifrigo-c95l"), at("fridgedoor"), "products.py"),
-    ("Kitchen", "2-burner gas hob, 30 cm (model to pick)", 4.0, at("hob"), "est. - Can Hoodiny 3.9 kg"),
+    ("Kitchen", "Thetford Topline 922 gas hob", prod("thetford-topline-922"), at("hob"), "products.py (Reimo 5.5 kg)"),
     ("Kitchen", "Tefal Optimo OF4448 oven", prod("tefal-of4448"), at("oven"), "products.py"),
     ("Kitchen", "Quadron Anthony 50 sink + colander, 2 taps, carbon filter", 10.0, at("sinkrim"), "est. - sink weight not published"),
     # --- shell: insulation, floor, cladding, openings
