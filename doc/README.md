@@ -131,8 +131,8 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3471 kg with full water, full gas, 2 panels,
-  tarp and poplar furniture (29 under), rear axle 1997, roof 51 of 150 - after leaving the bikes out, cutting solar to
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3475 kg with full water, full gas, 2 panels,
+  tarp and poplar furniture (25 under), rear axle 2002, roof 56 of 150 - after leaving the bikes out, cutting solar to
   one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
 - **Full gas chosen 2026-09-25** (cooking + hot water; [v2-real/energy.md](../v2-real/energy.md)): Thetford Topline 922 gas hob
@@ -147,6 +147,11 @@ See [budget.md](budget.md).
   distribution box in the driver bench beside the batteries (fuses, shunt, DC-DC, fuse block),
   the MPPT and shore box in the garage. All water crosses to the passenger side, away from the
   batteries. ~120 m of 12 V cable (~12 kg), 5 m of gas pipe, ~23 m of water pipe.
+- **Approval checked 2026-09-25 ([approval.md](approval.md)):** register it as a **motor caravan (M1 SA)**,
+  everything (conversion + lift + tyres) in **one** approval. Passes the weight rule by 28 kg weighed
+  full. Roof kit on **roof bars on VW's rack points**; one VW letter for the fan cut-outs; straps on
+  batteries, tanks and bottle; latches and round corners. **Before building:** phone the testing
+  station; ask a VW dealer for our van's PR list (C-rails 3S4? window bags?).
 - **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
 - **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
   All body holes are listed in the v2-real README.

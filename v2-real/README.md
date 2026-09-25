@@ -110,10 +110,10 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (~108 L)** — full gas, 2 panels, tarp, C95L, passenger 55 kg, MultiPlus C 12/2000 (2026-09-25) | **3471 — 29 under** | 3594 — 94 over |
-| Rear axle (max 2100) | 1997 | 2098 |
+| **Total, full fresh water (~108 L)** — full gas, 2 panels, tarp, C95L, passenger 55 kg, MultiPlus C 12/2000 (2026-09-25) | **3475 — 25 under** | 3598 — 98 over |
+| Rear axle (max 2100) | 2002 | 2102 |
 | Front axle (max 1800) | 1473 | 1496 |
-| Roof load (max 150) | 51 | 51 |
+| Roof load (max 150) | 56 (with roof bars) | 56 |
 
 | **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3344 — 155 under** (stricter, with water + gas: 3464) | — |
 
@@ -277,7 +277,9 @@ See [roof.png](roof.png). From the front:
 | Rear fan (MaxxFan) | x 2660–3060 cut | outer 585 x 417 | over the head of the bed |
 | Tarp keder rail | passenger edge, full length | — | the awning side |
 
-- **Roof load:** 51 kg of VW's 150 (see [payload.md](payload.md)).
+- **Mounting (2026-09-25):** the panels, Starlink and tarp rail sit on **roof bars on VW's roof-rack
+  points** (≥ 3 pairs), not on the roof skin — see [approval.md](../doc/approval.md).
+- **Roof load:** 56 kg of VW's 150 (with roof bars) (see [payload.md](payload.md)).
 - **Tight:** ~15 mm between each fan's outer frame and the panels. Fine on paper; on the van
   the panel rails may need to move a little. A panel may also shade a fan lid a bit — no problem.
 - **Bows:** only 0, 1688 and 3265 are known. VW's roof-rack points (from the rear: 133, 395,
@@ -304,6 +306,22 @@ Full list and reasons in [doc/products.md](../doc/products.md). What it changes 
   Moroccan winter week now just holds (lowest 7 %) instead of 0.2 kWh short.
 - **To check:** the MultiPlus C's real size (Victron's datasheet and the shops disagree); the
   Orion XS needs an ignition / D+ wire, because the Crafter's smart alternator can fool it.
+
+## Approval (STK) — checked 2026-09-25
+
+Full notes: [doc/approval.md](../doc/approval.md). The van becomes a **motor caravan (M1, SA)**;
+it passes the weight rule by **28 kg** when weighed with every tank full.
+
+**What it changed in the design:**
+
+- **Roof kit on roof bars** on VW's roof-rack mounting points (≥ 3 pairs of feet), not glued
+  or screwed into the roof skin — VW asks for a letter for anything on the roof skin. +5 kg.
+- **One VW letter of non-objection** for the two fan cut-outs (and the roof bars), via Porsche ČR.
+- **Straps or brackets** on the batteries, both tanks and the gas bottle, fixed to load rails.
+- **Latches on every door and drawer, all corners rounded** — rules for the cut list.
+- An **"LPG" sticker** at the rear right; a fixed notice by the 230 V main switch.
+- **Centre of gravity:** estimated ~870 mm above the road with the lift — VW's limit for
+  4MOTION is 910. Measure it.
 
 ## Wiring, gas and water — routed 2026-09-25
 

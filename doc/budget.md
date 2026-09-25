@@ -64,6 +64,12 @@ carries cooking and hot water" no longer applies to v2-real.
 | Shurflo pump + Whale Gulper 220 + Votronic sensors | ~550–570 |
 | **Water priced so far** (without Truma B10, pipes, fittings, taps) | **~950–1,570** |
 
+**Approval, checked 2026-09-25** ([approval.md](approval.md)): testing station ~6,800 CZK + ORP
+800–1,000 + gas revision 1,500–2,500 + electrical revision ~1,500–3,000 = **~10,500–15,000 CZK
+(~€420–600)**, plus a VW letter (price unknown) — the "homologation fees" in the Other line.
+Roof bars on VW's rack points for the solar and tarp rail: price to find (the Other line has
+"roof rails").
+
 The v1 Electrical line (4,350–5,350) still looks right once panels, cable and lighting are
 added. Tanks made to size cost more than v1's catalogue guess.
 

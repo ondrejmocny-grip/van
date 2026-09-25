@@ -58,7 +58,7 @@ ITEMS = [
     ("Electrics", "SmartSolar MPPT 100/30 + Orion XS 12/12-50 + SmartShunt", 1.8, at("electrics"), "Victron datasheets; shunt est."),
     ("Electrics", "Busbars, fuses, 230 V box (RCD + 2 MCB), CEE inlet", 4.0, at("electrics"), "box 0.6, inlet 0.35; rest est."),
     ("Electrics", "12 V cable ~120 m (95-1.5 mm2) + 230 V 8 m + lugs, conduit", 15.0, 1800, "systems.md: 12 V 12 kg; rest est."),
-    ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + rails - full gas, 2026-09-25", 29.0, 1810, "Victron 185 W 11 kg; rails est."),
+    ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + roof bars on VW's rack points (3-4 pairs)", 34.0, 1810, "Victron 185 W 11 kg; bars ~12 kg est. - VW: roof kit on rack points, approval.md"),
     ("Electrics", "Starlink Mini + mount and cable", 1.6, 240, "Mini 1.10 kg (Starlink spec); mount est."),
     ("Electrics", "12 V lighting, switches, USB", 4.0, 1500, "est."),
     # --- water and bathroom
@@ -226,6 +226,12 @@ def report():
     out += ["Stricter reading (fresh water 90 %% + a full gas bottle counted as well): **%d kg** — "
             "%s 3500 by %d." % (need + extra, "under" if need + extra <= GROSS else "OVER",
                                 abs(GROSS - need - extra)), ""]
+    # How the zkušebna really does it (Tom-Car, 2026-09-25): the van is weighed with every
+    # tank full - diesel, water, gas - and the seats and luggage allowance are added on top.
+    full = 108 + 14.3 + 0.1 * 75 * 0.84      # all fresh water, the bottle, the last 10 % diesel
+    out += ["**As the testing station weighs it** (every tank full: diesel, water, gas): **%d kg** — "
+            "%s 3500 by %d. See [doc/approval.md](../doc/approval.md)." %
+            (need + full, "under" if need + full <= GROSS else "OVER", abs(GROSS - need - full)), ""]
     roof = [(n, kg) for g, n, kg, x, s in p["lines"]
             if any(w in n for w in ("solar", "Starlink", "MaxxFan", "awning", "Tarp"))]
     out += ["**Roof load (VW max %d kg):** %d kg — %s." % (ROOF_MAX, sum(k for _, k in roof),
