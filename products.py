@@ -83,7 +83,7 @@ PRODUCTS = {
     "porta-potti-565e": dict(
         name="Thetford Porta Potti 565E (Curve)", kind="wc",
         outer=(386, 450, 447), waste_l=21, flush_l=15,
-        weight_kg=6.1, price_eur=None, shop=None,
+        weight_kg=6.1, price_eur=(180, 184), shop="karavan.cz 4,499 CZK",
         source="https://www.campingworld.com/thetford-porta-potti-565e-curve-portable-rvmarine-toilet-58980.html",
         note="386 W x 450 D x 447 H - inside the 420 x 520 slot, which the shower's diagonal "
              "face limits to 520 deep",
@@ -224,7 +224,7 @@ PRODUCTS = {
     # --- power (chosen 2026-09-25: 3 panels, 50 A DC-DC, lean use) ------------------------
     "starlink-mini": dict(
         name="Starlink Mini", kind="internet", outer=(299, 259, 39), power_w=(25, 40),
-        weight_kg=1.10, price_eur=None, shop="starlink.com",
+        weight_kg=1.10, price_eur=(200, 300), shop="alza.cz 4,999 CZK (sale prices up to 7,489)",
         source="https://starlink.com/public-files/specification_sheet_mini.pdf",
         note="replaces the Standard (75-100 W, 2.9 kg): -0.6 kWh on a working day", status="chosen"),
     "orion-xs-50": dict(
@@ -269,7 +269,7 @@ PRODUCTS = {
     "victron-185w": dict(
         name="Victron BlueSolar 185 W-12 V mono panel (SPM041851200)", kind="solar",
         outer=(1485, 668, 30), vmp=19.68, voc=24.11, isc=9.91, weight_kg=11.0,
-        price_eur=None, shop=None,
+        price_eur=(90, 137), shop="heureka.cz, Victron 175 W 1485x668: 2,213-3,424 CZK",
         source="https://www.victronenergy.com/upload/documents/Datasheet-BlueSolar-Monocrystalline-Panels-EN.pdf",
         status="proposed"),
     "smartshunt-500": dict(
@@ -329,7 +329,7 @@ PRODUCTS = {
     "vitrifrigo-c95l": dict(
         name="Vitrifrigo C95L, compressor, hinged door", kind="fridge",
         outer=(485, 473, 792), volume_l=95, freezer_l=12.8, weight_kg=22.3,
-        price_eur=None, shop="prokes-auto.com",
+        price_eur=(832, 880), shop="svetkaravanu.cz (20,790 CZK, 2026-09-25)",
         source="https://www.vitrifrigo.com/en_en/fridge-freezer-c95l-chr-black",
         note="+10 L and a real 12.8 L freezer; 792 tall - its base must sit at ~40 to stay "
              "under 835: 3 mm to spare, check on the real carcass", status="chosen"),
@@ -342,8 +342,8 @@ PRODUCTS = {
     # --- gas, if cooking and hot water switch (asked 2026-09-25) ------------------------------
     "truma-b10": dict(
         name="Truma Boiler B10, gas water heater 10 L", kind="water heater",
-        outer=(350, 350, 260), power_w=1500, gas_g_h=120, weight_kg=6.7, price_eur=None,
-        shop=None, source="https://www.truma.com/products/water-systems/boiler-gas-electro/boiler-gas-boiler-gas-elektro/",
+        outer=(350, 350, 260), power_w=1500, gas_g_h=120, weight_kg=6.7, price_eur=(729, 755),
+        shop="pieper-shop.de 729 gas only (gas + 230 V: 999) / CZ from 18,870 CZK", source="https://www.truma.com/products/water-systems/boiler-gas-electro/boiler-gas-boiler-gas-elektro/",
         note="needs a wall flue (one more hole) and the gas installation; replaces the calorifier",
         status="chosen"),
     # --- tarp instead of an awning (asked 2026-09-25) ----------------------------------------

@@ -1,35 +1,67 @@
 # Budget
 
-## v2-real overview — 2026-09-25
+## v2-real overview — 2026-09-25 (all prices estimated)
 
-One table for the whole build as it stands now. **Priced** = from a shop page in
-[products.md](products.md) or the [cut list](../v2-real/cutlist.md); **est.** = our guess, no
-product picked or no price found yet. CZK at 25 per €. The older, step-by-step notes are below.
+One table for the whole build. The last missing prices were looked up in shops on 2026-09-25;
+sources are in the list under the table. CZK at 25 per €. **est.** = no shop price, our guess.
 
-| Group | What is in it | Priced € | Est. € | **Total €** |
-|---|---|---|---|---|
-| **Shell** | 3 windows 1,500–1,760; 2 MaxxFans + adapters 900–950; fly screen 195; insulation, sound deadening, floor, cladding, carpet (cut list, 34,500 CZK) 1,380 | 3,975–4,285 | — | **4,000–4,300** |
-| **Furniture** | poplar boards (cut list, 28,100 CZK) 1,125; worktop + wet lining **est.** 200–400; latches, hinges, runners, table post **est.** 300–500; foam + fabric **est.** 300–500 | 1,125 | 800–1,400 | **1,900–2,500** |
-| **Kitchen** | Vitrifrigo C95L **est.** 1,000–1,150 (C75L is 815); Thetford hob 359–508; oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | 1,280–1,430 | 1,000–1,150 | **2,300–2,600** |
-| **Bathroom** | Porta Potti **est.** 150–200; shower tray, wet lining, shower head **est.** 400–700 | — | 550–900 | **550–900** |
-| **Water** | 2 tanks made to size 400–1,000 (quotes asked); Shurflo + Gulper + sensors 549–569; filler 30–60; pipes and fittings **est.** 150–250 | 980–1,630 | 150–250 | **1,150–1,900** |
-| **Gas** | Truma B10 **est.** 500–700; locker, regulator, pipe, detector **est.** 200–300; 6 kg bottle **est.** 100–200; installer + revision **est.** 100–250 (hob is in Kitchen) | — | 900–1,450 | **900–1,450** |
-| **Electrics** | 2 × Ective 150 Ah 2,220–2,400; MultiPlus C 975–1,145; MPPT + Orion 50 A + shunt 390–435; shore inlet + 230 V box 120–220; 2 × 185 W panels **est.** 300–400; cable, fuses, busbars, lighting **est.** 400–600 | 3,705–4,200 | 700–1,000 | **4,400–5,200** |
-| **Other** | Starlink Mini + mount **est.** 300–400; roof bars **est.** 300–600; tarp **est.** ~100; covers, bug screen **est.** 100–150; approval 420–600 + VW letter (unknown) | 420–600 | 800–1,250 | **1,200–1,850** |
-| **Build total** | | **~11,500–13,300** | **~4,900–7,400** | **€16,400–20,700** |
-| Rough-road upgrades (separate pot, see below) | tier 1 + 2 | | | €7,360–9,720 |
-| **Build + upgrades** | | | | **€23,800–30,400** |
+| Group | What is in it | **€** |
+|---|---|---|
+| **Shell** | 3 windows 1,500–1,760; 2 MaxxFans + adapters 900–950; fly screen 195; insulation, sound deadening, floor, cladding, carpet (cut list, 34,500 CZK) 1,380 | **3,975–4,285** |
+| **Furniture** | poplar boards (cut list, 28,100 CZK) 1,125; worktop + wet lining **est.** 200–400; latches, hinges, runners, table post **est.** 300–500; foam + fabric **est.** 300–500 | **1,925–2,525** |
+| **Kitchen** | Vitrifrigo C95L 832 (20,790 CZK); Thetford hob 359–508; oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | **2,111–2,260** |
+| **Bathroom** | Porta Potti 565E 180 (4,499 CZK); ABS shower tray 92 (2,290 CZK, 830 × 670 — cut or made to fit); shower mixer + head 80 (1,990 CZK); drain, curtain, small parts **est.** ~0–100 | **350–450** |
+| **Water** | 2 tanks made to size **est.** 500–800 (quotes asked); Shurflo + Gulper + sensors 549–569; filler 30–60; pipes and fittings **est.** 150–250 | **1,229–1,679** |
+| **Gas** | Truma B10, gas only 729; MonoControl CS regulator 132 (3,300 CZK); Alugas 6 kg bottle 139; copper pipe, locker, floor vent, gas + CO detector **est.** 150–250; installer **est.** 100–250 | **1,250–1,500** |
+| **Electrics** | 2 × Ective 150 Ah 2,220–2,400; MultiPlus C 975–1,145; MPPT + Orion 50 A + shunt 390–435; shore inlet + 230 V box 120–220; 2 × Victron 175/185 W panels 180–275; cable, fuses, busbars, lighting **est.** 400–600; 25 m CEE shore cable **est.** 60–80 | **4,345–5,155** |
+| **Other** | Starlink Mini 200 (4,999 CZK) + mount **est.** 50; roof bars (Thule WingBar Evo on fixpoints, 2 bars 300, 3–4 needed) 450–600; tarp ~100; window covers, bug screen **est.** 100–150 | **900–1,100** |
+| **Small stuff** | screws, rivnuts, sealant, glue, tape, oil for the ply **est.** 300–500; shipping of ~30 orders **est.** 200–400 | **500–900** |
+| **Parts subtotal** | | **16,585–19,854** |
+| **Approval and fees** | see the next table | **670–900** |
+| **Reserve, 10 %** | for what we forgot and prices that rise | **1,700–2,100** |
+| **Build total** | | **≈ €19,000–22,900** |
+| Rough-road upgrades (separate pot, see below) | tier 1 + 2 | 7,360–9,720 |
+| **Build + upgrades** | | **≈ €26,300–32,600** |
+
+**Approval and other charges (CZK):**
+
+| Item | CZK |
+|---|---|
+| Testing station check + protocol (Tom-Car) | 6,776 |
+| ORP application (approval of the conversion) | 800–1,000 (800 online) |
+| Registry change / new papers | 50–200 |
+| STK technician "type K" check before approval **est.** | 1,000–1,500 |
+| Gas revision | 1,500–2,500 |
+| Electrical revision (230 V, outside inlet) | 1,500–3,000 |
+| VW letter of non-objection **est.** (no Czech price; German letters ~€200–300) | 5,000–7,500 |
+| LPG sticker, notices by the main switch | ~100 |
+| **Total** | **~16,700–22,600 (≈ €670–900)** |
+
+Not in the numbers: the van, tools, insurance, a diesel heater, and the **Seikel lift's own TÜV
+papers** (in the upgrades). **Running costs:** Starlink Roam 1,120 CZK a month (100 GB) or 2,435
+(unlimited); gas ~140 CZK per 6 kg fill (est.).
 
 **Read on that:**
 
-- The build is **above the €10–15k target**: about €16.5–20.5k. About two thirds of it is
-  already priced, so the number is fairly solid; the rest can still move.
-- **The three biggest groups** are Electrics (~€4.8k), Shell (~€4.1k) and Kitchen (~€2.5k).
-- **Biggest open prices:** the C95L fridge, the Truma B10, the roof bars, and the tank quotes.
+- **About €19–23k for the build**, above the €10–15k target. Most of it is now real shop prices;
+  the big guesses left are the tanks, the VW letter and the reserve.
+- **The three biggest groups:** Electrics (~€4.7k), Shell (~€4.1k), Furniture + Kitchen (~€4.4k).
 - **Where it could come down:** 2 × 100 Ah batteries instead of 2 × 150 (~−€600, but the
-  energy check is already tight in a Moroccan winter); the smaller C75L fridge (~−€250);
-  tanks from stock shapes instead of made to size; one 900 window instead of two (~−€650).
-- Excluded, as before: the van, tools, insurance, a diesel heater.
+  energy check is already tight in a Moroccan winter); the smaller C75L fridge (~−€0 now — it
+  costs about the same as the C95L); tanks from stock shapes instead of made to size (~−€300);
+  one 900 window instead of two (~−€650).
+
+**Sources (2026-09-25):** C95L [svetkaravanu.cz](https://www.svetkaravanu.cz/vestavna-autochladnicka-vitrifrigo-c95l-chr-95-l-cerna_z102475/);
+B10 [pieper-shop.de](https://www.pieper-shop.de/truma-boiler-gas-b10.html); Porta Potti
+[karavan.cz](https://www.karavan.cz/chemicke-wc-thetford-porta-potti-565e); panels
+[heureka](https://fotovoltaicke-solarni-panely.heureka.cz/victron-energy-12v-fotovoltaicky-panel-175wp/);
+Starlink Mini [alza.cz](https://www.alza.cz/starlink-mini-d12512193.htm); roof bars
+[rameder.de](https://www.rameder.de/dachtraeger-thule-wingbar-evo-197933-37200-1.html); Alugas
+[fcr24.shop](https://www.fcr24.shop/Alugas-6-kg-Gasflasche-inkl-Gasfuellung-Nur-vor-Ort); MonoControl CS
+[karavany-hradec.cz](https://www.karavany-hradec.cz/eshop/index.php?route=product/product&path=2_18&product_id=667);
+tray and mixer [nomadem.cz](https://www.nomadem.cz/sprchove-vanicky/); fees
+[registr-vozidel.cz](https://www.registr-vozidel.cz/caste-dotazy/prehled-zakladnich-spravnich-poplatku),
+[tom-car.cz](https://www.tom-car.cz/prestavba-na-obytny-automobil).
 
 ---
 
