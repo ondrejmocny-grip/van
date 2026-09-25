@@ -1,4 +1,39 @@
-# Budget — v1 build
+# Budget
+
+## v2-real overview — 2026-09-25
+
+One table for the whole build as it stands now. **Priced** = from a shop page in
+[products.md](products.md) or the [cut list](../v2-real/cutlist.md); **est.** = our guess, no
+product picked or no price found yet. CZK at 25 per €. The older, step-by-step notes are below.
+
+| Group | What is in it | Priced € | Est. € | **Total €** |
+|---|---|---|---|---|
+| **Shell** | 3 windows 1,500–1,760; 2 MaxxFans + adapters 900–950; fly screen 195; insulation, sound deadening, floor, cladding, carpet (cut list, 34,500 CZK) 1,380 | 3,975–4,285 | — | **4,000–4,300** |
+| **Furniture** | poplar boards (cut list, 28,100 CZK) 1,125; worktop + wet lining **est.** 200–400; latches, hinges, runners, table post **est.** 300–500; foam + fabric **est.** 300–500 | 1,125 | 800–1,400 | **1,900–2,500** |
+| **Kitchen** | Vitrifrigo C95L **est.** 1,000–1,150 (C75L is 815); Thetford hob 359–508; oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | 1,280–1,430 | 1,000–1,150 | **2,300–2,600** |
+| **Bathroom** | Porta Potti **est.** 150–200; shower tray, wet lining, shower head **est.** 400–700 | — | 550–900 | **550–900** |
+| **Water** | 2 tanks made to size 400–1,000 (quotes asked); Shurflo + Gulper + sensors 549–569; filler 30–60; pipes and fittings **est.** 150–250 | 980–1,630 | 150–250 | **1,150–1,900** |
+| **Gas** | Truma B10 **est.** 500–700; locker, regulator, pipe, detector **est.** 200–300; 6 kg bottle **est.** 100–200; installer + revision **est.** 100–250 (hob is in Kitchen) | — | 900–1,450 | **900–1,450** |
+| **Electrics** | 2 × Ective 150 Ah 2,220–2,400; MultiPlus C 975–1,145; MPPT + Orion 50 A + shunt 390–435; shore inlet + 230 V box 120–220; 2 × 185 W panels **est.** 300–400; cable, fuses, busbars, lighting **est.** 400–600 | 3,705–4,200 | 700–1,000 | **4,400–5,200** |
+| **Other** | Starlink Mini + mount **est.** 300–400; roof bars **est.** 300–600; tarp **est.** ~100; covers, bug screen **est.** 100–150; approval 420–600 + VW letter (unknown) | 420–600 | 800–1,250 | **1,200–1,850** |
+| **Build total** | | **~11,500–13,300** | **~4,900–7,400** | **€16,400–20,700** |
+| Rough-road upgrades (separate pot, see below) | tier 1 + 2 | | | €7,360–9,720 |
+| **Build + upgrades** | | | | **€23,800–30,400** |
+
+**Read on that:**
+
+- The build is **above the €10–15k target**: about €16.5–20.5k. About two thirds of it is
+  already priced, so the number is fairly solid; the rest can still move.
+- **The three biggest groups** are Electrics (~€4.8k), Shell (~€4.1k) and Kitchen (~€2.5k).
+- **Biggest open prices:** the C95L fridge, the Truma B10, the roof bars, and the tank quotes.
+- **Where it could come down:** 2 × 100 Ah batteries instead of 2 × 150 (~−€600, but the
+  energy check is already tight in a Moroccan winter); the smaller C75L fridge (~−€250);
+  tanks from stock shapes instead of made to size; one 900 window instead of two (~−€650).
+- Excluded, as before: the van, tools, insurance, a diesel heater.
+
+---
+
+## v1 build (first estimate)
 
 Target: **€10–15k for the build itself**, excluding the van. Open to going higher.
 

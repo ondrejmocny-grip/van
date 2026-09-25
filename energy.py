@@ -14,13 +14,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 BATTERY_KWH = 300 * 12.8 / 1000          # 2 x 150 Ah LiFePO4 = 3.84 kWh
 USABLE = 0.90                            # keep 10 % in reserve
+FRIDGE_KWH = 0.56                        # Vitrifrigo C95L datasheet, Wh/24 h / 1000
 INVERTER_EFF = 0.92                      # AC loads cost ~8 % more at the battery (est.)
 
 # Loads: (name, watts while on, hours on per day-type, AC?, source). Hours per day-type:
 # work_parked, work_drive, free_drive, free_parked.
 LOADS = [
-    ("Fridge, Isotherm Cruise 85", None, None, False,
-     "Indel Cruise 85: 0.386 kWh/24 h at 25 C; x1.5 on hot days (est.)"),
+    ("Fridge, Vitrifrigo C95L", None, None, False,
+     "Vitrifrigo C95L CHR datasheet: 0.56 kWh/24 h (ambient not stated; Secop BD35, 45 W); x1.5 on hot days (est.)"),
     ("Induction cooking (hob capped at 2000 W)", 2000, (0.5, 0.5, 0.5, 0.6), True,
      "est. - 30 min at full power a day, incl. kettle"),
     ("Oven, Tefal Optimo 1380 W (3 times a week, 25 min, ~70 % duty)", 1380, (0.18,) * 4, True,
@@ -75,7 +76,7 @@ def day_use(day, hot, lean=False, shore=False, gas=False):
             rows.append((name, 0.0))            # cooked on gas
             continue
         if name.startswith("Fridge"):
-            kwh = 0.386 * (1.5 if hot else 1.0)
+            kwh = FRIDGE_KWH * (1.5 if hot else 1.0)
         elif name == "Starlink":
             kwh = (32 if lean else 85) * hours[i] / 1000
         elif name.startswith("Hot water") and (lean or shore):

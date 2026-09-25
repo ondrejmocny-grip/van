@@ -237,9 +237,10 @@ several set-ups, in three seasons.
   the van self-sufficient in every season without any campsite. See the question below.
 
 **Full gas** (cooking + hot water on gas, asked 2026-09-25): with **2 panels** the week is ok
-in summer and just reaches a Moroccan winter week (lowest 7 %, with the smaller MultiPlus C
-12/2000 in search mode - it was 0.2 kWh short with the 12/3000); with 3 panels it is self-sufficient
-everywhere. Hot water on gas is **comfort, not energy**: lean use already takes it off the
+in summer (lowest 11-14 %) but a Moroccan winter week runs **0.6 kWh short on Friday**, once the
+fridge is the C95L at its datasheet 0.56 kWh a day (updated 2026-09-25; the Isotherm figure was
+0.39 and gave 7 %). The fix is **~1 hour of driving (or idling) by Thursday**, or a campsite night;
+with 3 panels it would be self-sufficient everywhere, but there is no roof room for a third. Hot water on gas is **comfort, not energy**: lean use already takes it off the
 battery — gas gives hot showers on parked days too.
 
 **A parked working day, lean:** ~2.9 kWh. Usable battery 3.46 kWh; 3 panels 1.8–2.5 kWh a day;
