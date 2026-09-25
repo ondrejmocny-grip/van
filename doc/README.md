@@ -143,6 +143,10 @@ See [budget.md](budget.md).
   **MultiPlus C 12/2000** instead of the 12/3000 (-6 kg; the oven is the biggest AC load now), MPPT 100/30,
   Orion XS 50 A with a D+ signal, SmartShunt, no Cerbo. Both tanks **made to size** (no catalogue tank fits),
   Shurflo Trail King 7, Whale Gulper 220 for the shower, Votronic sensors.
+- **Wiring, gas and water routed 2026-09-25 ([v2-real/systems.md](../v2-real/systems.md)):** a
+  distribution box in the driver bench beside the batteries (fuses, shunt, DC-DC, fuse block),
+  the MPPT and shore box in the garage. All water crosses to the passenger side, away from the
+  batteries. ~120 m of 12 V cable (~12 kg), 5 m of gas pipe, ~23 m of water pipe.
 - **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
 - **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
   All body holes are listed in the v2-real README.
@@ -229,6 +233,10 @@ growing toward the driver side. In the drawing the nose is at the left, so the d
 sits at the bottom. View coordinates add z = height above the finished floor.
 
 **Energy:** `python energy.py` -> `v2-real/energy.md` - daily use per load and a simulated week per set-up.
+
+**Systems:** `python systems.py` -> `v2-real/systems.md` + `systems.png` - every cable, gas pipe
+and water pipe as a route between the model's boxes: lengths, 12 V cable sizes and fuses, a
+shopping list. Move an appliance in `model3d.py` and its cable follows.
 
 **Payload:** `python payload.py` -> `v2-real/payload.md` - total and axle loads from every item's
 weight and position (products, estimates, furniture from the model boxes).

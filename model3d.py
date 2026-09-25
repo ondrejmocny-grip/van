@@ -943,8 +943,11 @@ APPLIANCES_V2R = [
     # Victron MultiPlus C 12/2000/80: 1600 W at 25 C runs the 1380 W oven; 12 kg. Drawn at
     # the larger of the two sizes published (520 x 255 x 125 datasheet, 375 x 214 x 110 shops).
     (2040, 2560, 1310, 1565,  240,  365, "inverter"),   # on a shelf over the cells
-    # SmartSolar MPPT 100/30, Orion XS 12/12-50, SmartShunt, busbars, fuses, and the 230 V
-    # box (2-pole RCD + 2 MCB) - on a board against the wall, under the power inlet.
+    # The distribution, in the bench beside the cells: main fuse, SmartShunt, busbars, the
+    # Orion XS DC-DC and the 12 V fuse block - central, so the load cables stay short.
+    (2580, 2800, 1250, 1410,   30,  230, "electrics"),
+    # SmartSolar MPPT 100/30 and the 230 V shore box - on a board against the wall in the
+    # garage, under the power inlet and the solar cable's way down (systems.py).
     (2900, 3300, 1672, 1782,   60,  360, "electrics"),
 ]
 
@@ -1041,7 +1044,7 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                   "battery": "Ective LC 150 LT, 150 Ah",
                                   "inverter": "Victron MultiPlus C 12/2000/80",
                                   "plumbing": "Pump Shurflo Trail King 7, filter, trap",
-                                  "electrics": "MPPT 100/30, Orion XS 50 A, shunt, fuses, 230 V box"},
+                                  "electrics": "Electrics: fuses, busbars, DC-DC, MPPT, 230 V box"},
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
                            # taken out INSIDE, through the wardrobe base's lobby-side door. The
                            # only side-wall holes are the small service openings above.

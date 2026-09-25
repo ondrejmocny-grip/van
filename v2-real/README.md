@@ -305,6 +305,39 @@ Full list and reasons in [doc/products.md](../doc/products.md). What it changes 
 - **To check:** the MultiPlus C's real size (Victron's datasheet and the shops disagree); the
   Orion XS needs an ignition / D+ wire, because the Crafter's smart alternator can fool it.
 
+## Wiring, gas and water — routed 2026-09-25
+
+Open [systems.png](systems.png) (the routes from above) and [systems.md](systems.md) (every run
+with its length, cable size, fuse, and a shopping list). Made by `python systems.py` from the
+model's boxes.
+
+**How it is laid out:**
+
+| Where | What |
+|---|---|
+| **Driver bench, beside the batteries** | the distribution box: a fuse per battery, SmartShunt, busbars, Orion XS DC-DC, the 12 V fuse block; the MultiPlus over the cells; 230 V box B (RCD + 2 MCB) |
+| **Garage, driver wall** | MPPT 100/30 and 230 V box A (RCBO), under the power inlet and where the solar cable comes down |
+| **Floor channel, centre line** | the starter battery cable from the cab, and the cables to the passenger galley |
+| **Up the driver wall, along the ceiling** | fans, lights, Starlink |
+| **Passenger side, low** | the gas pipe to the hob (behind the fridge), and the water to and from the Truma B10 |
+
+**Numbers:** ~120 m of 12 V cable, ~12 kg (the thick ones: 95 mm² to the MultiPlus, 50 mm² per
+battery, 35 mm² from the starter battery, 5.5 m). 230 V: 8 m. Gas: 5 m of 8 mm copper. Water:
+~19 m of 12 mm pipe (7.5 m of it hot and insulated), plus the grey lines.
+
+**What routing it showed:**
+
+- **Water never passes the batteries.** Everything wet crosses the van in the floor at x 1930,
+  the galley's aft end, and runs back along the passenger side.
+- **The hot water runs are long** (~7.5 m): the Truma B10 is in the garage, the taps are
+  forward. ~0.1 L of cold water per metre before hot arrives. Insulate the hot pipe.
+- **The shower is the far end of everything:** its drain pump, both water pipes and a light go
+  through the WC base. That base needs a removable service panel.
+- **The starter battery take-off** is drawn in the cab floor, driver side — find the real
+  point on the van (VW's converter guidelines) before buying the 35 mm² cable.
+- **The Orion XS moved** from the garage board into the bench, next to the batteries: its
+  thick cables stay short.
+
 ## The grey tank — inside, under the footwell (agreed 2026-09-24)
 
 **Why it moved at all:** v2 hung it under the middle of the van (x 2100–2800), which on a
