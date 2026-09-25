@@ -208,6 +208,11 @@ PRODUCTS = {
         note="full: ~8.3 kg tare (typical steel) + 6 kg gas; composite ones are lighter. An 11 kg "
              "bottle is ~580 tall and does not fit under the 570 garage. ~210 g a day -> ~4 weeks",
         status="chosen"),
+    "water-filler": dict(
+        name="Lockable fresh water filler, marked WATER, ~60 mm", kind="filler",
+        weight_kg=0.3, price_eur=(30, 60), shop=None, source=None,
+        note="passenger side behind the arch, above the tank; the tank also needs a vent / "
+             "overflow hose through the floor", status="chosen"),
 }
 
 

@@ -152,6 +152,30 @@ placeholders to confirm.
   now, since the wall is 3 further in at 920; taps and sink moved up with it. The dinette table
   stays at 900.
 
+**Also decided 2026-09-25:**
+
+- **The gas bottle stays in the garage** (6 kg) and the oven stays under the sink. Considered and
+  dropped: the oven at eye level in the sink locker's place, with the bottle under the counter —
+  it fits (even an 11 kg bottle), but a hot drop-down oven door at 1.4 m and the lost locker
+  were not worth it. Also dropped: a longer hob run forward — it would close the sliding door
+  entry from ~690 to ~290.
+- **An outside fresh water filler** — lockable, marked WATER.
+
+**Every hole in the body, as of 2026-09-25:**
+
+| Opening | Where | Size |
+|---|---|---|
+| 3 x Dometic S4 windows | in VW's stamped window fields | cut-outs 902 x 448 (2), 500 x 348 |
+| 2 x MaxxFan | roof, clear of the known bows (measure the rest first) | 400 x 400 |
+| Fresh water filler | passenger side, x ~2900, low, above the tank | ~60 |
+| Campsite power inlet | driver side, x ~2990, low, at the garage | ~70 |
+| Truma B10 flue | passenger side, x ~3200, low | ~70 |
+| Grey tank drain + valve | floor, under the footwell | ~40 |
+| Fresh tank vent / overflow | floor, by the tank | ~20 |
+
+The side ones are in the model and the viewer (as small hatches). No hole in a pillar;
+corrosion protection on every cut.
+
 ## Energy — 3 panels, 50 A DC-DC, lean use (2026-09-25; then full gas, 2 panels)
 
 `python energy.py` writes **[energy.md](energy.md)**: every load per day type, and a

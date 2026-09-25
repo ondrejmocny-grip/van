@@ -137,6 +137,8 @@ See [budget.md](budget.md).
   inverter in search mode. Self-sufficient except a Moroccan winter week (0.2 kWh short). Brings a
   certified gas installation + inspection, a wall flue, and LPG refills to plan for Morocco.
 - **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
+- **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
+  All body holes are listed in the v2-real README.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished

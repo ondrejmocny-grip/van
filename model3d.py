@@ -972,6 +972,20 @@ WINDOWS_V2R = [
     cut("s4-900x450",  "d", 1940, 1000),
     cut("s4-900x450",  "p", 1940, 1000),
 ]
+# Small service openings in the side walls (side, x0, x1, z0, z1) - all low, outside the
+# window fields, clear of the pillars; corrosion protection on every cut (VW guidelines).
+#   Fresh water filler, lockable, marked WATER: passenger side, behind the arch, just above
+#     the tank's rear end (tank x 1930-2950, top 340). Agreed 2026-09-25.
+#   Campsite power inlet (CEE 230 V): driver side, at the garage, next to the electrics - the
+#     shortest cable to the MultiPlus.
+#   Truma B10 flue: passenger side, low at the garage corner, where the heater stands.
+# Through the FLOOR, not drawn: the grey tank's drain with a valve under the van, and the fresh
+# tank's vent / overflow hose - both clear of the chassis rails and cables.
+HATCHES_V2R = [
+    ("p", 2860, 2940, 400, 480),     # fresh water filler
+    ("d", 2950, 3030, 400, 480),     # campsite power inlet
+    ("p", 3160, 3240, 150, 230),     # water heater flue
+]
 # Fans: MaxxFan Deluxe, 400 x 400 cut-outs on the centre line.
 #   Front:  in VW's own roof-hatch pressing on the front roof panel (x ~385-1136), over the
 #           lobby between the shower and the galley - steam and cooking both reach it.
@@ -996,10 +1010,9 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
                            windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True,
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
-                           # taken out INSIDE, through the wardrobe base's lobby-side door, and
-                           # carried ~1 m to the sliding door. No cut in the side panel, so no
-                           # VW letter and no extra stiffening.
-                           hatches=())
+                           # taken out INSIDE, through the wardrobe base's lobby-side door. The
+                           # only side-wall holes are the small service openings above.
+                           hatches=HATCHES_V2R)
 
 
 def body_bands(v, step=40):
