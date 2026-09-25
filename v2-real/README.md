@@ -20,7 +20,30 @@ bench, garage board, pump box) - is an exact mesh built from datasheet sizes
 (`solids.py`) — see [props-sheet.png](props-sheet.png). The **furniture** too, one mesh per box at
 its own size: poplar ply carcasses with edge bands, 30 mm worktops, doors with push latches on
 the lockers and wardrobe, lids on the benches, piped cushions, the tables and the post — see
-[furniture-sheet.png](furniture-sheet.png). **The door and drawer splits are placeholders**
+[furniture-sheet.png](furniture-sheet.png).
+
+**Body and cab (2026-09-25):** the body is one smooth mesh per part (walls, roof, cab) at its
+real place — the walls follow the real lean, with the finished face inside and the outer skin
+100 outside the ribs (VW's 2040 outside width); the openings have reveals; the skin has the
+wheel-arch cut-outs; the arches inside are rounded; the rear frame, lights and bumper are
+drawn. **The cab is now the real length:** VW puts the front axle 1370 ahead of the partition
+(our x = VW X − 1370) and the bumper 1000 further, so the nose is **2370** long — the old boxes
+had 1500, and the front wheel at −900 instead of **−1370**. Seats, dashboard, steering wheel,
+wheels and the cat box are primitives too. See [body-sheet.png](body-sheet.png).
+
+**Wheel arches, re-checked 2026-09-25** against VW's data:
+
+| | VW | In the model |
+|---|---|---|
+| Along the van | 911 long (L), at x 1817–2728 (read off the drawing, ±10) | x 1817–2728 |
+| Between the arches | **1380** (W202, bare metal) — the same for the 4MOTION | inner faces at y 226 and 1606 = 1380 apart |
+| How far each comes in | wall to wall at arch height 1776 bare, so **~198 from the bare wall**, ~188 from the finished wall | 198 / 188 |
+| Height | 401 above the FWD low floor = **301 above our bare floor**, **266 above the finished floor** (35 build) | 266 |
+| Shape | rounded | box for the fit check (the safe side), rounded in the viewer |
+
+All consistent. What sits closest to them: the batteries **16** from the driver arch, the fridge
+**82** from the passenger arch. The x position is read off a drawing, so **measure it on the van**
+(in [todo.md](../doc/todo.md)). **The door and drawer splits are placeholders**
 until the cut list; the galley carcasses show only the appliance openings and one cupboard.
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):

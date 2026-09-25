@@ -352,9 +352,39 @@
     return buf.buffer.slice(0);
   }
 
+  // A mesh's own colour (solids.py), or the kind's colour; see-through parts stay see-through
+  function ownMat(m, colour) {
+    var t = !colour && m.transparent;
+    return new THREE.MeshLambertMaterial({
+      color: colour ? new THREE.Color(colour) : m.color.clone(),
+      transparent: t, opacity: t ? m.opacity : 1, depthWrite: !t,
+      side: t ? THREE.DoubleSide : THREE.FrontSide });
+  }
+
   function loadProps() {
     if (!THREE.GLTFLoader) { return; }
     var loader = new THREE.GLTFLoader();
+    // The body in one piece per kind (walls, roof, cab), built in millimetres at its real
+    // place - drawn 1:1, and standing in for all that kind's boxes when props are on.
+    (MODEL.bodyparts || []).forEach(function (bp) {
+      var p = BUNDLE.props[bp.key];
+      if (!p) { return; }
+      loader.parse(b64buf(bp.key, p.glb), "", function (g) {
+        if (!alive) { return; }
+        var o = g.scene;
+        o.traverse(function (n) {
+          if (n.isMesh) {
+            if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
+            n.material = ownMat(n.material, null);
+          }
+        });
+        o.scale.set(mm, mm, mm);
+        o.visible = propsOn;
+        scene.add(o);
+        (propParts[bp.k] = propParts[bp.k] || []).push(o);
+        refresh();
+      }, function (e) { console.warn("body " + bp.key + " failed to parse", e); });
+    });
     MODEL.boxes.forEach(function (item) {
       // a box may carry its own mesh (item.p: furniture built at that box's size)
       var p = item.p && BUNDLE.props[item.p] ? Object.assign({ key: item.p }, BUNDLE.props[item.p])
@@ -373,8 +403,7 @@
             // decimating strips the normals, and a mesh without them lights as pure black
             if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
             // meshes built from datasheets (solids.py) carry their own colours
-            n.material = new THREE.MeshLambertMaterial({ color: p.own && n.material.color ?
-              n.material.color.clone() : new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
+            n.material = ownMat(n.material, p.own ? null : MODEL.colours[item.k] || "#cccccc");
             // a carcass with kit inside ghosts with the Appliances layer, mesh or box
             if (container[item.k]) { ghostBody.push(n.material); ghostMat(n.material, ghostOn); }
           }

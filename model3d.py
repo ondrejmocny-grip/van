@@ -490,6 +490,7 @@ NAMES = {
 # Apertures are cut out of the body panels, so the openings are real holes rather
 # than drawn-on rectangles. p = passenger wall (y=0), d = driver wall (y=width).
 WALL = 40           # panel thickness, mm
+BODY_CAVITY = 100   # rib face to outer skin on the real body (VW: 2040 wide outside)
 NOSE = 1500         # how far the cab reaches forward of the load area
 CAB_ROOF = 1500     # the roof over the cab sits lower than the load-space roof
 
@@ -1068,6 +1069,9 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                     "filter": "filter-alb", "electrics": "dist-v2r",
                                     "board": "board-v2r", "plumbing": "plumbing-v2r"},
                            runs=True, furniture=True,
+                           # the real VW length: front axle 1370 ahead of the partition (our x
+                           # = VW X - 1370), bumper 1000 further (VW front overhang)
+                           nose=2370, front_axle=-1370, bodymesh=True,
                            # the solids.py meshes are built for the side they stand on here
                            facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
                            names={"rack": "Roof rail / bar on VW's rack points",
@@ -1161,14 +1165,16 @@ def real_shell(v):
         x0, x1, reach = 300, 3300, 2400
         ground = -608                          # road: 573 loaded floor + 35 build, below 0
         top, tip = H + WALL, ground + 2000     # at the rail, and at the poles
+        # the rail on the roof's edge: the real skin (solids.py) sits CAVITY outside the ribs
+        edge = wall_inset(v, H, bare=True) - BODY_CAVITY if sp.get("bodymesh") else -WALL
         n = 12
         for k in range(n):
-            ya, yb = -WALL - reach * k / n, -WALL - reach * (k + 1) / n
+            ya, yb = edge - reach * k / n, edge - reach * (k + 1) / n
             z = top + (tip - top) * (k + 0.5) / n
             out.append((x0, x1, yb, ya, z - 5, z + 5, "tarp"))
-        out.append((x0, x1, -WALL - 15, -WALL, top - 20, top + 10, "tarp"))   # keder rail
+        out.append((x0, x1, edge - 15, edge, top - 20, top + 10, "tarp"))   # keder rail
         for px in (x0, (x0 + x1) / 2, x1):
-            out.append((px - 15, px + 15, -WALL - reach - 15, -WALL - reach + 15, ground, tip, "pole"))
+            out.append((px - 15, px + 15, edge - reach - 15, edge - reach + 15, ground, tip, "pole"))
     # partition and rear doors, each band as wide as the walls are apart at that height
     holes = sp["partition"] or []
     if holes and not isinstance(holes[0], (list, tuple)):
@@ -1235,14 +1241,19 @@ def shell_for(v):
 
 def cab_for(v):
     """The cab: floor, lower roof, raked-off windscreen simplified to a vertical pane, side
-    walls with door openings, dashboard, wheel, and the seats - then the four road wheels."""
+    walls with door openings, dashboard, wheel, and the seats - then the four road wheels.
+    A variant on the real body carries the real nose length (spec 'nose'); its shape then
+    comes from solids.py and these boxes only stand in for it with the props off."""
     W = v["width"]
+    nose = spec(v).get("nose", NOSE)
+    door = (-1300, -150, 300, 1350) if nose != NOSE else (-1200, -350, 300, 1400)
     out = []
-    out.append((-NOSE, 0, 0, W, -WALL, 0, "cab"))
-    out.append((-NOSE + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
-    out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
+    out.append((-nose, 0, 0, W, -WALL, 0, "cab"))
+    out.append((-nose + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
+    if nose == NOSE:
+        out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
     for y0, y1 in ((-WALL, 0), (W, W + WALL)):
-        for x0, x1, z0, z1 in subtract((-NOSE, 0, 0, CAB_ROOF), [(-1200, -350, 300, 1400)]):
+        for x0, x1, z0, z1 in subtract((-nose, 0, 0, CAB_ROOF), [door]):
             out.append((x0, x1, y0, y1, z0, z1, "cab"))
     out.append((-1250, -1000, 60, W - 60, 700, 950, "dash"))
     out.append((-1050, -980, W - 620, W - 280, 950, 1300, "dash"))      # steering wheel
@@ -1283,7 +1294,7 @@ def wheels_for(v):
     w0, w1, wd = v["well"]
     W = v["width"]
     out = []
-    for cx in (FRONT_AXLE, (w0 + w1) / 2):
+    for cx in (spec(v).get("front_axle", FRONT_AXLE), (w0 + w1) / 2):
         for y0 in (wd - TYRE_W, W - wd):            # inner face at the arch line, on both sides
             out.append((cx - TYRE_R, cx + TYRE_R, y0, y0 + TYRE_W,
                         AXLE_Z - TYRE_R, AXLE_Z + TYRE_R, "wheel"))
@@ -1660,7 +1671,8 @@ def props_data(kinds=None):
 # cushion and a locker of the same kind are never stretched from one shape)
 FURNITURE = ("BENCH", "FOOTWELL -> BED", "HOB", "SINK", "REAR BENCH", "LOCKER", "WARDROBE",
              "overhead", "bed", "infill", "backrest", "pillow", "table", "leg", "ftable",
-             "ftablep", "farm", "parm", "ptable", "ptablep", "shower")
+             "ftablep", "farm", "parm", "ptable", "ptablep", "shower",
+             "seat", "dash", "litter", "litterlid", "wheel")
 
 
 def furniture_keys(v, boxes):
@@ -1708,7 +1720,9 @@ def viewer_data(v, out):
     used = {b[6] for b in boxes}
     return {
         "title": v["title"], "note": v["note"],
-        "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
+        "length": v["length"], "width": v["width"], "height": v["height"], "nose": sp.get("nose", NOSE),
+        "bodyparts": ([{"k": k, "key": "%s-body-%s" % (v["out"].split("/")[0], k)}
+                       for k in ("shell", "roof", "cab")] if sp.get("bodymesh") else []),
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
         "propmap": sp.get("propmap", {}), "runs": runs_for(v),
         "names": dict(NAMES, **sp.get("names", {})), "appliances": sorted({b[6] for b in fitout(v)[1]}),
@@ -1737,7 +1751,8 @@ def write_viewer(names, path, title="Van Interior"):
         v = VARIANTS[name]
         variants[name] = viewer_data(v, variant_dir(v))
     used = set().union(*(set(d["props"]) | set(d["propmap"].values()) |
-                         {b["p"] for b in d["boxes"] if "p" in b} for d in variants.values()))
+                         {b["p"] for b in d["boxes"] if "p" in b} |
+                         {b["key"] for b in d["bodyparts"]} for d in variants.values()))
     data = {"order": list(names), "start": names[-1], "variants": variants,
             "vehicle": "VW Crafter L3H3",
             "props": props_data(used)}

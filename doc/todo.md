@@ -29,5 +29,8 @@ the v2-real README).
 - [ ] **PR list from a VW dealer** — factory roof C-rails (3S4)? Window airbags?
 - [ ] **Weigh it per axle** (we pass by only 25–28 kg).
 - [ ] **Measure the roof bows** before cutting the fan holes.
+- [ ] **Measure the wheel arches**: start and end along the van (drawn 1817–2728, read off VW's
+  drawing ±10), how far in (1380 between them), height (266 above the finished floor). The
+  batteries are only 16 from the driver arch.
 - [ ] **Find the starter battery take-off point** (for the 35 mm² DC-DC cable).
 - [ ] **Centre of gravity** — measure, after the build (VW limit 910 mm for 4MOTION).

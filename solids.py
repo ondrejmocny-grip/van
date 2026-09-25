@@ -61,6 +61,31 @@ class Mesh:
             n = n / (np.linalg.norm(n) or 1)
             self._add(colour, q, [n] * 4, [0, 1, 2, 0, 2, 3])
 
+    def quad(self, pts, colour, out=None):
+        """A flat four-corner face, any orientation. `out` is a direction the face should look
+        toward (its normal is flipped to agree), else the corners' own winding decides."""
+        q = [np.array(c, float) for c in pts]
+        n = np.cross(q[1] - q[0], q[2] - q[0])
+        if out is not None and np.dot(n, out) < 0:
+            q, n = q[::-1], -n
+        n = n / (np.linalg.norm(n) or 1)
+        self._add(colour, q, [n] * 4, [0, 1, 2, 0, 2, 3])
+
+    def polygon(self, pts2, axis, at, colour, out):
+        """A flat polygon (ear-clipped, may be concave) in the plane axis = at. pts2 are the
+        two other coordinates in order (for axis 'z': x, y-up)."""
+        tris = earclip(pts2)
+        def lift(p):
+            a, b = p
+            return {"z": (a, b, at), "x": (at, b, a), "y": (a, at, b)}[axis]
+        for i, j, k in tris:
+            q = [np.array(lift(pts2[t]), float) for t in (i, j, k)]
+            n = np.cross(q[1] - q[0], q[2] - q[0])
+            if np.dot(n, out) < 0:
+                q, n = q[::-1], -n
+            n = n / (np.linalg.norm(n) or 1)
+            self._add(colour, q, [n] * 3, [0, 1, 2])
+
     def cylinder(self, cx, cz, y0, y1, r0, r1=None, colour="#888", seg=32, caps=True, axis="y"):
         """Upright (along y) cylinder or cone frustum, radius r0 at y0 and r1 at y1. With
         axis="z" it lies across the van instead: cx, cz are then its x and height, y0..y1 its
@@ -119,10 +144,14 @@ class Mesh:
                 accs.append(acc)
                 ids.append(len(accs) - 1)
                 blob += data + b"\0" * (-len(data) % 4)
-            hx = colour[1:] if len(colour) == 7 else "".join(ch * 2 for ch in colour[1:])
-            rgb = [int(hx[k:k + 2], 16) / 255 for k in (0, 2, 4)]
-            mats.append({"pbrMetallicRoughness": {"baseColorFactor": rgb + [1],
-                                                  "metallicFactor": 0, "roughnessFactor": 0.8}})
+            hx = colour[1:] if len(colour) in (7, 9) else "".join(ch * 2 for ch in colour[1:])
+            rgba = [int(hx[k:k + 2], 16) / 255 for k in (0, 2, 4)]
+            alpha = int(hx[6:8], 16) / 255 if len(hx) == 8 else 1.0      # "#rrggbbaa": see-through
+            mat = {"pbrMetallicRoughness": {"baseColorFactor": rgba + [alpha],
+                                            "metallicFactor": 0, "roughnessFactor": 0.8}}
+            if alpha < 1:
+                mat["alphaMode"] = "BLEND"
+            mats.append(mat)
             prims.append({"attributes": {"POSITION": ids[0], "NORMAL": ids[1]}, "indices": ids[2],
                           "material": len(mats) - 1})
         doc = {"asset": {"version": "2.0", "generator": "van/solids.py"}, "scene": 0,
@@ -135,6 +164,36 @@ class Mesh:
             f.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(blob)))
             f.write(struct.pack("<II", len(js), 0x4E4F534A) + js)
             f.write(struct.pack("<II", len(blob), 0x004E4942) + blob)
+
+
+def earclip(pts):
+    """Triangles (index triples) of a simple polygon given in order."""
+    P = [tuple(p) for p in pts]
+    area = sum(P[i][0] * P[(i + 1) % len(P)][1] - P[(i + 1) % len(P)][0] * P[i][1]
+               for i in range(len(P)))
+    idx = list(range(len(P))) if area > 0 else list(range(len(P)))[::-1]
+    def cross(o, a, b):
+        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    def inside(p, a, b, c):
+        return cross(a, b, p) >= 0 and cross(b, c, p) >= 0 and cross(c, a, p) >= 0
+    out, guard = [], 0
+    while len(idx) > 3 and guard < 10000:
+        guard += 1
+        for n in range(len(idx)):
+            i, j, k = idx[n - 1], idx[n], idx[(n + 1) % len(idx)]
+            a, b, c = P[i], P[j], P[k]
+            if cross(a, b, c) <= 1e-9:
+                continue
+            if any(inside(P[m], a, b, c) for m in idx if m not in (i, j, k)):
+                continue
+            out.append((i, j, k))
+            idx.pop(n)
+            break
+        else:
+            break
+    if len(idx) == 3:
+        out.append(tuple(idx))
+    return out
 
 
 # --- the products ------------------------------------------------------------------------
@@ -573,6 +632,52 @@ def furniture_piece(kind, L, W, H, front_plus_z, n):
         m.cylinder(L / 2, W / 2, 8, H - 8, 30, colour=ALU)
         m.cylinder(L / 2, W / 2, H - 8, H, L / 2 - 10, colour=ALU)
         return m
+    elif kind == "seat":
+        m = Mesh()
+        seat_dark, cloth = "#2f3135", "#474a50"
+        if H > 300:                    # the base, or the backrest (the tall thin one)
+            if L < 150:                # backrest with headrests: aft face at x = L
+                m.box(0, L, 0, H - 200, 20, W - 20, cloth)
+                heads = 2 if W > 700 else 1
+                for i in range(heads):
+                    c = W * (i + 0.5) / heads
+                    m.box(20, L - 20, H - 190, H, c - 130, c + 130, cloth)
+                    m.box(40, L - 40, H - 220, H - 190, c - 60, c - 45, "#9aa0a6")
+                    m.box(40, L - 40, H - 220, H - 190, c + 45, c + 60, "#9aa0a6")
+            else:
+                m.box(40, L - 40, 0, 60, 40, W - 40, "#6d6f72")          # rails
+                m.box(60, L - 60, 60, H, 60, W - 60, seat_dark)          # pedestal
+        else:
+            m = cushion(L, W, H, colour=cloth)
+        return m
+    elif kind == "dash":
+        m = Mesh()
+        if n == 0:                     # the dashboard: sloping top toward the windscreen
+            m.hexa([(0, 0, 0), (0, 0, W), (L, 0, W), (L, 0, 0),
+                    (0, H - 60, 0), (0, H - 60, W), (L, H, W), (L, H, 0)], "#2e3033")
+            for c in (W * 0.2, W * 0.5, W * 0.8):
+                m.box(L - 2, L, H - 110, H - 60, c - 60, c + 60, "#1c1c1c")     # vents
+        else:                          # the steering wheel on its column
+            c, r = (W / 2, H / 2), min(W, H) / 2 - 10
+            for k in range(28):
+                a0, a1 = 2 * math.pi * k / 28, 2 * math.pi * (k + 1) / 28
+                za, ya = c[1] + r * math.sin(a0), c[0] + r * math.cos(a0)
+                zb, yb = c[1] + r * math.sin(a1), c[0] + r * math.cos(a1)
+                m.box(L - 30, L - 5, min(za, zb) - 12, max(za, zb) + 12,
+                      min(ya, yb) - 12, max(ya, yb) + 12, "#1c1c1c")
+            m.box(L - 30, L - 5, c[1] - 12, c[1] + 12, c[0] - r, c[0] + r, "#1c1c1c")
+            m.cylinder(c[1], c[0], 0, L - 30, 25, colour="#2e3033", axis="x")    # column
+        return m
+    elif kind in ("litter", "litterlid"):
+        return slab(L, W, H, colour="#8fa3b0" if kind == "litter" else "#c9d3da")
+    elif kind == "wheel":
+        m = Mesh()
+        cz, r = H / 2, min(L, H) / 2
+        m.cylinder(L / 2, cz, 0, W, r, colour="#232325", axis="z", seg=48)       # tyre
+        rim_z = (0, 25) if front_plus_z else (W - 25, W)
+        m.cylinder(L / 2, cz, rim_z[0] - 1, rim_z[1] + 1, r * 0.6, colour="#b9bcc0", axis="z", seg=40)
+        m.cylinder(L / 2, cz, rim_z[0] - 3, rim_z[1] + 3, r * 0.17, colour="#6d6f72", axis="z")
+        return m
     elif kind == "shower":
         m = Mesh()
         m.cylinder(L / 2, W - 20, 0, H, 12, colour=ALU)                 # riser rail on the wall
@@ -602,6 +707,195 @@ def furniture(variant="v2-real"):
     return out
 
 
+# --- the van body (v2-real): real positions, in millimetres -------------------------------
+# glTF is y-up, so a model point (x, y, z) is written (x, z, y) - the viewer's own mapping.
+def G(x, y, z):
+    return (x, z, y)
+
+
+SKIN_IN, SKIN_OUT, ARCH = "#e4e1da", "#f4f4f2", "#d9d5cc"
+SILL = -250                       # the body's lower edge below the finished floor
+CAVITY = 100                      # rib face to outer skin (model3d.BODY_CAVITY)
+TYRE_CUT = 420                    # wheel-arch cut-out radius in the outer skin
+
+
+def body_shell(variant="v2-real"):
+    """Both side walls following the real lean (finished face inside, the skin CAVITY outside
+    the ribs), their openings (slider, windows, hatches) with reveals, the wheel-arch cut-outs
+    in the skin, the rounded wheel arches inside, and the rear frame round the open doors."""
+    import model3d
+    from plan import VARIANTS, wall_inset
+    v = VARIANTS[variant]
+    sp, body = model3d.spec(v), v["body"]
+    L, W, H, WALL = v["length"], v["width"], v["height"], model3d.WALL
+    fin = lambda z: wall_inset(v, max(0, min(z, H)))
+    bare = lambda z: wall_inset(v, max(0, min(z, H)), bare=True)
+    clamp = lambda a: min(a, L - 50)
+    w0, w1, wd = v["well"]
+    wheel_x = (w0 + w1) / 2
+    m = Mesh()
+    zs_prof = [z for z, _ in body["profile"] if 0 < z < H]
+    for side in ("p", "d"):
+        sgn = 1 if side == "p" else -1                        # +1: the inside is +y
+        yin = lambda z: fin(z) if side == "p" else W - fin(z)
+        yout = lambda z: (bare(z) - CAVITY) if side == "p" else W - bare(z) + CAVITY
+        holes = [(sp_x0, clamp(sp_x1), 0, body["slider_h"]) for sp_x0, sp_x1 in [v["slider"]]] \
+            if side == "p" else []
+        holes += [(clamp(x0), clamp(x1), z0, z1)
+                  for s_, x0, x1, z0, z1 in list(sp["windows"]) + list(sp["hatches"]) if s_ == side]
+        top = H + WALL
+        rows = [(SILL + 25 * k, SILL + 25 * (k + 1)) for k in range(-SILL // 25)]
+        zz = sorted({0, top} | set(zs_prof) | {z for h in holes for z in h[2:] if 0 < z < top})
+        rows += list(zip(zz, zz[1:]))
+        for za, zb in rows:
+            zm = (za + zb) / 2
+            xs = {0, L}
+            cut = None
+            if zb <= 0 and abs(zm + 244) < TYRE_CUT:          # the rear wheel's cut-out
+                dx = (TYRE_CUT ** 2 - (zm + 244) ** 2) ** 0.5
+                cut = (wheel_x - dx, wheel_x + dx)
+                xs |= set(cut)
+            live = [h for h in holes if h[2] <= za and zb <= h[3]]
+            for h in live:
+                xs |= {h[0], h[1]}
+            xs = sorted(xs)
+            for xa, xb in zip(xs, xs[1:]):
+                xm = (xa + xb) / 2
+                if cut and cut[0] < xm < cut[1]:
+                    continue
+                if any(h[0] < xm < h[1] for h in live):
+                    continue
+                if zb > 0:                                    # the inner, finished face
+                    m.quad([G(xa, yin(za), za), G(xb, yin(za), za), G(xb, yin(zb), zb),
+                            G(xa, yin(zb), zb)], SKIN_IN, out=G(0, sgn, 0))
+                m.quad([G(xa, yout(za), za), G(xb, yout(za), za), G(xb, yout(zb), zb),
+                        G(xa, yout(zb), zb)], SKIN_OUT, out=G(0, -sgn, 0))
+        # reveals round each opening: the wall's thickness, skin to finished face
+        for x0, x1, z0, z1 in holes:
+            for z in (z0, z1):
+                if z > 0:
+                    m.quad([G(x0, yin(z), z), G(x1, yin(z), z), G(x1, yout(z), z),
+                            G(x0, yout(z), z)], SKIN_OUT, out=G(0, 0, 1 if z == z0 else -1))
+            for x in (x0, x1):
+                for za, zb in zip(zz, zz[1:]):
+                    if z0 <= za and zb <= z1:
+                        m.quad([G(x, yin(za), za), G(x, yout(za), za), G(x, yout(zb), zb),
+                                G(x, yin(zb), zb)], SKIN_OUT, out=G(1 if x == x0 else -1, 0, 0))
+        # the wall's lower edge and the top edge under the roof
+        m.quad([G(0, yin(0), SILL), G(L, yin(0), SILL), G(L, yout(0), SILL), G(0, yout(0), SILL)],
+               SKIN_OUT, out=G(0, 0, -1))
+        # the wheel arch inside: flat top, rounded ends (a squared ellipse), up to arch_h
+        ya, yb = (fin(0), wd) if side == "p" else (W - wd, W - fin(0))
+        face = wd if side == "p" else W - wd
+        n, half, h = 32, (w1 - w0) / 2, body["arch_h"]
+        prof = []
+        for k in range(n + 1):
+            x = w0 + (w1 - w0) * k / n
+            u = min(1.0, abs(x - (w0 + half)) / half)
+            prof.append((x, h * (1 - u ** 4) ** 0.25))
+        for (xa, za), (xb, zb) in zip(prof, prof[1:]):
+            m.quad([G(xa, ya, za), G(xb, ya, zb), G(xb, yb, zb), G(xa, yb, za)], ARCH, out=G(0, 0, 1))
+        m.polygon([(w0, 0)] + prof[1:-1] + [(w1, 0)], "z", face, ARCH, out=G(0, sgn, 0))
+    # the rear frame round the open doors, and the bumper and lights
+    ri, rh = model3d.REAR_DOORS[0], body["rear_h"]
+    zz = sorted({SILL, 0, rh, H + WALL} | set(zs_prof))
+    for za, zb in zip(zz, zz[1:]):
+        ia, ib = max(fin(za), 0), max(fin(zb), 0)
+        oa, ob = bare(za) - CAVITY, bare(zb) - CAVITY
+        if zb <= rh:
+            strips = [((oa, ob), (ri, ri)), ((W - ri, W - ri), (W - oa, W - ob))]
+        else:
+            strips = [((oa, ob), (W - oa, W - ob))]
+        for (y0a, y0b), (y1a, y1b) in strips:
+            for x, out in ((L + WALL, 1), (L, -1)):
+                m.quad([G(x, y0a, za), G(x, y1a, za), G(x, y1b, zb), G(x, y0b, zb)],
+                       SKIN_OUT if out > 0 else SKIN_IN, out=G(out, 0, 0))
+    x0, x1 = L, L + 226
+    m.box(x0, x1, -380, -150, -60, W + 60, "#3a3a3a")          # rear bumper (glTF: y is up)
+    for y0 in (bare(900) - CAVITY + 5, W - bare(900) + CAVITY - 75):
+        m.box(L + WALL, L + WALL + 6, 700, 1250, y0, y0 + 70, "#b3262e")   # tall rear lights
+    return m
+
+
+def body_roof(variant="v2-real"):
+    """The roof panel, with the two fan cut-outs, from skin to skin across the top."""
+    import model3d
+    from plan import VARIANTS, wall_inset
+    v = VARIANTS[variant]
+    sp = model3d.spec(v)
+    L, W, H, WALL = v["length"], v["width"], v["height"], model3d.WALL
+    y0, y1 = wall_inset(v, H, bare=True) - CAVITY, W - wall_inset(v, H, bare=True) + CAVITY
+    fans = sp["fans"]
+    xs = sorted({0, L + WALL} | {f[0] for f in fans} | {f[1] for f in fans})
+    ys = sorted({y0, y1} | {f[2] for f in fans} | {f[3] for f in fans})
+    m = Mesh()
+    for xa, xb in zip(xs, xs[1:]):
+        for ya, yb in zip(ys, ys[1:]):
+            xm, ym = (xa + xb) / 2, (ya + yb) / 2
+            if any(f[0] < xm < f[1] and f[2] < ym < f[3] for f in fans):
+                continue
+            m.quad([G(xa, ya, H + WALL), G(xb, ya, H + WALL), G(xb, yb, H + WALL),
+                    G(xa, yb, H + WALL)], SKIN_OUT, out=G(0, 0, 1))
+            m.quad([G(xa, ya, H), G(xb, ya, H), G(xb, yb, H), G(xa, yb, H)], SKIN_IN,
+                   out=G(0, 0, -1))
+    for f in fans:                                              # the cut-out's reveal
+        for (xa, ya), (xb, yb) in (((f[0], f[2]), (f[1], f[2])), ((f[1], f[2]), (f[1], f[3])),
+                                   ((f[1], f[3]), (f[0], f[3])), ((f[0], f[3]), (f[0], f[2]))):
+            m.quad([G(xa, ya, H), G(xb, yb, H), G(xb, yb, H + WALL), G(xa, ya, H + WALL)], SKIN_OUT)
+    return m
+
+
+def body_cab(variant="v2-real"):
+    """The Crafter's nose, from the partition to the bumper: its side profile (roof over the
+    cab, windscreen, bonnet, grille, bumper, the front wheel's arch) extruded across the van,
+    open door windows, a see-through windscreen, lights, grille, mirrors."""
+    import model3d
+    from plan import VARIANTS
+    v = VARIANTS[variant]
+    sp = model3d.spec(v)
+    W, H, WALL = v["width"], v["height"], model3d.WALL
+    nose, fa = sp["nose"], sp["front_axle"]
+    top = H + WALL
+    wy0, wy1 = -80, W + 80                                      # the cab's outer skin
+    ws_top, ws_base = (-1080, 1420), (-1600, 880)
+    front = [(0, top), (-850, top), (-1000, top - 100), ws_top, ws_base,
+             (-2230, 700), (-2330, 600), (-nose, 350), (-nose, -380)]
+    arch = []
+    for k in range(25):                                         # the front wheel's arch
+        a = math.pi * k / 24
+        arch.append((fa - TYRE_CUT * math.cos(a), -244 + TYRE_CUT * math.sin(a)))
+    arch = [(x, max(z, SILL)) for x, z in arch]
+    lower = front + [(fa - TYRE_CUT - 30, -380)] + arch + [(0, SILL)]
+    m = Mesh()
+    belt = 1000
+    below = [(x, min(z, belt)) for x, z in lower]
+    ws_at_belt = ws_base[0] + (belt - ws_base[1]) * (ws_top[0] - ws_base[0]) / (ws_top[1] - ws_base[1])
+    lower_pts = [(0, belt), (ws_at_belt, belt), ws_base, (-2230, 700), (-2330, 600), (-nose, 350),
+                 (-nose, -380), (fa - TYRE_CUT - 30, -380)] + arch + [(0, SILL)]
+    for y, out in ((wy0, -1), (wy1, 1)):
+        m.polygon(lower_pts, "z", y, SKIN_OUT, out=G(0, out, 0))
+        # above the belt: B-pillar, the roof edge, the A-pillar along the windscreen
+        m.polygon([(0, belt), (0, top), (-150, top), (-150, belt)], "z", y, SKIN_OUT, out=G(0, out, 0))
+        m.polygon([(-150, 1380), (-150, top), (-850, top), (-1000, top - 100), ws_top,
+                   (-1000, 1380)], "z", y, SKIN_OUT, out=G(0, out, 0))
+        m.polygon([ws_top, (ws_at_belt, belt), (ws_at_belt + 110, belt), (ws_top[0] + 90, ws_top[1] - 30)],
+                  "z", y, SKIN_OUT, out=G(0, out, 0))
+        # door handle and mirror
+        m.box(-420, -300, 820, 845, y - 6 if out < 0 else y, y if out < 0 else y + 6, "#2b2b2b")
+        my = (y - 260, y) if out < 0 else (y, y + 260)
+        m.box(-1320, -1240, 1030, 1300, my[0], my[1], "#2b2b2b")
+    # across the front: roof front, windscreen (glass), bonnet, grille face, bumper face
+    for (xa, za), (xb, zb) in zip(front, front[1:]):
+        col = "#8fb3c766" if (xa, za) == ws_top else SKIN_OUT
+        m.quad([G(xa, wy0, za), G(xb, wy0, zb), G(xb, wy1, zb), G(xa, wy1, za)], col,
+               out=G(-1, 0, 1))
+    m.box(-nose - 20, -2200, -380, -150, wy0 + 20, wy1 - 20, "#3a3a3a")          # bumper
+    m.box(-nose - 4, -nose, 380, 560, 420, W - 420, "#2b2b2b")                  # grille
+    for y0 in (40, W - 360):                                                    # headlights
+        m.box(-2336, -2300, 440, 560, y0, y0 + 320, "#e8eef2")
+    return m
+
+
 SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
           "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini,
           "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
@@ -624,6 +918,10 @@ def main():
     for name, m in pieces.items():
         m.glb(os.path.join(OUT, name + ".glb"))
     print("wrote %d furniture meshes" % len(pieces))
+    for part, make in (("shell", body_shell), ("roof", body_roof), ("cab", body_cab)):
+        path = os.path.join(OUT, "v2-real-body-%s.glb" % part)
+        make().glb(path)
+        print("wrote", path, "%.1f kB" % (os.path.getsize(path) / 1000))
 
 
 if __name__ == "__main__":
