@@ -184,7 +184,7 @@ deep). All four are in the model and in the payload check.
 | | Reich Linnea L | 200 tall, reach 160 | made for camper pumps, fits 12 mm pipe | 109 | option — reach too short |
 | | Comet London | 180 tall, folds to 40, reach 145 | camper tap | 18 | option — reach too short |
 | Drinking filter | **Alb Filter Nano under-sink set** | housing Ø69 x 120; needs ~75 x 75 x 260 | **0.1 µm, certified against bacteria** (ASTM F838-15A); 5,000–7,000 L or 6 months, cartridge 59.90 | 170 | proposed |
-| Drinking tap | **its-wasser.de "Fil 1-Weg 1/4 kurz"** | outlet ~228 above the worktop | 12 mm hole | 109 | proposed — check height and reach |
+| Drinking tap | **its-wasser.de "Fil 1-Weg 1/4"**, **long-thread version** | outlet 228 above the worktop | 12 mm hole, 1/4" push-fit hose, ceramic quarter-turn | 109 | proposed — ask for the long thread; reach not published |
 
 Why:
 
@@ -199,8 +199,12 @@ Why:
   bacteria** and small enough. A 3-way tap does not fit: the lowest is 300 tall, our limit 280.
   Carbon-only filters (Omnipure) do not stop bacteria; the Seagull IV needs 1.7 bar, our pump
   gives 1.4. Add Alb's carbon stage (Fusion, ~320 long) only if the water tastes bad.
+- **Drinking tap:** the "kurz" version has a **short thread and is "nicht für Arbeitsplatte
+  geeignet"** — it is made to go through a thin steel sink deck. Our sink has no deck (a 20 mm
+  rim), so the tap goes through the **worktop**: order the **long-thread** version. The spout
+  outlet is 228 above the worktop — tall glasses and bottles fit under it.
 - **To check:** the Alb's flow at 1.4 bar (not published — ask or test), and the drinking tap's
-  real height and reach (it must reach ~180 to pour into the bowl).
+  reach (it must reach ~180 to pour into the bowl) and total height (drawn 280, the limit).
 
 **Kitchen water total: ~€690** (sink 179 + mixer 226 + filter 170 + tap 109).
 

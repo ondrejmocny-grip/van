@@ -915,7 +915,7 @@ APPLIANCES_V2R = [
     (1434, 1690, 1575, 1635,  925, 1127, "tap"),
     # drinking tap behind the mixer (toward the wall), its neck reaching 185 forward over the
     # bowl - its-wasser Fil kurz; its reach is not published: it needs >= ~180
-    (1560, 1770, 1655, 1705,  925, 1175, "filtertap"),
+    (1560, 1770, 1655, 1705,  925, 1205, "filtertap"),   # outlet 228 up; 280 in all, est.
     (1600, 1860, 1615, 1690,  410,  485, "filter"),     # Alb Filter Nano + couplings, 0.1 micron
     # galley, passenger side - carcass y 70-635
     # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the

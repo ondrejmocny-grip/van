@@ -344,7 +344,7 @@ def tap_grohe():
 def filtertap_its():
     """A slim drinking-water tap standing aft of the bowl: base, a thin column, and a neck
     reaching forward (toward x = 0) so it pours into the bowl, a small lever."""
-    L, W, H = 210, 50, 250
+    L, W, H = 210, 50, 280
     bx, c = L - 25, W / 2
     m = Mesh()
     m.cylinder(bx, c, 0, 10, 20, colour="#aab0b6")
