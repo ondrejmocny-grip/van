@@ -56,7 +56,7 @@ ITEMS = [
     ("Electrics", "2 x 150 Ah LiFePO4 (Ective LC 150 LT 15.5 kg each)", 31.0, at("battery"), "ective.de"),
     ("Electrics", "Victron MultiPlus C 12/2000/80 (was 12/3000, 18 kg)", 12.0, at("inverter"), "Victron datasheet"),
     ("Electrics", "SmartSolar MPPT 100/30 + Orion XS 12/12-50 + SmartShunt", 1.8, at("electrics"), "Victron datasheets; shunt est."),
-    ("Electrics", "Busbars, fuses, 230 V box (RCD + 2 MCB), CEE inlet", 4.0, at("electrics"), "box 0.6, inlet 0.35; rest est."),
+    ("Electrics", "Busbars, fuses, 230 V box (RCD + 2 MCB), CEE inlet", 4.0, at("board"), "box 0.6, inlet 0.35; rest est."),
     ("Electrics", "12 V cable ~120 m (95-1.5 mm2) + 230 V 8 m + lugs, conduit", 15.0, 1800, "systems.md: 12 V 12 kg; rest est."),
     ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + roof bars on VW's rack points (3-4 pairs)", 34.0, 1810, "Victron 185 W 11 kg; bars ~12 kg est. - VW: roof kit on rack points, approval.md"),
     ("Electrics", "Starlink Mini + mount and cable", 1.6, 240, "Mini 1.10 kg (Starlink spec); mount est."),

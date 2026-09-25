@@ -391,12 +391,71 @@ def filter_alb():
     return m
 
 
+VBLUE, COPPER = "#1f5fa8", "#b87333"
+
+
+def distribution():
+    """The distribution box in the driver bench, 220 along x 160 across x 200 high: a board on
+    the wall side (+z) carrying the Orion XS, the SmartShunt, two copper busbars, a MEGA fuse
+    per battery and the blade fuse block - all at their datasheet sizes."""
+    L, W, H = 220, 160, 200
+    m = Mesh()
+    m.box(0, L, 0, H, W - 12, W, "#d8cfbf")                              # plywood backboard
+    ob = PRODUCTS["orion-xs-50"]["outer"]                                # 137 x 123 x 40
+    m.box(8, 8 + ob[0], 70, 70 + ob[1], W - 12 - ob[2], W - 12, VBLUE)   # Orion XS
+    sh = PRODUCTS["smartshunt-500"]["outer"]                             # 46 x 120 x 54
+    m.box(8, 8 + sh[1], 12, 12 + sh[0], W - 12 - sh[2], W - 12, VBLUE)   # SmartShunt, lying
+    m.box(150, 212, 150, 162, W - 40, W - 12, COPPER)                    # + busbar
+    m.box(150, 212, 128, 140, W - 40, W - 12, "#333")                    # - busbar
+    for k, x in enumerate((152, 184)):                                   # MEGA fuse per battery
+        m.box(x, x + 26, 60, 118, W - 42, W - 12, "#c8102e")
+    m.box(140, 212, 8, 50, W - 45, W - 12, "#222")                       # blade fuse block
+    for k in range(6):
+        m.box(146 + 11 * k, 152 + 11 * k, 50, 58, W - 30, W - 20,
+              ("#f2c200", "#c8102e", "#2e86c1", "#2e8b57", "#f2c200", "#c8102e")[k])
+    return m
+
+
+def garage_board():
+    """The garage board on the driver wall, 400 along x 110 deep x 300 high: SmartSolar MPPT
+    100/30, the PV isolator, and the 230 V box A (2-pole RCBO) under the CEE inlet."""
+    L, W, H = 400, 110, 300
+    m = Mesh()
+    m.box(0, L, 0, H, W - 12, W, "#d8cfbf")                              # backboard
+    mp = PRODUCTS["smartsolar-100-30"]["outer"]                          # 130 x 186 x 70
+    m.box(20, 20 + mp[0], 90, 90 + mp[1], W - 12 - mp[2], W - 12, VBLUE)
+    m.box(40, 130, 150, 190, W - 12 - mp[2] - 2, W - 12 - mp[2], "#15407a")  # heat sink look
+    sb = PRODUCTS["shore-230v"]["outer"]                                 # 150 x 100 x 100
+    m.box(230, 230 + sb[0], 150, 150 + sb[1], W - 12 - sb[2] + 10, W - 12, "#9aa0a6")
+    m.box(270, 340, 170, 230, W - 12 - sb[2] + 6, W - 12 - sb[2] + 10, "#dfe6ea")  # window
+    m.box(230, 290, 40, 100, W - 50, W - 12, "#e8e8e8")                  # PV isolator
+    m.cylinder(260, W - 50, 60, 80, 14, colour="#c8102e", axis="z")      # its red knob
+    return m
+
+
+def plumbing():
+    """The pump box under the sink, 340 x 340 x 330: the Shurflo Trail King 7 on its plate,
+    a strainer before it, a small accumulator after it, and the sink trap coming down."""
+    L, W, H = 340, 340, 330
+    m = Mesh()
+    pl, pw, ph = PRODUCTS["shurflo-trailking-7"]["outer"]                # 197 x 127 x 113
+    m.box(20, 240, 0, 8, 20, 180, "#555")                                # mounting plate
+    m.box(30, 30 + pl * 0.55, 8, 8 + ph, 40, 40 + pw, "#2b2b2b")         # motor
+    m.box(30 + pl * 0.55, 30 + pl, 8, 8 + ph, 40, 40 + pw, "#8d9399")    # pump head
+    m.cylinder(8 + ph / 2, 100, 230, 300, 30, colour="#e9e9e9", axis="x")  # strainer, in
+    m.cylinder(290, 250, 0, 200, 45, colour="#2e86c1")                   # accumulator
+    m.cylinder(120, 280, 180, H, 20, colour="#cfcfcf")                   # trap, down from the sink
+    m.cylinder(120, 280, 140, 180, 32, colour="#cfcfcf")                 # its bottle
+    return m
+
+
 SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
           "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini,
           "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
           "portapotti": porta_potti, "oven-tefal": oven_tefal,
           "fresh-v2r": fresh_tank, "grey-v2r": grey_tank,
-          "tap-grohe": tap_grohe, "tap-franke": tap_franke, "filtertap-its": filtertap_its, "filter-alb": filter_alb}
+          "tap-grohe": tap_grohe, "tap-franke": tap_franke,
+          "dist-v2r": distribution, "board-v2r": garage_board, "plumbing-v2r": plumbing, "filtertap-its": filtertap_its, "filter-alb": filter_alb}
 
 
 def main():

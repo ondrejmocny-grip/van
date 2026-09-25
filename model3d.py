@@ -446,7 +446,7 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 # control image just draws boxes through the furniture and confuses the canny map.
 INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey", "gasbottle",
             "calorifier", "filter",
-            "battery", "inverter", "electrics")
+            "battery", "inverter", "electrics", "board")
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
@@ -483,7 +483,7 @@ NAMES = {
     "fridge": "Fridge 70 L", "fridgedoor": "Fridge 90 L, hinged door",
     "fresh": "Fresh water 110 L", "grey": "Grey water 70 L", "calorifier": "Calorifier 10 L",
     "battery": "Battery 150 Ah", "inverter": "Inverter 3000 W",
-    "electrics": "MPPT, DC-DC, fuses",
+    "electrics": "MPPT, DC-DC, fuses", "board": "Garage board: MPPT, 230 V box",
 }
 
 # --- the vehicle itself ----------------------------------------------------
@@ -559,7 +559,7 @@ KIND = {          # plan label or extra kind -> colour
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
     "fridgedoor": "#cfe4c9", "filter": "#7fb2cf", "filtertap": "#b6bcbe", "tap": "#b6bcbe",
     "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
-    "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
+    "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36", "board": "#b98b36",
 }
 GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 
@@ -572,7 +572,8 @@ KEEP_SHAPE = ("plumbing",)
 # Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
 OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink",
                "hob-thetford", "fridge-c95l", "b10", "portapotti", "oven-tefal",
-               "fresh-v2r", "grey-v2r", "tap-grohe", "tap-franke", "filtertap-its", "filter-alb")
+               "fresh-v2r", "grey-v2r", "tap-grohe", "tap-franke", "filtertap-its", "filter-alb",
+               "dist-v2r", "board-v2r", "plumbing-v2r")
 # Meshes drawn at their true size inside a bigger slot, standing on its floor
 REAL_SIZE = ("portapotti",)
 
@@ -958,7 +959,7 @@ APPLIANCES_V2R = [
     (2580, 2800, 1250, 1410,   30,  230, "electrics"),
     # SmartSolar MPPT 100/30 and the 230 V shore box - on a board against the wall in the
     # garage, under the power inlet and the solar cable's way down (systems.py).
-    (2900, 3300, 1672, 1782,   60,  360, "electrics"),
+    (2900, 3300, 1672, 1782,   60,  360, "board"),
 ]
 
 # The seated people, against the leaning wall. Your hips sit on the cushion at the wall, but
@@ -1064,7 +1065,8 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                     "calorifier": "b10", "cassette": "portapotti",
                                     "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r",
                                     "tap": "tap-franke", "filtertap": "filtertap-its",
-                                    "filter": "filter-alb"},
+                                    "filter": "filter-alb", "electrics": "dist-v2r",
+                                    "board": "board-v2r", "plumbing": "plumbing-v2r"},
                            runs=True,
                            # the solids.py meshes are built for the side they stand on here
                            facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
@@ -1083,7 +1085,8 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                   "battery": "Ective LC 150 LT, 150 Ah",
                                   "inverter": "Victron MultiPlus C 12/2000/80",
                                   "plumbing": "Pump Shurflo Trail King 7, filter, trap",
-                                  "electrics": "Electrics: fuses, busbars, DC-DC, MPPT, 230 V box"},
+                                  "electrics": "Distribution: fuses, shunt, busbars, Orion XS, fuse block",
+                                  "board": "Garage board: MPPT 100/30, 230 V box A, PV isolator"},
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
                            # taken out INSIDE, through the wardrobe base's lobby-side door. The
                            # only side-wall holes are the small service openings above.

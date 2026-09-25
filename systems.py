@@ -45,7 +45,7 @@ def centre(b, z=None):
 # --- the nodes ----------------------------------------------------------------------------
 H = V["height"]
 DIST = centre(box("electrics", 0))          # bench: main fuse, shunt, busbars, DC-DC, fuse block
-BOARD = centre(box("electrics", 1))         # garage: MPPT, 230 V box
+BOARD = centre(box("board"))         # garage: MPPT, 230 V box
 INV = centre(box("inverter"))
 BAT = centre(box("battery", 0))
 BAT2 = centre(box("battery", 1))

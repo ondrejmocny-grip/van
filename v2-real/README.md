@@ -15,7 +15,8 @@ cut-outs, the two MaxxFans, the two solar panels and the Starlink Mini, at catal
 [systems.md](systems.md) as tubes (turn off Body, Lockers and Shower to see them). The roof
 has its **rails and cross bars** on VW's rack points. Every chosen product - hob, fridge, oven, Truma
 B10, Porta Potti, both tanks, gas bottle, batteries, MultiPlus, panels, fans, Starlink, the
-Franke mixer, the drinking tap and the Alb filter - is an exact mesh built from its datasheet
+Franke mixer, the drinking tap and the Alb filter, and the custom parts (distribution box in the
+bench, garage board, pump box) - is an exact mesh built from datasheet sizes
 (`solids.py`) — see [props-sheet.png](props-sheet.png).
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
