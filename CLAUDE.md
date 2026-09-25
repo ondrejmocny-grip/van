@@ -61,9 +61,11 @@ viewer` writes it to the top-level `viewer.html`. Republish that one; the per-ve
 The box in `model3d.py` stays the authority — the viewer scales a mesh to fill its box, so a
 generated shape can never quietly change a dimension.
 
-Products that are simple shapes (solar panel, fan, gas bottle, battery, inverter, Starlink)
-are not generated: `solids.py` builds them in code from `products.py` sizes, with their own
-colours. A variant can point a kind at its own mesh (`propmap` in `REGISTRY`), so v2-real's
+**For v2-real, every product is built in code, not generated** (Ondrej, 2026-09-25: "as long
+as the dimensions match, primitives are fine - more precise"): `solids.py` builds hob, fridge,
+oven, water heater, WC, tanks, gas bottle, batteries, inverter, panels, fans and Starlink from
+`products.py` sizes, with their own colours. A mesh at `REAL_SIZE` is drawn 1:1 in a bigger
+slot (the WC). A variant can point a kind at its own mesh (`propmap` in `REGISTRY`), so v2-real's
 battery can be the real Ective while v2 keeps the generic one.
 
 Two things that cost a whole generation round each when we got them wrong:

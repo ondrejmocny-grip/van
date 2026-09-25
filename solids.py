@@ -61,8 +61,19 @@ class Mesh:
             n = n / (np.linalg.norm(n) or 1)
             self._add(colour, q, [n] * 4, [0, 1, 2, 0, 2, 3])
 
-    def cylinder(self, cx, cz, y0, y1, r0, r1=None, colour="#888", seg=32, caps=True):
-        """Upright (along y) cylinder or cone frustum, radius r0 at y0 and r1 at y1."""
+    def cylinder(self, cx, cz, y0, y1, r0, r1=None, colour="#888", seg=32, caps=True, axis="y"):
+        """Upright (along y) cylinder or cone frustum, radius r0 at y0 and r1 at y1. With
+        axis="z" it lies across the van instead: cx, cz are then its x and height, y0..y1 its
+        run across - for knobs on a front face."""
+        if axis == "z":
+            tmp = Mesh()
+            tmp.cylinder(cx, cz, y0, y1, r0, r1, colour, seg, caps)
+            for col, (ps, ns, ix) in tmp.parts.items():
+                for pp, nn, ii in zip(ps, ns, ix):
+                    # swap y and z: a mirror, so the triangles turn round too
+                    self._add(col, pp[:, [0, 2, 1]], nn[:, [0, 2, 1]], ii.reshape(-1, 3)[:, ::-1].ravel()
+                              - ii.min())
+            return
         r1 = r0 if r1 is None else r1
         pos, nrm, idx = [], [], []
         slope = (r0 - r1) / ((y1 - y0) or 1)
@@ -207,8 +218,117 @@ def starlink_mini():
     return m
 
 
+def hob():
+    """Thetford Topline 922: a stainless top with two burners one behind the other, black pan
+    supports, two knobs at the aisle edge; the body hangs under the worktop. 305 along the van,
+    500 across, the aisle at +z."""
+    L, W, _ = PRODUCTS["thetford-topline-922"]["outer"]
+    H, top = 80, 70
+    m = Mesh()
+    m.box(10, L - 10, 0, top - 2, 10, W - 10, "#3a3a3a")                 # body under the worktop
+    m.box(0, L, top - 2, top + 2, 0, W, "#c9cdd2")                       # stainless top
+    for zc, r in ((150, 45), (330, 38)):
+        m.cylinder(L / 2, zc, top + 2, top + 9, r, colour="#2b2b2b")     # burner
+        m.cylinder(L / 2, zc, top + 9, top + 12, r * 0.55, colour="#111")      # cap
+        for a in range(4):                                               # pan support arms
+            if a % 2:
+                m.box(L / 2 - 4, L / 2 + 4, top + 2, H, zc - r - 25, zc - r + 5, "#111")
+                m.box(L / 2 - 4, L / 2 + 4, top + 2, H, zc + r - 5, zc + r + 25, "#111")
+            else:
+                m.box(L / 2 - r - 25, L / 2 - r + 5, top + 2, H, zc - 4, zc + 4, "#111")
+                m.box(L / 2 + r - 5, L / 2 + r + 25, top + 2, H, zc - 4, zc + 4, "#111")
+    for xc in (L * 0.3, L * 0.7):
+        m.cylinder(xc, W - 45, top + 2, top + 22, 17, colour="#1a1a1a")  # knobs
+    return m
+
+
+def fridge_c95l():
+    """Vitrifrigo C95L: black cabinet, a flush door on the aisle side (+z) with a long handle,
+    the control panel along the top, a vent grille at the bottom."""
+    L, D, H = PRODUCTS["vitrifrigo-c95l"]["outer"]
+    m = Mesh()
+    m.box(0, L, 0, H, 0, D - 20, "#1f1f1f")
+    m.box(10, L - 10, 60, H - 70, D - 20, D, "#2c2d30")                  # door
+    m.box(0, L, H - 70, H, D - 20, D - 4, "#151515")                     # control strip
+    m.box(L * 0.4, L * 0.6, H - 45, H - 25, D - 4, D - 2, "#5ab4e6")     # display
+    m.box(L - 45, L - 25, 200, H - 150, D, D + 12, "#b9bcc0")            # handle
+    for k in range(6):                                                   # grille
+        m.box(40, L - 40, 12 + 8 * k, 16 + 8 * k, D - 20, D - 16, "#555")
+    return m
+
+
+def truma_b10():
+    """Truma Boiler B10: a light grey casing, the flue out through the passenger wall (-z),
+    blue and red water connections on top."""
+    L, D, H = PRODUCTS["truma-b10"]["outer"]
+    m = Mesh()
+    m.box(0, L, 0, H, 20, D, "#dfe1e0")
+    m.box(L * 0.3, L * 0.7, H * 0.3, H * 0.75, 3, 20, "#9a9c9e")          # flue to the wall
+    m.box(L * 0.25, L * 0.75, H * 0.2, H * 0.85, 0, 3, "#6d6f72")         # wall cowl, inside face
+    m.cylinder(L * 0.35, D * 0.6, H, H + 25, 9, colour="#2e86c1")
+    m.cylinder(L * 0.65, D * 0.6, H, H + 25, 9, colour="#e74c3c")
+    m.box(L * 0.1, L * 0.3, H * 0.5, H * 0.65, D, D + 4, "#3a3d42")       # control / label
+    return m
+
+
+def porta_potti():
+    """Thetford Porta Potti 565E at its REAL size (386 x 450 x 447), which is smaller than its
+    slot - the viewer places it at 1:1 on the slot's floor (model3d.REAL_SIZE). Grey waste
+    tank below, white flush unit with seat and lid above, facing the aisle (-z)."""
+    W, D, H = PRODUCTS["porta-potti-565e"]["outer"]
+    m = Mesh()
+    low = H * 0.42
+    m.box(0, W, 0, low, 0, D, "#8d9399")                                 # waste tank
+    m.box(0, W, low, H - 40, 0, D, "#f3f3f1")                            # flush unit
+    m.box(20, W - 20, H - 40, H - 25, 0, D - 60, "#e6e6e3")              # seat
+    m.box(20, W - 20, H - 25, H, 10, D - 60, "#fafaf8")                  # lid, closed
+    m.box(W - 90, W - 30, H - 40, H - 20, D - 55, D - 10, "#9aa0a6")     # flush button
+    m.box(W * 0.3, W * 0.7, low - 30, low - 10, -4, 0, "#5b6066")        # release handle
+    return m
+
+
+def oven_tefal():
+    """Tefal Optimo OF4448: silver-grey body, a dark glass door on the aisle side (-z) with a
+    handle, three knobs down the right of the front."""
+    L, D, H = PRODUCTS["tefal-of4448"]["outer"]
+    m = Mesh()
+    m.box(0, L, 0, H, 3, D, "#b9bcc0")
+    # the knobs are on the right of the front seen from the aisle - the forward end (x = 0)
+    m.box(120, L - 15, 30, H - 30, 0, 3, "#262a2e")                      # door glass
+    m.box(145, L - 40, H - 55, H - 42, -18, 0, "#8d9399")                # handle
+    for k in range(3):
+        m.cylinder(60, H * (0.25 + 0.25 * k), -16, 0, 15, colour="#1a1a1a", axis="z")
+    return m
+
+
+def tank(L, D, H, lid_x, fittings):
+    """A tank made to size: natural PE, a cleaning lid, round fittings on top."""
+    m = Mesh()
+    m.box(0, L, 0, H, 0, D, "#e8e4d8")
+    m.cylinder(lid_x, D / 2, H, H + 12, min(80, D / 2 - 20), colour="#3a3d42")
+    for x, z, r, col in fittings:
+        m.cylinder(x, z, H, H + 30, r, colour=col)
+    return m
+
+
+def fresh_tank():
+    """Fresh tank, 1020 x 374 x 310: cleaning lid, filler, vent, level sensor, blue outlet."""
+    return tank(1020, 374, 310, 520,
+                [(930, 187, 22, "#d6d8da"), (980, 300, 9, "#d6d8da"), (300, 187, 14, "#555"),
+                 (40, 187, 10, "#2e86c1")])
+
+
+def grey_tank():
+    """Grey tank, 880 x 600 x 180: cleaning lid, sink and shower inlets, level sensor."""
+    return tank(880, 600, 180, 440,
+                [(40, 480, 18, "#6e5a44"), (40, 540, 11, "#6e5a44"), (780, 300, 14, "#555")])
+
+
 SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
-          "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini}
+          "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini,
+          "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
+          "portapotti": porta_potti, "oven-tefal": oven_tefal,
+          "fresh-v2r": fresh_tank, "grey-v2r": grey_tank}
 
 
 def main():

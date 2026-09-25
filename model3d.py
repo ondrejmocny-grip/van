@@ -570,7 +570,11 @@ GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 # fitted uniformly shrinks to a quarter of its slot, because the mesh is thicker than 70 mm.
 KEEP_SHAPE = ("plumbing",)
 # Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
-OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink")
+OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink",
+               "hob-thetford", "fridge-c95l", "b10", "portapotti", "oven-tefal",
+               "fresh-v2r", "grey-v2r")
+# Meshes drawn at their true size inside a bigger slot, standing on its floor
+REAL_SIZE = ("portapotti",)
 
 CAMERAS = [                         # name, elevation, azimuth
     ("01-from-the-rear-looking-forward", 6, -24),
@@ -1051,8 +1055,13 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
                            windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True, roof_kit=ROOF_V2R,
                            # its own meshes where the product differs from v2's generic one
-                           propmap={"battery": "battery-ective", "inverter": "inverter-multiplusc"},
+                           propmap={"battery": "battery-ective", "inverter": "inverter-multiplusc",
+                                    "hob": "hob-thetford", "fridgedoor": "fridge-c95l",
+                                    "calorifier": "b10", "cassette": "portapotti",
+                                    "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r"},
                            runs=True,
+                           # the solids.py meshes are built for the side they stand on here
+                           facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
                            names={"rack": "Roof rail / bar on VW's rack points",
                                   "hob": "Gas hob, Thetford Topline 922",
                                   "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",
@@ -1628,7 +1637,7 @@ def props_data(kinds=None):
             if kinds is not None and kind not in kinds:
                 continue
             out[kind] = {"yaw": yaw.get(kind, 0),
-                         "fit": "keep" if kind in KEEP_SHAPE else "fill",
+                         "fit": "real" if kind in REAL_SIZE else "keep" if kind in KEEP_SHAPE else "fill",
                          "own": kind in OWN_COLOURS,
                          "glb": base64.b64encode(open(os.path.join(d, name), "rb").read()).decode()}
     return out

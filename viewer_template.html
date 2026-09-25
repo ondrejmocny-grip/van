@@ -380,8 +380,12 @@
         // reservation keep their proportions instead; model3d.KEEP_SHAPE lists them.
         var sx = w / (size.x || 1), sy = h / (size.y || 1), sz = d / (size.z || 1);
         if (p.fit === "keep") { sx = sy = sz = Math.min(sx, sy, sz); }
+        // "real": built in mm at the product's true size, smaller than its slot - drawn 1:1,
+        // standing on the slot's floor, centred in plan
+        var lift = h / 2;
+        if (p.fit === "real") { sx = sy = sz = mm; lift = size.y * mm / 2; }
         wrap.scale.set(sx, sy, sz);
-        wrap.position.set(b[0] * mm + w / 2, b[4] * mm + h / 2, b[2] * mm + d / 2);
+        wrap.position.set(b[0] * mm + w / 2, b[4] * mm + lift, b[2] * mm + d / 2);
         wrap.visible = propsOn;
         scene.add(wrap);
         (propParts[item.k] = propParts[item.k] || []).push(wrap);
