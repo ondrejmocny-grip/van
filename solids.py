@@ -449,6 +449,159 @@ def plumbing():
     return m
 
 
+# --- furniture (v2-real): one mesh per box, built at that box's own size -----------------
+PLY, EDGE, TOP = "#e8dcc2", "#c9b187", "#c2a07a"          # poplar ply, its edge band, worktop
+FABRIC, PIPING, ALU = "#9aa98f", "#7c8b73", "#c9cdd2"
+
+
+def turned(m, L, W):
+    """The same mesh turned 180 degrees about the vertical: for a piece whose front faces +z."""
+    out = Mesh()
+    for col, (ps, ns, ix) in m.parts.items():
+        for pp, nn, ii in zip(ps, ns, ix):
+            q, r = pp.copy(), nn.copy()
+            q[:, 0], q[:, 2] = L - pp[:, 0], W - pp[:, 2]
+            r[:, 0], r[:, 2] = -nn[:, 0], -nn[:, 2]
+            out._add(col, q, r, ii - ii.min())
+    return out
+
+
+def panel(m, x0, x1, y0, y1, colour=PLY, latch=None):
+    """A door or lid front on the z = 0 face, 3 mm gaps, a round push latch at `latch`."""
+    m.box(x0 + 2, x1 - 2, y0 + 2, y1 - 2, 0, 2, colour)
+    if latch:
+        m.cylinder(latch[0], latch[1], -3, 0, 9, colour="#3a3a3a", axis="z")
+
+
+def carcass(L, W, H, worktop=0, doors=(), openings=(), lids=()):
+    """Front at z = 0. Body in poplar ply with edge bands round the front, an optional worktop,
+    door panels (x0, x1, y0, y1, latch), dark openings where an appliance shows, lids on top."""
+    m = Mesh()
+    m.box(0, L, 0, H - worktop, 2, W, PLY)
+    if worktop:
+        m.box(0, L, H - worktop, H, 0, W, TOP)
+    e = 18
+    for x0, x1, y0, y1 in ((0, e, 0, H - worktop), (L - e, L, 0, H - worktop),
+                           (0, L, H - worktop - e, H - worktop), (0, L, 0, e)):
+        m.box(x0, x1, y0, y1, 0.5, 2, EDGE)
+    for x0, x1, y0, y1, latch in doors:
+        panel(m, x0, x1, y0, y1, latch=latch)
+    for x0, x1, y0, y1 in openings:
+        m.box(x0, x1, y0, y1, 0, 2.5, "#2a2a2a")
+    for x0, x1 in lids:                                    # lid gaps on the top
+        m.box(x0, x0 + 3, H, H + 0.5, 2, W, EDGE)
+        m.box(x1 - 3, x1, H, H + 0.5, 2, W, EDGE)
+    return m
+
+
+def cushion(L, W, H, colour=FABRIC):
+    """Foam in fabric, a piped edge round the top."""
+    m = Mesh()
+    m.box(6, L - 6, 0, H - 6, 6, W - 6, colour)
+    m.box(12, L - 12, H - 6, H, 12, W - 12, colour)
+    for x0, x1, z0, z1 in ((0, L, 0, 8), (0, L, W - 8, W), (0, 8, 8, W - 8), (L - 8, L, 8, W - 8)):
+        m.box(x0, x1, H - 16, H - 6, z0, z1, PIPING)
+    return m
+
+
+def slab(L, W, H, colour=TOP):
+    m = Mesh()
+    m.box(0, L, 0, H, 0, W, colour)
+    return m
+
+
+def furniture_piece(kind, L, W, H, front_plus_z, n):
+    """One furniture box. L along x, W across (z), H up. Front at z = 0, turned if +z."""
+    if kind in ("SINK", "HOB"):
+        # the galley: 30 worktop, the built-in appliance's opening, a cupboard door beside it
+        if kind == "SINK":        # oven opening at x 135-597, z 380-668; cupboard aft of it
+            m = carcass(L, W, H, 30, doors=[(597, L, 40, H - 30, (L - 40, H - 80))],
+                        openings=[(135, 597, 380, 668)])
+        else:                      # passenger side, so built mirrored and turned: the fridge
+            # door at van x 100-585 is 195-680 here, the cupboard aft of it 0-195
+            m = carcass(L, W, H, 30, doors=[(0, 195, 40, H - 30, (40, H - 80))],
+                        openings=[(195, 680, 30, 822)])
+    elif kind in ("BENCH", "LOCKER"):
+        m = carcass(L, W, H, lids=[(0, L / 2), (L / 2, L)] if kind == "BENCH" else [(0, L)])
+    elif kind == "REAR BENCH":
+        # front faces forward (-x): built with its length across, then turned a quarter
+        m = carcass(W, L, H, lids=[(0, W / 3), (W / 3, 2 * W / 3), (2 * W / 3, W)])
+        out = Mesh()
+        for col, (ps, ns, ix) in m.parts.items():
+            for pp, nn, ii in zip(ps, ns, ix):
+                q, r = pp.copy(), nn.copy()
+                q[:, 0], q[:, 2] = pp[:, 2], W - pp[:, 0]
+                r[:, 0], r[:, 2] = nn[:, 2], -nn[:, 0]
+                out._add(col, q, r, ii - ii.min())
+        return out
+    elif kind == "FOOTWELL -> BED":
+        m = carcass(L, W, H, lids=[(0, L)])
+        m.cylinder(L / 2, W / 2, H, H + 3, 60, colour=ALU)             # the post socket
+        return m                                                        # no front to turn
+    elif kind == "WARDROBE":
+        latch = (L / 2 - 20, H - 60) if n in (0, 3) else None
+        m = carcass(L, W, H)
+        panel(m, 20, L / 2 - 1, 20, H, latch=latch and (L / 2 - 30, latch[1]))
+        panel(m, L / 2 + 1, L - 20, 20, H, latch=latch and (L / 2 + 30, latch[1]))
+    elif kind == "overhead":
+        m = carcass(L, W, H)
+        k = max(1, round(L / 420))                                      # doors ~400 wide
+        for i in range(k):
+            x0, x1 = 20 + (L - 40) * i / k, 20 + (L - 40) * (i + 1) / k
+            panel(m, x0, x1, 20, H - 20, latch=((x0 + x1) / 2, 40))
+    elif kind in ("bed", "infill", "backrest"):
+        m = cushion(L, W, H)
+    elif kind == "pillow":
+        m = cushion(L, W, H, colour="#f1eee8")
+    elif kind in ("table", "ftable"):
+        m = Mesh()
+        m.box(0, L, H - 25, H, 0, W, TOP)
+        for x0, x1, z0, z1 in ((0, L, 0, 3), (0, L, W - 3, W), (0, 3, 0, W), (L - 3, L, 0, W)):
+            m.box(x0, x1, H - 25, H, z0, z1, EDGE)
+        if kind == "table":
+            m.cylinder(L / 2, W / 2, 0, H - 25, 55, colour=ALU)         # the socket on the post
+        else:
+            m.box(L * 0.6, L * 0.9, 0, H - 25, W * 0.4, W * 0.5, ALU)   # its bracket
+        return m                                                        # symmetric enough
+    elif kind in ("ftablep", "ptablep", "ptable"):
+        return slab(L, W, H)
+    elif kind in ("farm", "parm"):
+        return slab(L, W, H, colour=ALU)
+    elif kind == "leg":
+        m = Mesh()
+        m.cylinder(L / 2, W / 2, 0, 8, L / 2, colour=ALU)
+        m.cylinder(L / 2, W / 2, 8, H - 8, 30, colour=ALU)
+        m.cylinder(L / 2, W / 2, H - 8, H, L / 2 - 10, colour=ALU)
+        return m
+    elif kind == "shower":
+        m = Mesh()
+        m.cylinder(L / 2, W - 20, 0, H, 12, colour=ALU)                 # riser rail on the wall
+        m.cylinder(L / 2, W - 60, H - 90, H - 60, 55, colour=ALU)       # the head
+        m.cylinder(L / 2, W - 40, 0, 300, 8, colour="#8d9399")          # hose
+        m.box(L / 2 - 30, L / 2 + 30, 600 - 30 if H > 600 else H / 2, 600 if H > 600 else H / 2 + 30,
+              W - 40, W - 20, "#e8e8e8")                                # mixer body
+        return m
+    else:
+        return slab(L, W, H, colour=PLY)
+    return turned(m, L, W) if front_plus_z else m
+
+
+def furniture(variant="v2-real"):
+    """{key: Mesh} for every furniture box of the variant, keyed as the viewer asks for them."""
+    import model3d
+    from plan import VARIANTS
+    v = VARIANTS[variant]
+    boxes = model3d.boxes_for(v, with_shell=True)
+    out = {}
+    for b, key in zip(boxes, model3d.furniture_keys(v, boxes)):
+        if not key:
+            continue
+        x0, x1, y0, y1, z0, z1, kind = b
+        n = int(key.rsplit("-", 1)[1])
+        out[key] = furniture_piece(kind, x1 - x0, y1 - y0, z1 - z0, (y0 + y1) / 2 < v["width"] / 2, n)
+    return out
+
+
 SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
           "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini,
           "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
@@ -464,6 +617,13 @@ def main():
         path = os.path.join(OUT, name + ".glb")
         make().glb(path)
         print("wrote", path, "%.1f kB" % (os.path.getsize(path) / 1000))
+    for old in os.listdir(OUT):                      # furniture keys can change with the plan
+        if old.startswith("v2-real-") and old.endswith(".glb"):
+            os.remove(os.path.join(OUT, old))
+    pieces = furniture()
+    for name, m in pieces.items():
+        m.glb(os.path.join(OUT, name + ".glb"))
+    print("wrote %d furniture meshes" % len(pieces))
 
 
 if __name__ == "__main__":

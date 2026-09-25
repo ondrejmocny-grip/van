@@ -271,8 +271,12 @@
   // into a bench or the galley without inventing door and drawer splits we have not designed.
   var container = {};
   (MODEL.containers || []).forEach(function (k) { container[k] = 1; });
-  var ghostBody = [], ghostEdge = [];
+  var ghostBody = [], ghostEdge = [], ghostOn = false;
+  function ghostMat(m, on) {
+    m.transparent = on; m.opacity = on ? 0.22 : 1; m.depthWrite = !on; m.needsUpdate = true;
+  }
   function setGhost(on) {
+    ghostOn = on;
     ghostBody.forEach(function (m) {
       m.transparent = on; m.opacity = on ? 0.22 : 1; m.depthWrite = !on; m.needsUpdate = true;
     });
@@ -352,7 +356,9 @@
     if (!THREE.GLTFLoader) { return; }
     var loader = new THREE.GLTFLoader();
     MODEL.boxes.forEach(function (item) {
-      var p = PROPS[item.k];
+      // a box may carry its own mesh (item.p: furniture built at that box's size)
+      var p = item.p && BUNDLE.props[item.p] ? Object.assign({ key: item.p }, BUNDLE.props[item.p])
+                                             : PROPS[item.k];
       if (!p) { return; }
       loader.parse(b64buf(p.key, p.glb), "", function (g) {
         if (!alive) { return; }                      // switched away before it arrived
@@ -369,6 +375,8 @@
             // meshes built from datasheets (solids.py) carry their own colours
             n.material = new THREE.MeshLambertMaterial({ color: p.own && n.material.color ?
               n.material.color.clone() : new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
+            // a carcass with kit inside ghosts with the Appliances layer, mesh or box
+            if (container[item.k]) { ghostBody.push(n.material); ghostMat(n.material, ghostOn); }
           }
         });
         var w = (b[1] - b[0]) * mm, d = (b[3] - b[2]) * mm, h = (b[5] - b[4]) * mm;

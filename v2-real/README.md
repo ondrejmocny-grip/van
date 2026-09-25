@@ -17,7 +17,11 @@ has its **rails and cross bars** on VW's rack points. Every chosen product - hob
 B10, Porta Potti, both tanks, gas bottle, batteries, MultiPlus, panels, fans, Starlink, the
 Franke mixer, the drinking tap and the Alb filter, and the custom parts (distribution box in the
 bench, garage board, pump box) - is an exact mesh built from datasheet sizes
-(`solids.py`) — see [props-sheet.png](props-sheet.png).
+(`solids.py`) — see [props-sheet.png](props-sheet.png). The **furniture** too, one mesh per box at
+its own size: poplar ply carcasses with edge bands, 30 mm worktops, doors with push latches on
+the lockers and wardrobe, lids on the benches, piped cushions, the tables and the post — see
+[furniture-sheet.png](furniture-sheet.png). **The door and drawer splits are placeholders**
+until the cut list; the galley carcasses show only the appliance openings and one cupboard.
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
 finished walls black, bare rib faces grey, v2's old 1832 box dashed.

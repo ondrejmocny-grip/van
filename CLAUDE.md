@@ -64,7 +64,9 @@ generated shape can never quietly change a dimension.
 **For v2-real, every product is built in code, not generated** (Ondrej, 2026-09-25: "as long
 as the dimensions match, primitives are fine - more precise"): `solids.py` builds hob, fridge,
 oven, water heater, WC, tanks, gas bottle, batteries, inverter, panels, fans, Starlink, taps,
-filter, and the custom electrics boards and pump box from `products.py` sizes, with their own colours. A mesh at `REAL_SIZE` is drawn 1:1 in a bigger
+filter, and the custom electrics boards and pump box from `products.py` sizes, and the
+**furniture one mesh per box** at that box's own size (`furniture_keys()` in `model3d.py`, so a
+cushion is never stretched from another cushion's shape), with their own colours. A mesh at `REAL_SIZE` is drawn 1:1 in a bigger
 slot (the WC). A variant can point a kind at its own mesh (`propmap` in `REGISTRY`), so v2-real's
 battery can be the real Ective while v2 keeps the generic one.
 

@@ -1067,7 +1067,7 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                     "tap": "tap-franke", "filtertap": "filtertap-its",
                                     "filter": "filter-alb", "electrics": "dist-v2r",
                                     "board": "board-v2r", "plumbing": "plumbing-v2r"},
-                           runs=True,
+                           runs=True, furniture=True,
                            # the solids.py meshes are built for the side they stand on here
                            facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
                            names={"rack": "Roof rail / bar on VW's rack points",
@@ -1651,8 +1651,33 @@ def props_data(kinds=None):
                 continue
             out[kind] = {"yaw": yaw.get(kind, 0),
                          "fit": "real" if kind in REAL_SIZE else "keep" if kind in KEEP_SHAPE else "fill",
-                         "own": kind in OWN_COLOURS,
+                         "own": kind in OWN_COLOURS or kind.startswith("v2-real-"),
                          "glb": base64.b64encode(open(os.path.join(d, name), "rb").read()).decode()}
+    return out
+
+
+# Furniture drawn as its own mesh per box (solids.py builds each one at that box's size, so a
+# cushion and a locker of the same kind are never stretched from one shape)
+FURNITURE = ("BENCH", "FOOTWELL -> BED", "HOB", "SINK", "REAR BENCH", "LOCKER", "WARDROBE",
+             "overhead", "bed", "infill", "backrest", "pillow", "table", "leg", "ftable",
+             "ftablep", "farm", "parm", "ptable", "ptablep", "shower")
+
+
+def furniture_keys(v, boxes):
+    """The mesh key for each box, or None: '<variant>-<kind>-<n>' for a furniture box of a
+    variant whose REGISTRY entry sets furniture=True."""
+    if not spec(v).get("furniture"):
+        return [None] * len(boxes)
+    seen, out = {}, []
+    tag = v["out"].split("/")[0]
+    for b in boxes:
+        k = b[6]
+        if k in FURNITURE:
+            n = seen.get(k, 0)
+            seen[k] = n + 1
+            out.append("%s-%s-%d" % (tag, k.lower().replace(" -> ", "-").replace(" ", "-"), n))
+        else:
+            out.append(None)
     return out
 
 
@@ -1694,8 +1719,9 @@ def viewer_data(v, out):
         # redrawing an approximation of it
         "plan": plan_image(v, os.path.join(out, "overlay.png")),
         "boxes": [dict({"b": [x0, x1, y0, y1, z0, z1], "k": kind},
-                       **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}))
-                  for x0, x1, y0, y1, z0, z1, kind in boxes],
+                       **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}),
+                       **({"p": fk} if fk else {}))
+                  for (x0, x1, y0, y1, z0, z1, kind), fk in zip(boxes, furniture_keys(v, boxes))],
     }
 
 
@@ -1710,7 +1736,8 @@ def write_viewer(names, path, title="Van Interior"):
     for name in names:
         v = VARIANTS[name]
         variants[name] = viewer_data(v, variant_dir(v))
-    used = set().union(*(set(d["props"]) | set(d["propmap"].values()) for d in variants.values()))
+    used = set().union(*(set(d["props"]) | set(d["propmap"].values()) |
+                         {b["p"] for b in d["boxes"] if "p" in b} for d in variants.values()))
     data = {"order": list(names), "start": names[-1], "variants": variants,
             "vehicle": "VW Crafter L3H3",
             "props": props_data(used)}
