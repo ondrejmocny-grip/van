@@ -134,7 +134,7 @@ PRODUCTS = {
         name="Grohe Eurosmart Cosmopolitan 31170000, window mixer (lifts out)", kind="tap",
         outer=(226, 60, 202), reach=226, hole=35, flow_l_min=13, weight_kg=None,
         price_eur=(224, 228), shop="sanitino.cz 5,709 CZK (~21 days) / armixx.com 224",
-        source="https://www.grohe.cz",
+        source="https://www.sanitino.cz/grohe-eurostyle-cosmopolitan-pakova-drezova-baterie-chrom-31170000",
         note="202 tall, reaches 226 - to the middle of the bowl from beside it. The tap lifts off "
              "its base for driving (a 30 mm stub stays). 3/8 inch hoses: 12 mm push-fit adapters. "
              "Minimum pressure not published. Cheaper: Reich Linnea L (200 tall, reach 160 - "
