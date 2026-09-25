@@ -449,6 +449,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
     "roof": "Roof", "fan": "Roof fan, MaxxFan Deluxe",
+    "tarp": "Tarp on a keder rail, 3 x 2.4 m", "pole": "Tarp pole",
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
     "backrest": "Backrest pillow",
@@ -548,7 +549,7 @@ KIND = {          # plan label or extra kind -> colour
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
-    "roof": "#d6d2c9", "fan": "#3b3e44",
+    "roof": "#d6d2c9", "fan": "#3b3e44", "tarp": "#cdb98f", "pole": "#6f7378",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
@@ -973,10 +974,12 @@ FANS_V2R = [
 LAYERS_V2R = copy.deepcopy(LAYERS_V2)
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
                   {"id": "roof", "label": "Roof + fans", "kinds": ["roof", "fan"], "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
+                  {"id": "tarp", "label": "Tarp", "kinds": ["tarp", "pole"], "on": False})
 
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
-                           windows=WINDOWS_V2R, fans=FANS_V2R,
+                           windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True,
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
                            # taken out INSIDE, through the wardrobe base's lobby-side door, and
                            # carried ~1 m to the sliding door. No cut in the side panel, so no
@@ -1042,6 +1045,21 @@ def real_shell(v):
     for y0, y1 in ((floor, wd), (W - wd, W - floor)):
         out.append((w0, w1, y0, y1, 0, body["arch_h"], "shell"))
 
+    # A tarp on a keder rail along the passenger-side roof edge, out over the sliding door on
+    # three poles: yourGEAR 3 x 2.4 m (2.9 kg). Boxes cannot slope, so the canvas is a
+    # staircase of strips from the roof edge down to the pole tops, 2.0 m above the road.
+    if sp.get("tarp"):
+        x0, x1, reach = 300, 3300, 2400
+        ground = -608                          # road: 573 loaded floor + 35 build, below 0
+        top, tip = H + WALL, ground + 2000     # at the rail, and at the poles
+        n = 12
+        for k in range(n):
+            ya, yb = -WALL - reach * k / n, -WALL - reach * (k + 1) / n
+            z = top + (tip - top) * (k + 0.5) / n
+            out.append((x0, x1, yb, ya, z - 5, z + 5, "tarp"))
+        out.append((x0, x1, -WALL - 15, -WALL, top - 20, top + 10, "tarp"))   # keder rail
+        for px in (x0, (x0 + x1) / 2, x1):
+            out.append((px - 15, px + 15, -WALL - reach - 15, -WALL - reach + 15, ground, tip, "pole"))
     # partition and rear doors, each band as wide as the walls are apart at that height
     holes = sp["partition"] or []
     if holes and not isinstance(holes[0], (list, tuple)):

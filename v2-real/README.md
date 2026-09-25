@@ -165,6 +165,11 @@ several set-ups, in three seasons.
 - **Cooking is the biggest load** (~1.1 kWh a day). Taking it off the battery - on gas - makes
   the van self-sufficient in every season without any campsite. See the question below.
 
+**Full gas** (cooking + hot water on gas, asked 2026-09-25): with **2 panels** the week is ok
+in summer and 0.2 kWh short in a Moroccan winter; with 3 panels it is self-sufficient
+everywhere. Hot water on gas is **comfort, not energy**: lean use already takes it off the
+battery — gas gives hot showers on parked days too.
+
 **A parked working day, lean:** ~2.9 kWh. Usable battery 3.46 kWh; 3 panels 1.8–2.5 kWh a day;
 driving 0.67 kWh per hour.
 

@@ -37,6 +37,8 @@ Work Monday to Friday from the van, move 2 h on Wednesday and 4 h on Saturday, r
 | Chosen + campsite twice a week | 9 % · ok | 30 % · ok | 45 % · ok |
 | Chosen, cooking on GAS instead of induction - no campsite | 75 % · ok | 93 % · ok | 100 % · ok |
 | 4 panels (~800 W), 50 A, lean - no campsite | 9 % · ok | 67 % · ok | 94 % · ok |
+| Full gas (cooking + hot water), **2 panels**, 50 A, lean - no campsite | 0 % · **0.2 kWh short** | 22 % · ok | 37 % · ok |
+| Full gas, 1 panel, 50 A, lean - no campsite | 0 % · **3.2 kWh short** | 0 % · **2.7 kWh short** | 0 % · **2.9 kWh short** |
 
 ## The week, day by day (chosen set-up, Morocco in winter, no campsite)
 

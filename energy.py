@@ -62,6 +62,8 @@ SETUPS = [
     ("Chosen + campsite twice a week", 3, 50, True, ("Tue", "Fri"), False),
     ("Chosen, cooking on GAS instead of induction - no campsite", 3, 50, True, (), True),
     ("4 panels (~800 W), 50 A, lean - no campsite", 4, 50, True, (), False),
+    ("Full gas (cooking + hot water), **2 panels**, 50 A, lean - no campsite", 2, 50, True, (), True),
+    ("Full gas, 1 panel, 50 A, lean - no campsite", 1, 50, True, (), True),
 ]
 
 

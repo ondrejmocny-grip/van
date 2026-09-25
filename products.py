@@ -163,6 +163,37 @@ PRODUCTS = {
         weight_kg=None, price_eur=None, shop=None, source=None,
         note="0.67 kWh per hour of driving; the Crafter's alternator is 140-230 A (VW)",
         status="proposed"),
+    # --- bigger fridge options (asked 2026-09-25) --------------------------------------------
+    # Up to ~835 is free above the fridge base (the hob wants 65 under the worktop), so a
+    # taller fridge fits if it stands low.
+    "vitrifrigo-c95l": dict(
+        name="Vitrifrigo C95L, compressor, hinged door", kind="fridge",
+        outer=(485, 473, 792), volume_l=95, freezer_l=12.8, weight_kg=22.3,
+        price_eur=None, shop="prokes-auto.com",
+        source="https://www.vitrifrigo.com/en_en/fridge-freezer-c95l-chr-black",
+        note="+10 L and a real 12.8 L freezer; 792 tall - its base must sit at ~40 to stay "
+             "under 835: 3 mm to spare, check on the real carcass", status="option"),
+    "isotherm-cruise-100": dict(
+        name="Isotherm Cruise 100 Elegance, compressor, hinged door", kind="fridge",
+        outer=(487, 455, 746), volume_l=100, freezer_l=5, weight_kg=26.0,
+        price_eur=None, shop=None,
+        source="https://www.indelwebastomarine.com/int/products/product/show/cruise-100/",
+        note="+15 L, same family as the Cruise 85; +4 kg; plenty of height margin", status="option"),
+    # --- gas, if cooking and hot water switch (asked 2026-09-25) ------------------------------
+    "truma-b10": dict(
+        name="Truma Boiler B10, gas water heater 10 L", kind="water heater",
+        outer=(350, 350, 260), power_w=1500, gas_g_h=120, weight_kg=6.7, price_eur=None,
+        shop=None, source="https://www.truma.com/products/water-systems/boiler-gas-electro/boiler-gas-boiler-gas-elektro/",
+        note="needs a wall flue (one more hole) and the gas installation; replaces the calorifier",
+        status="option"),
+    # --- tarp instead of an awning (asked 2026-09-25) ----------------------------------------
+    "yourgear-tarp-3x24": dict(
+        name="yourGEAR caravan tarp 3 x 2.4 m, keder 7 / 5 mm, 3 poles", kind="awning",
+        outer=(3000, 2400, None), weight_kg=2.9, price_eur=None, shop="your-gear.de",
+        source="https://your-gear.de/your-gear-wohnwagen-sonnensegel-caravan-tarp-3-x-2-4-m-sonnendach-inkl.-aufstellstangen-5000-mm",
+        note="slides into a keder rail along the roof edge; 5000 mm water column, UV 50+; "
+             "poles, guy lines and pegs included. 4 x 2.4 m: 3.4 kg",
+        status="option"),
 }
 
 

@@ -123,6 +123,14 @@ deep). All four are in the model and in the payload check.
 | Oven | **Tefal Optimo OF4448**, hot air | 462 x 318 x 288 | 19 L, 1380 W | 4.8 | ~100 | **proposed** |
 | | Electrolux EMZ421MMW, microwave + grill | 442 x 345 x 262 | 20 L, 1270 W | 11.5 | ~138 | option — no hot air |
 
+**Bigger fridge (+10 L), asked 2026-09-25:**
+
+| | Size W x D x H | Total / freezer | kg | Fit |
+|---|---|---|---|---|
+| Isotherm Cruise 85 (proposed) | 475 x 505 x 627 | 85 / ~6 L | 22.0 | easy |
+| **Vitrifrigo C95L** | 485 x 473 x 792 | **95 / 12.8 L** | 22.3 | base at ~40 to stay under 835 — 3 mm spare, check on the carcass |
+| Isotherm Cruise 100 | 487 x 455 x 746 | 100 / 5 L | 26.0 | easy, but +4 kg |
+
 **What changed in the galley to take them:**
 
 - **Fridge:** the 620 height was never the real limit — above it there is room up to ~835
@@ -160,7 +168,9 @@ On the passenger side, over the sliding door. It counts toward the **150 kg roof
 | **Tarp / sun sail on a keder rail** along the roof edge, 2 poles | **~4–6** (est.) | **−20 kg**; 10 min to put up, needs pegs and guy lines, not in strong wind |
 
 The roll-out awnings all weigh 25–29 kg — none is much lighter. **If weight decides, a keder
-rail and a tarp is the only real saving.**
+rail and a tarp is the only real saving.** A real one: **yourGEAR caravan tarp 3 x 2.4 m, 2.9 kg**
+(4 x 2.4: 3.4 kg), keder 7 / 5 mm, 3 poles, guy lines and pegs included, 5000 mm water column.
+How it looks on our van: [v2-real/tarp.png](../v2-real/tarp.png), and the **Tarp** button in the viewer.
 
 ## Solar, charging, internet — chosen 2026-09-25
 
