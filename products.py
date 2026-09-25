@@ -121,7 +121,7 @@ PRODUCTS = {
     "quadron-anthony-50": dict(
         name="Quadron Anthony 50 = 'Paul' MF4444BS_I, stainless inset sink", kind="sink",
         outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(420, 420), drain='3 1/2"',
-        weight_kg=6.4, price_eur=(179, 190), shop="absulo.sk 189.57 / SIKO.cz ~4,472 CZK (search MF4444BS_I)",
+        weight_kg=6.4, price_eur=(190, 193), shop="CZ shop seen by Ondrej 4,830 CZK (to order, ~14 working days) / absulo.sk 189.57",
         source="https://absulo.sk/p/quadron-paul-nerezovy-drez-44x44-cm-mf4444bs-i",
         note="1 mm steel, R10 corners, space-saving siphon included. NO workstation ledge - board, "
              "mat and colander rest on the rim; no sink with a real ledge fits 440 x 440 x 190. "
