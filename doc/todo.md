@@ -17,6 +17,8 @@ Email drafts, ready to copy: [emails.md](emails.md).
 - [ ] **Alb Filter Nano** — flow at 1.4 bar?
 - [ ] **Victron MultiPlus C 12/2000** — its real size (datasheet 520 × 255 × 125, shops 375 × 214 × 110).
 - [ ] **Thetford Topline 922 hob** — how deep does it hang under the worktop? (drawn as 75)
+- [ ] **Weigh one poplar sheet** (15 mm, 2520 x 1220) at Dřevobis: 5.3 kg/m² (~17 kg a sheet)
+  is assumed; if it is ~21 kg (450 kg/m³) the build is ~55 kg heavier.
 - [ ] **Tank makers** (VanReady, LETO, DL Kunststofftechnik) — quotes for the fresh (1020 × 374 × 310,
   food-safe) and grey (880 × 600 × 180) tanks.
 

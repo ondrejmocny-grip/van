@@ -68,6 +68,12 @@ carries cooking and hot water" no longer applies to v2-real.
 insert bowl 56 + Franke Lina Semi Pro mixer 179 + Alb Filter Nano 170 + drinking tap 109 =
 **~€820** (proposed).
 
+**Boards and shell layers, priced 2026-09-25** ([v2-real/cutlist.md](../v2-real/cutlist.md)):
+furniture boards ~28,100 CZK (8 x poplar 15, 5 x 12, 1 x 9 — without the worktop and the wet
+lining, not priced yet) + shell layers ~34,500 CZK (sound deadening, K-Flex, glue, floor A,
+6 mm cladding, carpet) = **~62,600 CZK (~€2,500)**. The v1 Shell + Furniture lines were
+€4,200–5,200 for the same things, windows and fans included.
+
 **Approval, checked 2026-09-25** ([approval.md](approval.md)): testing station ~6,800 CZK + ORP
 800–1,000 + gas revision 1,500–2,500 + electrical revision ~1,500–3,000 = **~10,500–15,000 CZK
 (~€420–600)**, plus a VW letter (price unknown) — the "homologation fees" in the Other line.

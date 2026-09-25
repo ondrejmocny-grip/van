@@ -20,16 +20,77 @@ from plan import VARIANTS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 V = VARIANTS["v2-real"]
-SHEET = (2500, 1250)
+SHEET = (2520, 1220)                  # Dřevobis poplar sheets
 YIELD = 0.75                          # usable share of a sheet after the cuts and offcuts
 
-# kg per m2. Poplar plywood ~420 kg/m3, birch ~680, Paulownia ~300 (est. until confirmed)
+# kg per m2, from the shops' sheet weights (researched 2026-09-25): Dřevobis poplar 15 mm
+# 5.3, 12 mm 4.2, 6 mm 2.1 (~350 kg/m3). MAPH lists the same kind of poplar at 450 kg/m3 -
+# WEIGH ONE SHEET before trusting the total. 9 mm and the worktop are estimates.
 BOARD = {
-    "poplar 15": 6.3, "poplar 12": 5.0, "poplar 9": 3.8, "poplar 6": 2.5,
-    "worktop 19 (poplar 18 + HPL)": 8.3, "wet lining 3 (ACM)": 3.8,
+    "poplar 15": 5.3, "poplar 12": 4.2, "poplar 9": 3.2, "poplar 6": 2.1,
+    "worktop 19 (poplar 18 + HPL)": 7.6, "wet lining 3 (ACM)": 3.8,
 }
-BIRCH = {"poplar 15": 10.2, "poplar 12": 8.2, "poplar 9": 6.1, "poplar 6": 4.1,
-         "worktop 19 (poplar 18 + HPL)": 13.6, "wet lining 3 (ACM)": 3.8}
+BIRCH = {"poplar 15": 9.6, "poplar 12": 7.7, "poplar 9": 5.8, "poplar 6": 3.9,
+         "worktop 19 (poplar 18 + HPL)": 12.5, "wet lining 3 (ACM)": 3.8}
+# CZK per sheet (Dřevobis, incl. VAT); None = not priced yet
+PRICE = {"poplar 15": 2299, "poplar 12": 1936, "poplar 9": None, "poplar 6": 1476,
+         "worktop 19 (poplar 18 + HPL)": None, "wet lining 3 (ACM)": None}
+
+
+# --- the shell layers: walls, roof, rear doors, floor --------------------------------------
+def areas():
+    """m2 from the model: side walls along the real profile (net of the openings), the
+    ceiling, the rear doors, the floor, and how much wall hides behind furniture."""
+    from plan import wall_inset
+    sp = model3d.spec(V)
+    L, W, H = V["length"], V["width"], V["height"]
+    zs = sorted({0, H} | {z for z, _ in V["body"]["profile"] if 0 < z < H})
+    run = sum(math.hypot(zb - za, wall_inset(V, zb) - wall_inset(V, za)) for za, zb in zip(zs, zs[1:]))
+    holes = (V["slider"][1] - V["slider"][0]) * V["body"]["slider_h"]
+    holes += sum((x1 - x0) * (z1 - z0) for _s, x0, x1, z0, z1 in list(sp["windows"]) + list(sp["hatches"]))
+    walls = (2 * run * L - holes) / 1e6
+    hidden = 0
+    for b in model3d.boxes_for(V):
+        if b[6] in ("SINK", "HOB", "BENCH", "WARDROBE", "LOCKER", "overhead"):
+            hidden += (b[1] - b[0]) * (b[5] - b[4])
+        elif b[6] == "REAR BENCH":
+            hidden += 2 * (b[1] - b[0]) * (b[5] - b[4])
+    return dict(walls=walls, walls_gross=2 * run * L / 1e6, hidden=hidden / 1e6,
+                ceiling=L * (W - 2 * wall_inset(V, H)) / 1e6,
+                doors=(W - 2 * model3d.REAR_DOORS[0]) * V["body"]["rear_h"] / 1e6,
+                floor=L * (W - 2 * wall_inset(V, 0)) / 1e6)
+
+
+# (layer, m2, product, kg/m2, CZK per m2 or None, note). Picks of 2026-09-25, see
+# doc/products.md. FLOOR is option A (the cheap one); B is in the notes.
+DEADEN_SHARE = 0.20                   # butyl on ~20 % of the bare panels: the big flat ones
+FOAM_LAYERS = 1.3                     # 20 mm foam, a second layer where a cavity allows it
+
+
+def shell_layers():
+    a = areas()
+    panels = a["walls_gross"] + a["ceiling"] + a["doors"]
+    insul = (a["walls"] + a["ceiling"] + a["doors"]) * FOAM_LAYERS
+    clad = a["walls"] - a["hidden"] + a["ceiling"] + a["doors"]
+    return [
+        ("Sound deadening", panels * DEADEN_SHARE, "Comfortmat Cobra 2.3 mm (butyl + alu)", 2.71,
+         279 / 0.35, "on ~20 % of the bare panels, the big flat ones and the roof"),
+        ("Insulation, walls + roof + rear doors", insul, "K-Flex 20 mm self-adhesive (closed cell)",
+         1.23, 459, "fills the rib cavities; ~1.3 layers on average. Closed cell: no vapour "
+                    "barrier needed. Glue the roof with K-414 too (the self-adhesive gives up at ~80 C)"),
+        ("Glue for the foam", insul, "K-Flex K-414 contact adhesive", 0.15, 1190 / 2.6 / 3,
+         "~150 g/m2 on each side, ~3 x 2.6 l; weight = dry film"),
+        ("Floor: XPS", a["floor"], "Styrodur 2800 C 20 mm", 0.6, 149, "between battens"),
+        ("Floor: board", a["floor"], "poplar plywood 12 mm (Dřevobis)", 4.2, 1936 / 3.07,
+         "screwed through to the battens; furniture fixes to it"),
+        ("Floor: covering", a["floor"], "Gerflor Texline vinyl 2.9 mm", 2.0, 571,
+         "20 + 12 + 2.9 = 34.9 mm - inside the 35 of the model"),
+        ("Floor: battens + glue", a["floor"], "20 mm battens on the ribs, Sikaflex-252", 0.8, 180, "est."),
+        ("Cladding, walls + ceiling + rear doors", clad, "poplar plywood 6 mm (Dřevobis)", 2.1,
+         1476 / 3.07 / YIELD, "not behind furniture (%.1f m2 hidden)" % a["hidden"]),
+        ("Carpet on the curved parts", 3.0, "Carbest X-Trem stretch carpet 4.6 mm", 0.39, 249,
+         "window surrounds and the tight curve at the roof edge; glued with 3M 90"),
+    ]
 
 
 def boxes(kind):
@@ -148,6 +209,11 @@ def pieces():
     return out
 
 
+def shell_groups():
+    """(item, kg, x) for payload.py."""
+    return [(n + " - " + prod, m2 * kg, 1700) for n, m2, prod, kg, _c, _note in shell_layers()]
+
+
 def weight(rows, table):
     return sum(a * b / 1e6 * q * table[t] for _g, _n, a, b, t, q in rows)
 
@@ -199,6 +265,27 @@ def report():
             "|---|---|---|"]
     for g, p, b, _x in groups():
         out.append("| %s | %.1f | %.1f |" % (g, p, b))
+    cost = sum(math.ceil(sum(a * b / 1e6 * q for _g, _n, a, b, tt, q in rows if tt == t)
+                         / (SHEET[0] * SHEET[1] / 1e6 * YIELD)) * PRICE[t]
+               for t in dict.fromkeys(r[4] for r in rows) if PRICE.get(t))
+    out += ["", "**Board cost (priced boards only):** ~%s CZK." % format(round(cost, -2), ",.0f"), ""]
+    a = areas()
+    out += ["## Walls, roof, floor — layers and shopping list", "",
+            "Areas from the model: side walls %.1f m² net of the openings (%.1f gross), ceiling "
+            "%.1f, rear doors %.1f, floor %.1f; %.1f m² of wall is behind furniture (insulated, "
+            "not clad)." % (a["walls"], a["walls_gross"], a["ceiling"], a["doors"], a["floor"],
+                            a["hidden"]), "",
+            "| Layer | m² | Product | kg | CZK | Note |", "|---|---|---|---|---|---|"]
+    tk = tc = 0
+    for n, m2, prod, kg, czk, note in shell_layers():
+        k, c = m2 * kg, (m2 * czk if czk else None)
+        tk, tc = tk + k, tc + (c or 0)
+        out.append("| %s | %.1f | %s | %.1f | %s | %s |" % (n, m2, prod, k,
+                   format(round(c, -1), ",.0f") if c else "—", note))
+    out.append("| **Total** | | | **%.0f** | **~%s** | |" % (tk, format(round(tc, -2), ",.0f")))
+    out += ["", "**Floor option B** (lighter, dearer): Bo-dapter XPS kit for the Crafter L3 "
+            "(21,390 CZK, <5 kg) + 6 mm poplar + Texline = ~29 mm, ~7 kg lighter and ~20,000 CZK "
+            "more than A. Worth it only if the weight gets tight."]
     path = os.path.join(HERE, "v2-real", "cutlist.md")
     open(path, "w").write("\n".join(out) + "\n")
     print("wrote", path, "- furniture %.0f kg poplar / %.0f kg birch" % (tot_p, tot_b))

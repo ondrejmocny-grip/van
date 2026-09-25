@@ -311,3 +311,25 @@ Why:
 - **Pump:** quiet and proven, sold in Czech shops. For a stronger shower: Seaflo 42 series,
   11.3 l/min, 3.8 bar, but 7 A.
 - **Sensors:** Votronic's FL sender needs a tank at least 300 tall — too tall for the grey tank.
+
+## Walls, floor, ceiling and boards — researched 2026-09-25
+
+Quantities, weights and cost: [v2-real/cutlist.md](../v2-real/cutlist.md) (made from the model's areas).
+
+| Layer | Pick | kg/m² | Price | Link | Why |
+|---|---|---|---|---|---|
+| Sound deadening | **Comfortmat Cobra 2.3 mm** (on ~20 % of the bare panels) | 2.71 | 279 CZK / 700 x 500 sheet | [nomadem.cz](https://www.nomadem.cz/antivibracni-material-comfortmat-cobra_z9156/) | lighter per m² than the Panther (3.53); only the big flat panels need it |
+| Insulation (walls, roof, rear doors) | **K-Flex 20 mm self-adhesive**, closed cell | 1.23 | 459 CZK/m² | [nomadem.cz](https://www.nomadem.cz/izolace-k-flex-samolepici-bez-al-laminace-metraz_z1351/) | fire class B-s3,d0; closed cell = no vapour barrier needed; known weight |
+| Foam glue | **K-Flex K-414** (also on the roof: the self-adhesive lets go at ~80 °C) | — | 1,190 CZK / 2.6 l | [nomadem.cz](https://www.nomadem.cz/lepidlo-k-flex-k-414_z546/) | |
+| Floor (option A, **proposed**) | **Styrodur 2800 C 20 mm + poplar 12 mm + Gerflor Texline 2.9 mm** = 34.9 mm | 0.6 + 4.2 + 2.0 | ~9,000 CZK in all | [OBI](https://www.obi.cz/penove-izolace/izolacni-deska-styrodur-2800-c-20-mm/p/1008366) · [Dřevobis](https://www.drevobis-ds.cz/preklizka-truhlarska-topol-12-x-2520-x-1220-mm/) · [Texline](https://www.studio-tichy.shop/cs/pvc-s-filcem-gerflor-texline-1740-timber-naturel/2810) | fits the 35 exactly, cheap |
+| Floor (option B) | Bo-dapter XPS kit for the Crafter L3 + 6 mm poplar + Texline = ~29 mm | kit <5 kg total | 21,390 CZK for the kit | [nomadem.cz](https://www.nomadem.cz/izolacni-panely-bo-dapter-pro-kompletni-podlahu-vozu-crafter-a-man-tge_z9900/) | made for the Crafter, fills the floor valleys; ~7 kg lighter, ~20,000 CZK dearer |
+| Cladding | **poplar plywood 6 mm A/B (Dřevobis)** | 2.1 | 1,476 CZK / 2520 x 1220 | [drevobis-ds.cz](https://www.drevobis-ds.cz/preklizka-truhlarska-topol--6-x-2520-x-1220-mm/) | light, in CZ |
+| Curved parts | Carbest X-Trem stretch carpet 4.6 mm, glued with 3M 90 | 0.39 | 2,490 CZK / 5 x 2 m | [nomadem.cz](https://www.nomadem.cz/strecovy-potahovy-koberec-carbest-x-trem-barva-antracit_z5023/) | |
+| Furniture board | **poplar plywood 15 and 12 mm A/B (Dřevobis)** | 5.3 / 4.2 | 2,299 / 1,936 CZK per sheet | [15 mm](https://www.drevobis-ds.cz/preklizka-truhlarska-topol-15-x-2520-x-1220-mm/) · [12 mm](https://www.drevobis-ds.cz/preklizka-truhlarska-topol-12-x-2520-x-1220-mm/) | as light as Paulownia per the shop, and much cheaper |
+
+- **Weigh one poplar sheet before trusting the weight.** Dřevobis' sheet weights give ~350
+  kg/m³; MAPH lists the same kind of poplar at 450. At 450 the build is ~55 kg heavier - the
+  margin under 3500 would fall from ~74 to ~22 kg.
+- Not chosen: sheep wool and Thinsulate (let vapour through - condensation risk on the cold
+  metal; Thinsulate SM600L is ~38 mm, not sold in the EU), Paulownia KiriCore (German shop, no
+  lighter per the shop weights), birch (almost twice the weight).

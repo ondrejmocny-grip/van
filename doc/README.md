@@ -155,6 +155,10 @@ See [budget.md](budget.md).
   full. Roof kit on **roof bars on VW's rack points**; one VW letter for the fan cut-outs; straps on
   batteries, tanks and bottle; latches and round corners. **Before building:** phone the testing
   station; ask a VW dealer for our van's PR list (C-rails 3S4? window bags?).
+- **Cut list and shell layers, first draft 2026-09-25 ([v2-real/cutlist.md](../v2-real/cutlist.md)):**
+  a door and drawer proposal, every panel at board thickness, 8 + 5 + 1 poplar sheets; K-Flex 20 mm,
+  floor 20 XPS + 12 poplar + Texline (34.9 mm), 6 mm poplar cladding. Weight now **3425 kg (74
+  under)** - but weigh a poplar sheet first: at 450 kg/m³ it is only ~22 under.
 - **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
 - **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
   All body holes are listed in the v2-real README.
@@ -244,6 +248,10 @@ sits at the bottom. View coordinates add z = height above the finished floor.
 
 **Exact meshes:** `python solids.py` -> `props/<name>.glb` for products that are simple shapes,
 built from their datasheet sizes (no FAL). Then `python model3d.py viewer`.
+
+**Cut list:** `python cutlist.py` -> `v2-real/cutlist.md` - the door and drawer proposal, every
+furniture panel at board thickness, sheets to buy, and the shell layers (insulation, floor,
+cladding) from the model's areas; `payload.py` takes both weights from it.
 
 **Systems:** `python systems.py` -> `v2-real/systems.md` + `systems.png` - every cable, gas pipe
 and water pipe as a route between the model's boxes: lengths, 12 V cable sizes and fuses, a

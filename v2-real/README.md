@@ -492,8 +492,11 @@ replaces brochure data.
 
 ### 2. Wall, floor and ceiling build-up — thin build agreed 2026-09-24
 
-In the model as `floor_build`, `ceiling_build` and `clad` in `body=` (see above). Still to do:
-the actual products per layer, and the 70–110 mm cavity depth checked on the real van.
+In the model as `floor_build`, `ceiling_build` and `clad` in `body=` (see above). **Products
+per layer picked 2026-09-25** — list, weights and cost in [cutlist.md](cutlist.md#walls-roof-floor--layers-and-shopping-list):
+K-Flex 20 mm in the rib cavities (closed cell, no vapour barrier), butyl on ~20 % of the bare
+panels, floor 20 XPS + 12 poplar + Texline vinyl (34.9 mm), 6 mm poplar cladding, stretch
+carpet on the curves. Still to do: the cavity depth checked on the real van.
 
 ### 3. Product register — started 2026-09-24
 
@@ -513,7 +516,13 @@ weight/payload check and the daily energy use.
 | 5 | Batteries, inverter, MPPT, DC-DC, calorifier, heater | need airflow and service access — **proposed 2026-09-25**, see below |
 | 6 | Shower tray | probably custom — size it last |
 
-### 4. From boxes to parts — not started
+### 4. From boxes to parts — first draft 2026-09-25
+
+[cutlist.md](cutlist.md), made by `python cutlist.py` from the model's boxes: a **door and
+drawer proposal** (the viewer's cabinets show it), every panel at its board thickness, the
+sheets to buy (8 x poplar 15, 5 x 12, 1 x 9, the worktop and the shower lining), and the weight
+— **~156 kg of furniture board**, which `payload.py` now takes instead of its box estimate.
+Every size is to be re-measured on the real van before a board is cut.
 
 Panels at real board thickness → cut list; fixing points to ribs / rivnuts; wiring and
 plumbing diagrams with lengths; cut-out drawings from body landmarks; check against Czech

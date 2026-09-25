@@ -78,10 +78,6 @@ ITEMS = [
     # --- shell: insulation, floor, cladding, openings
     ("Shell", "3 x Dometic S4 (2 x 900x450 8.0 kg, 1 x 500x350 4.7 kg)", 20.7, 2000, "Dometic S4 chart"),
     ("Shell", "2 x MaxxFan Deluxe + 2 Crafter adapters", 17.4, 1810, "fan ~7.7 kg (shops vary); adapter est."),
-    ("Shell", "Insulation: Armaflex 19 mm on ~17.5 m2 + cavity fill", 27.0, 1700, "Armaflex 1.17 kg/m2; fill est."),
-    ("Shell", "Sound deadening ~6 m2", 9.0, 1700, "est. 1.5 kg/m2"),
-    ("Shell", "Floor 6 m2: 20 XPS + 12 ply + 2 vinyl + battens", 58.0, 1700, "XPS 0.6, poplar 12 4.9, vinyl ~3 kg/m2; battens est."),
-    ("Shell", "Wall + ceiling cladding, 6 mm ply ~11 m2 (not behind furniture)", 28.0, 1700, "poplar 6 mm ~2.5 kg/m2"),
     ("Shell", "Partition frame, crawl-through door + hinges (its panel is in the cut list)", 4.0, 0, "est."),
     ("Shell", "VanQuito door fly screen", prod("vanquito-crafter"), 960, "products.py"),
     ("Shell", "Tarp 3 x 2.4 m on a keder rail (yourGEAR) + rail", prod("yourgear-tarp-3x24") + 1.0, 1650, "tarp 2.9 kg; rail est. 1"),
@@ -177,6 +173,8 @@ def run(ply="poplar 15"):
     rows = [(g, n, kg, x, s) for g, n, kg, x, s in ITEMS]
     rows += [("Furniture", n, (p, b)[idx - 1], x, "cutlist.md, %s ply" % ply.split()[0])
              for n, p, b, x in furniture()]
+    import cutlist
+    rows += [("Shell", n, kg, x, "cutlist.md (layers)") for n, kg, x in cutlist.shell_groups()]
     rows += LOAD
     for g, n, kg, x, s in rows:
         if kg is None:

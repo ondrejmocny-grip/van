@@ -103,30 +103,51 @@ Every door and drawer gets a **push latch** and **rounded corners** (the approva
 | Shower | carved lobby face | 700 x 1740 | poplar 12 | 1 | 1.22 |
 | Partition | partition, net of the crawl-through | 1000 x 2340 | poplar 15 | 1 | 2.34 |
 
-## Boards to buy (sheets 2500 x 1250, 75 % usable)
+## Boards to buy (sheets 2520 x 1220, 75 % usable)
 
 | Board | m² net | Sheets | kg (poplar) | kg (if birch) |
 |---|---|---|---|---|
-| poplar 15 | 17.3 | 8 | 109 | 176 |
-| poplar 12 | 9.6 | 5 | 48 | 79 |
-| worktop 19 (poplar 18 + HPL) | 0.9 | 1 | 8 | 12 |
+| poplar 15 | 17.3 | 8 | 92 | 166 |
+| poplar 12 | 9.6 | 5 | 40 | 74 |
+| worktop 19 (poplar 18 + HPL) | 0.9 | 1 | 7 | 11 |
 | poplar 9 | 0.5 | 1 | 2 | 3 |
 | wet lining 3 (ACM) | 4.0 | 2 | 15 | 15 |
-| **Total** | | | **181** | **285** |
+| **Total** | | | **156** | **269** |
 
 ## By group — into the payload check
 
 | Group | kg poplar | kg birch |
 |---|---|---|
-| Galley, sink side | 22.6 | 36.8 |
-| Galley, hob side | 22.3 | 36.3 |
-| Bench, passenger (fresh tank) | 10.5 | 17.1 |
-| Bench, driver (batteries) | 12.1 | 19.7 |
-| Rear bench / garage | 20.3 | 33.0 |
-| Footwell | 5.9 | 9.6 |
-| Shoe locker (seat) | 5.1 | 8.2 |
-| Wardrobe + WC base | 22.2 | 35.9 |
-| Overhead lockers | 11.8 | 19.3 |
-| Tables | 5.6 | 9.1 |
-| Shower | 28.2 | 36.6 |
-| Partition | 14.7 | 23.9 |
+| Galley, sink side | 19.3 | 34.5 |
+| Galley, hob side | 19.0 | 34.0 |
+| Bench, passenger (fresh tank) | 8.9 | 16.0 |
+| Bench, driver (batteries) | 10.2 | 18.5 |
+| Rear bench / garage | 17.1 | 31.1 |
+| Footwell | 5.0 | 9.0 |
+| Shoe locker (seat) | 4.2 | 7.7 |
+| Wardrobe + WC base | 18.6 | 33.8 |
+| Overhead lockers | 9.9 | 18.2 |
+| Tables | 4.7 | 8.6 |
+| Shower | 26.2 | 35.3 |
+| Partition | 12.4 | 22.5 |
+
+**Board cost (priced boards only):** ~28,100 CZK.
+
+## Walls, roof, floor — layers and shopping list
+
+Areas from the model: side walls 9.2 m² net of the openings (12.4 gross), ceiling 4.9, rear doors 2.9, floor 6.0; 4.7 m² of wall is behind furniture (insulated, not clad).
+
+| Layer | m² | Product | kg | CZK | Note |
+|---|---|---|---|---|---|
+| Sound deadening | 4.0 | Comfortmat Cobra 2.3 mm (butyl + alu) | 11.0 | 3,220 | on ~20 % of the bare panels, the big flat ones and the roof |
+| Insulation, walls + roof + rear doors | 22.1 | K-Flex 20 mm self-adhesive (closed cell) | 27.2 | 10,140 | fills the rib cavities; ~1.3 layers on average. Closed cell: no vapour barrier needed. Glue the roof with K-414 too (the self-adhesive gives up at ~80 C) |
+| Glue for the foam | 22.1 | K-Flex K-414 contact adhesive | 3.3 | 3,370 | ~150 g/m2 on each side, ~3 x 2.6 l; weight = dry film |
+| Floor: XPS | 6.0 | Styrodur 2800 C 20 mm | 3.6 | 890 | between battens |
+| Floor: board | 6.0 | poplar plywood 12 mm (Dřevobis) | 25.0 | 3,750 | screwed through to the battens; furniture fixes to it |
+| Floor: covering | 6.0 | Gerflor Texline vinyl 2.9 mm | 11.9 | 3,400 | 20 + 12 + 2.9 = 34.9 mm - inside the 35 of the model |
+| Floor: battens + glue | 6.0 | 20 mm battens on the ribs, Sikaflex-252 | 4.8 | 1,070 | est. |
+| Cladding, walls + ceiling + rear doors | 12.3 | poplar plywood 6 mm (Dřevobis) | 25.8 | 7,870 | not behind furniture (4.7 m2 hidden) |
+| Carpet on the curved parts | 3.0 | Carbest X-Trem stretch carpet 4.6 mm | 1.2 | 750 | window surrounds and the tight curve at the roof edge; glued with 3M 90 |
+| **Total** | | | **114** | **~34,500** | |
+
+**Floor option B** (lighter, dearer): Bo-dapter XPS kit for the Crafter L3 (21,390 CZK, <5 kg) + 6 mm poplar + Texline = ~29 mm, ~7 kg lighter and ~20,000 CZK more than A. Worth it only if the weight gets tight.
