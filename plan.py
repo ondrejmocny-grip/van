@@ -302,8 +302,8 @@ VARIANTS["v2-real"] = dict(
         # build, the same as an appliance outside its cabinet.
         strict=True,
     ),
-    stats=["bed 1520 x 1744 across at 630", "worktops 565 deep", "galley aisle 562",
-           "garage 540 x 1746 x 570", "standing 1811", "grey 95 L under the footwell"],
+    stats=["bed 1520 x 1744 across at 630", "worktops 562 deep at 920", "galley aisle 562",
+           "garage 540 x 1746 x 570", "standing 1811", "grey 95 L under the footwell", "full gas: hob + water"],
     note=("v2's layout on the REAL body (VW panel-van drawing, ref/vw-crafter-bodybuilder) with the "
           "thin build: floor 3390 long, 1756 between the finished walls at the floor, 1694 at "
           "worktop height, 1452 from 1555 up; ceiling 1811. Arch x 1817-2728, 266 high. Galley "
@@ -317,9 +317,9 @@ VARIANTS["v2-real"] = dict(
         (   0,  450,   41,  400, "LOCKER", "450 x 359 - shoes - step to the hatch", SOFT),
         (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
         ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
-        ( 750, 1150,   70,  635, "WORKTOP", "400 x 565 - fold-down leaf", GALLEY),
-        (1150, 1930, 1197, 1762, "SINK", "780 x 565 - 440 single bowl, 340 prep aft", GALLEY),
-        (1150, 1930,   70,  635, "HOB", "780 x 565 - hob forward, 480 prep aft", GALLEY),
+        ( 750, 1150,   73,  635, "WORKTOP", "400 x 562 - fold-down leaf", GALLEY),
+        (1150, 1930, 1197, 1759, "SINK", "780 x 562 at 920 - 440 bowl, taps aft", GALLEY),
+        (1150, 1930,   73,  635, "HOB", "780 x 562 at 920 - gas hob, C95L fridge under", GALLEY),
         (1150, 1930,  635, 1197, "AISLE", "780 x 562", None),
         (1930, 2850, 1232, 1789, "BENCH", "920 x 557 - battery + inverter", SOFT),
         (1930, 2850,   43,  600, "BENCH", "920 x 557 - 118 L tank inboard of arch", SOFT),

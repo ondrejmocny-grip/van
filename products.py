@@ -98,7 +98,7 @@ PRODUCTS = {
         source="https://www.webasto.com/en-int/cooling/fridges-freezers/cruise-elegance.html",
         note="shallow (505) - leaves ~75 behind it for air in our 565 carcass; freezer size and "
              "daily use not on the maker page",
-        status="proposed"),
+        status="option"),
     "indel-cruise-85": dict(
         name="Indel B Cruise 85 OFF, compressor, hinged door", kind="fridge",
         outer=(475, 545, 635), volume_l=85, kwh_day=0.386, weight_kg=21.5,
@@ -117,7 +117,7 @@ PRODUCTS = {
         weight_kg=6.8, price_eur=(400, 472), shop="ab-com.cz (10,041 CZK) / kueche24.com",
         source="https://media3.bsh-group.com/Documents/9001763570_C.pdf",
         note="total power can be LIMITED in the settings, 1000-3000 W: set 2000 on our inverter",
-        status="proposed"),
+        status="option"),
     "quadron-anthony-50": dict(
         name="Quadron Anthony 50 workstation sink, stainless", kind="sink",
         outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(400, 400),
@@ -145,7 +145,7 @@ PRODUCTS = {
         shop="thule.com; Crafter H3 2017+ adapter Thule 301768 (camping-factory.com)",
         source="https://www.thule.com/de-de/awnings/manual-awnings/thule-omnistor-6300-325x250-_-302230",
         note="on the passenger side, over the sliding door; counts toward the 150 kg roof load",
-        status="optional"),
+        status="option"),
     "fiamma-f80s-320": dict(
         name="Fiamma F80S 320 roof awning, 3.2 m, projection 2.5 m", kind="awning",
         outer=(3200, 250, None), weight_kg=29.0, price_eur=None,
@@ -172,7 +172,7 @@ PRODUCTS = {
         price_eur=None, shop="prokes-auto.com",
         source="https://www.vitrifrigo.com/en_en/fridge-freezer-c95l-chr-black",
         note="+10 L and a real 12.8 L freezer; 792 tall - its base must sit at ~40 to stay "
-             "under 835: 3 mm to spare, check on the real carcass", status="option"),
+             "under 835: 3 mm to spare, check on the real carcass", status="chosen"),
     "isotherm-cruise-100": dict(
         name="Isotherm Cruise 100 Elegance, compressor, hinged door", kind="fridge",
         outer=(487, 455, 746), volume_l=100, freezer_l=5, weight_kg=26.0,
@@ -185,7 +185,7 @@ PRODUCTS = {
         outer=(350, 350, 260), power_w=1500, gas_g_h=120, weight_kg=6.7, price_eur=None,
         shop=None, source="https://www.truma.com/products/water-systems/boiler-gas-electro/boiler-gas-boiler-gas-elektro/",
         note="needs a wall flue (one more hole) and the gas installation; replaces the calorifier",
-        status="option"),
+        status="chosen"),
     # --- tarp instead of an awning (asked 2026-09-25) ----------------------------------------
     "yourgear-tarp-3x24": dict(
         name="yourGEAR caravan tarp 3 x 2.4 m, keder 7 / 5 mm, 3 poles", kind="awning",
@@ -193,7 +193,21 @@ PRODUCTS = {
         source="https://your-gear.de/your-gear-wohnwagen-sonnensegel-caravan-tarp-3-x-2-4-m-sonnendach-inkl.-aufstellstangen-5000-mm",
         note="slides into a keder rail along the roof edge; 5000 mm water column, UV 50+; "
              "poles, guy lines and pegs included. 4 x 2.4 m: 3.4 kg",
-        status="option"),
+        status="chosen"),
+    # --- full gas (chosen 2026-09-25) -------------------------------------------------------
+    "gas-hob-2-burner": dict(
+        name="2-burner gas hob, 30 mbar, flame failure devices - MODEL TO PICK", kind="hob",
+        outer=(306, 527, 51), weight_kg=4.0, price_eur=None, shop=None, source=None,
+        note="must fit the 306 x 527 slot the Bosch induction hob had; candidates: Dometic "
+             "HB 2325 (2 x 1.6 kW, 233 g/h), Lavanda 853, Can Hoodiny (3.9 kg) - sizes to check",
+        status="proposed"),
+    "gas-bottle-6kg": dict(
+        name="6 kg refillable LPG bottle", kind="gas", outer=(256, 256, 495),
+        weight_kg=14.3, price_eur=None, shop=None,
+        source="https://www.elgas.com.au/elgas-knowledge-hub/residential-lpg/lpg-gas-bottle-sizes-gas-bottle-dimension-measurements/",
+        note="full: ~8.3 kg tare (typical steel) + 6 kg gas; composite ones are lighter. An 11 kg "
+             "bottle is ~580 tall and does not fit under the 570 garage. ~210 g a day -> ~4 weeks",
+        status="chosen"),
 }
 
 

@@ -32,22 +32,21 @@ Work Monday to Friday from the van, move 2 h on Wednesday and 4 h on Saturday, r
 |---|---|---|---|
 | v2 plan: 1 panel, 30 A DC-DC | 0 % · **19.2 kWh short** | 0 % · **18.5 kWh short** | 0 % · **18.8 kWh short** |
 | 2 panels, 50 A DC-DC | 0 % · **13.4 kWh short** | 0 % · **12.0 kWh short** | 0 % · **11.2 kWh short** |
-| **Chosen: 3 panels (~600 W), 50 A, lean** - no campsite | 0 % · **2.7 kWh short** | 0 % · **1.2 kWh short** | 3 % · ok |
-| **Chosen + campsite once a week** (Friday) | 0 % · **2.7 kWh short** | 0 % · **1.2 kWh short** | 3 % · ok |
-| Chosen + campsite twice a week | 9 % · ok | 30 % · ok | 45 % · ok |
-| Chosen, cooking on GAS instead of induction - no campsite | 75 % · ok | 93 % · ok | 100 % · ok |
+| 3 panels (~600 W), 50 A, lean, induction - no campsite | 0 % · **2.7 kWh short** | 0 % · **1.2 kWh short** | 3 % · ok |
+| 3 panels, 50 A, lean, induction + campsite twice a week | 9 % · ok | 30 % · ok | 45 % · ok |
+| 3 panels, 50 A, lean, gas - no campsite | 75 % · ok | 93 % · ok | 100 % · ok |
 | 4 panels (~800 W), 50 A, lean - no campsite | 9 % · ok | 67 % · ok | 94 % · ok |
-| Full gas (cooking + hot water), **2 panels**, 50 A, lean - no campsite | 0 % · **0.2 kWh short** | 22 % · ok | 37 % · ok |
+| **Chosen 2026-09-25: full gas (cooking + hot water), 2 panels, 50 A, lean** - no campsite | 0 % · **0.2 kWh short** | 22 % · ok | 37 % · ok |
 | Full gas, 1 panel, 50 A, lean - no campsite | 0 % · **3.2 kWh short** | 0 % · **2.7 kWh short** | 0 % · **2.9 kWh short** |
 
-## The week, day by day (chosen set-up, Morocco in winter, no campsite)
+## The week, day by day (chosen: full gas, 2 panels, Morocco in winter, no campsite)
 
 | Day | Type | Used kWh | Charged kWh | Charge at night |
 |---|---|---|---|---|
-| Mon | work, parked | 3.31 | 1.80 | 56 % |
-| Tue | work, parked | 3.31 | 1.80 | 12 % |
-| Wed | work, drive | 3.24 | 3.14 | 9 % |
-| Thu | work, parked | 3.31 | 1.80 | 0 % |
-| Fri | work, parked | 3.31 | 1.80 | 0 % |
-| Sat | free, drive | 2.61 | 4.48 | 54 % |
-| Sun | free, parked | 2.79 | 1.80 | 25 % |
+| Mon | work, parked | 2.22 | 1.20 | 70 % |
+| Tue | work, parked | 2.22 | 1.20 | 41 % |
+| Wed | work, drive | 2.15 | 2.54 | 52 % |
+| Thu | work, parked | 2.22 | 1.20 | 22 % |
+| Fri | work, parked | 2.22 | 1.20 | 0 % |
+| Sat | free, drive | 1.52 | 3.88 | 68 % |
+| Sun | free, parked | 1.49 | 1.20 | 59 % |

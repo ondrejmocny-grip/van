@@ -442,12 +442,13 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
-INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey",
+INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey", "gasbottle",
             "calorifier", "filter",
             "battery", "inverter", "electrics")
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
+    "gasbottle": "Gas bottle 6 kg, in a sealed locker",
     "roof": "Roof", "fan": "Roof fan, MaxxFan Deluxe",
     "tarp": "Tarp on a keder rail, 3 x 2.4 m", "pole": "Tarp pole",
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
@@ -549,7 +550,7 @@ KIND = {          # plan label or extra kind -> colour
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
-    "roof": "#d6d2c9", "fan": "#3b3e44", "tarp": "#cdb98f", "pole": "#6f7378",
+    "roof": "#d6d2c9", "fan": "#3b3e44", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
@@ -829,7 +830,11 @@ def against_wall(x0, x1, y_front, z0, z1, side, kind, step=260):
 
 
 HEIGHTS_V2R = dict(HEIGHTS_V2)
-HEIGHTS_V2R["WARDROBE"] = (0, 775)  # the full-depth base, where the WC lives; the hanging
+HEIGHTS_V2R["WARDROBE"] = (0, 775)
+# The galley is 20 higher than v2 (920, agreed 2026-09-25): room for the taller C95L fridge
+# under the hob, and for whatever else the galley has to take.
+HEIGHTS_V2R["SINK"] = (0, 920)
+HEIGHTS_V2R["HOB"] = (0, 920)  # the full-depth base, where the WC lives; the hanging
                                     #   space above follows the lean - EXTRA_V2R
 
 EXTRA_V2R = [
@@ -844,9 +849,9 @@ EXTRA_V2R = [
     (2010, 2610, 1383, 1783,  630,  790, "pillow"),     # heads at the driver wall, one each
     (2770, 3370, 1383, 1783,  630,  790, "pillow"),
     # The galley leaf, the depth of the hob run now: 565.
-    ( 900, 1150,  260,  320,  780,  840, "farm"),       # swing-out bracket under the leaf
-    ( 750, 1150,   70,  635,  840,  900, "ftable"),     # deployed: 400 x 565 at worktop height
-    (1090, 1150,   70,  635,  440,  840, "ftablep"),    # folded: hangs down the galley end
+    ( 900, 1150,  260,  320,  800,  860, "farm"),       # swing-out bracket under the leaf
+    ( 750, 1150,   73,  635,  860,  920, "ftable"),     # deployed: 400 x 562 at worktop height
+    (1090, 1150,   73,  635,  440,  860, "ftablep"),    # folded: hangs down the galley end
     # The shoe locker's backrest: at 950 the wall is 78 in, so the pillow starts there.
     (   0,   60,   79,  400,  480,  950, "backrest"),
     ( 100,  180,  400,  460,  120,  640, "parm"),       # side table bracket, unchanged
@@ -883,8 +888,8 @@ EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
 # The sink: Quadron Anthony 50, 440 x 440 with a 400 x 400 x 190 bowl - no sink with a ledge
 # is sold at v2's 440 x 360. Its back 32 in front of the wall at 905 (1762). Its colander
 # drawn at v2's tray size: Quadron does not publish it.
-EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 715, 905, n=1)
-EXTRA_V2R += tray_box(1270, 1470, 1350, 1640, 825, 895)
+EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 735, 925, n=1)
+EXTRA_V2R += tray_box(1270, 1470, 1350, 1640, 845, 915)
 # The cat box and its tray behind the partition: the middle of the van, nothing moved.
 EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
 
@@ -896,14 +901,16 @@ APPLIANCES_V2R = [
     (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
     # The taps stand AFT of the bowl, at the back of the prep counter: the 440-deep sink
     # leaves no deck behind it, and at 1185 the wall is 122 in.
-    (1600, 1700, 1520, 1710,  905, 1185, "tap"),        # mixer, spout swings over the bowl
-    (1720, 1770, 1590, 1710,  905, 1155, "filtertap"),  # gooseneck, beside the mixer
+    (1600, 1700, 1515, 1705,  925, 1205, "tap"),        # mixer, spout swings over the bowl
+    (1720, 1770, 1585, 1705,  925, 1175, "filtertap"),  # gooseneck, beside the mixer
     (1600, 1860, 1630, 1690,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
     # galley, passenger side - carcass y 70-635
-    (1150, 1456,   88,  615,  849,  905, "hob"),        # Bosch PIB375FB1E, 306 x 527 x 51
-    # Isotherm Cruise 85 Elegance, 475 x 505 x 627, at the carcass front: ~75 behind it to
-    # the wall for air, and 92 clear of the wheel arch (x 1817).
-    (1250, 1725,  120,  625,   60,  687, "fridgedoor"),
+    # A 2-burner GAS hob in the induction hob's 306 x 527 slot (full gas, 2026-09-25; model to
+    # pick - camper 2-burner hobs weigh ~4 kg). Its body drawn 51 deep under the 920 worktop.
+    (1150, 1456,   88,  615,  869,  925, "hob"),
+    # Vitrifrigo C95L, 485 x 473 x 792 - 95 L with a 12.8 L freezer - standing low (45) so
+    # its top (837) is 32 under the hob. ~110 behind it for air; 82 clear of the arch.
+    (1250, 1735,  152,  625,   45,  837, "fridgedoor"),
     # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
     # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
     ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150
@@ -919,7 +926,12 @@ APPLIANCES_V2R = [
     # drain pump. Custom tank, 880 x 600 x 180 = 95 L gross, ~85 usable, outlet through the
     # floor at its low point. The table post needs a small frame over it.
     (1950, 2830,  616, 1216,   10,  190, "grey"),
-    (3080, 3380,  150,  550,   60,  360, "calorifier"), # 10 L, 30 forward: the floor is shorter
+    # Hot water on gas: Truma Boiler B10, 350 x 350 x 260, 10 L, in the garage's passenger
+    # rear corner where the calorifier was; its flue goes through the side wall there.
+    (3030, 3380,  150,  500,   60,  320, "calorifier"),
+    # The gas: a 6 kg refillable bottle (~256 x 495) standing in a sealed locker in the garage,
+    # vented through the floor. A standard 11 kg bottle (~580 tall) does not fit under 570.
+    (2880, 3140,  610,  870,   20,  515, "gasbottle"),
     # electrics, driver bench
     (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
     (2340, 2540, 1240, 1590,   30,  270, "battery"),
@@ -972,6 +984,9 @@ FANS_V2R = [
 # v2's Show buttons plus one for the roof, off by default: the roof with its real fan
 # cut-outs and the two fans on top of it.
 LAYERS_V2R = copy.deepcopy(LAYERS_V2)
+for _l in LAYERS_V2R:
+    if _l["id"] == "kit":
+        _l["kinds"] = sorted({b[6] for b in APPLIANCES_V2R})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
                   {"id": "roof", "label": "Roof + fans", "kinds": ["roof", "fan"], "on": False})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,

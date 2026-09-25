@@ -57,12 +57,11 @@ SETUPS = [
     # name, panels, DC-DC amps, lean, shore days, gas cooking
     ("v2 plan: 1 panel, 30 A DC-DC", 1, 30, False, (), False),
     ("2 panels, 50 A DC-DC", 2, 50, False, (), False),
-    ("**Chosen: 3 panels (~600 W), 50 A, lean** - no campsite", 3, 50, True, (), False),
-    ("**Chosen + campsite once a week** (Friday)", 3, 50, True, ("Fri",), False),
-    ("Chosen + campsite twice a week", 3, 50, True, ("Tue", "Fri"), False),
-    ("Chosen, cooking on GAS instead of induction - no campsite", 3, 50, True, (), True),
+    ("3 panels (~600 W), 50 A, lean, induction - no campsite", 3, 50, True, (), False),
+    ("3 panels, 50 A, lean, induction + campsite twice a week", 3, 50, True, ("Tue", "Fri"), False),
+    ("3 panels, 50 A, lean, gas - no campsite", 3, 50, True, (), True),
     ("4 panels (~800 W), 50 A, lean - no campsite", 4, 50, True, (), False),
-    ("Full gas (cooking + hot water), **2 panels**, 50 A, lean - no campsite", 2, 50, True, (), True),
+    ("**Chosen 2026-09-25: full gas (cooking + hot water), 2 panels, 50 A, lean** - no campsite", 2, 50, True, (), True),
     ("Full gas, 1 panel, 50 A, lean - no campsite", 1, 50, True, (), True),
 ]
 
@@ -144,9 +143,9 @@ def report():
             cells.append("%d %% · %s" % (low, "**%.1f kWh short**" % short if short > 0.05 else "ok"))
         out.append("| %s | %s |" % (name, " | ".join(cells)))
         summary.append((name, cells))
-    out += ["", "## The week, day by day (chosen set-up, Morocco in winter, no campsite)", "",
+    out += ["", "## The week, day by day (chosen: full gas, 2 panels, Morocco in winter, no campsite)", "",
             "| Day | Type | Used kWh | Charged kWh | Charge at night |", "|---|---|---|---|---|"]
-    for n, d, use, gain, pct in week(3, 50, "Morocco, winter", lean=True)[2]:
+    for n, d, use, gain, pct in week(2, 50, "Morocco, winter", lean=True, gas=True)[2]:
         out.append("| %s | %s | %.2f | %.2f | %d %% |" % (n, d.replace("_", ", "), use, gain, pct))
     path = os.path.join(HERE, "v2-real", "energy.md")
     open(path, "w").write("\n".join(out) + "\n")

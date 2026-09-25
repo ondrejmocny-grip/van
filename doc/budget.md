@@ -44,6 +44,13 @@ cladding and sound deadening — expect the Shell line to rise when the rest is 
 roughly −€150–250); the DC-DC may go up to 50 A (price to find); an **awning** joins the
 Other line (Thule Omnistor 6300 3.25 m + Crafter adapter, price to find); no bike rack.
 
+**Full gas, 2026-09-25** (all est. until the products are picked): gas hob ~150–300, Truma B10
+~500–700, locker + regulator + pipes + detector ~200–300, 6 kg bottle ~100–200, certified
+installation + inspection ~100–250 → **~1,050–1,750**. Out: the Bosch induction hob (−400–472)
+and the calorifier. Solar **2** panels again; the **tarp** (~100) instead of the awning; fridge
+**Vitrifrigo C95L** (price to find) instead of the Isotherm. The v1 note "no gas means the battery
+carries cooking and hot water" no longer applies to v2-real.
+
 ## Vehicle upgrades for rough roads — added 2026-09-24
 
 **A separate pot**, not part of the €10–15k build: these are changes to the vehicle, like the

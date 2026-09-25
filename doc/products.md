@@ -108,6 +108,25 @@ A fixed cassette toilet (Thetford C-series) is made to be emptied through an out
 needs flush plumbing - both fight the slide-out idea. Price and the final choice come with the
 bathroom products.
 
+## Full gas — chosen 2026-09-25
+
+Cooking **and** hot water on gas: the van needs no campsite for power (see
+[v2-real/energy.md](../v2-real/energy.md)), and solar drops to **2 panels**.
+
+| | Product | kg | Status |
+|---|---|---|---|
+| Hob | **2-burner gas hob, 30 mbar, flame failure devices** in the old 306 x 527 slot — model to pick (Dometic HB 2325, Lavanda 853, Can Hoodiny 3.9 kg …) | ~4 | proposed |
+| Hot water | **Truma Boiler B10**, 10 L, 1500 W, 120 g/h, 350 x 350 x 260 | 6.7 | **chosen** |
+| Gas | **6 kg refillable bottle** (~256 x 495) in a sealed locker in the garage, floor vent | ~14 full | **chosen** |
+| | regulator, hose, pipes, gas + CO detector | ~6 | |
+
+- **Why 6 kg, not 11 kg:** an 11 kg bottle is ~580 tall; the garage is 570. At ~210 g a day
+  (cooking + water) a 6 kg bottle lasts about **4 weeks**.
+- **What it brings with it:** a certified gas installation and its periodic inspection (CZ
+  "revize"); a flue through the side wall for the B10; LPG refills — easy in Turkey, harder in
+  Morocco (bottle systems differ: plan adapters, or refill before crossing).
+- **The oven stays electric** (Tefal, 1380 W) — used a few times a week, the battery carries it.
+
 ## Kitchen — proposed 2026-09-24
 
 Researched on the EU / Czech market and checked against the v2-real galley (worktops 565
@@ -115,10 +134,10 @@ deep). All four are in the model and in the payload check.
 
 | | Product | Size W x D x H | Key numbers | kg | € | Status |
 |---|---|---|---|---|---|---|
-| Fridge | **Isotherm Cruise 85 Elegance**, hinged door | 475 x 505 x 627 | 85 L | 22.0 | 1,040 | **proposed** |
+| Fridge | Isotherm Cruise 85 Elegance, hinged door | 475 x 505 x 627 | 85 L | 22.0 | 1,040 | option — replaced by the C95L |
 | | Indel B Cruise 85 OFF | 475 x 545 x 635 | 85 L, 0.386 kWh/day | 21.5 | 774 | option — cheaper, little air behind |
 | | Vitrifrigo C75L | 470 x 462 x 622 | 75 L | 18.6 | 815 | option — lightest |
-| Hob | **Bosch PIB375FB1E**, domino induction 30 cm | 306 x 527 x 51 | 3.7 kW, **total can be limited to 1000–3000 W** | 6.8 | 400–472 | **proposed** |
+| Hob | Bosch PIB375FB1E, domino induction 30 cm | 306 x 527 x 51 | 3.7 kW, total can be limited | 6.8 | 400–472 | option — **replaced by gas** (2026-09-25) |
 | Sink | **Quadron Anthony 50** workstation sink | 440 x 440 x 190 | bowl 400 x 400 x 190; colander, board, mat included | — | ~260 | **proposed** |
 | Oven | **Tefal Optimo OF4448**, hot air | 462 x 318 x 288 | 19 L, 1380 W | 4.8 | ~100 | **proposed** |
 | | Electrolux EMZ421MMW, microwave + grill | 442 x 345 x 262 | 20 L, 1270 W | 11.5 | ~138 | option — no hot air |
@@ -128,7 +147,7 @@ deep). All four are in the model and in the payload check.
 | | Size W x D x H | Total / freezer | kg | Fit |
 |---|---|---|---|---|
 | Isotherm Cruise 85 (proposed) | 475 x 505 x 627 | 85 / ~6 L | 22.0 | easy |
-| **Vitrifrigo C95L** | 485 x 473 x 792 | **95 / 12.8 L** | 22.3 | base at ~40 to stay under 835 — 3 mm spare, check on the carcass |
+| **Vitrifrigo C95L — chosen 2026-09-25** | 485 x 473 x 792 | **95 / 12.8 L** | 22.3 | fits with the galley at **920**: base 45, top 837, 32 under the hob |
 | Isotherm Cruise 100 | 487 x 455 x 746 | 100 / 5 L | 26.0 | easy, but +4 kg |
 
 **What changed in the galley to take them:**
@@ -147,11 +166,11 @@ deep). All four are in the model and in the payload check.
 
 **No sink weight is published** — the payload counts 10 kg for sink, taps and filter.
 
-## Awning — optional (nice to have, first to cut), 2026-09-24
+## Awning — tarp chosen 2026-09-25
 
 | Product | Length x projection | kg | Crafter 2017+ fitting | Status |
 |---|---|---|---|---|
-| **Thule Omnistor 6300 3.25** | 3.25 x 2.50 m | **25.1** | adapter Thule 301768 (H3, 2017+) | **optional** — nice to have, first to cut; lighter |
+| Thule Omnistor 6300 3.25 | 3.25 x 2.50 m | 25.1 | adapter Thule 301768 (H3, 2017+) | option — **replaced by the tarp** (2026-09-25) |
 | Fiamma F80S 320 | 3.20 x 2.50 m, 7.7 m² | 29.0 | bracket kit 98655Z058 | option |
 
 On the passenger side, over the sliding door. It counts toward the **150 kg roof load**
@@ -168,15 +187,15 @@ On the passenger side, over the sliding door. It counts toward the **150 kg roof
 | **Tarp / sun sail on a keder rail** along the roof edge, 2 poles | **~4–6** (est.) | **−20 kg**; 10 min to put up, needs pegs and guy lines, not in strong wind |
 
 The roll-out awnings all weigh 25–29 kg — none is much lighter. **If weight decides, a keder
-rail and a tarp is the only real saving.** A real one: **yourGEAR caravan tarp 3 x 2.4 m, 2.9 kg**
+rail and a tarp is the only real saving.** **Chosen: yourGEAR caravan tarp 3 x 2.4 m, 2.9 kg**
 (4 x 2.4: 3.4 kg), keder 7 / 5 mm, 3 poles, guy lines and pegs included, 5000 mm water column.
 How it looks on our van: [v2-real/tarp.png](../v2-real/tarp.png), and the **Tarp** button in the viewer.
 
-## Solar, charging, internet — chosen 2026-09-25
+## Solar, charging, internet — chosen 2026-09-25 (2 panels since full gas)
 
 | | Product | kg | Status |
 |---|---|---|---|
-| Solar | **3 panels ~200 W** (e.g. Victron 185 W 12 V, 1485 x 668, 11 kg each) | 33 + rails | **chosen** |
+| Solar | **2 panels ~200 W** (e.g. Victron 185 W 12 V, 1485 x 668, 11 kg each) — 3 before full gas | 22 + rails | **chosen** |
 | DC-DC | **Victron Orion XS 12/12-50A** — 0.67 kWh per hour of driving | — | proposed |
 | Batteries | 2 x 150 Ah LiFePO4 (e.g. Ective LC 150 LT, 15.5 kg each) | 31 | **chosen** (300 Ah) |
 | Internet | **Starlink Mini** — 25–40 W average, 1.10 kg | 1.1 | **chosen** (lean use) |

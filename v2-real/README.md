@@ -108,13 +108,12 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (118 L)** — with 3 panels (2026-09-25) | **3514 — 14 over** | 3637 — 137 over |
-| Rear axle (max 2100) | 2031 | 2131 |
+| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L (2026-09-25) | **3496 — 3 under** | 3619 — 119 over |
+| Rear axle (max 2100) | 2021 | 2122 |
 | Front axle (max 1800) | 1484 | 1507 |
-| Roof load (max 150) | 91 | 91 |
+| Roof load (max 150) | 51 | 51 |
 
-| Without the awning (optional, first to cut) | 3485 | 3608 |
-| **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3376 — 123 under** | 3499 — 1 under |
+| **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3344 — 155 under** (stricter, with water + gas: 3464) | — |
 
 **Two different limits:**
 
@@ -142,7 +141,18 @@ of driving) — a daily energy check is the next thing to do before settling the
 The furniture is estimated from the model's boxes (±20 %); the passenger and child weights are
 placeholders to confirm.
 
-## Energy — chosen 2026-09-25: 3 panels, 50 A DC-DC, lean use, campsite now and then
+## Changed 2026-09-25 — full gas, tarp, bigger fridge, galley at 920
+
+- **Full gas:** a 2-burner gas hob in the induction hob's slot, a **Truma B10** gas water heater
+  where the calorifier was, a **6 kg bottle** in a sealed locker in the garage. Solar back to
+  **2 panels**.
+- **Tarp** on a keder rail instead of the Thule awning (−25 kg).
+- **Vitrifrigo C95L** fridge: 95 L with a 12.8 L freezer, standing low under the hob.
+- **The galley is 920 high** (v2: 900) to give the fridge room — the carcasses are 562 deep
+  now, since the wall is 3 further in at 920; taps and sink moved up with it. The dinette table
+  stays at 900.
+
+## Energy — 3 panels, 50 A DC-DC, lean use (2026-09-25; then full gas, 2 panels)
 
 `python energy.py` writes **[energy.md](energy.md)**: every load per day type, and a
 simulated week (work Monday to Friday parked, drive 2 h on Wednesday and 4 h on Saturday) for
