@@ -239,6 +239,9 @@ sits at the bottom. View coordinates add z = height above the finished floor.
 
 **Energy:** `python energy.py` -> `v2-real/energy.md` - daily use per load and a simulated week per set-up.
 
+**Exact meshes:** `python solids.py` -> `props/<name>.glb` for products that are simple shapes,
+built from their datasheet sizes (no FAL). Then `python model3d.py viewer`.
+
 **Systems:** `python systems.py` -> `v2-real/systems.md` + `systems.png` - every cable, gas pipe
 and water pipe as a route between the model's boxes: lengths, 12 V cable sizes and fuses, a
 shopping list. Move an appliance in `model3d.py` and its cable follows.

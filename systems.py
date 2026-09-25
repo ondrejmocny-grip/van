@@ -335,6 +335,23 @@ def drawing():
     print("wrote", path)
 
 
+# For the viewer: each run as a tube of a kind (model3d.KIND colours it) and a radius in mm,
+# drawn thicker than life so a 1.5 mm2 wire can still be seen.
+TUBE = {"12 V main": ("cable12", 16), "12 V charge": ("cable12", 11), "12 V loads": ("cable12", 7),
+        "12 V solar": ("cablepv", 8), "230 V": ("cable230", 8), "Gas": ("gaspipe", 9),
+        "Fresh": ("coldpipe", 11), "Cold": ("coldpipe", 9), "Hot": ("hotpipe", 9),
+        "Grey": ("greypipe", 16)}
+
+
+def runs():
+    out = []
+    for group, *rest in DC + AC + GAS + WATER:
+        route = rest[-2]
+        k, r = TUBE[group]
+        out.append({"k": k, "r": r, "pts": [[round(c, 1) for c in p] for p in route]})
+    return out
+
+
 if __name__ == "__main__":
     report()
     drawing()

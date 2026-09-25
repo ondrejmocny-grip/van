@@ -11,6 +11,11 @@ cut-outs, the two MaxxFans, the two solar panels and the Starlink Mini, at catal
 
 **Open:** [roof.png](roof.png) — the roof from above.
 
+**Viewer, 2026-09-25:** **Wiring** and **Gas + water** buttons draw every cable and pipe from
+[systems.md](systems.md) as tubes (turn off Body, Lockers and Shower to see them). The roof
+has its **rails and cross bars** on VW's rack points. Solar panels, fans, gas bottle, batteries,
+MultiPlus and Starlink are exact meshes from their datasheets — see [props-sheet.png](props-sheet.png).
+
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
 finished walls black, bare rib faces grey, v2's old 1832 box dashed.
 

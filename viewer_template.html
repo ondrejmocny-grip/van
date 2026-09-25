@@ -312,12 +312,31 @@
     }
   });
 
+  // Cables and pipes (systems.py): tubes along their routes, drawn thicker than life so they
+  // read. Each run is a polyline; zero-length steps are dropped.
+  (MODEL.runs || []).forEach(function (run) {
+    var pts = [];
+    run.pts.forEach(function (q) {
+      var v = new THREE.Vector3(q[0] * mm, q[2] * mm, q[1] * mm);
+      if (!pts.length || pts[pts.length - 1].distanceTo(v) > 1e-4) { pts.push(v); }
+    });
+    if (pts.length < 2) { return; }
+    var path = new THREE.CurvePath();
+    for (var i = 1; i < pts.length; i++) { path.add(new THREE.LineCurve3(pts[i - 1], pts[i])); }
+    var geo = new THREE.TubeGeometry(path, 8 * (pts.length - 1), run.r * mm, 6, false);
+    var mat = new THREE.MeshLambertMaterial({ color: new THREE.Color(MODEL.colours[run.k] || "#c0392b") });
+    groupFor(run.k).add(new THREE.Mesh(geo, mat));
+  });
+
   // Detailed prop meshes, made by props.py and embedded as glb. The box stays the authority:
   // each mesh is scaled to exactly fill its box, so a generated shape can never quietly move a
   // dimension. Turning the layer on swaps the coloured box for the mesh.
+  // A variant can map a kind to its own mesh (propmap): v2-real's battery is a real Ective,
+  // v2's stays the generic one. The glb cache is keyed by the mesh, not the kind.
   var PROPS = {};
   (MODEL.props || []).forEach(function (k) {
-    if (BUNDLE.props[k]) { PROPS[k] = BUNDLE.props[k]; }
+    var key = (MODEL.propmap || {})[k] || k;
+    if (BUNDLE.props[key]) { PROPS[k] = Object.assign({ key: key }, BUNDLE.props[key]); }
   });
   var propParts = {}, propsOn = false;
 
@@ -335,7 +354,7 @@
     MODEL.boxes.forEach(function (item) {
       var p = PROPS[item.k];
       if (!p) { return; }
-      loader.parse(b64buf(item.k, p.glb), "", function (g) {
+      loader.parse(b64buf(p.key, p.glb), "", function (g) {
         if (!alive) { return; }                      // switched away before it arrived
         var o = g.scene, b = item.b;
         o.rotation.y = ((p.yaw || 0) + (item.y || 0)) * Math.PI / 180;
@@ -347,8 +366,9 @@
           if (n.isMesh) {
             // decimating strips the normals, and a mesh without them lights as pure black
             if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
-            n.material = new THREE.MeshLambertMaterial(
-              { color: new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
+            // meshes built from datasheets (solids.py) carry their own colours
+            n.material = new THREE.MeshLambertMaterial({ color: p.own && n.material.color ?
+              n.material.color.clone() : new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
           }
         });
         var w = (b[1] - b[0]) * mm, d = (b[3] - b[2]) * mm, h = (b[5] - b[4]) * mm;

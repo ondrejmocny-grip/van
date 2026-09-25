@@ -553,7 +553,7 @@ KIND = {          # plan label or extra kind -> colour
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
-    "roof": "#d6d2c9", "fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#f1f1ef", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
+    "roof": "#d6d2c9", "rack": "#8d9399", "cable12": "#c0392b", "cable230": "#7d3c98", "cablepv": "#e67e22", "gaspipe": "#d4ac0d", "coldpipe": "#2e86c1", "hotpipe": "#e74c3c", "greypipe": "#6e5a44", "fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#f1f1ef", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
@@ -569,6 +569,8 @@ GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 # pump to fill it looks like a smear. Everywhere else filling is what you want - a bed cushion
 # fitted uniformly shrinks to a quarter of its slot, because the mesh is thicker than 70 mm.
 KEEP_SHAPE = ("plumbing",)
+# Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
+OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink")
 
 CAMERAS = [                         # name, elevation, azimuth
     ("01-from-the-rear-looking-forward", 6, -24),
@@ -1013,10 +1015,18 @@ FANS_V2R = [
 #   2 solar panels ~200 W, 1485 x 668 each (Victron 185 W size), long side along the van,
 #     side by side on rails 40 above the roof, between the two fans (15 mm gaps).
 #   The tarp's keder rail along the passenger roof edge is drawn with the tarp.
-ROOF_V2R = [
-    ( 90,  389,  787, 1046,  10,  49, "starlink"),
-    (1068, 2553,  238,  906,  40,  75, "solar"),
-    (1068, 2553,  926, 1594,  40,  75, "solar"),
+# VW wants a letter for anything fixed to the roof skin, but allows roof-rack-like attachments
+# (approval.md): so everything sits on two SIDE RAILS on VW's ten roof-rack points per side,
+# with CROSS BARS clamped to them where the kit needs them - one under the Starlink, three
+# under the panels. The rails run along the roof edges, so they never cross a fan.
+_RAIL = [(300, 3200, 195, 225), (300, 3200, 1607, 1637)]
+_BARS = [240, 1180, 1810, 2440]
+ROOF_V2R = [(x0, x1, y0, y1, 0, 30, "rack") for x0, x1, y0, y1 in _RAIL]
+ROOF_V2R += [(x - 20, x + 20, 195, 1637, 30, 60, "rack") for x in _BARS]
+ROOF_V2R += [
+    ( 90,  389,  787, 1046,  60,  99, "starlink"),
+    (1068, 2553,  238,  906,  60,  95, "solar"),
+    (1068, 2553,  926, 1594,  60,  95, "solar"),
 ]
 
 # v2's Show buttons plus one for the roof, off by default: the roof with its real fan
@@ -1026,15 +1036,25 @@ for _l in LAYERS_V2R:
     if _l["id"] == "kit":
         _l["kinds"] = sorted({b[6] for b in APPLIANCES_V2R})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
-                  {"id": "roof", "label": "Roof + kit", "kinds": ["roof", "fan", "solar", "starlink"],
+                  {"id": "roof", "label": "Roof + kit", "kinds": ["roof", "rack", "fan", "solar", "starlink"],
                    "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
+                  {"id": "wiring", "label": "Wiring", "kinds": ["cable12", "cable230", "cablepv"],
+                   "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("wiring") + 1,
+                  {"id": "pipes", "label": "Gas + water",
+                   "kinds": ["gaspipe", "coldpipe", "hotpipe", "greypipe"], "on": False})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
                   {"id": "tarp", "label": "Tarp", "kinds": ["tarp", "pole"], "on": False})
 
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
                            windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True, roof_kit=ROOF_V2R,
-                           names={"hob": "Gas hob, Thetford Topline 922",
+                           # its own meshes where the product differs from v2's generic one
+                           propmap={"battery": "battery-ective", "inverter": "inverter-multiplusc"},
+                           runs=True,
+                           names={"rack": "Roof rail / bar on VW's rack points",
+                                  "hob": "Gas hob, Thetford Topline 922",
                                   "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",
                                   "oven": "Hot-air oven, Tefal Optimo",
                                   "cassette": "Portable WC",
@@ -1609,8 +1629,17 @@ def props_data(kinds=None):
                 continue
             out[kind] = {"yaw": yaw.get(kind, 0),
                          "fit": "keep" if kind in KEEP_SHAPE else "fill",
+                         "own": kind in OWN_COLOURS,
                          "glb": base64.b64encode(open(os.path.join(d, name), "rb").read()).decode()}
     return out
+
+
+def runs_for(v):
+    """Cables and pipes for the viewer, from systems.py - only for a variant that has them."""
+    if not spec(v).get("runs"):
+        return []
+    import systems
+    return systems.runs()
 
 
 def plan_image(v, path):
@@ -1634,6 +1663,7 @@ def viewer_data(v, out):
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
+        "propmap": sp.get("propmap", {}), "runs": runs_for(v),
         "names": dict(NAMES, **sp.get("names", {})), "appliances": sorted({b[6] for b in fitout(v)[1]}),
         "containers": list(sp["containers"]), "props": sorted(used),
         "cylinders": ["wheel"], "layers": sp["layers"],
@@ -1658,7 +1688,7 @@ def write_viewer(names, path, title="Van Interior"):
     for name in names:
         v = VARIANTS[name]
         variants[name] = viewer_data(v, variant_dir(v))
-    used = set().union(*(set(d["props"]) for d in variants.values()))
+    used = set().union(*(set(d["props"]) | set(d["propmap"].values()) for d in variants.values()))
     data = {"order": list(names), "start": names[-1], "variants": variants,
             "vehicle": "VW Crafter L3H3",
             "props": props_data(used)}
@@ -1889,9 +1919,10 @@ def roof_plan(v, path):
         cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
         items.append((cx - fw / 2, cx + fw / 2, cy - fd / 2, cy + fd / 2, "fan"))
         ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc="none", ec="#fff", lw=1, ls="--", zorder=4))
-    colour = {"fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#bbb"}
+    items.sort(key=lambda it: it[4] != "rack")                  # rails and bars underneath
+    colour = {"fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#bbb", "rack": "#9aa0a6"}
     label = {"fan": "MaxxFan\n%d x %d" % (fw, fd), "solar": "solar ~200 W\n1485 x 668",
-             "starlink": "Starlink\nMini"}
+             "starlink": "Starlink\nMini", "rack": ""}
     for x0, x1, y0, y1, k in items:
         ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc=colour[k], ec="#111", lw=1, zorder=3))
         ax.text((x0 + x1) / 2, (y0 + y1) / 2, label[k], color="#fff" if k != "starlink" else "#222",
