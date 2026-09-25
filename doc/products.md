@@ -115,7 +115,7 @@ Cooking **and** hot water on gas: the van needs no campsite for power (see
 
 | | Product | kg | Status |
 |---|---|---|---|
-| Hob | **Thetford Topline 922**, made for vehicles: 305 x 500 (cut-out 285 x 485), 2 x 1.5 kW, 216 g/h, **LPG 30 mbar from the factory**, flame failure on both burners, **12 V ignition**, no lid | 5.5 | **proposed** — €359 (Reimo) / 12,690 CZK (stavbakaravanu.cz) |
+| Hob | **Thetford Topline 922**, made for vehicles: 305 x 500 (cut-out 285 x 485), 2 x 1.5 kW, 216 g/h, **LPG 30 mbar from the factory**, flame failure on both burners, **12 V ignition**, no lid | 5.5 | **chosen 2026-09-25** — €359 (Reimo) / 12,690 CZK (stavbakaravanu.cz) |
 | | *alt:* Bosch PRB3A6B70, domino 306 x 527, 47 high, 1.9 + 2.8 kW — a home hob: set for natural gas (LPG jets included, changed by Bosch service), 230 V ignition | 7.0 | option — 11,628 CZK |
 | Hot water | **Truma Boiler B10**, 10 L, 1500 W, 120 g/h, 350 x 350 x 260 | 6.7 | **chosen** |
 | Gas | **6 kg refillable bottle** (~256 x 495) in a sealed locker in the garage, floor vent | ~14 full | **chosen** |

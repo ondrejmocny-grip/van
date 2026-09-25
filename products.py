@@ -203,7 +203,7 @@ PRODUCTS = {
         note="LPG 30 mbar from the factory; flame failure on both burners; 12 V ignition (no "
              "inverter needed); no lid. Frankana lists it discontinued - buy soon. Depth under "
              "the worktop not published: check before cutting",
-        status="proposed"),
+        status="chosen"),
     "bosch-prb3a6b70": dict(
         name="Bosch PRB3A6B70 Serie 8, domino gas hob 30 cm", kind="hob",
         outer=(306, 527, 47), cutout=(270, 490), power_kw=(1.9, 2.8), weight_kg=7.0,

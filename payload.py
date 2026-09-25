@@ -136,8 +136,8 @@ def furniture():
 
 # What we carry - the driver is already in the kerb weight.
 LOAD = [
-    ("People", "Passenger (Ondrej's wife)", 65.0, -600, "est. - to confirm"),
-    ("People", "Child + child seat", 25.0, -600, "est. - to confirm"),
+    ("People", "Passenger (Ondrej's wife)", 55.0, -600, "Ondrej, 2026-09-25"),
+    ("People", "Child + child seat", 25.0, -600, "Ondrej, 2026-09-25"),
     ("People", "Cat + litter", 10.0, 0, "est."),
     ("Water", "Fresh water, full 118 L", 118.0, at("fresh"), "1 kg/L"),
     ("Water", "Water heater full + WC flush water", 25.0, 900, "10 + 15 L"),

@@ -110,9 +110,9 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L (2026-09-25) | **3498 — 1 under** | 3621 — 121 over |
-| Rear axle (max 2100) | 2021 | 2122 |
-| Front axle (max 1800) | 1484 | 1507 |
+| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L, passenger 55 kg (2026-09-25) | **3488 — 12 under** | 3611 — 111 over |
+| Rear axle (max 2100) | 2017 | 2117 |
+| Front axle (max 1800) | 1471 | 1494 |
 | Roof load (max 150) | 51 | 51 |
 
 | **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3344 — 155 under** (stricter, with water + gas: 3464) | — |
@@ -140,8 +140,8 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 To lean on driving instead, the DC-DC charger can go from 30 A to **50 A** (~0.65 kWh per hour
 of driving) — a daily energy check is the next thing to do before settling the size.
 
-The furniture is estimated from the model's boxes (±20 %); the passenger and child weights are
-placeholders to confirm.
+The furniture is estimated from the model's boxes (±20 %); the passenger (55 kg) and child
+(25 kg with seat) weights are confirmed by Ondrej 2026-09-25.
 
 ## Changed 2026-09-25 — full gas, tarp, bigger fridge, galley at 920
 

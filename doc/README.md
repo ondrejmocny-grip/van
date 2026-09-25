@@ -131,8 +131,8 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3498 kg with full water, full gas, 2 panels,
-  tarp and poplar furniture (3 under), rear axle 2021, roof 51 of 150 - after leaving the bikes out, cutting solar to
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3488 kg with full water, full gas, 2 panels,
+  tarp and poplar furniture (12 under), rear axle 2017, roof 51 of 150 - after leaving the bikes out, cutting solar to
   one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
 - **Full gas chosen 2026-09-25** (cooking + hot water; [v2-real/energy.md](../v2-real/energy.md)): Thetford Topline 922 gas hob
