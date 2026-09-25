@@ -51,6 +51,22 @@ and the calorifier. Solar **2** panels again; the **tarp** (~100) instead of the
 **Vitrifrigo C95L** (price to find) instead of the Isotherm. The v1 note "no gas means the battery
 carries cooking and hot water" no longer applies to v2-real.
 
+**Electrics and water, priced 2026-09-25** ([products.md](products.md), proposed):
+
+| | € |
+|---|---|
+| 2 x Ective LC 150 LT | 2,220–2,400 |
+| MultiPlus C 12/2000/80 (the 12/3000 was ~1,094) | 975–1,145 |
+| MPPT 100/30 + Orion XS 50 A + SmartShunt | ~390–435 |
+| CEE inlet + 230 V box (2-pole RCD + 2 MCB) | ~120–220 |
+| **Electrics priced so far** (without panels, cable, fuses, lighting) | **~3,700–4,200** |
+| Fresh + grey tank, made to size | ~400–1,000 |
+| Shurflo pump + Whale Gulper 220 + Votronic sensors | ~550–570 |
+| **Water priced so far** (without Truma B10, pipes, fittings, taps) | **~950–1,570** |
+
+The v1 Electrical line (4,350–5,350) still looks right once panels, cable and lighting are
+added. Tanks made to size cost more than v1's catalogue guess.
+
 ## Vehicle upgrades for rough roads — added 2026-09-24
 
 **A separate pot**, not part of the €10–15k build: these are changes to the vehicle, like the

@@ -34,7 +34,7 @@ LOADS = [
     ("2 x MaxxFan, average", 20, (12,) * 4, False, "0.2-2.3 A each (Maxxair); est. average"),
     ("Water pump", 60, (0.3,) * 4, False, "Shurflo Trail King 7, est. use"),
     ("Inverter idle, in AES mode, off at night", 25, (14,) * 4, False,
-     "MultiPlus 12/3000: 30 W idle, 25 W AES, 10 W search (Victron datasheet)"),
+     "MultiPlus 12/3000: 20 W idle, 15 W AES, 8 W search; lean = MultiPlus C 12/2000 in search mode, 3 W (Victron datasheet)"),
 ]
 
 DAY_TYPES = ("work_parked", "work_drive", "free_drive", "free_parked")
@@ -49,7 +49,7 @@ DAY_NAMES = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 SUN = {"Morocco, winter": 0.60, "Turkey, spring / autumn": 0.70, "EU, summer": 0.85}
 HOT = {"Morocco, winter": False, "Turkey, spring / autumn": False, "EU, summer": True}
 
-# "Lean" use: Starlink Mini (25-40 W), the inverter in search mode (10 W), and hot water only
+# "Lean" use: Starlink Mini (25-40 W), the smaller inverter in search mode (3 W), and hot water only
 # from the engine or at a campsite - the three biggest cuts that do not touch cooking or work.
 # "Shore": a campsite with a hook-up on Tuesday and Friday nights (the MultiPlus charges
 # 120 A - full in ~3 h), so the battery starts the next day full.
@@ -81,7 +81,7 @@ def day_use(day, hot, lean=False, shore=False, gas=False):
         elif name.startswith("Hot water") and (lean or shore):
             kwh = 0.0                            # engine, or the campsite's power
         elif name.startswith("Inverter idle") and lean:
-            kwh = 10 * hours[i] / 1000           # search mode
+            kwh = 3 * hours[i] / 1000            # MultiPlus C 12/2000, search mode
         else:
             kwh = watts * hours[i] / 1000
         if ac:

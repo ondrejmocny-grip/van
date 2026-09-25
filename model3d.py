@@ -212,7 +212,9 @@ APPLIANCES_V2 = [
     # bathroom - the WC lives in the wardrobe base and slides into the shower
     ( 715, 1135, 1252, 1822,   40,  560, "cassette"),   # ~420 x 570, hatch at x 700-1150
     # water - the tank runs the bench-to-garage corner, inboard of the wheel arch
-    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
+    # No catalogue tank fits 374 wide at ~100 L (2026-09-25), so it is made to this size:
+    # ~108 L inside with 6-8 mm walls. Votronic 5545 level electrode.
+    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 outside
     (2100, 2800,  400,  900, -270,  -70, "grey"),       # 70 L, underslung
     (3100, 3400,  150,  550,   60,  360, "calorifier"), # 10 L off the engine heat exchanger
     # electrics, driver bench - 16 mm inboard of the tyre, which is what sets y here
@@ -934,11 +936,16 @@ APPLIANCES_V2R = [
     # The gas: a 6 kg refillable bottle (~256 x 495) standing in a sealed locker in the garage,
     # vented through the floor. A standard 11 kg bottle (~580 tall) does not fit under 570.
     (2880, 3140,  610,  870,   20,  515, "gasbottle"),
-    # electrics, driver bench
-    (2100, 2300, 1240, 1590,   30,  270, "battery"),    # 150 Ah LiFePO4, group 31 case
-    (2340, 2540, 1240, 1590,   30,  270, "battery"),
-    (2080, 2550, 1300, 1580,  270,  450, "inverter"),   # 3000 W, on a shelf over the cells
-    (2900, 3300, 1672, 1782,   60,  360, "electrics"),  # MPPT, DC-DC, busbars, fuses
+    # electrics, driver bench. Ective LC 150 LT, 353 x 175 x 190, 15.5 kg, heated (charges
+    # to -30 C), Bluetooth BMS - standing across the van, terminals up.
+    (2100, 2275, 1237, 1590,   30,  220, "battery"),
+    (2340, 2515, 1237, 1590,   30,  220, "battery"),
+    # Victron MultiPlus C 12/2000/80: 1600 W at 25 C runs the 1380 W oven; 12 kg. Drawn at
+    # the larger of the two sizes published (520 x 255 x 125 datasheet, 375 x 214 x 110 shops).
+    (2040, 2560, 1310, 1565,  240,  365, "inverter"),   # on a shelf over the cells
+    # SmartSolar MPPT 100/30, Orion XS 12/12-50, SmartShunt, busbars, fuses, and the 230 V
+    # box (2-pole RCD + 2 MCB) - on a board against the wall, under the power inlet.
+    (2900, 3300, 1672, 1782,   60,  360, "electrics"),
 ]
 
 # The seated people, against the leaning wall. Your hips sit on the cushion at the wall, but
@@ -1024,6 +1031,17 @@ LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
                            windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True, roof_kit=ROOF_V2R,
+                           names={"hob": "Gas hob, Thetford Topline 922",
+                                  "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",
+                                  "oven": "Hot-air oven, Tefal Optimo",
+                                  "cassette": "Portable WC",
+                                  "fresh": "Fresh water ~108 L, made to size",
+                                  "grey": "Grey water ~85 L, made to size",
+                                  "calorifier": "Truma B10 gas water heater",
+                                  "battery": "Ective LC 150 LT, 150 Ah",
+                                  "inverter": "Victron MultiPlus C 12/2000/80",
+                                  "plumbing": "Pump Shurflo Trail King 7, filter, trap",
+                                  "electrics": "MPPT 100/30, Orion XS 50 A, shunt, fuses, 230 V box"},
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
                            # taken out INSIDE, through the wardrobe base's lobby-side door. The
                            # only side-wall holes are the small service openings above.
@@ -1613,7 +1631,7 @@ def viewer_data(v, out):
         "title": v["title"], "note": v["note"],
         "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
-        "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
+        "names": dict(NAMES, **sp.get("names", {})), "appliances": sorted({b[6] for b in fitout(v)[1]}),
         "containers": list(sp["containers"]), "props": sorted(used),
         "cylinders": ["wheel"], "layers": sp["layers"],
         # the plan drawing itself, for the schema overlay: plan.py renders it cropped to the

@@ -48,7 +48,7 @@ person — runs into the finished walls, past the rear doors, or into the roof. 
 | Shower | 762 → 562 deep at the floor, wet lining follows the lean | 800 → 600 |
 | Taps | 130 forward, to the back edge of the bowl | at the back of the deck |
 | WC | **≤ 520 deep** (420 × 520 drawn), emptied **inside** — no body hatch | 420 × 570, hatch in the side panel |
-| Grey tank | **95 L inside, under the raised footwell**; the spare wheel stays in VW's bay | 70 L underslung, on the rear differential |
+| Grey tank | **~85 L inside, under the raised footwell** (made to size); the spare wheel stays in VW's bay | 70 L underslung, on the rear differential |
 
 **Two things the lean costs that are easy to miss:**
 
@@ -110,9 +110,9 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (118 L)** — full gas, 2 panels, tarp, C95L, passenger 55 kg (2026-09-25) | **3488 — 12 under** | 3611 — 111 over |
-| Rear axle (max 2100) | 2017 | 2117 |
-| Front axle (max 1800) | 1471 | 1494 |
+| **Total, full fresh water (~108 L)** — full gas, 2 panels, tarp, C95L, passenger 55 kg, MultiPlus C 12/2000 (2026-09-25) | **3471 — 29 under** | 3594 — 94 over |
+| Rear axle (max 2100) | 1997 | 2098 |
+| Front axle (max 1800) | 1473 | 1496 |
 | Roof load (max 150) | 51 | 51 |
 
 | **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3344 — 155 under** (stricter, with water + gas: 3464) | — |
@@ -130,7 +130,7 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 **Read on that:**
 
 - **Poplar furniture is a must.** With it the van is inside every limit — only just.
-- **8 kg is no margin.** Driving with ~40 L of fresh water instead of 118 gives ~85 kg of room.
+- **8 kg is no margin.** Driving with ~40 L of fresh water instead of 108 gives ~85 kg of room.
 - **The biggest unknown is still the van itself** (2440 is the listing; VW allows ±3-5 %).
   **Weigh it, per axle, before the build.**
 - **The rear axle got its room back** with the bikes gone (93 kg under). Bikes on the rear
@@ -202,7 +202,8 @@ several set-ups, in three seasons.
   the van self-sufficient in every season without any campsite. See the question below.
 
 **Full gas** (cooking + hot water on gas, asked 2026-09-25): with **2 panels** the week is ok
-in summer and 0.2 kWh short in a Moroccan winter; with 3 panels it is self-sufficient
+in summer and just reaches a Moroccan winter week (lowest 7 %, with the smaller MultiPlus C
+12/2000 in search mode - it was 0.2 kWh short with the 12/3000); with 3 panels it is self-sufficient
 everywhere. Hot water on gas is **comfort, not energy**: lean use already takes it off the
 battery — gas gives hot showers on parked days too.
 
@@ -283,6 +284,26 @@ See [roof.png](roof.png). From the front:
   661, 852, 1133, 1482, 1759, 2179, 2599, 2878) may sit on bows. The rear fan's cut contains
   the point near x 2870 — **measure before cutting**; the fan can move ~100 either way.
 - **Room for a 3rd panel?** No — not without dropping a fan or the Starlink. With full gas, 2 panels are enough ([energy.md](energy.md)).
+
+## Electrics and water products — proposed 2026-09-25
+
+Full list and reasons in [doc/products.md](../doc/products.md). What it changes in the model:
+
+| | Product | In the model |
+|---|---|---|
+| Batteries | 2 x Ective LC 150 LT, 353 x 175 x 190 | stand across the driver bench, x 2100–2275 and 2340–2515, 190 high (was 240) |
+| Inverter | **Victron MultiPlus C 12/2000/80** — replaces the 12/3000 | 520 x 255 x 125 on the shelf over the cells, z 240–365 |
+| MPPT, DC-DC, shunt, 230 V box | SmartSolar 100/30, Orion XS 50 A, SmartShunt, 2-pole RCD + 2 MCB | the board in the garage, under the power inlet (unchanged) |
+| Fresh tank | made to size, ~108 L | same box; 118 L was the outside volume |
+| Grey tank | made to size, ~85 L | same box |
+| Pumps | Shurflo Trail King 7 (galley), Whale Gulper 220 (shower tray) | pump in the plumbing box; the Gulper under the shower tray |
+
+- **Weight:** 3471 kg with full water — **29 under** (was 12). The smaller inverter gives 6 kg,
+  the real fresh volume 10 kg.
+- **Energy:** the MultiPlus C idles at 3 W in search mode (the 12/3000: 8–10 W). The
+  Moroccan winter week now just holds (lowest 7 %) instead of 0.2 kWh short.
+- **To check:** the MultiPlus C's real size (Victron's datasheet and the shops disagree); the
+  Orion XS needs an ignition / D+ wire, because the Crafter's smart alternator can fool it.
 
 ## The grey tank — inside, under the footwell (agreed 2026-09-24)
 
@@ -391,7 +412,7 @@ weight/payload check and the daily energy use.
 | 2 | WC | fixed cassette vs portable — sliding into the shower is non-standard; max ~520 deep |
 | 3 | Fridge 90 L, sink + tray, hob, oven | set the galley carcasses |
 | 4 | Fresh and grey tanks | catalogue size, or a custom tank |
-| 5 | Batteries, inverter, MPPT, DC-DC, calorifier, heater | need airflow and service access |
+| 5 | Batteries, inverter, MPPT, DC-DC, calorifier, heater | need airflow and service access — **proposed 2026-09-25**, see below |
 | 6 | Shower tray | probably custom — size it last |
 
 ### 4. From boxes to parts — not started

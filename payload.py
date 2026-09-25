@@ -54,16 +54,17 @@ def prod(key):
 ITEMS = [
     # --- electrics
     ("Electrics", "2 x 150 Ah LiFePO4 (Ective LC 150 LT 15.5 kg each)", 31.0, at("battery"), "ective.de"),
-    ("Electrics", "Victron MultiPlus 12/3000/120", 18.0, at("inverter"), "Victron datasheet"),
-    ("Electrics", "SmartSolar MPPT 100/50 + Orion-Tr 12/12-30", 3.1, at("electrics"), "Victron datasheets"),
-    ("Electrics", "Busbars, fuses, consumer unit, shore inlet", 5.0, at("electrics"), "est."),
+    ("Electrics", "Victron MultiPlus C 12/2000/80 (was 12/3000, 18 kg)", 12.0, at("inverter"), "Victron datasheet"),
+    ("Electrics", "SmartSolar MPPT 100/30 + Orion XS 12/12-50 + SmartShunt", 1.8, at("electrics"), "Victron datasheets; shunt est."),
+    ("Electrics", "Busbars, fuses, 230 V box (RCD + 2 MCB), CEE inlet", 4.0, at("electrics"), "box 0.6, inlet 0.35; rest est."),
     ("Electrics", "70 mm2 cable ~8 m (0.78 kg/m) + other wiring", 16.0, 1500, "cable 0.78 kg/m; wiring est."),
     ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + rails - full gas, 2026-09-25", 29.0, 1810, "Victron 185 W 11 kg; rails est."),
     ("Electrics", "Starlink Mini + mount and cable", 1.6, 240, "Mini 1.10 kg (Starlink spec); mount est."),
     ("Electrics", "12 V lighting, switches, USB", 4.0, 1500, "est."),
     # --- water and bathroom
-    ("Water system", "Fresh tank 118 L, empty", 8.0, at("fresh"), "PE tanks 6-8.5 kg"),
-    ("Water system", "Grey tank 95 L, empty", 8.5, at("grey"), "Fusion 100 L 8.5 kg"),
+    ("Water system", "Fresh tank ~108 L, made to size, empty", 8.0, at("fresh"), "PE tanks 6-8.5 kg"),
+    ("Water system", "Grey tank ~85 L, made to size, empty", 8.0, at("grey"), "Varile 80 L flat 7.2 kg"),
+    ("Water system", "Whale Gulper 220 shower drain pump + Votronic level sensors", 1.9, 350, "Whale 1.5 kg; sensors est."),
     ("Water system", "Truma Boiler B10 gas water heater 10 L, empty, + flue", 7.5, at("calorifier"), "Truma 6.7 kg; flue est."),
     ("Gas system", "Gas locker (sealed, floor vent), regulator, hose, pipes, gas + CO detector", 6.0, at("gasbottle"), "est."),
     ("Water system", "Pump (Shurflo Trail King 7), filter, pipes, fittings", 10.0, at("plumbing"), "pump 2.3 kg; rest est."),
@@ -139,7 +140,7 @@ LOAD = [
     ("People", "Passenger (Ondrej's wife)", 55.0, -600, "Ondrej, 2026-09-25"),
     ("People", "Child + child seat", 25.0, -600, "Ondrej, 2026-09-25"),
     ("People", "Cat + litter", 10.0, 0, "est."),
-    ("Water", "Fresh water, full 118 L", 118.0, at("fresh"), "1 kg/L"),
+    ("Water", "Fresh water, full ~108 L", 108.0, at("fresh"), "1 kg/L; 118 L outside, walls 6-8 mm"),
     ("Water", "Water heater full + WC flush water", 25.0, 900, "10 + 15 L"),
     ("Gas", "6 kg refillable gas bottle, full", 14.3, at("gasbottle"), "tare ~8.3 typical + 6 kg gas"),
     ("Water", "Grey water - empty when driving", 0.0, at("grey"), "empty it before driving"),
@@ -221,7 +222,7 @@ def report():
                                 need, "under" if need <= GROSS else "OVER", abs(GROSS - need)), ""]
     # Stricter reading: "mass in running order" of a motor caravan may include the fresh
     # water tank at 90 % and the gas bottle full - the STK decides which applies.
-    extra = 0.9 * 118 + 14.3
+    extra = 0.9 * 108 + 14.3
     out += ["Stricter reading (fresh water 90 %% + a full gas bottle counted as well): **%d kg** — "
             "%s 3500 by %d." % (need + extra, "under" if need + extra <= GROSS else "OVER",
                                 abs(GROSS - need - extra)), ""]

@@ -131,14 +131,18 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3488 kg with full water, full gas, 2 panels,
-  tarp and poplar furniture (12 under), rear axle 2017, roof 51 of 150 - after leaving the bikes out, cutting solar to
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3471 kg with full water, full gas, 2 panels,
+  tarp and poplar furniture (29 under), rear axle 1997, roof 51 of 150 - after leaving the bikes out, cutting solar to
   one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
 - **Full gas chosen 2026-09-25** (cooking + hot water; [v2-real/energy.md](../v2-real/energy.md)): Thetford Topline 922 gas hob
   (proposed), Truma B10, 6 kg bottle in the garage; 2 panels, 50 A DC-DC, 300 Ah, Starlink Mini,
-  inverter in search mode. Self-sufficient except a Moroccan winter week (0.2 kWh short). Brings a
+  inverter in search mode. Self-sufficient in every season, a Moroccan winter week only just (lowest 7 %). Brings a
   certified gas installation + inspection, a wall flue, and LPG refills to plan for Morocco.
+- **Electrics and water products proposed 2026-09-25 ([products.md](products.md)):** 2 x Ective LC 150 LT,
+  **MultiPlus C 12/2000** instead of the 12/3000 (-6 kg; the oven is the biggest AC load now), MPPT 100/30,
+  Orion XS 50 A with a D+ signal, SmartShunt, no Cerbo. Both tanks **made to size** (no catalogue tank fits),
+  Shurflo Trail King 7, Whale Gulper 220 for the shower, Votronic sensors.
 - **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
 - **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
   All body holes are listed in the v2-real README.

@@ -204,7 +204,7 @@ How it looks on our van: [v2-real/tarp.png](../v2-real/tarp.png), and the **Tarp
 | | Product | kg | Status |
 |---|---|---|---|
 | Solar | **2 panels ~200 W** (e.g. Victron 185 W 12 V, 1485 x 668, 11 kg each) — 3 before full gas | 22 + rails | **chosen** |
-| DC-DC | **Victron Orion XS 12/12-50A** — 0.67 kWh per hour of driving | — | proposed |
+| DC-DC | **Victron Orion XS 12/12-50A** — 0.67 kWh per hour of driving | 0.33 | proposed |
 | Batteries | 2 x 150 Ah LiFePO4 (e.g. Ective LC 150 LT, 15.5 kg each) | 31 | **chosen** (300 Ah) |
 | Internet | **Starlink Mini** — 25–40 W average, 1.10 kg | 1.1 | **chosen** (lean use) |
 
@@ -212,7 +212,57 @@ Energy check: [v2-real/energy.md](../v2-real/energy.md). The roof layout is draw
 [v2-real/roof.png](../v2-real/roof.png) — Starlink front, front fan, 2 panels side by side,
 rear fan over the bed, tarp rail on the passenger edge.
 
-## Still to add
+## Electrics — researched 2026-09-25
 
-Tanks, batteries, inverter, MPPT, DC-DC,
-calorifier. Their weights are already in the payload check ([v2-real/payload.md](../v2-real/payload.md)).
+Numbers in `products.py`. "From" prices on geizhals.de are often 0 % VAT offers (German PV
+rule) - the ranges below are with VAT where a shop showed it.
+
+| | Product | Size mm | kg | € | Status |
+|---|---|---|---|---|---|
+| Batteries | **2 x Ective LC 150 LT** — heated (charges to −30 °C), Bluetooth BMS, 150 A | 353 x 175 x 190 | 2 x 15.5 | 2 x 1,109–1,199 | proposed |
+| Inverter / charger | **Victron MultiPlus C 12/2000/80** — 1600 W at 25 °C, 1400 at 40 °C; idle 9 / search 3 W; 80 A charger | 520 x 255 x 125 (datasheet; shops say 375 x 214 x 110) | 12 | 975–1,145 | proposed — **replaces the 12/3000** |
+| Solar controller | **Victron SmartSolar MPPT 100/30** — 440 W at 12 V; panels in series | 130 x 186 x 70 | 1.3 | ~86–120 | proposed |
+| Panels | **2 x Victron BlueSolar 185 W 12 V** — Voc 24.1 V | 1485 x 668 x 30 | 2 x 11 | not found | proposed |
+| DC-DC | **Victron Orion XS 12/12-50A** — 98.5 %, IP65 | 137 x 123 x 40 | 0.33 | ~233 | proposed |
+| Battery monitor | **Victron SmartShunt 500A** | 46 x 120 x 54 | ~0.2 | 71–82 | proposed |
+| Shore power | **CEE 16 A caravan inlet** + **IP65 box, 2-pole RCD + 2 MCB** | 160 x 100 / 150 x 100 x 100 | ~1 | ~120–220 | proposed |
+
+Why:
+
+- **Batteries:** the lightest and lowest 150 Ah with a heater and Bluetooth we found. One
+  300 Ah (Ective LC 300L LT) is ~€700 cheaper but **6.5 kg heavier** and does not fit the bench.
+  Liontron LX 150 is 261–270 tall — too tall. Victron has no 150 Ah Smart battery.
+- **Inverter:** with full gas the biggest AC load is the **1380 W oven**. The MultiPlus C
+  12/2000 is the smallest that runs it (the 12/1600 gives 1300 W). Against the 12/3000:
+  **−6 kg**, idle 9 W instead of 20, similar price. Its 80 A charger fills 300 Ah in ~4 h at a campsite.
+  **Check its real size before building** — Victron's datasheet and the shops disagree.
+- **DC-DC:** a Euro 6 "smart" alternator can drop to ~12.6 V while driving; the Orion then
+  thinks the engine is off and stops. **Wire an ignition / D+ signal to it from the start.**
+- **No Cerbo GX** for now (~€161): we lose one screen for everything, remote history (VRM) and
+  shared charge control. The app still reads each device over Bluetooth. Can be added later.
+- **2-pole RCD:** on campsites you cannot trust which wire is live.
+
+## Water — researched 2026-09-25
+
+| | Product | Size mm | kg | € | Status |
+|---|---|---|---|---|---|
+| Fresh tank | **made to size**, food-safe PE, **~108 L** | 1020 x 374 x 310 | ~8 | ~200–500 | proposed |
+| Grey tank | **made to size**, PE, flat, **~85 L** | 880 x 600 x 180 | ~8 | ~200–500 | proposed |
+| Water pump | **Shurflo Trail King 7** (2095-204-412) — 6.8 l/min, 1.4 bar, 3.3 A | 197 x 127 x 113 | 2.3 | 151 (e-flow.cz 3,781 CZK) | proposed |
+| Shower drain pump | **Whale Gulper 220** (BP1552) — 14 l/min, on a switch | 273 x 133 x 114 | 1.5 | 218 | proposed |
+| Level sensors | **Votronic** electrodes 15-50 K (5545, fresh) + 12-24 K (5543, grey) + displays | — | ~0.4 | ~180–200 | proposed |
+
+Why:
+
+- **No catalogue tank fits.** The fresh space is 374 wide: Reimo's 100 L is 480 wide, Varile's
+  120 L is 1150 x 400. The grey space is 180 high: the flattest 80 L found (Varile NEO) is
+  200 high. **Makers who build to a drawing:** VanReady (price on request), LETO (from €500),
+  DL Kunststofftechnik (a forum user paid ~€200 net). Ask for food-safe PE for the fresh one.
+- **Fresh tank fittings:** filler 1½", vent ½" led higher than the filler, pump outlet and a
+  drain valve at the low end, sensor port, cleaning lid 120–160. **Grey:** outlet ≥ ¾" at
+  the low point, ball valve, pipe down through the floor.
+- **If we would rather buy a catalogue grey tank:** the Varile NEO 80 L (800 x 600 x 200, ~€90)
+  fits if the footwell floor goes up 20 mm.
+- **Pump:** quiet and proven, sold in Czech shops. For a stronger shower: Seaflo 42 series,
+  11.3 l/min, 3.8 bar, but 7 A.
+- **Sensors:** Votronic's FL sender needs a tank at least 300 tall — too tall for the grey tank.

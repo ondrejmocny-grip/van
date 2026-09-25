@@ -160,8 +160,99 @@ PRODUCTS = {
         note="replaces the Standard (75-100 W, 2.9 kg): -0.6 kWh on a working day", status="chosen"),
     "orion-xs-50": dict(
         name="Victron Orion XS 12/12-50A DC-DC charger", kind="dcdc", current_a=50,
-        weight_kg=None, price_eur=None, shop=None, source=None,
-        note="0.67 kWh per hour of driving; the Crafter's alternator is 140-230 A (VW)",
+        outer=(137, 123, 40), efficiency=0.985, weight_kg=0.33, price_eur=(233, 233),
+        shop="geizhals.de (from)",
+        source="https://www.victronenergy.com/upload/documents/Orion_XS_12-12-50A_DC-DC_battery_charger/124067-Orion_XS_DC-DC_battery_charger-pdf-en.pdf",
+        note="0.67 kWh per hour of driving; the Crafter's alternator is 140-230 A (VW). A Euro 6 "
+             "smart alternator can drop to ~12.6 V while driving and the Orion then thinks the "
+             "engine is off - wire an ignition / D+ engine-running signal to it from the start",
+        status="proposed"),
+    # --- electrics, researched 2026-09-25 ---------------------------------------------------
+    "ective-lc150-lt": dict(
+        name="Ective LC 150 LT, 12 V 150 Ah LiFePO4 (heated, Bluetooth BMS)", kind="battery",
+        outer=(353, 175, 190), current_a=150, weight_kg=15.5, price_eur=(1109, 1199),
+        shop="ective.de 1,109 (sold out) / vandalierer.com 1,199",
+        source="https://www.ective.de/mediafiles/Datenblatt/ective/LC-BT-LT/Ective-LC-150-BT%2BLT-EN.pdf",
+        note="LT = heating plates, charges down to -30 C. Two of them (300 Ah). One LC 300L LT "
+             "(520 x 268 x 228, 37.5 kg, ~1,485) is cheaper but 6.5 kg heavier and does not fit",
+        status="proposed"),
+    "multiplus-c-12-2000": dict(
+        name="Victron MultiPlus C 12/2000/80-30 inverter / charger", kind="inverter",
+        outer=(520, 255, 125), power_w=(1600, 1400), idle_w=(9, 7, 3), charger_a=80,
+        weight_kg=12.0, price_eur=(975, 1145), shop="bau-tech.shop 975 / heureka.cz ~28,612 CZK",
+        source="https://www.victronenergy.com/upload/documents/Datasheet-MultiPlus-inverter-charger-800VA-5kVA-EN.pdf",
+        note="1600 W at 25 C, 1400 at 40 C - the smallest that runs the 1380 W oven (the 12/1600 "
+             "gives 1300). Idle 9 / AES 7 / search 3 W. Size: datasheet 520 x 255 x 125, shops "
+             "375 x 214 x 110 - check before building; the model uses the larger",
+        status="proposed"),
+    "multiplus-12-3000": dict(
+        name="Victron MultiPlus 12/3000/120-16", kind="inverter", outer=(364, 295, 221),
+        power_w=(2400, 2200), idle_w=(20, 15, 8), charger_a=120, weight_kg=18.0,
+        price_eur=(1094, 1094), shop="bau-tech.shop",
+        source="https://www.victronenergy.com/upload/documents/Datasheet-MultiPlus-inverter-charger-800VA-5kVA-EN.pdf",
+        note="the v2 choice, sized for induction cooking - not needed on full gas", status="option"),
+    "smartsolar-100-30": dict(
+        name="Victron SmartSolar MPPT 100/30", kind="mppt", outer=(130, 186, 70), current_a=30,
+        weight_kg=1.3, price_eur=(86, 120), shop="geizhals.de (from)",
+        source="https://www.victronenergy.com/upload/documents/Datasheet-SmartSolar-charge-controller-MPPT-100-30-&-100-50-EN.pdf",
+        note="440 W at 12 V - enough for 2 x 185 W. Panels in series (Voc ~48 V, ~56 V in cold)",
+        status="proposed"),
+    "victron-185w": dict(
+        name="Victron BlueSolar 185 W-12 V mono panel (SPM041851200)", kind="solar",
+        outer=(1485, 668, 30), vmp=19.68, voc=24.11, isc=9.91, weight_kg=11.0,
+        price_eur=None, shop=None,
+        source="https://www.victronenergy.com/upload/documents/Datasheet-BlueSolar-Monocrystalline-Panels-EN.pdf",
+        status="proposed"),
+    "smartshunt-500": dict(
+        name="Victron SmartShunt 500A battery monitor", kind="monitor", outer=(46, 120, 54),
+        weight_kg=0.2, price_eur=(71, 82), shop="geizhals.de (from)",
+        source="https://www.victronenergy.com/upload/documents/Datasheet-SmartShunt-EN.pdf",
+        note="no Cerbo GX for now (from ~161): we lose one screen for all, VRM remote history and "
+             "DVCC. The app still reads each device over Bluetooth. Can be added later",
+        status="proposed"),
+    "shore-230v": dict(
+        name="CEE 16 A caravan inlet with lid + IP65 box, 2-pole RCD + 2 MCB", kind="shore",
+        outer=(150, 100, 100), weight_kg=0.95, price_eur=(120, 220),
+        shop="anhaenger-ersatzteile24.de 12.90 (inlet) / tigerexped.de 78-203 (box)",
+        source="https://www.tigerexped.de/1pn-2pn-small-distribution",
+        note="2-pole: on campsites you cannot trust which wire is live", status="proposed"),
+    # --- water, researched 2026-09-25 -------------------------------------------------------
+    "fresh-tank-custom": dict(
+        name="Fresh water tank made to size, food-safe PE", kind="tank",
+        outer=(1020, 374, 310), litres=108, weight_kg=8.0, price_eur=(200, 500),
+        shop="vanready.de (to drawing) / leto.de (from 500) / DL Kunststofftechnik (~200 net, forum)",
+        source="https://www.vanready.de/frischwasser-abwassertank-fuer-camper-und-wohnmobil-massanfertigung-nach-zeichnung",
+        note="no catalogue tank fits 374 wide at ~100 L (Reimo 100 L is 480 wide, Varile 120 L "
+             "1150 x 400). Fittings: filler 1 1/2, vent 1/2 led above the filler, pump outlet and "
+             "drain valve at the low end, sensor port, cleaning lid 120-160",
+        status="proposed"),
+    "grey-tank-custom": dict(
+        name="Grey water tank made to size, PE, flat", kind="tank",
+        outer=(880, 600, 180), litres=85, weight_kg=8.0, price_eur=(200, 500),
+        shop="same makers as the fresh tank",
+        source="https://leto.de/grauwassertank-wohnmobil/",
+        note="closest catalogue tank: Varile NEO 80 L, 800 x 600 x 200, 7.2 kg, ~90 - 20 too "
+             "tall (would lift the footwell 20). Outlet >= 3/4 at the low point, ball valve, "
+             "pipe down through the floor",
+        status="proposed"),
+    "shurflo-trailking-7": dict(
+        name="Shurflo Trail King 7 (2095-204-412), 12 V diaphragm pump", kind="pump",
+        outer=(197, 127, 113), flow_l_min=6.8, bar=1.4, current_a=3.3, weight_kg=2.3,
+        price_eur=(151, 151), shop="e-flow.cz 3,781 CZK",
+        source="https://www.e-flow.cz/shurflo-2095-204-412-membranove-cerpadlo-6-8-l-min-1-4-bar-12-v-dc-pp-sp-epdm-ps-p3765/",
+        note="quiet, proven. For a stronger shower: Seaflo 42 series 11.3 l/min, 3.8 bar, 7 A",
+        status="proposed"),
+    "whale-gulper-220": dict(
+        name="Whale Gulper 220 (BP1552) shower drain pump", kind="pump",
+        outer=(273, 133, 114), flow_l_min=14, current_a=4.0, weight_kg=1.5,
+        price_eur=(218, 218), shop="comptoirnautique.com",
+        source="https://en.comptoirnautique.com/waste-water-pump/37795-whale-gulper-220-electric-grey-water-pump-12v-14-l-min.html",
+        note="shower tray -> grey tank, on a switch; runs dry, takes hair and soap", status="proposed"),
+    "votronic-levels": dict(
+        name="Votronic tank electrodes 15-50 K (5545, fresh) + 12-24 K (5543, grey) + displays",
+        kind="sensor", weight_kg=0.4, price_eur=(180, 200), shop="schnell-und-sicher-handelskontor.de",
+        source="https://www.votronic.de/en/tank-sensor-fl/",
+        note="the FL sender needs a 300+ tank - too tall for grey. Both use a PG29 fitting",
         status="proposed"),
     # --- bigger fridge options (asked 2026-09-25) --------------------------------------------
     # Up to ~835 is free above the fridge base (the hob wants 65 under the worktop), so a
