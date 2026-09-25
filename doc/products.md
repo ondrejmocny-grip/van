@@ -147,13 +147,32 @@ deep). All four are in the model and in the payload check.
 | Fiamma F80S 320 | 3.20 x 2.50 m, 7.7 m² | 29.0 | bracket kit 98655Z058 | option |
 
 On the passenger side, over the sliding door. It counts toward the **150 kg roof load**
-(with the solar panel, fans and Starlink: 67 kg). Prices not found yet.
+(with the 3 panels, fans and Starlink Mini: 91 kg). Prices not found yet.
 
-## Solar and charging — changed 2026-09-24
+**Lighter options** (asked 2026-09-25):
 
-**One ~200 W panel** instead of two (−14 kg), and more charging while driving: a **50 A**
-DC-DC charger instead of the 30 A Orion (Victron's Orion XS 12/12-50 is the obvious one —
-weight and price to find). Batteries stay **300 Ah**. A daily energy check comes next.
+| Option | kg | Note |
+|---|---|---|
+| Thule Omnistor 6300 3.25 (above) | 25.1 | lightest roll-out awning with a Crafter 2017+ adapter we found |
+| Fiamma F65S 320 | 26.5 | fits the same Fiamma Crafter kit as the F80S |
+| Fiamma F80S 320 | 29.0 | |
+| Fiamma F40van 270 | 19 | made for smaller vans (T5/T6); **no Crafter kit found** |
+| **Tarp / sun sail on a keder rail** along the roof edge, 2 poles | **~4–6** (est.) | **−20 kg**; 10 min to put up, needs pegs and guy lines, not in strong wind |
+
+The roll-out awnings all weigh 25–29 kg — none is much lighter. **If weight decides, a keder
+rail and a tarp is the only real saving.**
+
+## Solar, charging, internet — chosen 2026-09-25
+
+| | Product | kg | Status |
+|---|---|---|---|
+| Solar | **3 panels ~200 W** (e.g. Victron 185 W 12 V, 1485 x 668, 11 kg each) | 33 + rails | **chosen** |
+| DC-DC | **Victron Orion XS 12/12-50A** — 0.67 kWh per hour of driving | — | proposed |
+| Batteries | 2 x 150 Ah LiFePO4 (e.g. Ective LC 150 LT, 15.5 kg each) | 31 | **chosen** (300 Ah) |
+| Internet | **Starlink Mini** — 25–40 W average, 1.10 kg | 1.1 | **chosen** (lean use) |
+
+Energy check: [v2-real/energy.md](../v2-real/energy.md). The roof layout (3 panels, 2 fans,
+Starlink Mini, awning) is still to draw.
 
 ## Still to add
 

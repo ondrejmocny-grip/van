@@ -58,8 +58,8 @@ ITEMS = [
     ("Electrics", "SmartSolar MPPT 100/50 + Orion-Tr 12/12-30", 3.1, at("electrics"), "Victron datasheets"),
     ("Electrics", "Busbars, fuses, consumer unit, shore inlet", 5.0, at("electrics"), "est."),
     ("Electrics", "70 mm2 cable ~8 m (0.78 kg/m) + other wiring", 16.0, 1500, "cable 0.78 kg/m; wiring est."),
-    ("Electrics", "1 solar panel ~200 W (11 kg) + rails - reduced 2026-09-24", 16.0, 2400, "Victron 185 W 11 kg; rails est."),
-    ("Electrics", "Starlink dish, router, flat mount", 5.0, 2900, "Starlink spec sheets"),
+    ("Electrics", "3 solar panels ~200 W (3 x 11 kg) + rails - chosen 2026-09-25", 43.0, 2400, "Victron 185 W 11 kg; rails est."),
+    ("Electrics", "Starlink Mini + mount and cable", 1.6, 2900, "Mini 1.10 kg (Starlink spec); mount est."),
     ("Electrics", "12 V lighting, switches, USB", 4.0, 1500, "est."),
     # --- water and bathroom
     ("Water system", "Fresh tank 118 L, empty", 8.0, at("fresh"), "PE tanks 6-8.5 kg"),

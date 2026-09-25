@@ -54,24 +54,25 @@ HOT = {"Morocco, winter": False, "Turkey, spring / autumn": False, "EU, summer":
 # "Shore": a campsite with a hook-up on Tuesday and Friday nights (the MultiPlus charges
 # 120 A - full in ~3 h), so the battery starts the next day full.
 SETUPS = [
-    # name, panels, DC-DC amps, lean, shore days
-    ("As planned: 1 panel, 30 A DC-DC", 1, 30, False, ()),
-    ("1 panel, 50 A DC-DC", 1, 50, False, ()),
-    ("2 panels, 50 A DC-DC", 2, 50, False, ()),
-    ("1 panel, 50 A DC-DC, lean use", 1, 50, True, ()),
-    ("3 panels (~600 W), 50 A DC-DC, lean use", 3, 50, True, ()),
-    ("4 panels (~800 W, if the roof layout allows), 50 A, lean use", 4, 50, True, ()),
-    ("2 panels, 50 A DC-DC, lean use, campsite twice a week", 2, 50, True, ("Tue", "Fri")),
-    ("1 panel, 50 A DC-DC, campsite twice a week", 1, 50, False, ("Tue", "Fri")),
-    ("1 panel, 50 A DC-DC, lean use, campsite twice a week", 1, 50, True, ("Tue", "Fri")),
+    # name, panels, DC-DC amps, lean, shore days, gas cooking
+    ("v2 plan: 1 panel, 30 A DC-DC", 1, 30, False, (), False),
+    ("2 panels, 50 A DC-DC", 2, 50, False, (), False),
+    ("**Chosen: 3 panels (~600 W), 50 A, lean** - no campsite", 3, 50, True, (), False),
+    ("**Chosen + campsite once a week** (Friday)", 3, 50, True, ("Fri",), False),
+    ("Chosen + campsite twice a week", 3, 50, True, ("Tue", "Fri"), False),
+    ("Chosen, cooking on GAS instead of induction - no campsite", 3, 50, True, (), True),
+    ("4 panels (~800 W), 50 A, lean - no campsite", 4, 50, True, (), False),
 ]
 
 
-def day_use(day, hot, lean=False, shore=False):
+def day_use(day, hot, lean=False, shore=False, gas=False):
     """kWh taken from the battery on one day, and the list of (load, kWh)."""
     i = DAY_TYPES.index(day)
     rows = []
     for name, watts, hours, ac, _src in LOADS:
+        if name.startswith("Induction") and gas:
+            rows.append((name, 0.0))            # cooked on gas
+            continue
         if name.startswith("Fridge"):
             kwh = 0.386 * (1.5 if hot else 1.0)
         elif name == "Starlink":
@@ -88,12 +89,12 @@ def day_use(day, hot, lean=False, shore=False):
     return sum(k for _, k in rows), rows
 
 
-def week(panels, amps, place, lean=False, shore=()):
+def week(panels, amps, place, lean=False, shore=(), gas=False):
     """Run the week from a full battery. Returns (lowest charge %, kWh short, per-day log)."""
     usable = BATTERY_KWH * USABLE
     charge, short, low, log = usable, 0.0, 100.0, []
     for d, name in zip(WEEK, DAY_NAMES):
-        use, _ = day_use(d, HOT[place], lean, name in shore)
+        use, _ = day_use(d, HOT[place], lean, name in shore, gas)
         gain = panels * SUN[place] + DRIVE_HOURS[d] * amps * 13.4 / 1000
         charge = charge - use + gain
         if charge < 0:
@@ -134,16 +135,16 @@ def report():
             "**was missing** (the battery hit empty):", "",
             "| Set-up | %s |" % " | ".join(SUN), "|---|%s" % ("---|" * len(SUN))]
     summary = []
-    for name, panels, amps, lean_use, shore in SETUPS:
+    for name, panels, amps, lean_use, shore, gas in SETUPS:
         cells = []
         for place in SUN:
-            low, short, _ = week(panels, amps, place, lean_use, shore)
+            low, short, _ = week(panels, amps, place, lean_use, shore, gas)
             cells.append("%d %% · %s" % (low, "**%.1f kWh short**" % short if short > 0.05 else "ok"))
         out.append("| %s | %s |" % (name, " | ".join(cells)))
         summary.append((name, cells))
-    out += ["", "## The week, day by day (as planned, Morocco in winter)", "",
+    out += ["", "## The week, day by day (chosen set-up, Morocco in winter, no campsite)", "",
             "| Day | Type | Used kWh | Charged kWh | Charge at night |", "|---|---|---|---|---|"]
-    for n, d, use, gain, pct in week(1, 30, "Morocco, winter")[2]:
+    for n, d, use, gain, pct in week(3, 50, "Morocco, winter", lean=True)[2]:
         out.append("| %s | %s | %.2f | %.2f | %d %% |" % (n, d.replace("_", ", "), use, gain, pct))
     path = os.path.join(HERE, "v2-real", "energy.md")
     open(path, "w").write("\n".join(out) + "\n")

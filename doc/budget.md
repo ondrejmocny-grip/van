@@ -38,7 +38,9 @@ cladding and sound deadening — expect the Shell line to rise when the rest is 
 **Kitchen, proposed 2026-09-24:** fridge 1,040 + hob 400–472 + sink ~260 + oven ~100 =
 **~1,800–1,870** (v1's Kitchen line: 1,290–1,690 — the 85 L fridge is the difference).
 
-**Changed 2026-09-24:** solar cut to **one** ~200 W panel (v1's Electrical line had two:
+**Changed 2026-09-25:** solar back to **three** ~200 W panels (one more than v1's two: roughly
++€150–250), a 50 A DC-DC, and **Starlink Mini** instead of the Standard (cheaper hardware). Earlier,
+2026-09-24: solar cut to **one** ~200 W panel (v1's Electrical line had two:
 roughly −€150–250); the DC-DC may go up to 50 A (price to find); an **awning** joins the
 Other line (Thule Omnistor 6300 3.25 m + Crafter adapter, price to find); no bike rack.
 

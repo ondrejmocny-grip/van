@@ -108,13 +108,13 @@ panel**, relying more on charging while driving; **awning added** (Thule Omnisto
 
 | | Poplar furniture | Birch furniture |
 |---|---|---|
-| **Total, full fresh water (118 L)** | **3491 — 8 under** | 3614 — 114 over |
-| Rear axle (max 2100) | 2007 | 2107 |
+| **Total, full fresh water (118 L)** — with 3 panels (2026-09-25) | **3514 — 14 over** | 3637 — 137 over |
+| Rear axle (max 2100) | 2031 | 2131 |
 | Front axle (max 1800) | 1484 | 1507 |
-| Roof load (max 150) | 67 | 67 |
+| Roof load (max 150) | 91 | 91 |
 
-| Without the awning (optional, first to cut) | 3462 | 3585 |
-| **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3353 — 146 under** | 3476 — 24 under |
+| Without the awning (optional, first to cut) | 3485 | 3608 |
+| **Registration test** — empty converted van + 75 kg x 2 seats + 90 kg luggage allowance | **3376 — 123 under** | 3499 — 1 under |
 
 **Two different limits:**
 
@@ -142,34 +142,31 @@ of driving) — a daily energy check is the next thing to do before settling the
 The furniture is estimated from the model's boxes (±20 %); the passenger and child weights are
 placeholders to confirm.
 
-## Energy — one panel is far too little (first check, 2026-09-24)
+## Energy — chosen 2026-09-25: 3 panels, 50 A DC-DC, lean use, campsite now and then
 
 `python energy.py` writes **[energy.md](energy.md)**: every load per day type, and a
-simulated week (work Monday to Friday parked, drive 2 h on Wednesday and 4 h on Saturday, no
-shore power) for several set-ups, in three seasons.
+simulated week (work Monday to Friday parked, drive 2 h on Wednesday and 4 h on Saturday) for
+several set-ups, in three seasons.
 
-- **A parked working day uses ~4.6 kWh** — more than the whole usable battery (3.46 kWh of
-  300 Ah). The big ones: cooking 1.1, Starlink Standard 0.9 (75–100 W on average, Starlink's
-  own spec), laptop + monitor 0.6, hot water 0.5, fridge 0.4, the inverter just being on 0.35.
-- **Charging while driving cannot carry it:** a 50 A DC-DC gives 0.67 kWh per hour of driving,
-  so a parked working day costs ~6-7 h of driving.
-- **"Lean" use** — Starlink Mini (25–40 W), the inverter in search mode, hot water only from
-  the engine or a campsite — brings a parked working day to ~2.9 kWh without touching
-  cooking or work.
+**Chosen:** **3 panels (~600 W)**, a **50 A DC-DC** (Orion XS), batteries **300 Ah**, and
+**lean use**: **Starlink Mini** (25–40 W instead of 75–100), the inverter in **search mode**,
+**hot water only from the engine or at a campsite**.
 
-| Set-up, one week without shore power | Morocco, winter | EU, summer |
+| One week | Morocco, winter | EU, summer |
 |---|---|---|
-| As planned: 1 panel, 30 A | empty — 19 kWh short | empty — 19 kWh short |
-| 2 panels, 50 A | empty — 13 kWh short | empty — 11 kWh short |
-| 1 panel, 50 A, lean, campsite twice a week | empty — 5 kWh short | empty — 5 kWh short |
-| 3 panels, 50 A, lean | empty — 3 kWh short | just ok |
-| **4 panels (~800 W), 50 A, lean** | **ok — lowest 9 %** | **ok — lowest 94 %** |
+| v2 plan: 1 panel, 30 A | empty — 19 kWh short | empty — 19 kWh short |
+| **Chosen, no campsite** | empty — 2.7 kWh short | just ok (lowest 3 %) |
+| Chosen + campsite once a week (Friday) | empty — 2.7 kWh short | just ok |
+| **Chosen + campsite twice a week** | **ok — lowest 9 %** | **ok — lowest 45 %** |
+| Chosen, **cooking on gas** — no campsite | **ok — lowest 75 %** | **ok — lowest 100 %** |
 
-**Energy and weight pull opposite ways.** 4 panels are ~+43 kg over the one panel — which the
-payload does not have (8 kg margin) unless the awning goes (−29) and we drive with little
-fresh water. **To decide with Ondrej**; the roof layout (4 panels around 2 fans and Starlink)
-is also still to draw. Loads are estimates (source column in energy.md) — the conclusion is
-robust to them: the gap is a factor of 3, not 10 %.
+- **"Occasional campsite" means about every 3 days** off the summer sun: once a week comes too
+  late, the shortfall builds up from Monday.
+- **Cooking is the biggest load** (~1.1 kWh a day). Taking it off the battery - on gas - makes
+  the van self-sufficient in every season without any campsite. See the question below.
+
+**A parked working day, lean:** ~2.9 kWh. Usable battery 3.46 kWh; 3 panels 1.8–2.5 kWh a day;
+driving 0.67 kWh per hour.
 
 ## Kitchen — proposed 2026-09-24
 

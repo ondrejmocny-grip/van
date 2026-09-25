@@ -128,14 +128,13 @@ See [budget.md](budget.md).
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
-- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3491 kg with full water and
-  poplar furniture, rear axle 2007, roof 67 of 150 - after leaving the bikes out, cutting solar to
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3514 kg with full water, 3 panels and
+  poplar furniture (14 over; 3485 without the awning), rear axle 2031, roof 91 of 150 - after leaving the bikes out, cutting solar to
   one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
   furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
-- **Energy: one panel is far too little** ([v2-real/energy.md](../v2-real/energy.md), 2026-09-24): a parked
-  working day uses ~4.6 kWh, more than the usable 300 Ah. Only ~800 W of solar + lean use (Starlink
-  Mini, inverter search mode, hot water from engine/campsite) gets through a week alone - and that
-  costs ~43 kg the payload does not have unless the awning goes. To decide.
+- **Energy chosen 2026-09-25** ([v2-real/energy.md](../v2-real/energy.md)): 3 panels, 50 A DC-DC, 300 Ah, lean use
+  (Starlink Mini, inverter search mode, hot water from engine/campsite). Needs a campsite about every
+  3 days outside summer. **Open: cooking on gas** - makes the van self-sufficient without campsites.
 - **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
 - **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
   2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished

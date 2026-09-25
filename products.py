@@ -152,6 +152,17 @@ PRODUCTS = {
         shop="Crafter 2017+ bracket kit 98655Z058 (justkampers.com)",
         source="https://www.offroadaccessoires.ch/de/markise/1004-1012-fiamma-f80s-320-cm-dachmarkise-fuer-vans-und-wohnmobile.html",
         note="4 kg heavier than the Thule", status="option"),
+    # --- power (chosen 2026-09-25: 3 panels, 50 A DC-DC, lean use) ------------------------
+    "starlink-mini": dict(
+        name="Starlink Mini", kind="internet", outer=(299, 259, 39), power_w=(25, 40),
+        weight_kg=1.10, price_eur=None, shop="starlink.com",
+        source="https://starlink.com/public-files/specification_sheet_mini.pdf",
+        note="replaces the Standard (75-100 W, 2.9 kg): -0.6 kWh on a working day", status="chosen"),
+    "orion-xs-50": dict(
+        name="Victron Orion XS 12/12-50A DC-DC charger", kind="dcdc", current_a=50,
+        weight_kg=None, price_eur=None, shop=None, source=None,
+        note="0.67 kWh per hour of driving; the Crafter's alternator is 140-230 A (VW)",
+        status="proposed"),
 }
 
 
