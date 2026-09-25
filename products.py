@@ -121,7 +121,7 @@ PRODUCTS = {
     "quadron-anthony-50": dict(
         name="Quadron Anthony 50 = 'Paul' MF4444BS_I, stainless inset sink", kind="sink",
         outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(420, 420), drain='3 1/2"',
-        weight_kg=6.4, price_eur=(179, 190), shop="SIKO.cz 4,472 CZK / absulo.sk 189.57",
+        weight_kg=6.4, price_eur=(179, 190), shop="absulo.sk 189.57 / SIKO.cz ~4,472 CZK (search MF4444BS_I)",
         source="https://absulo.sk/p/quadron-paul-nerezovy-drez-44x44-cm-mf4444bs-i",
         note="1 mm steel, R10 corners, space-saving siphon included. NO workstation ledge - board, "
              "mat and colander rest on the rim; no sink with a real ledge fits 440 x 440 x 190. "
@@ -152,7 +152,9 @@ PRODUCTS = {
     "its-fil-1weg-kurz": dict(
         name="its-wasser.de 'Fil 1-Weg 1/4 kurz', drinking-water tap", kind="filtertap",
         outer=(50, 120, 250), hole=12, weight_kg=None, price_eur=(109, 109), shop="its-wasser.de",
-        source="https://www.its-wasser.de", note="spout outlet ~228 above the worktop; check the "
+        source="https://www.its-wasser.de/wasserhaehne-wasserhaehne-61-61.html",
+        note="item Fil-1Weg 1/4 Edel kurz, swivel spout, 1/4 inch hose. The page says nicht fur "
+        "Arbeitsplatte geeignet - ask. Spout outlet ~228 above the worktop; check the "
         "total height (limit 250) and the reach (needs >= ~180 to pour into the bowl) before buying", status="proposed"),
     "tefal-of4448": dict(
         name="Tefal Optimo OF4448 mini oven 19 L, hot air", kind="oven",
