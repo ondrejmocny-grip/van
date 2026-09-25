@@ -58,8 +58,8 @@ ITEMS = [
     ("Electrics", "SmartSolar MPPT 100/50 + Orion-Tr 12/12-30", 3.1, at("electrics"), "Victron datasheets"),
     ("Electrics", "Busbars, fuses, consumer unit, shore inlet", 5.0, at("electrics"), "est."),
     ("Electrics", "70 mm2 cable ~8 m (0.78 kg/m) + other wiring", 16.0, 1500, "cable 0.78 kg/m; wiring est."),
-    ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + rails - full gas, 2026-09-25", 29.0, 2400, "Victron 185 W 11 kg; rails est."),
-    ("Electrics", "Starlink Mini + mount and cable", 1.6, 2900, "Mini 1.10 kg (Starlink spec); mount est."),
+    ("Electrics", "2 solar panels ~200 W (2 x 11 kg) + rails - full gas, 2026-09-25", 29.0, 1810, "Victron 185 W 11 kg; rails est."),
+    ("Electrics", "Starlink Mini + mount and cable", 1.6, 240, "Mini 1.10 kg (Starlink spec); mount est."),
     ("Electrics", "12 V lighting, switches, USB", 4.0, 1500, "est."),
     # --- water and bathroom
     ("Water system", "Fresh tank 118 L, empty", 8.0, at("fresh"), "PE tanks 6-8.5 kg"),
@@ -76,7 +76,7 @@ ITEMS = [
     ("Kitchen", "Quadron Anthony 50 sink + colander, 2 taps, carbon filter", 10.0, at("sinkrim"), "est. - sink weight not published"),
     # --- shell: insulation, floor, cladding, openings
     ("Shell", "3 x Dometic S4 (2 x 900x450 8.0 kg, 1 x 500x350 4.7 kg)", 20.7, 2000, "Dometic S4 chart"),
-    ("Shell", "2 x MaxxFan Deluxe + 2 Crafter adapters", 17.4, 1400, "fan ~7.7 kg (shops vary); adapter est."),
+    ("Shell", "2 x MaxxFan Deluxe + 2 Crafter adapters", 17.4, 1810, "fan ~7.7 kg (shops vary); adapter est."),
     ("Shell", "Insulation: Armaflex 19 mm on ~17.5 m2 + cavity fill", 27.0, 1700, "Armaflex 1.17 kg/m2; fill est."),
     ("Shell", "Sound deadening ~6 m2", 9.0, 1700, "est. 1.5 kg/m2"),
     ("Shell", "Floor 6 m2: 20 XPS + 12 ply + 2 vinyl + battens", 58.0, 1700, "XPS 0.6, poplar 12 4.9, vinyl ~3 kg/m2; battens est."),

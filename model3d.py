@@ -448,6 +448,7 @@ INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh",
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
+    "solar": "Solar panel ~200 W", "starlink": "Starlink Mini",
     "gasbottle": "Gas bottle 6 kg, in a sealed locker",
     "roof": "Roof", "fan": "Roof fan, MaxxFan Deluxe",
     "tarp": "Tarp on a keder rail, 3 x 2.4 m", "pole": "Tarp pole",
@@ -550,7 +551,7 @@ KIND = {          # plan label or extra kind -> colour
     "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
-    "roof": "#d6d2c9", "fan": "#3b3e44", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
+    "roof": "#d6d2c9", "fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#f1f1ef", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
@@ -993,7 +994,19 @@ HATCHES_V2R = [
 #   Rear:   over the dinette. Where the bows 5-6 are is not known: MEASURE before cutting.
 FANS_V2R = [
     cut("maxxfan-deluxe", None, 560, 716),
-    cut("maxxfan-deluxe", None, 2200, 716),
+    # moved aft from 2200 (2026-09-25) so the two solar panels fit between the fans; now over
+    # the back of the dinette and the head of the bed - air where we sleep
+    cut("maxxfan-deluxe", None, 2660, 716),
+]
+# The rest of the roof (2026-09-25), all from the product register where there is one:
+#   Starlink Mini (299 x 259 x 39) at the front, ahead of the front fan - flat, clear sky.
+#   2 solar panels ~200 W, 1485 x 668 each (Victron 185 W size), long side along the van,
+#     side by side on rails 40 above the roof, between the two fans (15 mm gaps).
+#   The tarp's keder rail along the passenger roof edge is drawn with the tarp.
+ROOF_V2R = [
+    ( 90,  389,  787, 1046,  10,  49, "starlink"),
+    (1068, 2553,  238,  906,  40,  75, "solar"),
+    (1068, 2553,  926, 1594,  40,  75, "solar"),
 ]
 
 # v2's Show buttons plus one for the roof, off by default: the roof with its real fan
@@ -1003,13 +1016,14 @@ for _l in LAYERS_V2R:
     if _l["id"] == "kit":
         _l["kinds"] = sorted({b[6] for b in APPLIANCES_V2R})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
-                  {"id": "roof", "label": "Roof + fans", "kinds": ["roof", "fan"], "on": False})
+                  {"id": "roof", "label": "Roof + kit", "kinds": ["roof", "fan", "solar", "starlink"],
+                   "on": False})
 LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
                   {"id": "tarp", "label": "Tarp", "kinds": ["tarp", "pole"], "on": False})
 
 REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
                            appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
-                           windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True,
+                           windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True, roof_kit=ROOF_V2R,
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
                            # taken out INSIDE, through the wardrobe base's lobby-side door. The
                            # only side-wall holes are the small service openings above.
@@ -1060,6 +1074,9 @@ def real_shell(v):
     top = wall_inset(v, H)
     for x0, x1, y0, y1 in subtract((0, L, top, W - top), sp["fans"]):
         out.append((x0, x1, y0, y1, H, H + WALL, "roof"))
+    # what else stands on the roof: panels, Starlink - z given above the roof skin
+    for x0, x1, y0, y1, z0, z1, kind in sp.get("roof_kit", ()):
+        out.append((x0, x1, y0, y1, H + WALL + z0, H + WALL + z1, kind))
     # the fans themselves, on top of their cut-outs, at the MaxxFan's own size (lid closed)
     fw, fd = PRODUCTS["maxxfan-deluxe"]["outer"]
     fh = PRODUCTS["maxxfan-deluxe"]["above_roof"][0]
@@ -1825,6 +1842,47 @@ def body_sections(v, path, stations=((1500, "galley, x 1500"), (2400, "dinette, 
     print("wrote", path)
 
 
+def roof_plan(v, path):
+    """The roof from above: everything on it, the known roof bows, VW's roof-rack mounting
+    points, and the tarp rail. Nose at the left, passenger side at the top - like the plan."""
+    from matplotlib.patches import Rectangle as R
+    sp, body = spec(v), v["body"]
+    L, W = v["length"], v["width"]
+    edge = 3265                                            # the roof's rear edge
+    top = wall_inset(v, v["height"], bare=True)
+    fig, ax = plt.subplots(figsize=(12, 5.2), dpi=150)
+    ax.add_patch(R((0, top), edge, W - 2 * top, fc="#f3f1ec", ec="#222", lw=2))
+    for b in body.get("roof_bows", ()):
+        ax.plot([b, b], [top, W - top], color="#b03a3a", lw=1.2)
+        ax.text(b, W - top + 40, "bow %d" % b, color="#b03a3a", fontsize=6, ha="center", va="top")
+    for d in (133, 395, 661, 852, 1133, 1482, 1759, 2179, 2599, 2878):     # VW L3, from the rear
+        for y in (top + 20, W - top - 20):
+            ax.plot(edge - d, y, marker="+", color="#777", ms=6)
+    ax.text(edge - 133, top - 25, "+ VW roof-rack points (may be bows - measure)", color="#777",
+            fontsize=6, ha="right", va="bottom")
+    ax.plot([300, 3300], [top - 12, top - 12], color="#8a6d3b", lw=3)
+    ax.text(1800, top - 45, "tarp keder rail - passenger side", color="#8a6d3b", fontsize=7, ha="center")
+    fw, fd = PRODUCTS["maxxfan-deluxe"]["outer"]
+    items = [(x0, x1, y0, y1, k) for x0, x1, y0, y1, z0, z1, k in sp.get("roof_kit", ())]
+    for x0, x1, y0, y1 in sp["fans"]:
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        items.append((cx - fw / 2, cx + fw / 2, cy - fd / 2, cy + fd / 2, "fan"))
+        ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc="none", ec="#fff", lw=1, ls="--", zorder=4))
+    colour = {"fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#bbb"}
+    label = {"fan": "MaxxFan\n%d x %d" % (fw, fd), "solar": "solar ~200 W\n1485 x 668",
+             "starlink": "Starlink\nMini"}
+    for x0, x1, y0, y1, k in items:
+        ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc=colour[k], ec="#111", lw=1, zorder=3))
+        ax.text((x0 + x1) / 2, (y0 + y1) / 2, label[k], color="#fff" if k != "starlink" else "#222",
+                fontsize=7, ha="center", va="center", zorder=5)
+    ax.set_xlim(-150, edge + 150); ax.set_ylim(W + 60, -120); ax.set_aspect("equal")
+    ax.set_title("v2-real roof, from above - nose left, passenger side up. Roof load %s" %
+                 "within VW's 150 kg (see payload.md)", fontsize=9)
+    ax.tick_params(labelsize=6)
+    fig.tight_layout(); fig.savefig(path, facecolor="white"); plt.close(fig)
+    print("wrote", path)
+
+
 def main(name):
     v = VARIANTS[name]
     if "height" not in v:
@@ -1836,6 +1894,7 @@ def main(name):
     write_obj(v, os.path.join(out, "model.obj"))
     if v.get("body"):
         body_sections(v, os.path.join(out, "sections.png"))
+        roof_plan(v, os.path.join(out, "roof.png"))
     write_viewer([name], os.path.join(out, "viewer.html"), v.get("viewer_title", "Van Interior"))
 
 

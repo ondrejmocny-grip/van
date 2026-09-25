@@ -208,8 +208,9 @@ How it looks on our van: [v2-real/tarp.png](../v2-real/tarp.png), and the **Tarp
 | Batteries | 2 x 150 Ah LiFePO4 (e.g. Ective LC 150 LT, 15.5 kg each) | 31 | **chosen** (300 Ah) |
 | Internet | **Starlink Mini** — 25–40 W average, 1.10 kg | 1.1 | **chosen** (lean use) |
 
-Energy check: [v2-real/energy.md](../v2-real/energy.md). The roof layout (3 panels, 2 fans,
-Starlink Mini, awning) is still to draw.
+Energy check: [v2-real/energy.md](../v2-real/energy.md). The roof layout is drawn:
+[v2-real/roof.png](../v2-real/roof.png) — Starlink front, front fan, 2 panels side by side,
+rear fan over the bed, tarp rail on the passenger edge.
 
 ## Still to add
 

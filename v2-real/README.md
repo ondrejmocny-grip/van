@@ -6,8 +6,10 @@ build-up we agreed, so it can become a plan to build from. **v2 is frozen.**
 
 ![plan](layout.png)
 
-**Viewer:** the **Roof + fans** button (off by default) shows the roof with its real fan
-cut-outs and the two MaxxFans on top, at their catalogue size.
+**Viewer:** the **Roof + kit** button (off by default) shows the roof with its real fan
+cut-outs, the two MaxxFans, the two solar panels and the Starlink Mini, at catalogue size.
+
+**Open:** [roof.png](roof.png) — the roof from above.
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
 finished walls black, bare rib faces grey, v2's old 1832 box dashed.
@@ -227,7 +229,7 @@ over a known roof bow.
 | Dinette, driver | Dometic S4 900 x 450 | x 1940–2842, z 1000–1448 |
 | Dinette, passenger | Dometic S4 900 x 450 | x 1940–2842, z 1000–1448 — cross-flow over the bed |
 | Front fan | MaxxFan Deluxe, cut 400 x 400 | x 560–960, centre line — VW's roof-hatch pressing, over the lobby |
-| Rear fan | MaxxFan Deluxe, cut 400 x 400 | x 2200–2600, over the dinette — **bow positions to measure first** |
+| Rear fan | MaxxFan Deluxe, cut 400 x 400 | x 2660–3060, over the dinette / head of the bed — moved aft from 2200 on 2026-09-25 to make room for the solar panels. **Bow positions to measure first** |
 
 **Changed from v2:** v2 had four windows — one crossed the pillar between the two driver
 fields, and three stood above the fields' top (~1473). **The shower window is gone for now**:
@@ -261,6 +263,26 @@ inside the field the shower is 470 wide, and the smallest S4 still sold is 500.
   own flush tank (e.g. Thetford Porta Potti 565E, 386 x 450 x 447) fits this best.
 
 **Still open:** roof bows 2-3 and 5-6 — measure on the real van before cutting either fan hole.
+
+## The roof — drawn 2026-09-25
+
+See [roof.png](roof.png). From the front:
+
+| Item | Where (x along the van) | Size | Why there |
+|---|---|---|---|
+| Starlink Mini | x 90–389, centre line | 299 x 259 | front, clear of the panels' shade; one short cable down the lobby |
+| Front fan (MaxxFan) | x 560–960 cut, outer 465–1050 | outer 585 x 417 | VW's hatch pressing, over the lobby and shower |
+| 2 solar panels, side by side | x 1068–2553, on rails 40 above the roof | 1485 x 668 each | the longest clear stretch between the fans |
+| Rear fan (MaxxFan) | x 2660–3060 cut | outer 585 x 417 | over the head of the bed |
+| Tarp keder rail | passenger edge, full length | — | the awning side |
+
+- **Roof load:** 51 kg of VW's 150 (see [payload.md](payload.md)).
+- **Tight:** ~15 mm between each fan's outer frame and the panels. Fine on paper; on the van
+  the panel rails may need to move a little. A panel may also shade a fan lid a bit — no problem.
+- **Bows:** only 0, 1688 and 3265 are known. VW's roof-rack points (from the rear: 133, 395,
+  661, 852, 1133, 1482, 1759, 2179, 2599, 2878) may sit on bows. The rear fan's cut contains
+  the point near x 2870 — **measure before cutting**; the fan can move ~100 either way.
+- **Room for a 3rd panel?** No — not without dropping a fan or the Starlink. With full gas, 2 panels are enough ([energy.md](energy.md)).
 
 ## The grey tank — inside, under the footwell (agreed 2026-09-24)
 

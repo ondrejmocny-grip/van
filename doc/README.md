@@ -123,6 +123,9 @@ See [budget.md](budget.md).
   window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead: VanQuito magnetic net chosen (the
   Horrex pleated door is sized for the FWD opening, 100 too tall for ours). No shower window (agreed). Measure the roof bows on the real van
   before any roof cut.
+- **Roof drawn 2026-09-25 ([v2-real/roof.png](../v2-real/roof.png)):** Starlink Mini front, front fan,
+  2 solar panels side by side in the middle, rear fan moved aft to x 2660 (over the bed), tarp rail
+  passenger side. 51 kg of 150. Measure the bows before cutting.
 - **WC emptied inside** (2026-09-24): no hatch in the side panel; a portable WC with its own flush
   tank fits the slide-out best.
 - **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
