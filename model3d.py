@@ -572,7 +572,7 @@ KEEP_SHAPE = ("plumbing",)
 # Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
 OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink",
                "hob-thetford", "fridge-c95l", "b10", "portapotti", "oven-tefal",
-               "fresh-v2r", "grey-v2r")
+               "fresh-v2r", "grey-v2r", "tap-grohe", "filtertap-its", "filter-alb")
 # Meshes drawn at their true size inside a bigger slot, standing on its floor
 REAL_SIZE = ("portapotti",)
 
@@ -910,9 +910,13 @@ APPLIANCES_V2R = [
     (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
     # The taps stand AFT of the bowl, at the back of the prep counter: the 440-deep sink
     # leaves no deck behind it, and at 1185 the wall is 122 in.
-    (1600, 1700, 1515, 1705,  925, 1205, "tap"),        # mixer, spout swings over the bowl
-    (1720, 1770, 1585, 1705,  925, 1175, "filtertap"),  # gooseneck, beside the mixer
-    (1600, 1860, 1630, 1690,  420,  480, "filter"),     # 2 x 10 inch inline carbon block
+    # Grohe Eurosmart Cosmopolitan 31170000: base at x ~1660, spout reaching 226 forward over
+    # the bowl (to x ~1434), 202 tall. Lifts out of its base for driving.
+    (1434, 1690, 1575, 1635,  925, 1127, "tap"),
+    # drinking tap behind the mixer (toward the wall), its neck reaching 185 forward over the
+    # bowl - its-wasser Fil kurz; its reach is not published: it needs >= ~180
+    (1560, 1770, 1655, 1705,  925, 1175, "filtertap"),
+    (1600, 1860, 1615, 1690,  410,  485, "filter"),     # Alb Filter Nano + couplings, 0.1 micron
     # galley, passenger side - carcass y 70-635
     # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the
     # factory, flame failure on both burners, 12 V ignition. 95 high in all; how much of that
@@ -1058,12 +1062,17 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                            propmap={"battery": "battery-ective", "inverter": "inverter-multiplusc",
                                     "hob": "hob-thetford", "fridgedoor": "fridge-c95l",
                                     "calorifier": "b10", "cassette": "portapotti",
-                                    "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r"},
+                                    "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r",
+                                    "tap": "tap-grohe", "filtertap": "filtertap-its",
+                                    "filter": "filter-alb"},
                            runs=True,
                            # the solids.py meshes are built for the side they stand on here
                            facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
                            names={"rack": "Roof rail / bar on VW's rack points",
                                   "hob": "Gas hob, Thetford Topline 922",
+                                  "tap": "Mixer, Grohe Eurosmart Cosmopolitan",
+                                  "filtertap": "Drinking tap, filtered",
+                                  "filter": "Alb Filter Nano, 0.1 micron",
                                   "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",
                                   "oven": "Hot-air oven, Tefal Optimo",
                                   "cassette": "Portable WC",

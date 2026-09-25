@@ -119,13 +119,41 @@ PRODUCTS = {
         note="total power can be LIMITED in the settings, 1000-3000 W: set 2000 on our inverter",
         status="option"),
     "quadron-anthony-50": dict(
-        name="Quadron Anthony 50 workstation sink, stainless", kind="sink",
-        outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(400, 400),
-        weight_kg=None, price_eur=(260, 260), shop="sink-tap.co.uk (GBP 221)",
-        source="https://www.olif.co.uk/products/quadron-anthony-50-kitchen-workstation-undermount-or-topmount",
-        note="colander, roll mat and chopping board included; ledge size not published. "
-             "80 deeper than our 360 plan, so the taps stand beside it, not behind",
+        name="Quadron Anthony 50 = 'Paul' MF4444BS_I, stainless inset sink", kind="sink",
+        outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(420, 420), drain='3 1/2"',
+        weight_kg=6.4, price_eur=(179, 190), shop="SIKO.cz 4,472 CZK / absulo.sk 189.57",
+        source="https://absulo.sk/p/quadron-paul-nerezovy-drez-44x44-cm-mf4444bs-i",
+        note="1 mm steel, R10 corners, space-saving siphon included. NO workstation ledge - board, "
+             "mat and colander rest on the rim; no sink with a real ledge fits 440 x 440 x 190. "
+             "Cut-out: shops say 420 or 400 - use the template in the box. Backup: Blanco Andano "
+             "400-IF, same size, 7,641 CZK. 6.4 kg is with packaging",
         status="proposed"),
+    # --- taps and drinking water (researched 2026-09-25) ------------------------------------
+    # NOT a German "Niederdruck" tap: those are for open boilers; the Truma B10 is pressurised.
+    "grohe-31170000": dict(
+        name="Grohe Eurosmart Cosmopolitan 31170000, window mixer (lifts out)", kind="tap",
+        outer=(226, 60, 202), reach=226, hole=35, flow_l_min=13, weight_kg=None,
+        price_eur=(224, 228), shop="sanitino.cz 5,709 CZK (~21 days) / armixx.com 224",
+        source="https://www.grohe.cz",
+        note="202 tall, reaches 226 - to the middle of the bowl from beside it. The tap lifts off "
+             "its base for driving (a 30 mm stub stays). 3/8 inch hoses: 12 mm push-fit adapters. "
+             "Minimum pressure not published. Cheaper: Reich Linnea L (200 tall, reach 160 - "
+             "short), 109; Comet London folds flat, 18, reach 145",
+        status="proposed"),
+    "alb-nano": dict(
+        name="Alb Filter Nano under-sink set, 0.1 micron hollow fibre", kind="filter",
+        outer=(120, 69, 69), micron=0.1, weight_kg=0.5, price_eur=(170, 170),
+        shop="alb-filter.com", source="https://alb-filter.com/products/alb-filter-nano-untertisch-komplett-set",
+        note="certified ASTM F838-15A, 99.999 % of bacteria. Cartridge 5,000-7,000 L or 6 months, "
+             "59.90. Needs ~75 x 75 x 260 with its couplings. No carbon - add the Active stage "
+             "(Fusion, ~320 long) for taste. Flow at 1.4 bar not published: ask or test. On the "
+             "cold line to the drinking tap only",
+        status="proposed"),
+    "its-fil-1weg-kurz": dict(
+        name="its-wasser.de 'Fil 1-Weg 1/4 kurz', drinking-water tap", kind="filtertap",
+        outer=(50, 120, 250), hole=12, weight_kg=None, price_eur=(109, 109), shop="its-wasser.de",
+        source="https://www.its-wasser.de", note="spout outlet ~228 above the worktop; check the "
+        "total height (limit 250) and the reach (needs >= ~180 to pour into the bowl) before buying", status="proposed"),
     "tefal-of4448": dict(
         name="Tefal Optimo OF4448 mini oven 19 L, hot air", kind="oven",
         outer=(462, 318, 288), power_w=1380, volume_l=19, weight_kg=4.8,

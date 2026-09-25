@@ -146,7 +146,7 @@ deep). All four are in the model and in the payload check.
 | | Indel B Cruise 85 OFF | 475 x 545 x 635 | 85 L, 0.386 kWh/day | 21.5 | 774 | option — cheaper, little air behind |
 | | Vitrifrigo C75L | 470 x 462 x 622 | 75 L | 18.6 | 815 | option — lightest |
 | Hob | Bosch PIB375FB1E, domino induction 30 cm | 306 x 527 x 51 | 3.7 kW, total can be limited | 6.8 | 400–472 | option — **replaced by gas** (2026-09-25) |
-| Sink | **Quadron Anthony 50** workstation sink | 440 x 440 x 190 | bowl 400 x 400 x 190; colander, board, mat included | — | ~260 | **proposed** |
+| Sink | **Quadron Anthony 50** (= "Paul" MF4444BS_I in CZ) | 440 x 440 x 190 | bowl 400 x 400 x 190; board, mat and colander rest on the rim | 6.4 | 179 (SIKO.cz 4,472 CZK) | **proposed** — see below |
 | Oven | **Tefal Optimo OF4448**, hot air | 462 x 318 x 288 | 19 L, 1380 W | 4.8 | ~100 | **proposed** |
 | | Electrolux EMZ421MMW, microwave + grill | 442 x 345 x 262 | 20 L, 1270 W | 11.5 | ~138 | option — no hot air |
 
@@ -173,6 +173,36 @@ deep). All four are in the model and in the payload check.
   3000 W inverter: **not both at full power at once.**
 
 **No sink weight is published** — the payload counts 10 kg for sink, taps and filter.
+
+## Sink, taps and drinking water — researched 2026-09-25
+
+| | Product | Size | Key numbers | € | Status |
+|---|---|---|---|---|---|
+| Sink | **Quadron Anthony 50 / "Paul" MF4444BS_I**, stainless, inset | 440 x 440, bowl 400 x 400 x **190** | 3½" drain, siphon included; cut-out 420 (use the box template) | **179** (SIKO.cz 4,472 CZK) | proposed |
+| | Blanco Andano 400-IF (backup) | 440 x 440, bowl 400 x 400 x 190 | flush or top mount | 306 (sanitino.cz 7,641 CZK) | option |
+| Mixer | **Grohe Eurosmart Cosmopolitan 31170000** (window mixer) | 202 tall, **reach 226** | lifts out of its base for driving; 3/8" hoses | 224–228 (sanitino.cz 5,709 CZK) | proposed |
+| | Reich Linnea L | 200 tall, reach 160 | made for camper pumps, fits 12 mm pipe | 109 | option — reach too short |
+| | Comet London | 180 tall, folds to 40, reach 145 | camper tap | 18 | option — reach too short |
+| Drinking filter | **Alb Filter Nano under-sink set** | housing Ø69 x 120; needs ~75 x 75 x 260 | **0.1 µm, certified against bacteria** (ASTM F838-15A); 5,000–7,000 L or 6 months, cartridge 59.90 | 170 | proposed |
+| Drinking tap | **its-wasser.de "Fil 1-Weg 1/4 kurz"** | outlet ~228 above the worktop | 12 mm hole | 109 | proposed — check height and reach |
+
+Why:
+
+- **Sink:** exactly our 440 x 440 x 190, sold in CZ, 40 % cheaper than the Blanco. **It has no
+  real ledge** — no stainless sink with a ledge fits 440 x 440 x 190 (the Blanco Etagon 500-U
+  has rails but is 540 wide). The board, mat and colander rest on the rim instead.
+- **Mixer:** the only compact one with the **reach to the middle of the bowl** from beside it;
+  the camper taps reach 145–160. It lifts off its base for driving.
+- **Do not buy a German "Niederdruck" tap:** those are for open boilers. The Truma B10 is
+  pressurised - a normal tap is right. No microswitch needed: the pump switches on pressure.
+- **Drinking water:** the Alb Nano is the only filter we found that is **certified against
+  bacteria** and small enough. A 3-way tap does not fit: the lowest is 300 tall, our limit 280.
+  Carbon-only filters (Omnipure) do not stop bacteria; the Seagull IV needs 1.7 bar, our pump
+  gives 1.4. Add Alb's carbon stage (Fusion, ~320 long) only if the water tastes bad.
+- **To check:** the Alb's flow at 1.4 bar (not published — ask or test), and the drinking tap's
+  real height and reach (it must reach ~180 to pour into the bowl).
+
+**Kitchen water total: ~€690** (sink 179 + mixer 226 + filter 170 + tap 109).
 
 ## Awning — tarp chosen 2026-09-25
 

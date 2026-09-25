@@ -64,6 +64,9 @@ carries cooking and hot water" no longer applies to v2-real.
 | Shurflo pump + Whale Gulper 220 + Votronic sensors | ~550–570 |
 | **Water priced so far** (without Truma B10, pipes, fittings, taps) | **~950–1,570** |
 
+**Sink and taps, priced 2026-09-25** ([products.md](products.md)): Quadron sink 179 + Grohe
+mixer ~226 + Alb Filter Nano 170 + drinking tap 109 = **~€690** (proposed).
+
 **Approval, checked 2026-09-25** ([approval.md](approval.md)): testing station ~6,800 CZK + ORP
 800–1,000 + gas revision 1,500–2,500 + electrical revision ~1,500–3,000 = **~10,500–15,000 CZK
 (~€420–600)**, plus a VW letter (price unknown) — the "homologation fees" in the Other line.

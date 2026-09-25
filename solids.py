@@ -65,13 +65,15 @@ class Mesh:
         """Upright (along y) cylinder or cone frustum, radius r0 at y0 and r1 at y1. With
         axis="z" it lies across the van instead: cx, cz are then its x and height, y0..y1 its
         run across - for knobs on a front face."""
-        if axis == "z":
+        if axis in ("z", "x"):
+            # axis="x": lying along the van; cx, cz are then its height and across position
+            order = [0, 2, 1] if axis == "z" else [1, 0, 2]
             tmp = Mesh()
             tmp.cylinder(cx, cz, y0, y1, r0, r1, colour, seg, caps)
             for col, (ps, ns, ix) in tmp.parts.items():
                 for pp, nn, ii in zip(ps, ns, ix):
-                    # swap y and z: a mirror, so the triangles turn round too
-                    self._add(col, pp[:, [0, 2, 1]], nn[:, [0, 2, 1]], ii.reshape(-1, 3)[:, ::-1].ravel()
+                    # swapping two axes is a mirror, so the triangles turn round too
+                    self._add(col, pp[:, order], nn[:, order], ii.reshape(-1, 3)[:, ::-1].ravel()
                               - ii.min())
             return
         r1 = r0 if r1 is None else r1
@@ -324,11 +326,55 @@ def grey_tank():
                 [(40, 480, 18, "#6e5a44"), (40, 540, 11, "#6e5a44"), (780, 300, 14, "#555")])
 
 
+def tap_grohe():
+    """Grohe Eurosmart Cosmopolitan 31170000: a round body at the aft end on its base, a
+    lever on top, and the spout reaching 226 forward (toward x = 0) over the bowl."""
+    L, W, H = 256, 60, 202                      # the box: reach + body, 202 tall
+    bx, bz = L - 30, W / 2
+    chrome = "#c9ced3"
+    m = Mesh()
+    m.cylinder(bx, bz, 0, 12, 28, colour="#aab0b6")                      # base
+    m.cylinder(bx, bz, 12, H - 40, 22, colour=chrome)                    # body
+    m.box(bx - 60, bx + 10, H - 40, H - 30, bz - 8, bz + 8, chrome)      # lever
+    m.cylinder(H - 55, bz, 0, bx, 11, colour=chrome, axis="x")           # spout, forward
+    m.cylinder(20, bz, H - 90, H - 55, 9, colour=chrome)                 # its nose, pointing down
+    return m
+
+
+def filtertap_its():
+    """A slim drinking-water tap standing aft of the bowl: base, a thin column, and a neck
+    reaching forward (toward x = 0) so it pours into the bowl, a small lever."""
+    L, W, H = 210, 50, 250
+    bx, c = L - 25, W / 2
+    m = Mesh()
+    m.cylinder(bx, c, 0, 10, 20, colour="#aab0b6")
+    m.cylinder(bx, c, 10, H - 12, 9, colour="#c9ced3")
+    m.cylinder(H - 12, c, 15, bx, 7, colour="#c9ced3", axis="x")        # the neck, forward
+    m.cylinder(15, c, H - 50, H - 12, 6, colour="#c9ced3")               # nose, pointing down
+    m.box(bx - 4, bx + 4, H - 80, H - 70, c - 4, W, "#8d9399")           # lever
+    return m
+
+
+def filter_alb():
+    """Alb Filter Nano: a white housing Ø69 x 120 lying along the van, quick couplings and
+    hoses at both ends, on a small wall bracket."""
+    L, W, H = 260, 75, 75
+    c = W / 2
+    m = Mesh()
+    m.cylinder(c, c, 70, 190, 34, colour="#f1f1ef", axis="x")            # housing
+    m.cylinder(c, c, 190, 200, 36, colour="#1f5fa8", axis="x")           # cap
+    m.cylinder(c, c, 0, 70, 6, colour="#2e86c1", axis="x")               # hose in
+    m.cylinder(c, c, 200, L, 6, colour="#2e86c1", axis="x")              # hose out
+    m.box(110, 150, 0, 4, 10, W - 10, "#8d9399")                         # bracket
+    return m
+
+
 SOLIDS = {"solar": solar, "fan": maxxfan, "gasbottle": gas_bottle,
           "battery-ective": battery, "inverter-multiplusc": multiplus_c, "starlink": starlink_mini,
           "hob-thetford": hob, "fridge-c95l": fridge_c95l, "b10": truma_b10,
           "portapotti": porta_potti, "oven-tefal": oven_tefal,
-          "fresh-v2r": fresh_tank, "grey-v2r": grey_tank}
+          "fresh-v2r": fresh_tank, "grey-v2r": grey_tank,
+          "tap-grohe": tap_grohe, "filtertap-its": filtertap_its, "filter-alb": filter_alb}
 
 
 def main():

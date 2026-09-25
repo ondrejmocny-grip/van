@@ -14,8 +14,9 @@ cut-outs, the two MaxxFans, the two solar panels and the Starlink Mini, at catal
 **Viewer, 2026-09-25:** **Wiring** and **Gas + water** buttons draw every cable and pipe from
 [systems.md](systems.md) as tubes (turn off Body, Lockers and Shower to see them). The roof
 has its **rails and cross bars** on VW's rack points. Every chosen product - hob, fridge, oven, Truma
-B10, Porta Potti, both tanks, gas bottle, batteries, MultiPlus, panels, fans, Starlink - is an
-exact mesh built from its datasheet (`solids.py`) — see [props-sheet.png](props-sheet.png).
+B10, Porta Potti, both tanks, gas bottle, batteries, MultiPlus, panels, fans, Starlink, the
+Grohe mixer, the drinking tap and the Alb filter - is an exact mesh built from its datasheet
+(`solids.py`) — see [props-sheet.png](props-sheet.png).
 
 **Open:** [sections.png](sections.png) — three cuts across the van (galley, dinette, garage):
 finished walls black, bare rib faces grey, v2's old 1832 box dashed.
@@ -312,6 +313,17 @@ Full list and reasons in [doc/products.md](../doc/products.md). What it changes 
   Moroccan winter week now just holds (lowest 7 %) instead of 0.2 kWh short.
 - **To check:** the MultiPlus C's real size (Victron's datasheet and the shops disagree); the
   Orion XS needs an ignition / D+ wire, because the Crafter's smart alternator can fool it.
+
+## Sink and taps — proposed 2026-09-25
+
+Details: [doc/products.md](../doc/products.md#sink-taps-and-drinking-water--researched-2026-09-25).
+
+| | Product | In the model |
+|---|---|---|
+| Sink | Quadron Anthony 50 ("Paul" in CZ), 440 x 440, bowl 190 deep | the built sink, unchanged |
+| Mixer | Grohe Eurosmart Cosmopolitan, 202 tall, reach 226 | base aft of the bowl at x ~1660, spout over the bowl to x 1434 |
+| Drinking tap | its-wasser Fil kurz | behind the mixer, toward the wall, neck reaching 185 forward |
+| Filter | Alb Filter Nano, 0.1 µm (bacteria) | 260 x 75 x 75 under the prep counter (was 260 x 60 x 60 - too small for its 69 mm housing) |
 
 ## Approval (STK) — checked 2026-09-25
 
