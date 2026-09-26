@@ -17,6 +17,7 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
 | 3 | [living.md](living.md) | the Carthago fit-out: layout, beds, water, gas, heating, fridge, electrics |
 | 4 | [checks.md](checks.md) | weak points and what to check before buying |
 | 4 | [electrics-upgrade.md](electrics-upgrade.md) | how to make it an office: lithium, DC-DC, portable solar — parts, cost, wiring |
+| 4 | [market-de.md](market-de.md) | ≈ 55 T4 Malibus for sale in Germany (2026-09-26), sorted by model — only one other complete 32.2 |
 | 4 | [vs-our-plan.md](vs-our-plan.md) | this van against our Crafter L3H3 plan and against [about-us](../../doc/about-us.md) |
 
 **How sure are the numbers?** Every row says where it comes from:
