@@ -1026,7 +1026,7 @@ FANS_V2R = [
 #     side by side on rails 40 above the roof, between the two fans (15 mm gaps).
 #   The tarp's keder rail along the passenger roof edge is drawn with the tarp.
 # VW wants a letter for anything fixed to the roof skin, but allows roof-rack-like attachments
-# (approval.md): so everything sits on two SIDE RAILS on VW's ten roof-rack points per side,
+# (v2-real/approval.md): so everything sits on two SIDE RAILS on VW's ten roof-rack points per side,
 # with CROSS BARS clamped to them where the kit needs them - one under the Starlink, three
 # under the panels. The rails run along the roof edges, so they never cross a fan.
 _RAIL = [(300, 3200, 195, 225), (300, 3200, 1607, 1637)]

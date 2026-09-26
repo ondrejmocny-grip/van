@@ -300,7 +300,7 @@ The grilling session was mostly elimination. Recording it so we do not re-argue 
   400 W actually lands.
 - Engine heat exchanger: **in the plan**. Ondrej to check it against the warranty later.
   Fallback if it is a problem: the 230 V immersion element alone.
-- Budget: €10-15k target; realistic landing zone €13.7-17k. See [doc/budget.md](../doc/budget.md).
+- Budget: €10-15k target; realistic landing zone €13.7-17k. See [v2-real/budget.md](../v2-real/budget.md) (v1 numbers at its end).
 - Paperwork for Morocco and Turkey, and the Schengen limits for a Turkish passport — see
   [doc/about-us.md](../doc/about-us.md).
 

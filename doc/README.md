@@ -112,7 +112,7 @@ Whichever we buy, the layout is a short edit to `plan.py`.
 
 €10-15k target for the build; realistic landing zone **€13.7-17k** with the cuts already
 decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-only.
-See [budget.md](budget.md).
+See [budget.md](../v2-real/budget.md).
 
 ## Open questions
 
@@ -131,7 +131,7 @@ See [budget.md](budget.md).
   passenger side. 51 kg of 150. Measure the bows before cutting.
 - **WC emptied inside** (2026-09-24): no hatch in the side panel; a portable WC with its own flush
   tank fits the slide-out best.
-- **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](budget.md).
+- **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](../v2-real/budget.md).
   Our van is manual, so the Seikel breathers (manual-only) fit.
   Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
 - **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3475 kg with full water, full gas, 2 panels,
@@ -150,7 +150,7 @@ See [budget.md](budget.md).
   distribution box in the driver bench beside the batteries (fuses, shunt, DC-DC, fuse block),
   the MPPT and shore box in the garage. All water crosses to the passenger side, away from the
   batteries. ~120 m of 12 V cable (~12 kg), 5 m of gas pipe, ~23 m of water pipe.
-- **Approval checked 2026-09-25 ([approval.md](approval.md)):** register it as a **motor caravan (M1 SA)**,
+- **Approval checked 2026-09-25 ([approval.md](../v2-real/approval.md)):** register it as a **motor caravan (M1 SA)**,
   everything (conversion + lift + tyres) in **one** approval. Passes the weight rule by 28 kg weighed
   full. Roof kit on **roof bars on VW's rack points**; one VW letter for the fan cut-outs; straps on
   batteries, tanks and bottle; latches and round corners. **Before building:** phone the testing

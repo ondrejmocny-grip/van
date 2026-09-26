@@ -66,7 +66,7 @@ add ~100–150, lift and tyres ~50–60 — about **2.65–2.75 m**. Check this 
 ## Decision 2026-09-24 — can be changed later
 
 **Tier 1: yes. Tier 2: yes. Tier 3: no.** Tyre size stays 235/65 R16 for now (the spare wheel
-bay). Priced in [doc/budget.md](../../doc/budget.md): tier 1 ~€3.2–5.0k, tier 2 ~€4.2–4.7k.
+bay). Priced in [v2-real/budget.md](../../v2-real/budget.md): tier 1 ~€3.2–5.0k, tier 2 ~€4.2–4.7k.
 
 Found while pricing:
 

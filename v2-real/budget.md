@@ -85,7 +85,7 @@ battery and fridge prices move a lot. Decisions already taken are baked into the
 
 ## Products priced so far (v2-real) — 2026-09-24
 
-From [products.md](products.md). The **Shell** line above assumed 2 awning windows and
+From [products.md](../doc/products.md). The **Shell** line above assumed 2 awning windows and
 2 Maxxair fans; the proposal is now **3 windows** (2 × S4 900 x 450, 1 × S4 500 x 350) and
 **2 MaxxFan Deluxe**:
 
@@ -118,7 +118,7 @@ and the calorifier. Solar **2** panels again; the **tarp** (~100) instead of the
 **Vitrifrigo C95L** (price to find) instead of the Isotherm. The v1 note "no gas means the battery
 carries cooking and hot water" no longer applies to v2-real.
 
-**Electrics and water, priced 2026-09-25** ([products.md](products.md), proposed):
+**Electrics and water, priced 2026-09-25** ([products.md](../doc/products.md), proposed):
 
 | | € |
 |---|---|
@@ -131,11 +131,11 @@ carries cooking and hot water" no longer applies to v2-real.
 | Shurflo pump + Whale Gulper 220 + Votronic sensors | ~550–570 |
 | **Water priced so far** (without Truma B10, pipes, fittings, taps) | **~950–1,570** |
 
-**Sink and taps, priced 2026-09-25** ([products.md](products.md)): Blanco Andano 400 sink 306 +
+**Sink and taps, priced 2026-09-25** ([products.md](../doc/products.md)): Blanco Andano 400 sink 306 +
 insert bowl 56 + Franke Lina Semi Pro mixer 179 + Alb Filter Nano 170 + drinking tap 109 =
 **~€820** (proposed).
 
-**Boards and shell layers, priced 2026-09-25** ([v2-real/cutlist.md](../v2-real/cutlist.md)):
+**Boards and shell layers, priced 2026-09-25** ([cutlist.md](cutlist.md)):
 furniture boards ~28,100 CZK (8 x poplar 15, 5 x 12, 1 x 9 — without the worktop and the wet
 lining, not priced yet) + shell layers ~34,500 CZK (sound deadening, K-Flex, glue, floor A,
 6 mm cladding, carpet) = **~62,600 CZK (~€2,500)**. The v1 Shell + Furniture lines were

@@ -1,7 +1,7 @@
 # To do — checks before buying and building
 
 One list of what is still to ask, measure or confirm. Tick it off here when done, and move
-the answer into the file it belongs to ([products.md](products.md), [approval.md](approval.md),
+the answer into the file it belongs to ([products.md](products.md), [approval.md](../v2-real/approval.md),
 the v2-real README).
 
 ## Ask sellers
@@ -24,7 +24,7 @@ Email drafts, ready to copy: [emails.md](emails.md).
 
 ## Approval
 
-- [ ] **Phone the testing station** (e.g. Tom-Car) before building — see [approval.md](approval.md#to-ask-before-we-build).
+- [ ] **Phone the testing station** (e.g. Tom-Car) before building — see [approval.md](../v2-real/approval.md#to-ask-before-we-build).
 - [ ] **VW letter of non-objection** via Porsche ČR — the 2 fan cut-outs and the roof bars.
 - [ ] **Gas installer** — locker vent size; can he sign the revision for our design?
 

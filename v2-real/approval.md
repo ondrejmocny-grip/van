@@ -9,7 +9,7 @@ or our own reading; ask the testing station before relying on it.
 |---|---|
 | Do we need an approval at all? | **Yes.** Cutting windows and fitting the lift are already a "přestavba" (conversion, zákon 56/2001 § 73(2)). An unapproved conversion is a defect at every STK |
 | Stay a van (N1) or become a motor caravan (**M1, SA "obytný automobil"**)? | **Become M1 SA** (recommended). Same approval effort; no truck rules (no-truck signs, truck overtaking bans, Austrian weigh stations); usually cheaper insurance; better resale. Czech road tax: none either way |
-| Do we pass the weight rule? | **Yes, by 28 kg** when weighed with every tank full, as the testing station does — see [payload.md](../v2-real/payload.md) |
+| Do we pass the weight rule? | **Yes, by 28 kg** when weighed with every tank full, as the testing station does — see [payload.md](payload.md) |
 | Cost | ~**10,000–15,000 CZK** in fees and revisions, plus a VW letter (price unknown) |
 | Time | 2–4 months with the paperwork (forum reports) |
 | **Design changes it causes** | the roof kit goes on **rails on VW's roof-rack points**, not on the roof skin; **straps** for batteries, tanks and the gas bottle; **latches and round corners** on the furniture; a **VW letter** for the roof — see below |
@@ -76,7 +76,7 @@ maximum mass ≥ weighed mass + 75 kg per extra seat + **10 × (seats + length i
 | + 90 % water + full gas bottle | 3454 | 45 |
 | **Every tank full, as Tom-Car weighs** | **3471** | **28** |
 
-Live numbers: [v2-real/payload.md](../v2-real/payload.md). 28 kg is real but thin: **weigh the
+Live numbers: [payload.md](payload.md). 28 kg is real but thin: **weigh the
 bought van per axle first**, and weigh again before the appointment.
 
 ## Centre of gravity (VW limit: 910 mm above the road for 4MOTION)
@@ -106,7 +106,7 @@ chapter 9.1.2 (weigh with one axle lifted) — the testing station or a VW partn
 | Detector | not required (not verified) | we fit a gas + CO detector anyway |
 | Re-inspection | no legal interval for private owners since 2022 ([vansafe](https://www.vansafe.cz/clanky-o-karavaningu-a-cestovani/plyn-a-elektrika-v-obytnem-aute-povinnost-revize-pojisteni)); every 2–3 years recommended; hoses and regulator max 10 years | plan it |
 
-Our gas design basis for the installer: [v2-real/systems.md](../v2-real/systems.md#gas--for-the-certified-installer).
+Our gas design basis for the installer: [systems.md](systems.md#gas--for-the-certified-installer).
 
 ## 230 V
 

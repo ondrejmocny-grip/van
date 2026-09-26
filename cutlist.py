@@ -246,7 +246,7 @@ def report():
     for k, (n, what) in LIDS.items():
         out.append("| %s | %d lid%s on top | | | %s |" % (k, n, "s" if n > 1 else "", what))
     out += ["", "Every door and drawer gets a **push latch** and **rounded corners** (the approval "
-            "asks for both, [approval.md](../doc/approval.md)).", "",
+            "asks for both, [approval.md](approval.md)).", "",
             "## Panels", "", "| Group | Panel | a x b mm | Board | Qty | m² |", "|---|---|---|---|---|---|"]
     for g, n, a, b, t, q in rows:
         out.append("| %s | %s | %.0f x %.0f | %s | %d | %.2f |" % (g, n, a, b, t, q, a * b / 1e6 * q))

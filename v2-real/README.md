@@ -314,7 +314,7 @@ See [roof.png](roof.png). From the front:
 | Tarp keder rail | passenger edge, full length | — | the awning side |
 
 - **Mounting (2026-09-25):** the panels, Starlink and tarp rail sit on **roof bars on VW's roof-rack
-  points** (≥ 3 pairs), not on the roof skin — see [approval.md](../doc/approval.md).
+  points** (≥ 3 pairs), not on the roof skin — see [approval.md](approval.md).
 - **Roof load:** 56 kg of VW's 150 (with roof bars) (see [payload.md](payload.md)).
 - **Tight:** ~15 mm between each fan's outer frame and the panels. Fine on paper; on the van
   the panel rails may need to move a little. A panel may also shade a fan lid a bit — no problem.
@@ -357,7 +357,7 @@ Details: [doc/products.md](../doc/products.md#sink-taps-and-drinking-water--rese
 
 ## Approval (STK) — checked 2026-09-25
 
-Full notes: [doc/approval.md](../doc/approval.md). The van becomes a **motor caravan (M1, SA)**;
+Full notes: [doc/approval.md](approval.md). The van becomes a **motor caravan (M1, SA)**;
 it passes the weight rule by **28 kg** when weighed with every tank full.
 
 **What it changed in the design:**

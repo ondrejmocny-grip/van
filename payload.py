@@ -238,7 +238,7 @@ def report():
     # tank full - diesel, water, gas - and the seats and luggage allowance are added on top.
     full = 108 + 14.3 + 0.1 * 75 * 0.84      # all fresh water, the bottle, the last 10 % diesel
     out += ["**As the testing station weighs it** (every tank full: diesel, water, gas): **%d kg** — "
-            "%s 3500 by %d. See [doc/approval.md](../doc/approval.md)." %
+            "%s 3500 by %d. See [approval.md](approval.md)." %
             (need + full, "under" if need + full <= GROSS else "OVER", abs(GROSS - need - full)), ""]
     roof = [(n, kg) for g, n, kg, x, s in p["lines"]
             if any(w in n for w in ("solar", "Starlink", "MaxxFan", "awning", "Tarp"))]
