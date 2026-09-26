@@ -16,6 +16,7 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
 | 3 | [vehicle.md](vehicle.md) | the VW base vehicle: VIN, engine, gearbox, size, weights, driving, ground clearance, emissions |
 | 3 | [living.md](living.md) | the Carthago fit-out: layout, beds, water, gas, heating, fridge, electrics |
 | 4 | [checks.md](checks.md) | weak points and what to check before buying |
+| 4 | [electrics-upgrade.md](electrics-upgrade.md) | how to make it an office: lithium, DC-DC, portable solar — parts, cost, wiring |
 | 4 | [vs-our-plan.md](vs-our-plan.md) | this van against our Crafter L3H3 plan and against [about-us](../../doc/about-us.md) |
 
 **How sure are the numbers?** Every row says where it comes from:
@@ -68,7 +69,7 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
   shower, gas heating and hot water, standing room under the high roof. The 32.2 is the most
   wanted Malibu layout. Price is mid-market for the German range.
 - **Bad for us:** **no room to work** — no desk, one small dinette; **tiny battery and no solar**
-  (a laptop day would empty it); **payload is small**; **Euro 2** keeps it out of German city
+  (a laptop day would empty it — fixable for ≈ €1.3–1.7k, see [electrics-upgrade.md](electrics-upgrade.md)); **payload is small**; **Euro 2** keeps it out of German city
   zones; **380,000 km**, 29-year-old seals, windows with no spare parts.
 - **In one line:** a good weekend or holiday camper, **not a 6-month office.** Details in
   [vs-our-plan.md](vs-our-plan.md).

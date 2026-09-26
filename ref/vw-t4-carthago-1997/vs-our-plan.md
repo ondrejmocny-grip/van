@@ -32,7 +32,7 @@ Crafter numbers: [doc/README.md](../../doc/README.md#base-vehicle-sizing),
 | Our need | T4 Carthago | Verdict |
 |---|---|---|
 | **Office 5 days a week** for Ondrej | one small dinette, no desk, no screen place | ❌ the main problem |
-| **Energy for a working day** (our lean parked day ≈ 2.9 kWh) | ≈ 60 Ah lead-acid ≈ **0.35 kWh usable**, no solar, small lead-acid charger, 90 A alternator | ❌ ≈ 1/8 of what we need — would need a full new electrical system |
+| **Energy for a working day** (our lean parked day ≈ 2.9 kWh) | ≈ 60 Ah lead-acid ≈ **0.35 kWh usable**, no solar, small lead-acid charger, 90 A alternator | ⚠️ as built ≈ 1/3 of a day. **Fixable:** here fridge, cooking and hot water are on gas, so the office day is only ≈ 1.0 kWh. 200 Ah lithium + 30 A DC-DC + 200 W portable solar ≈ €1.3–1.7k — [electrics-upgrade.md](electrics-upgrade.md) |
 | **6 months in one stretch** | small fridge (45 L), 2 × 5 kg gas, 50–75 L water | ⚠️ ok for short trips, tight for months |
 | **Economical with water** | 50–75 L fresh, 50–56 L grey, under the floor | ✅ fits our water habits |
 | **Minimal bathroom**, sit-down shower is fine | real washroom, cassette WC, very tight shower | ✅ better than many small vans |
@@ -52,15 +52,15 @@ Crafter numbers: [doc/README.md](../../doc/README.md#base-vehicle-sizing),
 |---|---|---|
 | Van | ≈ €14.7k (369,000 CZK) | van price not in this repo |
 | First repairs (belts, pump, battery, tyres, fluids) | ≈ €1–2k | — |
-| To make it an office (lithium battery, DC-DC, solar, inverter) | ≈ €2–3k (guess, from our [budget](../../v2-real/budget.md) electrics group) | included |
+| To make it an office (lithium battery, DC-DC, solar, inverter) | ≈ €1.3–1.7k ([electrics-upgrade.md](electrics-upgrade.md)) | included |
 | Build | done | ≈ €9.8–12.6k (low budget) to €19–22.9k (v2-real) |
 
 ## Bottom line
 
 - **As a holiday or weekend camper:** a good, honest buy if the roof and the body are dry.
-- **For our use — 6 months, working every day:** **no.** It fails on the office and on energy,
-  and fixing energy means rebuilding the electrics in a 29-year-old van with only ≈ 400 kg of
-  payload and an engine near the end of a long life.
+- **For our use — 6 months, working every day:** **no.** Energy can be fixed for ≈ €1.5k and
+  almost no weight ([electrics-upgrade.md](electrics-upgrade.md)). The office space cannot: one
+  small dinette, no desk. Add ≈ 400 kg payload, Euro 2 and an engine at 380,000 km.
 - **What it teaches our design:**
   - A **roof bed over the cab** frees the whole lower space by day. On a Crafter H3 there is
     no room for it, but the idea (bed that is never converted) is the same as our rear bed.
