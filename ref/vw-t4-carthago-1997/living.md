@@ -52,7 +52,7 @@ Front to rear (**seen**, positions ± — read off photos):
 | | Value | Source |
 |---|---|---|
 | Standing height | **≈ 1.85 m** | typical ([kleinanzeigen 31.3](https://www.kleinanzeigen.de/s-anzeige/volkswagen-vw-t4-carthago-malibu-31-3-hochdach-camper-van/3047088369-216-1110)) |
-| Roof bed | **≈ 2,150 × 1,200–1,250 mm** | typical ([ski-web24](https://www.ski-web24.de/Wohnmobil/Malibu/page1.htm), [promobil](https://www.promobil.de/fahrzeuge/oldtimer-carthago-malibu-t4-campingbus/)) |
+| Roof bed | **2,150 long; width disputed: 1,000 mm** (32.2 owner data sheet — one person only) **or 1,200–1,250** (other Malibu listings, maybe other models). **Measure it** | typical ([ski-web24](https://www.ski-web24.de/Wohnmobil/Malibu/page1.htm), [promobil](https://www.promobil.de/fahrzeuge/oldtimer-carthago-malibu-t4-campingbus/)) |
 | Lower bed (dinette) | ≈ 1,970 mm long, width not found | typical |
 | Berths | listed 2; factory 4 (2 up, 2 down) | listing / typical |
 | Seats with belts | 4 | listing |
