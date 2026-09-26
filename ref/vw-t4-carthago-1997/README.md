@@ -15,9 +15,10 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
 | 2 | [listing.md](listing.md) | the dealer's listing word for word (Czech + English), price, seller, photos |
 | 3 | [vehicle.md](vehicle.md) | the VW base vehicle: VIN, engine, gearbox, size, weights, driving, ground clearance, emissions |
 | 3 | [living.md](living.md) | the Carthago fit-out: layout, beds, water, gas, heating, fridge, electrics |
+| 4 | [service.md](service.md) | how often it needs a garage, costs, and against the La Strada listings |
 | 4 | [checks.md](checks.md) | weak points and what to check before buying |
 | 4 | [electrics-upgrade.md](electrics-upgrade.md) | how to make it an office: lithium, DC-DC, portable solar — parts, cost, wiring |
-| 4 | [market-de.md](market-de.md) | the Malibus **with washroom** for sale in Germany (2026-09-26) — 5 vans, one other complete 32.2 |
+| 4 | [market-de.md](market-de.md) | the Malibus **with washroom** for sale in Germany (2026-09-26) — 5 vans, one complete 32.2 |
 | 4 | [rehhorst-32/](rehhorst-32/README.md) | the best German alternative: Malibu 32 (32.3?), 1996, 263,000 km, €13,400 — against this van |
 | 4 | [vs-our-plan.md](vs-our-plan.md) | this van against our Crafter L3H3 plan and against [about-us](../../doc/about-us.md) |
 
@@ -38,7 +39,7 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
 | Vehicle | **VW T4 Transporter, long wheelbase (3320 mm)**, 1997, VIN WV1ZZZ70ZVH088958 |
 | Engine | **2.5 TDI, 5 cylinders, 75 kW / 102 PS**, 250 Nm, 5-speed manual, front-wheel drive |
 | Mileage | **380,000 km** |
-| Conversion | **Carthago Malibu**, almost surely the **32.2** layout: GRP high roof with a bed, rear washroom, rear kitchen (only ~400 built) |
+| Conversion | **Carthago Malibu 32**, most likely the **32.3** layout: GRP high roof with **lockers, no roof bed**, rear washroom, rear kitchen (≈ 200 built). First read as a 32.2 — corrected by Ondrej 2026-09-26 |
 | Price | **369,000 CZK** (≈ €14.7k) on Sauto; 399,000 CZK seen in a search snippet of the dealer's own page |
 | Seller | Karavany365, Tovární 150, 267 01 Trubín (Beroun) |
 | Links | [dealer page](https://karavany365.cz/product/vw-t4-carthago-2-5-tdi) · [Sauto listing](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) |
@@ -68,8 +69,8 @@ A ready-made 29-year-old camper van, for sale at a dealer near Beroun. Kept here
 ## Short verdict
 
 - **Good:** complete, legal, small, cheap, easy to park, a real washroom with a cassette WC and
-  shower, gas heating and hot water, standing room under the high roof. The 32.2 is the most
-  wanted Malibu layout. Price is mid-market for the German range.
+  shower, gas heating and hot water, standing room under the high roof. The 32.x (with washroom) is
+  the wanted Malibu family. Price is mid-market for the German range.
 - **Bad for us:** **no room to work** — no desk, one small dinette; **tiny battery and no solar**
   (a laptop day would empty it — fixable for ≈ €1.3–1.7k, see [electrics-upgrade.md](electrics-upgrade.md)); **payload is small**; **Euro 2** keeps it out of German city
   zones; **380,000 km**, 29-year-old seals, windows with no spare parts.
@@ -89,5 +90,5 @@ the most:
 | [18-interior-looking-aft](photos/18-interior-looking-aft.jpg) | from the sliding door: kitchen block on the left (passenger side), dinette on the right, washroom at the back |
 | [21-tailgate-open-rear-wall](photos/21-tailgate-open-rear-wall.jpg) | behind the tailgate: gas locker, WC cassette, plumbing |
 | [22-washroom-wc-basin](photos/22-washroom-wc-basin.jpg) | Thetford cassette WC, corner basin, shower tray |
-| [09-roof-bunk-and-overhead-lockers](photos/09-roof-bunk-and-overhead-lockers.jpg) | roof bed over the cab |
+| [09-roof-bunk-and-overhead-lockers](photos/09-roof-bunk-and-overhead-lockers.jpg) storage over the cab (not a bed — see the correction) |
 | [05-driver-side-truma-flue-vents](photos/05-driver-side-truma-flue-vents.jpg) | Truma flue and vent covers on the outside |

@@ -16,7 +16,7 @@
 | 8 | **Cold start, smoke, power on a hill** | VP37 pump seals / electronics, turbo + N75, head cracks at cylinder 3 |
 | 9 | **Gearbox**: jumps out, synchros; clutch pedal box cracks | common at high mileage |
 | 10 | **Front ball joints, rear arm bushes** | common wear |
-| 11 | **Carthago plate** (model 32.2?), **Truma plate** (E 2400 + boiler or C 3402?), **fridge plate** (RM 185?) | confirms what you are buying |
+| 11 | **Carthago plate** (model 32.3?), **Truma plate** (E 2400 + boiler or C 3402?), **fridge plate** (RM 185?) | confirms what you are buying |
 | 12 | Ask them to **run everything**: heater, boiler, fridge on gas and 230 V, pump, taps, WC flush, tank heaters, lights | dealer offers this at handover |
 | 13 | **Gas hoses, regulator date** | 29-year-old rubber; the dealer's new revize should replace them |
 | 14 | **Leisure battery**: age, type, fuse | probably old lead-acid, maybe no fuse |
@@ -66,6 +66,6 @@ Sources: [t4forum Kaufberatung 32.2](https://www.t4forum.de/forum/index.php?thre
 | CZ, bazos | 1992 units: 159,900 and 305,000 CZK; a 1997 2.5 TDI at 259,000 km also listed | [bazos](https://auto.bazos.cz/inzeraty/t4-obytn%C3%BD/) |
 | **This van** | **369,000 CZK ≈ €14.7k** (Sauto) | [Sauto](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) |
 
-**Reading:** mid-range for a 1997–98 TDI in Germany. The 32.2 is the rare and wanted layout.
+**Reading:** mid-range for a 1997–98 TDI in Germany. The 32.x with washroom is the wanted family.
 But **380,000 km** is high → room to negotiate, and budget **≈ €1–2k** at once for belts,
 water pump, fluids, tyres if old, and a new leisure battery.

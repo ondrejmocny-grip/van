@@ -74,7 +74,7 @@ registration papers (field F.1 / F.2) will say the truth.
 
 Things the text does not say but the 22 photos show (**seen**):
 
-- **High GRP roof** by Carthago, small windows at the front, **roof bed over the cab**, two roof
+- **High GRP roof** by Carthago, small windows at the front, **lockers over the cab (no roof bed)**, two roof
   hatches with skylights, overhead lockers along both sides.
 - **Tailgate** at the back (not barn doors). Behind it: **gas locker** with a "30 mbar" sticker,
   the **WC cassette** hatch, a mesh cover over pipes / pump.

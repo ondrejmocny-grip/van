@@ -1,4 +1,6 @@
-# Living part — Carthago Malibu 32.2 fit-out
+# Living part — Carthago Malibu 32 (32.3) fit-out
+
+**Correction 2026-09-26 (Ondrej):** this van has **no roof bed** — the space over the cab is lockers. So it is most likely a **32.3** (compact high roof, cabinets, no bed), not a 32.2. The bed is the dinette, made up each night.
 
 [← back to overview](README.md)
 
@@ -21,7 +23,7 @@ The model number tells the layout ([t4forum](https://www.t4forum.de/forum/index.
 | **32.2** | **long** | **kitchen at the rear + washroom** | **high roof with roof bed** | **≈ 400** |
 | 32.3 | long | kitchen at the rear + washroom | compact high roof, cabinets, no bed | ≈ 200 |
 
-**This van = 32.2** (typical): long wheelbase + high roof with a roof bed (**seen**) + washroom
+**This van = most likely 32.3**: long wheelbase + high roof with lockers and **no roof bed** (Ondrej) + washroom
 (**seen**). Confirm on the Carthago plate inside.
 
 ## Layout
@@ -38,11 +40,11 @@ Front to rear (**seen**, positions ± — read off photos):
   │ passeng.│  aisle               │ kitchen, L-shape │ gas locker +    │
   │ (swivel)│  SLIDING DOOR        │ sink+hob, fridge │ WC cassette at  │  passenger side
   └─────────┴──────────────────────┴──────────────────┴─ the tailgate ──┘
-       above the cab: roof bed          above both sides: lockers
+       above the cab: lockers           above both sides: lockers
 ```
 
 - **Cab seats swivel** (listing) and join the dinette → 4 people at the table.
-- **Roof bed** in the high roof over the cab and front of the living area.
+- **No roof bed** — lockers in the high roof over the cab. (The 32.2 has a wide roof bed that lowers down.)
 - **Dinette** turns into the lower bed.
 - **Overhead lockers** along both walls under the high roof.
 - **Two roof hatches** with skylights (one over the living area, one further back).
@@ -52,9 +54,9 @@ Front to rear (**seen**, positions ± — read off photos):
 | | Value | Source |
 |---|---|---|
 | Standing height | **≈ 1.85 m** | typical ([kleinanzeigen 31.3](https://www.kleinanzeigen.de/s-anzeige/volkswagen-vw-t4-carthago-malibu-31-3-hochdach-camper-van/3047088369-216-1110)) |
-| Roof bed | **2,150 long; width disputed: 1,000 mm** (32.2 owner data sheet — one person only) **or 1,200–1,250** (other Malibu listings, maybe other models). **Measure it** | typical ([ski-web24](https://www.ski-web24.de/Wohnmobil/Malibu/page1.htm), [promobil](https://www.promobil.de/fahrzeuge/oldtimer-carthago-malibu-t4-campingbus/)) |
+| Roof bed | **none in this van (32.3)**. In the 32.2: 2,150 long, lowers down; width 1,000 mm (one owner sheet) or 1,200–1,250 (other listings) — Ondrej sees wide ones in German 32.2 ads | typical ([ski-web24](https://www.ski-web24.de/Wohnmobil/Malibu/page1.htm), [promobil](https://www.promobil.de/fahrzeuge/oldtimer-carthago-malibu-t4-campingbus/)) |
 | Lower bed (dinette) | ≈ 1,970 mm long, width not found | typical |
-| Berths | listed 2; factory 4 (2 up, 2 down) | listing / typical |
+| Berths | **2** (the dinette bed) | listing |
 | Seats with belts | 4 | listing |
 
 ## Water
@@ -102,7 +104,7 @@ Front to rear (**seen**, positions ± — read off photos):
 |---|---|---|
 | Hob + sink | **one combined unit**: stainless sink + **2 gas burners**, glass lid (maker not found; Smev or Cramer likely) | seen / guess |
 | Fridge | **Electrolux RM 185**, absorption, **≈ 45 L**. Gas / 230 V / 12 V (12 V **only while driving**) | typical ([t4forum](https://www.t4forum.de/forum/index.php?thread%2F301682-neuen-k%C3%BChlschrank-carthago-malibu%2F=)) |
-| Fridge weak point | poor ventilation in the 32.2 → heat comes into the living space | typical |
+| Fridge weak point | poor ventilation in the 32.x → heat comes into the living space | typical |
 | Worktop | small L-shaped top beside the window | seen |
 | Oven / microwave | none | seen |
 

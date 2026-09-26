@@ -55,13 +55,13 @@ mobile.de). mobile.de blocks us, so the text below is from the **kleinanzeigen c
 
 ## Against the Czech van
 
-| | **Rehhorst 32** | **Czech van (32.2)** |
+| | **Rehhorst 32** | **Czech van (32, likely 32.3)** |
 |---|---|---|
 | Price | **€13,400 VB** | ≈ €14,700 (369,000 CZK) |
 | Year | 1996 | 1997 |
 | Mileage | **263,000** | 380,000 |
 | Engine | 1.9 TD, **68 PS** | **2.5 TDI, 102 PS** |
-| Roof | compact high roof, **no roof bed** | high roof **with roof bed** |
+| Roof | compact high roof, **no roof bed** | high roof, **no roof bed** (lockers) — corrected 2026-09-26 |
 | Berths | 2 | 2 listed, 4 from the factory |
 | Seats | 6 | 4 |
 | Washroom, tanks, heater, fridge | same Carthago kit, **75 / 50 L stated** | same kit, tanks not stated |
@@ -70,14 +70,12 @@ mobile.de). mobile.de blocks us, so the text below is from the **kleinanzeigen c
 | Condition story | private, hall-kept, accident-free, TÜV to 2028 | dealer, free gas + electric revize, handover demo |
 | Buying | in Germany: travel ≈ 700 km, export plates, CZ registration | in Beroun, already CZ papers |
 
-**In short:**
+**In short** (after the correction — both vans are the same 32.3 layout):
 
 - **Rehhorst is better kept and cheaper**, with 117,000 km less, and has the roof fan and the
   bike rack we would want.
-- **The Czech van has the better engine** (50 % more power) and the **roof bed**. The roof bed
-  matters for a family of three: with only the dinette bed, the kid has nowhere of their own.
-- For us the roof bed + TDI are the reasons to prefer the 32.2; the Rehhorst van is the
-  **safer car**.
+- **The Czech van has the better engine** (102 vs 68 PS) and Czech papers.
+- With the same layout, it comes down to **engine vs condition and km**.
 
 ## Questions for the seller
 

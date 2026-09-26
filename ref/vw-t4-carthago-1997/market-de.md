@@ -21,7 +21,7 @@ roof, cabinets, **no roof bed**. VB = price negotiable. H = historic plate.
 | Complete **32.2** (roof bed) | **1** — Berlin, €15,000, 1993, 2.4 D |
 | 32.2 with a **TDI** | **none**. One (2000, Wiesbaden) was just removed |
 | Best documented | **Rehhorst "32"** — €13,400, 1996, 263,000 km, most likely a **32.3** → [rehhorst-32/](rehhorst-32/README.md) |
-| **Our Czech van** | 32.2 + 2.5 TDI, 1997, 380,000 km, **369,000 CZK ≈ €14,700** |
+| **Our Czech van** | 32 (likely **32.3**, no roof bed) + 2.5 TDI, 1997, 380,000 km, **369,000 CZK ≈ €14,700** |
 
 ## For sale
 

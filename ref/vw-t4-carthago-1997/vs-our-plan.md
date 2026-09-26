@@ -7,7 +7,7 @@ Our plan: a **VW Crafter L3H3 4MOTION**, self-built ([v2-real](../../v2-real/REA
 
 ## Size and power
 
-| | **T4 Carthago 32.2** | **Crafter L3H3 (ours)** | Difference |
+| | **T4 Carthago 32 (32.3)** | **Crafter L3H3 (ours)** | Difference |
 |---|---|---|---|
 | Length | ≈ 5,190 | 5,986 | T4 ≈ **0.8 m shorter** |
 | Width, body / mirrors | 1,840 / 2,175 | 2,040 / 2,427 | T4 20 cm narrower |
@@ -37,7 +37,7 @@ Crafter numbers: [doc/README.md](../../doc/README.md#base-vehicle-sizing),
 | **Economical with water** | 50–75 L fresh, 50–56 L grey, under the floor | ✅ fits our water habits |
 | **Minimal bathroom**, sit-down shower is fine | real washroom, cassette WC, very tight shower | ✅ better than many small vans |
 | **70 L of belongings each** | overhead lockers both sides, under benches | ✅ enough |
-| **Bed made up, live in the front lounge** | roof bed stays made; dinette free by day | ✅ this works well |
+| **Bed made up, live in the front lounge** | **no roof bed** — the dinette is the bed, made up each night (Ondrej: fine) | ⚠️ ok |
 | **1 small kid, 1 cat** | 4 belted seats, 2 beds (roof + dinette) | ⚠️ kid sleeps in the roof or the dinette gets made every night |
 | **Bikes at the back** | tow bar fitted → bike rack on the ball possible; tailgate must still open | ⚠️ check payload and tailgate |
 | **Warm weather: Morocco, Turkey** | absorption fridge struggles in heat; no roof fan, only hatches; cab A/C only while driving | ⚠️ hot nights will be hard |

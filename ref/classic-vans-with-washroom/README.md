@@ -15,7 +15,8 @@ read from ads on 2026-09-26. "(unconf.)" = not confirmed.
 ## What matters for us
 
 - **Shower + WC** inside, even small.
-- **A bed that stays made** — so the dinette stays the office by day ([about-us](../../doc/about-us.md)).
+- ~~A bed that stays made~~ — **no longer needed**: making the bed daily is fine (Ondrej, 2026-09-26).
+- **Table seating (a dinette)** — the office by day.
 - **A durable engine** with parts everywhere.
 - **€8–20k**, short term → **resale value** matters too.
 - Upgrades are fine: battery, DC-DC, portable solar, fan ([same plan as the T4](../vw-t4-carthago-1997/electrics-upgrade.md)).
@@ -36,30 +37,28 @@ read from ads on 2026-09-26. "(unconf.)" = not confirmed.
 Dropped: Karmann Colorado, Robel, Karmann Missouri / Distance (coachbuilt), Knaus BoxStar and
 Big Nugget (2007+, over budget), Westfalia California (no washroom), Dehler Optima (≈ 85 built, no parts).
 
-## Ranking for us
+## Ondrej's preferences (2026-09-26)
 
-1. **Pössl 2Win / Globecar Globescout, 2002–2006, 2.8 JTD / HDi, manual.** Fixed rear bed, free
-   dinette, real washroom, most power (128 PS), **cheapest to buy and to fix**, lots on sale →
-   easy to resell. Minus: not a "cult" classic, Ducato rust, larger (2.03 m wide).
-2. **Westfalia James Cook, Sprinter 312D (OM602), 1996–2000.** The best-built, the most durable
-   engine, a **1.55 m fixed roof bed**, 100 L water. Minus: **rust decides everything**, 3.08 m
-   tall, top of the budget.
-3. **La Strada on Sprinter 312D.** Same engine as #2, washroom behind a door. Rare.
-4. **Carthago Malibu 32.2 (T4).** The smallest and easiest to drive, good TDI — but if the roof
-   bed is really 1.00 m wide, one of you sleeps on the dinette every night.
-5. Sven Hedin / Hymercar — real classics, but 30–40 years old and slow.
+- **No James Cook** — it usually has no proper table seating (dinette).
+- **Likes La Strada** — its layout is close to the Carthago.
+- **Making the bed every day is fine** — so a fixed or roof bed is no longer a must.
+- German **Carthago 32.2** units have a **wide roof bed that lowers down** — interesting. The
+  Czech Carthago has **no roof bed** (lockers instead) → it is most likely a **32.3**.
 
-## My pick
+## Ranking for us (after the preferences)
 
-**First choice to view: the Westfalia James Cook in Kladno** (CZ, 1997, 312 TD, 325,000 km,
-389,000 CZK ≈ €15,600) — the durable OM602, the wide fixed roof bed, 100 L water, Czech papers,
-≈ 30 km from Prague. Only if the rust is surface rust.
+1. **Carthago Malibu 32.x (T4)** — smallest, easiest to drive, table seating, washroom; the Czech
+   one has the 102 PS TDI. A German **32.2** adds the lowering roof bed.
+2. **La Strada on Sprinter 312D** — same idea as the Carthago, bigger, the durable OM602 engine
+   (timing chain). Waltershausen 1999, €18,500, washroom behind a door.
+3. **Pössl / Globecar, 244 Ducato-Boxer, 2.8** — best value and the most choice.
+4. Hymercar, Sven Hedin — real classics, but old and slow.
+5. ~~Westfalia James Cook~~ — dropped: no table seating.
 
-**Best value, if the James Cook is rusty:** a **Globecar / Pössl on the 244 Boxer / Ducato with
-the 2.8** — e.g. Globecar Boxer 2004, 149,000 km, 1st owner, €13,950 (Pfullingen dealer), or
-the Pössl Duett 2004, €16,980 (Lübeck). See [listings.md](listings.md).
+## Carthago (Czech) vs the La Strada listings
 
-**The Malibu stays in the running only if its roof bed measures ≥ 1.20 m wide.**
+See [../vw-t4-carthago-1997/service.md](../vw-t4-carthago-1997/service.md) for how often each
+needs a garage.
 
 ## Checks for any of them
 

@@ -23,7 +23,7 @@ model, not the ad. CZK → € at 25. KA = `https://www.kleinanzeigen.de/s-anzei
 | CZ7 | LT conversion + garage | VW LT35 | 2006 | 430,000 (engine 250,000) | 2.5 TDI | 339,000 CZK ≈ €13,600 | Pardubice | WC + shower, motorbike garage, living part worn | [bazos](https://auto.bazos.cz/inzerat/223500604/vw-lt-35-25-tdi-2006-vestavba-a-mx-garaz.php) |
 | CZ8 | Ducato (check body type) | Fiat Ducato | 07/2006 | 78,500 | 2.0 JTD 62 kW (weak) | 419,900 CZK ≈ €16,800 | Most | large bathroom, dealer | [sauto](https://www.sauto.cz/obytne/detail/fiat/ducato/209637684) |
 | CZ9 | Pössl | Peugeot Boxer | 10/1999 | 233,000 | 2.5 TD 79 kW | 159,900 CZK ≈ €6,400 | Turnov / Semily | **rust on sills and underbody** — project | [bazos](https://auto.bazos.cz/inzerat/223968834/peugeot-boxer-possl-25tdi79kwrv101999.php) |
-| — | Carthago Malibu 32.2 | VW T4 | 1997 | 380,000 | 2.5 TDI | 369,000 CZK | Beroun | [our reference](../vw-t4-carthago-1997/README.md) | [sauto](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) |
+| — | Carthago Malibu 32 (32.3) | VW T4 | 1997 | 380,000 | 2.5 TDI | 369,000 CZK | Beroun | [our reference](../vw-t4-carthago-1997/README.md) | [sauto](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) |
 
 Ask about the washroom: Sprinter 2.7 CDI 2003, only 102,000 km, 399,000 CZK
 ([bazos](https://auto.bazos.cz/inzerat/223434166/mercedes-sprinter-27cdi-2003-102000km-klima-markyza.php)).
