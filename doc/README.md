@@ -258,8 +258,9 @@ as they were, so two layouts can be compared from the same spot. `#v2` at the en
 opens that version where the host passes it through; otherwise the page opens on the version
 you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the
 three separate pages were 7 MB together. The older per-version pages (v1
-`LwGHoarYhEiNDaQSUbvz5s`, v2 `4zfKdrCzAheAzWhmKarVFe`, v3 `53pg4zZh6jgR2B4MFKnLHJ`) are no
-longer updated. Republish it after any change with the Artifact tool, passing that URL so it updates in place
+`LwGHoarYhEiNDaQSUbvz5s`, v2 `4zfKdrCzAheAzWhmKarVFe`, v3 `53pg4zZh6jgR2B4MFKnLHJ`) have been
+**deleted** - those links are dead, not merely stale, so anything still pointing at one needs
+repointing here. Republish it after any change with the Artifact tool, passing that URL so it updates in place
 rather than making a second one. It is private to Ondrej's account; sharing is done from the
 page's own Share menu, not from here.
 
