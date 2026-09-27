@@ -14,11 +14,13 @@ For elevations a = x (front at left). For sections a runs driver-wall to passeng
 
 Run: python plan.py <variant>
 """
+import copy
+import os
 import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Circle
+from matplotlib.patches import Rectangle, Circle, Polygon
 
 WARM, GALLEY, SOFT, WET, COLD = "#efe7d8", "#dce7e4", "#e7e0ec", "#d9e6f0", "#e2efdf"
 
@@ -101,14 +103,14 @@ VARIANTS["ref-scarletseth"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v1"] = dict(
     out="v1/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 195), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 195), slider=(300, 1600),
     cab=800,                                   # cab depth drawn forward of x=0
     seats=[(-430, 460, 285), (-430, 1380, 285)],
     title="v1 - VW Crafter L3H3 · swivel seats, wet cubicle, rear dinette",
     viewer_title="Crafter L3H3 Interior",
     stats=["bed 1730 long", "galley aisle 1232", "corridor past cubicle 532",
-           "worktop 900", "seat 520", "standing 1881"],
-    note="Load box 3450 x 1832 x 1881 mm finished. Furniture depths include the wall build. Estimated +/-50 mm.",
+           "worktop 900", "seat 520", "standing 1781"],
+    note="Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Furniture depths include the wall build. Estimated +/-50 mm.",
     boxes=[
         (-150,  550,  620, 1220, "TABLE", "Lagun swing arm", None),
         (   0,  620,    0, 1832, "FRONT LOUNGE", "swivel seats · office + seat", None),
@@ -125,41 +127,41 @@ VARIANTS["v1"] = dict(
         dict(kind="elev", title="Driver side elevation", span=3450, left="FRONT", right="REAR",
              datum=(520, "bed / seat top 520"),
              boxes=[
-                 (   0,  620,    0, 1881, "FRONT LOUNGE", "swivel seat + Lagun table", None),
+                 (   0,  620,    0, 1781, "FRONT LOUNGE", "swivel seat + Lagun table", None),
                  ( 620, 1720,    0,  900, "GALLEY", "sink · induction · oven · one drawer stack", GALLEY),
-                 ( 620, 1720, 1400, 1800, "overhead locker", "", WARM),
+                 ( 620, 1720, 1400, 1700, "overhead locker", "", WARM),
                  ( 900, 1550, 1000, 1350, "awning window", "", None),
                  (1720, 2270,    0,  900, "FRIDGE", "70 L, over the arch", COLD),
                  (2270, 3000,    0,  450, "BENCH", "battery + inverter under", SOFT),
                  (3000, 3450,    0,  450, "REAR BENCH", "", SOFT),
-                 (2270, 3000, 1400, 1800, "overhead locker", "", WARM),
+                 (2270, 3000, 1400, 1700, "overhead locker", "", WARM),
                  (2350, 3000,  620,  960, "awning window", "", None),
              ]),
         dict(kind="elev", title="Passenger side elevation (kerb side)", span=3450, left="FRONT", right="REAR",
              datum=(520, "bed / seat top 520"),
              boxes=[
-                 (   0,  300,    0, 1881, "LOUNGE", "", None),
+                 (   0,  300,    0, 1781, "LOUNGE", "", None),
                  ( 300, 1600,    0, 1550, "SLIDING DOOR", "entry", None),
-                 (1600, 2350,    0, 1881, "WET CUBICLE", "sit-down shower · floor +360", WET),
+                 (1600, 2350,    0, 1781, "WET CUBICLE", "sit-down shower · floor +360", WET),
                  (1750, 2100,  410,  810, "cassette hatch", "", None),
                  (2350, 3000,    0,  450, "BENCH", "108 L fresh tank under", SOFT),
                  (3000, 3450,    0,  450, "REAR BENCH", "", SOFT),
-                 (2350, 3000, 1400, 1800, "overhead locker", "", WARM),
+                 (2350, 3000, 1400, 1700, "overhead locker", "", WARM),
                  (2400, 3000,  620,  960, "awning window", "", None),
              ]),
         dict(kind="sect", title="Section A-A · through the galley, looking forward", span=1832,
              left="DRIVER", right="PASSENGER",
              boxes=[
                  (   0,  600,    0,  900, "GALLEY", "600 deep", GALLEY),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
              ],
              notes=[(1216, 1150, "entry / aisle 1232 wide"), (1650, 500, "sliding door")]),
         dict(kind="sect", title="Section B-B · through the wet cubicle, looking forward", span=1832,
              left="DRIVER", right="PASSENGER", datum=(520, "bed 1132 wide here"),
              boxes=[
                  (   0,  600,    0,  900, "FRIDGE", "70 L over the arch", COLD),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
-                 (1132, 1832,    0, 1881, "WET CUBICLE", "700 wide · floor +360", WET),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
+                 (1132, 1832,    0, 1781, "WET CUBICLE", "700 wide · floor +360", WET),
                  (1132, 1832,    0,  360, "step", "", WARM),
              ],
              notes=[(866, 1150, "corridor 532")]),
@@ -169,10 +171,10 @@ VARIANTS["v1"] = dict(
                  (   0,  600,    0,  450, "BENCH", "battery + inverter under", SOFT),
                  (1132, 1832,    0,  450, "BENCH", "fresh tank", SOFT),
                  ( 600, 1132,  700,  760, "TABLE", "", WARM),
-                 (   0,  320, 1400, 1800, "locker", "", WARM),
-                 (1512, 1832, 1400, 1800, "locker", "", WARM),
+                 (   0,  320, 1400, 1700, "locker", "", WARM),
+                 (1512, 1832, 1400, 1700, "locker", "", WARM),
              ],
-             notes=[(916, 1150, "headroom 1881")]),
+             notes=[(916, 1150, "headroom 1781")]),
     ],
 )
 
@@ -202,18 +204,18 @@ VARIANTS["v1-roof"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v2"] = dict(
     out="v2/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
     title="v2 - VW Crafter L3H3 - front shower + wardrobe, split galley, rear U",
     viewer_title="Crafter L3H3 v2 Interior",
     stats=["bed 1520 x 1832 at 630", "table 900 x 600 at 900", "shower opening 450",
            "garage 600 x 1832 x 570", "crawl-through 500 x 930", "galley aisle 632",
-           "rear floor +180", "standing 1881"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. Partition wall behind a 3-seat cab at x=0, "
+           "rear floor +220", "standing 1781"],
+    note=("Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van, 100 lower than FWD. Partition wall behind a 3-seat cab at x=0, "
           "with a hatch over the shoe locker instead of a walk-through - the bench backs onto "
           "the partition, so there was never a way past it. The rear is a U again, but the "
           "whole of it is "
-          "lifted: you step up 180 into the footwell, the benches are 570 high, and the bed "
+          "lifted: you step up 220 into the footwell, the benches are 570 high, and the bed "
           "makes up at 630 across the van - 1832 gross, ~1760 after the wall build. That lift "
           "is the storage: 570 of garage under the rear bench, and a shallow drawer under the "
           "footwell floor. The table is 900 x 600 on a post at 900, the galley worktop height, "
@@ -221,9 +223,10 @@ VARIANTS["v2"] = dict(
           "and slides forward into the shower, cassette out through the driver-side panel. The "
           "U is one carcass, so the fresh tank runs the side-to-rear corner, inboard of the "
           "wheel arch. Estimated +/-50 mm."),
+    shapes={"SHOWER": [(0, 1032), (700, 1232), (700, 1832), (0, 1832)]},
     boxes=[
         ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
-        (   0,  700, 1032, 1832, "SHOWER", "700 x 800 - 450 carved opening, aft end", WET),
+        (   0,  700, 1032, 1832, "SHOWER", "700 x 800>600 - diagonal face - 450 opening aft", WET),
         ( 700, 1150, 1232, 1832, "WARDROBE", "450 x 600 - WC under", WARM),
         (   0,  450,    0,  400, "LOCKER", "450 x 400 - shoes - step to the hatch", SOFT),
         (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
@@ -234,11 +237,96 @@ VARIANTS["v2"] = dict(
         (1150, 1930,  600, 1232, "AISLE", "780 x 632", None),
         (1930, 2850, 1232, 1832, "BENCH", "920 x 600 - battery + inverter", SOFT),
         (1930, 2850,    0,  600, "BENCH", "920 x 600 - 118 L tank inboard of arch", SOFT),
-        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +180, drawer under", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, drawer under", SOFT),
         (2850, 3450,    0, 1832, "REAR BENCH", "600 x 1832 - garage 570 clear under", SOFT),
     ],
 )
 
+
+# --------------------------------------------------------------------------
+# v2-real - v2 turned from a schema into a buildable plan. Started 2026-09-24 as a copy of
+# v2; since the real body went in it has its own box list, written against the REAL walls.
+# v2 is frozen as the schema it was.
+#
+# Frame: x from the partition, z above the finished floor, y against v2's old 1832 box lines
+# - the real centre line stays at y 916, so the walls simply stand inside 0 and 1832 by the
+# body profile below plus the cladding. Where a part stands against a wall, its wall-side
+# edge is that finished face at the part's top (the lean only comes further in higher up).
+# --------------------------------------------------------------------------
+VARIANTS["v2-real"] = dict(
+    out="v2-real/layout",
+    title="v2-real - VW Crafter L3H3 4MOTION - v2 on the real body",
+    viewer_title="Crafter L3H3 v2-real Interior",
+    length=3390,                    # VW L502-2, partition to rear door, not the brochure 3450
+    width=1832,                     # the frame, NOT the van: the real walls are body= below
+    height=1811,                    # 1861 bare - 35 floor - 15 ceiling
+    slider=(305, 1615),             # VW L508 1311 wide, centred at x ~960
+    well=(1817, 2728, 226),         # VW 911 long; 1380 between the arches (W202)
+    cab=800,
+    body=dict(
+        source="ref/vw-crafter-bodybuilder",
+        # The thin build, agreed 2026-09-24 (v2-real/README.md): insulation lives in the
+        # 70-110 mm cavity behind the rib faces, so only what goes OVER the ribs costs room.
+        floor_build=35,             # 20 XPS between battens + 12 ply + 2 vinyl
+        ceiling_build=15,           # foam between the roof bows + 6 ply
+        clad=10,                    # per wall: 3 mm thermal-break strip + 6 ply, or a carcass back
+        # (z, inset): how far the BARE wall (the rib faces) stands inside the old 1832 box
+        # line, at each height above the finished floor. Linear between points, the same on
+        # both sides and all along the van (the slider and rear-axle sections differ by
+        # 11 mm at most; the tighter one is used). Heights are VW's on the high floor - 35.
+        #   z 0-265:  888 from the centre (VW, section C-C)        -> 28
+        #   z 775:    880 / 891 (C-C), 880 (D-D, 1760 wide)        -> 36
+        #   z 1555+:  736 / 741 (C-C), 1473 wide (D-D, "H3")       -> 180
+        profile=((0, 28), (265, 28), (775, 36), (1555, 180), (1811, 180)),
+        arch_h=266,                 # VW 401 on the low floor -> 301 on ours -> 266 finished
+        slider_h=1687,              # VW H508 1722 on the high floor
+        rear_h=1705,                # VW H202 1740 on the high floor
+        # Where a window may be cut: the stamped window fields in the side panels (VW converter
+        # guidelines p. 209-210 - cutting outside them needs a VW letter and added stiffness).
+        # Read off VW's side view and the L3H3 foil template: VW X - 1370, road height - 573
+        # (loaded floor, H196) - 35. About +/-30 - to check on the real van.
+        # side, x0, x1, z0, z1
+        window_fields=(("d",  190, 1685, 753, 1473),     # driver, behind the B-pillar
+                       ("d", 1690, 3200, 816, 1473),     # driver, rear
+                       ("p",  170, 1650, 753, 1473),     # passenger: the sliding door's glass
+                       ("p", 1650, 3160, 816, 1473)),    # passenger, rear
+        # Roof bows KNOWN to be there. VW (converter guidelines 2023 p. 207-208): an L3 has at
+        # least 6 - one behind the B-pillar (x ~0), two "in the middle of the sliding door",
+        # one at the C-pillar (x 1688, the seam between the window fields), the rest between
+        # the C-pillar and the rear header (x ~3265). Only these three have a position; the
+        # others are to MEASURE on the real van before any roof cut. A cut-out stays this far
+        # clear of each known one.
+        roof_bows=(0, 1688, 3265),
+        bow_clear=40,
+        # True: a part that runs into the real walls, the rear doors or the roof fails the
+        # build, the same as an appliance outside its cabinet.
+        strict=True,
+    ),
+    stats=["bed 1520 x 1744 across at 630", "worktops 562 deep at 920", "galley aisle 562",
+           "garage 540 x 1746 x 570", "standing 1811", "grey 95 L under the footwell", "full gas: hob + water"],
+    note=("v2's layout on the REAL body (VW panel-van drawing, ref/vw-crafter-bodybuilder) with the "
+          "thin build: floor 3390 long, 1756 between the finished walls at the floor, 1694 at "
+          "worktop height, 1452 from 1555 up; ceiling 1811. Arch x 1817-2728, 266 high. Galley "
+          "split down the middle: worktops 565, aisle 562. Bed across 1744. Grey tank inside, "
+          "under the footwell. Red lines: the finished walls. Body +/-10 mm."),
+    shapes={"SHOWER": [(0, 1032), (700, 1232), (700, 1794), (0, 1794)]},
+    boxes=[
+        ( 400, 1090,  660, 1032, "ENTRY", "690 wide at the side door - the lobby", None),
+        (   0,  700, 1032, 1794, "SHOWER", "700 x 762>562 - diagonal face - 450 opening aft", WET),
+        ( 700, 1150, 1232, 1786, "WARDROBE", "450 x 554 - back follows the lean - WC under", WARM),
+        (   0,  450,   41,  400, "LOCKER", "450 x 359 - shoes - step to the hatch", SOFT),
+        (-190,  210,  580,  980, "CAT", "400 x 400 - slides behind the bench - flap aft", WARM),
+        ( 460,  800,   60,  440, "SIDE TABLE", "340 x 380 at 720 - L bracket off the locker", GALLEY),
+        ( 750, 1150,   73,  635, "WORKTOP", "400 x 562 - fold-down leaf", GALLEY),
+        (1150, 1930, 1197, 1759, "SINK", "780 x 562 at 920 - 440 bowl, taps aft", GALLEY),
+        (1150, 1930,   73,  635, "HOB", "780 x 562 at 920 - gas hob, C95L fridge under", GALLEY),
+        (1150, 1930,  635, 1197, "AISLE", "780 x 562", None),
+        (1930, 2850, 1232, 1789, "BENCH", "920 x 557 - battery + inverter", SOFT),
+        (1930, 2850,   43,  600, "BENCH", "920 x 557 - 118 L tank inboard of arch", SOFT),
+        (1930, 2850,  600, 1232, "FOOTWELL -> BED", "632 wide - floor +220, 95 L grey tank under", SOFT),
+        (2850, 3390,   43, 1789, "REAR BENCH", "540 x 1746 - garage 570 clear under", SOFT),
+    ],
+)
 
 # --------------------------------------------------------------------------
 # v3 - VW Crafter L3H3. Same van and same 3-seat cab as v2, turned around:
@@ -248,13 +336,13 @@ VARIANTS["v2"] = dict(
 # --------------------------------------------------------------------------
 VARIANTS["v3"] = dict(
     out="v3/layout",
-    length=3450, width=1832, height=1881, well=(1863, 2763, 226), slider=(300, 1600),
+    length=3450, width=1832, height=1781, well=(1863, 2763, 226), slider=(300, 1600),
     cab=800,
     title="v3 - VW Crafter L3H3 - L-galley, dinette that works as the office, rear bathroom",
     viewer_title="Crafter L3H3 v3 Interior",
     stats=["bed 1520 x 1832 across", "galley 1.15 m2", "bathroom 600 x 1232",
            "entry 730", "corridor 632", "garage 600 wide full height"],
-    note=("Load box 3450 x 1832 x 1881 mm finished. The galley is a proper L round the corner "
+    note=("Load box 3450 x 1832 x 1781 mm finished - the 4MOTION van. The galley is a proper L round the corner "
           "behind the driver: 600 x 1382 across the bulkhead and a 530 return down the driver "
           "wall, then the larder. No separate office seat - two people work at the dinette, "
           "facing each other across the 632 corridor with the table at 745. The bed is TWO "
@@ -296,6 +384,30 @@ for _name, _variant in VARIANTS.items():
     _variant["name"] = _name
 
 
+def wall_inset(v, z, bare=False):
+    """How far the real wall stands inside the variant's box line at height z, for a variant
+    that carries a measured body: the finished face (rib face + cladding), or with bare=True
+    the rib faces themselves. 0 for the box-shaped variants."""
+    body = v.get("body")
+    if not body:
+        return 0
+    pts = body["profile"]
+    clad = 0 if bare else body.get("clad", 0)
+    if z <= pts[0][0]:
+        return pts[0][1] + clad
+    for (za, ia), (zb, ib) in zip(pts, pts[1:]):
+        if z <= zb:
+            return ia + (ib - ia) * (z - za) / (zb - za) + clad
+    return pts[-1][1] + clad
+
+
+def wall_inset_max(v, z0, z1, bare=False):
+    """The deepest the wall comes in anywhere between z0 and z1 - what a box spanning those
+    heights has to clear."""
+    zs = [z0, z1] + [z for z, _ in v.get("body", {}).get("profile", ()) if z0 < z < z1]
+    return max(wall_inset(v, z, bare) for z in zs)
+
+
 def draw(ax, v):
     """Plan view."""
     LEN, WID = v["length"], v["width"]
@@ -312,11 +424,18 @@ def draw(ax, v):
 
     ax.add_patch(Rectangle((0, 0), LEN, WID, fc="white", ec="#222", lw=3, zorder=2))
 
+    # A box can be drawn as a polygon instead, when the thing it stands for is not square in
+    # plan - v2's shower has a diagonal face. The box stays: it is the label position and
+    # the bounding size the rest of the tooling reads.
+    shapes = v.get("shapes", {})
     for x0, x1, y0, y1, lab, sub, fc in v["boxes"]:
         open_floor = fc is None
-        ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fc="none" if open_floor else fc,
-                               ec="#b5b5b5" if open_floor else "#8a8a8a", lw=1.2,
-                               ls=(0, (4, 3)) if open_floor else "-", zorder=3))
+        style = dict(fc="none" if open_floor else fc, ec="#b5b5b5" if open_floor else "#8a8a8a",
+                     lw=1.2, ls=(0, (4, 3)) if open_floor else "-", zorder=3)
+        if lab in shapes:
+            ax.add_patch(Polygon(shapes[lab], closed=True, **style))
+        else:
+            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, **style))
         cx = (x0 + x1) / 2
         # open zones label at their top edge, so furniture drawn inside them stays readable
         cy = y0 + 130 if open_floor else (y0 + y1) / 2
@@ -328,6 +447,15 @@ def draw(ax, v):
         if sub:
             ax.text(cx + (105 if rot else 0), cy + (0 if rot else 105), sub, ha="center", va="center",
                     rotation=rot, fontsize=6, color="#888" if open_floor else "#666", zorder=5)
+
+    if v.get("body"):
+        # the real wall, at the floor and where it has leaned in the most, over the box line
+        for z, ls, tag in ((0, "-", "finished wall at the floor"), (1600, (0, (6, 3)), "finished wall at 1600 high")):
+            i = wall_inset(v, z)
+            for y in (i, WID - i):
+                ax.plot([0, LEN], [y, y], color="#c0392b", lw=1.4, ls=ls, zorder=9)
+            ax.text(LEN - 20, i + 18, "%s (%d in)" % (tag, i), ha="right", va="top",
+                    fontsize=5.5, color="#c0392b", zorder=9)
 
     if v.get("well"):
       w0, w1, wd = v["well"]
@@ -451,6 +579,7 @@ def main(name):
     fig, ax = plt.subplots(figsize=(12, 6.2), dpi=160)
     fig.patch.set_facecolor("#fbfaf7")
     draw(ax, v)
+    os.makedirs(os.path.dirname(v["out"]) or ".", exist_ok=True)   # a new variant has no folder yet
     for ext in ("png", "svg"):
         fig.savefig("%s.%s" % (v["out"], ext), facecolor=fig.get_facecolor(), bbox_inches="tight")
         print("wrote", "%s.%s" % (v["out"], ext))

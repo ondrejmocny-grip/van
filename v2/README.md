@@ -1,6 +1,12 @@
 # v2 — VW Crafter L3H3, 3-seat cab
 
-Started 2026-09-20. **Plan and 3D model — iterating.** No photoreal impressions yet.
+Started 2026-09-20. **Frozen 2026-09-24** — work continues in **[v2-real](../v2-real/README.md)**,
+which copies this layout and makes it buildable. Do not edit v2: v2-real is built from its tables.
+
+**Drawn on the 4MOTION van since 2026-09-23:** finished ceiling **1781**, 100 mm lower than the
+front-wheel-drive van (VW brochure: 1861 vs 1961 raw). The overhead lockers dropped to 1700 and
+1710 tops, the shower head to 1760 and the shower arch to 1740. Standing on the 60 mm tray
+leaves ~1720 - about 1 cm over Ondrej.
 
 ![plan](layout.png)
 
@@ -278,20 +284,40 @@ same call as the shower cubicle. The taps are still meshes; a tap is a shape, no
 **carved out of it** — a walk-in opening with a semicircular head, as narrow as an adult
 actually needs, pushed to the aft end of the face, against the wardrobe.
 
+**The face runs on a diagonal.** Changed 2026-09-24. The cubicle used to stand 200 mm proud of
+the wardrobe and the galley line, and its aft corner was exactly where you turn from the
+aisle into the lobby. Making the cubicle shallower would have fixed the corner and ruined the
+shower, so only the face moved: it now runs from the partition at **800 deep** to the
+wardrobe at **600 deep**, flush with the wardrobe front.
+
+| | Straight face (before) | **Diagonal face (now)** |
+|---|---|---|
+| Outside | 700 × 800 | **700 × 800 at the partition → 600 at the wardrobe** |
+| Inside depth, forward wall | 720 | **706** — where the head is, and where you stand |
+| Inside depth, middle | 720 | **618** |
+| Inside depth, aft wall | 720 | **529** — where you walk in |
+| Floor inside | 0.45 m² | **0.38 m²** (−14 %) |
+| Lobby floor | — | **+0.07 m²**; +200 at the old corner, +100 halfway along |
+
+The loss is a triangle, and nearly all of it is at the aft end — the doorway end, which you
+walk through rather than stand in. The standing spot under the head, against the partition,
+is 14 mm shallower than before.
+
 | | |
 |---|---|
-| Opening | **450 wide**, from the 60 mm curb up to **1800** |
-| Head | full semicircle, radius 225, springing at 1575 |
-| Position | hard against the **aft** wall, x 210–660 of the 620 mm face — the wardrobe end |
-| **Panel left forward of it** | **170 wide × full height**, on the partition side — see below |
+| Opening | **450 wide measured along the face**, from the 60 mm curb up to **1740** |
+| Head | full semicircle, radius 225, springing at 1515 |
+| Position | hard against the **aft** wall — x 227–660 in plan, the wardrobe end |
+| **Panel left forward of it** | **~190 along the face × full height**, on the partition side — see below |
 | Curb | the 60 mm tray lip runs across the opening, bottom corners radius 60 |
+| Tray | a **trapezoid**, 620 long, 706 → 529 deep — a custom tray or a built-in GRP floor |
 
 **450 is the floor, not a choice.** Interior doors are 600–700 and RV shower doors 500–560;
 450 is where a boat head lands, and it is what leaves anything at all on the other side of
-the face. Every millimetre added to the opening comes straight off that 170.
+the face. Every millimetre added to the opening comes straight off that strip.
 
-**What the 170 strip can hold:** towel hooks or a vertical rail, a slim shelf column on the
-wet side for bottles, or a mirror. Not a cupboard — 170 × 40 of panel is a surface to mount
+**What the ~190 strip can hold:** towel hooks or a vertical rail, a slim shelf column on the
+wet side for bottles, or a mirror. Not a cupboard — a strip of 40 mm panel is a surface to mount
 on, not a volume. If it turns out to be worth more than that, the honest move is to steal it
 from the wardrobe next door rather than from the opening.
 
@@ -299,17 +325,25 @@ It sits at the **forward** end now, against the partition. That is the end you r
 coming through from the cab, and it keeps the opening itself beside the wardrobe, where the
 WC slides in and where you are already standing when you use the bathroom.
 
-**A curtain is still the wet-side answer.** The carve keeps the water in only as far as the
-curb does; a curtain or a half-height glass fin on the aft jamb stops the spray reaching the
+**A curtain is still the wet-side answer**, and the diagonal does not change that: the track
+runs straight along the face, and the curtain stacks on the forward strip. The carve keeps the water in only as far as the
+curb does; the curtain or a half-height glass fin on the aft jamb stops the spray reaching the
 lobby floor. Never a swinging door — that is what would cost the 800 mm width.
 
 The cubicle is built from the box list rather than from a generated mesh: three wall panels,
-a tray, and the carved face. The arch itself is a staircase of thin boxes, rounded outward
-so the hole is never smaller than the curve it approximates.
+a tray, and the carved face. The face is a staircase of 20 mm columns — the model has no
+slanted boxes — with the arch rounded outward in each, so the hole is never smaller than the
+curve it approximates. The teeth are 6 mm deep, invisible at real scale.
 
 **The WC stows under the wardrobe.** A cassette unit, roughly 420 × 570, sits in the wardrobe
 base and **slides forward into the shower** when you need it. The **cassette itself comes out
 sideways through a hatch in the driver-side body panel**, at x 700–1150.
+
+**The diagonal sets a limit on the WC: no deeper than ~520.** It slides forward out of the
+wardrobe past the aft wall, and that is where the shower is now narrowest — 529 inside. Once
+it is in, the forward half is deep enough (≥ 570 anywhere forward of x 520), but it has to get
+there. The 420 × 570 drawn is a placeholder; portable cassette units are typically nearer
+430–450 deep. This is the one real cost of the diagonal — check it against the actual WC.
 
 What this buys:
 
@@ -323,24 +357,44 @@ full-length coat.
 ## The rear: a U again, lifted
 
 Changed 2026-09-23. Back to a **U** — two side benches and a rear bench, table in the middle
-— but the whole of it sits **180 mm higher than the rest of the van**. You step up into the
+— but the whole of it sits **above the rest of the van**: the footwell floor at +220, the benches at 570. You step up into the
 footwell, and everything that step buys is storage.
 
 | | |
 |---|---|
-| Footwell floor | **+180**, x 1930–2850 × y 600–1232, drawer inside it |
+| Footwell floor | **+220**, x 1930–2850 × y 600–1232, drawer inside it |
 | Side benches | **920 × 600**, tops at **570**, cushion to **630** |
 | Rear bench | **600 × 1832**, top at 570 — the garage is what is under it |
 | Garage | **600 × 1832 × 570 clear = 0.63 m³** (the old flat U gave 0.44) |
 | Table | **900 × 600** at **900**, on one post |
 | Bed made up | **1520 × 1832 at 630** |
-| Sitting headroom over the bed | 1881 − 630 = **1251** |
+| Sitting headroom over the bed | 1781 − 630 = **1151** |
 | Seat to head, sitting | 630 + 850 = **1480** at the top of the head |
+| Seat to foot | 630 − 220 = **410** |
+| Windows over the benches | **800 × 450**, z **1050–1500** — seated eye ~1400 |
 
 **The numbers all come from one rule.** A seat wants to be ~450 above whatever your feet are
 on, and a table ~270 above the seat. Set the footwell floor at 180 and the rest follows:
 seat 630, table 900. Lift it further and the table goes above worktop height and the room
 starts to feel like a bar; lift it less and the garage gains nothing.
+
+**Then the footwell alone went up to 220** (2026-09-24). 450 seat-to-foot was sized to
+Ondrej's legs with shoes on; barefoot his knee crease is ~430 and his wife's is lower, so
+**410** fits both of them better, and nothing above the floor moves: seat, table, bed,
+garage and headroom are all unchanged. Knees still clear the table's underside (840) by
+~90. The limit is Ondrej: at 380 his thighs lift off the seat front, so ~230 is the most
+this floor can take on its own.
+
+**Why the whole U did not go up with it.** Every 10 mm of lift takes 10 mm off the 80 mm
+between a seated head (1480) and the dinette lockers (1560), and the 4MOTION ceiling at
+1781 leaves them nowhere to go. +40 would have bought 40 mm of garage height for half the
+headroom, a two-tread step and a table above the worktop. The only way past that limit is
+removing the lockers over the dinette — parked as an open question.
+
+**The windows over the benches moved up** at the same time, from 620–960 to **1050–1500**.
+The old height was left over from a 450 bench and put the glass behind your shoulders; a
+seated eye here is ~1400 (630 + ~770), a little lower for Ondrej's wife. The top stops 60
+under the lockers.
 
 **Why the rear box shrank to 600.** The table is on a post again instead of sliding out of the
 rear box, so the rear box no longer has to be 900 deep to swallow it — and the 900 table has
@@ -354,7 +408,7 @@ moved rather than quietly overlapping:
 
 | | Before | Now |
 |---|---|---|
-| Height | 1400–1800 | **1560–1810** |
+| Height | 1400–1800 | **1560–1710** |
 | Depth | 300 | **260** |
 | Over the dinette | driver 1930–2850, passenger 1600–2850 | **1950–2830 both sides** |
 | Clear over a seated head | −80 (through it) | **+80** |
@@ -388,8 +442,8 @@ them.
 
 | Area | Size (mm) | Contains |
 |---|---|---|
-| Shower | **700 × 800**, floor level, 1881 clear | **450 carved opening** at the forward end, 170 of panel aft of it; WC slides in when needed |
-| Wardrobe | **450 × 600** | hanging above (~1281 clear), **WC drawer below** |
+| Shower | **700 × 800 → 600**, diagonal face, floor level, 1781 clear | **450 carved opening** at the aft end, ~190 of panel forward of it; WC slides in when needed |
+| Wardrobe | **450 × 600** | hanging above (~1181 clear), **WC drawer below** |
 | Shoe locker | **450 × 400 × 450** | shoes; doubles as the step up to the cab hatch |
 | Cat box | **400 × 400 × 420** | 190 of it forward of the partition; 240 × 260 flap in the aft face |
 | Side table | **340 × 380** at 720 | L bracket off the locker's side panel; folds down flat |
@@ -400,7 +454,7 @@ them.
 | Galley aisle | **780 × 632** | |
 | Bench, driver | **920 × 600 × 570** | 2 × 150 Ah battery, 3000 W inverter |
 | Bench, passenger | **920 × 600 × 570** | **118 L fresh tank**, 1020 × 374 × 310, inboard of the arch, running into the rear bench |
-| Footwell | **920 × 632**, floor at **+180** | shallow drawer under the floor, pulling forward into the galley aisle |
+| Footwell | **920 × 632**, floor at **+220** | shallow drawer under the floor, pulling forward into the galley aisle |
 | Table | **900 × 600** at 900 | on one post at x 2340–2440, drops to 570 for the bed |
 | **Rear bench + garage** | **600 × 1832**, top at 570, **570 clear** | calorifier, electrics board, and the third seat on top |
 | **Bed made up** | **1520 × 1832** at 630 | 2 at 760 each, or 3 at 507 |
@@ -443,7 +497,7 @@ sitting over the same arch.
 | Body length in bed | 1730 (along the van) | **~1760** (across, after wall build) | +30 |
 | Bed shape | 1730 × 1832 head, **1132 at the foot** | **1520 × 1832**, no notch | notch gone |
 | Shower footprint | 750 × 700 = 0.53 m² | 700 × 800 = **0.56 m²** | +7% |
-| Shower headroom | 1681 (floor is +200 over the wheel well) | **1881** | +200, no step |
+| Shower headroom | 1681 (floor is +200 over the wheel well) | **1781** | +100, no step |
 | Shower floor when showering | cassette in it | **clear** | WC stows away |
 | Galley worktop | 1100 × 600 = 0.66 m² | 2 × 780 × 600 + a 400 × 600 leaf = **1.18 m²** gross, 0.81 free | +79% |
 | Hanging space | none | **450 × 600**, ~1281 clear | new |
@@ -473,14 +527,14 @@ sitting over the same arch.
 8. **Bowls at 239 × 304 vs prep at 200 mm.** A 660-wide top would give 279 × 304 bowls and
    drop the prep strip to 120. Decide with a dinner plate and a washing-up bowl in hand.
 9. **Drinking water cartridge grade**, and whether a sediment pre-filter earns its space.
-10. **The step up into the dinette is 180 mm.** That is a normal stair riser, but it is in the
+10. **The step up into the dinette is 220 mm.** That is a steep but single stair riser, but it is in the
     dark at the end of a 632 aisle, and it is the last thing you cross at night. A nosing
     strip and an LED under the bench lip are not optional extras here.
 11. **The table post stands in the middle of the footwell.** Feet go either side of it —
     which is exactly why the two dinette seats are drawn offset along the van. If sitting
     opposite each other turns out to matter more than the 900 table, a wall-mounted swing arm
     off the rear bench face is the alternative, at the cost of the free corner.
-12. **Two slim high lockers instead of two deep low ones.** 1560–1810, 260 deep. Confirm by
+12. **Two slim high lockers instead of two deep low ones.** 1560–1710, 260 deep - only 150 tall on the 4MOTION van. Confirm by
     sitting: the check clears a seated head by 80 mm, and that number came from 171 cm.
 13. **Perch versus door.** The fold-out perch stands in the step-in pocket. If it turns out to
     be folded 95% of the time, it is a hook, not a seat — worth living with a cardboard
@@ -504,6 +558,12 @@ sitting over the same arch.
     (costs the backrest).
 19. **The corner above the cat box is empty again.** 210 deep × 332 wide × the full height, and
     nothing in it — deliberately parked, not solved.
+20. **Overhead lockers over the dinette, or a taller garage.** Removing the two 880 runs lets
+    the whole U rise ~100–150 (garage ~700 high) under the 1781 ceiling. Kept for now.
+21. **The WC must be ≤ ~520 deep** to slide past the aft end of the diagonal shower (529
+    inside). Pick the actual unit before the wardrobe base is built.
+22. **The shower tray is a trapezoid** (620 × 706 → 529). Custom GRP or stainless tray, or a
+    tanked floor with a former — no catalogue rectangle fits.
 6. **Window in the shower** (Brisa's trick) at x 0–700 of the driver-side panel. Clear of the
    cassette hatch at 700–1150.
 7. **Wheel-well depth.** v2 uses 226 mm, correct for a 1832 / 1380 Crafter. `v1` still carries

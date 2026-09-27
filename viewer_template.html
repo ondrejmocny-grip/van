@@ -218,7 +218,7 @@
   var LAYERS = MODEL.layers || [
     { id: "bed", label: "Bed made up", kinds: ["infill"], on: false, hide: ["table", "leg"] },
     { id: "cubicle", label: "Wet cubicle", kinds: ["WET CUBICLE", "step"], on: true },
-    { id: "lockers", label: "Lockers", kinds: ["locker"], on: true },
+    { id: "lockers", label: "Lockers", kinds: ["overhead"], on: true },
     { id: "kit", label: "Appliances", kinds: APPLIANCES, on: true, xray: true },
     { id: "body", label: "Body + glass",
       kinds: ["shell", "glass", "floor", "wheel", "partition", "hatch"], on: true },
@@ -271,8 +271,12 @@
   // into a bench or the galley without inventing door and drawer splits we have not designed.
   var container = {};
   (MODEL.containers || []).forEach(function (k) { container[k] = 1; });
-  var ghostBody = [], ghostEdge = [];
+  var ghostBody = [], ghostEdge = [], ghostOn = false;
+  function ghostMat(m, on) {
+    m.transparent = on; m.opacity = on ? 0.22 : 1; m.depthWrite = !on; m.needsUpdate = true;
+  }
   function setGhost(on) {
+    ghostOn = on;
     ghostBody.forEach(function (m) {
       m.transparent = on; m.opacity = on ? 0.22 : 1; m.depthWrite = !on; m.needsUpdate = true;
     });
@@ -312,12 +316,31 @@
     }
   });
 
+  // Cables and pipes (systems.py): tubes along their routes, drawn thicker than life so they
+  // read. Each run is a polyline; zero-length steps are dropped.
+  (MODEL.runs || []).forEach(function (run) {
+    var pts = [];
+    run.pts.forEach(function (q) {
+      var v = new THREE.Vector3(q[0] * mm, q[2] * mm, q[1] * mm);
+      if (!pts.length || pts[pts.length - 1].distanceTo(v) > 1e-4) { pts.push(v); }
+    });
+    if (pts.length < 2) { return; }
+    var path = new THREE.CurvePath();
+    for (var i = 1; i < pts.length; i++) { path.add(new THREE.LineCurve3(pts[i - 1], pts[i])); }
+    var geo = new THREE.TubeGeometry(path, 8 * (pts.length - 1), run.r * mm, 6, false);
+    var mat = new THREE.MeshLambertMaterial({ color: new THREE.Color(MODEL.colours[run.k] || "#c0392b") });
+    groupFor(run.k).add(new THREE.Mesh(geo, mat));
+  });
+
   // Detailed prop meshes, made by props.py and embedded as glb. The box stays the authority:
   // each mesh is scaled to exactly fill its box, so a generated shape can never quietly move a
   // dimension. Turning the layer on swaps the coloured box for the mesh.
+  // A variant can map a kind to its own mesh (propmap): v2-real's battery is a real Ective,
+  // v2's stays the generic one. The glb cache is keyed by the mesh, not the kind.
   var PROPS = {};
   (MODEL.props || []).forEach(function (k) {
-    if (BUNDLE.props[k]) { PROPS[k] = BUNDLE.props[k]; }
+    var key = (MODEL.propmap || {})[k] || k;
+    if (BUNDLE.props[key]) { PROPS[k] = Object.assign({ key: key }, BUNDLE.props[key]); }
   });
   var propParts = {}, propsOn = false;
 
@@ -329,13 +352,45 @@
     return buf.buffer.slice(0);
   }
 
+  // A mesh's own colour (solids.py), or the kind's colour; see-through parts stay see-through
+  function ownMat(m, colour) {
+    var t = !colour && m.transparent;
+    return new THREE.MeshLambertMaterial({
+      color: colour ? new THREE.Color(colour) : m.color.clone(),
+      transparent: t, opacity: t ? m.opacity : 1, depthWrite: !t,
+      side: t ? THREE.DoubleSide : THREE.FrontSide });
+  }
+
   function loadProps() {
     if (!THREE.GLTFLoader) { return; }
     var loader = new THREE.GLTFLoader();
-    MODEL.boxes.forEach(function (item) {
-      var p = PROPS[item.k];
+    // The body in one piece per kind (walls, roof, cab), built in millimetres at its real
+    // place - drawn 1:1, and standing in for all that kind's boxes when props are on.
+    (MODEL.bodyparts || []).forEach(function (bp) {
+      var p = BUNDLE.props[bp.key];
       if (!p) { return; }
-      loader.parse(b64buf(item.k, p.glb), "", function (g) {
+      loader.parse(b64buf(bp.key, p.glb), "", function (g) {
+        if (!alive) { return; }
+        var o = g.scene;
+        o.traverse(function (n) {
+          if (n.isMesh) {
+            if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
+            n.material = ownMat(n.material, null);
+          }
+        });
+        o.scale.set(mm, mm, mm);
+        o.visible = propsOn;
+        scene.add(o);
+        (propParts[bp.k] = propParts[bp.k] || []).push(o);
+        refresh();
+      }, function (e) { console.warn("body " + bp.key + " failed to parse", e); });
+    });
+    MODEL.boxes.forEach(function (item) {
+      // a box may carry its own mesh (item.p: furniture built at that box's size)
+      var p = item.p && BUNDLE.props[item.p] ? Object.assign({ key: item.p }, BUNDLE.props[item.p])
+                                             : PROPS[item.k];
+      if (!p) { return; }
+      loader.parse(b64buf(p.key, p.glb), "", function (g) {
         if (!alive) { return; }                      // switched away before it arrived
         var o = g.scene, b = item.b;
         o.rotation.y = ((p.yaw || 0) + (item.y || 0)) * Math.PI / 180;
@@ -347,8 +402,10 @@
           if (n.isMesh) {
             // decimating strips the normals, and a mesh without them lights as pure black
             if (!n.geometry.attributes.normal) { n.geometry.computeVertexNormals(); }
-            n.material = new THREE.MeshLambertMaterial(
-              { color: new THREE.Color(MODEL.colours[item.k] || "#cccccc") });
+            // meshes built from datasheets (solids.py) carry their own colours
+            n.material = ownMat(n.material, p.own ? null : MODEL.colours[item.k] || "#cccccc");
+            // a carcass with kit inside ghosts with the Appliances layer, mesh or box
+            if (container[item.k]) { ghostBody.push(n.material); ghostMat(n.material, ghostOn); }
           }
         });
         var w = (b[1] - b[0]) * mm, d = (b[3] - b[2]) * mm, h = (b[5] - b[4]) * mm;
@@ -360,8 +417,12 @@
         // reservation keep their proportions instead; model3d.KEEP_SHAPE lists them.
         var sx = w / (size.x || 1), sy = h / (size.y || 1), sz = d / (size.z || 1);
         if (p.fit === "keep") { sx = sy = sz = Math.min(sx, sy, sz); }
+        // "real": built in mm at the product's true size, smaller than its slot - drawn 1:1,
+        // standing on the slot's floor, centred in plan
+        var lift = h / 2;
+        if (p.fit === "real") { sx = sy = sz = mm; lift = size.y * mm / 2; }
         wrap.scale.set(sx, sy, sz);
-        wrap.position.set(b[0] * mm + w / 2, b[4] * mm + h / 2, b[2] * mm + d / 2);
+        wrap.position.set(b[0] * mm + w / 2, b[4] * mm + lift, b[2] * mm + d / 2);
         wrap.visible = propsOn;
         scene.add(wrap);
         (propParts[item.k] = propParts[item.k] || []).push(wrap);

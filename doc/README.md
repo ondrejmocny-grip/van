@@ -11,8 +11,10 @@ schema only so far.
 **[v3](../v3/README.md)** puts the galley in an L around the corner behind the driver, splits
 the bed into two benches with a corridor between them running to a rear bathroom beside a
 full-height garage, and works the office at the dinette rather than at a seat of its own. Plan and 3D done.
+**[v2-real](../v2-real/README.md)** started 2026-09-24 as a copy of v2, to turn it into a buildable
+plan: real Crafter body, wall build-up, real products. **v2 is frozen; work continues in v2-real.**
 
-**3D viewer, all versions in one page: [v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
+**3D viewer, all versions in one page: [v1 · v2 · v3 · v2-real](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)** — the buttons at the top switch between them.
 
 ## Who this is for
 
@@ -26,6 +28,7 @@ Read it before proposing anything.
 | [v1](../v1/README.md) | **Crafter L3H3**: swivel-seat front lounge, mid galley, sit-down wet cubicle, rear dinette to bed | Current. Configuration settled, drawings done. |
 | [v2](../v2/README.md) | Crafter L3H3 with a 3-seat cab and a partition wall: front-corner shower, hanging wardrobe, split galley, rear U to a 1520 x 1832 bed that sleeps across | **Schema only, iterating.** Brisa's layout ported. No front lounge - open question. |
 | [v3](../v3/README.md) | Same van and cab as v2: **L-galley** into the corner behind the driver (1.15 m2), thin larder, **split** convertible bed - two parallel benches with a 632 corridor between them running to the bathroom, and the dinette doubling as the office for two - and a 600 x 1232 rear bathroom with a pocket door beside a full-height garage loading from the back | **Plan + 3D, iterating.** Most galley and the biggest bathroom of any version, and the first where no appliance overlaps a wheel arch. |
+| [v2-real](../v2-real/README.md) | v2's layout on the real VW body with the thin wall build: galley 565 / aisle 562, bed across 1744, garage 540, ceiling 1811 | **Fitted 2026-09-24.** Strict body check passes. Grey tank inside under the footwell. v2 is frozen. |
 
 ## References
 
@@ -34,6 +37,10 @@ Read it before proposing anything.
 | [emandnick-transit-148el](../ref/emandnick-transit-148el/README.md) | 2018 Ford Transit 148" EL, high roof. Wet bath opposite the slider, split galley, rear dinette to bed, front desk. | **We like it.** Layout reconstructed. Basis for v1. |
 | [doracamper-brisa-ducato-l2h2](../ref/doracamper-brisa-ducato-l2h2/README.md) | Fiat Ducato L2H2, 5.40 m overall. Front-corner standing shower, split galley, rear salon to a 1350 x 1880 bed. | **Most relevant reference we have.** 330 mm *shorter* than ours and still has a full shower. Layout reconstructed. |
 | [scarletseth-promaster-159ext](../ref/scarletseth-promaster-159ext/README.md) | Ram ProMaster 159" EXT. Shower turned sideways against the cab bulkhead, WC in a drawer under the fridge, rear dinette to a near-square bed. | **Two ideas, not a layout.** $104k build on a 4089 mm van. Layout reconstructed. |
+| [vw-crafter-bodybuilder](../ref/vw-crafter-bodybuilder/README.md) | VW's official body builder drawings and converter guidelines for our van, Crafter L3H3 4MOTION. | **Source of truth for the body** until we measure the real van. Walls lean in, floor 3390, grey tank position wrong in v2. |
+| [vw-t4-carthago-1997](../ref/vw-t4-carthago-1997/README.md) | **For sale** at Karavany365 (Beroun): 1997 VW T4 LWB 2.5 TDI, Carthago Malibu 32 (likely 32.3) - high roof with lockers, no roof bed, rear washroom, rear kitchen. 369,000 CZK, 380,000 km. Full factory specs researched. | **Buy-instead-of-build data point. Not for us:** no office, ~400 kg payload, Euro 2. Battery (0.35 kWh) is fixable for ~€1.5k: lithium + DC-DC + portable solar. Good ideas: roof bed, WC cassette + gas locker opening from the tailgate. |
+| [classic-vans-with-washroom](../ref/classic-vans-with-washroom/README.md) | Old, durable panel-van campers with shower + WC, €8–20k: James Cook, Pössl / Globecar, La Strada, Malibu, Hymercar. ≈ 45 live ads in DE + CZ. | **Short-term option.** Ondrej 2026-09-26: no James Cook (no table seating), likes La Strada (close to the Carthago), daily bed-making is fine. Best value: Globecar / Pössl 2.8. |
+| [offroad-upgrades](../ref/offroad-upgrades/README.md) | Rough-road upgrades for the 4MOTION: skid plates, lift, air springs, A/T tyres, snorkel - checked against our van. | **Tier 1 + 2 chosen 2026-09-24 (can change).** Nothing changes inside; outside +30-60 height and step-in. Bigger tyres collide with the spare wheel bay; everything costs payload under the 3.5 t licence limit. |
 
 ## Base vehicle sizing
 
@@ -55,6 +62,11 @@ Load compartment, panel van, floor level:
 | Reference van — Ram ProMaster 159" EXT, high roof | 4089 mm | 1930 mm | 1869 / 1384 |
 | Reference van — Fiat Ducato **L2H2** | **3120 mm** | 1932 mm | 1870 / 1422 |
 
+- **Checked 2026-09-23 against VW's own panel-van brochure** (MY18 UK, technical pages):
+  Crafter medium wheelbase, high roof = wheelbase 3640, load 3450 x 1832 (1380 between
+  arches), overall 5986. Load height **1961 is front-wheel drive only - 4MOTION and RWD give
+  1861**, and the load sill rises 570 -> 670. Parkers lists 1861 for the FWD van; the
+  brochure says that is wrong.
 - L4H3 would be the direct equivalent of the reference van — 157 mm shorter, 45 mm lower.
 - **L3H3 is 880 mm shorter** than the reference van, 20% of the length. Everything in v1
   follows from having to give that up.
@@ -102,9 +114,62 @@ Whichever we buy, the layout is a short edit to `plan.py`.
 
 €10-15k target for the build; realistic landing zone **€13.7-17k** with the cuts already
 decided (no Cerbo GX, cushions made by us). Starlink stays in, accepted as EU-only.
-See [budget.md](budget.md).
+See [budget.md](../v2-real/budget.md).
 
 ## Open questions
+
+**Checks before buying and building: [todo.md](todo.md).**
+
+- **Wall build-up: thin, agreed 2026-09-24** - insulation in the rib cavity, 10 per wall, floor 35,
+  ceiling 15. Bed stays across (1744). Galley: 565 worktops, 562 aisle.
+- **Kitchen proposed 2026-09-24 ([products.md](products.md)):** Isotherm Cruise 85, Bosch PIB375FB1E (cap 2000 W),
+  Quadron Anthony 50 sink (taps beside it), Tefal Optimo hot-air oven. Not hob + oven at full power together.
+- **Windows and fans chosen 2026-09-24 ([products.md](products.md)):** 3 × Dometic S4 in VW's stamped
+  window fields, 2 × MaxxFan Deluxe. No window in the sliding door - a fly screen instead: VanQuito magnetic net chosen (the
+  Horrex pleated door is sized for the FWD opening, 100 too tall for ours). No shower window (agreed). Measure the roof bows on the real van
+  before any roof cut.
+- **Roof drawn 2026-09-25 ([v2-real/roof.png](../v2-real/roof.png)):** Starlink Mini front, front fan,
+  2 solar panels side by side in the middle, rear fan moved aft to x 2660 (over the bed), tarp rail
+  passenger side. 51 kg of 150. Measure the bows before cutting.
+- **WC emptied inside** (2026-09-24): no hatch in the side panel; a portable WC with its own flush
+  tank fits the slide-out best.
+- **Rough-road upgrades: tier 1 + 2 yes, tier 3 no** (2026-09-24, can change) - ~€7.4-9.7k, a separate pot in [budget.md](../v2-real/budget.md).
+  Our van is manual, so the Seikel breathers (manual-only) fit.
+  Tyre size is limited by the spare wheel bay (~730 for a 712 wheel): 225/75 is doubtful, 245/75 does not fit.
+- **Weight: just under 3500 kg** ([v2-real/payload.md](../v2-real/payload.md)): 3475 kg with full water, full gas, 2 panels,
+  tarp and poplar furniture (25 under), rear axle 2002, roof 56 of 150 - after leaving the bikes out, cutting solar to
+  one panel and adding the awning (optional, first to cut) (2026-09-24). Registration test passes by 146 kg. **Weigh the van per axle before the build**; poplar
+  furniture is a must; drive with little fresh water. No route above 3.5 t for a 2023 4MOTION.
+- **Full gas chosen 2026-09-25** (cooking + hot water; [v2-real/energy.md](../v2-real/energy.md)): Thetford Topline 922 gas hob
+  (proposed), Truma B10, 6 kg bottle in the garage; 2 panels, 50 A DC-DC, 300 Ah, Starlink Mini,
+  inverter in search mode. Self-sufficient in every season, a Moroccan winter week only just (lowest 7 %). Brings a
+  certified gas installation + inspection, a wall flue, and LPG refills to plan for Morocco.
+- **Electrics and water products proposed 2026-09-25 ([products.md](products.md)):** 2 x Ective LC 150 LT,
+  **MultiPlus C 12/2000** instead of the 12/3000 (-6 kg; the oven is the biggest AC load now), MPPT 100/30,
+  Orion XS 50 A with a D+ signal, SmartShunt, no Cerbo. Both tanks **made to size** (no catalogue tank fits),
+  Shurflo Trail King 7, Whale Gulper 220 for the shower, Votronic sensors.
+- **Wiring, gas and water routed 2026-09-25 ([v2-real/systems.md](../v2-real/systems.md)):** a
+  distribution box in the driver bench beside the batteries (fuses, shunt, DC-DC, fuse block),
+  the MPPT and shore box in the garage. All water crosses to the passenger side, away from the
+  batteries. ~120 m of 12 V cable (~12 kg), 5 m of gas pipe, ~23 m of water pipe.
+- **Approval checked 2026-09-25 ([approval.md](../v2-real/approval.md)):** register it as a **motor caravan (M1 SA)**,
+  everything (conversion + lift + tyres) in **one** approval. Passes the weight rule by 28 kg weighed
+  full. Roof kit on **roof bars on VW's rack points**; one VW letter for the fan cut-outs; straps on
+  batteries, tanks and bottle; latches and round corners. **Before building:** phone the testing
+  station; ask a VW dealer for our van's PR list (C-rails 3S4? window bags?).
+- **Cut list and shell layers, first draft 2026-09-25 ([v2-real/cutlist.md](../v2-real/cutlist.md)):**
+  a door and drawer proposal, every panel at board thickness, 8 + 5 + 1 poplar sheets; K-Flex 20 mm,
+  floor 20 XPS + 12 poplar + Texline (34.9 mm), 6 mm poplar cladding. Weight now **3425 kg (74
+  under)** - but weigh a poplar sheet first: at 450 kg/m³ it is only ~22 under.
+- **Tarp** instead of the awning, **Vitrifrigo C95L** fridge, galley at **920** (2026-09-25).
+- **Gas bottle stays in the garage (6 kg), oven stays under the sink; outside fresh water filler** (2026-09-25).
+  All body holes are listed in the v2-real README.
+- **Grey tank: inside, under the raised footwell (agreed 2026-09-24).** The spare wheel stays in VW's bay under the rear; the rear doors stay free for a bike rack. Check the bought van really has a spare (some come with a repair kit only).
+- **Drive.** The van we are looking at ([aaaauto 34775613](https://www.aaaauto.cz/detail/volkswagen/crafter/34775613),
+  2023, 4MOTION) is **100 mm lower inside** than the FWD van we drew: ~1781 finished
+  standing, not 1881. That still fits 171 cm. **v1, v2 and v3 are all drawn at 1781** (lockers,
+  shower heads and full-height parts lowered), and standing on the 60 mm shower tray leaves ~1720 clear - about 1 cm over Ondrej.
+  The listing's own "1961" is the FWD brochure figure, not this van's.
 - Engine heat exchanger: in the plan, Ondrej to check against the warranty.
 - Morocco and Turkey paperwork, and Schengen limits on a Turkish passport.
 - Measure the real van's roof once bought; our 3300 x 1570 mm usable figure is derived, not measured.
@@ -181,12 +246,44 @@ Plan coordinates: x = 0 at the front bulkhead growing aft, y = 0 at the passenge
 growing toward the driver side. In the drawing the nose is at the left, so the driver side
 sits at the bottom. View coordinates add z = height above the finished floor.
 
+**Energy:** `python energy.py` -> `v2-real/energy.md` - daily use per load and a simulated week per set-up.
+
+**Exact meshes:** `python solids.py` -> `props/<name>.glb` for products that are simple shapes,
+built from their datasheet sizes (no FAL). Then `python model3d.py viewer`.
+
+**Cut list:** `python cutlist.py` -> `v2-real/cutlist.md` - the door and drawer proposal, every
+furniture panel at board thickness, sheets to buy, and the shell layers (insulation, floor,
+cladding) from the model's areas; `payload.py` takes both weights from it.
+
+**Systems:** `python systems.py` -> `v2-real/systems.md` + `systems.png` - every cable, gas pipe
+and water pipe as a route between the model's boxes: lengths, 12 V cable sizes and fuses, a
+shopping list. Move an appliance in `model3d.py` and its cable follows.
+
+**Payload:** `python payload.py` -> `v2-real/payload.md` - total and axle loads from every item's
+weight and position (products, estimates, furniture from the model boxes).
+
+**Products** live in `products.py` (sizes, cut-outs, prices, sources); `doc/products.md` is the
+readable version. v2-real takes its window and fan cut-outs from there, so a product change is
+one edit and the check says whether it still fits.
+
+**A variant can carry a real body** (`body=` in `plan.py`, only v2-real so far): a wall
+profile of (height, inset) pairs measured from VW's drawing, the arch height, the slider and
+rear door heights. `model3d.py` then builds leaning walls and solid arches, and
+`body_clashes()` lists every part that runs into the real walls or past the rear doors -
+printed as a report while `body.strict` is False, fatal once it is True.
+
 `model3d.py` extrudes the plan into 3D: greybox renders, edge-only control renders, and an
 OBJ for Blender or SketchUp.
 
     python model3d.py v1          # -> v1/3d/*.png, v1/model.obj, v1/viewer.html
     python model3d.py v2          # -> v2/3d/*.png, v2/model.obj, v2/viewer.html
     python model3d.py viewer      # -> viewer.html: v1, v2 and v3 in one page, with a switch
+    python model3d.py v2-real     # also v2-real/sections.png, and the BODY report
+    python model3d.py vanspace v2 # -> v2.vs3d in VanSpace3D's saves folder, every box a Cube,
+                                  #    except VS3D_ITEMS: real catalogue items at their own size,
+                                  #    printed against our box ("TOO BIG" when one outgrows it).
+                                  #    Their "VW Cr L2H2" is a real L3H3 inside - their L3H3 is an L4.
+                                  #    Their vans are FWD height; the export scales it to 4MOTION (x0.953).
 
 The model now includes the **vehicle itself**: body panels with real apertures cut for the
 sliding door, the rear doors, the windows and the roof fans, plus glazing and the cab with
@@ -242,6 +339,10 @@ A sitter is written from the seat surface: trunk from the seat to seat + 850, th
 straddling the cushion, shins from the floor to just under it. 850 is Ondrej at 171 cm -
 raise it before trusting the numbers for anyone taller.
 
+**Two kinds must never differ only by case.** A prop is `props/<kind>.glb`, and Windows keeps
+one file for `LOCKER.glb` and `locker.glb` - a pull silently overwrote one mesh with the other,
+and the viewer lost the overhead lockers. That kind is `overhead` since 2026-09-23.
+
 **A mirrored placement turns its prop with it.** `FACING_V2` records which wall each mesh was
 modelled facing away from; a box against the other wall gets a half turn on top of the kind's
 own `yaw.json` entry, so the galley on v2's passenger side does not open into the wall.
@@ -253,14 +354,12 @@ template.
 `viewer_template.html` is the viewer's markup; model3d.py injects the geometry into it.
 **One published viewer for all versions: [Crafter L3H3 - v1 · v2 · v3](https://claude.ai/artifact/77kssSuBvxoTHCrQmxq97y)**, built
 from the top-level `viewer.html` (`python model3d.py viewer`; `VIEWER_ALL` in model3d.py
-lists the versions). Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
+lists the versions). It has no roofs, over the load area or the cab, so you can look straight in from above. Buttons in the header switch versions, next to one line naming the van and its inside size (the per-version title and the colour key were dropped to save space). It opens on **From the door**; the view and the Show layers stay
 as they were, so two layouts can be compared from the same spot. `#v2` at the end of the link
 opens that version where the host passes it through; otherwise the page opens on the version
 you looked at last (or v3 the first time). Prop meshes are embedded once for the page, so it is 3.4 MB where the
-three separate pages were 7 MB together. The older per-version pages (v1
-`LwGHoarYhEiNDaQSUbvz5s`, v2 `4zfKdrCzAheAzWhmKarVFe`, v3 `53pg4zZh6jgR2B4MFKnLHJ`) have been
-**deleted** - those links are dead, not merely stale, so anything still pointing at one needs
-repointing here. Republish it after any change with the Artifact tool, passing that URL so it updates in place
+three separate pages were 7 MB together. The older per-version pages (v1, v2, v3 and the
+Transit one) were deleted on 2026-09-24 - this is the only published viewer. Republish it after any change with the Artifact tool, passing that URL so it updates in place
 rather than making a second one. It is private to Ondrej's account; sharing is done from the
 page's own Share menu, not from here.
 
@@ -393,8 +492,14 @@ The taps stayed meshes, because a tap is a shape rather than a hole.
 It takes `n=1` for a single bowl and `axis` for which way two bowls sit; `tray_box()` beside
 it is the same five-sided trick for anything open-topped - v2's drop-in sink tray is one.
 
-**Curves are staircases of boxes, 2026-09-23.** `arch_face()` draws a panel with a
-rounded-corner opening carved out of it - v2's shower entrance. Everything in this model is
+**Curves are staircases of boxes, 2026-09-23.** `arch_face()` drew a panel with a
+rounded-corner opening carved out of it - v2's shower entrance. On 2026-09-24 the face went
+diagonal and `slant_face()` replaced it: the same carve on a panel whose outer face is a
+line in plan, laid as 20 mm columns in x, each reaching from the outer face at its start to
+the inner face at its end so the staircase never shows a gap. The opening is given along
+the face, in true length. `plan.py` draws such a thing through a variant's `shapes`
+(label -> polygon); the box stays in the list as the label position and bounding size.
+What `arch_face()` did: Everything in this model is
 an axis-aligned box, so the arch is sampled in columns, each column rounded **outward** so
 the hole is never smaller than the true curve, and columns that come out the same height are
 merged so a shallow arch does not cost thirty boxes. 45 columns across a 450 mm opening is

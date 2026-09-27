@@ -41,6 +41,10 @@ water but heavy on daily working comfort.
 Each design version lives in its own folder (`v1/`, `v2/`, ...) with its own README and
 drawings. `plan.py` generates them all: `python plan.py <variant>`.
 
+**v2-real** (2026-09-24) is v2 being turned into a buildable plan - on the real VW body, with
+the agreed wall build-up. It has its own tables and a `body=` in `plan.py`; its body check is
+strict. **v2 is frozen**: edit v2-real, never v2.
+
 **v1, v2 and v3 are all a VW Crafter L3H3.** v1 was drawn on a Ford Transit first; the Transit
 was dropped on 2026-09-20 and its folder no longer exists.
 
@@ -56,6 +60,16 @@ viewer` writes it to the top-level `viewer.html`. Republish that one; the per-ve
 `props.py` replaces the viewer's coloured boxes with generated low-poly meshes through FAL.
 The box in `model3d.py` stays the authority — the viewer scales a mesh to fill its box, so a
 generated shape can never quietly change a dimension.
+
+**For v2-real, every product is built in code, not generated** (Ondrej, 2026-09-25: "as long
+as the dimensions match, primitives are fine - more precise"): `solids.py` builds hob, fridge,
+oven, water heater, WC, tanks, gas bottle, batteries, inverter, panels, fans, Starlink, taps,
+filter, and the custom electrics boards and pump box from `products.py` sizes, and the
+**furniture one mesh per box** at that box's own size (`furniture_keys()` in `model3d.py`, so a
+cushion is never stretched from another cushion's shape), and the **body** (walls on the real
+lean, roof, the cab at VW's real length) as whole meshes drawn 1:1 (`bodyparts`), with their own colours. A mesh at `REAL_SIZE` is drawn 1:1 in a bigger
+slot (the WC). A variant can point a kind at its own mesh (`propmap` in `REGISTRY`), so v2-real's
+battery can be the real Ective while v2 keeps the generic one.
 
 Two things that cost a whole generation round each when we got them wrong:
 

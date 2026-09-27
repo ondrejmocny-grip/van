@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Extrude a plan into 3D: greybox renders, line renders, an OBJ, and a web viewer.
 
 The footprint comes straight from plan.py, so there is one source of truth.
@@ -10,22 +10,28 @@ the vehicle itself - body panels with real apertures, glazing, and the cab.
 line_render() is used by impressions.py as the control image for image generation.
 write_viewer() fills viewer_template.html with one variant, or with several and a switch.
 """
-import json, os, sys
+import copy, json, os, sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from plan import VARIANTS, overlay_png
+from plan import VARIANTS, overlay_png, wall_inset, wall_inset_max
+from products import PRODUCTS, cut
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # --- v1: plan label -> (z0, z1). None means the plan box is a void (footwell, open floor).
 # Every table below is v1's. The v2 tables follow, and REGISTRY at the end of this section
 # says which variant gets which. A variant with no entry falls back to v1's, remapped.
+# Every version is drawn on the 4MOTION van since 2026-09-23 - finished ceiling 1781, 100 under
+# the FWD van. Anything that reaches the ceiling is keyed to its variant's height.
+H_V1 = VARIANTS["v1"]["height"]
+H_V3 = VARIANTS["v3"]["height"]
+
 HEIGHTS = {
     "GALLEY": (0, 900),
-    "WET CUBICLE": (0, 1945),
+    "WET CUBICLE": (0, H_V1),
     "FRIDGE": (0, 900),
     "BENCH": (0, 450),
     "REAR BENCH": (0, 450),
@@ -41,16 +47,16 @@ EXTRA = [
     (2350, 3494,    0,  700,  450,  520, "bed"),
     (2350, 3494, 1184, 1784,  450,  520, "bed"),
     (3044, 3494,  700, 1184,  450,  520, "bed"),
-    ( 620, 1720, 1484, 1784, 1400, 1800, "locker"),     # driver, over the galley
-    (2270, 3044, 1484, 1784, 1400, 1800, "locker"),     # driver, over the dinette
-    (2350, 3044,    0,  300, 1400, 1800, "locker"),     # passenger, over the dinette
+    ( 620, 1720, 1484, 1784, 1400, 1700, "overhead"),     # driver, over the galley
+    (2270, 3044, 1484, 1784, 1400, 1700, "overhead"),     # driver, over the dinette
+    (2350, 3044,    0,  300, 1400, 1700, "overhead"),     # passenger, over the dinette
     (2350, 3044,  700, 1184,  700,  760, "table"),      # dinette table, same patch
     ( -50,  550,  600, 1180,  700,  760, "ftable"),     # front Lagun table
     (1600, 2350,    0,  700,    0,  360, "step"),       # raised cubicle floor, high
                                                          # enough to clear the arch
     (2567, 2827,  812, 1072,    0,  700, "leg"),        # dinette post, under its centre
     ( 120,  380,  760, 1020,    0,  700, "fleg"),       # front table post
-    (1600, 1760,   60,  420, 1140, 1940, "shower"),     # head and riser, raised with
+    (1600, 1760,   60,  420, 1140, 1760, "shower"),     # head and riser, raised with
                                                          # the floor under it
 ]
 
@@ -93,19 +99,21 @@ APPLIANCES = [
 # aisle, U-dinette in the back. Nothing about v1's fit-out would survive being
 # shifted onto it, so it gets its own tables.
 # --------------------------------------------------------------------------
+H_V2 = VARIANTS["v2"]["height"]
+
 HEIGHTS_V2 = {
     "SHOWER": None,             # the cubicle is built from panels in EXTRA_V2, not one solid
-    "WARDROBE": (0, 1881),      # hanging above, WC drawer below
+    "WARDROBE": (0, H_V2),      # hanging above, WC drawer below
     "LOCKER": (0, 450),         # shoe locker, and the step through the hatch to the cab
     "CAT": None,                # the litter cabinet is panels in EXTRA_V2, with a hole in it
     "SINK": (0, 900),
     "HOB": (0, 900),
-    # The rear U is lifted as one piece. Floor +180 in the footwell, benches 570, bed at 630.
+    # The rear U is lifted as one piece. Floor +220 in the footwell, benches 570, bed at 630.
     # Everything that lift buys is storage: 570 of garage under the rear bench instead of 450,
     # and a drawer under the footwell floor that pulls forward into the galley aisle.
     "BENCH": (0, 570),
     "REAR BENCH": (0, 570),     # the garage, reached through the rear doors
-    "FOOTWELL -> BED": (0, 180),# the step up, and the drawer inside it
+    "FOOTWELL -> BED": (0, 220),# the step up, and the drawer inside it
     "WORKTOP": None,            # the fold-down leaf is in EXTRA_V2, in both its positions
     "SIDE TABLE": None,         # the fold-away top is in EXTRA_V2, in both its positions
     "ENTRY": None,
@@ -118,11 +126,13 @@ EXTRA_V2 = [
     # benches, not inside the garage. The whole U is lifted, and the numbers chain from the
     # one comfort rule that matters: seat 450 above the floor your feet are on, table 270
     # above the seat. Footwell floor 180 -> seat 630 -> table 900, the galley worktop height.
+    # The floor then went up to 220 on its own: 410 from seat to foot fits both of us barefoot
+    # (Ondrej's knee crease is ~430, his wife's lower), and nothing above it has to move.
     (1930, 2850,    0,  600,  570,  630, "bed"),        # seat cushion, passenger bench
     (1930, 2850, 1232, 1832,  570,  630, "bed"),        # seat cushion, driver bench
     (2850, 3450,    0, 1832,  570,  630, "bed"),        # seat cushion, rear bench
     (1940, 2840,  616, 1216,  840,  900, "table"),      # 900 x 600, on one post
-    (2340, 2440,  866,  966,  180,  840, "leg"),        # the post, standing on the raised floor
+    (2340, 2440,  866,  966,  220,  840, "leg"),        # the post, standing on the raised floor
     (1930, 2850,  600, 1232,  570,  630, "infill"),     # bed made up: table down on cleats at
                                                         #   570, infill cushion over it
     (2010, 2610, 1420, 1820,  630,  790, "pillow"),     # heads at the driver wall, one each
@@ -152,25 +162,26 @@ EXTRA_V2 = [
     ( 200,  540,  400,  440,  300,  680, "ptablep"),    # folded: drops off the arm and hangs
                                                         #   flat down the locker's side panel,
                                                         #   clear of the legs of whoever sits
-    (1150, 1930, 1532, 1832, 1400, 1800, "locker"),     # driver, over the sink
-    (1600, 1930,    0,  300, 1400, 1800, "locker"),     # passenger, clear of the door head
+    (1150, 1930, 1532, 1832, 1400, 1700, "overhead"),     # driver, over the sink
+    (1600, 1930,    0,  300, 1400, 1700, "overhead"),     # passenger, clear of the door head
     # Over the dinette the lockers had to move. A 600-deep bench at 570 puts a seated head
     # at 1480, and a locker whose door starts at 1400 is exactly where that head is. So they
     # go up and get shallower: 260 deep instead of 300, 1560 instead of 1400, which clears
     # the head by 80 mm. Shoulder room is the reason they are also held 20 mm off the wall
     # line the bench uses.
-    (1950, 2830, 1572, 1832, 1560, 1810, "locker"),     # driver, over the dinette
-    (1950, 2830,    0,  260, 1560, 1810, "locker"),     # passenger, over the dinette
-    (   0,  160, 1600, 1760, 1140, 1860, "shower"),     # head and riser, on the partition
+    (1950, 2830, 1572, 1832, 1560, 1710, "overhead"),     # driver, over the dinette
+    (1950, 2830,    0,  260, 1560, 1710, "overhead"),     # passenger, over the dinette
+    (   0,  160, 1600, 1760, 1140, 1760, "shower"),     # head and riser, on the partition
     # The shower cubicle, built rather than generated. A room is not a product: a single
-    # mesh scaled to fill a 700 x 800 x 1881 hole either reads as a solid block or turns
+    # mesh scaled to fill a 700 x 800 x 1781 hole either reads as a solid block or turns
     # its one opening to the wall, and which way a generated mesh faces is a coin toss the
     # box list should not be losing. Three panels, a tray, and a fourth panel on the lobby
-    # side with the entrance carved out of it - see arch_face() below.
-    (   0,   40, 1032, 1832,    0, 1881, "wetwall"),    # forward wall, on the partition
-    ( 660,  700, 1032, 1832,    0, 1881, "wetwall"),    # aft wall, shared with the wardrobe
-    (   0,  700, 1792, 1832,    0, 1881, "wetwall"),    # the driver-side wall
-    (  40,  660, 1072, 1792,    0,   60, "tray"),
+    # side with the entrance carved out of it - see slant_face() below. That face runs on a
+    # diagonal, so the aft wall starts 200 further in than the forward one, and the tray is
+    # a trapezoid; both are laid down after the helpers.
+    (   0,   40, 1032, 1832,    0, H_V2, "wetwall"),    # forward wall, on the partition
+    ( 660,  700, 1232, 1832,    0, H_V2, "wetwall"),    # aft wall, shared with the wardrobe
+    (   0,  700, 1792, 1832,    0, H_V2, "wetwall"),    # the driver-side wall
 ]
 
 APPLIANCES_V2 = [
@@ -201,7 +212,9 @@ APPLIANCES_V2 = [
     # bathroom - the WC lives in the wardrobe base and slides into the shower
     ( 715, 1135, 1252, 1822,   40,  560, "cassette"),   # ~420 x 570, hatch at x 700-1150
     # water - the tank runs the bench-to-garage corner, inboard of the wheel arch
-    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
+    # No catalogue tank fits 374 wide at ~100 L (2026-09-25), so it is made to this size:
+    # ~108 L inside with 6-8 mm walls. Votronic 5545 level electrode.
+    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 outside
     (2100, 2800,  400,  900, -270,  -70, "grey"),       # 70 L, underslung
     (3100, 3400,  150,  550,   60,  360, "calorifier"), # 10 L off the engine heat exchanger
     # electrics, driver bench - 16 mm inboard of the tyre, which is what sets y here
@@ -223,7 +236,7 @@ CONTAINERS_V2 = ("WARDROBE", "LOCKER", "SINK", "HOB", "BENCH", "REAR BENCH",
 #    bracket onto the locker's side panel rather than onto the face you sit looking over.
 # 2+3) The two dinette seats, facing each other across the 632 footwell and OFFSET along the
 #    van - the offset is the whole reason the table is 900 long. Seat surface 630, feet on
-#    the raised floor at 180, so the body sits 450 above what it stands on. Head tops out at
+#    the raised floor at 220, so the body sits 410 above what it stands on. Head tops out at
 #    1480 (Ondrej is 171), which is what evicted the old 1400 lockers over the dinette.
 SITTER_V2 = [
     (  60,  400,   60,  380,  450, 1300),    # shoe locker: trunk, facing aft
@@ -231,10 +244,10 @@ SITTER_V2 = [
     ( 620,  820,  100,  380,    0,  400),    #   shins, feet on the floor
     (2000, 2340,   32,  352,  630, 1480),    # passenger bench, sitting forward: trunk
     (2040, 2320,  352,  652,  560,  680),    #   thighs, overhanging the bench edge by 52
-    (2040, 2320,  600,  760,  180,  580),    #   shins, dropping into the footwell
+    (2040, 2320,  600,  760,  220,  580),    #   shins, dropping into the footwell
     (2440, 2780, 1480, 1800,  630, 1480),    # driver bench, sitting aft: trunk
     (2480, 2760, 1180, 1480,  560,  680),    #   thighs
-    (2480, 2760, 1072, 1232,  180,  580),    #   shins
+    (2480, 2760, 1072, 1232,  220,  580),    #   shins
 ]
 # What is allowed to touch a sitter: the seat under them, the cushion on it, and the floor
 # they step on.
@@ -247,7 +260,7 @@ SIT_OK_V2 = ("LOCKER", "bed", "infill", "pillow", "BENCH", "REAR BENCH",
 # the kind's own yaw, so yaw.json keeps meaning what it meant.
 # fridgedoor, LOCKER and WARDROBE are modelled for v2's own placements, so they are
 # not in here - their facing lives in yaw.json like any deliberate turn.
-FACING_V2 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+FACING_V2 = {"overhead": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 # The shoe locker turned a quarter turn in plan - 450 along the van, 400 across - so its
 # mesh has to turn with it. Sign as in YAW_V3: +90 is counter-clockwise seen from above,
 # so a clockwise quarter turn is 270.
@@ -264,7 +277,7 @@ LAYERS_V2 = [
      "hide": ["ftablep"]},
     {"id": "perch", "label": "Side table out", "kinds": ["ptable"], "on": True,
      "hide": ["ptablep"]},
-    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "lockers", "label": "Lockers", "kinds": ["overhead"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V2}),
      "on": True, "xray": True},
     {"id": "body", "label": "Body + glass",
@@ -286,10 +299,10 @@ LAYERS_V2 = [
 HEIGHTS_V3 = {
     "GALLEY": (0, 900),             # both legs of the L carry the same label
     "LOCKER": (0, 450),             # shoes, and the step through to the cab
-    "LARDER": (0, 1881),
+    "LARDER": (0, H_V3),
     "BENCH -> BED": (0, 450),       # both benches carry the same label
-    "BATHROOM": (0, 1881),          # a carcass the viewer ghosts, like v1's wet cubicle
-    "GARAGE": (0, 1881),
+    "BATHROOM": (0, H_V3),          # a carcass the viewer ghosts, like v1's wet cubicle
+    "GARAGE": (0, H_V3),
     "ENTRY": None,
     "CORRIDOR -> BED": None,
     "TABLE": None,
@@ -310,18 +323,18 @@ EXTRA_V3 = [
     (   0,  600,    0,  450,  880,  900, "ltable"),      # up, over the locker
     (   0,  600,  430,  450,  450,  875, "ltablep"),     # folded down the end panel
     # Overhead lockers. The passenger run starts aft of the sliding door head.
-    (   0, 1130, 1532, 1832, 1400, 1800, "locker"),      # driver, over the galley
-    (1330, 2850, 1532, 1832, 1400, 1800, "locker"),      # driver, over the bed bench
-    (1700, 2850,    0,  300, 1400, 1800, "locker"),      # passenger, clear of the door head
+    (   0, 1130, 1532, 1832, 1400, 1700, "overhead"),      # driver, over the galley
+    (1330, 2850, 1532, 1832, 1400, 1700, "overhead"),      # driver, over the bed bench
+    (1700, 2850,    0,  300, 1400, 1700, "overhead"),      # passenger, clear of the door head
     # Bathroom fit-out. A pocket door has nothing to draw when it is open - the leaf is
     # inside the wall - so only the shut position is a box, and it is off by default.
     (2890, 3410,  640, 1792,    0,   60, "tray"),
-    (2890, 3050, 1672, 1832, 1140, 1860, "shower"),      # head and riser, clear of the wall
-    (2850, 2890,  600, 1200,    0, 1881, "doorshut"),    # shut: the leaf out of its pocket
+    (2890, 3050, 1672, 1832, 1140, 1760, "shower"),      # head and riser, clear of the wall
+    (2850, 2890,  600, 1200,    0, H_V3, "doorshut"),    # shut: the leaf out of its pocket
     # The wall that closes the bed off from the bathroom and the garage, with the doorway
     # left open in it.
-    (2850, 2890,    0,  600,    0, 1881, "wall"),
-    (2850, 2890, 1200, 1832,    0, 1881, "wall"),
+    (2850, 2890,    0,  600,    0, H_V3, "wall"),
+    (2850, 2890, 1200, 1832,    0, H_V3, "wall"),
 ]
 
 APPLIANCES_V3 = [
@@ -373,7 +386,7 @@ SITTER_V3 = [
 ]
 SIT_OK_V3 = ("BENCH -> BED", "bed", "infill", "ENTRY", "CORRIDOR -> BED")
 
-FACING_V3 = {"locker": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
+FACING_V3 = {"overhead": "d", "hob": "d", "oven": "d", "sink": "d", "cassette": "p"}
 # v3's galley crosses the bulkhead instead of running along a wall, so its kit is a quarter
 # turn from the box every existing mesh was made for. These are the turns Ondrej read off the
 # viewer, added to whatever yaw.json and FACING already apply.
@@ -401,7 +414,7 @@ LAYERS_V3 = [
     {"id": "door", "label": "Bathroom door shut", "kinds": ["doorshut"], "on": False},
     {"id": "leaf", "label": "Galley leaf up", "kinds": ["ltable"], "on": False,
      "hide": ["ltablep"]},
-    {"id": "lockers", "label": "Lockers", "kinds": ["locker"], "on": True},
+    {"id": "lockers", "label": "Lockers", "kinds": ["overhead"], "on": True},
     {"id": "kit", "label": "Appliances", "kinds": sorted({b[6] for b in APPLIANCES_V3}),
      "on": True, "xray": True},
     {"id": "body", "label": "Body + glass",
@@ -431,12 +444,16 @@ CONTAINERS = ("GALLEY", "WET CUBICLE", "BENCH", "REAR BENCH", "FRIDGE")
 
 # Kit that lives inside a cabinet. A wireframe has no occlusion, so leaving these in the
 # control image just draws boxes through the furniture and confuses the canny map.
-INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey",
+INTERNAL = ("oven", "plumbing", "fridge", "fridgedoor", "fridgedrawer", "fresh", "grey", "gasbottle",
             "calorifier", "filter",
-            "battery", "inverter", "electrics")
+            "battery", "inverter", "electrics", "board")
 
 # What each kind is called, for the viewer key and the dimension labels.
 NAMES = {
+    "solar": "Solar panel ~200 W", "starlink": "Starlink Mini",
+    "gasbottle": "Gas bottle 6 kg, in a sealed locker",
+    "roof": "Roof", "fan": "Roof fan, MaxxFan Deluxe",
+    "tarp": "Tarp on a keder rail, 3 x 2.4 m", "pole": "Tarp pole",
     "SHOWER": "Shower", "WARDROBE": "Wardrobe + WC under", "LOCKER": "Shoe locker / step",
     "CAT": "Cat box", "litter": "Cat box", "litterlid": "Litter tray",
     "backrest": "Backrest pillow",
@@ -455,7 +472,7 @@ NAMES = {
     "GALLEY": "Galley", "WET CUBICLE": "Wet cubicle", "FRIDGE": "Fridge 70 L drawer",
     "BENCH": "Bench", "REAR BENCH": "Rear bench / garage",
     "GARAGE": "Garage + bed base", "bedslide": "Bed slide-out", "mattress": "Mattress", "bed": "Seat cushion", "infill": "Bed infill",
-    "locker": "Overhead locker", "table": "Table", "step": "Cubicle step",
+    "overhead": "Overhead locker", "table": "Table", "step": "Cubicle step",
     "leg": "Table post", "shower": "Shower head",
     "ftable": "Worktop leaf", "fleg": "Front table post",
     "ftablep": "Worktop leaf, folded", "farm": "Leaf bracket",
@@ -466,13 +483,14 @@ NAMES = {
     "fridge": "Fridge 70 L", "fridgedoor": "Fridge 90 L, hinged door",
     "fresh": "Fresh water 110 L", "grey": "Grey water 70 L", "calorifier": "Calorifier 10 L",
     "battery": "Battery 150 Ah", "inverter": "Inverter 3000 W",
-    "electrics": "MPPT, DC-DC, fuses",
+    "electrics": "MPPT, DC-DC, fuses", "board": "Garage board: MPPT, 230 V box",
 }
 
 # --- the vehicle itself ----------------------------------------------------
 # Apertures are cut out of the body panels, so the openings are real holes rather
 # than drawn-on rectangles. p = passenger wall (y=0), d = driver wall (y=width).
 WALL = 40           # panel thickness, mm
+BODY_CAVITY = 100   # rib face to outer skin on the real body (VW: 2040 wide outside)
 NOSE = 1500         # how far the cab reaches forward of the load area
 CAB_ROOF = 1500     # the roof over the cab sits lower than the load-space roof
 
@@ -489,8 +507,11 @@ FAN_HOLES = [(860, 1340, 140, 620), (2460, 2940, 140, 620)]
 WINDOWS_V2 = [
     ("d",  120,  620, 1180, 1520),              # shower window, Brisa's trick
     ("d", 1250, 1850, 1000, 1350),              # over the sink
-    ("d", 1950, 2750,  620,  960),              # over the driver bench
-    ("p", 1950, 2750,  620,  960),              # over the passenger bench
+    # Over the benches the glass goes where a seated eye is: 630 + ~770 = ~1400 for Ondrej,
+    # a little lower for his wife. 620-960 had been left over from a 450 bench and put the
+    # glass behind your shoulders. The top stops 60 under the dinette lockers at 1560.
+    ("d", 1950, 2750, 1050, 1500),              # over the driver bench
+    ("p", 1950, 2750, 1050, 1500),              # over the passenger bench
 ]
 FAN_HOLES_V2 = [(1400, 1880, 676, 1156), (2350, 2830, 676, 1156)]
 # Service hatches: a real hole in a body panel with a lid in it. side, x0, x1, z0, z1.
@@ -530,15 +551,16 @@ KIND = {          # plan label or extra kind -> colour
     "GALLEY": "#cfded9", "WET CUBICLE": "#bcd6e6", "FRIDGE": "#cfe4c9",
     "BENCH": "#d8cfe2", "REAR BENCH": "#d8cfe2", "GARAGE": "#d8cfe2",
     "bedslide": "#e3dfe9", "mattress": "#eceaf1",
-    "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "locker": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
+    "bed": "#eceaf1", "infill": "#eceaf1", "wheel": "#3b3b3d", "overhead": "#e6dcc6", "table": "#d9b98a", "ftable": "#d9b98a", "fleg": "#9a9287",
     "step": "#e6dcc6", "leg": "#9a9287", "shower": "#b9c3c7",
     "shell": "#e4e1da", "glass": "#a9c6d8", "floor": "#cdc4b2",
+    "roof": "#d6d2c9", "rack": "#8d9399", "cable12": "#c0392b", "cable230": "#7d3c98", "cablepv": "#e67e22", "gaspipe": "#d4ac0d", "coldpipe": "#2e86c1", "hotpipe": "#e74c3c", "greypipe": "#6e5a44", "fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#f1f1ef", "gasbottle": "#c9563c", "tarp": "#cdb98f", "pole": "#6f7378",
     "cab": "#dcd8d0", "seat": "#8f9a8c", "dash": "#5f6166",
     # appliances: stainless greys for the kitchen, blue for water, amber for electrics
     "oven": "#8d9295", "hob": "#4e5457", "sink": "#b6bcbe", "sinkrim": "#c3c9cb", "bowl": "#a9b0b2", "plumbing": "#9aa3a6", "fridge": "#cfe4c9",
     "fridgedoor": "#cfe4c9", "filter": "#7fb2cf", "filtertap": "#b6bcbe", "tap": "#b6bcbe",
     "cassette": "#dde4e8", "fresh": "#7fb2cf", "grey": "#8f9aa2", "calorifier": "#c08f7a",
-    "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36",
+    "battery": "#e0b25c", "inverter": "#cf9a3f", "electrics": "#b98b36", "board": "#b98b36",
 }
 GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 
@@ -548,6 +570,13 @@ GLASSY = ("glass", "screen")     # drawn transparent in the viewer
 # pump to fill it looks like a smear. Everywhere else filling is what you want - a bed cushion
 # fitted uniformly shrinks to a quarter of its slot, because the mesh is thicker than 70 mm.
 KEEP_SHAPE = ("plumbing",)
+# Meshes built from datasheet sizes by solids.py: exact shapes, several colours each
+OWN_COLOURS = ("solar", "fan", "gasbottle", "battery-ective", "inverter-multiplusc", "starlink",
+               "hob-thetford", "fridge-c95l", "b10", "portapotti", "oven-tefal",
+               "fresh-v2r", "grey-v2r", "tap-grohe", "tap-franke", "filtertap-its", "filter-alb",
+               "dist-v2r", "board-v2r", "plumbing-v2r")
+# Meshes drawn at their true size inside a bigger slot, standing on its floor
+REAL_SIZE = ("portapotti",)
 
 CAMERAS = [                         # name, elevation, azimuth
     ("01-from-the-rear-looking-forward", 6, -24),
@@ -683,62 +712,75 @@ def tray_box(x0, x1, y0, y1, z0, z1, wall=6, kind="insert"):
     ]
 
 
-def arch_face(x0, x1, y0, y1, z0, z1, ox0, ox1, oz0, oz1, rtop, rbot, kind, steps=30):
-    """A panel across the van's x with a rounded-corner opening carved out of it.
-
-    Everything in this model is an axis-aligned box, so the curve is a staircase: the
-    opening is sampled in columns and each column keeps whatever panel is left above and
-    below it. Each column is rounded OUTWARD - the hole is never smaller than the true
-    curve, because a doorway 2 mm generous beats one with a sliver of panel in your
-    shoulder. Columns that come out the same height are merged, so the straight part of a
-    shallow arch costs one box, not thirty.
-    """
-    out = []
-    if ox0 > x0:
-        out.append((x0, ox0, y0, y1, z0, z1, kind))
-    if ox1 < x1:
-        out.append((ox1, x1, y0, y1, z0, z1, kind))
-
-    def edge(x, r, base, up):
-        """Where the opening's top (up=1) or bottom (up=-1) sits at x, corners radius r."""
-        if r <= 0:
-            return base
-        d = min(x - ox0, ox1 - x)
-        if d >= r:
-            return base
-        return base - up * (r - (r * r - (r - d) ** 2) ** 0.5)
-
-    cols = []
-    for i in range(steps):
-        a = ox0 + (ox1 - ox0) * i / float(steps)
-        b = ox0 + (ox1 - ox0) * (i + 1) / float(steps)
-        hi = max(edge(a, rtop, oz1, 1), edge(b, rtop, oz1, 1))
-        lo = min(edge(a, rbot, oz0, -1), edge(b, rbot, oz0, -1))
-        if cols and abs(cols[-1][2] - lo) < 0.5 and abs(cols[-1][3] - hi) < 0.5:
-            cols[-1][1] = b
-        else:
-            cols.append([a, b, lo, hi])
-    for a, b, lo, hi in cols:
-        if lo > z0:
-            out.append((a, b, y0, y1, z0, lo, kind))
-        if hi < z1:
-            out.append((a, b, y0, y1, hi, z1, kind))
-    return out
-
-
 # The sink: one deep bowl, 440 x 360 outside, hard against the wardrobe at x 1150. The bowl
 # is 195 deep - deep enough that the shallow tray drops inside it instead of beside it, and
 # that is the whole point: two compartments when washing up, and 340 mm of unbroken counter
 # aft of the unit the rest of the time, which is where the chopping board lives.
 EXTRA_V2 += sink_wells(1150, 1590, 1440, 1800, 700, 905, n=1)
 EXTRA_V2 += tray_box(1355, 1555, 1475, 1765, 815, 895)
-# The shower entrance: carved, not a door and not a full glass wall. 450 clear is the
-# narrowest an adult actually walks through; a semicircular head springs at 1575 and tops
-# out at 1800. It is pushed to the AFT end of the face, against the wardrobe, which leaves
-# 170 mm of full-height panel at the forward end, on the partition side - the only place on
-# this face anything can be mounted, and the end you meet first coming from the cab.
-EXTRA_V2 += arch_face(40, 660, 1032, 1072, 0, 1881,
-                      210, 660, 60, 1800, 225, 60, "wetface", steps=45)
+def slant_face(x0, x1, y0, slope, t, z0, z1, s0, s1, oz0, oz1, rtop, rbot, kind, step=20):
+    """A wall panel with a rounded-corner opening carved out of it, running on a diagonal.
+
+    Everything in this model is an axis-aligned box, so both the arch and the slant are
+    staircases. The panel's outer face is the line y = y0 + slope * x, and it is t thick measured square
+    to itself. Axis-aligned boxes cannot lie on a slant, so it is laid as columns step wide
+    in x, each one reaching from the outer face at its start to the inner face at its end:
+    the staircase never shows a gap, and its teeth are slope * step deep (6 mm at 20).
+    The opening is given ALONG the face (s0, s1 from x = 0), because that is the width a
+    person walks through; the arch is rounded in true length too, then projected. Each
+    column is rounded OUTWARD - the hole is never smaller than the true curve, because a
+    doorway 2 mm generous beats one with a sliver of panel in your shoulder.
+    """
+    k = (1 + slope * slope) ** 0.5
+    ox0, ox1 = s0 / k, s1 / k
+    xs = []
+    for a, b in ((x0, ox0), (ox0, ox1), (ox1, x1)):
+        n = max(1, int(round((b - a) / float(step))))
+        xs += [a + (b - a) * i / float(n) for i in range(n)]
+    xs.append(x1)
+
+    def edge(s, r, base, up):
+        if r <= 0:
+            return base
+        d = min(s - s0, s1 - s)
+        if d >= r:
+            return base
+        return base - up * (r - (r * r - (r - d) ** 2) ** 0.5)
+
+    out = []
+    for a, b in zip(xs, xs[1:]):
+        ya, yb = y0 + slope * a, y0 + slope * b + t * k
+        if a >= ox0 - 0.01 and b <= ox1 + 0.01:
+            hi = max(edge(a * k, rtop, oz1, 1), edge(b * k, rtop, oz1, 1))
+            lo = min(edge(a * k, rbot, oz0, -1), edge(b * k, rbot, oz0, -1))
+            if lo > z0:
+                out.append((a, b, ya, yb, z0, lo, kind))
+            if hi < z1:
+                out.append((a, b, ya, yb, hi, z1, kind))
+        else:
+            out.append((a, b, ya, yb, z0, z1, kind))
+    return out
+
+
+# The shower's lobby face runs on a DIAGONAL: 800 deep at the partition, 600 at the
+# wardrobe, so it no longer ends in a corner standing 200 proud of the wardrobe and the
+# galley line - which was exactly where you turn from the aisle into the lobby. It gives
+# the corridor 200 at the old corner and 100 halfway along, and costs the shower a
+# triangle, 14 % of its floor, almost all of it at the aft end, away from the head.
+# The entrance is still carved and still at the aft end: 450 clear measured along the
+# face, from the aft wall's inner face forward. A semicircular head springs at 1515 and
+# tops out at 1740, 41 under the 4MOTION ceiling. What is left forward of it is ~190 of
+# full-height panel on the partition side - the only place on this face anything can be
+# mounted, and the end you meet first coming from the cab.
+_WET_Y0, _WET_SLOPE, _WET_T = 1032, 200 / 700.0, 40
+_WET_K = (1 + _WET_SLOPE ** 2) ** 0.5
+EXTRA_V2 += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2,
+                       660 * _WET_K - 450, 660 * _WET_K, 60, 1740, 225, 60, "wetface")
+# The tray follows the face: a trapezoid, laid in the same 20 mm columns, each starting on
+# the inner face of the slant so none of it can show through on the lobby side.
+EXTRA_V2 += [(40 + 20 * i, 60 + 20 * i,
+              _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1792, 0, 60, "tray")
+             for i in range(31)]
 
 # The cat box, in the hole the walk-through left at floor level. 400 x 400 outside, and it
 # reaches 190 mm forward THROUGH the partition into the dead space behind the bench's seat
@@ -763,10 +805,395 @@ EXTRA_V2 += tray_box(-150, 170, 630, 930, 40, 190, kind="litterlid")
 EXTRA_V3 += sink_wells(200, 540, 1240, 1800, 755, 905, axis="y")
 
 
+# --------------------------------------------------------------------------
+# v2-real - v2's room on the REAL Crafter body, with the thin build (floor 35, ceiling 15,
+# 10 on every wall). Its own tables since 2026-09-24: v2's were written against a 1832 box,
+# and nearly every part that touched a wall moved. The frame is still v2's (centre line at
+# y 916), so a part that did not touch a wall kept its numbers. Where a part stands against
+# a wall, its wall-side edge is the finished face at the part's top: plan.wall_inset().
+# --------------------------------------------------------------------------
+V2R = VARIANTS["v2-real"]
+H_V2R = V2R["height"]
+W_V2R = V2R["width"]
+
+
+def against_wall(x0, x1, y_front, z0, z1, side, kind, step=260):
+    """A full-height part standing against a wall that leans: stacked boxes, each one's back
+    on the finished wall at the TOP of its own band, so the stack follows the lean down to
+    the floor instead of losing its whole depth to the narrowest point. Bands break at the
+    profile's own corners, and every `step` in between where the wall is sloping."""
+    zs = [z0]
+    for z, _ in V2R["body"]["profile"]:
+        if z0 < z < z1:
+            zs.append(z)
+    zs.append(z1)
+    cuts = []
+    for a, b in zip(zs, zs[1:]):
+        n = 1 if wall_inset(V2R, a) == wall_inset(V2R, b) else max(1, int(round((b - a) / step)))
+        cuts += [a + (b - a) * k / n for k in range(n)]
+    cuts.append(z1)
+    out = []
+    for a, b in zip(cuts, cuts[1:]):
+        i = int(wall_inset_max(V2R, a, b) + 0.999)
+        y0, y1 = (i, y_front) if side == "p" else (y_front, W_V2R - i)
+        out.append((x0, x1, y0, y1, round(a), round(b), kind))
+    return out
+
+
+HEIGHTS_V2R = dict(HEIGHTS_V2)
+HEIGHTS_V2R["WARDROBE"] = (0, 775)
+# The galley is 20 higher than v2 (920, agreed 2026-09-25): room for the taller C95L fridge
+# under the hob, and for whatever else the galley has to take.
+HEIGHTS_V2R["SINK"] = (0, 920)
+HEIGHTS_V2R["HOB"] = (0, 920)  # the full-depth base, where the WC lives; the hanging
+                                    #   space above follows the lean - EXTRA_V2R
+
+EXTRA_V2R = [
+    # The rear U, lifted as in v2: footwell +220, benches 570, cushions to 630, table at 900.
+    # The benches lost 43 to the walls, the rear bench 60 to the shorter floor.
+    (1930, 2850,   44,  600,  570,  630, "bed"),        # seat cushion, passenger bench
+    (1930, 2850, 1232, 1788,  570,  630, "bed"),        # seat cushion, driver bench
+    (2850, 3390,   44, 1788,  570,  630, "bed"),        # seat cushion, rear bench
+    (1940, 2840,  616, 1216,  840,  900, "table"),      # 900 x 600, on one post
+    (2340, 2440,  866,  966,  220,  840, "leg"),        # the post, standing on the raised floor
+    (1930, 2850,  600, 1232,  570,  630, "infill"),     # bed made up: 1744 across, wall to wall
+    (2010, 2610, 1383, 1783,  630,  790, "pillow"),     # heads at the driver wall, one each
+    (2770, 3370, 1383, 1783,  630,  790, "pillow"),
+    # The galley leaf, the depth of the hob run now: 565.
+    ( 900, 1150,  260,  320,  800,  860, "farm"),       # swing-out bracket under the leaf
+    ( 750, 1150,   73,  635,  860,  920, "ftable"),     # deployed: 400 x 562 at worktop height
+    (1090, 1150,   73,  635,  440,  860, "ftablep"),    # folded: hangs down the galley end
+    # The shoe locker's backrest: at 950 the wall is 78 in, so the pillow starts there.
+    (   0,   60,   79,  400,  480,  950, "backrest"),
+    ( 100,  180,  400,  460,  120,  640, "parm"),       # side table bracket, unchanged
+    ( 180,  660,  400,  460,  640,  680, "parm"),
+    ( 460,  800,   60,  440,  680,  720, "ptable"),     # at 720 the wall is 45 in - clear
+    ( 200,  540,  400,  440,  300,  680, "ptablep"),
+    # Overhead lockers. From 1555 up the finished wall is 190 in, so a locker at v2's front
+    # line would be 110 deep. They keep a usable 250 / 220 instead and stand that much
+    # further into the room. The ceiling came up 30, so the dinette ones went up with it:
+    # 110 over a seated head now instead of 80.
+    (1150, 1930, 1392, 1642, 1400, 1700, "overhead"),   # driver, over the sink: 250 deep
+    (1600, 1930,  190,  440, 1400, 1700, "overhead"),   # passenger, clear of the door head
+    (1950, 2830, 1422, 1642, 1590, 1740, "overhead"),   # driver, over the dinette: 220 deep
+    (1950, 2830,  190,  410, 1590, 1740, "overhead"),   # passenger, over the dinette
+    # The shower riser, on the partition: the wall at 1760 is 190 in, and the wet panel is
+    # another 10 inside that.
+    (   0,  160, 1472, 1632, 1140, 1760, "shower"),
+]
+# The hanging space over the wardrobe base, back on the lean.
+EXTRA_V2R += against_wall(700, 1150, 1232, 775, H_V2R, "d", "WARDROBE")
+# The shower's three panels. Forward and aft walls end on the finished wall; the driver-side
+# one IS a wet lining over the cladding, 10 thick, following the lean all the way up.
+EXTRA_V2R += against_wall(  0,   40, 1032, 0, H_V2R, "d", "wetwall")
+EXTRA_V2R += against_wall(660,  700, 1232, 0, H_V2R, "d", "wetwall")
+EXTRA_V2R += [(x0, x1, y1 - 10, y1, z0, z1, k)
+              for x0, x1, _y0, y1, z0, z1, k in against_wall(40, 660, 0, 0, H_V2R, "d", "wetwall")]
+# The carved lobby face and the tray, as in v2 - the face is inside the room, only its
+# height changed; the tray stops at the wet lining.
+EXTRA_V2R += slant_face(0, 700, _WET_Y0, _WET_SLOPE, _WET_T, 0, H_V2R,
+                        660 * _WET_K - 450, 660 * _WET_K, 60, 1740, 225, 60, "wetface")
+EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
+               _WET_Y0 + _WET_SLOPE * (40 + 20 * i) + _WET_T * _WET_K, 1784, 0, 60, "tray")
+              for i in range(31)]
+# The sink: Blanco Andano 400-IF, 440 x 440 with a 400 x 400 x 190 bowl. Its insert bowl
+# (Blanco 227692, 197 x 417 x 80) rests on the rim across the bowl, over the aft half: soapy
+# water in it, rinse in the front half. No double sink this small exists (2026-09-25).
+EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 735, 925, n=1)
+EXTRA_V2R += tray_box(1370, 1567, 1301, 1718, 845, 925)
+# The cat box and its tray behind the partition: the middle of the van, nothing moved.
+EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
+
+APPLIANCES_V2R = [
+    # galley, driver side - carcass y 1197-1762, worktop 900
+    # Tefal Optimo OF4448, 462 x 318 x 288, hot air, 1380 W - at the aisle edge. 288 tall, so
+    # its top (668) is 47 under the sink bowl (715); v2's 340-tall box ran 20 into the bowl.
+    (1285, 1747, 1217, 1535,  380,  668, "oven"),
+    (1180, 1520, 1410, 1750,   40,  370, "plumbing"),   # pump, filter and trap, behind the oven
+    # The taps stand AFT of the bowl, at the back of the prep counter: the 440-deep sink
+    # leaves no deck behind it, and at 1185 the wall is 122 in.
+    # Franke Lina Semi Pro: a spring-hose mixer, base at x ~1670, arm reaching 205 forward
+    # over the bowl (to x ~1465), 410 tall - 65 under the locker over the sink (1400).
+    (1465, 1700, 1575, 1635,  925, 1335, "tap"),
+    # drinking tap behind the mixer (toward the wall), its neck reaching 185 forward over the
+    # bowl - its-wasser Fil kurz; its reach is not published: it needs >= ~180
+    (1560, 1770, 1655, 1705,  925, 1205, "filtertap"),   # outlet 228 up; 280 in all, est.
+    (1600, 1860, 1615, 1690,  410,  485, "filter"),     # Alb Filter Nano + couplings, 0.1 micron
+    # galley, passenger side - carcass y 70-635
+    # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the
+    # factory, flame failure on both burners, 12 V ignition. 95 high in all; how much of that
+    # hangs under the worktop is not published - drawn as 75, to be safe.
+    (1150, 1455,  104,  604,  845,  925, "hob"),
+    # Vitrifrigo C95L, 485 x 473 x 792 - 95 L with a 12.8 L freezer - standing low (30) so
+    # its top (822) is 23 under the hob's body. ~110 behind it for air; 82 clear of the arch.
+    (1250, 1735,  152,  625,   30,  822, "fridgedoor"),
+    # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
+    # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
+    ( 715, 1135, 1266, 1786,   40,  560, "cassette"),   # ~420 x 520, hatch at x 700-1150
+    # water
+    (1930, 2950,  226,  600,   30,  340, "fresh"),      # 1020 x 374 x 310 = 118 L
+    # The grey tank, INSIDE, under the raised footwell floor. v2 hung it at x 2100-2800
+    # under the middle of the van - on a 4MOTION that is the propshaft and the rear
+    # differential (VW underbody drawing, AWD L3). The only clear bay underneath is the
+    # spare wheel's, and the spare stays there: the rear doors are kept free for a bike
+    # rack, so no carrier on them. The footwell is lifted 220 for nothing but storage, so
+    # its drawer becomes the tank: low, on the centre line, between the axles. The sink
+    # drains into it by gravity (bowl ~700, tank top 190); the shower tray needs a small
+    # drain pump. Custom tank, 880 x 600 x 180 = 95 L gross, ~85 usable, outlet through the
+    # floor at its low point. The table post needs a small frame over it.
+    (1950, 2830,  616, 1216,   10,  190, "grey"),
+    # Hot water on gas: Truma Boiler B10, 350 x 350 x 260, 10 L, in the garage's passenger
+    # rear corner where the calorifier was; its flue goes through the side wall there.
+    (3030, 3380,  150,  500,   60,  320, "calorifier"),
+    # The gas: a 6 kg refillable bottle (~256 x 495) standing in a sealed locker in the garage,
+    # vented through the floor. A standard 11 kg bottle (~580 tall) does not fit under 570.
+    (2880, 3140,  610,  870,   20,  515, "gasbottle"),
+    # electrics, driver bench. Ective LC 150 LT, 353 x 175 x 190, 15.5 kg, heated (charges
+    # to -30 C), Bluetooth BMS - standing across the van, terminals up.
+    (2100, 2275, 1237, 1590,   30,  220, "battery"),
+    (2340, 2515, 1237, 1590,   30,  220, "battery"),
+    # Victron MultiPlus C 12/2000/80: 1600 W at 25 C runs the 1380 W oven; 12 kg. Drawn at
+    # the larger of the two sizes published (520 x 255 x 125 datasheet, 375 x 214 x 110 shops).
+    (2040, 2560, 1310, 1565,  240,  365, "inverter"),   # on a shelf over the cells
+    # The distribution, in the bench beside the cells: main fuse, SmartShunt, busbars, the
+    # Orion XS DC-DC and the 12 V fuse block - central, so the load cables stay short.
+    (2580, 2800, 1250, 1410,   30,  230, "electrics"),
+    # SmartSolar MPPT 100/30 and the 230 V shore box - on a board against the wall in the
+    # garage, under the power inlet and the solar cable's way down (systems.py).
+    (2900, 3300, 1672, 1782,   60,  360, "board"),
+]
+
+# The seated people, against the leaning wall. Your hips sit on the cushion at the wall, but
+# your shoulders meet the wall higher up, where it has come in ~100 more - so every trunk is
+# two boxes: the lower one on the wall at 900, the upper one on the wall at its top. That is
+# the real cost of the lean at the dinette: the head and shoulders sit ~100 further into the
+# room than v2 assumed, and the thighs and shins with them.
+SITTER_V2R = [
+    (  60,  400,   70,  390,  450,  900),    # shoe locker: lower trunk, facing aft
+    (  60,  400,  143,  423,  900, 1300),    #   shoulders, on the wall at 1300
+    ( 450,  800,  100,  380,  380,  500),    #   thighs, under the side table
+    ( 620,  820,  100,  380,    0,  400),    #   shins, feet on the floor
+    (2000, 2340,   70,  390,  630,  900),    # passenger bench, sitting forward: lower trunk
+    (2000, 2340,  177,  457,  900, 1480),    #   shoulders and head, on the wall at 1480
+    (2040, 2320,  390,  690,  560,  680),    #   thighs
+    (2040, 2320,  638,  798,  220,  580),    #   shins, dropping into the footwell
+    (2440, 2780, 1442, 1762,  630,  900),    # driver bench, sitting aft: lower trunk
+    (2440, 2780, 1375, 1655,  900, 1480),    #   shoulders and head
+    (2480, 2760, 1142, 1442,  560,  680),    #   thighs
+    (2480, 2760, 1034, 1194,  220,  580),    #   shins
+]
+
+# Windows and fans from the product register, placed inside VW's stamped window fields and
+# clear of the known roof bows - body_clashes() checks both.
+#   Sink:     S4 500 x 350 between the wardrobe (1150) and the end of the front field (1685),
+#             its top under the locker over the sink (1400).
+#   Dinette:  S4 900 x 450 each side, over the benches, top 25 under the fields (1473):
+#             seated eye ~1400, and the pair gives cross-flow over the bed.
+#   Shower:   none for now - the shower is 470 wide inside the front field, and the smallest
+#             S4 still sold is 500 wide.
+WINDOWS_V2R = [
+    cut("s4-500x350",  "d", 1165, 1040),
+    cut("s4-900x450",  "d", 1940, 1000),
+    cut("s4-900x450",  "p", 1940, 1000),
+]
+# Small service openings in the side walls (side, x0, x1, z0, z1) - all low, outside the
+# window fields, clear of the pillars; corrosion protection on every cut (VW guidelines).
+#   Fresh water filler, lockable, marked WATER: passenger side, behind the arch, just above
+#     the tank's rear end (tank x 1930-2950, top 340). Agreed 2026-09-25.
+#   Campsite power inlet (CEE 230 V): driver side, at the garage, next to the electrics - the
+#     shortest cable to the MultiPlus.
+#   Truma B10 flue: passenger side, low at the garage corner, where the heater stands.
+# Through the FLOOR, not drawn: the grey tank's drain with a valve under the van, and the fresh
+# tank's vent / overflow hose - both clear of the chassis rails and cables.
+HATCHES_V2R = [
+    ("p", 2860, 2940, 400, 480),     # fresh water filler
+    ("d", 2950, 3030, 400, 480),     # campsite power inlet
+    ("p", 3160, 3240, 150, 230),     # water heater flue
+]
+# Fans: MaxxFan Deluxe, 400 x 400 cut-outs on the centre line.
+#   Front:  in VW's own roof-hatch pressing on the front roof panel (x ~385-1136), over the
+#           lobby between the shower and the galley - steam and cooking both reach it.
+#   Rear:   over the dinette. Where the bows 5-6 are is not known: MEASURE before cutting.
+FANS_V2R = [
+    cut("maxxfan-deluxe", None, 560, 716),
+    # moved aft from 2200 (2026-09-25) so the two solar panels fit between the fans; now over
+    # the back of the dinette and the head of the bed - air where we sleep
+    cut("maxxfan-deluxe", None, 2660, 716),
+]
+# The rest of the roof (2026-09-25), all from the product register where there is one:
+#   Starlink Mini (299 x 259 x 39) at the front, ahead of the front fan - flat, clear sky.
+#   2 solar panels ~200 W, 1485 x 668 each (Victron 185 W size), long side along the van,
+#     side by side on rails 40 above the roof, between the two fans (15 mm gaps).
+#   The tarp's keder rail along the passenger roof edge is drawn with the tarp.
+# VW wants a letter for anything fixed to the roof skin, but allows roof-rack-like attachments
+# (v2-real/approval.md): so everything sits on two SIDE RAILS on VW's ten roof-rack points per side,
+# with CROSS BARS clamped to them where the kit needs them - one under the Starlink, three
+# under the panels. The rails run along the roof edges, so they never cross a fan.
+_RAIL = [(300, 3200, 195, 225), (300, 3200, 1607, 1637)]
+_BARS = [240, 1180, 1810, 2440]
+ROOF_V2R = [(x0, x1, y0, y1, 0, 30, "rack") for x0, x1, y0, y1 in _RAIL]
+ROOF_V2R += [(x - 20, x + 20, 195, 1637, 30, 60, "rack") for x in _BARS]
+ROOF_V2R += [
+    ( 90,  389,  787, 1046,  60,  99, "starlink"),
+    (1068, 2553,  238,  906,  60,  95, "solar"),
+    (1068, 2553,  926, 1594,  60,  95, "solar"),
+]
+
+# v2's Show buttons plus one for the roof, off by default: the roof with its real fan
+# cut-outs and the two fans on top of it.
+LAYERS_V2R = copy.deepcopy(LAYERS_V2)
+for _l in LAYERS_V2R:
+    if _l["id"] == "kit":
+        _l["kinds"] = sorted({b[6] for b in APPLIANCES_V2R})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("body") + 1,
+                  {"id": "roof", "label": "Roof + kit", "kinds": ["roof", "rack", "fan", "solar", "starlink"],
+                   "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
+                  {"id": "wiring", "label": "Wiring", "kinds": ["cable12", "cable230", "cablepv"],
+                   "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("wiring") + 1,
+                  {"id": "pipes", "label": "Gas + water",
+                   "kinds": ["gaspipe", "coldpipe", "hotpipe", "greypipe"], "on": False})
+LAYERS_V2R.insert([l["id"] for l in LAYERS_V2R].index("roof") + 1,
+                  {"id": "tarp", "label": "Tarp", "kinds": ["tarp", "pole"], "on": False})
+
+REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R, layers=LAYERS_V2R,
+                           appliances=APPLIANCES_V2R, sitter=SITTER_V2R,
+                           windows=WINDOWS_V2R, fans=FANS_V2R, tarp=True, roof_kit=ROOF_V2R,
+                           # its own meshes where the product differs from v2's generic one
+                           propmap={"battery": "battery-ective", "inverter": "inverter-multiplusc",
+                                    "hob": "hob-thetford", "fridgedoor": "fridge-c95l",
+                                    "calorifier": "b10", "cassette": "portapotti",
+                                    "oven": "oven-tefal", "fresh": "fresh-v2r", "grey": "grey-v2r",
+                                    "tap": "tap-franke", "filtertap": "filtertap-its",
+                                    "filter": "filter-alb", "electrics": "dist-v2r",
+                                    "board": "board-v2r", "plumbing": "plumbing-v2r"},
+                           runs=True, furniture=True,
+                           # the real VW length: front axle 1370 ahead of the partition (our x
+                           # = VW X - 1370), bumper 1000 further (VW front overhang)
+                           nose=2370, front_axle=-1370, bodymesh=True,
+                           # the solids.py meshes are built for the side they stand on here
+                           facing=dict(REGISTRY["v2"].get("facing", {}), hob="p", cassette="d"),
+                           names={"rack": "Roof rail / bar on VW's rack points",
+                                  "hob": "Gas hob, Thetford Topline 922",
+                                  "tap": "Mixer, Franke Lina Semi Pro (spring hose)",
+                                  "insert": "Insert bowl, Blanco 227692",
+                                  "filtertap": "Drinking tap, filtered",
+                                  "filter": "Alb Filter Nano, 0.1 micron",
+                                  "fridgedoor": "Fridge Vitrifrigo C95L, 95 L",
+                                  "oven": "Hot-air oven, Tefal Optimo",
+                                  "cassette": "Portable WC",
+                                  "fresh": "Fresh water ~108 L, made to size",
+                                  "grey": "Grey water ~85 L, made to size",
+                                  "calorifier": "Truma B10 gas water heater",
+                                  "battery": "Ective LC 150 LT, 150 Ah",
+                                  "inverter": "Victron MultiPlus C 12/2000/80",
+                                  "plumbing": "Pump Shurflo Trail King 7, filter, trap",
+                                  "electrics": "Distribution: fuses, shunt, busbars, Orion XS, fuse block",
+                                  "board": "Garage board: MPPT 100/30, 230 V box A, PV isolator"},
+                           # No cassette hatch in the body (2026-09-24): the WC's waste tank is
+                           # taken out INSIDE, through the wardrobe base's lobby-side door. The
+                           # only side-wall holes are the small service openings above.
+                           hatches=HATCHES_V2R)
+
+
+def body_bands(v, step=40):
+    """The real wall as horizontal bands, (z0, z1, inset) each: vertical where the wall is
+    vertical, 40 mm steps where it leans. Boxes cannot slope, so a sloped wall is a
+    staircase - each step at the inset of its middle, never more than 3 mm off the line."""
+    pts = v["body"]["profile"]
+    bands = []
+    for (za, ia), (zb, ib) in zip(pts, pts[1:]):
+        n = 1 if abs(ib - ia) < 1 else max(1, int(round((zb - za) / step)))
+        for k in range(n):
+            z0, z1 = za + (zb - za) * k / n, za + (zb - za) * (k + 1) / n
+            bands.append((z0, z1, wall_inset(v, (z0 + z1) / 2)))
+    return bands
+
+
+def real_shell(v):
+    """The load area of a variant with a measured body: side walls that lean in, a roof as
+    wide as the top of them, wheel arches as solids, and the slider and rear doors at their
+    real openings. The cab and the wheels are the same as the box van's."""
+    L, W, H = v["length"], v["width"], v["height"]
+    sp, body = spec(v), v["body"]
+    bands = body_bands(v)
+    out = []
+    clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
+    sx0, sx1 = v["slider"]
+    for side in ("p", "d"):
+        holes = [(sx0, sx1, 0, body["slider_h"])] if side == "p" else []
+        holes += [clamp(hx0, hx1) + (hz0, hz1)
+                  for s, hx0, hx1, hz0, hz1 in list(sp["windows"]) + list(sp["hatches"]) if s == side]
+        for z0, z1, i in bands:
+            y0, y1 = (i - WALL, i) if side == "p" else (W - i, W - i + WALL)
+            for x0, x1, bz0, bz1 in subtract((0, L, z0, z1), holes):
+                out.append((x0, x1, y0, y1, bz0, bz1, "shell"))
+            for s, wx0, wx1, wz0, wz1 in sp["windows"]:
+                if s == side and wz0 < z1 and wz1 > z0:
+                    wx0, wx1 = clamp(wx0, wx1)
+                    out.append((wx0, wx1, y0, y1, max(z0, wz0), min(z1, wz1), "glass"))
+            for s, hx0, hx1, hz0, hz1 in sp["hatches"]:
+                if s == side and hz0 < z1 and hz1 > z0:
+                    hx0, hx1 = clamp(hx0, hx1)
+                    out.append((hx0, hx1, y0, y1, max(z0, hz0), min(z1, hz1), "hatch"))
+
+    top = wall_inset(v, H)
+    for x0, x1, y0, y1 in subtract((0, L, top, W - top), sp["fans"]):
+        out.append((x0, x1, y0, y1, H, H + WALL, "roof"))
+    # what else stands on the roof: panels, Starlink - z given above the roof skin
+    for x0, x1, y0, y1, z0, z1, kind in sp.get("roof_kit", ()):
+        out.append((x0, x1, y0, y1, H + WALL + z0, H + WALL + z1, kind))
+    # the fans themselves, on top of their cut-outs, at the MaxxFan's own size (lid closed)
+    fw, fd = PRODUCTS["maxxfan-deluxe"]["outer"]
+    fh = PRODUCTS["maxxfan-deluxe"]["above_roof"][0]
+    for x0, x1, y0, y1 in sp["fans"]:
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        out.append((cx - fw / 2, cx + fw / 2, cy - fd / 2, cy + fd / 2, H + WALL, H + WALL + fh, "fan"))
+    floor = wall_inset(v, 0)
+    out.append((0, L, floor, W - floor, -WALL, 0, "floor"))
+
+    # the wheel arches, solid: the thing the benches are built over
+    w0, w1, wd = v["well"]
+    for y0, y1 in ((floor, wd), (W - wd, W - floor)):
+        out.append((w0, w1, y0, y1, 0, body["arch_h"], "shell"))
+
+    # A tarp on a keder rail along the passenger-side roof edge, out over the sliding door on
+    # three poles: yourGEAR 3 x 2.4 m (2.9 kg). Boxes cannot slope, so the canvas is a
+    # staircase of strips from the roof edge down to the pole tops, 2.0 m above the road.
+    if sp.get("tarp"):
+        x0, x1, reach = 300, 3300, 2400
+        ground = -608                          # road: 573 loaded floor + 35 build, below 0
+        top, tip = H + WALL, ground + 2000     # at the rail, and at the poles
+        # the rail on the roof's edge: the real skin (solids.py) sits CAVITY outside the ribs
+        edge = wall_inset(v, H, bare=True) - BODY_CAVITY if sp.get("bodymesh") else -WALL
+        n = 12
+        for k in range(n):
+            ya, yb = edge - reach * k / n, edge - reach * (k + 1) / n
+            z = top + (tip - top) * (k + 0.5) / n
+            out.append((x0, x1, yb, ya, z - 5, z + 5, "tarp"))
+        out.append((x0, x1, edge - 15, edge, top - 20, top + 10, "tarp"))   # keder rail
+        for px in (x0, (x0 + x1) / 2, x1):
+            out.append((px - 15, px + 15, edge - reach - 15, edge - reach + 15, ground, tip, "pole"))
+    # partition and rear doors, each band as wide as the walls are apart at that height
+    holes = sp["partition"] or []
+    if holes and not isinstance(holes[0], (list, tuple)):
+        holes = [holes]
+    ri = REAR_DOORS[0]
+    for z0, z1, i in bands:
+        for y0, y1, bz0, bz1 in subtract((i, W - i, z0, z1), [tuple(h) for h in holes]):
+            out.append((-WALL, 0, y0, y1, bz0, bz1, "partition"))
+        for y0, y1, bz0, bz1 in subtract((i, W - i, z0, z1), [(ri, W - ri, 0, body["rear_h"])]):
+            out.append((L, L + WALL, y0, y1, bz0, bz1, "shell"))
+    return out
+
+
 def shell_for(v):
     """Body panels with apertures, glazing, and the cab. Same box format as everything else."""
     L, W, H = v["length"], v["width"], v["height"]
     sp = spec(v)
+    if v.get("body"):
+        return real_shell(v) + cab_for(v)
     out = []
     clamp = lambda a, b: (min(a, L - 50), min(b, L - 50))
 
@@ -809,13 +1236,24 @@ def shell_for(v):
     for y0, y1, z0, z1 in subtract((0, W, 0, H), [(ri, W - ri, rz0, rz1)]):
         out.append((L, L + WALL, y0, y1, z0, z1, "shell"))
 
-    # cab: floor, lower roof, raked-off windscreen simplified to a vertical pane,
-    # side walls with door openings, dashboard, wheel, and the seats
-    out.append((-NOSE, 0, 0, W, -WALL, 0, "cab"))
-    out.append((-NOSE + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
-    out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
+    return out + cab_for(v)
+
+
+def cab_for(v):
+    """The cab: floor, lower roof, raked-off windscreen simplified to a vertical pane, side
+    walls with door openings, dashboard, wheel, and the seats - then the four road wheels.
+    A variant on the real body carries the real nose length (spec 'nose'); its shape then
+    comes from solids.py and these boxes only stand in for it with the props off."""
+    W = v["width"]
+    nose = spec(v).get("nose", NOSE)
+    door = (-1300, -150, 300, 1350) if nose != NOSE else (-1200, -350, 300, 1400)
+    out = []
+    out.append((-nose, 0, 0, W, -WALL, 0, "cab"))
+    out.append((-nose + 100, -100, 0, W, CAB_ROOF, CAB_ROOF + WALL, "cab"))
+    if nose == NOSE:
+        out.append((-NOSE + 50, -NOSE + 90, 60, W - 60, 900, CAB_ROOF, "glass"))
     for y0, y1 in ((-WALL, 0), (W, W + WALL)):
-        for x0, x1, z0, z1 in subtract((-NOSE, 0, 0, CAB_ROOF), [(-1200, -350, 300, 1400)]):
+        for x0, x1, z0, z1 in subtract((-nose, 0, 0, CAB_ROOF), [door]):
             out.append((x0, x1, y0, y1, z0, z1, "cab"))
     out.append((-1250, -1000, 60, W - 60, 700, 950, "dash"))
     out.append((-1050, -980, W - 620, W - 280, 950, 1300, "dash"))      # steering wheel
@@ -856,7 +1294,7 @@ def wheels_for(v):
     w0, w1, wd = v["well"]
     W = v["width"]
     out = []
-    for cx in (FRONT_AXLE, (w0 + w1) / 2):
+    for cx in (spec(v).get("front_axle", FRONT_AXLE), (w0 + w1) / 2):
         for y0 in (wd - TYRE_W, W - wd):            # inner face at the arch line, on both sides
             out.append((cx - TYRE_R, cx + TYRE_R, y0, y0 + TYRE_W,
                         AXLE_Z - TYRE_R, AXLE_Z + TYRE_R, "wheel"))
@@ -1223,9 +1661,44 @@ def props_data(kinds=None):
             if kinds is not None and kind not in kinds:
                 continue
             out[kind] = {"yaw": yaw.get(kind, 0),
-                         "fit": "keep" if kind in KEEP_SHAPE else "fill",
+                         "fit": "real" if kind in REAL_SIZE else "keep" if kind in KEEP_SHAPE else "fill",
+                         "own": kind in OWN_COLOURS or kind.startswith("v2-real-"),
                          "glb": base64.b64encode(open(os.path.join(d, name), "rb").read()).decode()}
     return out
+
+
+# Furniture drawn as its own mesh per box (solids.py builds each one at that box's size, so a
+# cushion and a locker of the same kind are never stretched from one shape)
+FURNITURE = ("BENCH", "FOOTWELL -> BED", "HOB", "SINK", "REAR BENCH", "LOCKER", "WARDROBE",
+             "overhead", "bed", "infill", "backrest", "pillow", "table", "leg", "ftable",
+             "ftablep", "farm", "parm", "ptable", "ptablep", "shower",
+             "seat", "dash", "litter", "litterlid", "wheel")
+
+
+def furniture_keys(v, boxes):
+    """The mesh key for each box, or None: '<variant>-<kind>-<n>' for a furniture box of a
+    variant whose REGISTRY entry sets furniture=True."""
+    if not spec(v).get("furniture"):
+        return [None] * len(boxes)
+    seen, out = {}, []
+    tag = v["out"].split("/")[0]
+    for b in boxes:
+        k = b[6]
+        if k in FURNITURE:
+            n = seen.get(k, 0)
+            seen[k] = n + 1
+            out.append("%s-%s-%d" % (tag, k.lower().replace(" -> ", "-").replace(" ", "-"), n))
+        else:
+            out.append(None)
+    return out
+
+
+def runs_for(v):
+    """Cables and pipes for the viewer, from systems.py - only for a variant that has them."""
+    if not spec(v).get("runs"):
+        return []
+    import systems
+    return systems.runs()
 
 
 def plan_image(v, path):
@@ -1240,12 +1713,19 @@ def viewer_data(v, out):
     """One variant's geometry for the viewer. `out` is the variant's folder, where the
     schema overlay image is written on the way."""
     sp = spec(v)
-    used = {b[6] for b in boxes_for(v, with_shell=True)}
+    # no roofs, over the load area or the cab: the viewer is for looking in from above. A
+    # variant with a real body keeps its roof as its own kind, behind a switch that starts off.
+    boxes = [b for b in boxes_for(v, with_shell=True)
+             if not (b[6] in ("shell", "cab") and b[4] in (v["height"], CAB_ROOF))]
+    used = {b[6] for b in boxes}
     return {
         "title": v["title"], "note": v["note"],
-        "length": v["length"], "width": v["width"], "height": v["height"], "nose": NOSE,
+        "length": v["length"], "width": v["width"], "height": v["height"], "nose": sp.get("nose", NOSE),
+        "bodyparts": ([{"k": k, "key": "%s-body-%s" % (v["out"].split("/")[0], k)}
+                       for k in ("shell", "roof", "cab")] if sp.get("bodymesh") else []),
         "colours": KIND, "glassy": list(GLASSY), "stats": v.get("stats", []),
-        "names": NAMES, "appliances": sorted({b[6] for b in fitout(v)[1]}),
+        "propmap": sp.get("propmap", {}), "runs": runs_for(v),
+        "names": dict(NAMES, **sp.get("names", {})), "appliances": sorted({b[6] for b in fitout(v)[1]}),
         "containers": list(sp["containers"]), "props": sorted(used),
         "cylinders": ["wheel"], "layers": sp["layers"],
         # the plan drawing itself, for the schema overlay: plan.py renders it cropped to the
@@ -1253,8 +1733,9 @@ def viewer_data(v, out):
         # redrawing an approximation of it
         "plan": plan_image(v, os.path.join(out, "overlay.png")),
         "boxes": [dict({"b": [x0, x1, y0, y1, z0, z1], "k": kind},
-                       **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}))
-                  for x0, x1, y0, y1, z0, z1, kind in boxes_for(v, with_shell=True)],
+                       **({"y": t} if (t := half_turn(v, (x0, x1, y0, y1, z0, z1, kind))) else {}),
+                       **({"p": fk} if fk else {}))
+                  for (x0, x1, y0, y1, z0, z1, kind), fk in zip(boxes, furniture_keys(v, boxes))],
     }
 
 
@@ -1269,7 +1750,9 @@ def write_viewer(names, path, title="Van Interior"):
     for name in names:
         v = VARIANTS[name]
         variants[name] = viewer_data(v, variant_dir(v))
-    used = set().union(*(set(d["props"]) for d in variants.values()))
+    used = set().union(*(set(d["props"]) | set(d["propmap"].values()) |
+                         {b["p"] for b in d["boxes"] if "p" in b} |
+                         {b["key"] for b in d["bodyparts"]} for d in variants.values()))
     data = {"order": list(names), "start": names[-1], "variants": variants,
             "vehicle": "VW Crafter L3H3",
             "props": props_data(used)}
@@ -1284,6 +1767,65 @@ def variant_dir(v):
 
 
 WELL_H = 350            # wheel arch height above the finished floor - not in the plan data
+
+
+def body_clashes(v):
+    """Everything solid that the REAL body cuts: through a leaning side wall, past the rear
+    doors, or into the roof. One line per part, with how far it goes in. Empty for the box
+    variants - their walls are the box."""
+    if not v.get("body"):
+        return []
+    L, W, H = v["length"], v["width"], v["height"]
+    out = []
+    people = [b[:6] + ("person on a seat",) for b in spec(v).get("sitter", ())]
+    for x0, x1, y0, y1, z0, z1, kind in boxes_for(v) + people:
+        if kind == "grey" and z1 <= 0:
+            continue                                    # underslung, outside on purpose
+        za, zb = max(z0, 0), min(z1, H)
+        i = wall_inset_max(v, za, zb)
+        # the lowest height at which the wall reaches the box - a tall carcass that meets the
+        # lean only near the ceiling is a different problem from a bench too wide at the floor
+        start = lambda gap: next(z for z in range(int(za), int(zb) + 2, 10)
+                                 if wall_inset(v, min(z, zb)) > gap + 1)
+        hits = []
+        if y0 < i - 1:
+            hits.append("passenger wall by %d (from z %d)" % (i - y0, start(y0)))
+        if y1 > W - i + 1:
+            hits.append("driver wall by %d (from z %d)" % (y1 - (W - i), start(W - y1)))
+        if x1 > L + 1:
+            hits.append("rear doors by %d" % (x1 - L))
+        if z1 > H + 1:
+            hits.append("roof by %d" % (z1 - H))
+        if hits:
+            out.append("%s at x %d-%d, z %d-%d: into the %s" % (kind, x0, x1, z0, z1, ", ".join(hits)))
+    body, sp = v["body"], spec(v)
+    # Windows only inside a stamped window field on their own side.
+    for side, wx0, wx1, wz0, wz1 in sp["windows"]:
+        if not any(s == side and fx0 <= wx0 and wx1 <= fx1 and fz0 <= wz0 and wz1 <= fz1
+                   for s, fx0, fx1, fz0, fz1 in body.get("window_fields", ())):
+            out.append("window %s x %d-%d, z %d-%d: outside the stamped window fields"
+                       % (side, wx0, wx1, wz0, wz1))
+    # Roof cut-outs clear of every roof bow.
+    c = body.get("bow_clear", 0)
+    for fx0, fx1, fy0, fy1 in sp["fans"]:
+        hit = [b for b in body.get("roof_bows", ()) if fx0 - c < b < fx1 + c]
+        if hit:
+            out.append("roof cut-out x %d-%d: over the roof bow at x %s"
+                       % (fx0, fx1, ", ".join(str(b) for b in hit)))
+    return out
+
+
+def body_check(v):
+    """Report the real body's clashes; fatal only once the variant says it is adapted."""
+    clashes = body_clashes(v)
+    if not clashes:
+        return
+    if v["body"].get("strict"):
+        raise AssertionError("body check failed: " + "; ".join(clashes))
+    print("BODY - %d parts cut by the real walls (not fatal yet, body.strict is False):"
+          % len(clashes))
+    for c in clashes:
+        print("  " + c)
 
 
 def check(v):
@@ -1316,13 +1858,21 @@ def check(v):
         for b in app[i + 1:]:
             if overlap(a[:6], b[:6]):
                 bad.append("%s clashes with %s" % (a[6], b[6]))
-        if not (0 <= a[0] and a[1] <= L and 0 <= a[2] and a[3] <= W and a[5] <= H):
+        if not v.get("body") and not (0 <= a[0] and a[1] <= L and 0 <= a[2] and a[3] <= W
+                                      and a[5] <= H):
             bad.append("%s sticks out of the van" % a[6])
-        if a[6] == "grey":
+        if a[6] == "grey" and a[5] <= 0:
             continue                                    # underslung, deliberately outside
         if not housed(a):
             bad.append("%s is not inside any cabinet" % a[6])
-    assert not bad, "appliance check failed: " + "; ".join(bad)
+    if v.get("body"):
+        built = [b for b in fitout(v)[0] if b[6] in ("bowl", "insert", "sinkrim")]
+        for a in app:
+            for b in built:
+                if overlap(a[:6], b[:6]):
+                    bad.append("%s runs into the sink (%s)" % (a[6], b[6]))
+    assert not bad, "appliance check failed: " + "; ".join(sorted(set(bad)))
+    body_check(v)
 
     # Nothing may occupy the space a seated person does - except the seat they sit on, and
     # the cushion on top of it. A table at 760 over the thighs is fine; the arm that carries
@@ -1342,8 +1892,9 @@ def check(v):
     # to split it is still open, and a hard failure would block every other drawing meanwhile.
     if v.get("well"):
         w0, w1, wd = v["well"]
+        well_h = v["body"]["arch_h"] if v.get("body") else WELL_H
         for a in app:
-            if a[6] == "grey" or a[1] <= w0 or a[0] >= w1 or a[4] >= WELL_H:
+            if a[6] == "grey" or a[1] <= w0 or a[0] >= w1 or a[4] >= well_h:
                 continue
             for y0, y1 in ((0, wd), (W - wd, W)):
                 across = min(a[3], y1) - max(a[2], y0)
@@ -1362,6 +1913,92 @@ def check(v):
     print("check ok - %d appliances placed" % len(app))
 
 
+def body_sections(v, path, stations=((1500, "galley, x 1500"), (2400, "dinette, x 2400"),
+                                      (3100, "garage, x 3100"))):
+    """Cross-sections through the real body, looking forward: v2's old box line, the real
+    wall, and every solid the cut passes through - red where it pokes into the wall. One
+    picture of what the lean costs, at the three places it costs the most."""
+    from matplotlib.patches import Rectangle as R, Polygon as P
+    W, H = v["width"], v["height"]
+    boxes = boxes_for(v)
+    fig, axes = plt.subplots(1, len(stations), figsize=(6 * len(stations), 6.6), dpi=130)
+    pts = v["body"]["profile"]
+    for ax, (x, title) in zip(axes, stations):
+        ax.add_patch(R((0, 0), W, H, fc="none", ec="#999", lw=1, ls=(0, (5, 4))))
+        bare = [(i, z) for z, i in pts] + [(W - i, z) for z, i in reversed(pts)]
+        ax.add_patch(P(bare, closed=True, fc="none", ec="#999", lw=1.0))
+        c = v["body"].get("clad", 0)
+        fin = [(i + c, z) for z, i in pts] + [(W - i - c, z) for z, i in reversed(pts)]
+        ax.add_patch(P(fin, closed=True, fc="#f7f5f0", ec="#222", lw=2.2))
+        if v.get("well") and v["well"][0] <= x <= v["well"][1]:
+            w0, w1, wd = v["well"]
+            for y0, y1 in ((0, wd), (W - wd, W)):
+                ax.add_patch(R((y0, 0), y1 - y0, v["body"]["arch_h"], fc="#d9d4c8", ec="#777"))
+        for x0, x1, y0, y1, z0, z1, kind in boxes:
+            if not (x0 <= x < x1) or kind == "grey":
+                continue
+            i = wall_inset_max(v, max(z0, 0), min(z1, H))
+            bad = y0 < i - 1 or y1 > W - i + 1
+            ax.add_patch(R((y0, z0), y1 - y0, z1 - z0, fc=(1, .82, .8, .55) if bad else (.85, .87, .9, .45),
+                           ec="#c0392b" if bad else "#667", lw=1.3 if bad else .7))
+        for z, lab in ((0, "floor"), (900, "900"), (1540, "1540"), (H, "ceiling %d" % H)):
+            i = wall_inset(v, z)
+            ax.annotate("", (i, z), (W - i, z), arrowprops=dict(arrowstyle="<->", color="#2c6e9b", lw=.8))
+            ax.text(W / 2, z + 12, "%d wide at %s" % (W - 2 * i, lab), ha="center", va="bottom",
+                    fontsize=7.5, color="#2c6e9b")
+        ax.set_title(title + "  (looking aft from the cab, passenger side left)", fontsize=9)
+        ax.set_xlim(-60, W + 60); ax.set_ylim(-60, H + 80); ax.set_aspect("equal")
+        ax.tick_params(labelsize=6)
+    fig.suptitle("v2-real - finished walls (black) over the bare rib faces (grey), inside v2's "
+                 "1832 box (dashed). Red: parts the finished wall cuts.", fontsize=10)
+    fig.tight_layout()
+    fig.savefig(path, facecolor="white")
+    plt.close(fig)
+    print("wrote", path)
+
+
+def roof_plan(v, path):
+    """The roof from above: everything on it, the known roof bows, VW's roof-rack mounting
+    points, and the tarp rail. Nose at the left, passenger side at the top - like the plan."""
+    from matplotlib.patches import Rectangle as R
+    sp, body = spec(v), v["body"]
+    L, W = v["length"], v["width"]
+    edge = 3265                                            # the roof's rear edge
+    top = wall_inset(v, v["height"], bare=True)
+    fig, ax = plt.subplots(figsize=(12, 5.2), dpi=150)
+    ax.add_patch(R((0, top), edge, W - 2 * top, fc="#f3f1ec", ec="#222", lw=2))
+    for b in body.get("roof_bows", ()):
+        ax.plot([b, b], [top, W - top], color="#b03a3a", lw=1.2)
+        ax.text(b, W - top + 40, "bow %d" % b, color="#b03a3a", fontsize=6, ha="center", va="top")
+    for d in (133, 395, 661, 852, 1133, 1482, 1759, 2179, 2599, 2878):     # VW L3, from the rear
+        for y in (top + 20, W - top - 20):
+            ax.plot(edge - d, y, marker="+", color="#777", ms=6)
+    ax.text(edge - 133, top - 25, "+ VW roof-rack points (may be bows - measure)", color="#777",
+            fontsize=6, ha="right", va="bottom")
+    ax.plot([300, 3300], [top - 12, top - 12], color="#8a6d3b", lw=3)
+    ax.text(1800, top - 45, "tarp keder rail - passenger side", color="#8a6d3b", fontsize=7, ha="center")
+    fw, fd = PRODUCTS["maxxfan-deluxe"]["outer"]
+    items = [(x0, x1, y0, y1, k) for x0, x1, y0, y1, z0, z1, k in sp.get("roof_kit", ())]
+    for x0, x1, y0, y1 in sp["fans"]:
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        items.append((cx - fw / 2, cx + fw / 2, cy - fd / 2, cy + fd / 2, "fan"))
+        ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc="none", ec="#fff", lw=1, ls="--", zorder=4))
+    items.sort(key=lambda it: it[4] != "rack")                  # rails and bars underneath
+    colour = {"fan": "#3b3e44", "solar": "#1f2f52", "starlink": "#bbb", "rack": "#9aa0a6"}
+    label = {"fan": "MaxxFan\n%d x %d" % (fw, fd), "solar": "solar ~200 W\n1485 x 668",
+             "starlink": "Starlink\nMini", "rack": ""}
+    for x0, x1, y0, y1, k in items:
+        ax.add_patch(R((x0, y0), x1 - x0, y1 - y0, fc=colour[k], ec="#111", lw=1, zorder=3))
+        ax.text((x0 + x1) / 2, (y0 + y1) / 2, label[k], color="#fff" if k != "starlink" else "#222",
+                fontsize=7, ha="center", va="center", zorder=5)
+    ax.set_xlim(-150, edge + 150); ax.set_ylim(W + 60, -120); ax.set_aspect("equal")
+    ax.set_title("v2-real roof, from above - nose left, passenger side up. Roof load %s" %
+                 "within VW's 150 kg (see payload.md)", fontsize=9)
+    ax.tick_params(labelsize=6)
+    fig.tight_layout(); fig.savefig(path, facecolor="white"); plt.close(fig)
+    print("wrote", path)
+
+
 def main(name):
     v = VARIANTS[name]
     if "height" not in v:
@@ -1371,12 +2008,15 @@ def main(name):
     check(v)
     render(v, os.path.join(out, "3d"))
     write_obj(v, os.path.join(out, "model.obj"))
+    if v.get("body"):
+        body_sections(v, os.path.join(out, "sections.png"))
+        roof_plan(v, os.path.join(out, "roof.png"))
     write_viewer([name], os.path.join(out, "viewer.html"), v.get("viewer_title", "Van Interior"))
 
 
 # The versions the combined viewer switches between, in the order its buttons show them.
 # The last one is where it opens.
-VIEWER_ALL = ("v1", "v2", "v3")
+VIEWER_ALL = ("v1", "v2", "v3", "v2-real")
 
 
 def main_all():
@@ -1386,6 +2026,138 @@ def main_all():
     write_viewer(list(VIEWER_ALL), os.path.join(HERE, "viewer.html"), "Crafter L3H3 Interior")
 
 
+# VanSpace3D (vanspace3d.com) saves a build as Unity JsonUtility JSON: one "Parent" per placed
+# item, holding the catalogue item by name. Its "Cube" is a 1-unit mesh centred on its pivot,
+# 1 unit = 100 mm, +z toward the cab, +x toward the passenger wall, +y up, x = 0 on the
+# centre line. Measured off its own van meshes, 2026-09-23. Its names run one size up from
+# VW's: its "L2H2" is a real L3H3 inside (3440 x 1836 x 1953), its "L3H3" is an L4 with the
+# super-high roof (4294 x 1838 x 2200).
+VS3D_SAVES = os.path.expanduser("~/AppData/LocalLow/vanspace 3D/vanspace 3D/saves")
+VS3D_FLOOR = 4.47                      # y of the floor top, unscaled
+VS3D_RAW_H = 1861                      # our van's raw load height: 4MOTION, VW brochure
+VS3D_VANS = {                          # van -> (z of the bulkhead's aft face, y of the ceiling,
+    "VW Cr L2H2": (5.37, 24.00, 364.0),  #   default wheelbase - in cm: 3640, the real L3's)
+    "VW Cr L3H3": (4.65, 26.40, 450.0),
+}
+# Their vans are the FWD height. The save scales the van about its origin, so a yScale that
+# brings the ceiling down to VS3D_RAW_H brings the floor down with it - the cubes follow.
+
+
+# Kinds that go in as a real catalogue item, at the item's own size: the save names it and
+# the app loads the mesh. Bounds are the item's mesh in its own frame, VanSpace3D units,
+# read out of the app's asset bundles with UnityPy on 2026-09-24 - pivots are not always
+# centred. Materials must match the prefab's renderer, or the item loads untextured.
+# Everything else - and anything the catalogue has no honest stand-in for - stays a Cube.
+VS3D_ITEMS = {   # kind -> (catalogue name, (min x, y, z), (max x, y, z), materials)
+    "fridgedoor": ("Osculati Isotherm Fridge 65L", (-2.305, -2.707, -2.638), (2.305, 2.707, 2.638),
+                   ["Steel Rough"] * 4),     # front door, but 65 L against our 90 L
+    "cassette": ("Porta Potti 565E", (-2.087, -2.272, -2.478), (2.087, 2.272, 2.478),
+                 ["Sla Plastic White"] * 2),  # Thetford, as the C223 is - portable, not cassette
+    "battery": ("Car Battery Large", (-1.686, -1.061, -0.848), (1.686, 1.061, 0.848),
+                ["Sla Plastic", "Sla Plastic", "Steel Rough", "Sla Plastic Red",
+                 "Sla Plastic vanspace Blue"]),  # group 31 case, near enough
+    "inverter": ("Inverter", (-1.947, -0.285, -3.555), (0.652, 0.530, 0.061), ["inverter_mat"]),
+    "tap": ("Foldable RV Faucet Rotating Single Handle", (-0.474, -1.178, -0.986),
+            (0.474, 1.178, 0.986), ["Steel Rough"]),
+    "pillow": ("Pillow", (-2.317, -0.995, -1.134), (2.317, 0.995, 1.134), ["Satin Fabric"]),
+    # Tried and left as Cubes, 2026-09-24: the handheld showers hang 810 of hose off a 620
+    # rail and would poke through the ceiling; the pillow set is four meshes in one item.
+}
+
+
+def vs3d_item(v, box, layer, front, floor):
+    """A catalogue item standing on the box's floor, centred on its footprint, turned 90 when
+    that fits the box better. Returns the Parent and a line comparing the two sizes."""
+    x0, x1, y0, y1, z0, z1, kind = box
+    name, lo, hi, mats = VS3D_ITEMS[kind]
+    ex, ey, ez = (h - l for h, l in zip(hi, lo))
+    cx, cz = (lo[0] + hi[0]) / 2, (lo[2] + hi[2]) / 2
+    across, along = (y1 - y0) / 100, (x1 - x0) / 100
+    turn = abs(ez - across) + abs(ex - along) < abs(ex - across) + abs(ez - along)
+    if turn:     # +90 about y: the item's +x points aft (-z), its +z toward the passenger wall
+        rot = {"x": 0.0, "y": 0.5 ** 0.5, "z": 0.0, "w": 0.5 ** 0.5}
+        cx, cz, ex, ez = cz, -cx, ez, ex
+    else:
+        rot = {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0}
+    pos = {"x": (v["width"] / 2 - (y0 + y1) / 2) / 100 - cx,
+           "y": floor + z0 / 100 - lo[1],
+           "z": front - (x0 + x1) / 200 - cz}
+    white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
+    sub = dict(Name=name + " (1)", Position=pos, Rotation=rot, Scale={"x": 1.0, "y": 1.0, "z": 1.0},
+               IsSafeDestroyed=False, Visible=True, SubItems=[], MaterialNames=mats,
+               MaterialColors=[white] * len(mats), Layer=layer, IsDuplicate=False)
+    parent = dict(sub, Name=name, Visible=False, SubItems=[sub], MaterialNames=[], MaterialColors=[])
+    size = lambda a, b, c: "%4.0f x %4.0f x %4.0f" % (a, b, c)
+    over = [ax for ax, i, b in (("along", ez, along), ("across", ex, across), ("up", ey, (z1 - z0) / 100))
+            if i > b + 0.05]    # 5 mm of slack
+    note = "%-11s %-42s box %s  item %s%s%s" % (
+        kind, name, size(x1 - x0, y1 - y0, z1 - z0), size(ez * 100, ex * 100, ey * 100),
+        "  turned" if turn else "", "  TOO BIG " + "/".join(over) if over else "")
+    return parent, note
+
+
+def vs3d_box(v, box, layer, front, floor):
+    """One of our boxes as a VanSpace3D Parent holding a scaled Cube."""
+    x0, x1, y0, y1, z0, z1, kind = box
+    pos = {"x": (v["width"] / 2 - (y0 + y1) / 2) / 100,
+           "y": floor + (z0 + z1) / 200,
+           "z": front - (x0 + x1) / 200}
+    rot = {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0}
+    hexcol = KIND.get(kind, "#bbbbbb")
+    colour = dict(zip("rgb", (int(hexcol[i:i + 2], 16) / 255 for i in (1, 3, 5))), a=1.0)
+    cube = dict(Name="Cube", Position=pos, Rotation=rot,
+                Scale={"x": (y1 - y0) / 100, "y": (z1 - z0) / 100, "z": (x1 - x0) / 100},
+                IsSafeDestroyed=False, Visible=True, SubItems=[],
+                MaterialNames=["Sla Plastic Grey"], MaterialColors=[colour],
+                Layer=layer, IsDuplicate=False)
+    return dict(cube, Name="Parent", Scale={"x": 1.0, "y": 1.0, "z": 1.0}, SubItems=[cube],
+                MaterialNames=[], MaterialColors=[])
+
+
+def write_vs3d(name, van="VW Cr L2H2"):
+    """vN.vs3d straight into VanSpace3D's saves folder: every box as a coloured Cube, one
+    layer per kind so each can be hidden, except the kinds in VS3D_ITEMS, which go in as
+    the real catalogue item at its own size - printed against our box, so a catalogue item
+    that outgrows the space we gave it shows. Any van but the default gets its own file,
+    vN-<van>.vs3d."""
+    v = VARIANTS[name]
+    check(v)
+    front, ceiling, wheelbase = VS3D_VANS[van]
+    ys = VS3D_RAW_H / 100 / (ceiling - VS3D_FLOOR)
+    boxes = boxes_for(v)
+    kinds = list(dict.fromkeys(b[6] for b in boxes))
+    items = []
+    for b in boxes:
+        layer = kinds.index(b[6]) + 1
+        if b[6] in VS3D_ITEMS:
+            item, note = vs3d_item(v, b, layer, front, VS3D_FLOOR * ys)
+            print(note)
+            items.append(item)
+        else:
+            items.append(vs3d_box(v, b, layer, front, VS3D_FLOOR * ys))
+    white = {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0}
+    save = dict(VanModelName=van, ApplicationVersion="3.08", TimeOfDay=0.0,
+                CustomVan=False, CustomVanPresetName="", xScale=1.0, yScale=ys, zScale=1.0,
+                WallDimensions={"x": 0.0, "y": 0.0, "z": 0.0}, WheelbaseLength=wheelbase,
+                ExteriorColor=white, WallMaterialName="Aged Plywood", WallColor=white,
+                FloorMaterialName="Aged Plywood", FloorColor=white,
+                CeilingMaterialName="Aged Plywood", CeilingColor=white,
+                items=items, groups=[],
+                wires={"isWire": False, "Lines": []}, pipes={"isWire": False, "Lines": []},
+                wheelOnLeft=False,
+                labels=[{"name": "Base Layer", "index": 0}]
+                + [{"name": k, "index": i + 1} for i, k in enumerate(kinds)],
+                isBulkheadVisible=True, isSeatsVisible=True)
+    tag = "" if van == "VW Cr L2H2" else "-" + van.split()[-1]
+    path = os.path.join(VS3D_SAVES, name + tag + ".vs3d")
+    with open(path, "w") as f:
+        json.dump(save, f, indent=4)
+    print("wrote %s - %d boxes on %d layers, van height x%.3f" % (path, len(boxes), len(kinds), ys))
+
+
 if __name__ == "__main__":
     arg = sys.argv[1] if len(sys.argv) > 1 else "v1"
-    main_all() if arg == "viewer" else main(arg)
+    if arg == "vanspace":
+        write_vs3d(*(sys.argv[2:4] or ["v2"]))
+    else:
+        main_all() if arg == "viewer" else main(arg)

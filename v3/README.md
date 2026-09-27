@@ -3,6 +3,10 @@
 Started 2026-09-21. Reworked several times; current shape from 2026-09-22.
 **Plan and 3D model — iterating.** No photoreal impressions yet.
 
+**Drawn on the 4MOTION van since 2026-09-23:** finished ceiling **1781**, 100 mm under the
+front-wheel-drive van (VW brochure: 1861 vs 1961 raw). Overhead lockers top out at 1700,
+the shower head at 1760, and full-height parts follow the ceiling.
+
 ![plan](layout.png)
 
 Regenerate: `python plan.py v3` then `python model3d.py v3`, from the project root.
@@ -136,7 +140,7 @@ block its extra depth. 730 is still the widest entry of any version except v1's 
 | **Galley, return** — down the driver wall | **530 × 600**, worktop 900 | counter and the drainer end, **oven under**, its door onto the corridor |
 | Galley leaf | **600 × 450** at 900 | pulls up over the shoe locker |
 | Shoe locker | **600 × 450**, top 450 | shoes; the step to the cab, pass-through over it |
-| **Larder** | **200 × 600**, full height 1881 | ~0.23 m³ — a **tandem pull-out**, 200-wide front onto the aisle, 600-deep baskets |
+| **Larder** | **200 × 600**, full height 1781 | ~0.23 m³ — a **tandem pull-out**, 200-wide front onto the aisle, 600-deep baskets |
 | Aisle | **632** | runs straight into the corridor |
 | Entry clear at the door | **730** | of the 1300 aperture |
 
@@ -215,8 +219,8 @@ length went — and **split**, not full width:
 
 | | Size (mm) | |
 |---|---|---|
-| **Bathroom**, driver side | **600 × 1232** = 0.74 m², 1881 clear | sit-down shower **and** a permanent cassette WC |
-| **Garage**, passenger side | **600 × 600**, full height 1881 ≈ 0.68 m³ | loads through the **rear door** |
+| **Bathroom**, driver side | **600 × 1232** = 0.74 m², 1781 clear | sit-down shower **and** a permanent cassette WC |
+| **Garage**, passenger side | **600 × 600**, full height 1781 ≈ 0.64 m³ | loads through the **rear door** |
 
 **The extra 100 mm is all shower.** The WC's knee room is set across the room, not along it, so
 it stays at 662; what grows is the standing and sitting space in front of the tray, and the
@@ -265,7 +269,7 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
 | Fridge | 90 L hinged, over the arch, blocks the aisle | **90 L drawer, no arch** | better |
 | Work position | none | **the dinette, table at 745, two people** | new |
 | Hanging space | wardrobe 450 × 600 | **garage rail, 600 × 500 full height** | ≈ |
-| Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.68 m³ full height** + 2 benches under the bed | +55 % |
+| Garage | rear bench 1.10 m², ~400 clear ≈ 0.44 m³ | **0.64 m³ full height** + 2 benches under the bed | +45 % |
 | Galley shape | two runs across the aisle | **L into the corner behind the driver** | |
 | Entry clear at the door | 690 | **730** | +40 |
 | Travelling seats | 3 | 3 | = |
@@ -313,7 +317,7 @@ Options, all open: have one made, plumb two slim off-the-shelf tanks in series, 
    that matters or whether the leaf should stop at the locker's own width.
 13. **No photoreal impressions yet.** `impressions.py` has not been run on v3.
 
-**The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1881 and the
+**The pocket door stays a coloured box, on purpose.** Its slot is 40 × 600 × 1781 and the
 viewer stretches a mesh to fill its box, so any door leaf becomes a flat slab — which is what
 the box already looks like. The only thing a mesh would add is a recessed finger pull. The
 prompt is written in `props.py` if we ever change our mind; nothing else is.
