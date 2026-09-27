@@ -9,6 +9,7 @@ WC (even a tiny one), for a **short-term** van for two, with upgrades allowed. S
 | 1 | **this page** | models, ranking, my pick |
 | 2 | [listings.md](listings.md) | ≈ 45 vans for sale today in Germany and Czechia, with links |
 | 3 | [carthago-vs-lastrada-v6.md](carthago-vs-lastrada-v6.md) | Carthago Malibu 32.x against the La Strada V6: size, water, fridge, beds, weight |
+| 3 | [weight.md](weight.md) | weight limits of the Czech Carthago and the La Strada V6, our load, what to watch |
 
 **How sure:** model facts have a source per row in the research; prices are **asking** prices
 read from ads on 2026-09-26. "(unconf.)" = not confirmed.
