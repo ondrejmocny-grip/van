@@ -13,6 +13,8 @@ roof, cabinets, **no roof bed**. VB = price negotiable. H = historic plate.
 
 **How sure:** details come from a summary of each ad. Check before you call. Ads change daily.
 
+> ⭐ **Top 3 picks across all vans** (2026-09-27): La Strada 312D Waltershausen · this Czech Carthago · La Strada Ducato Doorn → [classic-vans-with-washroom](../classic-vans-with-washroom/README.md#-top-3-picks-2026-09-27)
+
 ## Short answer
 
 | | |
