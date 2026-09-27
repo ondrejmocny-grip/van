@@ -28,7 +28,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 2. its-wasser.de — drinking-water tap (German)
+## 2. its-wasser.de — drinking-water tap (German) — ✅ answered 2026-09-27 (use the "lang" version, reach 120 mm)
 
 **To:** its-wasser.de (contact form / shop e-mail)
 **Subject:** Frage zu Fil-1Weg 1/4 Edel kurz – lange Gewindeversion?

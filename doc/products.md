@@ -187,7 +187,7 @@ deep). All four are in the model and in the payload check.
 | | Reich Linnea L | 200 tall, reach 160 | made for camper pumps, fits 12 mm pipe | 109 | option — reach too short |
 | | Comet London | 180 tall, folds to 40, reach 145 | camper tap | 18 | option — reach too short |
 | Drinking filter | **Alb Filter Nano under-sink set** | housing Ø69 x 120; needs ~75 x 75 x 260 | **0.1 µm, certified against bacteria** (ASTM F838-15A); 5,000–7,000 L or 6 months, cartridge 59.90 | 170 | proposed |
-| Drinking tap | **its-wasser.de "Fil 1-Weg 1/4"**, **long-thread version** | outlet 228 above the worktop | 12 mm hole, 1/4" push-fit hose, ceramic quarter-turn | 109 | proposed — ask for the long thread; reach not published |
+| Drinking tap | **its-wasser.de "Fil-1Weg 1/4 Edel lang"** ([link](https://www.its-wasser.de/wasserhaehne-wasserhaehne-54-54.html)) | outlet 228 above the worktop, reach 120 (seller) | 12 mm hole, 70 mm thread (worktop ≤ 50), 1/4" push-fit hose, ceramic quarter-turn | 109 | proposed — confirmed by the seller 2026-09-27 |
 
 Why:
 
