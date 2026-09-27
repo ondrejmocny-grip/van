@@ -9,6 +9,7 @@ WC (even a tiny one), for a **short-term** van for two, with upgrades allowed. S
 | 1 | **this page** | models, ranking, my pick |
 | 2 | [listings.md](listings.md) | ≈ 45 vans for sale today in Germany and Czechia, with links |
 | 3 | [carthago-vs-lastrada-v6.md](carthago-vs-lastrada-v6.md) | Carthago Malibu 32.x against the La Strada V6: size, water, fridge, beds, weight |
+| 2 | [lastrada.md](lastrada.md) | **La Strada only**: 9 on the 3.5 t Sprinter, 5 on the 2xx, 3 on Jumper / Ducato |
 | 3 | [weight.md](weight.md) | weight limits of the Czech Carthago and the La Strada V6, our load, what to watch |
 
 **How sure:** model facts have a source per row in the research; prices are **asking** prices
@@ -51,7 +52,7 @@ Big Nugget (2007+, over budget), Westfalia California (no washroom), Dehler Opti
 
 1. **Carthago Malibu 32.x (T4)** — smallest, easiest to drive, table seating, washroom; the Czech
    one has the 102 PS TDI. A German **32.2** adds the lowering roof bed.
-2. **La Strada on Sprinter 312D** — same idea as the Carthago, bigger, the durable OM602 engine
+2. **La Strada on Sprinter 312D** ([own list](lastrada.md)) — same idea as the Carthago, bigger, the durable OM602 engine
    (timing chain). Waltershausen 1999, €18,500, washroom behind a door.
 3. **Pössl / Globecar, 244 Ducato-Boxer, 2.8** — best value and the most choice.
 4. Hymercar, Sven Hedin — real classics, but old and slow.
