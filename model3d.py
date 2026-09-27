@@ -915,9 +915,10 @@ APPLIANCES_V2R = [
     # Franke Lina Semi Pro: a spring-hose mixer, base at x ~1670, arm reaching 205 forward
     # over the bowl (to x ~1465), 410 tall - 65 under the locker over the sink (1400).
     (1465, 1700, 1575, 1635,  925, 1335, "tap"),
-    # drinking tap behind the mixer (toward the wall), its neck reaching 185 forward over the
-    # bowl - its-wasser Fil kurz; its reach is not published: it needs >= ~180
-    (1560, 1770, 1655, 1705,  925, 1205, "filtertap"),   # outlet 228 up; 280 in all, est.
+    # drinking tap beside the mixer (toward the wall) - its-wasser Fil-1Weg 1/4 Edel lang: reach
+    # 120 (seller, 2026-09-27), so its base sits at x ~1630, 60 aft of the rim; the outlet (x ~1510)
+    # is 50 inside the bowl's aft wall (1562)
+    (1495, 1655, 1655, 1705,  925, 1205, "filtertap"),   # outlet 228 up; 280 in all, est.
     (1600, 1860, 1615, 1690,  410,  485, "filter"),     # Alb Filter Nano + couplings, 0.1 micron
     # galley, passenger side - carcass y 70-635
     # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the

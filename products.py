@@ -184,16 +184,16 @@ PRODUCTS = {
              "(Fusion, ~320 long) for taste. Flow at 1.4 bar not published: ask or test. On the "
              "cold line to the drinking tap only",
         status="proposed"),
-    "its-fil-1weg-kurz": dict(
-        name="its-wasser.de 'Fil 1-Weg 1/4', drinking-water tap - LONG-thread version", kind="filtertap",
-        outer=(50, 120, 280), hole=12, spout_height=228, weight_kg=None, price_eur=(109, 109),
-        shop="its-wasser.de", source="https://www.its-wasser.de/wasserhaehne-wasserhaehne-61-61.html",
-        note="the 'kurz' (Fil-1Weg 1/4 Edel kurz) ships with a SHORT thread and is marked 'nicht fur "
-             "Arbeitsplatte geeignet': it is for a thin sink deck, not a worktop. Our sink has no "
-             "deck (20 mm rim), so the tap goes through the worktop -> ask for the long-thread "
-             "version. Brushed stainless, swivel spout, ceramic quarter-turn, 1/4 inch (6 mm) "
-             "push-fit hose, hole 12 mm (11.5-20). Spout outlet 228 above the worktop; total "
-             "height and reach not published - drawn 280 tall; needs ~180 reach to pour into the bowl",
+    "its-fil-1weg-lang": dict(
+        name="its-wasser.de 'Fil-1Weg 1/4 Edel lang', drinking-water tap, long thread", kind="filtertap",
+        outer=(50, 145, 280), hole=12, spout_height=228, reach=120, thread=70, worktop_max=50,
+        weight_kg=None, price_eur=(109, 109), shop="its-wasser.de",
+        source="https://www.its-wasser.de/wasserhaehne-wasserhaehne-54-54.html",
+        note="the long version of the 'kurz': 70 mm thread, worktop up to 50 mm (ours 30). Seller "
+             "(2026-09-27): reach 120 mm, measured. Brushed stainless, swivel spout, ceramic "
+             "quarter-turn, 1/4 inch (6 mm) push-fit hose, hole 12 mm (11.5-20), outlet 228 above "
+             "the worktop; total height not published - drawn 280. With 120 reach its base goes "
+             "~60 aft of the sink rim so it pours 50 inside the bowl",
         status="proposed"),
     "tefal-of4448": dict(
         name="Tefal Optimo OF4448 mini oven 19 L, hot air", kind="oven",

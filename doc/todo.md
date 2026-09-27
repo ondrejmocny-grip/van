@@ -12,8 +12,8 @@ Email drafts, ready to copy: [emails.md](emails.md).
   Franke publishes 9 l/min at 3 bar but no minimum. Ask sanitino.cz or Franke CZ. If not →
   Grohe Minta 32321002 (minimum 1.0 bar published). *(chosen 2026-09-25)*
 - [ ] **Blanco 227692 insert bowl** — is it **solid** (holds soapy water), not perforated?
-- [ ] **its-wasser drinking tap** — is there a **long-thread** version for a 20–30 mm worktop?
-  Its total height and spout reach (needs ~180 to pour into the bowl)?
+- [x] **its-wasser drinking tap** — answered 2026-09-27: the **"lang"** version (70 mm thread,
+  worktop up to 50 mm, 109 €); reach **120 mm**. Tap moved so it pours into the bowl.
 - [ ] **Alb Filter Nano** — flow at 1.4 bar?
 - [ ] **Victron MultiPlus C 12/2000** — its real size (datasheet 520 × 255 × 125, shops 375 × 214 × 110).
 - [ ] **Thetford Topline 922 hob** — how deep does it hang under the worktop? (drawn as 75)
