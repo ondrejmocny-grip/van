@@ -45,6 +45,26 @@ Builder: La Strada, Echzell (Hesse), founded 1986.
 | **Payload** | **≈ 500–700 kg** | **212D: ≈ 400 kg or less** · **312D: ≈ 940 kg** | the **312D** is the one to want |
 | Price (ads now) | €10–15k; Czech ≈ €14.7k | €11–18.5k; Berlin €16.5k | |
 
+## For scale: Fiat Doblò Combi, 2010 (2nd generation, type 263, short wheelbase)
+
+A normal small family van — to get a feeling for the size. Sources:
+[Wikipedia](https://en.wikipedia.org/wiki/Fiat_Dobl%C3%B2),
+[VanDimensions](https://vandimensions.com/database/fiat/doblo-2010).
+
+| | **Fiat Doblò Combi 2010** | **Carthago Malibu 32.x** | **La Strada V6** |
+|---|---|---|---|
+| Length | **4,390** (Maxi 4,740) | 5,050–5,190 → **+0.7–0.8 m** | 5,600 → **+1.2 m** |
+| Width, no mirrors | **1,832** | 1,840 → **same** | 1,933 → +10 cm |
+| Width with mirrors | 2,148 | 2,175 | ≈ 2,400+ (unconf.) |
+| Height | **1,845** (H1) | ≈ 2,750 → **+0.9 m** | 2,800–2,950 → **+1.0 m** |
+| Height inside | 1,305 — sit only | ≈ 1,850 — stand | ≥ 1,900 (unconf.) — stand |
+| Load length inside | 1,820 (cargo L1) | ≈ 2,885 | ≈ 3,300 |
+| Wheelbase | 2,755 (unconf.) | 3,320 | 3,550 |
+
+**In words:** the Carthago is **as wide as a Doblò** and about **one small car-boot longer**
+(+0.75 m) — it parks in a normal space, only it is ≈ 0.9 m taller. The La Strada is **a Doblò +
+1.2 m long, +10 cm wide, +1 m tall** — it needs a long space and no height barriers.
+
 ## What it means
 
 - **Size:** the La Strada is a size bigger — ≈ half a metre longer, 9 cm wider, a bit taller. More
