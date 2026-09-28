@@ -1,6 +1,6 @@
 # About us and how we'll use the van
 
-Last updated: 2026-09-17
+Last updated: 2026-09-28
 
 ## Who
 
@@ -10,6 +10,9 @@ Last updated: 2026-09-17
   The bikes go on a **rack on the rear doors**, so nothing else may claim them (2026-09-24:
   that is why the spare wheel stays under the van and the grey tank moved inside).
   **Bikes left out for now** (2026-09-24) to stay under 3500 kg; the rear doors stay free for them.
+- **What we drive now:** a **Fiat Doblò mini-camper**. Its bed is **89 cm wide at the legs,
+  105 cm at the widest** — "manageable, but not ideal long term for two people" (Ondrej,
+  2026-09-28). **Use it as the lower limit:** any bed for long trips should be clearly wider.
 
 ## How we'll use it
 
