@@ -147,7 +147,7 @@ See [budget.md](../v2-real/budget.md).
 - **Electrics and water products proposed 2026-09-25 ([products.md](products.md)):** 2 x Ective LC 150 LT,
   **MultiPlus C 12/2000** instead of the 12/3000 (-6 kg; the oven is the biggest AC load now), MPPT 100/30,
   Orion XS 50 A with a D+ signal, SmartShunt, no Cerbo. Both tanks **made to size** (no catalogue tank fits),
-  Shurflo Trail King 7, Whale Gulper 220 for the shower, Votronic sensors.
+  LILIE Soft 11.3 pump (2.1 bar), Whale Gulper 220 for the shower, Votronic sensors.
 - **Wiring, gas and water routed 2026-09-25 ([v2-real/systems.md](../v2-real/systems.md)):** a
   distribution box in the driver bench beside the batteries (fuses, shunt, DC-DC, fuse block),
   the MPPT and shore box in the garage. All water crosses to the passenger side, away from the

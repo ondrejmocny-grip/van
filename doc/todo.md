@@ -8,14 +8,17 @@ the v2-real README).
 
 Email drafts, ready to copy: [emails.md](emails.md).
 
-- [ ] **Franke Lina Semi Pro (mixer)** — does it work at **1.4 bar** (our Shurflo pump, ~6.8 l/min)?
+- [ ] **Franke Lina Semi Pro (mixer)** — does it work at **2.1 bar** (pump changed 2026-09-28 from 1.4 bar; the question sent asked about 1.4)?
   Franke publishes 9 l/min at 3 bar but no minimum. Ask sanitino.cz or Franke CZ. If not →
   Grohe Minta 32321002 (minimum 1.0 bar published). *(chosen 2026-09-25)*
 - [ ] **Blanco 227692 insert bowl** — is it **solid** (holds soapy water), not perforated?
 - [x] **its-wasser drinking tap** — answered 2026-09-27: the **"lang"** version (70 mm thread,
   worktop up to 50 mm, 109 €); reach **120 mm**. Tap moved so it pours into the bowl.
-- [ ] **Alb Filter Nano** — flow at 1.4 bar?
-- [ ] **Victron MultiPlus C 12/2000** — its real size (datasheet 520 × 255 × 125, shops 375 × 214 × 110).
+- [x] **Alb Filter Nano** — answered 2026-09-28: ~11 l/min at 3 bar, pump **min. 1.5 bar** → pump changed to
+  the LILIE Soft 11.3 (2.1 bar). Alb sells no adapters; buy John Guest **PM011214E** (inlet, 12 mm × G½" male) and
+  **CI320814S** (outlet, G½" female × ¼") + locking clips — see `products.py` (alb-nano).
+- [x] **Victron MultiPlus C 12/2000** — answered 2026-09-28: **520 × 255 × 125** is right (the model already uses it);
+  DC cable **50 mm²** (Victron) — in systems.md, as 105 °C cable run on its own.
 - [ ] **Thetford Topline 922 hob** — how deep does it hang under the worktop? (drawn as 75)
 - [ ] **Weigh one poplar sheet** (15 mm, 2520 x 1220) at Dřevobis: 5.3 kg/m² (~17 kg a sheet)
   is assumed; if it is ~21 kg (450 kg/m³) the build is ~55 kg heavier.

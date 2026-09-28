@@ -48,7 +48,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 3. Alb Filter — flow at low pressure (German)
+## 3. Alb Filter — flow at low pressure (German) — ✅ answered 2026-09-28 (min. 1.5 bar; pump changed to 2.1 bar)
 
 **To:** Alb Filter (alb-filter.com, contact form)
 **Subject:** Nano Untertisch-Set – Durchfluss bei 1,4 bar?
@@ -68,7 +68,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 4. Victron dealer — MultiPlus C size (German)
+## 4. Victron dealer — MultiPlus C size (German) — ✅ answered 2026-09-28 (520 × 255 × 125; 50 mm²)
 
 **To:** bau-tech.shop (or any Victron dealer)
 **Subject:** MultiPlus C 12/2000/80-30 – tatsächliche Abmessungen

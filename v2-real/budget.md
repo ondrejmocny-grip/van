@@ -11,7 +11,7 @@ sources are in the list under the table. CZK at 25 per €. **est.** = no shop p
 | **Furniture** | poplar boards (cut list, 28,100 CZK) 1,125; worktop + wet lining **est.** 200–400; latches, hinges, runners, table post **est.** 300–500; foam + fabric **est.** 300–500 | **1,925–2,525** |
 | **Kitchen** | Vitrifrigo C95L 832 (20,790 CZK); Thetford hob 359–508; oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | **2,111–2,260** |
 | **Bathroom** | Porta Potti 565E 180 (4,499 CZK); ABS shower tray 92 (2,290 CZK, 830 × 670 — cut or made to fit); shower mixer + head 80 (1,990 CZK); drain, curtain, small parts **est.** ~0–100 | **350–450** |
-| **Water** | 2 tanks made to size **est.** 500–800 (quotes asked); Shurflo + Gulper + sensors 549–569; filler 30–60; pipes and fittings **est.** 150–250 | **1,229–1,679** |
+| **Water** | 2 tanks made to size **est.** 500–800 (quotes asked); LILIE pump + Gulper + sensors 522–561; filler 30–60; pipes and fittings **est.** 150–250 | **1,229–1,679** |
 | **Gas** | Truma B10, gas only 729; MonoControl CS regulator 132 (3,300 CZK); Alugas 6 kg bottle 139; copper pipe, locker, floor vent, gas + CO detector **est.** 150–250; installer **est.** 100–250 | **1,250–1,500** |
 | **Electrics** | 2 × Ective 150 Ah 2,220–2,400; MultiPlus C 975–1,145; MPPT + Orion 50 A + shunt 390–435; shore inlet + 230 V box 120–220; 2 × Victron 175/185 W panels 180–275; cable, fuses, busbars, lighting **est.** 400–600; 25 m CEE shore cable **est.** 60–80 | **4,345–5,155** |
 | **Other** | Starlink Mini 200 (4,999 CZK) + mount **est.** 50; roof bars (Thule WingBar Evo on fixpoints, 2 bars 300, 3–4 needed) 450–600; tarp ~100; window covers, bug screen **est.** 100–150 | **900–1,100** |
@@ -128,7 +128,7 @@ carries cooking and hot water" no longer applies to v2-real.
 | CEE inlet + 230 V box (2-pole RCD + 2 MCB) | ~120–220 |
 | **Electrics priced so far** (without panels, cable, fuses, lighting) | **~3,700–4,200** |
 | Fresh + grey tank, made to size | ~400–1,000 |
-| Shurflo pump + Whale Gulper 220 + Votronic sensors | ~550–570 |
+| LILIE Soft pump + Whale Gulper 220 + Votronic sensors | ~520–560 |
 | **Water priced so far** (without Truma B10, pipes, fittings, taps) | **~950–1,570** |
 
 **Sink and taps, priced 2026-09-25** ([products.md](../doc/products.md)): Blanco Andano 400 sink 306 +

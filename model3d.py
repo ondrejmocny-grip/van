@@ -1089,7 +1089,7 @@ REGISTRY["v2-real"] = dict(REGISTRY["v2"], heights=HEIGHTS_V2R, extra=EXTRA_V2R,
                                   "calorifier": "Truma B10 gas water heater",
                                   "battery": "Ective LC 150 LT, 150 Ah",
                                   "inverter": "Victron MultiPlus C 12/2000/80",
-                                  "plumbing": "Pump Shurflo Trail King 7, filter, trap",
+                                  "plumbing": "Pump LILIE Soft 11.3, filter, trap",
                                   "electrics": "Distribution: fuses, shunt, busbars, Orion XS, fuse block",
                                   "board": "Garage board: MPPT 100/30, 230 V box A, PV isolator"},
                            # No cassette hatch in the body (2026-09-24): the WC's waste tank is
