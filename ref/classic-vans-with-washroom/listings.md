@@ -10,6 +10,17 @@ vans (no alcove / coachbuilt), roughly €6–21k. Carthago Malibus are in
 **How sure:** each row is a summary of the ad — check before you call. (i) = inferred from the
 model, not the ad. CZK → € at 25. KA = `https://www.kleinanzeigen.de/s-anzeige/…`.
 
+## ⭐ Top 3 picks (2026-09-27)
+
+| # | Van | € | Why | Watch out | Link |
+|---|---|---|---|---|---|
+| **1** | **La Strada 312D**, Waltershausen DE — 11/1999, 212,000 km, manual | **18,500** | table seating + shower/WC behind a door; **3.5 t, ≈ 940 kg payload**; OM602 with timing chain; garage-kept, full history, TÜV 07/2028; ≈ 400 km from Prague | **rust** (Sprinter), German import, 5.6 m, Euro 2 | [ad](https://www.kleinanzeigen.de/s-anzeige/wohnmobil-mercedes-sprinter-la-strada/3457240186-220-3721) · [more](lastrada.md) |
+| **2** | **Carthago Malibu 32 (32.3)**, Beroun CZ — 1997 2.5 TDI, 380,000 km | ≈ 14,700 (369,000 CZK) | local, Czech papers, dealer demo; small (5.1 m); washroom | 380,000 km, **2 timing belts**, tight **rear axle (1,410 kg)** | [ad](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) · [more](../vw-t4-carthago-1997/README.md) |
+| **3** | **La Strada on Ducato 244**, Doorn NL — 2005, **92,172 km** | 15,500 | Carthago size (**5.10 m**), wet room, low km, new turbo | engine not stated (2.0 / 2.3 / 2.8?), ≈ 900 km away | [ad](https://www.marktplaats.nl/v/caravans-en-kamperen/campers/m2439226113-compacte-la-strada-op-fiat-ducato-244-l) · [more](lastrada.md#c-side-note-la-strada-on-jumper--ducato-same-years) |
+
+**Next:** ask Waltershausen for underbody photos, the weight page of the papers and the service
+book → see the Czech Carthago as a benchmark → one email to Doorn.
+
 ## Czechia — no import needed
 
 | # | Model | Base | Year | km | Engine | Price | Place | Notes | Link |
@@ -30,17 +41,15 @@ Ask about the washroom: Sprinter 2.7 CDI 2003, only 102,000 km, 399,000 CZK
 
 ## Germany — Westfalia James Cook and other Sprinters
 
+**La Strada vans moved to their own list: [lastrada.md](lastrada.md)** (2026-09-27).
+
 | # | Model | Base | Year | km | Engine | € | Place | Notes | Link |
 |---|---|---|---|---|---|---|---|---|---|
 | D1 | James Cook | Sprinter 312D | 04/2000 | 240,000 | 2.9 TD 122 PS | 20,900 VB | Düsseldorf | sills + rear welded, underbody resealed, **green sticker**, solar, beds 150 × 220 + 135 × 200 | [KA](https://www.kleinanzeigen.de/s-anzeige/westfalia-james-cook-312d-gepflegt-gruene-plakette/3373512029-220-2077) |
 | D2 | James Cook | Sprinter 316 CDI | 04/2000 | **132,600** | 2.7 CDI 156 PS | 19,800 | Schwerin | TÜV 03/2028; **loses coolant**, small rust | [KA](https://www.kleinanzeigen.de/s-anzeige/mercedes-sprinter-316-cdi-westfalia-james-cook-tuev-03-2028/3496337232-220-280) |
 | D3 | James Cook | Sprinter 312D | 05/1996 | 325,000 | automatic | 18,000 | Neuruppin | TÜV fresh, rust spots, separating toilet | [KA](https://www.kleinanzeigen.de/s-anzeige/james-cook-westfalia-mercedes-benz/3425996855-220-7947) |
 | D4 | James Cook | Sprinter 312D (i) | 05/1996 | 190,000 | automatic | 14,900 VB | Wentorf | turbo 2025, some rust, TÜV 05/2026 (check) | [KA](https://www.kleinanzeigen.de/s-anzeige/mercedes-benz-james-cook-westfalia-190tkm-automatik-tuev-neu/3498989698-220-766) |
-| D5 | La Strada | Sprinter 312D | 11/1999 | 212,000 | 2.9 TD | 18,500 | Waltershausen | **shower + basin + WC behind a door**, TÜV 07/2028 | [KA](https://www.kleinanzeigen.de/s-anzeige/wohnmobil-mercedes-sprinter-la-strada/3457240186-220-3721) |
 | D6 | Karmann | Sprinter 312D | 1999 | 188,500 | 122 PS | 17,000 | Mühbrook | separate shower, air suspension, solar, TÜV 06/2028 | [campertrader](https://campertrader.de/camper/campervan-karmann-db-sprinter-312d-1999-muhbrook/056cc7e3-eee7-44e8-9fd5-e6f636708baa/) |
-| D7 | La Strada V6 | Sprinter 212D | 07/1997 | 294,000 | 2.9 TD | 16,500 VB | Berlin | lift bed 130 × 200, **100 Ah lithium, solar, compressor fridge** | [KA](https://www.kleinanzeigen.de/s-anzeige/la-strada-modell-v6-sprinter-212-d-campervan/3485949849-220-3489) |
-| D8 | La Strada | Sprinter 312D | 03/1997 | 206,900 | 122 PS | 14,700 | Ebermannsdorf | dealer, double + lift bed, solar | [KA](https://www.kleinanzeigen.de/s-anzeige/la-strada-sonstige-312-d-mb-312-d-hubbett-solar-mark/3510991861-220-5787) |
-| D9 | La Strada | Sprinter 208D | 08/1997 | 199,500 | 79 PS (slow) | 12,999 | Itzehoe | separate bathroom | [KA](https://www.kleinanzeigen.de/s-anzeige/mercedes-benz-sprinter-208d-la-strada-wc-autark/3521098779-220-13329) |
 
 ## Germany — Pössl / Globecar / Adria on Ducato, Boxer, Jumper
 
@@ -76,6 +85,7 @@ Ask about the washroom: Sprinter 2.7 CDI 2003, only 102,000 km, 399,000 CZK
 |---|---|---|---|
 | Pössl / Globecar / Adria (Ducato-Boxer-Jumper) | 11 DE + 6 CZ | €6,400–20,600, most €10–17k | **biggest choice, best value**, 2.8 128 PS |
 | James Cook (Sprinter) | 4 DE + 1 CZ | €14,900–20,900 | best build; rust check decides |
-| La Strada / Karmann (Sprinter) | 6 DE | €13,000–18,500 | good builds; Waltershausen 312D best match |
+| La Strada (Sprinter, Jumper, Ducato) | 14 + 3 | €11,000–39,990 | **own list: [lastrada.md](lastrada.md)** |
+| Karmann (Sprinter) | 1 DE | €17,000 | Mühbrook 312D |
 | Hymercar | 3 DE | €15,000–16,000 | old 1991–95, H plates |
 | Carthago Malibu 32.x | 5 DE + 1 CZ | €10,000–15,000 | [own list](../vw-t4-carthago-1997/market-de.md) |

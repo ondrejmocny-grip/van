@@ -9,9 +9,23 @@ WC (even a tiny one), for a **short-term** van for two, with upgrades allowed. S
 | 1 | **this page** | models, ranking, my pick |
 | 2 | [listings.md](listings.md) | ≈ 45 vans for sale today in Germany and Czechia, with links |
 | 3 | [carthago-vs-lastrada-v6.md](carthago-vs-lastrada-v6.md) | Carthago Malibu 32.x against the La Strada V6: size, water, fridge, beds, weight |
+| 2 | [lastrada.md](lastrada.md) | **La Strada only**: 9 on the 3.5 t Sprinter, 5 on the 2xx, 3 on Jumper / Ducato |
+| 3 | [beds.md](beds.md) | bed sizes of the Carthago and La Strada models we looked at |
+| 3 | [weight.md](weight.md) | weight limits of the Czech Carthago and the La Strada V6, our load, what to watch |
 
 **How sure:** model facts have a source per row in the research; prices are **asking** prices
 read from ads on 2026-09-26. "(unconf.)" = not confirmed.
+
+## ⭐ Top 3 picks (2026-09-27)
+
+| # | Van | € | Why | Watch out | Link |
+|---|---|---|---|---|---|
+| **1** | **La Strada 312D**, Waltershausen DE — 11/1999, 212,000 km, manual | **18,500** | table seating + shower/WC behind a door; **3.5 t, ≈ 940 kg payload**; OM602 with timing chain; garage-kept, full history, TÜV 07/2028; ≈ 400 km from Prague | **rust** (Sprinter), German import, 5.6 m, Euro 2 | [ad](https://www.kleinanzeigen.de/s-anzeige/wohnmobil-mercedes-sprinter-la-strada/3457240186-220-3721) · [more](lastrada.md) |
+| **2** | **Carthago Malibu 32 (32.3)**, Beroun CZ — 1997 2.5 TDI, 380,000 km | ≈ 14,700 (369,000 CZK) | local, Czech papers, dealer demo; small (5.1 m); washroom | 380,000 km, **2 timing belts**, tight **rear axle (1,410 kg)** | [ad](https://www.sauto.cz/obytne/detail/carthago/ostatni/208629503) · [more](../vw-t4-carthago-1997/README.md) |
+| **3** | **La Strada on Ducato 244**, Doorn NL — 2005, **92,172 km** | 15,500 | Carthago size (**5.10 m**), wet room, low km, new turbo | engine not stated (2.0 / 2.3 / 2.8?), ≈ 900 km away | [ad](https://www.marktplaats.nl/v/caravans-en-kamperen/campers/m2439226113-compacte-la-strada-op-fiat-ducato-244-l) · [more](lastrada.md#c-side-note-la-strada-on-jumper--ducato-same-years) |
+
+**Next:** ask Waltershausen for underbody photos, the weight page of the papers and the service
+book → see the Czech Carthago as a benchmark → one email to Doorn.
 
 ## What matters for us
 
@@ -50,7 +64,7 @@ Big Nugget (2007+, over budget), Westfalia California (no washroom), Dehler Opti
 
 1. **Carthago Malibu 32.x (T4)** — smallest, easiest to drive, table seating, washroom; the Czech
    one has the 102 PS TDI. A German **32.2** adds the lowering roof bed.
-2. **La Strada on Sprinter 312D** — same idea as the Carthago, bigger, the durable OM602 engine
+2. **La Strada on Sprinter 312D** ([own list](lastrada.md)) — same idea as the Carthago, bigger, the durable OM602 engine
    (timing chain). Waltershausen 1999, €18,500, washroom behind a door.
 3. **Pössl / Globecar, 244 Ducato-Boxer, 2.8** — best value and the most choice.
 4. Hymercar, Sven Hedin — real classics, but old and slow.
