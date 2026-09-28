@@ -493,11 +493,12 @@ def garage_board():
 
 
 def plumbing():
-    """The pump box under the sink, 340 x 340 x 330: the Shurflo Trail King 7 on its plate,
-    a strainer before it, a small accumulator after it, and the sink trap coming down."""
+    """The pump box under the sink, 340 x 340 x 330: the LILIE Soft 11.3 pump on its plate,
+    a strainer before it, a small accumulator after it (not needed with its bypass - kept as a
+    fitting), and the sink trap coming down."""
     L, W, H = 340, 340, 330
     m = Mesh()
-    pl, pw, ph = PRODUCTS["shurflo-trailking-7"]["outer"]                # 197 x 127 x 113
+    pl, pw, ph = PRODUCTS["lilie-soft-11-3"]["outer"]                    # 210 x 130 x 120, est.
     m.box(20, 240, 0, 8, 20, 180, "#555")                                # mounting plate
     m.box(30, 30 + pl * 0.55, 8, 8 + ph, 40, 40 + pw, "#2b2b2b")         # motor
     m.box(30 + pl * 0.55, 30 + pl, 8, 8 + ph, 40, 40 + pw, "#8d9399")    # pump head

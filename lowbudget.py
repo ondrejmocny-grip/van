@@ -24,7 +24,7 @@ SWAPS = [
     ("Grey tank", "Grey tank Varile NEO 80 L (stock)", 6.0),
     ("Whale Gulper", "Kemo tank level indicator (no shower pump: gravity drain)", 0.4),
     ("Truma Boiler B10", None, None),
-    ("Pump (Shurflo", "Pump (Seaflo 42), filter, pipes, fittings", 9.0),
+    ("Pump (", "Pump (Seaflo 42), filter, pipes, fittings", 9.0),
     ("Thetford Porta Potti 565E", "Thetford Porta Potti 335, dry", 4.2),
     ("Shower tray", "Shower tray, wet lining, curtain (no mixer: solar shower bag)", 12.0),
     ("Vitrifrigo C95L", "Indel B Cruise 85 OFF fridge, 85 L", 21.5),

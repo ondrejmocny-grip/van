@@ -67,7 +67,7 @@ ITEMS = [
     ("Water system", "Whale Gulper 220 shower drain pump + Votronic level sensors", 1.9, 350, "Whale 1.5 kg; sensors est."),
     ("Water system", "Truma Boiler B10 gas water heater 10 L, empty, + flue", 7.5, at("calorifier"), "Truma 6.7 kg; flue est."),
     ("Gas system", "Gas locker (sealed, floor vent), regulator, hose, pipes, gas + CO detector", 6.0, at("gasbottle"), "est."),
-    ("Water system", "Pump (Shurflo Trail King 7), filter, pipes, fittings", 10.0, at("plumbing"), "pump 2.3 kg; rest est."),
+    ("Water system", "Pump (LILIE Soft 11.3, 2.1 bar), filter, pipes, fittings", 9.7, at("plumbing"), "pump 2.0 kg; rest est."),
     ("Water system", "Thetford Porta Potti 565E, dry", 6.1, at("cassette"), "sylvansport.com"),
     ("Water system", "Shower tray, wet lining, curtain, mixer + head", 15.0, 350, "est."),
     # --- kitchen: estimates until the kitchen products are picked

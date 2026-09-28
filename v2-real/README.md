@@ -334,7 +334,7 @@ Full list and reasons in [doc/products.md](../doc/products.md). What it changes 
 | MPPT, DC-DC, shunt, 230 V box | SmartSolar 100/30, Orion XS 50 A, SmartShunt, 2-pole RCD + 2 MCB | the board in the garage, under the power inlet (unchanged) |
 | Fresh tank | made to size, ~108 L | same box; 118 L was the outside volume |
 | Grey tank | made to size, ~85 L | same box |
-| Pumps | Shurflo Trail King 7 (galley), Whale Gulper 220 (shower tray) | pump in the plumbing box; the Gulper under the shower tray |
+| Pumps | LILIE Soft 11.3 by SHURflo, 2.1 bar (galley; was the Trail King 7 - 1.4 bar is under the filter's minimum), Whale Gulper 220 (shower tray) | pump in the plumbing box; the Gulper under the shower tray |
 
 - **Weight:** 3471 kg with full water — **29 under** (was 12). The smaller inverter gives 6 kg,
   the real fresh volume 10 kg.

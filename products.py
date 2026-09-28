@@ -181,8 +181,12 @@ PRODUCTS = {
         shop="alb-filter.com", source="https://alb-filter.com/products/alb-filter-nano-untertisch-komplett-set",
         note="certified ASTM F838-15A, 99.999 % of bacteria. Cartridge 5,000-7,000 L or 6 months, "
              "59.90. Needs ~75 x 75 x 260 with its couplings. No carbon - add the Active stage "
-             "(Fusion, ~320 long) for taste. Flow at 1.4 bar not published: ask or test. On the "
-             "cold line to the drinking tap only",
+             "(Fusion, ~320 long) for taste. Alb (2026-09-28): ~11 l/min at 3 bar, no figure for 1.4 "
+             "bar, pump minimum 1.5 bar -> pump changed to 2.1 bar. Housing has 1/2 inch threads "
+             "for a home corner valve: add 1/2 inch -> 12 mm hose tail (in) and 1/2 inch -> 1/4 inch "
+             "push-fit (out, to the drinking tap). Alb suggests the Travel Nano (199.90, same "
+             "cartridge, GEKA couplings for 10-13 mm hose) - +30 for fittings we still need to "
+             "adapt to 1/4 inch. On the cold line to the drinking tap only",
         status="proposed"),
     "its-fil-1weg-lang": dict(
         name="its-wasser.de 'Fil-1Weg 1/4 Edel lang', drinking-water tap, long thread", kind="filtertap",
@@ -304,13 +308,23 @@ PRODUCTS = {
              "tall (would lift the footwell 20). Outlet >= 3/4 at the low point, ball valve, "
              "pipe down through the floor",
         status="proposed"),
+    "lilie-soft-11-3": dict(
+        name="LILIE Soft 11.3 by SHURflo, 12 V diaphragm pump with bypass", kind="pump",
+        outer=(210, 130, 120), flow_l_min=11.3, bar=2.1, current_a=5.0, weight_kg=2.0,
+        price_eur=(124, 143), shop="svetkaravanu.cz 3,048 CZK (sale; normally 3,499)",
+        source="https://www.svetkaravanu.cz/membranove-cerpadlo-lilie-soft-11-3-l-min_z19614/",
+        note="2026-09-28: replaces the Trail King 7. 2.1 bar: over Alb's 1.5 bar minimum for the Nano "
+             "filter, under the Truma B10's 2.8 bar maximum (B10 manual p. 6). Bypass built in: no "
+             "accumulator, less pulsing. Size not published - drawn as a Trail King 10 (est.)",
+        status="proposed"),
     "shurflo-trailking-7": dict(
         name="Shurflo Trail King 7 (2095-204-412), 12 V diaphragm pump", kind="pump",
         outer=(197, 127, 113), flow_l_min=6.8, bar=1.4, current_a=3.3, weight_kg=2.3,
         price_eur=(151, 151), shop="e-flow.cz 3,781 CZK",
         source="https://www.e-flow.cz/shurflo-2095-204-412-membranove-cerpadlo-6-8-l-min-1-4-bar-12-v-dc-pp-sp-epdm-ps-p3765/",
-        note="quiet, proven. For a stronger shower: Seaflo 42 series 11.3 l/min, 3.8 bar, 7 A",
-        status="proposed"),
+        note="quiet, proven - but 1.4 bar is under Alb's 1.5 bar filter minimum (Alb, 2026-09-28). "
+             "Seaflo 42 (3.8 bar) is over the Truma B10's 2.8 bar maximum",
+        status="option"),
     "whale-gulper-220": dict(
         name="Whale Gulper 220 (BP1552) shower drain pump", kind="pump",
         outer=(273, 133, 114), flow_l_min=14, current_a=4.0, weight_kg=1.5,

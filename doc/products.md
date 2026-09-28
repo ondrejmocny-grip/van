@@ -293,7 +293,7 @@ Why:
 |---|---|---|---|---|---|
 | Fresh tank | **made to size**, food-safe PE, **~108 L** | 1020 x 374 x 310 | ~8 | ~200–500 | proposed |
 | Grey tank | **made to size**, PE, flat, **~85 L** | 880 x 600 x 180 | ~8 | ~200–500 | proposed |
-| Water pump | **Shurflo Trail King 7** (2095-204-412) — 6.8 l/min, 1.4 bar, 3.3 A | 197 x 127 x 113 | 2.3 | 151 (e-flow.cz 3,781 CZK) | proposed |
+| Water pump | **LILIE Soft 11.3 by SHURflo** — 11.3 l/min, **2.1 bar**, 5 A, bypass (no accumulator) ([link](https://www.svetkaravanu.cz/membranove-cerpadlo-lilie-soft-11-3-l-min_z19614/)) | ~210 x 130 x 120 (est.) | 2.0 | 124–143 (svetkaravanu.cz 3,048 CZK) | proposed 2026-09-28 — replaces the Trail King 7 (1.4 bar is under Alb's 1.5 bar minimum); under the Truma B10's 2.8 bar maximum |
 | Shower drain pump | **Whale Gulper 220** (BP1552) — 14 l/min, on a switch | 273 x 133 x 114 | 1.5 | 218 | proposed |
 | Level sensors | **Votronic** electrodes 15-50 K (5545, fresh) + 12-24 K (5543, grey) + displays | — | ~0.4 | ~180–200 | proposed |
 

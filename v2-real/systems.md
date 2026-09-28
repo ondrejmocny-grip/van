@@ -18,7 +18,7 @@ Cable size = the thicker of: 3 % voltage drop there and back, and what the fuse 
 | 12 V charge | MPPT 100/30 -> busbars — past the wheel arch, above it | 30 | 1.0 | 40 | **10** |
 | 12 V solar | Solar: panels in series -> DC isolator -> MPPT — on the roof: panel link + one cable to a gland aft of the panels; 4-6 mm2 solar cable | 10 | 4.5 | 15 | **6** |
 | 12 V loads | Fridge Vitrifrigo C95L — compressor fridges cut out on low voltage: keep this one thick | 7 | 2.5 | 10 | **2.5** |
-| 12 V loads | Water pump Shurflo Trail King 7 | 4.5 | 2.0 | 7.5 | **1.5** |
+| 12 V loads | Water pump LILIE Soft 11.3 (2.1 bar) | 5 | 2.0 | 7.5 | **1.5** |
 | 12 V loads | Shower drain pump Whale Gulper 220 — on a switch at the shower; through the WC base, not the tray | 4 | 2.5 | 5 | **1.5** |
 | 12 V loads | Rear fan MaxxFan | 3 | 3.5 | 5 | **1.5** |
 | 12 V loads | Front fan MaxxFan | 3 | 5.5 | 5 | **2.5** |

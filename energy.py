@@ -33,7 +33,7 @@ LOADS = [
     ("Phones, tablet, second laptop", 25, (6,) * 4, False, "est."),
     ("Lights, 12 V LED", 20, (4,) * 4, False, "est."),
     ("2 x MaxxFan, average", 20, (12,) * 4, False, "0.2-2.3 A each (Maxxair); est. average"),
-    ("Water pump", 60, (0.3,) * 4, False, "Shurflo Trail King 7, est. use"),
+    ("Water pump", 60, (0.3,) * 4, False, "LILIE Soft 11.3, 5 A; est. use"),
     ("Inverter idle, in AES mode, off at night", 25, (14,) * 4, False,
      "MultiPlus 12/3000: 20 W idle, 15 W AES, 8 W search; lean = MultiPlus C 12/2000 in search mode, 3 W (Victron datasheet)"),
 ]

@@ -48,7 +48,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 3. Alb Filter — flow at low pressure (German)
+## 3. Alb Filter — flow at low pressure (German) — ✅ answered 2026-09-28 (min. 1.5 bar; pump changed to 2.1 bar)
 
 **To:** Alb Filter (alb-filter.com, contact form)
 **Subject:** Nano Untertisch-Set – Durchfluss bei 1,4 bar?

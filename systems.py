@@ -113,7 +113,7 @@ DC = [
     # loads, from the fuse block in the distribution box
     ("12 V loads", "Fridge Vitrifrigo C95L", 7, via_floor(DIST, FRIDGE, x_cross=1930) ,
      "compressor fridges cut out on low voltage: keep this one thick"),
-    ("12 V loads", "Water pump Shurflo Trail King 7", 4.5,
+    ("12 V loads", "Water pump LILIE Soft 11.3 (2.1 bar)", 5.0,
      [DIST, (DIST[0], 1330, 150), (1930, 1330, 150), (1520, 1580, 150), PUMP], ""),
     ("12 V loads", "Shower drain pump Whale Gulper 220", 4,
      [DIST, (1930, 1330, 150), (1150, 1420, 150), (700, 1420, 100), GULPER],
