@@ -6,6 +6,15 @@ Made 2026-09-28 from what the ads, owner data sheets and forums say. **No factor
 for either maker is online**, so many sizes are missing — ask the seller or measure. Sizes are
 **length × width in cm**. For scale: a normal double bed is 200 × 140; Ondrej is 171 cm.
 
+**Our benchmark (Ondrej, 2026-09-28):** our current **Fiat Doblò mini-camper** bed is **89 wide
+at the legs, 105 at the widest** — "manageable, but not ideal long term for two people". So:
+
+| Width | Verdict for two, long term |
+|---|---|
+| ≤ 105 | **= the Doblò** — manageable, not ideal |
+| 120–130 | better, still snug |
+| **≥ 130–140** | **what we want** |
+
 ## Carthago Malibu (VW T4)
 
 | Model | Bed | Size | Source | Van we saw |
@@ -34,8 +43,8 @@ for either maker is online**, so many sizes are missing — ask the seller or me
 
 | | Bed that stays made? | Size | For two? |
 |---|---|---|---|
-| **Czech Carthago (32.3)** | no — dinette, made each night | ≈ 197 × 105–120 | **tight**: 105–120 is between a single and a small double |
-| German Carthago **32.2** | yes — roof bed lowers | 215 × 100–125 | 100 = one person; 120–125 = snug double |
+| **Czech Carthago (32.3)** | no — dinette, made each night | ≈ 197 × 105–120 | **tight — about the Doblò** at the narrow end, a bit wider at best |
+| German Carthago **32.2** | yes — roof bed lowers | 215 × 100–125 | 100 = narrower than the Doblò; 120–125 = snug |
 | **La Strada V6** | yes — lift bed 200 × 130, plus bench 200 × 140 below | two doubles | **✅ good** — one of them can stay made |
 | La Strada Regent L | yes (lift bed) or fixed 200 × 133 | | ✅ |
 | **La Strada Nova L** | **yes — fixed rear bed 200 × 150/135** | | **✅ the widest** |
@@ -43,8 +52,9 @@ for either maker is online**, so many sizes are missing — ask the seller or me
 ## What it means
 
 - **Length is fine everywhere** (≥ 190 cm; Ondrej 171 cm).
-- **Width is the issue on the Carthago.** The dinette bed is ≈ 105–120 cm — a single mattress is
-  90, a small double 120–140. For two people every night, **measure it at the viewing** and lie
-  on it together.
-- **La Strada beds are wider** (130–150) — a size bigger van, and it shows here.
+- **Width is the issue on the Carthago.** The dinette bed is ≈ 105–120 cm — **about the Doblò
+  bed we already find "not ideal"**. For two people every night, **measure it at the viewing**
+  and lie on it together. If it is ≈ 105, the Carthago gives us a washroom but **no better bed**
+  than we have now.
+- **La Strada beds are wider** (130–150) — **clearly better than the Doblò**. This is a real point for La Strada.
 - **Ask Waltershausen (L1) and Doorn for bed sizes** before driving there.
