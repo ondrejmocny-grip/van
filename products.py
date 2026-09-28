@@ -182,9 +182,11 @@ PRODUCTS = {
         note="certified ASTM F838-15A, 99.999 % of bacteria. Cartridge 5,000-7,000 L or 6 months, "
              "59.90. Needs ~75 x 75 x 260 with its couplings. No carbon - add the Active stage "
              "(Fusion, ~320 long) for taste. Alb (2026-09-28): ~11 l/min at 3 bar, no figure for 1.4 "
-             "bar, pump minimum 1.5 bar -> pump changed to 2.1 bar. Housing has 1/2 inch threads "
-             "for a home corner valve: add 1/2 inch -> 12 mm hose tail (in) and 1/2 inch -> 1/4 inch "
-             "push-fit (out, to the drinking tap). Alb suggests the Travel Nano (199.90, same "
+             "bar, pump minimum 1.5 bar -> pump changed to 2.1 bar. Housing (manual p. 6): INLET on top "
+             "1/2 inch FEMALE with a flat head seal, OUTLET below 1/2 inch MALE. Alb sells no adapters "
+             "(2026-09-28). Buy: inlet John Guest PM011214E (12 mm push-fit x G1/2 male, parallel, "
+             "~5.50 EUR, schankanlagen.net); outlet John Guest CI320814S (G1/2 female x 1/4 inch "
+             "push-fit, ~4 EUR) + locking clips. Both NSF 51/61. Alb suggests the Travel Nano (199.90, same "
              "cartridge, GEKA couplings for 10-13 mm hose) - +30 for fittings we still need to "
              "adapt to 1/4 inch. On the cold line to the drinking tap only",
         status="proposed"),
