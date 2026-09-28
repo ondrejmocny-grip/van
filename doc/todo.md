@@ -16,7 +16,8 @@ Email drafts, ready to copy: [emails.md](emails.md).
   worktop up to 50 mm, 109 €); reach **120 mm**. Tap moved so it pours into the bowl.
 - [x] **Alb Filter Nano** — answered 2026-09-28: ~11 l/min at 3 bar, pump **min. 1.5 bar** → pump changed to
   the LILIE Soft 11.3 (2.1 bar). Housing has 1/2" threads: add a 1/2" → 12 mm tail and a 1/2" → 1/4" push-fit.
-- [ ] **Victron MultiPlus C 12/2000** — its real size (datasheet 520 × 255 × 125, shops 375 × 214 × 110).
+- [x] **Victron MultiPlus C 12/2000** — answered 2026-09-28: **520 × 255 × 125** is right (the model already uses it);
+  DC cable **50 mm²** (Victron) — in systems.md, as 105 °C cable run on its own.
 - [ ] **Thetford Topline 922 hob** — how deep does it hang under the worktop? (drawn as 75)
 - [ ] **Weigh one poplar sheet** (15 mm, 2520 x 1220) at Dřevobis: 5.3 kg/m² (~17 kg a sheet)
   is assumed; if it is ~21 kg (450 kg/m³) the build is ~55 kg heavier.

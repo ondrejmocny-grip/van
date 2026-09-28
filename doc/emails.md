@@ -68,7 +68,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 4. Victron dealer — MultiPlus C size (German)
+## 4. Victron dealer — MultiPlus C size (German) — ✅ answered 2026-09-28 (520 × 255 × 125; 50 mm²)
 
 **To:** bau-tech.shop (or any Victron dealer)
 **Subject:** MultiPlus C 12/2000/80-30 – tatsächliche Abmessungen

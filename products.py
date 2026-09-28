@@ -255,8 +255,8 @@ PRODUCTS = {
         weight_kg=12.0, price_eur=(975, 1145), shop="bau-tech.shop 975 / heureka.cz ~28,612 CZK",
         source="https://www.victronenergy.com/upload/documents/Datasheet-MultiPlus-inverter-charger-800VA-5kVA-EN.pdf",
         note="1600 W at 25 C, 1400 at 40 C - the smallest that runs the 1380 W oven (the 12/1600 "
-             "gives 1300). Idle 9 / AES 7 / search 3 W. Size: datasheet 520 x 255 x 125, shops "
-             "375 x 214 x 110 - check before building; the model uses the larger",
+             "gives 1300). Idle 9 / AES 7 / search 3 W. Size 520 x 255 x 125 - confirmed by the Victron "
+             "dealer 2026-09-28 (the shops' 375 x 214 x 110 is wrong); DC cable 50 mm2 (Victron)",
         status="proposed"),
     "multiplus-12-3000": dict(
         name="Victron MultiPlus 12/3000/120-16", kind="inverter", outer=(364, 295, 221),

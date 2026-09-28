@@ -32,6 +32,13 @@ AMPACITY = {1.5: 14, 2.5: 20, 4: 27, 6: 35, 10: 50, 16: 70, 25: 95, 35: 120, 50:
             70: 190, 95: 230, 120: 270}
 FUSES = (3, 5, 7.5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 100, 125, 150, 175, 200, 250)
 KG_PER_M = {s: s * 0.0089 * 1.25 for s in AMPACITY}      # copper + ~25 % insulation
+# Runs where the maker's own figure wins over the table above: (mm2, why).
+MAKER = {
+    "Busbars -> MultiPlus C 12/2000 (1600 W)": (
+        50, "Victron (dealer, 2026-09-28): 50 mm2. Our bundled-PVC table says 95 for a 200 A fuse, "
+            "so use 105 C tinned flexible cable (marine / welding type, ~250+ A single in free air), "
+            "run on its own, not bundled"),
+}
 
 
 def box(kind, n=0):
@@ -98,7 +105,7 @@ DC = [
      [BAT2, (BAT2[0], BAT2[1], 230), (DIST[0], DIST[1], 230), DIST], "same length as battery 1"),
     ("12 V main", "Busbars -> MultiPlus C 12/2000 (1600 W)", 148,
      [DIST, (DIST[0], DIST[1], 300), (INV[0], INV[1], 300), INV],
-     "1600 W / 12 V / 0.9; follow Victron's manual table if it asks for more"),
+     "1600 W / 12 V / 0.9"),
     ("12 V charge", "Starter battery -> Orion XS 50 A (input)", 53,
      via_floor(STARTER, DIST, x_cross=DIST[0]),
      "fuse at the starter battery end; + a thin ignition / D+ wire alongside it"),
@@ -219,6 +226,9 @@ def report():
     for g, name, amps, route, note in DC:
         m = length(route)
         fuse, mm2 = size(amps, m)
+        if name in MAKER:
+            mm2, why = MAKER[name]
+            note = why
         per_size[mm2] = per_size.get(mm2, 0) + 2 * m
         kg += 2 * m * KG_PER_M[mm2]
         out.append("| %s | %s%s | %g | %.1f | %g | **%g** |" %

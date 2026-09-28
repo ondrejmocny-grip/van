@@ -265,7 +265,7 @@ rule) - the ranges below are with VAT where a shop showed it.
 | | Product | Size mm | kg | € | Status |
 |---|---|---|---|---|---|
 | Batteries | **2 x Ective LC 150 LT** — heated (charges to −30 °C), Bluetooth BMS, 150 A | 353 x 175 x 190 | 2 x 15.5 | 2 x 1,109–1,199 | proposed |
-| Inverter / charger | **Victron MultiPlus C 12/2000/80** — 1600 W at 25 °C, 1400 at 40 °C; idle 9 / search 3 W; 80 A charger | 520 x 255 x 125 (datasheet; shops say 375 x 214 x 110) | 12 | 975–1,145 | proposed — **replaces the 12/3000** |
+| Inverter / charger | **Victron MultiPlus C 12/2000/80** — 1600 W at 25 °C, 1400 at 40 °C; idle 9 / search 3 W; 80 A charger | 520 x 255 x 125 (confirmed by the Victron dealer 2026-09-28); DC cable 50 mm² | 12 | 975–1,145 | proposed — **replaces the 12/3000** |
 | Solar controller | **Victron SmartSolar MPPT 100/30** — 440 W at 12 V; panels in series | 130 x 186 x 70 | 1.3 | ~86–120 | proposed |
 | Panels | **2 x Victron BlueSolar 185 W 12 V** — Voc 24.1 V | 1485 x 668 x 30 | 2 x 11 | not found | proposed |
 | DC-DC | **Victron Orion XS 12/12-50A** — 98.5 %, IP65 | 137 x 123 x 40 | 0.33 | ~233 | proposed |

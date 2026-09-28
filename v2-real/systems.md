@@ -12,7 +12,7 @@ Cable size = the thicker of: 3 % voltage drop there and back, and what the fuse 
 |---|---|---|---|---|---|
 | 12 V main | Battery 1 -> own fuse -> busbar (via the shunt) — each battery carries half of ~180 A (inverter ~148 + DC loads ~30); equal cable lengths | 90 | 1.0 | 125 | **50** |
 | 12 V main | Battery 2 -> own fuse -> busbar (via the shunt) — same length as battery 1 | 90 | 1.0 | 125 | **50** |
-| 12 V main | Busbars -> MultiPlus C 12/2000 (1600 W) — 1600 W / 12 V / 0.9; follow Victron's manual table if it asks for more | 148 | 1.0 | 200 | **95** |
+| 12 V main | Busbars -> MultiPlus C 12/2000 (1600 W) — Victron (dealer, 2026-09-28): 50 mm2. Our bundled-PVC table says 95 for a 200 A fuse, so use 105 C tinned flexible cable (marine / welding type, ~250+ A single in free air), run on its own, not bundled | 148 | 1.0 | 200 | **50** |
 | 12 V charge | Starter battery -> Orion XS 50 A (input) — fuse at the starter battery end; + a thin ignition / D+ wire alongside it | 53 | 5.5 | 70 | **35** |
 | 12 V charge | Orion XS -> busbars (output) — a short link in the same box | 50 | 0.5 | 70 | **16** |
 | 12 V charge | MPPT 100/30 -> busbars — past the wheel arch, above it | 30 | 1.0 | 40 | **10** |
@@ -30,7 +30,7 @@ Cable size = the thicker of: 3 % voltage drop there and back, and what the fuse 
 | 12 V loads | Truma B10 (control) + gas / CO detector — the detector sits low by the gas locker | 1.5 | 2.0 | 3 | **1.5** |
 | 12 V loads | Hob ignition + tank level displays — tiny currents - size set by the fuse | 1 | 3.5 | 3 | **1.5** |
 
-**To buy, 12 V cable (red + black):** 95 mm² 2 m, 50 mm² 4 m, 35 mm² 11 m, 16 mm² 1 m, 10 mm² 2 m, 6 mm² 9 m, 4 mm² 26 m, 2.5 mm² 29 m, 1.5 mm² 35 m — about **12 kg** of cable.
+**To buy, 12 V cable (red + black):** 50 mm² 6 m, 35 mm² 11 m, 16 mm² 1 m, 10 mm² 2 m, 6 mm² 9 m, 4 mm² 26 m, 2.5 mm² 29 m, 1.5 mm² 35 m — about **11 kg** of cable.
 
 ## 230 V
 
