@@ -19,7 +19,10 @@ Email drafts, ready to copy: [emails.md](emails.md).
   **CI320814S** (outlet, G½" female × ¼") + locking clips — see `products.py` (alb-nano).
 - [x] **Victron MultiPlus C 12/2000** — answered 2026-09-28: **520 × 255 × 125** is right (the model already uses it);
   DC cable **50 mm²** (Victron) — in systems.md, as 105 °C cable run on its own.
-- [ ] **Thetford Topline 922 hob** — how deep does it hang under the worktop? (drawn as 75)
+- [x] **Thetford Topline 922 hob** — answered 2026-09-28 (stavbakaravanu + the installation manual):
+  75 mm under the glass top, cut-out 450 × 255, gas inlet 8 mm. **8,670 CZK, last pieces — order soon.**
+  Needs: aluminium heat shield over the fridge (30 mm below the hob), a gas drop hole to the outside,
+  a front vent slot, non-flammable sheet on the wall beside it (burners < 200 mm from the wall).
 - [ ] **Weigh one poplar sheet** (15 mm, 2520 x 1220) at Dřevobis: 5.3 kg/m² (~17 kg a sheet)
   is assumed; if it is ~21 kg (450 kg/m³) the build is ~55 kg heavier.
 - [ ] **Tank makers** (VanReady, LETO, DL Kunststofftechnik) — quotes for the fresh (1020 × 374 × 310,

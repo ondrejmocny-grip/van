@@ -9,19 +9,19 @@ sources are in the list under the table. CZK at 25 per €. **est.** = no shop p
 |---|---|---|
 | **Shell** | 3 windows 1,500–1,760; 2 MaxxFans + adapters 900–950; fly screen 195; insulation, sound deadening, floor, cladding, carpet (cut list, 34,500 CZK) 1,380 | **3,975–4,285** |
 | **Furniture** | poplar boards (cut list, 28,100 CZK) 1,125; worktop + wet lining **est.** 200–400; latches, hinges, runners, table post **est.** 300–500; foam + fabric **est.** 300–500 | **1,925–2,525** |
-| **Kitchen** | Vitrifrigo C95L 832 (20,790 CZK); Thetford hob 359–508; oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | **2,111–2,260** |
+| **Kitchen** | Vitrifrigo C95L 832 (20,790 CZK); Thetford hob 354 (8,670 CZK, stavbakaravanu); oven 100; Blanco sink + bowl 362; Franke mixer 179; Alb filter 170 + tap 109 | **2,106** |
 | **Bathroom** | Porta Potti 565E 180 (4,499 CZK); ABS shower tray 92 (2,290 CZK, 830 × 670 — cut or made to fit); shower mixer + head 80 (1,990 CZK); drain, curtain, small parts **est.** ~0–100 | **350–450** |
 | **Water** | 2 tanks made to size **est.** 500–800 (quotes asked); LILIE pump + Gulper + sensors 522–561; filler 30–60; pipes and fittings **est.** 150–250 | **1,229–1,679** |
 | **Gas** | Truma B10, gas only 729; MonoControl CS regulator 132 (3,300 CZK); Alugas 6 kg bottle 139; copper pipe, locker, floor vent, gas + CO detector **est.** 150–250; installer **est.** 100–250 | **1,250–1,500** |
 | **Electrics** | 2 × Ective 150 Ah 2,220–2,400; MultiPlus C 975–1,145; MPPT + Orion 50 A + shunt 390–435; shore inlet + 230 V box 120–220; 2 × Victron 175/185 W panels 180–275; cable, fuses, busbars, lighting **est.** 400–600; 25 m CEE shore cable **est.** 60–80 | **4,345–5,155** |
 | **Other** | Starlink Mini 200 (4,999 CZK) + mount **est.** 50; roof bars (Thule WingBar Evo on fixpoints, 2 bars 300, 3–4 needed) 450–600; tarp ~100; window covers, bug screen **est.** 100–150 | **900–1,100** |
 | **Small stuff** | screws, rivnuts, sealant, glue, tape, oil for the ply **est.** 300–500; shipping of ~30 orders **est.** 200–400 | **500–900** |
-| **Parts subtotal** | | **16,585–19,854** |
+| **Parts subtotal** | | **16,580–19,700** |
 | **Approval and fees** | see the next table | **670–900** |
 | **Reserve, 10 %** | for what we forgot and prices that rise | **1,700–2,100** |
-| **Build total** | | **≈ €19,000–22,900** |
+| **Build total** | | **≈ €19,000–22,700** |
 | Rough-road upgrades (separate pot, see below) | tier 1 + 2 | 7,360–9,720 |
-| **Build + upgrades** | | **≈ €26,300–32,600** |
+| **Build + upgrades** | | **≈ €26,300–32,400** |
 
 **Approval and other charges (CZK):**
 

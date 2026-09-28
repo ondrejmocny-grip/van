@@ -373,12 +373,19 @@ PRODUCTS = {
     # --- full gas (chosen 2026-09-25) -------------------------------------------------------
     "thetford-topline-922": dict(
         name="Thetford Topline 922 (SHB92290Z), 2-burner gas hob for vehicles", kind="hob",
-        outer=(305, 500, 95), cutout=(285, 485), power_kw=(1.5, 1.5), gas_g_h=216,
-        weight_kg=5.5, price_eur=(359, 508), shop="stavbakaravanu.cz 12,690 CZK / reimo.com 359",
+        outer=(305, 500, 112), cutout=(255, 450), holes=(285, 485), under=75, gas_inlet_mm=8,
+        power_kw=(1.48, 1.48), gas_g_h=213,
+        weight_kg=5.5, price_eur=(354, 354), shop="stavbakaravanu.cz 8,670 CZK (2026-09-28, last pieces, 7-10 days)",
         source="https://www.thetford.com/au/products-and-support/topline-hob-922-gas-only/",
         note="LPG 30 mbar from the factory; flame failure on both burners; 12 V ignition (no "
-             "inverter needed); no lid. Frankana lists it discontinued - buy soon. Depth under "
-             "the worktop not published: check before cutting",
+             "inverter needed); no lid. Discontinued. Installation manual (SINS2308/0125-V03, from "
+             "stavbakaravanu 2026-09-28): 112 tall from the pan rests to the lowest point, 75 from the "
+             "glass top down; cut-out 450 x 255 with 4 x 10 mm stud holes at 485 x 285; gas inlet 8 mm "
+             "copper (metal pipe only). Rules: 30 mm clear below its lowest point to a NON-COMBUSTIBLE "
+             "heat shield - mandatory, the fridge is below; a gas drop hole 25-50 mm to the outside, "
+             "away from the burners; a front vent slot 8 x 100 under the worktop edge; 200 mm from "
+             "the burner edges to side walls or protect them with non-flammable sheet; 500 mm clear "
+             "above the pan rests; built into a closed cabinet; EN721 warning label",
         status="chosen"),
     "bosch-prb3a6b70": dict(
         name="Bosch PRB3A6B70 Serie 8, domino gas hob 30 cm", kind="hob",

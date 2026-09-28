@@ -85,7 +85,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 5. stavbakaravanu.cz — Thetford hob depth (Czech)
+## 5. stavbakaravanu.cz — Thetford hob depth (Czech) — ✅ answered 2026-09-28 (manual; 8,670 CZK, last pieces)
 
 **To:** stavbakaravanu.cz (the shop that sells the Topline 922 in CZ)
 **Subject:** Thetford Topline 922 – hloubka pod pracovní deskou

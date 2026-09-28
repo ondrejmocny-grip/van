@@ -922,11 +922,12 @@ APPLIANCES_V2R = [
     (1600, 1860, 1615, 1690,  410,  485, "filter"),     # Alb Filter Nano + couplings, 0.1 micron
     # galley, passenger side - carcass y 70-635
     # Thetford Topline 922, 2-burner gas hob made for vehicles: 305 x 500, LPG 30 mbar from the
-    # factory, flame failure on both burners, 12 V ignition. 95 high in all; how much of that
-    # hangs under the worktop is not published - drawn as 75, to be safe.
-    (1150, 1455,  104,  604,  845,  925, "hob"),
+    # factory, flame failure on both burners, 12 V ignition. Manual: lowest point 75 under the
+    # glass top (~6 above the worktop) -> ~856; drawn from 855.
+    (1150, 1455,  104,  604,  855,  925, "hob"),
     # Vitrifrigo C95L, 485 x 473 x 792 - 95 L with a 12.8 L freezer - standing low (30) so
-    # its top (822) is 23 under the hob's body. ~110 behind it for air; 82 clear of the arch.
+    # its top (822) is 33 under the hob's lowest point; the manual wants 30 to a non-combustible
+    # heat shield - a 1 mm aluminium sheet at ~823-824, on the carcass, not on the fridge. ~110 behind it for air; 82 clear of the arch.
     (1250, 1735,  152,  625,   30,  822, "fridgedoor"),
     # bathroom - WC in the wardrobe base, sliding into the shower. 520 deep at most: the
     # diagonal shower face leaves 529 at its aft wall, and this is what has to pass.
