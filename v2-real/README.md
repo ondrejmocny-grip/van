@@ -350,7 +350,7 @@ Details: [doc/products.md](../doc/products.md#sink-taps-and-drinking-water--rese
 | | Product | In the model |
 |---|---|---|
 | Sink | Blanco Andano 400-IF, 440 x 440, bowl 190 deep | the built sink, unchanged |
-| Insert bowl | Blanco 227692, 197 x 417 x 80 - **the soapy-water compartment** | on the rim over the aft half of the bowl, x 1370–1567 |
+| Soapy-water pan | **GN 1/3 gastronorm pan**, 325 x 176 x 150, 5.7 L, solid stainless (Blanco 227692 is perforated) | on the bowl floor against its forward wall, x 1180–1356; the aft half under the taps stays free |
 | Mixer | **Franke Lina Semi Pro — chosen**, spring hose, 410 tall, reach 205 (pressure to confirm, [todo](../doc/todo.md)) | base aft of the bowl at x ~1670, arm over the bowl to x 1465; top 1335, 65 under the locker |
 | Drinking tap | its-wasser Fil-1Weg 1/4 Edel **lang** (70 mm thread, worktop ≤ 50) | beside the mixer, toward the wall, base ~60 aft of the rim; reach **120** (seller, 2026-09-27) pours 50 inside the bowl |
 | Filter | Alb Filter Nano, 0.1 µm (bacteria) | 260 x 75 x 75 under the prep counter (was 260 x 60 x 60 - too small for its 69 mm housing) |

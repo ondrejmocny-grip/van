@@ -136,17 +136,27 @@ PRODUCTS = {
         outer=(440, 440, 190), bowl=(400, 400, 190), cutout=(430, 430), drain='3 1/2" InFino',
         weight_kg=None, price_eur=(306, 306), shop="eshop-blanco.cz 7,641 CZK",
         source="https://eshop-blanco.cz/jednodrezy-kulate-drezy/17218-kuchynsky-drez-blanco-andano-400-if-bez-tahla.html",
-        note="no ledge, but Blanco makes an insert bowl for it (blanco-227692); hidden overflow; "
+        note="no ledge; the soapy-water compartment is a GN 1/3 pan standing in the bowl (gn13-150); hidden overflow; "
              "no tap hole - the taps go in the worktop", status="proposed"),
+    "gn13-150": dict(
+        name="Gastronorm pan GN 1/3, 150 deep, stainless (any brand)", kind="insert",
+        outer=(176, 325, 150), volume_l=5.7, weight_kg=0.8, price_eur=(9, 36),
+        shop="rajgastronomie.cz 764 CZK / gstshop.de 8.75",
+        source="https://eshop.rajgastronomie.cz/Gastronadoba-GN-1-3-150-mm-d17438.htm",
+        note="2026-09-29: the soapy-water compartment, since every rim-resting bowl for a 400 sink "
+             "is perforated (Blanco 227692, 219649; Franke BXX/EOX/CEX). Stands on the bowl floor "
+             "against the FORWARD wall, top ~40 under the rim; the aft half (under the taps) stays "
+             "free for rinsing. Keep it off the drain. A polycarbonate GN 1/3 is lighter and quieter",
+        status="proposed"),
     "blanco-227692": dict(
         name="Blanco 227692 multifunction insert bowl, stainless (Andano / Supra / Etagon)",
         kind="insert", outer=(197, 417, 80), volume_l=6, weight_kg=None, price_eur=(56, 56),
         shop="sanitino.cz 1,395 CZK",
         source="https://www.sanitino.cz/blanco-doplnky-miska-do-drezu-andano-nerez-227692",
         note="417 long, so it rests on the 400 bowl's rim and covers about half of it: soapy water "
-             "in it, rinse beside it, lift it out for big pots. CHECK it is SOLID, not perforated "
-             "(227689 is perforated and fits other models). Fallback: a plastic tub in the bowl",
-        status="proposed"),
+             "in it, rinse beside it, lift it out for big pots. PERFORATED - a colander, it does not "
+             "hold water (sanitino, 2026-09-29) -> the GN 1/3 pan instead",
+        status="rejected"),
     # a tall, movable spring hose (Ondrej, 2026-09-25)
     "franke-lina-semipro": dict(
         name="Franke Lina Semi Pro FC 6085.031 (115.0626.085), spring-hose mixer, chrome/black",

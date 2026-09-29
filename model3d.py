@@ -900,7 +900,9 @@ EXTRA_V2R += [(40 + 20 * i, 60 + 20 * i,
 # (Blanco 227692, 197 x 417 x 80) rests on the rim across the bowl, over the aft half: soapy
 # water in it, rinse in the front half. No double sink this small exists (2026-09-25).
 EXTRA_V2R += sink_wells(1150, 1590, 1290, 1730, 735, 925, n=1)
-EXTRA_V2R += tray_box(1370, 1567, 1301, 1718, 845, 925)
+# the soapy-water pan: a GN 1/3 (325 x 176 x 150) standing on the bowl floor against its
+# forward wall, clear of the taps' aft half (Blanco's rim bowl is perforated)
+EXTRA_V2R += tray_box(1180, 1356, 1348, 1673, 743, 893)
 # The cat box and its tray behind the partition: the middle of the van, nothing moved.
 EXTRA_V2R += [b for b in EXTRA_V2 if b[6] in ("litter", "litterlid")]
 
