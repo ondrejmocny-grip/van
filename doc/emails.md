@@ -5,7 +5,7 @@ for German ones. Fill in the answer in `todo.md` when it comes back.
 
 ---
 
-## 1. sanitino.cz — Franke mixer and Blanco insert bowl (Czech)
+## 1. sanitino.cz — Franke mixer and Blanco insert bowl (Czech) — ✅ answered 2026-09-29 (Franke min 1 bar; the Blanco bowl is perforated)
 
 **To:** sanitino.cz customer service (form on the product page, or info@sanitino.cz)
 **Subject:** Dotaz k produktům Franke FC 6085.031 a Blanco 227692

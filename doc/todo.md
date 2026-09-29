@@ -8,10 +8,10 @@ the v2-real README).
 
 Email drafts, ready to copy: [emails.md](emails.md).
 
-- [ ] **Franke Lina Semi Pro (mixer)** — does it work at **2.1 bar** (pump changed 2026-09-28 from 1.4 bar; the question sent asked about 1.4)?
-  Franke publishes 9 l/min at 3 bar but no minimum. Ask sanitino.cz or Franke CZ. If not →
-  Grohe Minta 32321002 (minimum 1.0 bar published). *(chosen 2026-09-25)*
-- [ ] **Blanco 227692 insert bowl** — is it **solid** (holds soapy water), not perforated?
+- [x] **Franke Lina Semi Pro (mixer)** — answered 2026-09-29: **min 1 bar**, ideal 3, max 5; water max 70 °C;
+  hoses G3/8. Our pump (2.1 bar) is fine. *(chosen 2026-09-25)*
+- [ ] **Blanco 227692 insert bowl** — answered 2026-09-29: it is **perforated** (a colander) — it does **not** hold
+  water. → find a solid insert or a folding washing-up bowl (searching).
 - [x] **its-wasser drinking tap** — answered 2026-09-27: the **"lang"** version (70 mm thread,
   worktop up to 50 mm, 109 €); reach **120 mm**. Tap moved so it pours into the bowl.
 - [x] **Alb Filter Nano** — answered 2026-09-28: ~11 l/min at 3 bar, pump **min. 1.5 bar** → pump changed to

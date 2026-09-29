@@ -153,7 +153,8 @@ PRODUCTS = {
         kind="tap", outer=(205, 60, 410), reach=205, flow_l_min=9, weight_kg=None,
         price_eur=(179, 179), shop="sanitino.cz 4,469 CZK",
         source="https://www.sanitino.cz/franke-lina-drezova-baterie-fc-6085-031-s-flexibilnim-ramenem-chrom-cerna-115-0626-085",
-        note="410 tall (the locker is ~480 over the worktop), reach 205, turns 360, stream / spray. "
+        note="Franke manual (sanitino, 2026-09-29): pressure min 1 bar, ideal 3, max 5; water max 70 C; balanced hot/cold pressure recommended; hoses G3/8. Our pump 2.1 bar: ok. "
+             "410 tall (the locker is ~480 over the worktop), reach 205, turns 360, stream / spray. "
              "Minimum pressure not published (9 l/min at 3 bar). The arm swings - strap it and clip "
              "the head for driving. Alternative with a known minimum (1.0 bar): Grohe Minta "
              "32321002 pull-out, 379 tall, reach 223, 5,119 CZK", status="chosen"),
